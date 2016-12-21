@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1'], function() {
 
+	Route::resource('regions', 'RegionController', [
+		'only' => ['index', 'show']
+	]);
+
 	Route::resource('services', 'ServiceController', [
 		'except' => ['create', 'edit']
 	]);
