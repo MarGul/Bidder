@@ -15,5 +15,14 @@ class Region extends Model
     protected $fillable = [
     	'name', 'description'
     ];
+
+    /**
+     * A region has many services
+     * 
+     * @return Eloquent Relationship
+     */
+    public function services() {
+    	return $this->hasMany('App\Service');
+    }
     
 }

@@ -15,5 +15,14 @@ class Category extends Model
     protected $fillable = [
     	'name', 'description'
     ];
+
+    /**
+     * A category has many services.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function services() {
+    	return $this->hasMany('App\Service');
+    }
     
 }
