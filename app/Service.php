@@ -54,11 +54,13 @@ class Service extends Model
             $w = array_keys($where)[0];
             $e = $where[$w];
 
-            $services = Service::with('region', 'category', 'comments')
-                                ->where($w, $e)
-                                ->get();
+            if ( !$services = Service::with('region', 'category', 'comments')->where($w, $e)->get() ) {
+                return false;
+            }
         } else {
-            $services = Service::with('region', 'category', 'comments')->get();
+            if ( !$services = Service::with('region', 'category', 'comments')->get() ) {
+                return false;
+            }
         }
 
         $services = self::parseServices($services);

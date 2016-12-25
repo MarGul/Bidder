@@ -21,6 +21,10 @@ Route::group(['prefix' => 'v1'], function() {
 		'only' => ['index', 'show']
 	]);
 
+	Route::resource('categories.services', 'CategoryServiceController', [
+		'only' => ['index']
+	]);
+
 	Route::resource('services', 'ServiceController', [
 		'except' => ['create', 'edit']
 	]);
