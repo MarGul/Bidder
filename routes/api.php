@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 | API Routes Bidder - Version 1
 |--------------------------------------------------------------------------
 */
-
 Route::group(['prefix' => 'v1'], function() {
 
 	Route::resource('regions', 'RegionController', [
 		'only' => ['index', 'show']
+	]);
+
+	Route::resource('regions.services', 'RegionServiceController', [
+		'only' => ['index']
 	]);
 
 	Route::resource('categories', 'CategoryController', [
