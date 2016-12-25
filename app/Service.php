@@ -47,7 +47,7 @@ class Service extends Model
      *  Get services based on one condition.
      * 
      * @param  Array $where [The key is the column that the value should be equal to.]
-     * @return Collection   [Collection of parsed Service objects]
+     * @return Collection   [Collection of parsed App\Service objects]
      */
     public static function getServices($where = null) {
         if ( !is_null($where) ) {
@@ -70,11 +70,27 @@ class Service extends Model
     }
 
     /**
+     * Get a service and parse it
+     * 
+     * @param  Integer $service_id [The Service ID]
+     * @return App\Service         [The Service object]
+     */
+    public static function getService($service_id) {
+        $service = Service::with('category', 'region', 'comments')
+                            ->where('id', (int)$service_id)
+                            ->firstOrFail();
+
+        $service = self::parseServices([$service]);
+
+        return $service[0];
+    }
+
+    /**
      * Run the services through this private function to add hypermedia links
      * and other things that needs to be done to the service.
      * 
-     * @param  Collection $services [Collection of Service objects]
-     * @return Collection           [Collection of parsed Service objects]
+     * @param  Collection $services [Collection of App\Service objects]
+     * @return Collection           [Collection of parsed App\Service objects]
      */
     private static function parseServices($services) {
        foreach ($services as $service) {

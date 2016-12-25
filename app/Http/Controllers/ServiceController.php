@@ -75,16 +75,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::with('category', 'region', 'comments')->where('id', (int)$id)->firstOrFail();
-        
-        // No need to show category_id and region_id, it's in the relationship
-        unset($service->category_id);
-        unset($service->region_id);
-
-        $service->view_services = [
-            'href' => 'api/v1/services',
-            'method' => 'GET'
-        ];
+        $service = Service::getService($id);
 
         return response()->json([
             'message' => 'Viewing service data.',
