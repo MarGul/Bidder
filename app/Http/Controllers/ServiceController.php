@@ -16,13 +16,13 @@ class ServiceController extends Controller
     public function index()
     {
         // Eager load to not have the 1 + N query problem.
-        $services = Service::with('category', 'region')->get();
+        $services = Service::with('category', 'region', 'comments')->get();
 
         foreach ($services as $service) {
             // No need to show the category_id and region_id, it's in the relationships
             unset($service->category_id);
             unset($service->region_id);
-            
+
             $service->view_service = [
                 'href' => 'api/v1/services/' . $service->id,
                 'method' => 'GET'
@@ -87,7 +87,12 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::find((int)$id);
+        $service = Service::with('category', 'region', 'comments')->where('id', (int)$id)->firstOrFail();
+        
+        // No need to show category_id and region_id, it's in the relationship
+        unset($service->category_id);
+        unset($service->region_id);
+
         $service->view_services = [
             'href' => 'api/v1/services',
             'method' => 'GET'

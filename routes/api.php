@@ -22,4 +22,8 @@ Route::group(['prefix' => 'v1'], function() {
 		'except' => ['create', 'edit']
 	]);
 
+	Route::resource('services.comments', 'ServiceCommentController', [
+		'except' => ['create', 'edit', 'show']
+	]);
+
 });

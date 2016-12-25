@@ -33,4 +33,13 @@ class Service extends Model
     public function region() {
     	return $this->belongsTo('App\Region');
     }
+
+    /**
+     * A service has many comments
+     * 
+     * @return Eloquent Relationship
+     */
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 }
