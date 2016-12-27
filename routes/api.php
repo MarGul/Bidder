@@ -33,4 +33,8 @@ Route::group(['prefix' => 'v1'], function() {
 		'except' => ['create', 'edit', 'show']
 	]);
 
+	Route::resource('services.bids', 'ServiceBidController', [
+		'except' => ['create', 'edit']
+	]);
+
 });

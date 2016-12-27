@@ -48,7 +48,7 @@ class ServiceCommentController extends Controller
         return response()->json([
             'message' => 'Successfully created the comment.',
             'comment' => $comment
-        ], 200);
+        ], 201);
     }
 
     /**

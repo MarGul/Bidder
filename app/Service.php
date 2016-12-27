@@ -17,7 +17,7 @@ class Service extends Model
     ];
 
     /**
-     * A service belongs to a category
+     * A service belongs to a category.
      * 
      * @return Eloquent Relationship
      */
@@ -26,7 +26,7 @@ class Service extends Model
     }
 
     /**
-     * A service belongs to a region
+     * A service belongs to a region.
      * 
      * @return Eloquent Relationship
      */
@@ -35,12 +35,21 @@ class Service extends Model
     }
 
     /**
-     * A service has many comments
+     * A service has many comments.
      * 
      * @return Eloquent Relationship
      */
     public function comments() {
         return $this->hasMany('App\Comment');
+    }
+
+    /**
+     * A service has many bids.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function bids() {
+        return $this->hasMany('App\Bid');
     }
 
     /**
@@ -51,7 +60,9 @@ class Service extends Model
      */
     public static function getServices($where = null) {
         if ( !is_null($where) ) {
+            // Where column is $w
             $w = array_keys($where)[0];
+            // And equal to $e
             $e = $where[$w];
 
             if ( !$services = Service::with('region', 'category', 'comments')->where($w, $e)->get() ) {
@@ -70,7 +81,7 @@ class Service extends Model
     }
 
     /**
-     * Get a service and parse it
+     * Get a service and parse it.
      * 
      * @param  Integer $service_id [The Service ID]
      * @return App\Service         [The Service object]
