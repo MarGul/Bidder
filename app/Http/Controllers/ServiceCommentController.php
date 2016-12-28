@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Service;
 
 class ServiceCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function index($service_id)
+    public function index(Service $service)
     {
-        if ( !$comments = Comment::getCommentsService($service_id) ) {
+        if ( !$comments = Comment::getCommentsService($service->id) ) {
             return response()->json(['message' => 'Could not fetch comments.'], 500);
         }
 
@@ -22,7 +24,7 @@ class ServiceCommentController extends Controller
             'message' => 'Listing all comments.',
             'comments' => $comments,
             'create_comment' => [
-                'href' => 'api/v1/services/' . $service_id . '/comments',
+                'href' => 'api/v1/services/' . $service->id . '/comments',
                 'method' => 'POST',
                 'params' => ['body']
             ]
@@ -33,15 +35,16 @@ class ServiceCommentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $service_id)
+    public function store(Request $request, Service $service)
     {
         $this->validate($request, [
             'body' => 'required'
         ]);
         
-        if ( !$comment = Comment::createComment($service_id, ['body' => $request->input('body')]) ) {
+        if ( !$comment = Comment::createComment($service->id, ['body' => $request->input('body')]) ) {
             return response()->json(['message' => 'Could not create the comment.'], 500);
         }
 
@@ -55,16 +58,17 @@ class ServiceCommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Service  $service
+     * @param  App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $service_id, $comment_id)
+    public function update(Request $request, Service $service, Comment $comment)
     {
         $this->validate($request, [
             'body' => 'required'
         ]);
 
-        if ( !$comment = Comment::updateComment($comment_id, ['body' => $request->input('body')]) ) {
+        if ( !$comment = Comment::updateComment($comment->id, ['body' => $request->input('body')]) ) {
             return response()->json(['message' => 'Could not update comment.'], 500);
         }
 
@@ -77,12 +81,13 @@ class ServiceCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Service  $service
+     * @param  App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($service_id, $comment_id)
+    public function destroy(Service $service, Comment $comment)
     {
-        if ( !$comment = Comment::deleteComment($comment_id) ) {
+        if ( !$comment = Comment::deleteComment($comment->id) ) {
             return response()->json(['message' => 'Could not delete comment.'], 500);
         }
 

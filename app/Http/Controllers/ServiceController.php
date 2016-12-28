@@ -32,13 +32,15 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_id' => 'required|integer',
-            'region_id' => 'integer',
+            'category_id' => 'required|integer|exists:categories,id',
+            'region_id' => 'integer|exists:regions,id',
             'title' => 'required|max:100',
             'description' => 'required',
             'physical' => 'required|boolean',
             'start' => 'required|date_format:YmdHie',
-            'end' => 'required|date_format:YmdHie'
+            'end' => 'required|date_format:YmdHie',
+            'bid_start' => 'required|date_format:YmdHie',
+            'bid_stop' => 'required|date_format:YmdHie'
         ]);
 
         $service = new Service([
@@ -50,9 +52,12 @@ class ServiceController extends Controller
             'physical' => (boolean)$request->input('physical'),
             'start' => Carbon::createFromFormat('YmdHie', $request->input('start')),
             'end' => Carbon::createFromFormat('YmdHie', $request->input('end')),
+            'bid_start' => Carbon::createFromFormat('YmdHie', $request->input('bid_start')),
+            'bid_stop' => Carbon::createFromFormat('YmdHie', $request->input('bid_stop')),
+            'status' => 'active'
         ]);
 
-        if($service->save()) {
+        if ( $service->save() ) {
             $service->view_service = [
                 'href' => 'api/v1/service/' . $service->id,
                 'method' => 'GET'
@@ -70,12 +75,12 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Service $service)
     {
-        $service = Service::getService($id);
+        $service = Service::getService($service->id);
 
         return response()->json([
             'message' => 'Viewing service data.',
@@ -87,23 +92,22 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
         $this->validate($request, [
-            'category_id' => 'required|integer',
-            'region_id' => 'integer',
+            'category_id' => 'required|integer|exists:categories,id',
+            'region_id' => 'integer|exists:regions,id',
             'title' => 'required|max:100',
             'description' => 'required',
             'physical' => 'required|boolean',
             'start' => 'required|date_format:YmdHie',
-            'end' => 'required|date_format:YmdHie'
+            'end' => 'required|date_format:YmdHie',
+            'bid_start' => 'required|date_format:YmdHie',
+            'bid_stop' => 'required|date_format:YmdHie'
         ]);
-
-        // If the service isn't found Laravel will return a 404.
-        $service = Service::findOrFail((int)$id);
 
         $service->category_id = (int)$request->input('category_id');
         $service->region_id = (int)$request->input('region_id');
@@ -112,6 +116,8 @@ class ServiceController extends Controller
         $service->physical = (boolean)$request->input('physical');
         $service->start = Carbon::createFromFormat('YmdHie', $request->input('start'));
         $service->end = Carbon::createFromFormat('YmdHie', $request->input('end'));
+        $service->bid_start = Carbon::createFromFormat('YmdHie', $request->input('bid_start'));
+        $service->bid_stop = Carbon::createFromFormat('YmdHie', $request->input('bid_stop'));
 
         if ( !$service->update() ) {
             return response()->json(['message' => 'Could not update resource.'], 500);
@@ -131,13 +137,11 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        $service = Service::findOrFail((int)$id);
-
         if ( !$service->delete() ) {
             return response()->json(['message' => 'Could not delete service.'], 500);
         }

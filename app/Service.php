@@ -13,7 +13,8 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'category_id', 'region_id', 'title', 'description', 'physical', 'start', 'end'
+    	'user_id', 'category_id', 'region_id', 'title', 'description', 'physical', 'start', 'end',
+        'bid_start', 'bid_stop', 'status'
     ];
 
     /**
@@ -60,12 +61,7 @@ class Service extends Model
      */
     public static function getServices($where = null) {
         if ( !is_null($where) ) {
-            // Where column is $w
-            $w = array_keys($where)[0];
-            // And equal to $e
-            $e = $where[$w];
-
-            if ( !$services = Service::with('region', 'category', 'comments')->where($w, $e)->get() ) {
+            if ( !$services = Service::with('region', 'category', 'comments')->where($where)->get() ) {
                 return false;
             }
         } else {

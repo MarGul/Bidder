@@ -32,13 +32,11 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::findOrFail((int)$id);
-
         $category->view_categories = [
             'href' => 'api/v1/categories',
             'method' => 'GET'

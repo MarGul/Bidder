@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Bid;
+use App\Service;
 use Carbon\Carbon;
 
 class ServiceBidController extends Controller
@@ -14,9 +15,9 @@ class ServiceBidController extends Controller
      * @param  int  $service_id
      * @return \Illuminate\Http\Response
      */
-    public function index($service_id)
+    public function index(Service $service)
     {
-        //
+        return response()->json(['data' => $service]);
     }
 
     /**
@@ -26,8 +27,9 @@ class ServiceBidController extends Controller
      * @param  int                       $service_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $service_id)
+    public function store(Request $request, Service $service)
     {
+
         $this->validate($request, [
             'description' => 'required',
             'start_service' => 'required|date_format:YmdHie',

@@ -23,6 +23,9 @@ class CreateServicesTable extends Migration
             $table->boolean('physical');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->dateTime('bid_start');
+            $table->dateTime('bid_stop');
+            $table->string('status');
             $table->timestamps();
         });
     }

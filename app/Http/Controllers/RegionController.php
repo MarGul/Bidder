@@ -32,13 +32,11 @@ class RegionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Region $region)
     {
-        $region = Region::findOrFail((int)$id);
-
         $region->view_regions = [
             'href' => 'api/v1/regions',
             'method' => 'GET'

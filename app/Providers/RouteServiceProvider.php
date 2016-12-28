@@ -23,9 +23,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
 
         parent::boot();
+
+        // Bind the params to their model. Laravel will automatically throw a 404 if the model does not exist.
+        Route::model('services', App\Service::class);
+        Route::model('regions', App\Region::class);
+        Route::model('categories', App\Category::class);
+        Route::model('comments', App\Comment::class);
     }
 
     /**
