@@ -35,7 +35,7 @@ class ServiceCommentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Service  $service
+     * @param  App\Service               $service
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Service $service)
@@ -58,8 +58,8 @@ class ServiceCommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Service  $service
-     * @param  App\Comment  $comment
+     * @param  App\Service               $service
+     * @param  App\Comment               $comment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Service $service, Comment $comment)

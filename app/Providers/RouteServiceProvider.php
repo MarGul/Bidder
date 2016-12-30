@@ -31,6 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('regions', App\Region::class);
         Route::model('categories', App\Category::class);
         Route::model('comments', App\Comment::class);
+        Route::model('bids', App\Bid::class);
     }
 
     /**
