@@ -86,7 +86,30 @@ class ServiceBidController extends Controller
      */
     public function update(Request $request, Service $service, Bid $bid)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+            'start_service' => 'required|date_format:YmdHie',
+            'end_service' => 'required|date_format:YmdHie',
+            'hours_service' => 'numeric',
+            'price' => 'required|numeric'
+        ]);
+
+        $data = [
+            'description' => $request->input('description'),
+            'start_service' => Carbon::createFromFormat('YmdHie', $request->input('start_service')),
+            'end_service' => Carbon::createFromFormat('YmdHie', $request->input('end_service')),
+            'hours_service' => (!empty($request->input('hours_service'))) ? (float)$request->input('hours_service') : null,
+            'price' => (float)$request->input('price')
+        ];
+
+        if ( !$bid = Bid::updateBid($service, $bid, $data) ) {
+            return response()->json(['Could not update bid.'], 500);
+        }
+
+        return response()->json([
+            'message' => 'Successfully updated the bid.',
+            'bid' => $bid
+        ], 200);
     }
 
     /**
