@@ -18,6 +18,15 @@ class Service extends Model
     ];
 
     /**
+     * A service belongs to a user.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
      * A service belongs to a category.
      * 
      * @return Eloquent Relationship

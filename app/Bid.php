@@ -9,7 +9,7 @@ class Bid extends Model
 {
     
 	/**
-	 * A bid belongs to a service
+	 * A bid belongs to a service.
 	 * 
 	 * @return Eloquent Relationship
 	 */
@@ -18,7 +18,16 @@ class Bid extends Model
     }
 
     /**
-     * Get bids based on conditions
+     * A bid belongs to a user.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get bids based on conditions.
      * 
      * @param  Array  $where [Condition for bids]
      * @return Collection    [Collection of App\Bid objects]
@@ -36,7 +45,7 @@ class Bid extends Model
     /**
      * Create a bid
      * 
-     * @param  App\Service $service [The service to place a bid on]
+     * @param  App\Service        $service [The service to place a bid on]
      * @param  Array              $data    [Array of data for the bid]
      * @return Response|Boolean            [True on success, otherwise false. Or a direct response on error]
      */

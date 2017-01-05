@@ -17,12 +17,21 @@ class Comment extends Model
     ];
 
     /**
-     *  A comment belongs to a service
+     *  A comment belongs to a service.
      * 
      * @return Eloquent Relationship
      */
     public function service() {
     	return $this->belongsTo('App\Service');
+    }
+
+    /**
+     * A comment belongs to a user.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 
 	/**
