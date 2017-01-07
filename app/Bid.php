@@ -52,7 +52,10 @@ class Bid extends Model
     public static function createBid($service, $data) {
     	// If the service don't have status active - return a response.
         if ( $service->status != 'active' ) {
-            return response()->json(['message' => 'The requested service is not active.'], 401)->send();
+            return [
+                'error' => true,
+                'response' => response()->json(['message' => 'The requested service is not active.'], 401)
+            ];
         }
 
         $bid_stop = new Carbon($service->bid_stop, 'CET');
@@ -60,13 +63,16 @@ class Bid extends Model
         
         // If the time for bidding has past, a bid can not be placed.
         if ( $now > $bid_stop ) {
-            return response()->json(['message' => 'The time for bidding on this service has ended.'], 403)->send();
+            return [
+                'error' => true,
+                'response' => response()->json(['message' => 'The time for bidding on this service has ended.'], 403)
+            ];
         }
 
         // All is good, let's create a bid!
         $bid = new Bid;
         $bid->service_id = $service->id;
-        $bid->user_id = 1337;
+        $bid->user_id = $data['user_id'];
         $bid->description = $data['description'];
         $bid->start_service = $data['start_service'];
         $bid->end_service = $data['end_service'];
@@ -82,7 +88,10 @@ class Bid extends Model
             return $bid;
         }
 
-        return false;
+        return [
+            'error' => true,
+            'response' => response()->json(['Could not create bid.'], 500)
+        ];
     }
 
     /**
@@ -99,7 +108,10 @@ class Bid extends Model
         
         // If the time for bidding has past, a bid can not be updated.
         if ( $now > $bid_stop ) {
-            return response()->json(['message' => 'The time for bidding on this service has ended.'], 403)->send();
+            return [
+                'error' => true,
+                'response' => response()->json(['message' => 'The time for bidding on this service has ended.'], 403)
+            ];
         }
 
         // All is good, let's update the bid!
@@ -117,7 +129,10 @@ class Bid extends Model
             return $bid;
         }
 
-        return false;
+        return [
+            'error' => true,
+            'response' => response()->json(['message' => 'Could not update the bid.'], 500)
+        ];
     }
 
     /**

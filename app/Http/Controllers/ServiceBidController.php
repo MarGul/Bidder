@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Bid;
 use App\Service;
 use Carbon\Carbon;
+use App\Helpers\AuthHelp;
 
 class ServiceBidController extends Controller
 {
@@ -44,6 +45,8 @@ class ServiceBidController extends Controller
      */
     public function store(Request $request, Service $service)
     {
+        $user = AuthHelp::authorize($service);
+        if ( isset($user['error']) ) return $user['response'];
 
         $this->validate($request, [
             'description' => 'required',
@@ -54,6 +57,7 @@ class ServiceBidController extends Controller
         ]);
 
         $data = [
+            'user_id' => (int)$user->id,
             'description' => $request->input('description'),
             'start_service' => Carbon::createFromFormat('YmdHie', $request->input('start_service')),
             'end_service' => Carbon::createFromFormat('YmdHie', $request->input('end_service')),
@@ -61,9 +65,8 @@ class ServiceBidController extends Controller
             'price' => (float)$request->input('price')
         ];
 
-        if ( !$bid = Bid::createBid($service, $data) ) {
-            return response()->json(['Could not create bid.'], 500);
-        }
+        $bid = Bid::createBid($service, $data);
+        if ( isset($bid['error']) ) return $bid['response'];
 
         return response()->json([
             'message' => 'Successfully created the bid.',
@@ -94,6 +97,9 @@ class ServiceBidController extends Controller
      */
     public function update(Request $request, Service $service, Bid $bid)
     {
+        $user = AuthHelp::authorize($bid);
+        if ( isset($user['error']) ) return $user['response'];
+
         $this->validate($request, [
             'description' => 'required',
             'start_service' => 'required|date_format:YmdHie',
@@ -110,9 +116,8 @@ class ServiceBidController extends Controller
             'price' => (float)$request->input('price')
         ];
 
-        if ( !$bid = Bid::updateBid($service, $bid, $data) ) {
-            return response()->json(['Could not update bid.'], 500);
-        }
+        $bid = Bid::updateBid($service, $bid, $data);
+        if ( isset($bid['error']) ) return $bid['response'];
 
         return response()->json([
             'message' => 'Successfully updated the bid.',
@@ -129,6 +134,9 @@ class ServiceBidController extends Controller
      */
     public function destroy(Service $service, Bid $bid)
     {
+        $user = AuthHelp::authorize($bid);
+        if ( isset($user['error']) ) return $user['response'];
+
         if ( !$bid = Bid::deleteBid($bid) ) {
             return response()->json(['Could not delete bid.'], 500);
         }

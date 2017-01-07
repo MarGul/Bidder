@@ -59,7 +59,7 @@ class Comment extends Model
     	
     	$comment = new Comment;
     	$comment->service_id = $service_id;
-    	$comment->user_id = 1337;
+    	$comment->user_id = $data['user_id'];
     	$comment->body = $data['body'];
 
     	if( !$comment->save() ) {
@@ -81,9 +81,8 @@ class Comment extends Model
      * @param  Array   $data       [Data to update the comment to]
      * @return Boolean|Comment     [False on failure, comment object on success.]
      */
-    public static function updateComment($comment_id, $data) {
+    public static function updateComment($comment, $data) {
 
-    	$comment = Comment::findOrFail((int)$comment_id);
     	$comment->body = $data['body'];
 
     	if ( !$comment->update() ) {
@@ -104,9 +103,7 @@ class Comment extends Model
      * @param  Integer $comment_id [The comment ID]
      * @return Boolean|Comment     [False on fail, the comment object on success]
      */
-    public static function deleteComment($comment_id) {
-    	$comment = Comment::findOrFail((int)$comment_id);
-
+    public static function deleteComment($comment) {
     	if( !$comment->delete() ) {
     		return false;
     	}

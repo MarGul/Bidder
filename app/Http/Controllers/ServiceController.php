@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Service;
 use Carbon\Carbon;
+use App\Helpers\AuthHelp;
 
 class ServiceController extends Controller
 {
@@ -27,6 +28,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'message' => 'Listing all services.',
+            'test' => $test,
             'services' => $services
         ], 200);
     }
@@ -39,6 +41,10 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        // Get the authenticated and authorized user.
+        $user = AuthHelp::authorize();
+        if ( isset($user['error']) ) return $user['response'];       
+
         $this->validate($request, [
             'category_id' => 'required|integer|exists:categories,id',
             'region_id' => 'integer|exists:regions,id',
@@ -52,7 +58,7 @@ class ServiceController extends Controller
         ]);
 
         $service = new Service([
-            'user_id' => 1337,
+            'user_id' => $user->id,
             'category_id' => (int)$request->input('category_id'),
             'region_id' => (int)$request->input('region_id'),
             'title' => $request->input('title'),
@@ -66,6 +72,10 @@ class ServiceController extends Controller
         ]);
 
         if ( $service->save() ) {
+            // Replace the user_id with the user object
+            unset($service->user_id);
+            $service->user = $user;
+
             $service->view_service = [
                 'href' => 'api/v1/service/' . $service->id,
                 'method' => 'GET'
@@ -105,6 +115,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
+        $user = AuthHelp::authorize($service);
+        if ( isset($user['error']) ) return $user['response'];
+
         $this->validate($request, [
             'category_id' => 'required|integer|exists:categories,id',
             'region_id' => 'integer|exists:regions,id',
@@ -150,6 +163,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        $user = AuthHelp::authorize($service);
+        if ( isset($user['error']) ) return $user['response'];
+
         if ( !$service->delete() ) {
             return response()->json(['message' => 'Could not delete service.'], 500);
         }

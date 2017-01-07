@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Service;
+use App\Helpers\AuthHelp;
 
 class ServiceCommentController extends Controller
 {
@@ -48,11 +49,19 @@ class ServiceCommentController extends Controller
      */
     public function store(Request $request, Service $service)
     {
+        $user = AuthHelp::authorize();
+        if ( isset($user['error']) ) return $user['response'];
+
         $this->validate($request, [
             'body' => 'required'
         ]);
+
+        $data = [
+            'user_id' => (int)$user->id,
+            'body' => $request->input('body')
+        ];
         
-        if ( !$comment = Comment::createComment($service->id, ['body' => $request->input('body')]) ) {
+        if ( !$comment = Comment::createComment($service->id, $data) ) {
             return response()->json(['message' => 'Could not create the comment.'], 500);
         }
 
@@ -72,11 +81,14 @@ class ServiceCommentController extends Controller
      */
     public function update(Request $request, Service $service, Comment $comment)
     {
+        $user = AuthHelp::authorize($comment);
+        if ( isset($user['error']) ) return $user['response'];
+
         $this->validate($request, [
             'body' => 'required'
         ]);
 
-        if ( !$comment = Comment::updateComment($comment->id, ['body' => $request->input('body')]) ) {
+        if ( !$comment = Comment::updateComment($comment, ['body' => $request->input('body')]) ) {
             return response()->json(['message' => 'Could not update comment.'], 500);
         }
 
@@ -95,7 +107,10 @@ class ServiceCommentController extends Controller
      */
     public function destroy(Service $service, Comment $comment)
     {
-        if ( !$comment = Comment::deleteComment($comment->id) ) {
+        $user = AuthHelp::authorize($comment);
+        if ( isset($user['error']) ) return $user['response'];
+
+        if ( !$comment = Comment::deleteComment($comment) ) {
             return response()->json(['message' => 'Could not delete comment.'], 500);
         }
 

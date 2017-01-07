@@ -70,11 +70,11 @@ class Service extends Model
      */
     public static function getServices($where = null) {
         if ( !is_null($where) ) {
-            if ( !$services = Service::with('region', 'category', 'comments')->where($where)->get() ) {
+            if ( !$services = Service::with('region', 'category', 'comments', 'user')->where($where)->get() ) {
                 return false;
             }
         } else {
-            if ( !$services = Service::with('region', 'category', 'comments')->get() ) {
+            if ( !$services = Service::with('region', 'category', 'comments', 'user')->get() ) {
                 return false;
             }
         }
@@ -94,7 +94,7 @@ class Service extends Model
     public static function getService($service_id) {
         $service = Service::with('category', 'region', 'comments')
                             ->where('id', (int)$service_id)
-                            ->firstOrFail();
+                            ->first();
 
         $service = self::parseServices([$service]);
 
@@ -122,9 +122,10 @@ class Service extends Model
 
             // If it's the user's requesting service, have delete and update service hypermedia.
 
-            // No need for category_id and region_id. They are in the relationships
+            // No need for category_id, region_id and user_id. They are in the relationships
             unset($service->category_id);
             unset($service->region_id);
+            unset($service->user_id);
         }
 
         return $services; 
