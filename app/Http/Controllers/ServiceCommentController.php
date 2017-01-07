@@ -8,6 +8,14 @@ use App\Service;
 
 class ServiceCommentController extends Controller
 {
+    
+    public function __construct() {
+        // Add the jwt.auth middleware to routes
+        $this->middleware('jwt.auth', ['only' => [
+            'store', 'update', 'destroy'
+        ]]);
+    }
+
     /**
      * Display a listing of the resource.
      *
