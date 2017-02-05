@@ -28,7 +28,7 @@ class ServiceController extends Controller
 
         return response()->json([
             'message' => 'Listing all services.',
-            'test' => $test,
+            'test' => $services,
             'services' => $services
         ], 200);
     }
