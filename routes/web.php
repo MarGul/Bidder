@@ -4,13 +4,10 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
+| We redirect everything to the index and let our VueJS single Page application
+| handle all of the routing.
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('{all}', function () {
+    return view('index');
+})->where(['all' => '.*']);
