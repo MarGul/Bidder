@@ -3,11 +3,10 @@
  * Bootstrap the application
  */
 require('./bootstrap');
-
 /**
  * Import the Application. This is the starting point for the App.
  */
-import App from './components/App.vue';
+import App from './App.vue';
 /**
  * All of the applications routes. Great starting point for overview of app.
  */

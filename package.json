@@ -9,6 +9,7 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
+    "jquery": "^3.1.0",
     "laravel-mix": "^0.6.0",
     "vue": "^2.0.1",
     "vue-router": "^2.1.3"
