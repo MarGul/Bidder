@@ -7,10 +7,8 @@
         <div id="site-wrap">
             <div class="overlay" v-if="breakpoints.is('xs')"></div>
 
-            <div class="container">
-                <!-- This is where the router view component will be loaded -->
-                <router-view></router-view>
-            </div>
+            <!-- This is where the router view component will be loaded -->
+            <router-view></router-view>
 
             <app-footer></app-footer>
         </div>
