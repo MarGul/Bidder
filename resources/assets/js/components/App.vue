@@ -1,23 +1,14 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
+    <div id="site">
+        
 
-                    <div class="panel-body">
-                        I'm the app Component
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- This is where the router view component will be loaded -->
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('App component mounted.')
-        }
+        
     }
 </script>
