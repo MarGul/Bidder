@@ -1,13 +1,19 @@
 <template>
     <div id="site">
         
-        <app-mobile-header v-if="breakpoints.isMobile()"></app-mobile-header>
+        <app-mobile-header v-if="breakpoints.is('xs')"></app-mobile-header>
         <app-desktop-header v-else></app-desktop-header>
         
-        <!-- This is where the router view component will be loaded -->
-        <router-view></router-view>
+        <div id="site-wrap">
+            <div class="overlay" v-if="breakpoints.is('xs')"></div>
 
-        <app-footer></app-footer>
+            <div class="container">
+                <!-- This is where the router view component will be loaded -->
+                <router-view></router-view>
+            </div>
+
+            <app-footer></app-footer>
+        </div>
 
     </div>
 </template>

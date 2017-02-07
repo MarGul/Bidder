@@ -7,3 +7,31 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Mobile Navigation
+@import "navigation/mobile-nav.scss";
+
+
+html,
+body {
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+#site {
+	width: 100%;
+	height: 100%;
+}
+
+#site-wrap {
+	min-height: calc(100% - #{$mobile-nav-height});
+	min-width: 100%;
+	background-color: white;
+	position: relative;
+	top: 0;
+	bottom: 100%;
+	left: 0;
+	z-index: 1;
+	transition: left 0.5s ease-in-out;
+}

@@ -14395,6 +14395,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14411,9 +14417,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appMobileHeader: __WEBPACK_IMPORTED_MODULE_0__components_Layout_Header_MobileHeader_vue___default.a,
         appDesktopHeader: __WEBPACK_IMPORTED_MODULE_1__components_Layout_Header_DesktopHeader_vue___default.a,
         appFooter: __WEBPACK_IMPORTED_MODULE_2__components_Layout_Footer_Footer_vue___default.a
-    },
-    created: function created() {
-        console.log(breakpoints.isMobile());
     }
 };
 
@@ -14474,13 +14477,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = {};
+/* harmony default export */ __webpack_exports__["default"] = {
+	methods: {
+		navToggle: function navToggle() {
+			if ($('body').hasClass('mobile-nav-open')) {
+				$('body').removeClass('mobile-nav-open');
+			} else {
+				$('body').addClass('mobile-nav-open');
+			}
+		}
+	}
+};
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(9)))
 
 /***/ }),
 /* 37 */
@@ -14526,24 +14553,19 @@ window.breakpoints = new __WEBPACK_IMPORTED_MODULE_0__classes_BootstrapBreakpoin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/* WEBPACK VAR INJECTION */(function($) {var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var BootstrapBreakpoints = function () {
 	function BootstrapBreakpoints() {
 		_classCallCheck(this, BootstrapBreakpoints);
-
-		console.log('here');
 	}
 
 	_createClass(BootstrapBreakpoints, [{
-		key: 'getBreakpoint',
-		value: function getBreakpoint() {}
-	}, {
-		key: 'isMobile',
-		value: function isMobile() {
-			return false;
+		key: 'is',
+		value: function is(breakpoint) {
+			return $('#detect-breakpoints .device-' + breakpoint).is(':visible');
 		}
 	}]);
 
@@ -14551,6 +14573,7 @@ var BootstrapBreakpoints = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = BootstrapBreakpoints;
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(9)))
 
 /***/ }),
 /* 39 */
@@ -14589,7 +14612,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/App.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14623,7 +14646,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/components/Error/404.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Error/404.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] 404.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14657,7 +14680,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/components/Home/Home.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Home/Home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Home.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14691,7 +14714,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/components/Layout/Footer/Footer.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Layout/Footer/Footer.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Footer.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14725,7 +14748,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/components/Layout/Header/DesktopHeader.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Layout/Header/DesktopHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DesktopHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14759,7 +14782,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/Code/Bidder/resources/assets/js/components/Layout/Header/MobileHeader.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Layout/Header/MobileHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MobileHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14803,7 +14826,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "site"
     }
-  }, [(_vm.breakpoints.isMobile()) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('app-footer')], 1)
+  }, [(_vm.breakpoints.is('xs')) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), _c('div', {
+    attrs: {
+      "id": "site-wrap"
+    }
+  }, [(_vm.breakpoints.is('xs')) ? _c('div', {
+    staticClass: "overlay"
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "container"
+  }, [_c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -14818,8 +14849,55 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("Mobile Header")])
-},staticRenderFns: []}
+  return _c('div', {
+    attrs: {
+      "id": "site-head"
+    }
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "mobile-nav-header"
+  }, [_c('a', {
+    attrs: {
+      "id": "mobile-nav-toggle",
+      "href": ""
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.navToggle($event)
+      }
+    }
+  }, [_c('span')])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "mobile-navigation"
+  }, [_c('ul', {
+    staticClass: "mobile-nav"
+  }, [_c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 1")])]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 2")])]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 3")])]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Link 4")])])])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

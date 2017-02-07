@@ -1,0 +1,121 @@
+.mobile-nav-open {
+	overflow: hidden;
+}
+
+.mobile-navigation {
+	position: relative;
+}
+
+.mobile-nav-header {
+	position: relative;
+	height: $mobile-nav-height;
+	width: 100%;
+	background: #f6f6f6;
+	border-bottom: 1px solid #d7d7d7;
+}
+
+.mobile-nav {
+	padding-top: $mobile-nav-height;
+	width: 300px;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	list-style-type: none;
+	background: #4D545D;
+
+	.nav-item a {
+		display: block;
+		padding: 1em;
+		color: #fff;
+		font-size: 1.2em;
+		text-decoration: none;
+
+		&:hover {
+			color: #c74438;
+		}
+	}
+}
+
+#mobile-nav-toggle {
+	position: absolute;
+	height: $mobile-nav-height;
+	width: 35px;
+	left: 15px;
+	padding-top: 22px;
+
+	&:focus {
+		outline: none;
+	}
+
+	span,
+	span:before,
+	span:after {
+		cursor: pointer;
+		border-radius: 1px;
+		height: 5px;
+		width: 35px;
+		background: #7d8793;
+		position: absolute;
+		display: block;
+		content: "";
+		transition: all 0.5s ease-in-out;
+	}
+
+	span:before {
+		top: -10px;
+	}
+
+	span:after {
+		bottom: -10px;
+	}
+}
+
+body.mobile-nav-open {
+	
+	#mobile-nav-toggle {
+		span {
+			background: transparent;
+		}
+		
+		span:before,
+		span:after {
+			top: 0;
+		}
+
+		span:before {
+			-webkit-transform: rotate(45deg);
+				-ms-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+					transform: rotate(45deg);
+		}
+
+		span:after {
+			-webkit-transform: rotate(-45deg);
+				-ms-transform: rotate(-45deg);
+				-moz-transform: rotate(-45deg);
+					transform: rotate(-45deg);
+		}
+	}
+
+	#site-wrap {
+		left: 300px;
+	}
+
+	.overlay {
+		display: block;
+	}
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background: rgba(0,0,0,0.7);
+	z-index: 5;
+	box-shadow: inset 5px 0px 5px rgba(0,0,0,0.7);
+}

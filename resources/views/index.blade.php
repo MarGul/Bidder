@@ -20,10 +20,12 @@
         <div id="app"></div>
 
         <!-- Detect Bootstrap breakpoints in JS -->
-        <span class="device-xs visible-xs"></span>
-        <span class="device-sm visible-sm"></span>
-        <span class="device-md visible-md"></span>
-        <span class="device-lg visible-lg"></span>
+        <div id="detect-breakpoints">
+            <span class="device-xs visible-xs"></span>
+            <span class="device-sm visible-sm"></span>
+            <span class="device-md visible-md"></span>
+            <span class="device-lg visible-lg"></span>
+        </div>
         
         <script src="{{ URL::asset('js/app.js') }}"></script>
     </body>

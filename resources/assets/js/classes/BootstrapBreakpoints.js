@@ -1,15 +1,11 @@
 class BootstrapBreakpoints {
 
 	constructor() {
-		console.log('here');
+		
 	}
 
-	getBreakpoint() {
-
-	}
-
-	isMobile() {
-		return false;
+	is(breakpoint) {
+		return $('#detect-breakpoints .device-' + breakpoint).is(':visible');
 	}
 
 }
