@@ -1,5 +1,5 @@
 <template>
-	<div id="site-head">
+	<div class="site-head">
 		<nav class="mobile-navigation">
 			<ul class="mobile-nav">
 				<li class="nav-item"><a href="#">Link 1</a></li>
