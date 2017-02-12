@@ -2,14 +2,14 @@ class BootstrapBreakpoints {
 
 	constructor() {
 		let bb = this;
-		this._onLoad(bb);
+		this._update(bb);
 
 		$(window).resize(function() {
-			bb._onLoad(bb);
+			bb._update(bb);
 		});
 	}
 
-	_onLoad(bb) {
+	_update(bb) {
 		bb.current = bb._getCurrentBreakpoint();
 		bb.mobile = bb.isMobile();
 	}

@@ -5,7 +5,7 @@
         <app-desktop-header v-else></app-desktop-header>
         
         <div id="site-wrap">
-            <div class="overlay" v-if="breakpoints.mobile"></div>
+            <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
 
             <!-- Show the search component here if we're on mobile -->
             <div class="mobile-search-header" v-if="breakpoints.mobile">
@@ -31,6 +31,11 @@
         data() {
             return {
                 breakpoints: window.breakpoints
+            }
+        },
+        methods: {
+            hideMobileNav() {
+                $('body').removeClass('mobile-nav-open');
             }
         },
         components: {
