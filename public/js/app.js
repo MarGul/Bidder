@@ -14440,6 +14440,8 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
+//
 
 
 
@@ -15055,7 +15057,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._v("Footer")])
+  return _c("div")
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -15085,7 +15087,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _vm._e(), _vm._v(" "), (_vm.breakpoints.mobile) ? _c('div', {
     staticClass: "mobile-search-header"
-  }, [_c('app-search')], 1) : _vm._e(), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('app-footer')], 1)], 1)
+  }, [_c('app-search')], 1) : _vm._e(), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "slide",
+      "mode": "out-in"
+    }
+  }, [_c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
