@@ -16,10 +16,10 @@
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
 						<ul class="desktop-header-nav clearfix">
 							<li>
-								<a href="#" class="register">Registrera</a>
+								<router-link to="/register" class="register">Registrera</router-link>
 							</li>
 							<li>
-								<a href="#" class="login">Logga In</a>
+								<router-link to="/login" class="login">Logga In</router-link>
 							</li>
 						</ul>
 					</div>
@@ -31,20 +31,20 @@
 			<div class="container">
 				<ul class="desktop-nav clearfix">
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link 1</a>
+						<router-link to="/categories"><i class="fa fa-list-ul" aria-hidden="true"></i> Kategorier</router-link>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link 2</a>
+						<router-link to="/regions"><i class="fa fa-map-marker" aria-hidden="true"></i> Regioner</router-link>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link 3</a>
+						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link 4</a>
+						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link 5</a>
-					</li>
+						<router-link to="/information"><i class="fa fa-question" aria-hidden="true"></i> Information</router-link>
+					</li>				
 				</ul>
 			</div>
 		</nav>
