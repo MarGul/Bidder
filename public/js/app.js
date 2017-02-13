@@ -14593,6 +14593,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	methods: {
@@ -14602,6 +14620,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			} else {
 				$('body').addClass('mobile-nav-open');
 			}
+		},
+		hideMenu: function hideMenu() {
+			$('body').removeClass('mobile-nav-open');
 		}
 	}
 };
@@ -15081,7 +15102,93 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "site-head"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('nav', {
+    staticClass: "mobile-navigation"
+  }, [_c('ul', {
+    staticClass: "mobile-nav"
+  }, [_c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/categories"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-list-ul",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Kategorier")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/regions"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-map-marker",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Regioner")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_vm._m(0)]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_vm._m(1)]), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/information"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-question",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Information")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "spacer"
+  }), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/register"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Registrera")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item",
+    on: {
+      "click": _vm.hideMenu
+    }
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/login"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-unlock-alt",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Logga In")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "mobile-nav-header"
   }, [_c('a', {
     attrs: {
@@ -15096,35 +15203,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span')])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "mobile-navigation"
-  }, [_c('ul', {
-    staticClass: "mobile-nav"
-  }, [_c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
+  return _c('a', {
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("Link 1")])]), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Link")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("Link 2")])]), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
     attrs: {
-      "href": "#"
+      "aria-hidden": "true"
     }
-  }, [_vm._v("Link 3")])]), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Link 4")])])])])
+  }), _vm._v(" Link")])
 }]}
 module.exports.render._withStripped = true
 if (false) {
