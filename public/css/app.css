@@ -8004,24 +8004,29 @@ body.mobile-nav-open .overlay {
   box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
-.hero h2 {
+.hero h1 {
+  font-size: 3em;
   margin: 0 0 30px 0;
 }
 
+.hero .hero-left {
+  font-size: 1.3em;
+}
+
 .slide-in-enter-active {
-  -webkit-animation: slide-in 500ms ease-out forwards;
-  animation: slide-in 500ms ease-out forwards;
+  -webkit-animation: slide-in 800ms ease-out forwards;
+  animation: slide-in 800ms ease-out forwards;
 }
 
 .slide-in-leave-active {
-  -webkit-animation: slide-out 500ms ease-out forwards;
-  animation: slide-out 500ms ease-out forwards;
+  -webkit-animation: slide-out 800ms ease-out forwards;
+  animation: slide-out 800ms ease-out forwards;
 }
 
 @keyFrames slide-in {
   from {
-    -webkit-transform: translateX(80px);
-            transform: translateX(80px);
+    -webkit-transform: translateX(90px);
+            transform: translateX(90px);
     opacity: 0;
   }
   to {
@@ -8038,17 +8043,25 @@ body.mobile-nav-open .overlay {
     opacity: 1;
   }
   to {
-    -webkit-transform: translateX(80px);
-            transform: translateX(80px);
+    -webkit-transform: translateX(90px);
+            transform: translateX(90px);
     opacity: 0;
   }
 }
 
 .fade-in-enter-active {
-  -webkit-animation: fade-in 500ms ease-out forwards;
-  animation: fade-in 500ms ease-out forwards;
+  -webkit-animation: fade-in 700ms ease-out forwards;
+  animation: fade-in 700ms ease-out forwards;
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.fade-in-slow-enter-active {
+  -webkit-animation: fade-in 700ms ease-out forwards;
+  animation: fade-in 700ms ease-out forwards;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
   opacity: 0;
 }
 

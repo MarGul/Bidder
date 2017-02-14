@@ -5,7 +5,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
 					<div class="hero-left">
 						<transition name="fade-in" appear>
-							<h2 slot="title"></h2>
+							<slot name="title"></slot>
 						</transition>
 						<transition name="fade-in-slow" appear>
 							<slot name="left"></slot>

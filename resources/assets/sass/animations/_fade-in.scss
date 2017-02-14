@@ -1,8 +1,16 @@
 .fade-in-enter-active {
-	-webkit-animation: fade-in 500ms ease-out forwards;
-			animation: fade-in 500ms ease-out forwards;
+	-webkit-animation: fade-in 700ms ease-out forwards;
+			animation: fade-in 700ms ease-out forwards;
 	-webkit-animation-delay: 0.2s;
 			animation-delay: 0.2s;
+	opacity: 0;
+}
+
+.fade-in-slow-enter-active {
+	-webkit-animation: fade-in 700ms ease-out forwards;
+			animation: fade-in 700ms ease-out forwards;
+	-webkit-animation-delay: 0.5s;
+			animation-delay: 0.5s;
 	opacity: 0;
 }
 

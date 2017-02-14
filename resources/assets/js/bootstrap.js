@@ -14,6 +14,14 @@ window.Vue = require('vue');
 Vue.use(require('vue-router'));
 
 /**
+ * Global Vue components 
+ */
+import Hero from './components/Includes/Hero.vue';
+
+Vue.component('app-hero', Hero);
+
+
+/**
  * Load in Axios HTTP framework.
  */
 window.axios = require('axios');
