@@ -14440,8 +14440,6 @@ module.exports = function spread(callback) {
 //
 //
 //
-//
-//
 
 
 
@@ -14653,6 +14651,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15036,13 +15058,46 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "categories-view"
   }, [_c('div', {
+    staticClass: "hero"
+  }, [_c('div', {
     staticClass: "container"
-  }, [_c('h2', [_vm._v("Categories Page")])])])
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-sm-6 col-md-7 col-lg-8"
+  }, [_c('transition', {
+    attrs: {
+      "name": "fade-in",
+      "mode": "out-in",
+      "appear": ""
+    }
+  }, [_c('div', {
+    staticClass: "hero-left"
+  }, [_c('h2', [_vm._v("Hitta rätt via kategorier")]), _vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam culpa obcaecati inventore ut ea repudiandae, modi enim pariatur aspernatur adipisci? Aliquam modi labore ut sunt, nihil quidem id praesentium consequuntur.\n\t\t\t\t\t\t")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "hidden-xs col-sm-6 col-md-5 hero-right text-center col-lg-4"
+  }, [_c('transition', {
+    attrs: {
+      "name": "slide-in",
+      "mode": "out-in",
+      "appear": ""
+    }
+  }, [_c('div', {
+    staticClass: "hero-right"
+  }, [_c('img', {
+    attrs: {
+      "src": "mechanic.png",
+      "alt": ""
+    }
+  })])])], 1)])])]), _vm._v(" "), _vm._m(0)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_vm._v("\n\t\t\tHere goes some content\n\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -15087,12 +15142,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _vm._e(), _vm._v(" "), (_vm.breakpoints.mobile) ? _c('div', {
     staticClass: "mobile-search-header"
-  }, [_c('app-search')], 1) : _vm._e(), _vm._v(" "), _c('transition', {
-    attrs: {
-      "name": "slide",
-      "mode": "out-in"
-    }
-  }, [_c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)
+  }, [_c('app-search')], 1) : _vm._e(), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('app-footer')], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

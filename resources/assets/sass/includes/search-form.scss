@@ -13,7 +13,7 @@
 	border-radius: 3px;
 
 	&:hover .glyphicon {
-		color: #55AE3A;
+		color: $primary-green;
 	}
 
 	.glyphicon {
@@ -71,12 +71,12 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	color: #fff;
-	background: #55AE3A;
+	background: $primary-green;
 	letter-spacing: 1px;
 	transition: all ease-out-in 200ms;
 
 	&:hover {
-		background: #308014;
+		background: $hover-green;
 		color: #fff;
 	}
 }

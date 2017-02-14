@@ -42,18 +42,18 @@
 		}
 
 		&:hover {
-			background: #55AE3A;
+			background: $primary-green;
 		}
 	}
 
 	.active {
-		background: #55AE3A;
+		background: $primary-green;
 		cursor: default;
 	}
 
 	.spacer {
 		margin: 10px 15px;
-		border-top: 1px solid #55AE3A;
+		border-top: 1px solid $primary-green;
 	}
 }
 

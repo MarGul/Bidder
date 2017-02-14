@@ -13,9 +13,7 @@
             </div>
 
             <!-- This is where the router view component will be loaded -->
-            <transition name="slide" mode="out-in">
-                <router-view></router-view>
-            </transition>
+            <router-view></router-view>
 
             <app-footer></app-footer>
         </div>

@@ -7860,7 +7860,6 @@ body.mobile-nav-open .overlay {
 
 .desktop-navigation {
   background: #f6f6f6;
-  border-bottom: 1px solid #d7d7d7;
 }
 
 .desktop-nav {
@@ -7992,24 +7991,37 @@ body.mobile-nav-open .overlay {
 }
 
 .btn-search:hover {
-  background: #308014;
+  background: #264e1a;
   color: #fff;
 }
 
-.slide-enter-active {
-  -webkit-animation: slide-in 200ms ease-out forwards;
-          animation: slide-in 200ms ease-out forwards;
+.hero {
+  -webkit-background: -webkit-linear-gradient(135deg, #55AE3A, #264e1a);
+  -moz-background: linear-gradient(-45deg, #55AE3A, #264e1a);
+  background: linear-gradient(-45deg, #55AE3A, #264e1a);
+  padding: 40px 0px;
+  color: #fff;
+  box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
-.slide-leave-active {
-  -webkit-animation: slide-out 200ms ease-out forwards;
-          animation: slide-out 200ms ease-out forwards;
+.hero h2 {
+  margin: 0 0 30px 0;
+}
+
+.slide-in-enter-active {
+  -webkit-animation: slide-in 500ms ease-out forwards;
+  animation: slide-in 500ms ease-out forwards;
+}
+
+.slide-in-leave-active {
+  -webkit-animation: slide-out 500ms ease-out forwards;
+  animation: slide-out 500ms ease-out forwards;
 }
 
 @keyFrames slide-in {
   from {
-    -webkit-transform: translateX(-60px);
-            transform: translateX(-60px);
+    -webkit-transform: translateX(80px);
+            transform: translateX(80px);
     opacity: 0;
   }
   to {
@@ -8026,9 +8038,23 @@ body.mobile-nav-open .overlay {
     opacity: 1;
   }
   to {
-    -webkit-transform: translateX(-60px);
-            transform: translateX(-60px);
+    -webkit-transform: translateX(80px);
+            transform: translateX(80px);
     opacity: 0;
+  }
+}
+
+.fade-in-enter-active {
+  -webkit-animation: fade-in 500ms ease-out forwards;
+  animation: fade-in 500ms ease-out forwards;
+}
+
+@keyFrames fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -8037,6 +8063,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+  background: #fafafa;
 }
 
 a {
@@ -8059,4 +8086,8 @@ a {
   z-index: 1;
   -webkit-transition: left 0.5s ease-in-out;
   transition: left 0.5s ease-in-out;
+}
+
+.content {
+  margin: 60px 0px;
 }

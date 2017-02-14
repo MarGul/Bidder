@@ -1,0 +1,13 @@
+.fade-in-enter-active {
+	-webkit-animation: fade-in 500ms ease-out forwards;
+			animation: fade-in 500ms ease-out forwards;	
+}
+
+@keyFrames fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

@@ -1,0 +1,12 @@
+.hero {
+	-webkit-background: linear-gradient(-45deg, $primary-green, $hover-green);
+		-moz-background: linear-gradient(-45deg, $primary-green, $hover-green);
+			background: linear-gradient(-45deg, $primary-green, $hover-green);
+	padding: 40px 0px;
+	color: #fff;
+	box-shadow: 0px 3px 0px rgba(0,0,0,0.3);
+
+	h2 {
+		margin: 0 0 30px 0;
+	}
+}

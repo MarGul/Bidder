@@ -1,6 +1,6 @@
 .desktop-header {
 	background: #4D545D;
-	border-top: 2px solid #55AE3A;
+	border-top: 2px solid $primary-green;
 	padding: 12px 0px;
 }
 
@@ -32,14 +32,13 @@
 		}
 
 		a.login {
-			color: #55AE3A;
+			color: $primary-green;
 		}
 	}
 }
 
 .desktop-navigation {
 	background: #f6f6f6;
-	border-bottom: 1px solid #d7d7d7;
 }
 
 .desktop-nav {
@@ -75,13 +74,13 @@
 			}
 
 			&:hover {
-				background: #55AE3A;
+				background: $primary-green;
 				color: #fff;
 			}
 		}
 
 		.active {
-			background: #55AE3A;
+			background: $primary-green;
 			color: #fff;
 			cursor: default;
 		}

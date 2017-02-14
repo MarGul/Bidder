@@ -37,5 +37,9 @@ $input-color-placeholder: lighten($text-color, 30%);
 // Panels
 $panel-default-heading-bg: #fff;
 
+// Colors
+$primary-green: #55AE3A;
+$hover-green: darken($primary-green, 25%);
+
 // Navigation
 $mobile-nav-height: 50px;
