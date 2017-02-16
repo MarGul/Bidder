@@ -11,7 +11,7 @@
 
 		<div class="container">
 			<div class="content">
-				Here goes some content
+				Here goes some content and stuff you know all that
 			</div>
 		</div>
 	</div>
@@ -19,6 +19,9 @@
 
 <script>
 	export default {
-
+		created() {
+			// If the data isn't already in vuex, load it.
+			
+		}
 	}
 </script>

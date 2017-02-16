@@ -35,25 +35,32 @@ class Category extends Model
     }
 
     /**
-     * Parse the categories to add hypermedia links.
+     * Parse the categories.
      * 
-     * @param  Collection $categories [Collection of ]
+     * @param  Collection $categories [Collection of App\Category]
      * @return void
      */
     public static function parseCategories($categories) {
         foreach ($categories as $category) {
-            $category->view_category = [
-                'href' => 'api/v1/categories/' . $category->id,
-                'method' => 'GET'
-            ];
+            self::parseCategory($category);
 
             foreach ($category->sub_categories as $subcategory) {
-                $subcategory->view_category = [
-                    'href' => 'api/v1/categories/' . $subcategory->id,
-                    'method' => 'GET'
-                ];
+                self::parseCategory($subcategory);
             }
         }
+    }
+
+    /**
+     * Parse a category to add hypermedia.
+     *  
+     * @param  App\Category $category [The category to be parsed]
+     * @return void
+     */
+    public static function parseCategory($category) {
+        $category->view_category = [
+            'href' => 'api/v1/categories/' . $category->id,
+            'method' => 'GET'
+        ];
     }
 
 }

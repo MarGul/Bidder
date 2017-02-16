@@ -14706,7 +14706,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = {};
+/* harmony default export */ __webpack_exports__["default"] = {
+	created: function created() {
+		// If the data isn't already in vuex, load it.
+
+	}
+};
 
 /***/ }),
 /* 40 */
@@ -15375,7 +15380,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [_c('div', {
     staticClass: "content"
-  }, [_vm._v("\n\t\t\tHere goes some content\n\t\t")])])
+  }, [_vm._v("\n\t\t\tHere goes some content and stuff you know all that\n\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
