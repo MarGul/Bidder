@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // Reject all categories that's not a root category
         $categories = $categories->reject(function($category) {
             return $category->sub_categories->isEmpty();
-        });
+        })->flatten();
 
         Category::parseCategories($categories);
 
@@ -32,15 +32,18 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  App\Category  $category
+     * @param  Integer|String  $identifier  [Slug or Id to identify a category]
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($identifier)
     {
-        $category->view_categories = [
-            'href' => 'api/v1/categories',
-            'method' => 'GET'
-        ];
+        if ( is_numeric($identifier) ) {
+            $category = Category::with('sub_categories')->findOrFail((int)$identifier);
+        } else {
+            $category = Category::with('sub_categories')->where('slug', $identifier)->firstOrFail();
+        }
+
+        Category::parseCategory($category);
 
         return response()->json([
             'message' => 'Viewing category data.',

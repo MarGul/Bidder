@@ -13,7 +13,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-    	'name', 'description', 'parent', 'icon'
+    	'slug', 'name', 'description', 'parent', 'icon'
     ];
 
     /**
@@ -43,15 +43,11 @@ class Category extends Model
     public static function parseCategories($categories) {
         foreach ($categories as $category) {
             self::parseCategory($category);
-
-            foreach ($category->sub_categories as $subcategory) {
-                self::parseCategory($subcategory);
-            }
         }
     }
 
     /**
-     * Parse a category to add hypermedia.
+     * Parse a category and recursively parse it's subcategories.
      *  
      * @param  App\Category $category [The category to be parsed]
      * @return void
@@ -61,6 +57,17 @@ class Category extends Model
             'href' => 'api/v1/categories/' . $category->id,
             'method' => 'GET'
         ];
+
+        $category->view_services = [
+            'href' => 'api/v1/categories/' . $category->slug . '/services',
+            'method' => 'GET'
+        ];
+
+        if ( !$category->sub_categories->isEmpty() ) {
+            foreach ($category->sub_categories as $subcategory) {
+                self::parseCategory($subcategory);
+            }
+        }
     }
 
 }
