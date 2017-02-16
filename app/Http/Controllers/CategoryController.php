@@ -14,14 +14,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        // Eager load with sub_categories relationship
+        $categories = Category::with('sub_categories')->get();
+        // Reject all categories that's not a root category
+        $categories = $categories->reject(function($category) {
+            return $category->sub_categories->isEmpty();
+        });
 
-        foreach ($categories as $category) {
-            $category->view_category = [
-                'href' => 'api/v1/categories/' . $category->id,
-                'method' => 'GET'
-            ];
-        }
+        Category::parseCategories($categories);
 
         return response()->json([
             'message' => 'Listing all categories.',
