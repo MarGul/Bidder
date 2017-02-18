@@ -1,3 +1,5 @@
+import Category from '../../includes/models/Category';
+
 const categories = {
 	state: {
 		categories: []
@@ -9,7 +11,9 @@ const categories = {
 	},
 	actions: {
 		fetchCategories({commit}) {
-			commit('SET_CATEGORIES', [{test:'test'}, {test2: 'test2'}]);
+			Category.all().then(({categories}) => {
+				commit('SET_CATEGORIES', categories);
+			});
 		}
 	},
 	getters: {

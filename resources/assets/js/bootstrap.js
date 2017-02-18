@@ -26,6 +26,7 @@ Vue.component('app-hero', Hero);
  */
 window.axios = require('axios');
 
+window.axios.defaults.baseURL = 'http://bidder.dev/api/v1/';
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
@@ -34,5 +35,5 @@ window.axios.defaults.headers.common = {
 /**
  * Object to handle Twitter bootstrap breakpoints
  */
-import Breakpoints from './classes/BootstrapBreakpoints';
+import Breakpoints from './includes/classes/BootstrapBreakpoints';
 window.breakpoints = new Breakpoints;

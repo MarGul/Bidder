@@ -11,8 +11,9 @@
 
 		<div class="container">
 			<div class="content">
-				Here goes some content and stuff you know all that
-				{{ categories }}
+				<div v-for="category in categories">
+					{{ category.name }}
+				</div>
 			</div>
 		</div>
 	</div>
