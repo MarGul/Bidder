@@ -43,6 +43,10 @@
             appDesktopHeader: DesktopHeader,
             appSearch: Search,
             appFooter: Footer
+        },
+        created() {
+            // Initialize Data
+            this.$store.dispatch('fetchCategories');
         }
     }
 </script>

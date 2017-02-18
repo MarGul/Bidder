@@ -12,6 +12,7 @@
 		<div class="container">
 			<div class="content">
 				Here goes some content and stuff you know all that
+				{{ categories }}
 			</div>
 		</div>
 	</div>
@@ -19,9 +20,10 @@
 
 <script>
 	export default {
-		created() {
-			// If the data isn't already in vuex, load it.
-			
+		computed: {
+			categories() {
+				return this.$store.getters.getCategories;
+			}
 		}
 	}
 </script>
