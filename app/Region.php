@@ -13,8 +13,15 @@ class Region extends Model
      * @var array
      */
     protected $fillable = [
-    	'name', 'description'
+    	'slug', 'name', 'description'
     ];
+
+    /**
+     * Disable timestamps on the model.
+     *  
+     * @var boolean
+     */
+    public $timestamps = false;
 
     /**
      * A region has many services
@@ -23,6 +30,31 @@ class Region extends Model
      */
     public function services() {
     	return $this->hasMany('App\Service');
+    }
+
+    /**
+     * Parse the regions.
+     * 
+     * @param  Collection $regions [Collecton of App\Region]
+     * @return void
+     */
+    public static function parseRegions($regions) {
+        foreach ($regions as $region) {
+            self::parseRegion($region);
+        }
+    }
+
+    /**
+     * Parse one region.
+     * 
+     * @param  App\Region $region [Region to be parsed]
+     * @return void
+     */
+    public static function parseRegion($region) {
+        $region->view_services = [
+            'href' => 'api/v1/regions/' . $region->slug . '/services',
+            'method' => 'GET'
+        ];
     }
     
 }

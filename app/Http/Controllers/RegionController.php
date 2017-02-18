@@ -16,12 +16,7 @@ class RegionController extends Controller
     {
         $regions = Region::all();
 
-        foreach ($regions as $region) {
-            $region->view_region = [
-                'href' => 'api/v1/regions/' . $region->id,
-                'method' => 'GET'
-            ];
-        }
+        Region::parseRegions($regions);
 
         return response()->json([
             'message' => 'Listing all regions.',
@@ -32,15 +27,19 @@ class RegionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  App\Region  $region
+     * @param  Integer|String  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show($identifier)
     {
-        $region->view_regions = [
-            'href' => 'api/v1/regions',
-            'method' => 'GET'
-        ];
+        // If integer look for region with that ID. Otherwise look for region with slug of $identifier
+        if ( is_numeric($identifier) ) {
+            $region = Region::findOrFail((int)$identifier);
+        } else {
+            $region = Region::where('slug', $identifier)->firstOrFail();
+        }
+
+        Region::parseRegion($region);
 
         return response()->json([
             'message' => 'Viewing region data',

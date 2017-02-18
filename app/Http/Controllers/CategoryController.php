@@ -37,6 +37,7 @@ class CategoryController extends Controller
      */
     public function show($identifier)
     {
+        // If integer look for category with that ID. Otherwise look for category with slug of $identifier
         if ( is_numeric($identifier) ) {
             $category = Category::with('sub_categories')->findOrFail((int)$identifier);
         } else {

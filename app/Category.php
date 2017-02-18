@@ -17,6 +17,13 @@ class Category extends Model
     ];
 
     /**
+     * Disable timestamps on the model.
+     * 
+     * @var boolean
+     */
+    public $timestamps = false;
+
+    /**
      * A category has many services.
      * 
      * @return Eloquent Relationship

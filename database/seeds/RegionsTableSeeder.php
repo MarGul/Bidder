@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Region;
 
 class RegionsTableSeeder extends Seeder
 {
@@ -11,28 +12,38 @@ class RegionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('regions')->insert(['name' => 'Skåne']);
-        DB::table('regions')->insert(['name' => 'Blekinge']);
-        DB::table('regions')->insert(['name' => 'Kronoberg']);
-        DB::table('regions')->insert(['name' => 'Halland']);
-        DB::table('regions')->insert(['name' => 'Gotland']);
-        DB::table('regions')->insert(['name' => 'Kalmar']);
-        DB::table('regions')->insert(['name' => 'Jönköping']);
-        DB::table('regions')->insert(['name' => 'Älvsborg']);
-        DB::table('regions')->insert(['name' => 'Göteborg']);
-        DB::table('regions')->insert(['name' => 'Östergötland']);
-        DB::table('regions')->insert(['name' => 'Skaraborg']);
-        DB::table('regions')->insert(['name' => 'Södermanland']);
-        DB::table('regions')->insert(['name' => 'Stockholm']);
-        DB::table('regions')->insert(['name' => 'Uppsala']);
-        DB::table('regions')->insert(['name' => 'Västmanland']);
-        DB::table('regions')->insert(['name' => 'Örebro']);
-        DB::table('regions')->insert(['name' => 'Värmland']);
-        DB::table('regions')->insert(['name' => 'Dalarna']);
-        DB::table('regions')->insert(['name' => 'Gävleborg']);
-        DB::table('regions')->insert(['name' => 'Västernorrland']);
-        DB::table('regions')->insert(['name' => 'Jämtland']);
-        DB::table('regions')->insert(['name' => 'Västerbotten']);
-        DB::table('regions')->insert(['name' => 'Norrbotten']);
+        $regions = [
+            ['name' => 'Skåne', 'slug' => 'skane', 'description' => ''],
+            ['name' => 'Blekinge', 'slug' => 'blekinge', 'description' => ''],
+            ['name' => 'Kronoberg', 'slug' => 'kronoberg', 'description' => ''],
+            ['name' => 'Halland', 'slug' => 'halland', 'description' => ''],
+            ['name' => 'Gotland', 'slug' => 'gotland', 'description' => ''],
+            ['name' => 'Kalmar', 'slug' => 'kalmar', 'description' => ''],
+            ['name' => 'Jönköping', 'slug' => 'jonkoping', 'description' => ''],
+            ['name' => 'Älvsborg', 'slug' => 'alvsborg', 'description' => ''],
+            ['name' => 'Göteborg', 'slug' => 'goteborg', 'description' => ''],
+            ['name' => 'Östergötland', 'slug' => 'ostergotland', 'description' => ''],
+            ['name' => 'Skaraborg', 'slug' => 'skaraborg', 'description' => ''],
+            ['name' => 'Södermanland', 'slug' => 'sodermanland', 'description' => ''],
+            ['name' => 'Stockholm', 'slug' => 'stockholm', 'description' => ''],
+            ['name' => 'Uppsala', 'slug' => 'uppsala', 'description' => ''],
+            ['name' => 'Västmanland', 'slug' => 'vastmanland', 'description' => ''],
+            ['name' => 'Örebro', 'slug' => 'orebro', 'description' => ''],
+            ['name' => 'Värmland', 'slug' => 'varmland', 'description' => ''],
+            ['name' => 'Dalarna', 'slug' => 'dalarna', 'description' => ''],
+            ['name' => 'Gävleborg', 'slug' => 'gavleborg', 'description' => ''],
+            ['name' => 'Västernorrland', 'slug' => 'vasternorrland', 'description' => ''],
+            ['name' => 'Jämtland', 'slug' => 'jamtland', 'description' => ''],
+            ['name' => 'Västerbotten', 'slug' => 'vasterbotten', 'description' => ''],
+            ['name' => 'Norrbotten', 'slug' => 'norrbotten', 'description' => ''],
+        ];
+
+        foreach ($regions as $region) {
+            Region::create([
+                'name' => $region['name'],
+                'slug' => $region['slug'],
+                'description' => $region['description']
+            ]);
+        }
     }
 }
