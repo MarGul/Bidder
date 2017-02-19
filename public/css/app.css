@@ -8171,6 +8171,14 @@ body {
   height: 100%;
 }
 
+@media (min-width: 768px) {
+  html,
+  body {
+    width: auto;
+    height: auto;
+  }
+}
+
 a {
   outline: 0;
 }
