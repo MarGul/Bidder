@@ -37,7 +37,7 @@
 						<router-link to="/regions"><i class="fa fa-map-marker" aria-hidden="true"></i> Regioner</router-link>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
+						<a href="#"><i class="fa fa-building" aria-hidden="true"></i> Städer</a>
 					</li>
 					<li class="nav-item">
 						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>

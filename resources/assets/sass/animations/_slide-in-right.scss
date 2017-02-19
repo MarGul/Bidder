@@ -1,0 +1,31 @@
+.slide-in-right-enter-active {
+	-webkit-animation: slide-in-right 400ms ease-out forwards;
+			animation: slide-in-right 400ms ease-out forwards;
+}
+
+.slide-in-right-leave-active {
+	-webkit-animation: slide-out-right 400ms ease-out forwards;
+			animation: slide-out-right 400ms ease-out forwards;
+}
+
+@keyFrames slide-in-right {
+	from {
+		transform: translateX(-90px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyFrames slide-out-right {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(-90px);
+		opacity: 0;
+	}
+}

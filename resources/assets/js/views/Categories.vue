@@ -11,16 +11,22 @@
 
 		<div class="container">
 			<div class="content">
-				<div v-for="category in categories">
-					{{ category.name }}
-				</div>
+				<app-items-block
+					:items="categories"
+					subItemsKey="sub_categories"
+				></app-items-block>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import ItemsBlock from '../components/Includes/ItemsBlock.vue';
+
 	export default {
+		components: {
+			appItemsBlock: ItemsBlock
+		},
 		computed: {
 			categories() {
 				return this.$store.getters.getCategories;

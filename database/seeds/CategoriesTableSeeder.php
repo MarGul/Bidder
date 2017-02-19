@@ -101,37 +101,73 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => 'bygg-renovering',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Elinstallation' => [
+                        'slug' => 'elinstallation',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ],
             'Tomt & Markarbeten' => [
                 'slug' => 'tomt-markarbeten',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Stensättning' => [
+                        'slug' => 'stensattning',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ],
             'Arkitekt & Inredning' => [
                 'slug' => 'arkitekt-inredning',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Heminredning' => [
+                        'slug' => 'heminredning',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ],
             'Ekonomi & Juridik' => [
                 'slug' => 'ekonomi-juridik',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Bokslut' => [
+                        'slug' => 'bokslut',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ],
             'Webb/IT & Design' => [
                 'slug' => 'webb-it-design',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Programmering' => [
+                        'slug' => 'programmering',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ],
             'Övriga Tjänster' => [
                 'slug' => 'ovriga-tjanster',
                 'description' => '',
                 'icon' => '',
-                'subcats' => []
+                'subcats' => [
+                    'Barnpassning' => [
+                        'slug' => 'barnpassning',
+                        'description' => '',
+                        'icon' => ''
+                    ]
+                ]
             ]
         ];
 
