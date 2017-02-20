@@ -42,7 +42,7 @@
 }
 
 .desktop-nav {
-	width: 100%;
+	display: flex;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -50,9 +50,7 @@
 
 	.nav-item {
 		display: inline-block;
-		float: left;
-		width: 20%;
-		box-sizing: border-box;
+		flex: 1;
 		text-align: center;
 		border-right: 1px solid #d7d7d7;
 
