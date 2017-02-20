@@ -14,7 +14,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regions = Region::all();
+        $regions = Region::with('cities')->get();
 
         Region::parseRegions($regions);
 
@@ -34,9 +34,9 @@ class RegionController extends Controller
     {
         // If integer look for region with that ID. Otherwise look for region with slug of $identifier
         if ( is_numeric($identifier) ) {
-            $region = Region::findOrFail((int)$identifier);
+            $region = Region::with('cities')->findOrFail((int)$identifier);
         } else {
-            $region = Region::where('slug', $identifier)->firstOrFail();
+            $region = Region::with('cities')->where('slug', $identifier)->firstOrFail();
         }
 
         Region::parseRegion($region);

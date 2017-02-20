@@ -24,6 +24,15 @@ class Region extends Model
     public $timestamps = false;
 
     /**
+     * A region has many cities
+     * 
+     * @return Eloquemt Relationship
+     */
+    public function cities() {
+        return $this->hasMany('App\City');
+    }
+
+    /**
      * A region has many services
      * 
      * @return Eloquent Relationship
@@ -55,6 +64,10 @@ class Region extends Model
             'href' => 'api/v1/regions/' . $region->slug . '/services',
             'method' => 'GET'
         ];
+
+        if ( !empty($region->cities) ) {
+            \App\City::parseCities($region->cities);
+        }
     }
     
 }
