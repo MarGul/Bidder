@@ -8018,15 +8018,18 @@ body.mobile-nav-open .overlay {
 }
 
 .items-block {
-  width: 100%;
   border: 1px solid #d7d7d7;
   background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .items-block .left {
   display: inline-block;
-  float: left;
-  width: 35%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .items-block .left .side-nav li {
@@ -8061,9 +8064,9 @@ body.mobile-nav-open .overlay {
 }
 
 .items-block .right {
-  box-sizing: border-box;
-  display: inline-block;
-  width: 65%;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
   padding: 25px 50px;
 }
 
