@@ -43,7 +43,11 @@
 	}
 
 	.right {
-		flex: 2;
+		flex: 1;
 		padding: 25px 50px;
+
+		@media screen and (min-width: 992px) {
+			flex: 2;
+		}
 	}
 }
