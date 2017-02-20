@@ -23085,7 +23085,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = {};
 
@@ -24576,9 +24575,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "container"
   }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-sm-6 col-md-7 col-lg-8"
+    staticClass: "hero-container"
   }, [_c('div', {
     staticClass: "hero-left"
   }, [_c('transition', {
@@ -24591,8 +24588,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "fade-in-slow",
       "appear": ""
     }
-  }, [_vm._t("left")], 2)], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "hidden-xs col-sm-6 col-md-5 hero-right text-center col-lg-4"
+  }, [_vm._t("left")], 2)], 1), _vm._v(" "), _c('div', {
+    staticClass: "hidden-xs hero-right"
   }, [_c('transition', {
     attrs: {
       "name": "slide-in",

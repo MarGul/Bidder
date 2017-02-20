@@ -8010,13 +8010,32 @@ body.mobile-nav-open .overlay {
   box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
+.hero .hero-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .hero h1 {
   font-size: 3em;
   margin: 0 0 30px 0;
 }
 
 .hero .hero-left {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
   font-size: 1.3em;
+}
+
+.hero .hero-right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
 }
 
 .items-block {
