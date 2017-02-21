@@ -1,5 +1,5 @@
 <template>
-	<div class="items-block clearfix" v-if="items.length > 0">
+	<div class="items-block" v-if="items.length > 0">
 		<div class="left">
 			<ul class="main-nav list-unstyled" >
 				<li v-for="(item, index) in items" 
@@ -12,7 +12,7 @@
 		</div>
 		<div class="right">
 			<h1>{{ items[active].name }}</h1>
-			<a :href="generateLink(items[active], true)" class="btn btn-primary">Visa Alla</a>
+			<router-link :to="generateLink(items[active], true)" class="btn btn-primary">Visa Alla</router-link>
 
 			<ul class="sub-nav list-unstyled">
 				<li v-for="subItem in items[active][subItemsKey]">

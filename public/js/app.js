@@ -24221,7 +24221,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return (_vm.items.length > 0) ? _c('div', {
-    staticClass: "items-block clearfix"
+    staticClass: "items-block"
   }, [_c('div', {
     staticClass: "left"
   }, [_c('ul', {
@@ -24239,10 +24239,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("\n\t\t\t\t" + _vm._s(item.name) + "\n\t\t\t")])
   }))]), _vm._v(" "), _c('div', {
     staticClass: "right"
-  }, [_c('h1', [_vm._v(_vm._s(_vm.items[_vm.active].name))]), _vm._v(" "), _c('a', {
+  }, [_c('h1', [_vm._v(_vm._s(_vm.items[_vm.active].name))]), _vm._v(" "), _c('router-link', {
     staticClass: "btn btn-primary",
     attrs: {
-      "href": _vm.generateLink(_vm.items[_vm.active], true)
+      "to": _vm.generateLink(_vm.items[_vm.active], true)
     }
   }, [_vm._v("Visa Alla")]), _vm._v(" "), _c('ul', {
     staticClass: "sub-nav list-unstyled"
@@ -24252,7 +24252,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "to": _vm.generateLink(subItem)
       }
     }, [_c('span', [_vm._v("»")]), _vm._v(_vm._s(subItem.name))])], 1)
-  }))])]) : _vm._e()
+  }))], 1)]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

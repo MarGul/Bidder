@@ -7966,6 +7966,10 @@ body.mobile-nav-open .overlay {
   transition: color ease-out-in 200ms;
 }
 
+.nav-search-form .btn {
+  box-shadow: none;
+}
+
 .search-input {
   width: 100%;
 }
@@ -8085,7 +8089,7 @@ body.mobile-nav-open .overlay {
 
 .items-block .left .main-nav li {
   padding: 15px 20px;
-  background: #f6f6f6;
+  background: #f1f1f1;
   color: #7d8793;
   font-weight: bold;
   font-size: 1.2em;
