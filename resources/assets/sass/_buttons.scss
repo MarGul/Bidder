@@ -1,0 +1,15 @@
+.btn {
+	border-radius: 0;
+	padding: 5px 9px;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+}
+
+.btn-primary {
+	background-color: $primary-green;
+	border-color: $dark-green;
+
+	&:hover {
+		background-color: $dark-green;
+		border-color: $darkest-green;
+	}
+}

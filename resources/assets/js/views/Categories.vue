@@ -14,6 +14,7 @@
 				<app-items-block
 					:items="categories"
 					subItemsKey="sub_categories"
+					link="category/{slug}"
 				></app-items-block>
 			</div>
 		</div>

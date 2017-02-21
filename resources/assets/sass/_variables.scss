@@ -39,7 +39,9 @@ $panel-default-heading-bg: #fff;
 
 // Colors
 $primary-green: #55AE3A;
-$hover-green: darken($primary-green, 25%);
+$dark-green: darken($primary-green, 10%);
+$darker-green: darken($primary-green, 15%);
+$darkest-green: darken($primary-green, 25%);
 
 // Navigation
 $mobile-nav-height: 50px;

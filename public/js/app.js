@@ -23118,9 +23118,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['items', 'subItemsKey'],
+	props: ['items', 'subItemsKey', 'link', 'allLink'],
 	data: function data() {
 		return {
 			active: 0
@@ -23130,6 +23131,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		changeActive: function changeActive(index) {
 			this.active = index;
+		},
+		generateLink: function generateLink(item) {
+			var all = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+			var link = all && this.allLink ? this.allLink : this.link;
+			return link.replace('{slug}', item.slug);
 		}
 	}
 };
@@ -23320,6 +23327,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__);
+//
 //
 //
 //
@@ -24194,7 +24202,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-items-block', {
     attrs: {
       "items": _vm.categories,
-      "subItemsKey": "sub_categories"
+      "subItemsKey": "sub_categories",
+      "link": "category/{slug}"
     }
   })], 1)])], 1)
 },staticRenderFns: []}
@@ -24216,7 +24225,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "left"
   }, [_c('ul', {
-    staticClass: "side-nav list-unstyled"
+    staticClass: "main-nav list-unstyled"
   }, _vm._l((_vm.items), function(item, index) {
     return _c('li', {
       class: {
@@ -24230,15 +24239,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("\n\t\t\t\t" + _vm._s(item.name) + "\n\t\t\t")])
   }))]), _vm._v(" "), _c('div', {
     staticClass: "right"
-  }, [_c('transition', {
+  }, [_c('h1', [_vm._v(_vm._s(_vm.items[_vm.active].name))]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-primary",
     attrs: {
-      "name": "slide-in-right"
+      "href": _vm.generateLink(_vm.items[_vm.active], true)
     }
-  }, [_c('ul', {
+  }, [_vm._v("Visa Alla")]), _vm._v(" "), _c('ul', {
     staticClass: "sub-nav list-unstyled"
   }, _vm._l((_vm.items[_vm.active][_vm.subItemsKey]), function(subItem) {
-    return _c('li', [_vm._v("\n\t\t\t\t\t" + _vm._s(subItem.name) + "\n\t\t\t\t")])
-  }))])], 1)]) : _vm._e()
+    return _c('li', [_c('router-link', {
+      attrs: {
+        "to": _vm.generateLink(subItem)
+      }
+    }, [_c('span', [_vm._v("»")]), _vm._v(_vm._s(subItem.name))])], 1)
+  }))])]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
