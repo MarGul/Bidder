@@ -1,5 +1,5 @@
 .mobile-search-header {
-	background: #4D545D;
+	background: $dark-black;
 	padding: 15px;
 }
 
@@ -17,7 +17,7 @@
 	}
 
 	.glyphicon {
-		color: #d7d7d7;
+		color: $border-color-gray;
 		font-size: 2em;
 		line-height: 1.4;
 		margin-right: 15px;
@@ -39,7 +39,7 @@
 		background: #fff;
 		box-shadow: none;
 		border: none;
-		color: #333;
+		color: $gray-text;
 		letter-spacing: 1px;
 		font-size: 1.2em;
 
@@ -49,20 +49,20 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: #d7d7d7;
+		color: $border-color-gray;
 		font-weight: bold;
 		letter-spacing: 1px;
 	}
 
 	:-moz-placeholder {
-		color: #d7d7d7;
+		color: $border-color-gray;
 		font-weight: bold;
 		letter-spacing: 1px;
 		opacity: 1;
 	}
 
 	::-moz-placeholder {
-		color: #d7d7d7;
+		color: $border-color-gray;
 		font-weight: bold;
 		letter-spacing: 1px;
 		opacity: 1;

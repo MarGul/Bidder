@@ -1,13 +1,9 @@
 
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #f6f6f6;
 
 // Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border: $laravel-border-color;
-$navbar-default-border: $laravel-border-color;
-$panel-default-border: $laravel-border-color;
-$panel-inner-border: $laravel-border-color;
+$border-color-gray: #d7d7d7;
 
 // Brands
 $brand-primary: #3097D1;
@@ -37,12 +33,9 @@ $input-color-placeholder: lighten($text-color, 30%);
 // Panels
 $panel-default-heading-bg: #fff;
 
-// Breakpoints
-$breakpoint-sm: 768px;
-$breakpoint-md: 992px;
-$breakpoint-lg: 1200px;
-
 // Colors
+$dark-black: #4D545D;
+$gray-text: #7d8793;
 $primary-green: #55AE3A;
 $dark-green: darken($primary-green, 10%);
 $darker-green: darken($primary-green, 15%);

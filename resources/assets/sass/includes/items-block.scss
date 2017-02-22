@@ -1,5 +1,5 @@
 .items-block {
-	border: 1px solid #d7d7d7;
+	border: 1px solid $border-color-gray;
 	background: #fff;
 	display: flex;
 
@@ -12,18 +12,18 @@
 			.nav-head {
 				padding: 15px 20px;
 				background: #f1f1f1;
-				color: #7d8793;
+				color: $gray-text;
 				font-weight: bold;
 				font-size: 1.2em;
-				border-bottom: 1px solid #d7d7d7;
+				border-bottom: 1px solid $border-color-gray;
 				cursor: pointer;
 
 				&:hover {
 					color: $primary-green;
 				}
 
-				@media screen and (min-width: 768px) {
-					border-right: 1px solid #d7d7d7;
+				@media screen and (min-width: $screen-sm-min) {
+					border-right: 1px solid $border-color-gray;
 				}
 			}
 
@@ -36,8 +36,8 @@
 				position: relative;
 				background: #fff;
 				color: $primary-green;
-				border-bottom: 1px solid #d7d7d7;
-				border-left: 3px solid #d7d7d7;
+				border-bottom: 1px solid $border-color-gray;
+				border-left: 3px solid $border-color-gray;
 				border-right: none;
 				cursor: default;
 				box-shadow: -1px 3px 3px rgba(0,0,0,0.1);
@@ -48,16 +48,16 @@
 	.sub-container {
 		flex: 1;
 		padding: 15px 20px;
-		border-bottom: 1px solid #d7d7d7;
+		border-bottom: 1px solid $border-color-gray;
 		box-shadow: inset 0px -3px 3px rgba(0,0,0,0.1);
 
-		@media screen and (min-width: $breakpoint-sm) {
+		@media screen and (min-width: $screen-sm-min) {
 			padding: 25px 50px;
 			border-bottom: none;
 			box-shadow: none;
 		}
 
-		@media screen and (min-width: $breakpoint-md) {
+		@media screen and (min-width: $screen-md-min) {
 			flex: 2;
 		}
 
@@ -67,7 +67,7 @@
 			margin: 0 0 10px 0;
 			font-size: 26px;
 
-			@media screen and (min-width: $breakpoint-md) {
+			@media screen and (min-width: $screen-md-min) {
 				margin: 10px 0 20px 0;
 				padding-bottom: 15px;
 				font-size: 34px;
@@ -86,15 +86,15 @@
 				padding: 3px 0px;
 				width: 100%;
 
-				@media screen and (min-width: $breakpoint-md) {
+				@media screen and (min-width: $screen-md-min) {
 					width: 50%;
 				}
 
 				a {
-					color: #7d8793;
+					color: $gray-text;
 					font-size: 1.1em;
 
-					@media screen and(min-width: $breakpoint-md) {
+					@media screen and(min-width: $screen-md-min) {
 						font-size: 1.2em;
 					}
 

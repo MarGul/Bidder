@@ -14,7 +14,7 @@
 					</div>
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
-						<ul class="desktop-header-nav clearfix">
+						<ul class="desktop-header-nav">
 							<li>
 								<router-link to="/register" class="register">Registrera</router-link>
 							</li>
@@ -29,7 +29,7 @@
 
 		<nav class="desktop-navigation">
 			<div class="container">
-				<ul class="desktop-nav clearfix">
+				<ul class="desktop-nav">
 					<li class="nav-item">
 						<router-link to="/categories"><i class="fa fa-list-ul" aria-hidden="true"></i> Kategorier</router-link>
 					</li>

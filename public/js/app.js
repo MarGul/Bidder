@@ -24519,7 +24519,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-search')], 1), _vm._v(" "), _c('div', {
     staticClass: "hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right"
   }, [_c('ul', {
-    staticClass: "desktop-header-nav clearfix"
+    staticClass: "desktop-header-nav"
   }, [_c('li', [_c('router-link', {
     staticClass: "register",
     attrs: {
@@ -24535,7 +24535,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "container"
   }, [_c('ul', {
-    staticClass: "desktop-nav clearfix"
+    staticClass: "desktop-nav"
   }, [_c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {

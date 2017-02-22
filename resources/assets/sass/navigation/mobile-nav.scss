@@ -10,8 +10,8 @@
 	position: relative;
 	height: $mobile-nav-height;
 	width: 100%;
-	background: #f6f6f6;
-	border-bottom: 1px solid #d7d7d7;
+	background: $body-bg;
+	border-bottom: 1px solid $border-color-gray;
 }
 
 .mobile-nav {
