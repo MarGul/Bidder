@@ -6,7 +6,7 @@ import VueRouter from 'vue-router';
 let routes = [
 	{ path: "/", component: require('./views/Home.vue') },
 	{ path: "/categories", component: require('./views/Categories.vue') },
-	{ path: "/regions", component: require('./views/Regions.vue') },
+	{ path: "/locations", component: require('./views/Locations.vue') },
 	{ path: "/information", component: require('./views/Information.vue') },
 	{ path: "/register", component: require('./views/Register.vue') },
 	{ path: "/login", component: require('./views/Login.vue') },

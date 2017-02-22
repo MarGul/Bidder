@@ -23050,6 +23050,7 @@ module.exports = function spread(callback) {
     created: function created() {
         // Initialize Data
         this.$store.dispatch('fetchCategories');
+        this.$store.dispatch('fetchRegions');
     }
 };
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
@@ -23435,32 +23436,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = {};
 
 /***/ }),
-/* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = {};
-
-/***/ }),
+/* 45 */,
 /* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23662,7 +23638,7 @@ var Model = function () {
 /**
  * All of the applications routes
  */
-var routes = [{ path: "/", component: __webpack_require__(62) }, { path: "/categories", component: __webpack_require__(61) }, { path: "/regions", component: __webpack_require__(65) }, { path: "/information", component: __webpack_require__(63) }, { path: "/register", component: __webpack_require__(66) }, { path: "/login", component: __webpack_require__(64) },
+var routes = [{ path: "/", component: __webpack_require__(62) }, { path: "/categories", component: __webpack_require__(61) }, { path: "/locations", component: __webpack_require__(95) }, { path: "/information", component: __webpack_require__(63) }, { path: "/register", component: __webpack_require__(66) }, { path: "/login", component: __webpack_require__(64) },
 
 /* 404 is handled by the vue application */
 { path: "*", component: __webpack_require__(60) }];
@@ -23720,6 +23696,7 @@ var categories = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuex__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_categories__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_regions__ = __webpack_require__(93);
 
 
 
@@ -23728,9 +23705,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 // Import modules
 
 
+
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_1_vuex___default.a.Store({
 	modules: {
-		categories: __WEBPACK_IMPORTED_MODULE_2__modules_categories__["a" /* default */]
+		categories: __WEBPACK_IMPORTED_MODULE_2__modules_categories__["a" /* default */],
+		regions: __WEBPACK_IMPORTED_MODULE_3__modules_regions__["a" /* default */]
 	}
 });
 
@@ -24109,40 +24088,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(45),
-  /* template */
-  __webpack_require__(80),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/Regions.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Regions.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f764f226", Component.options)
-  } else {
-    hotAPI.reload("data-v-f764f226", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 65 */,
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24374,14 +24320,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('router-link', {
     attrs: {
-      "to": "/regions"
+      "to": "/locations"
     }
   }, [_c('i', {
     staticClass: "fa fa-map-marker",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Regioner")])], 1), _vm._v(" "), _c('li', {
+  }), _vm._v(" Platser")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item",
     on: {
       "click": _vm.hideMenu
@@ -24455,11 +24401,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_c('i', {
-    staticClass: "fa fa-building",
+    staticClass: "fa fa-globe",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Städer")])
+  }), _vm._v(" Link")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     attrs: {
@@ -24551,14 +24497,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
-      "to": "/regions"
+      "to": "/locations"
     }
   }, [_c('i', {
     staticClass: "fa fa-map-marker",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Regioner")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('li', {
+  }), _vm._v(" Platser")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
@@ -24587,11 +24533,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "#"
     }
   }, [_c('i', {
-    staticClass: "fa fa-building",
+    staticClass: "fa fa-globe",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Städer")])])
+  }), _vm._v(" Link")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "nav-item"
@@ -24757,37 +24703,7 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "regions-view"
-  }, [_c('app-hero', [_c('h1', {
-    slot: "title"
-  }, [_vm._v("Regioner")]), _vm._v(" "), _c('p', {
-    slot: "left"
-  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
-    attrs: {
-      "src": "mechanic.png",
-      "alt": ""
-    },
-    slot: "right"
-  })]), _vm._v(" "), _vm._m(0)], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('h2', [_vm._v("Regions Page")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-f764f226", module.exports)
-  }
-}
-
-/***/ }),
+/* 80 */,
 /* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25632,6 +25548,196 @@ module.exports = g;
 __webpack_require__(13);
 module.exports = __webpack_require__(14);
 
+
+/***/ }),
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__(50);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Region = function (_Model) {
+	_inherits(Region, _Model);
+
+	function Region() {
+		_classCallCheck(this, Region);
+
+		return _possibleConstructorReturn(this, (Region.__proto__ || Object.getPrototypeOf(Region)).call(this, 'regions'));
+	}
+
+	return Region;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = new Region();
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Region__ = __webpack_require__(92);
+
+
+var regions = {
+	state: {
+		regions: []
+	},
+	mutations: {
+		'SET_REGIONS': function SET_REGIONS(state, regions) {
+			state.regions = regions;
+		}
+	},
+	actions: {
+		fetchRegions: function fetchRegions(_ref) {
+			var commit = _ref.commit;
+
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_Region__["a" /* default */].all().then(function (_ref2) {
+				var regions = _ref2.regions;
+
+				commit('SET_REGIONS', regions);
+			});
+		}
+	},
+	getters: {
+		getRegions: function getRegions(state) {
+			return state.regions;
+		}
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = regions;
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default.a
+	},
+	computed: {
+		regions: function regions() {
+			return this.$store.getters.getRegions;
+		}
+	}
+};
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(94),
+  /* template */
+  __webpack_require__(96),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/Locations.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Locations.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-436a7d68", Component.options)
+  } else {
+    hotAPI.reload("data-v-436a7d68", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "regions-view"
+  }, [_c('app-hero', [_c('h1', {
+    slot: "title"
+  }, [_vm._v("Platser")]), _vm._v(" "), _c('p', {
+    slot: "left"
+  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": "mechanic.png",
+      "alt": ""
+    },
+    slot: "right"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('app-items-block', {
+    attrs: {
+      "items": _vm.regions,
+      "subItemsKey": "cities",
+      "link": "city/{slug}",
+      "allLink": "region/{slug}"
+    }
+  })], 1)])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-436a7d68", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

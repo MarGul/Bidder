@@ -6,10 +6,10 @@
 					<router-link to="/categories"><i class="fa fa-list-ul" aria-hidden="true"></i> Kategorier</router-link>
 				</li>
 				<li class="nav-item" @click="hideMenu">
-					<router-link to="/regions"><i class="fa fa-map-marker" aria-hidden="true"></i> Regioner</router-link>
+					<router-link to="/locations"><i class="fa fa-map-marker" aria-hidden="true"></i> Platser</router-link>
 				</li>
 				<li class="nav-item" @click="hideMenu">
-					<a href="#"><i class="fa fa-building" aria-hidden="true"></i> Städer</a>
+					<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
 				</li>
 				<li class="nav-item" @click="hideMenu">
 					<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>

@@ -47,6 +47,7 @@
         created() {
             // Initialize Data
             this.$store.dispatch('fetchCategories');
+            this.$store.dispatch('fetchRegions');
         }
     }
 </script>
