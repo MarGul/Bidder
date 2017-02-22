@@ -64,7 +64,7 @@
 			letter-spacing: 1px;
 			font-size: 12px;
 
-			@media screen and (min-width: 992px) {
+			@media screen and (min-width: $breakpoint-md) {
 				font-size: 15px;
 			}
 

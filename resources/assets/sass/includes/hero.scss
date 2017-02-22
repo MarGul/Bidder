@@ -19,7 +19,7 @@
 		flex: 1;
 		font-size: 1.3em;
 
-		@media screen and (min-width: 992px) {
+		@media screen and (min-width: $breakpoint-md) {
 			flex: 2;
 		}
 	}

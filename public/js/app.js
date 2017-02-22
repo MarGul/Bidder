@@ -23119,15 +23119,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['items', 'subItemsKey', 'link', 'allLink'],
 	data: function data() {
 		return {
-			active: 0
+			active: 0,
+			breakpoints: window.breakpoints
 		};
 	},
 
+	computed: {
+		subCats: function subCats() {
+			return this.items.length > 0 ? this.items[this.active][this.subItemsKey] : [];
+		},
+		activeItem: function activeItem() {
+			return this.items.length > 0 ? this.items[this.active] : null;
+		}
+	},
 	methods: {
 		changeActive: function changeActive(index) {
 			this.active = index;
@@ -24223,11 +24242,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return (_vm.items.length > 0) ? _c('div', {
     staticClass: "items-block"
   }, [_c('div', {
-    staticClass: "left"
-  }, [_c('ul', {
-    staticClass: "main-nav list-unstyled"
-  }, _vm._l((_vm.items), function(item, index) {
-    return _c('li', {
+    staticClass: "root-container"
+  }, [_c('nav', {
+    staticClass: "root-nav"
+  }, [_vm._l((_vm.items), function(item, index) {
+    return [_c('div', {
+      staticClass: "nav-head",
       class: {
         active: index == _vm.active
       },
@@ -24236,23 +24256,38 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.changeActive(index)
         }
       }
-    }, [_vm._v("\n\t\t\t\t" + _vm._s(item.name) + "\n\t\t\t")])
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "right"
-  }, [_c('h1', [_vm._v(_vm._s(_vm.items[_vm.active].name))]), _vm._v(" "), _c('router-link', {
+    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(item.name) + "\n\t\t\t\t")]), _vm._v(" "), (_vm.breakpoints.mobile && (index == _vm.active)) ? _c('div', {
+      staticClass: "sub-container"
+    }, [_c('router-link', {
+      staticClass: "btn btn-primary",
+      attrs: {
+        "to": _vm.generateLink(_vm.activeItem, true)
+      }
+    }, [_vm._v("Visa Alla")]), _vm._v(" "), _c('ul', {
+      staticClass: "sub-nav list-unstyled"
+    }, _vm._l((_vm.subCats), function(subItem) {
+      return _c('li', [_c('router-link', {
+        attrs: {
+          "to": _vm.generateLink(subItem)
+        }
+      }, [_c('span', [_vm._v("»")]), _vm._v(_vm._s(subItem.name))])], 1)
+    }))], 1) : _vm._e()]
+  })], 2)]), _vm._v(" "), (!_vm.breakpoints.mobile) ? _c('div', {
+    staticClass: "sub-container"
+  }, [_c('h1', [_vm._v(_vm._s(_vm.activeItem.name))]), _vm._v(" "), _c('router-link', {
     staticClass: "btn btn-primary",
     attrs: {
-      "to": _vm.generateLink(_vm.items[_vm.active], true)
+      "to": _vm.generateLink(_vm.activeItem, true)
     }
   }, [_vm._v("Visa Alla")]), _vm._v(" "), _c('ul', {
     staticClass: "sub-nav list-unstyled"
-  }, _vm._l((_vm.items[_vm.active][_vm.subItemsKey]), function(subItem) {
+  }, _vm._l((_vm.subCats), function(subItem) {
     return _c('li', [_c('router-link', {
       attrs: {
         "to": _vm.generateLink(subItem)
       }
     }, [_c('span', [_vm._v("»")]), _vm._v(_vm._s(subItem.name))])], 1)
-  }))], 1)]) : _vm._e()
+  }))], 1) : _vm._e()]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

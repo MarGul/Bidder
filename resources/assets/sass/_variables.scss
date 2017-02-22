@@ -37,6 +37,11 @@ $input-color-placeholder: lighten($text-color, 30%);
 // Panels
 $panel-default-heading-bg: #fff;
 
+// Breakpoints
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+
 // Colors
 $primary-green: #55AE3A;
 $dark-green: darken($primary-green, 10%);

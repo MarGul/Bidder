@@ -3,28 +3,31 @@
 	background: #fff;
 	display: flex;
 
-	.left {
+	.root-container {
 		display: inline-block;
 		flex: 1;
 
-		.main-nav {
+		.root-nav {
 
-			li {
+			.nav-head {
 				padding: 15px 20px;
 				background: #f1f1f1;
 				color: #7d8793;
 				font-weight: bold;
 				font-size: 1.2em;
 				border-bottom: 1px solid #d7d7d7;
-				border-right: 1px solid #d7d7d7;
 				cursor: pointer;
 
 				&:hover {
 					color: $primary-green;
 				}
+
+				@media screen and (min-width: 768px) {
+					border-right: 1px solid #d7d7d7;
+				}
 			}
 
-			li:last-child {
+			.nav-head:last-child {
 				border-bottom: none;
 				box-shadow: none;
 			}
@@ -42,18 +45,33 @@
 		}
 	}
 
-	.right {
+	.sub-container {
 		flex: 1;
-		padding: 25px 50px;
+		padding: 15px 20px;
+		border-bottom: 1px solid #d7d7d7;
+		box-shadow: inset 0px -3px 3px rgba(0,0,0,0.1);
 
-		@media screen and (min-width: 992px) {
+		@media screen and (min-width: $breakpoint-sm) {
+			padding: 25px 50px;
+			border-bottom: none;
+			box-shadow: none;
+		}
+
+		@media screen and (min-width: $breakpoint-md) {
 			flex: 2;
 		}
 
 		h1 {
 			border-bottom: 1px solid $primary-green;
-			padding-bottom: 15px;
-			margin-bottom: 20px;
+			padding-bottom: 10px;
+			margin: 0 0 10px 0;
+			font-size: 26px;
+
+			@media screen and (min-width: $breakpoint-md) {
+				margin: 10px 0 20px 0;
+				padding-bottom: 15px;
+				font-size: 34px;
+			}
 		}
 
 		.btn {
@@ -65,12 +83,20 @@
 			flex-wrap: wrap;
 
 			li {
-				width: 50%;
 				padding: 3px 0px;
+				width: 100%;
+
+				@media screen and (min-width: $breakpoint-md) {
+					width: 50%;
+				}
 
 				a {
 					color: #7d8793;
-					font-size: 1.2em;
+					font-size: 1.1em;
+
+					@media screen and(min-width: $breakpoint-md) {
+						font-size: 1.2em;
+					}
 
 					&:hover {
 						color: $primary-green;
