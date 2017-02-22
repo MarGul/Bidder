@@ -7929,6 +7929,12 @@ body.mobile-nav-open .overlay {
   margin-right: 5px;
 }
 
+@media screen and (min-width: 992px) {
+  .desktop-nav .nav-item > a i {
+    margin-right: 15px;
+  }
+}
+
 .desktop-nav .nav-item > a:hover {
   background: #55AE3A;
   color: #fff;

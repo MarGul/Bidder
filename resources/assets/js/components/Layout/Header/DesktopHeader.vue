@@ -37,7 +37,7 @@
 						<router-link to="/locations"><i class="fa fa-map-marker" aria-hidden="true"></i> Platser</router-link>
 					</li>
 					<li class="nav-item">
-						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
+						<router-link to="/services"><i class="fa fa-users" aria-hidden="true"></i> Tjänster</router-link>
 					</li>
 					<li class="nav-item">
 						<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>

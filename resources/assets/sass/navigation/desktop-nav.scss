@@ -73,6 +73,10 @@
 				position: relative;
 				top: 2px;
 				margin-right: 5px;
+
+				@media screen and (min-width: $screen-md-min) {
+					margin-right: 15px;
+				}
 			}
 
 			&:hover {
