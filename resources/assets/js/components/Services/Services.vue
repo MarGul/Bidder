@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-4 column">
 					<label>Fritext</label>
-					<input type="text" id="filter_text" class="form-control">
+					<input type="text" id="filter_text" class="form-control" v-model="filterText">
 				</div>
 				<div class="col-xs-12 col-md-4 column">
 					<label>Kategorier</label>
@@ -12,7 +12,7 @@
 				</div>
 				<div class="col-xs-12 col-md-4 column">
 					<label>Platser</label>
-					<input type="text" id="filter_text" class="form-control">
+					<app-tags-input :items="locations" @add="locationAdd"></app-tags-input>
 				</div>
 			</div>
 			<div class="row">
@@ -32,9 +32,23 @@
 	import TagsInput from '../Includes/TagsInput.vue';
 
 	export default {
-		props: ['categories', 'regions', 'cities'],
+		props: {
+			categories: { type: Array, default: [] },
+			regions: { type: Array, default: [] },
+			cities: { type: Array, default: [] }
+		},
 		components: {
 			appTagsInput: TagsInput
+		},
+		data() {
+			return {
+				filterText: '',
+			}
+		},
+		computed: {
+			locations() {
+				return this.regions.concat(this.cities);
+			}
 		},
 		methods: {
 			categoryAdd(item) {
@@ -45,6 +59,12 @@
 			},
 			categoryRemove(index) {
 				this.categories.splice(index, 1);
+			},
+			locationAdd(item) {
+				// Is the item they typed a region or city? Add to the correct data.
+			},
+			locationRemove(index, type) {
+				// Depending on the type, remove the item with index in the correct data.
 			}
 		}
 	}

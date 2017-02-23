@@ -8237,6 +8237,7 @@ body.mobile-nav-open .overlay {
 .tags-input-container .tags-input {
   position: relative;
   width: 100%;
+  min-height: 36px;
   overflow: hidden;
   display: inline-block;
   box-sizing: border-box;
@@ -8269,6 +8270,7 @@ body.mobile-nav-open .overlay {
   background: #fff;
   border: 0px solid transparent;
   width: 40px;
+  margin-top: 5px;
 }
 
 .tags-input-container .tags-input input:focus {

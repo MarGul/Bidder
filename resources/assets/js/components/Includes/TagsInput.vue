@@ -13,8 +13,8 @@
 	export default {
 		props: ['items'],
 		methods: {
-			inputFocus() {
-				$('.tags-input input').focus();
+			inputFocus(event) {
+				$(event.target).find('input').focus();
 			},
 			removeItem(index) {
 				this.$emit('remove', index);

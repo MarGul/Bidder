@@ -23444,9 +23444,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['categories', 'regions', 'cities'],
+	props: {
+		categories: { type: Array, default: [] },
+		regions: { type: Array, default: [] },
+		cities: { type: Array, default: [] }
+	},
 	components: {
 		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default.a
+	},
+	data: function data() {
+		return {
+			filterText: ''
+		};
+	},
+
+	computed: {
+		locations: function locations() {
+			return this.regions.concat(this.cities);
+		}
 	},
 	methods: {
 		categoryAdd: function categoryAdd(item) {
@@ -23457,6 +23472,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		categoryRemove: function categoryRemove(index) {
 			this.categories.splice(index, 1);
+		},
+		locationAdd: function locationAdd(item) {
+			// Is the item they typed a region or city? Add to the correct data.
+		},
+		locationRemove: function locationRemove(index, type) {
+			// Depending on the type, remove the item with index in the correct data.
 		}
 	}
 };
@@ -23675,7 +23696,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			category: [{ text: 'CategoryTest', value: 1337 }, { text: 'Category2', value: 13 }]
+			category: [{ text: 'CategoryTest', value: 1337 }, { text: 'Category2', value: 13 }],
+			region: [{ text: 'Region1', value: 1 }, { text: 'Region2', value: 2 }],
+			city: [{ text: 'City1', value: 1 }, { text: 'City2', value: 2 }]
 		};
 	}
 };
@@ -24650,7 +24673,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "service-filter-container"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filterText),
+      expression: "filterText"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "filter_text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.filterText)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filterText = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-4 column"
   }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
     attrs: {
@@ -24660,30 +24706,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "add": _vm.categoryAdd,
       "remove": _vm.categoryRemove
     }
-  })], 1), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _vm._m(2)]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.locations
+    },
+    on: {
+      "add": _vm.locationAdd
+    }
+  })], 1)]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('div', {
     staticClass: "services"
   })])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "filter_text"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "filter_text"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -24727,8 +24762,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-services', {
     attrs: {
       "categories": _vm.category,
-      "regions": [],
-      "cities": []
+      "regions": _vm.region,
+      "cities": _vm.city
     }
   })], 1)])], 1)
 },staticRenderFns: []}
@@ -26059,8 +26094,8 @@ module.exports = Component.exports
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['items'],
 	methods: {
-		inputFocus: function inputFocus() {
-			$('.tags-input input').focus();
+		inputFocus: function inputFocus(event) {
+			$(event.target).find('input').focus();
 		},
 		removeItem: function removeItem(index) {
 			this.$emit('remove', index);

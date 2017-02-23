@@ -12,8 +12,8 @@
 			<div class="content">
 				<app-services
 					:categories="category"
-					:regions="[]"
-					:cities="[]"
+					:regions="region"
+					:cities="city"
 				></app-services>
 			</div>
 		</div>
@@ -29,7 +29,9 @@
 		},
 		data() {
 			return {
-				category: [{text: 'CategoryTest', value: 1337}, {text: 'Category2', value: 13}]
+				category: [{text: 'CategoryTest', value: 1337}, {text: 'Category2', value: 13}],
+				region: [{text: 'Region1', value:1}, {text: 'Region2', value:2}],
+				city: [{text: 'City1', value:1}, {text: 'City2', value:2}]
 			}
 		}
 	}
