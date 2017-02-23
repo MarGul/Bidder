@@ -1,0 +1,34 @@
+.tags-input-container {
+	height: auto;
+	width: 100%;
+
+	.tags-input {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		display: inline-block;
+		box-sizing: border-box;
+		z-index: 1;
+		border: 1px solid $border-color-gray;
+		cursor: text;
+		padding: 4px 8px;
+
+		.tag {
+			display: inline-block;
+			background: $body-bg;
+			border: 1px solid darken($border-color-gray, 10%);
+			padding: 2px 4px;
+			margin: 0 3px 3px 0;
+			cursor: default;
+
+			i {
+				margin-left: 7px;
+				cursor: pointer;
+
+				&:hover {
+					color: $brand-danger;
+				}
+			}
+		}
+	}
+}

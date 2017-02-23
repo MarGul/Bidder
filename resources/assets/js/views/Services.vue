@@ -11,8 +11,9 @@
 		<div class="container">
 			<div class="content">
 				<app-services
-					:categories="['Category1', 'Category2']"
-					:locations="['Helsingborg', 'Landskrona']"
+					:categories="category"
+					:regions="[]"
+					:cities="[]"
 				></app-services>
 			</div>
 		</div>
@@ -25,6 +26,11 @@
 	export default {
 		components: {
 			appServices: Services
+		},
+		data() {
+			return {
+				category: [{text: 'CategoryTest', value: 1337}, {text: 'Category2', value: 13}]
+			}
 		}
 	}
 </script>

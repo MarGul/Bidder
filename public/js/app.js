@@ -23408,12 +23408,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__);
 //
 //
 //
@@ -23445,8 +23441,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['categories', 'locations']
+	props: ['categories', 'regions', 'cities'],
+	components: {
+		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default.a
+	},
+	methods: {
+		categoryAdd: function categoryAdd() {},
+		categoryRemove: function categoryRemove(index) {
+			this.categories.splice(index, 1);
+		}
+	}
 };
 
 /***/ }),
@@ -23653,12 +23660,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 ;
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	components: {
 		appServices: __WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue___default.a
+	},
+	data: function data() {
+		return {
+			category: [{ text: 'CategoryTest', value: 1337 }, { text: 'Category2', value: 13 }]
+		};
 	}
 };
 
@@ -24626,39 +24639,47 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "services-component"
   }, [_c('div', {
     staticClass: "service-filter-container"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('div', {}, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
+  }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.categories
+    },
+    on: {
+      "add": _vm.categoryAdd,
+      "remove": _vm.categoryRemove
+    }
+  })], 1), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _vm._m(2)]), _vm._v(" "), _c('div', {
+    staticClass: "services"
+  })])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
       "type": "text",
       "id": "filter_text"
     }
-  })])]), _vm._v(" "), _c('div', {
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('div', {}, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('input', {
+  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
       "type": "text",
       "id": "filter_text"
     }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('div', {}, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "filter_text"
-    }
-  })])])]), _vm._v(" "), _c('div', {
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12"
@@ -24667,9 +24688,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "button"
     }
-  }, [_vm._v("Hitta Tjänster")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "services"
-  })])
+  }, [_vm._v("Hitta Tjänster")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -24702,8 +24721,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "content"
   }, [_c('app-services', {
     attrs: {
-      "categories": ['Category1', 'Category2'],
-      "locations": ['Helsingborg', 'Landskrona']
+      "categories": _vm.category,
+      "regions": [],
+      "cities": []
     }
   })], 1)])], 1)
 },staticRenderFns: []}
@@ -25970,6 +25990,107 @@ module.exports = g;
 __webpack_require__(15);
 module.exports = __webpack_require__(16);
 
+
+/***/ }),
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(101),
+  /* template */
+  __webpack_require__(102),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/TagsInput.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TagsInput.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-82ec9b96", Component.options)
+  } else {
+    hotAPI.reload("data-v-82ec9b96", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	props: ['items'],
+	methods: {
+		removeItem: function removeItem(index) {
+			this.$emit('remove', index);
+		}
+	}
+};
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "tags-input-container"
+  }, [_c('div', {
+    staticClass: "tags-input"
+  }, _vm._l((_vm.items), function(item, index) {
+    return _c('div', {
+      staticClass: "tag"
+    }, [_vm._v("\n\t\t\t" + _vm._s(item.text)), _c('i', {
+      staticClass: "fa fa-times",
+      attrs: {
+        "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.removeItem(index)
+        }
+      }
+    })])
+  }))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-82ec9b96", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

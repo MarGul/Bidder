@@ -3,22 +3,16 @@
 		<div class="service-filter-container">
 			<div class="row">
 				<div class="col-xs-12 col-md-4 column">
-					<div class="">
-						<label>Fritext</label>
-						<input type="text" id="filter_text" class="form-control">
-					</div>
+					<label>Fritext</label>
+					<input type="text" id="filter_text" class="form-control">
 				</div>
 				<div class="col-xs-12 col-md-4 column">
-					<div class="">
-						<label>Kategorier</label>
-						<input type="text" id="filter_text" class="form-control">
-					</div>
+					<label>Kategorier</label>
+					<app-tags-input :items="categories" @add="categoryAdd" @remove="categoryRemove"></app-tags-input>
 				</div>
 				<div class="col-xs-12 col-md-4 column">
-					<div class="">
-						<label>Platser</label>
-						<input type="text" id="filter_text" class="form-control">
-					</div>
+					<label>Platser</label>
+					<input type="text" id="filter_text" class="form-control">
 				</div>
 			</div>
 			<div class="row">
@@ -35,7 +29,20 @@
 </template>
 
 <script>
+	import TagsInput from '../Includes/TagsInput.vue';
+
 	export default {
-		props: ['categories', 'locations']
+		props: ['categories', 'regions', 'cities'],
+		components: {
+			appTagsInput: TagsInput
+		},
+		methods: {
+			categoryAdd() {
+
+			},
+			categoryRemove(index) {
+				this.categories.splice(index, 1);
+			}
+		}
 	}
 </script>
