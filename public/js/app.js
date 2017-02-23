@@ -23449,7 +23449,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default.a
 	},
 	methods: {
-		categoryAdd: function categoryAdd() {},
+		categoryAdd: function categoryAdd(item) {
+			this.categories.push({
+				text: item,
+				value: 2
+			});
+		},
 		categoryRemove: function categoryRemove(index) {
 			this.categories.splice(index, 1);
 		}
@@ -26038,7 +26043,8 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -26053,11 +26059,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['items'],
 	methods: {
+		inputFocus: function inputFocus() {
+			$('.tags-input input').focus();
+		},
 		removeItem: function removeItem(index) {
 			this.$emit('remove', index);
+		},
+		input: function input(event) {
+			if (event.which === 13) {
+				var item = event.target.value.trim();
+				event.target.value = '';
+				this.$emit('add', item);
+			}
 		}
 	}
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 102 */
@@ -26067,8 +26084,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "tags-input-container"
   }, [_c('div', {
-    staticClass: "tags-input"
-  }, _vm._l((_vm.items), function(item, index) {
+    staticClass: "tags-input",
+    on: {
+      "click": _vm.inputFocus
+    }
+  }, [_vm._l((_vm.items), function(item, index) {
     return _c('div', {
       staticClass: "tag"
     }, [_vm._v("\n\t\t\t" + _vm._s(item.text)), _c('i', {
@@ -26082,7 +26102,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })])
-  }))])
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "text"
+    },
+    on: {
+      "keydown": _vm.input
+    }
+  })], 2)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

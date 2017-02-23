@@ -8242,16 +8242,17 @@ body.mobile-nav-open .overlay {
   box-sizing: border-box;
   z-index: 1;
   border: 1px solid #d7d7d7;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   cursor: text;
-  padding: 4px 8px;
+  padding: 0 8px 4px 8px;
 }
 
 .tags-input-container .tags-input .tag {
   display: inline-block;
   background: #f6f6f6;
   border: 1px solid #bebdbd;
-  padding: 2px 4px;
-  margin: 0 3px 3px 0;
+  padding: 1px 4px;
+  margin: 4px 4px 0 0;
   cursor: default;
 }
 
@@ -8262,6 +8263,16 @@ body.mobile-nav-open .overlay {
 
 .tags-input-container .tags-input .tag i:hover {
   color: #cc0000;
+}
+
+.tags-input-container .tags-input input {
+  background: #fff;
+  border: 0px solid transparent;
+  width: 40px;
+}
+
+.tags-input-container .tags-input input:focus {
+  outline: none;
 }
 
 .service-filter-container {

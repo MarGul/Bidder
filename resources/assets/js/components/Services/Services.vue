@@ -37,8 +37,11 @@
 			appTagsInput: TagsInput
 		},
 		methods: {
-			categoryAdd() {
-
+			categoryAdd(item) {
+				this.categories.push({
+					text: item,
+					value: 2
+				});
 			},
 			categoryRemove(index) {
 				this.categories.splice(index, 1);
