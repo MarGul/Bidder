@@ -7708,6 +7708,19 @@ button.close {
   margin: 0;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.form-control {
+  border-radius: 0;
+  border: 1px solid #d7d7d7;
+}
+
+.form-control:focus {
+  border-color: #55AE3A;
+}
+
 .mobile-nav-open {
   overflow: hidden;
 }
@@ -8214,6 +8227,37 @@ body.mobile-nav-open .overlay {
 
 .items-block .sub-container .sub-nav li a span {
   margin-right: 8px;
+}
+
+.service-filter-container {
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  padding: 15px;
+}
+
+.service-filter-container .column {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 992px) {
+  .service-filter-container .column {
+    margin-top: 0;
+  }
+}
+
+.service-filter-container .column:first-child {
+  margin-top: 0;
+}
+
+.service-filter-container .btn {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.service-filter-container label {
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 .slide-in-enter-active {

@@ -13,6 +13,9 @@
 // Helpers
 @import "_helpers.scss";
 
+// Forms
+@import "_forms.scss";
+
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";
 
@@ -27,6 +30,9 @@
 
 // Item Blocks
 @import "includes/items-block.scss";
+
+// Services Component
+@import "includes/filter-services.scss";
 
 // Animations
 @import "animations/_slide-in.scss";
