@@ -8,7 +8,12 @@
 				</div>
 				<div class="col-xs-12 col-md-4 column">
 					<label>Kategorier</label>
-					<app-tags-input :items="categories" @add="categoryAdd" @remove="categoryRemove"></app-tags-input>
+					<app-tags-input 
+						:items="categories"
+						:options="allCategories"
+						@add="categoryAdd" 
+						@remove="categoryRemove"
+					></app-tags-input>
 				</div>
 				<div class="col-xs-12 col-md-4 column">
 					<label>Platser</label>
@@ -48,6 +53,9 @@
 		computed: {
 			locations() {
 				return this.regions.concat(this.cities);
+			},
+			allCategories() {
+				return this.$store.getters.getCategories;
 			}
 		},
 		methods: {

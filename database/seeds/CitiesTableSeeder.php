@@ -160,5 +160,6 @@ class CitiesTableSeeder extends Seeder
                 ]);
             }
         }
+        
     }
 }
