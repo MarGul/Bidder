@@ -55,14 +55,14 @@
 				return this.regions.concat(this.cities);
 			},
 			allCategories() {
-				return this.$store.getters.getCategories;
+				return this.$store.getters.getCategoriesFlatten;
 			}
 		},
 		methods: {
 			categoryAdd(item) {
 				this.categories.push({
-					text: item,
-					value: 2
+					text: item.text,
+					value: item.value
 				});
 			},
 			categoryRemove(index) {

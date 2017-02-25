@@ -23279,25 +23279,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['items', 'options'],
 	data: function data() {
 		return {
 			input: '',
-			matched: []
+			matched: [],
+			error: false
 		};
 	},
 
 	watch: {
 		input: function input() {
 			if (!this.input) {
-				this.matched = [];return;
+				return this.matched = [];
 			}
 
 			this.matched = this.options.filter(function (option) {
 				return option.name.toLowerCase().indexOf(this.input.toLowerCase()) !== -1;
-			}.bind(this)).slice(0, 5);
+			}.bind(this));
 		}
 	},
 	methods: {
@@ -23307,14 +23313,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		removeItem: function removeItem(index) {
 			this.$emit('remove', index);
 		},
-		addItem: function addItem() {
-			var item = event.target.value.trim();
-			event.target.value = '';
-			this.$emit('add', item);
-		},
 		inputHandler: function inputHandler(event) {
+			this.error = false;
 			if (event.which === 13) {
-				this.addItem();
+				if (this.validItem(this.input)) {
+					this.addItem(this.input, 3, 'category');
+				}
+			}
+		},
+		matchHandler: function matchHandler(match) {
+			if (this.validItem(match)) {
+				this.addItem(match, 3, 'category');
+			}
+		},
+		addItem: function addItem(text, value, type) {
+			var item = {
+				text: text,
+				value: value,
+				type: type
+			};
+			this.$emit('add', item);
+			this.input = '';
+		},
+		validItem: function validItem(item) {
+			var result = $.grep(this.options, function (e) {
+				return e.name.toLowerCase() == item.toLowerCase();
+			});
+
+			if (result.length > 0) {
+				return true;
+			} else {
+				this.error = true;
+				return false;
 			}
 		}
 	}
@@ -23529,14 +23559,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.regions.concat(this.cities);
 		},
 		allCategories: function allCategories() {
-			return this.$store.getters.getCategories;
+			return this.$store.getters.getCategoriesFlatten;
 		}
 	},
 	methods: {
 		categoryAdd: function categoryAdd(item) {
 			this.categories.push({
-				text: item,
-				value: 2
+				text: item.text,
+				value: item.value
 			});
 		},
 		categoryRemove: function categoryRemove(index) {
@@ -23981,6 +24011,20 @@ var categories = {
 	getters: {
 		getCategories: function getCategories(state) {
 			return state.categories;
+		},
+		getCategoriesFlatten: function getCategoriesFlatten(state) {
+			var flattenCategories = [];
+			var flatten = function flatten(categories) {
+				categories.forEach(function (category, index) {
+					if (category.sub_categories) {
+						flatten(category.sub_categories);
+					}
+					return flattenCategories.push(category);
+				});
+			};
+			flatten(state.categories);
+
+			return flattenCategories;
 		}
 	}
 };
@@ -25218,8 +25262,13 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "tags-input-container"
-  }, [_c('div', {
+  }, [(_vm.error) ? _c('div', {
+    staticClass: "tooltip-error"
+  }, [_vm._v("Ej giltigt val")]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "tags-input",
+    class: {
+      hasError: _vm.error
+    },
     on: {
       "click": _vm.inputFocus
     }
@@ -25257,11 +25306,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.input = $event.target.value
       }
     }
-  })], 2), _vm._v(" "), _c('div', {
+  })], 2), _vm._v(" "), (_vm.matched.length > 0) ? _c('div', {
     staticClass: "tags-help"
+  }, [_c('ul', {
+    staticClass: "list-unstyled"
   }, _vm._l((_vm.matched), function(match) {
-    return _c('div', [_vm._v(_vm._s(match.name))])
-  }))])
+    return _c('li', {
+      on: {
+        "click": function($event) {
+          _vm.matchHandler(match.name)
+        }
+      }
+    }, [_vm._v(_vm._s(match.name))])
+  }))]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

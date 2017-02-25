@@ -8232,6 +8232,16 @@ body.mobile-nav-open .overlay {
 .tags-input-container {
   height: auto;
   width: 100%;
+  position: relative;
+}
+
+.tags-input-container .tooltip-error {
+  position: absolute;
+  padding: 4px 10px;
+  background: #cc0000;
+  color: #fff;
+  top: -30px;
+  right: 0;
 }
 
 .tags-input-container .tags-input {
@@ -8246,6 +8256,10 @@ body.mobile-nav-open .overlay {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   cursor: text;
   padding: 0 8px 4px 8px;
+}
+
+.tags-input-container .tags-input.hasError {
+  border: 1px solid #cc0000;
 }
 
 .tags-input-container .tags-input .tag {
@@ -8275,6 +8289,29 @@ body.mobile-nav-open .overlay {
 
 .tags-input-container .tags-input input:focus {
   outline: none;
+}
+
+.tags-input-container .tags-help {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  max-height: 125px;
+  overflow-y: scroll;
+  z-index: 5;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+}
+
+.tags-input-container .tags-help li {
+  font-size: 1.1em;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.tags-input-container .tags-help li:hover {
+  color: #55AE3A;
 }
 
 .service-filter-container {
