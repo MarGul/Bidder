@@ -25,6 +25,8 @@ const categories = {
 					if ( category.sub_categories ) {
 						flatten(category.sub_categories);
 					}
+					// The TagsInput needs a type.
+					category.type = 'category';
 					return flattenCategories.push(category);
 				});
 			}

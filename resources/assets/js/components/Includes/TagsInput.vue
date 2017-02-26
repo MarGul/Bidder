@@ -3,7 +3,7 @@
 		<div class="tooltip-error" v-if="error">Ej giltigt val</div>
 		<div class="tags-input" :class="{hasError: error}" @click="inputFocus">
 			<div class="tag" v-for="(item, index) in items">
-				{{ item.text }}<i class="fa fa-times" aria-hidden="true" @click="removeItem(index)"></i>
+				{{ item.text }}<i class="fa fa-times" aria-hidden="true" @click="removeItem(item, index)"></i>
 			</div>
 			<input type="text" @keydown="inputHandler" v-model="input">
 		</div>
@@ -41,13 +41,13 @@
 			inputFocus(event) {
 				$(event.target).find('input').focus();
 			},
-			removeItem(index) {
-				this.$emit('remove', index);
+			removeItem(item, index) {
+				this.$emit('remove', {item, index});
 			},
 			inputHandler(event) {
 				// Grow the width of the input depending on how many characters.
 				$(event.target).width((20 + (this.input.length * 12)) + 'px');
-				
+
 				this.error = false;
 				if ( event.which === 13 ) {
 					if ( this.validateItem(this.input) ) {
@@ -64,7 +64,7 @@
 				this.$emit('add', {
 					text: this.current.name,
 					value: this.current.id,
-					type: 'cat'
+					type: this.current.type
 				});
 				this.input = '';
 				this.current = {};

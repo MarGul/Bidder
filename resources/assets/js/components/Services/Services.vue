@@ -18,8 +18,10 @@
 				<div class="col-xs-12 col-md-4 column">
 					<label>Platser</label>
 					<app-tags-input 
-						:items="locations" 
+						:items="locations"
+						:options="allLocations"
 						@add="locationAdd"
+						@remove="locationRemove"
 					></app-tags-input>
 				</div>
 			</div>
@@ -41,9 +43,9 @@
 
 	export default {
 		props: {
-			categories: { type: Array, default: [] },
-			regions: { type: Array, default: [] },
-			cities: { type: Array, default: [] }
+			categories: { type: Array, default: () => [] },
+			regions: { type: Array, default: () => [] },
+			cities: { type: Array, default: () => [] }
 		},
 		components: {
 			appTagsInput: TagsInput
@@ -59,23 +61,25 @@
 			},
 			allCategories() {
 				return this.$store.getters.getCategoriesFlatten;
+			},
+			allLocations() {
+				return this.$store.getters.getRegionsFlatten;
 			}
 		},
 		methods: {
 			categoryAdd(item) {
-				this.categories.push({
-					text: item.text,
-					value: item.value
-				});
+				this.categories.push(item);
 			},
-			categoryRemove(index) {
+			categoryRemove({index}) {
 				this.categories.splice(index, 1);
 			},
 			locationAdd(item) {
-				// Is the item they typed a region or city? Add to the correct data.
+				(item.type == 'region') ? this.regions.push(item) : this.cities.push(item);
 			},
-			locationRemove(index, type) {
-				// Depending on the type, remove the item with index in the correct data.
+			locationRemove({item}) {
+				let target = (item.type == 'region') ? this.regions : this.cities;
+				let index = target.findIndex(el => el.value == item.value);
+				if (index != -1) target.splice(index, 1);
 			}
 		}
 	}

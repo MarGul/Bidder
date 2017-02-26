@@ -23311,8 +23311,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		inputFocus: function inputFocus(event) {
 			$(event.target).find('input').focus();
 		},
-		removeItem: function removeItem(index) {
-			this.$emit('remove', index);
+		removeItem: function removeItem(item, index) {
+			this.$emit('remove', { item: item, index: index });
 		},
 		inputHandler: function inputHandler(event) {
 			// Grow the width of the input depending on how many characters.
@@ -23334,7 +23334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$emit('add', {
 				text: this.current.name,
 				value: this.current.id,
-				type: 'cat'
+				type: this.current.type
 			});
 			this.input = '';
 			this.current = {};
@@ -23544,14 +23544,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: {
-		categories: { type: Array, default: [] },
-		regions: { type: Array, default: [] },
-		cities: { type: Array, default: [] }
+		categories: { type: Array, default: function _default() {
+				return [];
+			} },
+		regions: { type: Array, default: function _default() {
+				return [];
+			} },
+		cities: { type: Array, default: function _default() {
+				return [];
+			} }
 	},
 	components: {
 		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default.a
@@ -23568,23 +23576,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		allCategories: function allCategories() {
 			return this.$store.getters.getCategoriesFlatten;
+		},
+		allLocations: function allLocations() {
+			return this.$store.getters.getRegionsFlatten;
 		}
 	},
 	methods: {
 		categoryAdd: function categoryAdd(item) {
-			this.categories.push({
-				text: item.text,
-				value: item.value
-			});
+			this.categories.push(item);
 		},
-		categoryRemove: function categoryRemove(index) {
+		categoryRemove: function categoryRemove(_ref) {
+			var index = _ref.index;
+
 			this.categories.splice(index, 1);
 		},
 		locationAdd: function locationAdd(item) {
-			// Is the item they typed a region or city? Add to the correct data.
+			item.type == 'region' ? this.regions.push(item) : this.cities.push(item);
 		},
-		locationRemove: function locationRemove(index, type) {
-			// Depending on the type, remove the item with index in the correct data.
+		locationRemove: function locationRemove(_ref2) {
+			var item = _ref2.item;
+
+			var target = item.type == 'region' ? this.regions : this.cities;
+			var index = target.findIndex(function (el) {
+				return el.value == item.value;
+			});
+			if (index != -1) target.splice(index, 1);
 		}
 	}
 };
@@ -23790,23 +23806,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 ;
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	components: {
 		appServices: __WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue___default.a
-	},
-	data: function data() {
-		return {
-			category: [{ text: 'CategoryTest', value: 1337 }, { text: 'Category2', value: 13 }],
-			region: [{ text: 'Region1', value: 1 }, { text: 'Region2', value: 2 }],
-			city: [{ text: 'City1', value: 1 }, { text: 'City2', value: 2 }]
-		};
 	}
 };
 
@@ -24027,6 +24032,8 @@ var categories = {
 					if (category.sub_categories) {
 						flatten(category.sub_categories);
 					}
+					// The TagsInput needs a type.
+					category.type = 'category';
 					return flattenCategories.push(category);
 				});
 			};
@@ -24070,6 +24077,24 @@ var regions = {
 	getters: {
 		getRegions: function getRegions(state) {
 			return state.regions;
+		},
+		getRegionsFlatten: function getRegionsFlatten(state) {
+			var flattenedRegions = [];
+			var flatten = function flatten(regions) {
+				regions.forEach(function (region, index) {
+					if (region.cities) {
+						region.type = 'region';
+						flatten(region.cities);
+					} else {
+						region.type = 'city';
+					}
+
+					return flattenedRegions.push(region);
+				});
+			};
+			flatten(state.regions);
+
+			return flattenedRegions;
 		}
 	}
 };
@@ -24866,10 +24891,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12 col-md-4 column"
   }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
     attrs: {
-      "items": _vm.locations
+      "items": _vm.locations,
+      "options": _vm.allLocations
     },
     on: {
-      "add": _vm.locationAdd
+      "add": _vm.locationAdd,
+      "remove": _vm.locationRemove
     }
   })], 1)]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('div', {
     staticClass: "services"
@@ -24915,13 +24942,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [_c('div', {
     staticClass: "content"
-  }, [_c('app-services', {
-    attrs: {
-      "categories": _vm.category,
-      "regions": _vm.region,
-      "cities": _vm.city
-    }
-  })], 1)])], 1)
+  }, [_c('app-services')], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25290,7 +25311,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.removeItem(index)
+          _vm.removeItem(item, index)
         }
       }
     })])

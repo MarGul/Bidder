@@ -10,11 +10,7 @@
 
 		<div class="container">
 			<div class="content">
-				<app-services
-					:categories="category"
-					:regions="region"
-					:cities="city"
-				></app-services>
+				<app-services></app-services>
 			</div>
 		</div>
 	</div>
@@ -26,13 +22,6 @@
 	export default {
 		components: {
 			appServices: Services
-		},
-		data() {
-			return {
-				category: [{text: 'CategoryTest', value: 1337}, {text: 'Category2', value: 13}],
-				region: [{text: 'Region1', value:1}, {text: 'Region2', value:2}],
-				city: [{text: 'City1', value:1}, {text: 'City2', value:2}]
-			}
 		}
 	}
 </script>
