@@ -23290,6 +23290,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			input: '',
+			current: {},
 			matched: [],
 			error: false
 		};
@@ -23314,33 +23315,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$emit('remove', index);
 		},
 		inputHandler: function inputHandler(event) {
+			// Grow the width of the input depending on how many characters.
+			$(event.target).width(20 + this.input.length * 12 + 'px');
+
 			this.error = false;
 			if (event.which === 13) {
-				if (this.validItem(this.input)) {
-					this.addItem(this.input, 3, 'category');
+				if (this.validateItem(this.input)) {
+					this.addItem(this.input);
 				}
 			}
 		},
 		matchHandler: function matchHandler(match) {
-			if (this.validItem(match)) {
-				this.addItem(match, 3, 'category');
+			if (this.validateItem(match)) {
+				this.addItem(match);
 			}
 		},
-		addItem: function addItem(text, value, type) {
-			var item = {
-				text: text,
-				value: value,
-				type: type
-			};
-			this.$emit('add', item);
+		addItem: function addItem(text) {
+			this.$emit('add', {
+				text: this.current.name,
+				value: this.current.id,
+				type: 'cat'
+			});
 			this.input = '';
+			this.current = {};
 		},
-		validItem: function validItem(item) {
+		validateItem: function validateItem(item) {
 			var result = $.grep(this.options, function (e) {
 				return e.name.toLowerCase() == item.toLowerCase();
 			});
 
 			if (result.length > 0) {
+				this.current = result[0];
 				return true;
 			} else {
 				this.error = true;
@@ -23501,6 +23506,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__);
+//
+//
+//
 //
 //
 //

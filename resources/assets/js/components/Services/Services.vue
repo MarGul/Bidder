@@ -17,7 +17,10 @@
 				</div>
 				<div class="col-xs-12 col-md-4 column">
 					<label>Platser</label>
-					<app-tags-input :items="locations" @add="locationAdd"></app-tags-input>
+					<app-tags-input 
+						:items="locations" 
+						@add="locationAdd"
+					></app-tags-input>
 				</div>
 			</div>
 			<div class="row">

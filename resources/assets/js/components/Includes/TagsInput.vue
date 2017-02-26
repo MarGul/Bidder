@@ -23,6 +23,7 @@
 		data() {
 			return {
 				input: '',
+				current: {},
 				matched: [],
 				error: false
 			}
@@ -44,31 +45,35 @@
 				this.$emit('remove', index);
 			},
 			inputHandler(event) {
+				// Grow the width of the input depending on how many characters.
+				$(event.target).width((20 + (this.input.length * 12)) + 'px');
+				
 				this.error = false;
 				if ( event.which === 13 ) {
-					if ( this.validItem(this.input) ) {
-						this.addItem(this.input, 3, 'category');
+					if ( this.validateItem(this.input) ) {
+						this.addItem(this.input);
 					}
 				}
 			},
 			matchHandler(match) {
-				if ( this.validItem(match) ) {
-					this.addItem(match, 3, 'category');
+				if ( this.validateItem(match) ) {
+					this.addItem(match);
 				}
 			},
-			addItem(text, value, type) {
-				let item = {
-					text: text,
-					value: value,
-					type: type
-				}
-				this.$emit('add', item);
+			addItem(text) {
+				this.$emit('add', {
+					text: this.current.name,
+					value: this.current.id,
+					type: 'cat'
+				});
 				this.input = '';
+				this.current = {};
 			},
-			validItem(item) {
+			validateItem(item) {
 				let result = $.grep(this.options, function(e) { return e.name.toLowerCase() == item.toLowerCase() });
 				
 				if ( result.length > 0 ) {
+					this.current = result[0];
 					return true;
 				} else {
 					this.error = true;
