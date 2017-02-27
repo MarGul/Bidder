@@ -27,19 +27,27 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary full-width">Hitta Tjänster</button>
+					<button type="button" class="btn btn-primary full-width" @click="getServices(false)">Hitta Tjänster</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="services">
+		<div class="services margin-25">
 			<!-- v-for loop through the services with a component -->
+			<app-service v-for="service in services" :service="service"></app-service>
+			
+			<div class="load-spinner text-center" v-if="loading">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import TagsInput from '../Includes/TagsInput.vue';
+	import Services from '../../includes/models/Services';
+	import Service from './Service.vue';
 
 	export default {
 		props: {
@@ -48,11 +56,15 @@
 			cities: { type: Array, default: () => [] }
 		},
 		components: {
-			appTagsInput: TagsInput
+			appTagsInput: TagsInput,
+			appService: Service
 		},
 		data() {
 			return {
 				filterText: '',
+				loading: false,
+				services: [],
+				page: 1
 			}
 		},
 		computed: {
@@ -80,7 +92,27 @@
 				let target = (item.type == 'region') ? this.regions : this.cities;
 				let index = target.findIndex(el => el.value == item.value);
 				if (index != -1) target.splice(index, 1);
+			},
+			getServices(append) {
+				this.loading = true;
+				Services.get({
+					page: this.page,
+					text: this.filterText, 
+					categories: this.categories.map(el => el.value),
+					regions: this.regions.map(el => el.value),
+					cities: this.cities.map(el => el.value)
+				})
+				.then(({services}) => {
+					this.services = (append) ? this.services.concat(services) : services;
+					this.loading = false;
+				})
+				.catch(error => {
+					console.log(error);
+				});
 			}
+		},
+		mounted() {
+			this.getServices();
 		}
 	}
 </script>

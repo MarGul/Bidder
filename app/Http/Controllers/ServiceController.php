@@ -22,13 +22,14 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::getServices();
+        $services = Service::with('comments', 'bids', 'region', 'city', 'category')->get();
+
+        Service::parseServices($services);
 
         return response()->json([
             'message' => 'Listing all services.',
-            'test' => $services,
             'services' => $services
         ], 200);
     }

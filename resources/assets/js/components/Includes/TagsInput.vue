@@ -52,6 +52,7 @@
 				if ( event.which === 13 ) {
 					if ( this.validateItem(this.input) ) {
 						this.addItem(this.input);
+						$(event.target).width('20px');
 					}
 				}
 			},

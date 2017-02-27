@@ -33,6 +33,15 @@ class City extends Model
     }
 
     /**
+     * A city may have many services.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function services() {
+        return $this->hasMany('App\Service');
+    }
+
+    /**
      * Parse the cities.
      * 
      * @param  Collection $cities [Collection of App\City]

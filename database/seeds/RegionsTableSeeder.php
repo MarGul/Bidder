@@ -39,11 +39,7 @@ class RegionsTableSeeder extends Seeder
         ];
 
         foreach ($regions as $region) {
-            Region::create([
-                'name' => $region['name'],
-                'slug' => $region['slug'],
-                'description' => $region['description']
-            ]);
+            Region::create($region);
         }
     }
 }

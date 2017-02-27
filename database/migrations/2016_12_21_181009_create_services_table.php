@@ -18,9 +18,10 @@ class CreateServicesTable extends Migration
             $table->integer('user_id');
             $table->integer('category_id');
             $table->integer('region_id')->nullable();
+            $table->integer('city_id')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->boolean('physical');
+            $table->boolean('physical')->default(false);
             $table->dateTime('start');
             $table->dateTime('end');
             $table->dateTime('bid_start');

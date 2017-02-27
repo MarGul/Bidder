@@ -4,6 +4,10 @@ class Model {
 		this.resource = resource;
 	}
 
+	get(params = {}) {
+		return this.send('get', this.resource, {params});
+	}
+
 	all() {
 		return this.send('get', this.resource);
 	}
@@ -12,9 +16,9 @@ class Model {
 		return this.send('get', this.resource + '/' + identifier);
 	}
 
-	send(requestType, url, data = {}) {
+	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
-			axios[requestType](url, data)
+			axios[requestType](url, config)
 				.then(response => {
 					resolve(response.data);
 				})

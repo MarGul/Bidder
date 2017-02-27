@@ -7704,12 +7704,22 @@ button.close {
   border-color: #264e1a;
 }
 
+.btn-primary:focus {
+  background-color: #55AE3A;
+  border-color: #42882d;
+  outline: none;
+}
+
 .list-unstyled {
   margin: 0;
 }
 
 .full-width {
   width: 100%;
+}
+
+.margin-25 {
+  margin: 25px 0px;
 }
 
 .form-control {
