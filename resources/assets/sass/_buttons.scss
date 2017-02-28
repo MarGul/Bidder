@@ -13,9 +13,10 @@
 		border-color: $darkest-green;
 	}
 
-	&:focus {
-		background-color: $primary-green;
-		border-color: $dark-green;
+	&:focus,
+	&:active {
+		background-color: $primary-green !important;
+		border-color: $dark-green !important;
 		outline: none;
 	}
 }

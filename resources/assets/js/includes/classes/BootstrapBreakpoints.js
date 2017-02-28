@@ -1,17 +1,16 @@
 class BootstrapBreakpoints {
 
 	constructor() {
-		let bb = this;
-		this._update(bb);
+		this._update();
 
 		$(window).resize(function() {
-			bb._update(bb);
-		});
+			this._update();
+		}.bind(this));
 	}
 
 	_update(bb) {
-		bb.current = bb._getCurrentBreakpoint();
-		bb.mobile = bb.isMobile();
+		this.current = this._getCurrentBreakpoint();
+		this.mobile = this.isMobile();
 	}
 
 	_getCurrentBreakpoint() {

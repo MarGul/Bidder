@@ -34,7 +34,11 @@
 
 		<div class="services margin-25">
 			<!-- v-for loop through the services with a component -->
-			<app-service v-for="service in services" :service="service"></app-service>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6" v-for="service in services">
+					<app-service :service="service"></app-service>
+				</div>
+			</div>
 			
 			<div class="load-spinner text-center" v-if="loading">
 				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -95,6 +99,7 @@
 			},
 			getServices(append) {
 				this.loading = true;
+				this.services = (append) ? this.services : [];
 				Services.get({
 					page: this.page,
 					text: this.filterText, 
@@ -103,7 +108,7 @@
 					cities: this.cities.map(el => el.value)
 				})
 				.then(({services}) => {
-					this.services = (append) ? this.services.concat(services) : services;
+					this.services = this.services.concat(services);
 					this.loading = false;
 				})
 				.catch(error => {

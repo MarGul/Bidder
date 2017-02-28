@@ -23297,68 +23297,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			input: '',
-			current: {},
-			matched: [],
 			error: false
 		};
 	},
 
-	watch: {
-		input: function input() {
-			if (!this.input) {
-				return this.matched = [];
-			}
+	computed: {
+		matched: function matched() {
+			var _this = this;
 
-			this.matched = this.options.filter(function (option) {
-				return option.name.toLowerCase().indexOf(this.input.toLowerCase()) !== -1;
-			}.bind(this));
+			if (!this.input) return [];
+
+			return this.options.filter(function (opt) {
+				return opt.name.toLowerCase().indexOf(_this.input.toLowerCase()) !== -1;
+			});
+		},
+		inputWidth: function inputWidth() {
+			return { width: 20 + this.input.length * 8 + 'px' };
 		}
 	},
 	methods: {
 		inputFocus: function inputFocus(event) {
 			$(event.target).find('input').focus();
 		},
-		removeItem: function removeItem(item, index) {
-			this.$emit('remove', { item: item, index: index });
-		},
-		inputHandler: function inputHandler(event) {
-			// Grow the width of the input depending on how many characters.
-			$(event.target).width(20 + this.input.length * 12 + 'px');
-
-			this.error = false;
-			if (event.which === 13) {
-				if (this.validateItem(this.input)) {
-					this.addItem(this.input);
-					$(event.target).width('20px');
-				}
-			}
-		},
-		matchHandler: function matchHandler(match) {
-			if (this.validateItem(match)) {
-				this.addItem(match);
-			}
-		},
 		addItem: function addItem(text) {
-			this.$emit('add', {
-				text: this.current.name,
-				value: this.current.id,
-				type: this.current.type
-			});
-			this.input = '';
-			this.current = {};
-		},
-		validateItem: function validateItem(item) {
-			var result = $.grep(this.options, function (e) {
-				return e.name.toLowerCase() == item.toLowerCase();
-			});
+			var current = $.grep(this.options, function (e) {
+				return e.name.toLowerCase() == text.toLowerCase();
+			})[0];
 
-			if (result.length > 0) {
-				this.current = result[0];
-				return true;
-			} else {
-				this.error = true;
-				return false;
+			if (current) {
+				this.$emit('add', {
+					text: current.name,
+					value: current.id,
+					type: current.type
+				});
+				return this.input = '';
 			}
+
+			return !(this.error = true);
 		}
 	}
 };
@@ -23516,12 +23491,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['service'],
-	mounted: function mounted() {
-		console.log(this.service);
-	}
+	props: ['service']
 };
 
 /***/ }),
@@ -23535,6 +23525,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_Services__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Service_vue__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Service_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Service_vue__);
+//
+//
+//
+//
 //
 //
 //
@@ -23647,6 +23641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.loading = true;
+			this.services = append ? this.services : [];
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_Services__["a" /* default */].get({
 				page: this.page,
 				text: this.filterText,
@@ -23662,7 +23657,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).then(function (_ref3) {
 				var services = _ref3.services;
 
-				_this.services = append ? _this.services.concat(services) : services;
+				_this.services = _this.services.concat(services);
 				_this.loading = false;
 			}).catch(function (error) {
 				console.log(error);
@@ -23946,19 +23941,18 @@ var BootstrapBreakpoints = function () {
 	function BootstrapBreakpoints() {
 		_classCallCheck(this, BootstrapBreakpoints);
 
-		var bb = this;
-		this._update(bb);
+		this._update();
 
 		$(window).resize(function () {
-			bb._update(bb);
-		});
+			this._update();
+		}.bind(this));
 	}
 
 	_createClass(BootstrapBreakpoints, [{
 		key: '_update',
 		value: function _update(bb) {
-			bb.current = bb._getCurrentBreakpoint();
-			bb.mobile = bb.isMobile();
+			this.current = this._getCurrentBreakpoint();
+			this.mobile = this.isMobile();
 		}
 	}, {
 		key: '_getCurrentBreakpoint',
@@ -25045,19 +25039,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Hitta Tjänster")])])])]), _vm._v(" "), _c('div', {
     staticClass: "services margin-25"
-  }, [_vm._l((_vm.services), function(service) {
-    return _c('app-service', {
+  }, [_c('div', {
+    staticClass: "row"
+  }, _vm._l((_vm.services), function(service) {
+    return _c('div', {
+      staticClass: "col-xs-12 col-sm-6"
+    }, [_c('app-service', {
       attrs: {
         "service": service
       }
-    })
-  }), _vm._v(" "), (_vm.loading) ? _c('div', {
+    })], 1)
+  })), _vm._v(" "), (_vm.loading) ? _c('div', {
     staticClass: "load-spinner text-center"
   }, [_c('i', {
     staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
   }), _vm._v(" "), _c('span', {
     staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()], 2)])
+  }, [_vm._v("Loading...")])]) : _vm._e()])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25457,17 +25455,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.removeItem(item, index)
+          _vm.$emit('remove', {
+            item: item,
+            index: index
+          })
         }
       }
     })])
   }), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
-      rawName: "v-model",
+      rawName: "v-model.trim",
       value: (_vm.input),
-      expression: "input"
+      expression: "input",
+      modifiers: {
+        "trim": true
+      }
     }],
+    style: (_vm.inputWidth),
     attrs: {
       "type": "text"
     },
@@ -25475,10 +25480,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": _vm._s(_vm.input)
     },
     on: {
-      "keydown": _vm.inputHandler,
+      "keydown": [function($event) {
+        _vm.error = false
+      }, function($event) {
+        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+        _vm.addItem(_vm.input)
+      }],
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.input = $event.target.value
+        _vm.input = $event.target.value.trim()
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
       }
     }
   })], 2), _vm._v(" "), (_vm.matched.length > 0) ? _c('div', {
@@ -25489,7 +25502,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', {
       on: {
         "click": function($event) {
-          _vm.matchHandler(match.name)
+          _vm.addItem(match.name)
         }
       }
     }, [_vm._v(_vm._s(match.name))])
@@ -25529,7 +25542,33 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('h4', [_vm._v("Service")])
+  return _c('div', {
+    staticClass: "service-container"
+  }, [_c('div', {
+    staticClass: "service-img"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "service-content"
+  }, [_c('div', {
+    staticClass: "service-title"
+  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.service.title) + "\n\t\t")]), _vm._v(" "), _c('ul', {
+    staticClass: "list-unstyled"
+  }, [_c('li', {
+    staticClass: "category"
+  }, [_c('i', {
+    staticClass: "fa fa-list-ul",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.service.category.name) + "\n\t\t\t")]), _vm._v(" "), _c('li', {
+    staticClass: "location"
+  }, [_c('i', {
+    staticClass: "fa fa-map-marker",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.service.city.name) + ", " + _vm._s(_vm.service.region.name) + "\n\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "service-bottom"
+  }, [_vm._v("\n\t\t\ttest\n\t\t")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
