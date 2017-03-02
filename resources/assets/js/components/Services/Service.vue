@@ -5,16 +5,20 @@
 			<div class="service-title">
 				{{ service.title }}
 			</div>
-			<ul class="list-unstyled">
-				<li class="category">
-					<i class="fa fa-list-ul" aria-hidden="true"></i> {{ service.category.name }}
-				</li>
-				<li class="location">
-					<i class="fa fa-map-marker" aria-hidden="true"></i> {{ service.city.name }}, {{ service.region.name }}
-				</li>
-			</ul>
 			<div class="service-bottom">
-				test
+				<ul class="list-unstyled bottom-info">
+					<li class="category">
+						<i class="fa fa-list-ul" aria-hidden="true"></i> {{ service.category.name }}
+					</li>
+					<li class="location">
+						<i class="fa fa-map-marker" aria-hidden="true"></i> {{ service.city.name }}, {{ service.region.name }}
+					</li>
+				</ul>
+				<ul class="list-unstyled bottom-meta">
+					<li class="bid"><i class="fa fa-gavel" aria-hidden="true"></i> {{ service.bids.length }} bud</li>
+					<li class="comments"><i class="fa fa-commenting" aria-hidden="true"></i> {{ service.comments.length }}</li>
+					<li class="time"><i class="fa fa-clock-o" aria-hidden="true"></i> Time</li>
+				</ul>
 			</div>
 		</div>
 	</div>
