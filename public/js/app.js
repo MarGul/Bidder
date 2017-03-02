@@ -23316,9 +23316,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		inputFocus: function inputFocus(event) {
-			$(event.target).find('input').focus();
-		},
 		addItem: function addItem(text) {
 			var current = $.grep(this.options, function (e) {
 				return e.name.toLowerCase() == text.toLowerCase();
@@ -25443,7 +25440,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       hasError: _vm.error
     },
     on: {
-      "click": _vm.inputFocus
+      "click": function($event) {
+        _vm.$refs.input.focus()
+      }
     }
   }, [_vm._l((_vm.items), function(item, index) {
     return _c('div', {
@@ -25472,6 +25471,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "trim": true
       }
     }],
+    ref: "input",
     style: (_vm.inputWidth),
     attrs: {
       "type": "text"
@@ -25505,7 +25505,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addItem(match.name)
         }
       }
-    }, [_vm._v(_vm._s(match.name))])
+    }, [_vm._v("\n\t\t\t\t" + _vm._s(match.name) + "\n\t\t\t")])
   }))]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
