@@ -15,9 +15,20 @@
 					</li>
 				</ul>
 				<ul class="list-unstyled bottom-meta">
-					<li class="bid"><i class="fa fa-gavel" aria-hidden="true"></i> {{ service.bids.length }} bud</li>
-					<li class="comments"><i class="fa fa-commenting" aria-hidden="true"></i> {{ service.comments.length }}</li>
-					<li class="time"><i class="fa fa-clock-o" aria-hidden="true"></i> Time</li>
+					<li class="bid">
+						<i class="fa fa-gavel" aria-hidden="true"></i> {{ service.bids.length }} bud
+					</li>
+					<li class="comments">
+						<i class="fa fa-commenting" aria-hidden="true"></i> {{ service.comments.length }}
+					</li>
+					<li class="time">
+						<i class="fa fa-clock-o" aria-hidden="true"></i> 
+						<app-timer 
+							:timeEnd="service.bid_stop"
+							:timeNow="timeNow"
+							@timerStop="bidStop"
+						></app-timer>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -25,7 +36,17 @@
 </template>
 
 <script>
+	import Timer from '../Includes/Timer.vue';
+
 	export default {
-		props: ['service']
+		props: ['service', 'timeNow'],
+		components: {
+			appTimer: Timer
+		},
+		methods: {
+			bidStop() {
+				// Emit an event to bidStop so that the Services component can remove the service from the list.
+			}
+		}
 	}
 </script>

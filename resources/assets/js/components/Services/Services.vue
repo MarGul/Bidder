@@ -36,7 +36,11 @@
 			<!-- v-for loop through the services with a component -->
 			<div class="row">
 				<div class="col-xs-12 col-sm-6" v-for="service in services">
-					<app-service :service="service"></app-service>
+					<app-service 
+						:service="service"
+						:timeNow="timeNow"
+						@bidStop=""
+					></app-service>
 				</div>
 			</div>
 			
@@ -65,6 +69,8 @@
 		},
 		data() {
 			return {
+				timer: null,
+				timeNow: 1,
 				filterText: '',
 				loading: false,
 				services: [],
@@ -118,6 +124,9 @@
 		},
 		mounted() {
 			this.getServices();
+			this.timer = setInterval(() => {
+				this.timeNow++;
+			}, 1000);
 		}
 	}
 </script>

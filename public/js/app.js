@@ -23470,6 +23470,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -23493,6 +23497,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
+			timer: null,
+			timeNow: 1,
 			filterText: '',
 			loading: false,
 			services: [],
@@ -23560,7 +23566,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	mounted: function mounted() {
+		var _this2 = this;
+
 		this.getServices();
+		this.timer = setInterval(function () {
+			_this2.timeNow++;
+		}, 1000);
 	}
 };
 
@@ -24845,7 +24856,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-xs-12 col-sm-6"
     }, [_c('app-service', {
       attrs: {
-        "service": service
+        "service": service,
+        "timeNow": _vm.timeNow
+      },
+      on: {
+        "bidStop": function($event) {}
       }
     })], 1)
   })), _vm._v(" "), (_vm.loading) ? _c('div', {
@@ -26360,6 +26375,19 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26387,8 +26415,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['service']
+	props: ['service', 'timeNow'],
+	components: {
+		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue___default.a
+	},
+	methods: {
+		bidStop: function bidStop() {
+			// Emit an event to bidStop so that the Services component can remove the service from the list.
+		}
+	}
 };
 
 /***/ }),
@@ -26493,24 +26531,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" " + _vm._s(_vm.service.bids.length) + " bud")]), _vm._v(" "), _c('li', {
+  }), _vm._v(" " + _vm._s(_vm.service.bids.length) + " bud\n\t\t\t\t")]), _vm._v(" "), _c('li', {
     staticClass: "comments"
   }, [_c('i', {
     staticClass: "fa fa-commenting",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" " + _vm._s(_vm.service.comments.length))]), _vm._v(" "), _vm._m(0)])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
+  }), _vm._v(" " + _vm._s(_vm.service.comments.length) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
     staticClass: "time"
   }, [_c('i', {
     staticClass: "fa fa-clock-o",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Time")])
-}]}
+  }), _vm._v(" "), _c('app-timer', {
+    attrs: {
+      "timeEnd": _vm.service.bid_stop,
+      "timeNow": _vm.timeNow
+    },
+    on: {
+      "timerStop": _vm.bidStop
+    }
+  })], 1)])])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -26518,6 +26562,80 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-b132dc68", module.exports)
   }
 }
+
+/***/ }),
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(115),
+  /* template */
+  __webpack_require__(114),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/Timer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Timer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a250a49", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a250a49", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "timer-component"
+  }, [_vm._v("\n\t" + _vm._s(_vm.timeNow) + " " + _vm._s(_vm.timeEnd) + "\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2a250a49", module.exports)
+  }
+}
+
+/***/ }),
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	props: ['timeEnd', 'timeNow']
+};
 
 /***/ })
 /******/ ]);
