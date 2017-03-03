@@ -35,13 +35,14 @@
 		<div class="services margin-25">
 			<!-- v-for loop through the services with a component -->
 			<div class="row">
-				<div class="col-xs-12 col-sm-6" v-for="service in services">
-					<app-service 
-						:service="service"
-						:timeNow="timeNow"
-						@bidStop=""
-					></app-service>
-				</div>
+				<transition-group name="slide-out" mode="out-in">
+					<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
+						<app-service 
+							:service="service"
+							@bidStop="removeService"
+						></app-service>
+					</div>
+				</transition-group>
 			</div>
 			
 			<div class="load-spinner text-center" v-if="loading">
@@ -69,8 +70,6 @@
 		},
 		data() {
 			return {
-				timer: null,
-				timeNow: 1,
 				filterText: '',
 				loading: false,
 				services: [],
@@ -120,13 +119,18 @@
 				.catch(error => {
 					console.log(error);
 				});
+			},
+			removeService({id}) {
+				let sleep = function(ms) {
+					return new Promise(resolve => setTimeout(resolve, ms));
+				}
+				sleep(Math.random() * 10).then(() => {
+					this.services.splice(this.services.findIndex(e => e.id == id), 1)
+				});
 			}
 		},
 		mounted() {
 			this.getServices();
-			this.timer = setInterval(() => {
-				this.timeNow++;
-			}, 1000);
 		}
 	}
 </script>

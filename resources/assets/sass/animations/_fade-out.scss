@@ -1,0 +1,15 @@
+.fade-out-leave-active {
+	-webkit-animation: 	fade-out 700ms ease-out forwards;
+	-moz-animation: 	fade-out 700ms ease-out forwards;
+	-o-animation: 		fade-out 700ms ease-out forwards;
+	animation: 			fade-out 700ms ease-out forwards;
+}
+
+@keyFrames fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

@@ -3,11 +3,6 @@
 			animation: slide-in 800ms ease-out forwards;
 }
 
-.slide-in-leave-active {
-	-webkit-animation: slide-out 800ms ease-out forwards;
-			animation: slide-out 800ms ease-out forwards;
-}
-
 @keyFrames slide-in {
 	from {
 		transform: translateX(90px);
@@ -16,16 +11,5 @@
 	to {
 		transform: translateX(0);
 		opacity: 1;
-	}
-}
-
-@keyFrames slide-out {
-	from {
-		transform: translateX(0);
-		opacity: 1;
-	}
-	to {
-		transform: translateX(90px);
-		opacity: 0;
 	}
 }

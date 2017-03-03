@@ -1,0 +1,27 @@
+.slide-out-enter-active {
+	-webkit-animation: slide-io-in 300ms ease-out forwards;
+			animation: slide-io-in 300ms ease-out forwards;
+}
+
+.slide-out-leave-active {
+	-webkit-animation: slide-io-out 300ms ease-out forwards;
+			animation: slide-io-out 300ms ease-out forwards;
+}
+
+@keyFrames slide-io-in {
+	from {
+		transform: translateX(-90px);
+	}
+	to {
+		transform: translateX(0px);
+	}
+}
+
+@keyFrames slide-io-out {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-800px);
+	}
+}

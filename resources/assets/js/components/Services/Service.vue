@@ -22,11 +22,9 @@
 						<i class="fa fa-commenting" aria-hidden="true"></i> {{ service.comments.length }}
 					</li>
 					<li class="time">
-						<i class="fa fa-clock-o" aria-hidden="true"></i> 
 						<app-timer 
-							:timeEnd="service.bid_stop"
-							:timeNow="timeNow"
-							@timerStop="bidStop"
+							:ends="service.bid_stop"
+							@ended="bidStop"
 						></app-timer>
 					</li>
 				</ul>
@@ -39,13 +37,14 @@
 	import Timer from '../Includes/Timer.vue';
 
 	export default {
-		props: ['service', 'timeNow'],
+		props: ['service'],
 		components: {
 			appTimer: Timer
 		},
 		methods: {
 			bidStop() {
 				// Emit an event to bidStop so that the Services component can remove the service from the list.
+				this.$emit('bidStop', {id: this.service.id});
 			}
 		}
 	}
