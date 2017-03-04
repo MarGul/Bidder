@@ -16,7 +16,7 @@
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
 						<ul class="desktop-header-nav">
 							<li>
-								<router-link to="/register" class="register">Registrera</router-link>
+								<a href="#" @click.prevent="register = true" class="register">Registrera</a>
 							</li>
 							<li>
 								<router-link to="/login" class="login">Logga In</router-link>
@@ -26,6 +26,10 @@
 				</div>
 			</div>
 		</header>
+
+		<transition name="slide-down-up">
+			<app-register v-if="register" @close="register = false"></app-register>
+		</transition>
 
 		<nav class="desktop-navigation">
 			<div class="container">
@@ -54,10 +58,17 @@
 
 <script>
 	import Search from '../../Includes/Search.vue';
+	import Register from '../../Register/Register.vue';
 
 	export default {
 		components: {
-			appSearch: Search
+			appSearch: Search,
+			appRegister: Register
+		},
+		data() {
+			return {
+				register: false
+			}
 		}
 	}
 </script>

@@ -16,6 +16,18 @@ class Model {
 		return this.send('get', this.resource + '/' + identifier);
 	}
 
+	create(data) {
+		return this.send('post', this.resource, data)
+	}
+
+	update(identifier, data) {
+
+	}
+
+	delete(identifier) {
+		
+	}
+
 	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
 			axios[requestType](url, config)

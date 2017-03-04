@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUser;
 use App\User;
 
 class UserController extends Controller
@@ -14,18 +14,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email|unique:users,email',
-            'username' => 'required|alpha_num|unique:users,username',
-            'password' => 'required|min:6',
-            'name' => 'required'
-        ]);
-
         $user = new User([
             'email' => $request->input('email'),
-            'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')),
             'name' => $request->input('name')
         ]);

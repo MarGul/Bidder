@@ -1,0 +1,29 @@
+.slide-down-up-enter-active {
+	-webkit-animation: slide-du-in 400ms ease-out forwards;
+			animation: slide-du-in 400ms ease-out forwards;
+}
+
+.slide-down-up-leave-active {
+	-webkit-animation: slide-du-out 400ms ease-out forwards;
+			animation: slide-du-out 400ms ease-out forwards;
+}
+
+@keyFrames slide-du-in {
+	from {
+		transform: translateY(-200px);
+	}
+	to {
+		transform: translateY(0px);
+	}
+}
+
+@keyFrames slide-du-out {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-200px);
+		opacity: 0;
+	}
+}
