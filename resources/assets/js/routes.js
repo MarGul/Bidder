@@ -9,8 +9,6 @@ let routes = [
 	{ path: "/locations", component: require('./views/Locations.vue') },
 	{ path: "/services", component: require('./views/Services.vue') },
 	{ path: "/information", component: require('./views/Information.vue') },
-	{ path: "/register", component: require('./views/Register.vue') },
-	{ path: "/login", component: require('./views/Login.vue') },
 	
 	/* 404 is handled by the vue application */
 	{ path: "*", component: require('./views/404.vue') }

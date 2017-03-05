@@ -7714,6 +7714,10 @@ button.close {
   outline: none;
 }
 
+a {
+  cursor: pointer;
+}
+
 .list-unstyled {
   margin: 0;
 }
@@ -8089,11 +8093,29 @@ body.mobile-nav-open .overlay {
 
 .modal-container {
   position: relative;
-  top: 100px;
-  width: 25%;
+  width: 90%;
+  top: 75px;
   margin: 0 auto;
   background: #fff;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-container {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .modal-container {
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .modal-container {
+    width: 450px;
+  }
 }
 
 .modal-container .close {

@@ -16,20 +16,16 @@
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
 						<ul class="desktop-header-nav">
 							<li>
-								<a href="#" @click.prevent="register = true" class="register">Registrera</a>
+								<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
 							</li>
 							<li>
-								<router-link to="/login" class="login">Logga In</router-link>
+								<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</header>
-
-		<transition name="slide-down-up">
-			<app-register v-if="register" @close="register = false"></app-register>
-		</transition>
 
 		<nav class="desktop-navigation">
 			<div class="container">

@@ -1,28 +1,28 @@
 <template>
 	<div class="site-head">
 		<nav class="mobile-navigation">
-			<ul class="mobile-nav">
-				<li class="nav-item" @click="hideMenu">
+			<ul class="mobile-nav" @click="hideMenu">
+				<li class="nav-item">
 					<router-link to="/categories"><i class="fa fa-list-ul" aria-hidden="true"></i> Kategorier</router-link>
 				</li>
-				<li class="nav-item" @click="hideMenu">
+				<li class="nav-item">
 					<router-link to="/locations"><i class="fa fa-map-marker" aria-hidden="true"></i> Platser</router-link>
 				</li>
-				<li class="nav-item" @click="hideMenu">
+				<li class="nav-item">
 					<router-link to="/services"><i class="fa fa-users" aria-hidden="true"></i> Tjänster</router-link>
 				</li>
-				<li class="nav-item" @click="hideMenu">
+				<li class="nav-item">
 					<a href="#"><i class="fa fa-globe" aria-hidden="true"></i> Link</a>
 				</li>
-				<li class="nav-item" @click="hideMenu">
+				<li class="nav-item">
 					<router-link to="/information"><i class="fa fa-question" aria-hidden="true"></i> Information</router-link>
 				</li>
 				<li class="spacer"></li>
-				<li class="nav-item" @click="hideMenu">
-					<router-link to="/register"><i class="fa fa-user-circle" aria-hidden="true"></i> Registrera</router-link>
+				<li class="nav-item">
+					<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
 				</li>
-				<li class="nav-item" @click="hideMenu">
-					<router-link to="/login"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Logga In</router-link>
+				<li class="nav-item">
+					<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
 				</li>
 			</ul>
 		</nav>
