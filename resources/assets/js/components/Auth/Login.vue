@@ -8,6 +8,12 @@
 		<div class="modal-body">
 			<form @keydown="form.errors.clear()">
 				
+				<div 
+					class="alert alert-danger" 
+					v-if="form.errors.has('invalid_credentials')" 
+					v-text="form.errors.get('invalid_credentials')">
+				</div>
+
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
 					<input 
 						type="email" 
@@ -33,7 +39,7 @@
 					<button 
 						type="submit" 
 						class="btn btn-primary full-width" 
-						@click.prevent="login"
+						@click.prevent="authenticate"
 						:disabled="processing || this.form.errors.any()"
 					>
 						Logga In
@@ -67,9 +73,18 @@
 			}
 		},
 		methods: {
-			login() {
+			authenticate() {
 				this.processing = true;
-				axios.post()
+				axios.post('auth', this.form.data())
+					.then((response) => {
+						console.log(response);
+					})
+					.catch((error) => {
+						let err = (error.response.status === 401) ? {invalid_credentials: ['Ogiltiga Uppgifter']} : error.response.data;
+
+						this.form.errors.record(err);
+						this.processing = false;
+					});
 			}
 		}
 	}

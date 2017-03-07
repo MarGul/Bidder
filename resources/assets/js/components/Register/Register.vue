@@ -84,14 +84,13 @@
 			register() {
 				this.processing = true;
 				User.create(this.form.data())
-				.then((response) => {
+					.then((response) => {
 
-				})
-				.catch((error) => {
-					this.form.errors.record(error);
-					this.processing = false;
-					console.log(this.form);
-				});
+					})
+					.catch((error) => {
+						this.form.errors.record(error);
+						this.processing = false;
+					});
 			}
 		}
 	}

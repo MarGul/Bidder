@@ -36,9 +36,6 @@ class Model {
 
 	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
-			// If withToken is set then we should provide the auth token as well.
-			// Category().token(this.$state.getters.getToken).create({data});
-
 			axios[requestType](url, config)
 				.then(response => {
 					resolve(response.data);
