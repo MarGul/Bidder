@@ -25529,7 +25529,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "sr-only"
   }, [_vm._v("Loading...")])]) : _vm._e()])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
-  }, [_vm._v("\n\t\tHar du inte registrerat dig än? "), _c('a', {
+  }, [_vm._v("\n\t\tHar du inte ett konto än? "), _c('a', {
     on: {
       "click": function($event) {
         _vm.$store.dispatch('openModal', {

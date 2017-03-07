@@ -47,9 +47,9 @@
 		</div>
 
 		<div class="modal-footer">
-			Har du inte registrerat dig än? <a @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			Har du inte ett konto än? <a @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 		</div>
-					
+
 	</div>
 </template>
 
@@ -69,6 +69,7 @@
 		methods: {
 			login() {
 				this.processing = true;
+				axios.post()
 			}
 		}
 	}

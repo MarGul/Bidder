@@ -2,6 +2,12 @@ class Model {
 
 	constructor(resource) {
 		this.resource = resource;
+		this.token = null;
+	}
+
+	token(token) {
+		// If the token is null, throw an exception here.
+		this.token = token;
 	}
 
 	get(params = {}) {
@@ -30,6 +36,9 @@ class Model {
 
 	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
+			// If withToken is set then we should provide the auth token as well.
+			// Category().token(this.$state.getters.getToken).create({data});
+
 			axios[requestType](url, config)
 				.then(response => {
 					resolve(response.data);
