@@ -6,6 +6,10 @@ class User extends Model {
 		super('users');
 	}
 
+	authenticate(data) {
+		return this.send('post', 'auth', data);
+	}
+
 }
 
 export default new User;

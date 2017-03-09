@@ -10,8 +10,8 @@
 				
 				<div 
 					class="alert alert-danger" 
-					v-if="form.errors.has('invalid_credentials')" 
-					v-text="form.errors.get('invalid_credentials')">
+					v-if="form.errors.has('error')" 
+					v-text="form.errors.getValue('message')">
 				</div>
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
@@ -61,6 +61,7 @@
 
 <script>
 	import Form from '../../includes/classes/Form';
+	import User from '../../includes/models/User';
 
 	export default {
 		data() {
@@ -75,14 +76,13 @@
 		methods: {
 			authenticate() {
 				this.processing = true;
-				axios.post('auth', this.form.data())
+
+				User.authenticate(this.form.data())
 					.then((response) => {
 						console.log(response);
 					})
 					.catch((error) => {
-						let err = (error.response.status === 401) ? {invalid_credentials: ['Ogiltiga Uppgifter']} : error.response.data;
-
-						this.form.errors.record(err);
+						this.form.errors.record(error);
 						this.processing = false;
 					});
 			}

@@ -14,6 +14,10 @@ class Model {
 		return this.send('get', this.resource, {params});
 	}
 
+	post(data = {}) {
+		return this.send('post', this.resource, data);
+	}
+
 	all() {
 		return this.send('get', this.resource);
 	}
