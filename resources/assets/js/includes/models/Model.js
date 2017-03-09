@@ -31,7 +31,7 @@ class Model {
 	}
 
 	update(identifier, data) {
-
+		
 	}
 
 	delete(identifier) {

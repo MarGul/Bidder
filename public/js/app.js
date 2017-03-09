@@ -11374,6 +11374,14 @@ var User = function (_Model) {
 		return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this, 'users'));
 	}
 
+	/**
+  * Instead of having a model just for authenticate.
+  * 
+  * @param  {Object} data [The email and password data]
+  * @return {Primise}     [The send returns a promise that we then return]
+  */
+
+
 	_createClass(User, [{
 		key: 'authenticate',
 		value: function authenticate(data) {
@@ -23415,7 +23423,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].authenticate(this.form.data()).then(function (response) {
-				console.log(response);
+				_this.$store.dispatch('authenticate', response);
+				_this.processing = false;
+				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -24856,6 +24866,7 @@ var regions = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_categories__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_regions__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_modal__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_auth__ = __webpack_require__(121);
 
 
 
@@ -24866,11 +24877,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 
 
+
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_1_vuex___default.a.Store({
 	modules: {
 		categories: __WEBPACK_IMPORTED_MODULE_2__modules_categories__["a" /* default */],
 		regions: __WEBPACK_IMPORTED_MODULE_3__modules_regions__["a" /* default */],
-		modal: __WEBPACK_IMPORTED_MODULE_4__modules_modal__["a" /* default */]
+		modal: __WEBPACK_IMPORTED_MODULE_4__modules_modal__["a" /* default */],
+		auth: __WEBPACK_IMPORTED_MODULE_5__modules_auth__["a" /* default */]
 	}
 });
 
@@ -27869,6 +27882,75 @@ module.exports = g;
 __webpack_require__(18);
 module.exports = __webpack_require__(19);
 
+
+/***/ }),
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var auth = {
+	state: {
+		authenticated: false,
+		token: null,
+		expiration: null,
+		user: {}
+	},
+	mutations: {
+		'SET_AUTHENTICATED': function SET_AUTHENTICATED(state, value) {
+			state.authenticated = value;
+		},
+		'SET_TOKEN': function SET_TOKEN(state, token) {
+			state.token = token;
+		},
+		'SET_EXPIRATION': function SET_EXPIRATION(state, expiration) {
+			state.expiration = expiration;
+		},
+		'SET_USER': function SET_USER(state, user) {
+			state.user = user;
+		}
+	},
+	actions: {
+		initAuth: function initAuth(_ref) {
+			// Read from local storage and update the state.
+
+			var commit = _ref.commit;
+		},
+		authenticate: function authenticate(_ref2, auth) {
+			var commit = _ref2.commit;
+
+			// Set the state.
+			commit('SET_TOKEN', auth.access_token);
+			commit('SET_EXPIRATION', Date.now() + auth.expires_in);
+			commit('SET_AUTHENTICATED', true);
+			// Set the localStorage
+			window.localStorage.setItem('token', auth.access_token);
+			window.localStorage.setItem('expires', Date.now() + auth.expires_in);
+		}
+	},
+	getters: {
+		isAuthenticated: function isAuthenticated(state) {
+			return state.authenticated;
+		},
+		getToken: function getToken(state) {
+			return state.token;
+		},
+		getExpiration: function getExpiration(state) {
+			return state.expiration;
+		},
+		getUser: function getUser(state) {
+			return state.user;
+		}
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = auth;
 
 /***/ })
 /******/ ]);

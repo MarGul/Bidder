@@ -79,7 +79,9 @@
 
 				User.authenticate(this.form.data())
 					.then((response) => {
-						console.log(response);
+						this.$store.dispatch('authenticate', response);
+						this.processing = false;
+						this.$store.dispatch('closeModal');
 					})
 					.catch((error) => {
 						this.form.errors.record(error);

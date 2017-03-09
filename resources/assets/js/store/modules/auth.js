@@ -7,7 +7,7 @@ const auth = {
 	},
 	mutations: {
 		'SET_AUTHENTICATED'(state, value) {
-			state.authenticate = value;
+			state.authenticated = value;
 		},
 		'SET_TOKEN'(state, token) {
 			state.token = token;
@@ -23,16 +23,21 @@ const auth = {
 		initAuth({commit}) {
 			// Read from local storage and update the state.
 		},
-		authenticate({commit}, {access_token, expiration, user}) {
-			// Update the local storage and the state.
+		authenticate({commit}, auth) {
+			// Set the state.
+			commit('SET_TOKEN', auth.access_token);
+			commit('SET_EXPIRATION', Date.now() + auth.expires_in);
+			commit('SET_AUTHENTICATED', true);
+			// Set the localStorage
+			window.localStorage.setItem('token', auth.access_token);
+			window.localStorage.setItem('expires', Date.now() + auth.expires_in);
 		}
 	},
 	getters: {
 		isAuthenticated: state => state.authenticated,
 		getToken: state => state.token,
 		getExpiration: state => state.expiration,
-		getName: state => state.name,
-		getAvatar: state => state.avatar,
+		getUser: state => state.user
 	}
 }
 
