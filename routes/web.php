@@ -8,6 +8,9 @@
 | handle all of the routing.
 */
 
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
+
 Route::any('{all}', function () {
     return view('index');
 })->where(['all' => '.*']);

@@ -81,7 +81,6 @@
 					})
 					.catch((error) => {
 						let err = (error.response.status === 401) ? {invalid_credentials: ['Ogiltiga Uppgifter']} : error.response.data;
-
 						this.form.errors.record(err);
 						this.processing = false;
 					});
