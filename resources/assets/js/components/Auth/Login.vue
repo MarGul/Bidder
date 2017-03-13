@@ -84,7 +84,6 @@
 						this.$store.dispatch('closeModal');
 					})
 					.catch((error) => {
-						this.form.errors.record(error);
 						this.processing = false;
 					});
 			}

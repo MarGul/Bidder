@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function test(Request $request) {
+        return response()->json(['user' => $request->user()]);
+    }
+
 
     /**
      * Store a newly created resource in storage.

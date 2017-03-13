@@ -23325,9 +23325,8 @@ module.exports = function spread(callback) {
     },
     created: function created() {
         // Initialize Data
-        // this.$store.dispatch('initAuth');
-        this.$store.dispatch('fetchCategories');
-        this.$store.dispatch('fetchRegions');
+        //this.$store.dispatch('fetchCategories');
+        //this.$store.dispatch('fetchRegions');
     }
 };
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
@@ -23421,6 +23420,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
+<<<<<<< HEAD
 
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].authenticate(this.form.data()).then(function (response) {
 				_this.$store.dispatch('authenticate', response);
@@ -23428,6 +23428,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
+=======
+			axios.post('auth', this.form.data()).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				var err = error.response.status === 401 ? { invalid_credentials: ['Ogiltiga Uppgifter'] } : error.response.data;
+				_this.form.errors.record(err);
+>>>>>>> b596df751ff913ce3591e72cb1922a68df56e15d
 				_this.processing = false;
 			});
 		}
@@ -24288,8 +24295,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = {};
+/* harmony default export */ __webpack_exports__["default"] = {
+	methods: {
+		auth: function auth() {
+			var credentials = { email: 'first@tester.com', password: 'tester' };
+
+			var instance = axios.create({
+				baseURL: 'http://bidder.dev'
+			});
+
+			instance.post('login', credentials).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		},
+		logout: function logout() {
+			var instance = axios.create({
+				baseURL: 'http://bidder.dev'
+			});
+
+			instance.post('logout').then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		},
+		ajax: function ajax() {
+			axios.post('test').then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}
+};
 
 /***/ }),
 /* 55 */
@@ -26603,14 +26648,24 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "home-view"
   }, [_c('div', {
     staticClass: "container"
-  }, [_c('h2', [_vm._v("Home Page")])])])
-}]}
+  }, [_c('h2', [_vm._v("Home Page")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": _vm.auth
+    }
+  }, [_vm._v("Auth")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": _vm.logout
+    }
+  }, [_vm._v("Logout")]), _vm._v(" "), _c('button', {
+    on: {
+      "click": _vm.ajax
+    }
+  }, [_vm._v("Run Ajax")])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'v1'], function() {
 
 	/* Authentication Routes */
-	Route::post('auth')->uses('AuthController@authenticate');
+	Route::post('test')->uses('UserController@test')->middleware('auth:api');
 
 	/* users/{user} */
 	Route::resource('users', 'UserController', [

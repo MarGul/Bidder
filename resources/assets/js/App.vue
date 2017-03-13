@@ -58,9 +58,8 @@
         },
         created() {
             // Initialize Data
-            // this.$store.dispatch('initAuth');
-            this.$store.dispatch('fetchCategories');
-            this.$store.dispatch('fetchRegions');
+            //this.$store.dispatch('fetchCategories');
+            //this.$store.dispatch('fetchRegions');
         }
     }
 </script>
