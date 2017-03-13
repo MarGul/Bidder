@@ -2,12 +2,18 @@ class Model {
 
 	constructor(resource) {
 		this.resource = resource;
-		this.token = null;
+		this.instance = null;
+		this.url = null;
 	}
 
-	token(token) {
-		// If the token is null, throw an exception here.
-		this.token = token;
+	new(config = {baseURL: 'http://bidder.dev'}) {
+		this.instance = axios.create(config);
+		return this;
+	}
+
+	setUrl(url) {
+		this.url = url;
+		return this;
 	}
 
 	get(params = {}) {
@@ -40,7 +46,10 @@ class Model {
 
 	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
-			axios[requestType](url, config)
+			let instance = this.instance || axios;
+			let path = this.url || url;
+
+			instance[requestType](path, config)
 				.then(response => {
 					resolve(response.data);
 				})

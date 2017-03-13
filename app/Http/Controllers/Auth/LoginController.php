@@ -38,7 +38,6 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-
     /**
      * The user has been authenticated.
      * Overrided method to send a JSON response to the SPA.
@@ -50,6 +49,26 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return response()->json(['authenticated' => true], 200);
+    }
+
+    /**
+     * Get the failed login response instance.
+     * Override method to be able to change the key for errors.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = ['invalid_login' => trans('auth.failed')];
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
     }
 
 }

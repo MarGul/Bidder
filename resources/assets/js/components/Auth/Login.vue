@@ -10,8 +10,8 @@
 				
 				<div 
 					class="alert alert-danger" 
-					v-if="form.errors.has('error')" 
-					v-text="form.errors.getValue('message')">
+					v-if="form.errors.has('invalid_login')" 
+					v-text="form.errors.getValue('invalid_login')">
 				</div>
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
@@ -77,13 +77,14 @@
 			authenticate() {
 				this.processing = true;
 
-				User.authenticate(this.form.data())
+				User.new().setUrl('login').post(this.form.data())
 					.then((response) => {
-						this.$store.dispatch('authenticate', response);
+						this.$store.dispatch('getAuthUser');
 						this.processing = false;
 						this.$store.dispatch('closeModal');
 					})
 					.catch((error) => {
+						this.form.errors.record(error);
 						this.processing = false;
 					});
 			}

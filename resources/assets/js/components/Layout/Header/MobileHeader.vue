@@ -18,12 +18,17 @@
 					<router-link to="/information"><i class="fa fa-question" aria-hidden="true"></i> Information</router-link>
 				</li>
 				<li class="spacer"></li>
-				<li class="nav-item">
-					<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
+				<li v-if="$store.getters.isAuthenticated" class="nav-item">
+					Auth
 				</li>
-				<li class="nav-item">
-					<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
-				</li>
+				<template v-else>
+					<li class="nav-item">
+						<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
+					</li>
+					<li class="nav-item">
+						<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
+					</li>
+				</template>
 			</ul>
 		</nav>
 
