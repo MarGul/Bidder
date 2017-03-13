@@ -23883,6 +23883,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	methods: {
@@ -23996,7 +24001,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].create(this.form.data()).then(function (response) {}).catch(function (error) {
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].create(this.form.data()).then(function (response) {
+				// Authenticate the user
+			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
 			});
@@ -24782,18 +24789,8 @@ var auth = {
 		}
 	},
 	actions: {
-		initAuth: function initAuth(_ref) {
-			// Read from local storage and update the state.
-
+		getAuthUser: function getAuthUser(_ref) {
 			var commit = _ref.commit;
-		},
-		authenticate: function authenticate(_ref2, auth) {
-			// Set the state.
-
-			var commit = _ref2.commit;
-		},
-		getAuthUser: function getAuthUser(_ref3) {
-			var commit = _ref3.commit;
 
 			axios.get('auth/user').then(function (response) {
 				commit('SET_AUTHENTICATED', true);
@@ -26373,7 +26370,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "spacer"
   }), _vm._v(" "), (_vm.$store.getters.isAuthenticated) ? _c('li', {
     staticClass: "nav-item"
-  }, [_vm._v("\n\t\t\t\tAuth\n\t\t\t")]) : [_c('li', {
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/information"
+    }
+  }, [_c('div', {
+    staticClass: "auth-user"
+  }, [_c('div', {
+    staticClass: "auth-avatar"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "auth-name"
+  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.name))])])])], 1) : [_c('li', {
     staticClass: "nav-item"
   }, [_c('a', {
     staticClass: "register",

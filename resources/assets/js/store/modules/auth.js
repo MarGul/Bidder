@@ -12,13 +12,6 @@ const auth = {
 		}
 	},
 	actions: {
-		initAuth({commit}) {
-			// Read from local storage and update the state.
-		},
-		authenticate({commit}, auth) {
-			// Set the state.
-			
-		},
 		getAuthUser({commit}) {
 			axios.get('auth/user')
 				.then((response) => {

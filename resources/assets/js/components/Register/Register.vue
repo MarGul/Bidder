@@ -85,7 +85,7 @@
 				this.processing = true;
 				User.create(this.form.data())
 					.then((response) => {
-
+						// Authenticate the user
 					})
 					.catch((error) => {
 						this.form.errors.record(error);
