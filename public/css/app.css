@@ -7793,6 +7793,10 @@ a {
   margin: 25px 0px;
 }
 
+.margin-bottom-7 {
+  margin-bottom: 7px !important;
+}
+
 .no-underline {
   text-decoration: none;
 }
@@ -8709,6 +8713,20 @@ body.mobile-nav-open .overlay {
   .service-bids {
     margin-bottom: 20px;
   }
+}
+
+.add-comment-component h4 {
+  font-weight: bold;
+}
+
+.add-comment-component .comments-as {
+  font-size: 0.9em;
+  padding-right: 10px;
+}
+
+.add-comment-component textarea {
+  resize: none;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .slide-in-enter-active {

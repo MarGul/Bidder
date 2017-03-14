@@ -19,12 +19,22 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+					<app-comments></app-comments>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Comments from '../components/Comments/Comments.vue';
+
 	export default {
+		components: {
+			appComments: Comments
+		},
 		computed: {
 			breakpoints() {
 				return window.breakpoints;

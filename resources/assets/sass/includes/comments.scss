@@ -1,0 +1,16 @@
+.add-comment-component {
+	
+	h4 {
+		font-weight: bold;
+	}
+
+	.comments-as {
+		font-size: 0.9em;
+		padding-right: 10px;
+	}
+
+	textarea {
+		resize: none;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+	}
+}
