@@ -28226,13 +28226,25 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "comments-component"
-  }, [_c('app-add-comment'), _vm._v(" "), _vm._l((_vm.comments), function(comment) {
-    return _c('app-comment', {
+  }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
+    staticClass: "margin-50"
+  }, [_c('ul', {
+    staticClass: "top-comments"
+  }, _vm._l((_vm.comments), function(comment) {
+    return _c('li', [_c('app-comment', {
       attrs: {
         "comment": comment
       }
-    })
-  })], 2)
+    }), _vm._v(" "), (comment.replies.length > 0) ? _c('ul', {
+      staticClass: "comment-replies"
+    }, _vm._l((comment.replies), function(reply) {
+      return _c('li', [_c('app-comment', {
+        attrs: {
+          "comment": reply
+        }
+      })], 1)
+    })) : _vm._e()], 1)
+  }))])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -28260,6 +28272,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -28275,24 +28298,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				avatar: 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460',
 				author: 'Marcus Gullberg',
 				comment: 'Hello there this is a comment because I want to know what is going on with this service.',
-				time: '',
+				time: '1 hour ago',
+				canReply: true,
 				replies: [{
 					avatar: 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg',
 					author: 'Elon Musk',
 					comment: 'I need you to build a space rocket in 5 days. Can you handle it?',
-					time: '',
+					time: '12 minutes ago',
+					canReply: false,
 					replies: []
 				}]
 			}, {
 				avatar: 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460',
 				author: 'Marcus Gullberg',
 				comment: 'Hello there this is a comment because I want to know what is going on with this service.',
-				time: '',
+				time: '1 hour ago',
+				canReply: true,
 				replies: [{
 					avatar: 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg',
 					author: 'Elon Musk',
 					comment: 'I need you to build a space rocket in 5 days. Can you handle it?',
-					time: '',
+					time: '15 minutes ago',
+					canReply: false,
 					replies: []
 				}]
 			}]
@@ -28479,9 +28506,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: ['comment']
+	props: ['comment'],
+	computed: {
+		avatar: function avatar() {
+			return 'url(\'' + this.comment.avatar + '\')';
+		}
+	}
 };
 
 /***/ }),
@@ -28491,7 +28531,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "comment-component"
-  }, [_vm._v("\n\t" + _vm._s(_vm.comment.author) + "\n")])
+  }, [_c('div', {
+    staticClass: "comment-avatar",
+    style: ({
+      'background-image': _vm.avatar
+    })
+  }), _vm._v(" "), _c('div', {
+    staticClass: "comment-content"
+  }, [_c('div', {
+    staticClass: "comment-head"
+  }, [_c('span', {
+    staticClass: "comment-author",
+    domProps: {
+      "textContent": _vm._s(_vm.comment.author)
+    }
+  }), _vm._v(" "), _c('small', {
+    staticClass: "comment-time",
+    domProps: {
+      "textContent": _vm._s(_vm.comment.time)
+    }
+  }), _vm._v(" "), (_vm.comment.canReply) ? _c('i', {
+    staticClass: "fa fa-reply",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "comment-body",
+    domProps: {
+      "textContent": _vm._s(_vm.comment.comment)
+    }
+  })])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
