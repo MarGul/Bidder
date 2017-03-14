@@ -11,6 +11,7 @@ class BootstrapBreakpoints {
 	_update(bb) {
 		this.current = this._getCurrentBreakpoint();
 		this.mobile = this.isMobile();
+		this.small = this.isSmallDevices();
 	}
 
 	_getCurrentBreakpoint() {
@@ -23,6 +24,10 @@ class BootstrapBreakpoints {
 
 	isMobile() {
 		return this.current == 'xs';
+	}
+
+	isSmallDevices() {
+		return this.current == 'xs' || this.current == 'sm';
 	}
 
 }

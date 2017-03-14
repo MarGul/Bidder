@@ -24543,6 +24543,7 @@ var BootstrapBreakpoints = function () {
 		value: function _update(bb) {
 			this.current = this._getCurrentBreakpoint();
 			this.mobile = this.isMobile();
+			this.small = this.isSmallDevices();
 		}
 	}, {
 		key: '_getCurrentBreakpoint',
@@ -24558,6 +24559,11 @@ var BootstrapBreakpoints = function () {
 		key: 'isMobile',
 		value: function isMobile() {
 			return this.current == 'xs';
+		}
+	}, {
+		key: 'isSmallDevices',
+		value: function isSmallDevices() {
+			return this.current == 'xs' || this.current == 'sm';
 		}
 	}]);
 
@@ -28070,8 +28076,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = {};
+/* harmony default export */ __webpack_exports__["default"] = {
+	computed: {
+		breakpoints: function breakpoints() {
+			return window.breakpoints;
+		}
+	}
+};
 
 /***/ }),
 /* 126 */
@@ -28112,14 +28141,26 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "service-details-view"
+    staticClass: "service-details-view no-hero-view"
   }, [_c('div', {
     staticClass: "container"
-  }, [_vm._v("\n\t\they\n\t")])])
-}]}
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-8"
+  }, [(!_vm.breakpoints.small) ? _c('div', {
+    staticClass: "service-description white-container"
+  }, [_vm._v("\n\t\t\t\t\tDescription\n\t\t\t\t")]) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4"
+  }, [_c('div', {
+    staticClass: "service-bids white-container"
+  }, [_vm._v("\n\t\t\t\t\tBids\n\t\t\t\t")]), _vm._v(" "), (_vm.breakpoints.small) ? _c('div', {
+    staticClass: "service-description white-container"
+  }, [_vm._v("\n\t\t\t\t\tDescription\n\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "service-about white-container"
+  }, [_vm._v("\n\t\t\t\t\tAbout\n\t\t\t\t")])])])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
