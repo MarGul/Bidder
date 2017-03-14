@@ -86,6 +86,15 @@
 				User.create(this.form.data())
 					.then((response) => {
 						// Authenticate the user
+						User.new().setUrl('login').post({email: this.form.email, password: this.form.password})
+							.then((response) => {
+								this.$store.dispatch('getAuthUser');
+								this.processing = false;
+								this.$store.dispatch('closeModal');
+							})
+							.catch((error) => {
+								console.log(error);
+							});
 					})
 					.catch((error) => {
 						this.form.errors.record(error);

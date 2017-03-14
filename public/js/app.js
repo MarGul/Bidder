@@ -24003,6 +24003,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].create(this.form.data()).then(function (response) {
 				// Authenticate the user
+				__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].new().setUrl('login').post({ email: _this.form.email, password: _this.form.password }).then(function (response) {
+					_this.$store.dispatch('getAuthUser');
+					_this.processing = false;
+					_this.$store.dispatch('closeModal');
+				}).catch(function (error) {
+					console.log(error);
+				});
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;

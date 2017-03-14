@@ -23,9 +23,9 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $user = new User([
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'name' => $request->input('name')
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'name' => $request->name
         ]);
 
         // If save failed
