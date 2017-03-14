@@ -7,11 +7,13 @@ Vue.use(Vuex);
 import categories from './modules/categories';
 import regions from './modules/regions';
 import modal from './modules/modal';
+import auth from './modules/auth';
 
 export default new Vuex.Store({
 	modules: {
 		categories,
 		regions,
-		modal
+		modal,
+		auth
 	}
 });

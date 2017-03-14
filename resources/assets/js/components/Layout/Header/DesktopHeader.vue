@@ -6,7 +6,9 @@
 				<div class="row">
 					
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-left">
-						<img src="logo_mock.png" class="logo">
+						<router-link to="/">
+							<img src="logo_mock.png" class="logo">
+						</router-link>
 					</div>
 
 					<div class="col-xs-12 col-md-6 col-lg-6 desktop-header-mid">
@@ -14,7 +16,12 @@
 					</div>
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
-						<ul class="desktop-header-nav">
+						<div v-if="$store.getters.isAuthenticated" class="auth-user">
+							<div class="auth-avatar"></div>
+							<div class="auth-name">{{ $store.getters.authUser.name }}</div>
+						</div>
+
+						<ul v-else class="desktop-header-nav">
 							<li>
 								<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
 							</li>

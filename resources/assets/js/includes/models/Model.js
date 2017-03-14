@@ -2,10 +2,26 @@ class Model {
 
 	constructor(resource) {
 		this.resource = resource;
+		this.instance = null;
+		this.url = null;
+	}
+
+	new(config = {baseURL: 'http://bidder.dev'}) {
+		this.instance = axios.create(config);
+		return this;
+	}
+
+	setUrl(url) {
+		this.url = url;
+		return this;
 	}
 
 	get(params = {}) {
 		return this.send('get', this.resource, {params});
+	}
+
+	post(data = {}) {
+		return this.send('post', this.resource, data);
 	}
 
 	all() {
@@ -21,7 +37,7 @@ class Model {
 	}
 
 	update(identifier, data) {
-
+		
 	}
 
 	delete(identifier) {
@@ -30,7 +46,10 @@ class Model {
 
 	send(requestType, url, config = {}) {
 		return new Promise((resolve, reject) => {
-			axios[requestType](url, config)
+			let instance = this.instance || axios;
+			let path = this.url || url;
+
+			instance[requestType](path, config)
 				.then(response => {
 					resolve(response.data);
 				})

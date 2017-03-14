@@ -8,6 +8,12 @@
 		<div class="modal-body">
 			<form @keydown="form.errors.clear()">
 				
+				<div 
+					class="alert alert-danger" 
+					v-if="form.errors.has('invalid_login')" 
+					v-text="form.errors.getValue('invalid_login')">
+				</div>
+
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
 					<input 
 						type="email" 
@@ -33,7 +39,7 @@
 					<button 
 						type="submit" 
 						class="btn btn-primary full-width" 
-						@click.prevent="login"
+						@click.prevent="authenticate"
 						:disabled="processing || this.form.errors.any()"
 					>
 						Logga In
@@ -47,14 +53,15 @@
 		</div>
 
 		<div class="modal-footer">
-			Har du inte registrerat dig än? <a @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			Har du inte ett konto än? <a @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 		</div>
-					
+
 	</div>
 </template>
 
 <script>
 	import Form from '../../includes/classes/Form';
+	import User from '../../includes/models/User';
 
 	export default {
 		data() {
@@ -67,8 +74,19 @@
 			}
 		},
 		methods: {
-			login() {
+			authenticate() {
 				this.processing = true;
+
+				User.new().setUrl('login').post(this.form.data())
+					.then((response) => {
+						this.$store.dispatch('getAuthUser');
+						this.processing = false;
+						this.$store.dispatch('closeModal');
+					})
+					.catch((error) => {
+						this.form.errors.record(error);
+						this.processing = false;
+					});
 			}
 		}
 	}

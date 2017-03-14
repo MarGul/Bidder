@@ -60,6 +60,8 @@
             // Initialize Data
             this.$store.dispatch('fetchCategories');
             this.$store.dispatch('fetchRegions');
+            // Check if we are logged in.
+            this.$store.dispatch('getAuthUser');
         }
     }
 </script>

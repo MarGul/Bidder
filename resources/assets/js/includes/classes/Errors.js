@@ -36,6 +36,16 @@ class Errors {
         }
     }
 
+    /**
+     * Retrieve a value based on a key in the error object
+     * 
+     * @param  {String} key [The key to grab the value from]
+     * @return {Mixed}      [The value from the key]
+     */
+    getValue(key) {
+        return this.errors[key];
+    }
+
 
     /**
      * Record the new errors.

@@ -7688,6 +7688,11 @@ button.close {
   }
 }
 
+.alert {
+  border-radius: 0;
+  text-align: center;
+}
+
 .btn {
   border-radius: 0;
   padding: 5px 9px;
@@ -7809,6 +7814,32 @@ a {
 .mobile-nav .spacer {
   margin: 10px 15px;
   border-top: 1px solid #55AE3A;
+}
+
+.mobile-nav .auth-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mobile-nav .auth-user .auth-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #55AE3A;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("https://www.biography.com/.image/c_fill,cs_srgb,g_face,h_300,w_300/MTE1ODA0OTcxOTUyMDE0ODYx/elon-musk-20837159-1-402.png");
+}
+
+.mobile-nav .auth-user .auth-name {
+  padding-left: 15px;
+  color: #fff;
+  font-weight: bold;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 #mobile-nav-toggle {
@@ -7988,6 +8019,35 @@ body.mobile-nav-open .overlay {
   background: #55AE3A;
   color: #fff;
   cursor: default;
+}
+
+.desktop-header-right .auth-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 2.5px;
+  cursor: pointer;
+}
+
+.desktop-header-right .auth-user .auth-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #55AE3A;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("https://www.biography.com/.image/c_fill,cs_srgb,g_face,h_300,w_300/MTE1ODA0OTcxOTUyMDE0ODYx/elon-musk-20837159-1-402.png");
+}
+
+.desktop-header-right .auth-user .auth-name {
+  padding-left: 15px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .mobile-search-header {
