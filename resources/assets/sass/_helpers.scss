@@ -9,3 +9,11 @@
 .margin-25 {
 	margin: 25px 0px;
 }
+
+.no-underline {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+}

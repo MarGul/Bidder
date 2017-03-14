@@ -24143,6 +24143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -24766,7 +24768,7 @@ var Services = function (_Model) {
 /**
  * All of the applications routes
  */
-var routes = [{ path: "/", component: __webpack_require__(85) }, { path: "/categories", component: __webpack_require__(84) }, { path: "/locations", component: __webpack_require__(87) }, { path: "/services", component: __webpack_require__(88) }, { path: "/information", component: __webpack_require__(86) },
+var routes = [{ path: "/", name: 'home', component: __webpack_require__(85) }, { path: "/categories", name: 'categories', component: __webpack_require__(84) }, { path: "/locations", name: 'locations', component: __webpack_require__(87) }, { path: "/services", name: 'services', component: __webpack_require__(88) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(126) }, { path: "/information", name: 'information', component: __webpack_require__(86) },
 
 /* 404 is handled by the vue application */
 { path: "*", component: __webpack_require__(83) }];
@@ -26260,6 +26262,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', {
       key: service.id,
       staticClass: "col-xs-12 col-sm-6"
+    }, [_c('router-link', {
+      staticClass: "no-underline",
+      attrs: {
+        "to": {
+          name: 'serviceDetails',
+          params: {
+            id: service.id
+          }
+        }
+      }
     }, [_c('app-service', {
       attrs: {
         "service": service
@@ -26267,7 +26279,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "bidStop": _vm.removeService
       }
-    })], 1)
+    })], 1)], 1)
   }))], 1), _vm._v(" "), (_vm.loading) ? _c('div', {
     staticClass: "load-spinner text-center"
   }, [_c('i', {
@@ -26469,7 +26481,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('img', {
     staticClass: "logo",
     attrs: {
-      "src": "logo_mock.png"
+      "src": "http://bidder.dev/logo_mock.png"
     }
   })])], 1), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-6 col-lg-6 desktop-header-mid"
@@ -28033,6 +28045,88 @@ module.exports = g;
 __webpack_require__(18);
 module.exports = __webpack_require__(19);
 
+
+/***/ }),
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {};
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(125),
+  /* template */
+  __webpack_require__(127),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/ServiceDetails.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ServiceDetails.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6398b14f", Component.options)
+  } else {
+    hotAPI.reload("data-v-6398b14f", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "service-details-view"
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_vm._v("\n\t\they\n\t")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

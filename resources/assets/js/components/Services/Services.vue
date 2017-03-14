@@ -37,10 +37,12 @@
 			<div class="row">
 				<transition-group name="slide-out" mode="out-in">
 					<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
-						<app-service 
-							:service="service"
-							@bidStop="removeService"
-						></app-service>
+						<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
+							<app-service 
+								:service="service"
+								@bidStop="removeService"
+							></app-service>
+						</router-link>
 					</div>
 				</transition-group>
 			</div>

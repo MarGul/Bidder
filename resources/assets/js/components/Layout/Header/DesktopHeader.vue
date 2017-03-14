@@ -7,7 +7,7 @@
 					
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-left">
 						<router-link to="/">
-							<img src="logo_mock.png" class="logo">
+							<img src="http://bidder.dev/logo_mock.png" class="logo">
 						</router-link>
 					</div>
 

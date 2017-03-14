@@ -7735,6 +7735,14 @@ a {
   margin: 25px 0px;
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
+.no-underline:hover {
+  text-decoration: none;
+}
+
 .form-control {
   border-radius: 0;
   border: 1px solid #d7d7d7;
@@ -7959,6 +7967,7 @@ body.mobile-nav-open .overlay {
 
 .desktop-navigation {
   background: #f6f6f6;
+  border-bottom: 1px solid #d7d7d7;
 }
 
 .desktop-nav {
@@ -8200,6 +8209,8 @@ body.mobile-nav-open .overlay {
 }
 
 .hero {
+  position: relative;
+  top: -1px;
   -webkit-background: -webkit-linear-gradient(135deg, #55AE3A, #264e1a);
   -moz-background: linear-gradient(-45deg, #55AE3A, #264e1a);
   background: linear-gradient(-45deg, #55AE3A, #264e1a);
@@ -8502,6 +8513,7 @@ body.mobile-nav-open .overlay {
   margin: 15px 0;
   height: auto;
   cursor: pointer;
+  color: #636b6f;
 }
 
 @media screen and (min-width: 992px) {
