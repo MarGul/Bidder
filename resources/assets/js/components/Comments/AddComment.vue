@@ -29,10 +29,13 @@
 </template>
 
 <script>
+	import Comment from '../../includes/models/Comment';
+
 	export default {
 		data() {
 			return {
 				comment: '',
+				parent: null,
 				error: false,
 				processing: false
 			}
@@ -43,7 +46,21 @@
 				if ( !this.comment ) return this.error = true;
 				this.processing = true;
 
+				Comment.setUrl(`services/${this.$route.params.id}/comments`).create({
+					body: this.comment, 
+					parent: this.parent
+				})
+				.then(response => {
+					console.log(response);
 
+					// Clear input and stop processing
+					this.comment = '';
+					this.parent = null;
+					this.processing = false;
+				})
+				.catch(error => {
+					console.log(error);
+				});
 			}
 		}
 	}

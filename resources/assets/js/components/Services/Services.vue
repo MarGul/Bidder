@@ -57,8 +57,8 @@
 
 <script>
 	import TagsInput from '../Includes/TagsInput.vue';
-	import Services from '../../includes/models/Services';
-	import Service from './Service.vue';
+	import Service from '../../includes/models/Service';
+	import ServiceGrid from './Service.vue';
 
 	export default {
 		props: {
@@ -68,7 +68,7 @@
 		},
 		components: {
 			appTagsInput: TagsInput,
-			appService: Service
+			appService: ServiceGrid
 		},
 		data() {
 			return {
@@ -107,7 +107,7 @@
 			getServices(append) {
 				this.loading = true;
 				this.services = (append) ? this.services : [];
-				Services.get({
+				Service.get({
 					page: this.page,
 					text: this.filterText, 
 					categories: this.categories.map(el => el.value),
