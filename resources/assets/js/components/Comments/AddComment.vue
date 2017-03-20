@@ -6,17 +6,24 @@
 			<textarea 
 				class="form-control" 
 				v-model="comment"
-				@input="error = false"
-			></textarea>
+				@input="error = false"></textarea>
 		</div>
 
 		<div class="form-group text-right">
-			<span class="comments-as">Kommenterar som Marcus Gullberg</span>
+			<span class="comments-as" v-if="$store.getters.isAuthenticated">
+				Du kommenterar som <a class="link">@{{ $store.getters.authUser.displayname }}</a>
+			</span>
+			<span class="comments-as" v-else>Du måste <a class="link" @click="$store.dispatch('openModal', {component: 'login'})">logga in</a> innan du kan kommentera</span>
 			<button 
 				class="btn btn-primary" 
-				:disabled="error"
-				@click="add"
-			>Kommentera</button>
+				:disabled="error || !$store.getters.isAuthenticated || processing"
+				@click="add">
+					Kommentera
+					<span class="processing" v-if="processing">
+						<i class="fa fa-spinner fa-pulse fa-fw"></i>
+						<span class="sr-only">Loading...</span>
+					</span>
+			</button>
 		</div>
 	</div>
 </template>
@@ -27,12 +34,14 @@
 			return {
 				comment: '',
 				error: false,
+				processing: false
 			}
 		},
 		methods: {
 			add() {
 				// Validation
 				if ( !this.comment ) return this.error = true;
+				this.processing = true;
 
 
 			}

@@ -14,16 +14,18 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'displayname' => 'first',
-                'email' => 'first@tester.com',
+                'displayname' => 'MarGul',
+                'email' => 'gullbeerg@gmail.com',
                 'password' => bcrypt('tester'),
-                'name' => 'First Tester',
+                'name' => 'Marcus Gullberg',
+                'avatar' => 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460'
             ],
             [
-                'displayname' => 'second',
-                'email' => 'second@tester.com',
+                'displayname' => 'Musk',
+                'email' => 'elon@spacex.com',
                 'password' => bcrypt('tester'),
-                'name' => 'Second Tester',
+                'name' => 'Elon Musk',
+                'avatar' => 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg'
             ]
         ];
 

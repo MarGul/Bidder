@@ -28390,12 +28390,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	data: function data() {
 		return {
 			comment: '',
-			error: false
+			error: false,
+			processing: false
 		};
 	},
 
@@ -28403,6 +28411,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		add: function add() {
 			// Validation
 			if (!this.comment) return this.error = true;
+			this.processing = true;
 		}
 	}
 };
@@ -28440,17 +28449,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group text-right"
-  }, [_c('span', {
+  }, [(_vm.$store.getters.isAuthenticated) ? _c('span', {
     staticClass: "comments-as"
-  }, [_vm._v("Kommenterar som Marcus Gullberg")]), _vm._v(" "), _c('button', {
+  }, [_vm._v("\n\t\t\tDu kommenterar som "), _c('a', {
+    staticClass: "link"
+  }, [_vm._v("@" + _vm._s(_vm.$store.getters.authUser.displayname))])]) : _c('span', {
+    staticClass: "comments-as"
+  }, [_vm._v("Du måste "), _c('a', {
+    staticClass: "link",
+    on: {
+      "click": function($event) {
+        _vm.$store.dispatch('openModal', {
+          component: 'login'
+        })
+      }
+    }
+  }, [_vm._v("logga in")]), _vm._v(" innan du kan kommentera")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "disabled": _vm.error
+      "disabled": _vm.error || !_vm.$store.getters.isAuthenticated || _vm.processing
     },
     on: {
       "click": _vm.add
     }
-  }, [_vm._v("Kommentera")])])])
+  }, [_vm._v("\n\t\t\t\tKommentera\n\t\t\t\t"), (_vm.processing) ? _c('span', {
+    staticClass: "processing"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])]) : _vm._e()])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

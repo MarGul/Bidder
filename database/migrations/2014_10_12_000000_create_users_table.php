@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('displayname')->unique()->nullable();
             $table->string('password');
             $table->string('name');
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
