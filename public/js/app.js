@@ -28041,8 +28041,11 @@ module.exports = __webpack_require__(19);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Comments_Comments_vue__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Comments_Comments_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Comments_Comments_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Service__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue__);
 //
 //
 //
@@ -28073,17 +28076,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	components: {
-		appComments: __WEBPACK_IMPORTED_MODULE_0__components_Comments_Comments_vue___default.a
+		appComment: __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue___default.a,
+		appAddComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue___default.a
 	},
 	computed: {
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
 		}
+	},
+	created: function created() {
+		__WEBPACK_IMPORTED_MODULE_0__includes_models_Service__["a" /* default */].find(this.$route.params.id).then(function (response) {
+			console.log(response);
+		}).catch(function (error) {});
 	}
 };
 
@@ -28148,57 +28171,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-8"
-  }, [_c('app-comments')], 1)])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
-  }
-}
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(130),
-  /* template */
-  __webpack_require__(129),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Comments/Comments.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Comments.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6ad3d197", Component.options)
-  } else {
-    hotAPI.reload("data-v-6ad3d197", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "comments-component"
   }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
     staticClass: "margin-50"
   }, [_c('ul', {
@@ -28217,90 +28189,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       })], 1)
     })) : _vm._e()], 1)
-  }))])], 1)
+  }))])], 1)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6ad3d197", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
   }
 }
 
 /***/ }),
-/* 130 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddComment_vue__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddComment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddComment_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Comment_vue__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Comment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Comment_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-	components: {
-		appAddComment: __WEBPACK_IMPORTED_MODULE_0__AddComment_vue___default.a,
-		appComment: __WEBPACK_IMPORTED_MODULE_1__Comment_vue___default.a
-	},
-	data: function data() {
-		return {
-			comments: [{
-				avatar: 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460',
-				author: 'Marcus Gullberg',
-				comment: 'Hello there this is a comment because I want to know what is going on with this service.',
-				time: '1 hour ago',
-				canReply: true,
-				replies: [{
-					avatar: 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg',
-					author: 'Elon Musk',
-					comment: 'I need you to build a space rocket in 5 days. Can you handle it?',
-					time: '12 minutes ago',
-					canReply: false,
-					replies: []
-				}]
-			}, {
-				avatar: 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460',
-				author: 'Marcus Gullberg',
-				comment: 'Hello there this is a comment because I want to know what is going on with this service.',
-				time: '1 hour ago',
-				canReply: true,
-				replies: [{
-					avatar: 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg',
-					author: 'Elon Musk',
-					comment: 'I need you to build a space rocket in 5 days. Can you handle it?',
-					time: '15 minutes ago',
-					canReply: false,
-					replies: []
-				}]
-			}]
-		};
-	}
-};
-
-/***/ }),
+/* 128 */,
+/* 129 */,
+/* 130 */,
 /* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 

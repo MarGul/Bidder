@@ -21,7 +21,19 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
-					<app-comments></app-comments>
+					<app-add-comment></app-add-comment>
+					<div class="margin-50">
+						<ul class="top-comments">
+							<li v-for="comment in comments">
+								<app-comment :comment="comment"></app-comment>
+								<ul class="comment-replies" v-if="comment.replies.length > 0">
+									<li v-for="reply in comment.replies">
+										<app-comment :comment="reply"></app-comment>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -29,16 +41,28 @@
 </template>
 
 <script>
-	import Comments from '../components/Comments/Comments.vue';
+	import Service from '../includes/models/Service';
+	import AddComment from '../components/Comments/AddComment.vue';
+	import Comment from '../components/Comments/Comment.vue';
 
 	export default {
 		components: {
-			appComments: Comments
+			appComment: Comment,
+			appAddComment: AddComment
 		},
 		computed: {
 			breakpoints() {
 				return window.breakpoints;
 			}
+		},
+		created() {
+			Service.find(this.$route.params.id)
+			.then(response => {
+				console.log(response);
+			})
+			.catch(error => {
+
+			});
 		}
 	}
 </script>

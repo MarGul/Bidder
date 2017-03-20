@@ -14,25 +14,21 @@
 		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
 	}
 }
-
-.comments-component {
 	
-	.top-comments {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
+.top-comments {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.comment-replies {
+	list-style-type: none;
+	margin: 0 0 0 30px;
+	padding: 0;
+
+	@media screen and (min-width: $screen-sm-min) {
+		margin: 0 0 0 70px;
 	}
-
-	.comment-replies {
-		list-style-type: none;
-		margin: 0 0 0 30px;
-		padding: 0;
-
-		@media screen and (min-width: $screen-sm-min) {
-			margin: 0 0 0 70px;
-		}
-	}
-
 }
 
 .comment-component {
