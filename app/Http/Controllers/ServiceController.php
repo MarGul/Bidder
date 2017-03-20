@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Service;
 use Carbon\Carbon;
-use App\Helpers\AuthHelp;
+use App\Features\ServiceManager;
 
 class ServiceController extends Controller
 {
 
-    public function __construct() {
-        // Add the jwt.auth middleware to routes
-        $this->middleware('jwt.auth', ['only' => [
-            'store', 'update', 'destroy'
-        ]]);
+    protected $manager;
+
+    public function __construct(ServiceManager $manager) {
+        $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);
+
+        $this->manager = $manager;
     }
 
     /**
@@ -99,12 +100,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $service = Service::getService($service->id);
-
-        return response()->json([
-            'message' => 'Viewing service data.',
-            'service' => $service
-        ], 200);
+        return $this->manager->get($service);
     }
 
     /**
