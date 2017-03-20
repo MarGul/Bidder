@@ -178,6 +178,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Customer Service Providers...
+         */
+        App\Providers\FeatureServiceProvider::class
+
     ],
 
     /*
