@@ -15,6 +15,9 @@ class CommentManager {
 	 */
 	public function get($service) {
 		$comments = Comment::where('service_id', $service->id)->get();
+		$comments->load('user');
+
+		self::parseComments($comments);
 
 		return response()->json(['message' => 'Listing comments for service', 'comments' => $comments], 200);
 	}
