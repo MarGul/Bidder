@@ -18,6 +18,15 @@ class Service extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id', 'category_id', 'region_id', 'city_id'
+    ];
+
+    /**
      * A service belongs to a user.
      * 
      * @return Eloquent Relationship
