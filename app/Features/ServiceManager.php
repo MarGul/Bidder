@@ -15,10 +15,9 @@ class ServiceManager {
 	 */
 	public function get($service) {
 		$s = Service::where('id', $service->id)->first();
-		$s->load('user', 'category', 'region', 'city', 'comments.user', 'bids');
-
-		// Get the comments into a hierachy with replies.
-		CommentManager::parseComments($s->comments);
+		$s->load(['user', 'category', 'region', 'city', 'bids', 'comments' => function($query) {
+			$query->with(['user', 'replies.user'])->where('parent', null);
+		}]);
 
 		return response()->json(['message' => 'Service details', 'service' => $s], 200);
 	}

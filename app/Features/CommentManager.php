@@ -14,10 +14,10 @@ class CommentManager {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function get($service) {
-		$comments = Comment::where('service_id', $service->id)->get();
-		$comments->load('user');
-
-		self::parseComments($comments);
+		$comments = Comment::with('user', 'replies.user')
+					->where('service_id', $service->id)
+					->where('parent', null)
+					->get();
 
 		return response()->json(['message' => 'Listing comments for service', 'comments' => $comments], 200);
 	}
@@ -46,26 +46,6 @@ class CommentManager {
 		$comment->replies = [];
 
 		return response()->json(['message' => 'Created comment', 'comment' => $comment], 201);
-	}
-
-	/**
-	 * Parse comments into hierachy with replies.
-	 * This manipulates the original collection passed in.
-	 * 
-	 * @param  Collection $comments 
-	 * @return void
-	 */
-	public static function parseComments($comments) {
-		foreach ($comments as $comment) {
-			$comment->replies = [];
-			foreach ($comments as $key => $c) {
-				if ( $c->parent === $comment->id ) {
-					$comment->replies = array_merge($comment->replies, [$c]);
-					// Bug here, can't remove an item without converting comments to an object instead of array.
-					//$comments->forget($key);
-				}
-			}
-		}
 	}
 
 }

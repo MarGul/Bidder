@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Comment extends Model
 {
@@ -41,6 +42,27 @@ class Comment extends Model
      */
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * A comment can have many replies.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function replies() {
+        return $this->hasMany(self::class, 'parent', 'id');
+    }
+
+    /**
+     * Add a global scope to this model to always sort by updated_at DESC
+     * 
+     * @return void
+     */
+    protected static function boot() {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('updated_at', 'desc');
+        });
     }
 
 }
