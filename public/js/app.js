@@ -28088,6 +28088,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -28107,6 +28112,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
+		}
+	},
+	methods: {
+		addComment: function addComment(_ref) {
+			var comment = _ref.comment;
+
+			this.service.comments.unshift(comment);
 		}
 	},
 	created: function created() {
@@ -28179,25 +28191,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-8"
-  }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
+  }, [_c('app-add-comment', {
+    on: {
+      "added": _vm.addComment
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "margin-50"
   }, [_c('ul', {
     staticClass: "top-comments"
-  }, _vm._l((this.service.comments), function(comment) {
-    return _c('li', [_c('app-comment', {
+  }, [_c('transition-group', {
+    attrs: {
+      "name": "slide-in-left"
+    }
+  }, _vm._l((_vm.service.comments), function(comment) {
+    return _c('li', {
+      key: comment.id
+    }, [_c('app-comment', {
       attrs: {
         "comment": comment
       }
     }), _vm._v(" "), (comment.replies.length > 0) ? _c('ul', {
       staticClass: "comment-replies"
+    }, [_c('transition-group', {
+      attrs: {
+        "name": "slide-in-left"
+      }
     }, _vm._l((comment.replies), function(reply) {
-      return _c('li', [_c('app-comment', {
+      return _c('li', {
+        key: reply.id
+      }, [_c('app-comment', {
         attrs: {
           "comment": reply
         }
       })], 1)
-    })) : _vm._e()], 1)
-  }))])], 1)])])])
+    }))], 1) : _vm._e()], 1)
+  }))], 1)])], 1)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -28306,7 +28334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				body: this.comment,
 				parent: this.parent
 			}).then(function (response) {
-				console.log(response);
+				_this.$emit('added', { comment: response.comment });
 
 				// Clear input and stop processing
 				_this.comment = '';

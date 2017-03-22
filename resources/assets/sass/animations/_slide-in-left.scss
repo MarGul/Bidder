@@ -1,0 +1,15 @@
+.slide-in-left-enter-active {
+	-webkit-animation: slide-in-left 400ms ease-out forwards;
+			animation: slide-in-left 400ms ease-out forwards;
+}
+
+@keyFrames slide-in-left {
+	from {
+		transform: translateX(-90px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}

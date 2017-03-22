@@ -51,7 +51,7 @@
 					parent: this.parent
 				})
 				.then(response => {
-					console.log(response);
+					this.$emit('added', {comment: response.comment});
 
 					// Clear input and stop processing
 					this.comment = '';

@@ -41,6 +41,10 @@ class CommentManager {
 			return response()->json(['message' => 'Could not store the comment in the database. Please try again.'], 500);
 		}
 
+		// Pass with the user and empty replies as well.
+		$comment->user = $request->user();
+		$comment->replies = [];
+
 		return response()->json(['message' => 'Created comment', 'comment' => $comment], 201);
 	}
 
@@ -57,7 +61,8 @@ class CommentManager {
 			foreach ($comments as $key => $c) {
 				if ( $c->parent === $comment->id ) {
 					$comment->replies = array_merge($comment->replies, [$c]);
-					$comments->forget($key);
+					// Bug here, can't remove an item without converting comments to an object instead of array.
+					//$comments->forget($key);
 				}
 			}
 		}

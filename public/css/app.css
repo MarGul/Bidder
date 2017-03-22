@@ -8868,6 +8868,24 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.slide-in-left-enter-active {
+  -webkit-animation: slide-in-left 400ms ease-out forwards;
+  animation: slide-in-left 400ms ease-out forwards;
+}
+
+@keyFrames slide-in-left {
+  from {
+    -webkit-transform: translateX(-90px);
+            transform: translateX(-90px);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .slide-out-enter-active {
   -webkit-animation: slide-io-in 300ms ease-out forwards;
   animation: slide-io-in 300ms ease-out forwards;

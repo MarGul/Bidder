@@ -21,17 +21,22 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
-					<app-add-comment></app-add-comment>
+					<app-add-comment @added="addComment"></app-add-comment>
 					<div class="margin-50">
 						<ul class="top-comments">
-							<li v-for="comment in this.service.comments">
-								<app-comment :comment="comment"></app-comment>
-								<ul class="comment-replies" v-if="comment.replies.length > 0">
-									<li v-for="reply in comment.replies">
-										<app-comment :comment="reply"></app-comment>
-									</li>
-								</ul>
-							</li>
+							<transition-group name="slide-in-left">
+								<li v-for="comment in service.comments" :key="comment.id">
+									<app-comment :comment="comment"></app-comment>
+								
+									<ul class="comment-replies" v-if="comment.replies.length > 0">
+										<transition-group name="slide-in-left">
+											<li v-for="reply in comment.replies" :key="reply.id">
+												<app-comment :comment="reply"></app-comment>
+											</li>
+										</transition-group>
+									</ul>
+								</li>
+							</transition-group>
 						</ul>
 					</div>
 				</div>
@@ -58,6 +63,11 @@
 		computed: {
 			breakpoints() {
 				return window.breakpoints;
+			}
+		},
+		methods: {
+			addComment({comment}) {
+				this.service.comments.unshift(comment);
 			}
 		},
 		created() {
