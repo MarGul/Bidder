@@ -3,11 +3,11 @@
 		<div class="comment-avatar" :style="{'background-image': avatar}"></div>
 		<div class="comment-content">
 			<div class="comment-head">
-				<span class="comment-author" v-text="comment.author"></span>
-				<small class="comment-time" v-text="comment.time"></small>
+				<span class="comment-author" v-text="comment.user.displayname"></span>
+				<small class="comment-time" v-text="comment.updated_at"></small>
 				<i class="fa fa-reply" aria-hidden="true" v-if="comment.canReply"></i>
 			</div>
-			<div class="comment-body" v-text="comment.comment"></div>
+			<div class="comment-body" v-text="comment.body"></div>
 		</div>
 	</div>
 </template>
@@ -17,7 +17,7 @@
 		props: ['comment'],
 		computed: {
 			avatar() {
-				return `url('${this.comment.avatar}')`;
+				return `url('${this.comment.user.avatar}')`;
 			}
 		}
 	}

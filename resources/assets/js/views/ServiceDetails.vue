@@ -24,7 +24,7 @@
 					<app-add-comment></app-add-comment>
 					<div class="margin-50">
 						<ul class="top-comments">
-							<li v-for="comment in comments">
+							<li v-for="comment in this.service.comments">
 								<app-comment :comment="comment"></app-comment>
 								<ul class="comment-replies" v-if="comment.replies.length > 0">
 									<li v-for="reply in comment.replies">
@@ -50,6 +50,11 @@
 			appComment: Comment,
 			appAddComment: AddComment
 		},
+		data() {
+			return {
+				service: {}
+			}
+		},
 		computed: {
 			breakpoints() {
 				return window.breakpoints;
@@ -58,7 +63,7 @@
 		created() {
 			Service.find(this.$route.params.id)
 			.then(response => {
-				console.log(response);
+				this.service = response.service;
 			})
 			.catch(error => {
 

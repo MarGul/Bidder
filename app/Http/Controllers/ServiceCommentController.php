@@ -10,8 +10,12 @@ use App\Features\CommentManager;
 
 class ServiceCommentController extends Controller
 {
-    
-    protected $manager = null;
+    /**
+     * Class to manage comments
+     * 
+     * @var App\Features\CommentManager
+     */
+    protected $manager;
 
     public function __construct(CommentManager $manager) {
         $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);

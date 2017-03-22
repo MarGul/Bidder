@@ -28098,14 +28098,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appComment: __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue___default.a,
 		appAddComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue___default.a
 	},
+	data: function data() {
+		return {
+			service: {}
+		};
+	},
+
 	computed: {
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
 		}
 	},
 	created: function created() {
+		var _this = this;
+
 		__WEBPACK_IMPORTED_MODULE_0__includes_models_Service__["a" /* default */].find(this.$route.params.id).then(function (response) {
-			console.log(response);
+			_this.service = response.service;
 		}).catch(function (error) {});
 	}
 };
@@ -28175,7 +28183,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "margin-50"
   }, [_c('ul', {
     staticClass: "top-comments"
-  }, _vm._l((_vm.comments), function(comment) {
+  }, _vm._l((this.service.comments), function(comment) {
     return _c('li', [_c('app-comment', {
       attrs: {
         "comment": comment
@@ -28442,7 +28450,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['comment'],
 	computed: {
 		avatar: function avatar() {
-			return 'url(\'' + this.comment.avatar + '\')';
+			return 'url(\'' + this.comment.user.avatar + '\')';
 		}
 	}
 };
@@ -28466,12 +28474,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "comment-author",
     domProps: {
-      "textContent": _vm._s(_vm.comment.author)
+      "textContent": _vm._s(_vm.comment.user.displayname)
     }
   }), _vm._v(" "), _c('small', {
     staticClass: "comment-time",
     domProps: {
-      "textContent": _vm._s(_vm.comment.time)
+      "textContent": _vm._s(_vm.comment.updated_at)
     }
   }), _vm._v(" "), (_vm.comment.canReply) ? _c('i', {
     staticClass: "fa fa-reply",
@@ -28481,7 +28489,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "comment-body",
     domProps: {
-      "textContent": _vm._s(_vm.comment.comment)
+      "textContent": _vm._s(_vm.comment.body)
     }
   })])])
 },staticRenderFns: []}
