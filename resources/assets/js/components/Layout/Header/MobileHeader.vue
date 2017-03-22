@@ -21,8 +21,8 @@
 				<li v-if="$store.getters.isAuthenticated" class="nav-item">
 					<router-link to="/information">
 						<div class="auth-user">
-							<div class="auth-avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.name }}</div>
+							<div class="auth-avatar" :style="avatar"></div>
+							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
 						</div>
 					</router-link>
 				</li>
@@ -45,6 +45,11 @@
 
 <script>
 	export default {
+		computed: {
+			avatar() {
+				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
+			}
+		},
 		methods: {
 			navToggle() {
 				if ( $('body').hasClass('mobile-nav-open') ) {

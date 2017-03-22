@@ -23966,6 +23966,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			register: false
 		};
+	},
+
+	computed: {
+		avatar: function avatar() {
+			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar };
+		}
 	}
 };
 
@@ -24022,6 +24028,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = {
+	computed: {
+		avatar: function avatar() {
+			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar };
+		}
+	},
 	methods: {
 		navToggle: function navToggle() {
 			if ($('body').hasClass('mobile-nav-open')) {
@@ -26849,10 +26860,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "auth-user"
   }, [_c('div', {
-    staticClass: "auth-avatar"
+    staticClass: "auth-avatar",
+    style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.name))])])])], 1) : [_c('li', {
+  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.displayname))])])])], 1) : [_c('li', {
     staticClass: "nav-item"
   }, [_c('a', {
     staticClass: "register",
@@ -27014,10 +27026,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.$store.getters.isAuthenticated) ? _c('div', {
     staticClass: "auth-user"
   }, [_c('div', {
-    staticClass: "auth-avatar"
+    staticClass: "auth-avatar",
+    style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.name))])]) : _c('ul', {
+  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.displayname))])]) : _c('ul', {
     staticClass: "desktop-header-nav"
   }, [_c('li', [_c('a', {
     staticClass: "register",

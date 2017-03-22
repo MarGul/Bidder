@@ -17,8 +17,8 @@
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
 						<div v-if="$store.getters.isAuthenticated" class="auth-user">
-							<div class="auth-avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.name }}</div>
+							<div class="auth-avatar" :style="avatar"></div>
+							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
 						</div>
 
 						<ul v-else class="desktop-header-nav">
@@ -71,6 +71,11 @@
 		data() {
 			return {
 				register: false
+			}
+		},
+		computed: {
+			avatar() {
+				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
 			}
 		}
 	}
