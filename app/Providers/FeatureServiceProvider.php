@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Features\CommentManager;
 use App\Features\ServiceManager;
+use App\Features\BidManager;
 
 class FeatureServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,10 @@ class FeatureServiceProvider extends ServiceProvider
 
         $this->app->bind(ServiceManager::class, function($app) {
             return new ServiceManager;
+        });
+
+        $this->app->bind(BidManager::class, function($app) {
+            return new BidManager;
         });
 
     }

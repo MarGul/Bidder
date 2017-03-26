@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBid;
 use App\Bid;
 use App\Service;
-use Carbon\Carbon;
-use App\Helpers\AuthHelp;
+use App\Features\BidManager;
 
 class ServiceBidController extends Controller
 {
-    
-    public function __construct() {
-        // Add the jwt.auth middleware to routes
-        $this->middleware('jwt.auth', ['only' => [
-            'store', 'update', 'destroy'
-        ]]);
+    private $manager;
+
+    public function __construct(BidManager $manager) {
+        $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);
+        $this->manager = $manager;
     }
 
     /**
@@ -26,14 +25,7 @@ class ServiceBidController extends Controller
      */
     public function index(Service $service)
     {
-        if ( !$bids = Bid::getBids(['service_id' => $service->id]) ) {
-            return response()->json(['message' => 'Error trying to list bids.'], 500);
-        }
-
-        return response()->json([
-            'message' => 'Listing bids for a service.',
-            'bids' => $bids
-        ]);
+        return $this->manager->get($service);
     }
 
     /**
@@ -43,35 +35,9 @@ class ServiceBidController extends Controller
      * @param  App\Service               $service
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Service $service)
+    public function store(StoreBid $request, Service $service)
     {
-        $user = AuthHelp::authorize($service);
-        if ( isset($user['error']) ) return $user['response'];
-
-        $this->validate($request, [
-            'description' => 'required',
-            'start_service' => 'required|date_format:YmdHie',
-            'end_service' => 'required|date_format:YmdHie',
-            'hours_service' => 'numeric',
-            'price' => 'required|numeric'
-        ]);
-
-        $data = [
-            'user_id' => (int)$user->id,
-            'description' => $request->input('description'),
-            'start_service' => Carbon::createFromFormat('YmdHie', $request->input('start_service')),
-            'end_service' => Carbon::createFromFormat('YmdHie', $request->input('end_service')),
-            'hours_service' => (!empty($request->input('hours_service'))) ? (float)$request->input('hours_service') : null,
-            'price' => (float)$request->input('price')
-        ];
-
-        $bid = Bid::createBid($service, $data);
-        if ( isset($bid['error']) ) return $bid['response'];
-
-        return response()->json([
-            'message' => 'Successfully created the bid.',
-            'bid' => $bid
-        ], 201);
+        return $this->manager->create($request, $service);
     }
 
     /**

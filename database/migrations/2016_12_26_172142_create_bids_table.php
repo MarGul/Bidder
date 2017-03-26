@@ -18,9 +18,9 @@ class CreateBidsTable extends Migration
             $table->integer('service_id');
             $table->integer('user_id');
             $table->text('description');
-            $table->dateTime('start_service');
-            $table->dateTime('end_service');
-            $table->float('hours_service')->nullable();
+            $table->date('start');
+            $table->date('end');
+            $table->float('hours')->nullable();
             $table->float('price');
             $table->string('status');
             $table->timestamps();
