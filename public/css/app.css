@@ -8238,17 +8238,26 @@ body.mobile-nav-open .overlay {
   .modal-container {
     width: 60%;
   }
+  .modal-container.large {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 992px) {
   .modal-container {
     width: 45%;
   }
+  .modal-container.large {
+    width: 60%;
+  }
 }
 
 @media screen and (min-width: 992px) {
   .modal-container {
     width: 450px;
+  }
+  .modal-container.large {
+    width: 750px;
   }
 }
 

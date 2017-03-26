@@ -18,14 +18,26 @@
 
 	@media screen and(min-width: $screen-sm-min) {
 		width: 60%;
+
+		&.large {
+			width: 80%;
+		}
 	}
 
 	@media screen and(min-width: $screen-md-min) {
 		width: 45%;
+
+		&.large {
+			width: 60%;
+		}
 	}
 
 	@media screen and(min-width: $screen-md-min) {
 		width: 450px;
+
+		&.large {
+			width: 750px;
+		}
 	}
 
 	.close {

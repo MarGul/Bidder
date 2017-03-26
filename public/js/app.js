@@ -23297,14 +23297,10 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_Header_DesktopHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Layout_Header_DesktopHeader_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal_vue__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register_Register_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Register_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Register_Register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Auth_Login_vue__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Auth_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Search_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Search_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Includes_Search_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Layout_Footer_Footer_vue__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Layout_Footer_Footer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Layout_Footer_Footer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Search_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer_Footer_vue__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer_Footer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer_Footer_vue__);
 //
 //
 //
@@ -23332,10 +23328,6 @@ module.exports = function spread(callback) {
 //
 //
 //
-//
-//
-
-
 
 
 
@@ -23359,10 +23351,8 @@ module.exports = function spread(callback) {
         appMobileHeader: __WEBPACK_IMPORTED_MODULE_0__components_Layout_Header_MobileHeader_vue___default.a,
         appDesktopHeader: __WEBPACK_IMPORTED_MODULE_1__components_Layout_Header_DesktopHeader_vue___default.a,
         appModal: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal_vue___default.a,
-        register: __WEBPACK_IMPORTED_MODULE_3__components_Register_Register_vue___default.a,
-        login: __WEBPACK_IMPORTED_MODULE_4__components_Auth_Login_vue___default.a,
-        appSearch: __WEBPACK_IMPORTED_MODULE_5__components_Includes_Search_vue___default.a,
-        appFooter: __WEBPACK_IMPORTED_MODULE_6__components_Layout_Footer_Footer_vue___default.a
+        appSearch: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search_vue___default.a,
+        appFooter: __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer_Footer_vue___default.a
     },
     created: function created() {
         // Initialize Data
@@ -23693,6 +23683,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Register_Register_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Register_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Register_Register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Login_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Auth_Login_vue__);
 //
 //
 //
@@ -23707,10 +23701,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		register: __WEBPACK_IMPORTED_MODULE_0__Register_Register_vue___default.a,
+		login: __WEBPACK_IMPORTED_MODULE_1__Auth_Login_vue___default.a
+	},
 	methods: {
 		close: function close() {
 			this.$store.dispatch('closeModal');
+		}
+	},
+	computed: {
+		size: function size() {
+			return this.$store.getters.modalSize;
 		}
 	}
 };
@@ -25126,7 +25132,8 @@ var categories = {
 var modal = {
 	state: {
 		open: false,
-		component: ''
+		component: '',
+		size: 'small'
 	},
 	mutations: {
 		'OPEN_MODAL': function OPEN_MODAL(state) {
@@ -25137,14 +25144,20 @@ var modal = {
 		},
 		'SET_MODAL_COMPONENT': function SET_MODAL_COMPONENT(state, component) {
 			state.component = component;
+		},
+		'SET_MODAL_SIZE': function SET_MODAL_SIZE(state, size) {
+			state.size = size;
 		}
 	},
 	actions: {
 		openModal: function openModal(_ref, _ref2) {
 			var commit = _ref.commit;
-			var component = _ref2.component;
+			var component = _ref2.component,
+			    _ref2$size = _ref2.size,
+			    size = _ref2$size === undefined ? "small" : _ref2$size;
 
 			commit('SET_MODAL_COMPONENT', component);
+			commit('SET_MODAL_SIZE', size);
 			commit('OPEN_MODAL');
 		},
 		closeModal: function closeModal(_ref3) {
@@ -25160,6 +25173,9 @@ var modal = {
 		},
 		modalComponent: function modalComponent(state) {
 			return state.component;
+		},
+		modalSize: function modalSize(state) {
+			return state.size;
 		}
 	}
 };
@@ -26425,9 +26441,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": "slide-down-up"
     }
-  }, [(_vm.$store.getters.modalOpen) ? _c('app-modal', [_c(_vm.$store.getters.modalComponent, {
-    tag: "component"
-  })], 1) : _vm._e()], 1), _vm._v(" "), _c('div', {
+  }, [(_vm.$store.getters.modalOpen) ? _c('app-modal') : _vm._e()], 1), _vm._v(" "), _c('div', {
     attrs: {
       "id": "site-wrap"
     }
@@ -27267,7 +27281,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "modal-mask"
   }, [_c('div', {
-    staticClass: "modal-container"
+    staticClass: "modal-container",
+    class: [_vm.size]
   }, [_c('span', {
     staticClass: "close",
     on: {
@@ -27278,7 +27293,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _vm._t("default")], 2)])
+  })]), _vm._v(" "), _c(_vm.$store.getters.modalComponent, {
+    tag: "component"
+  })], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
