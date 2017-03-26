@@ -13,7 +13,7 @@ class BidManager {
 	 * @param  App\Service $service
 	 * @return \Illuminate\Http\Response
 	 */
-	public function get($service) {
+	public function all($service) {
 		$bids = Bid::with('user')->where('service_id', $service->id)->get();
 
 		return response()->json([

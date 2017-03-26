@@ -25,7 +25,7 @@ class ServiceBidController extends Controller
      */
     public function index(Service $service)
     {
-        return $this->manager->get($service);
+        return $this->manager->all($service);
     }
 
     /**
@@ -49,8 +49,7 @@ class ServiceBidController extends Controller
      */
     public function show(Service $service, Bid $bid)
     {
-        // Maybe implement in the future
-        return response()->json(['Not implemented at the moment.'], 403);
+        return $this->manager->get($bid);
     }
 
     /**
@@ -63,32 +62,7 @@ class ServiceBidController extends Controller
      */
     public function update(Request $request, Service $service, Bid $bid)
     {
-        $user = AuthHelp::authorize($bid);
-        if ( isset($user['error']) ) return $user['response'];
-
-        $this->validate($request, [
-            'description' => 'required',
-            'start_service' => 'required|date_format:YmdHie',
-            'end_service' => 'required|date_format:YmdHie',
-            'hours_service' => 'numeric',
-            'price' => 'required|numeric'
-        ]);
-
-        $data = [
-            'description' => $request->input('description'),
-            'start_service' => Carbon::createFromFormat('YmdHie', $request->input('start_service')),
-            'end_service' => Carbon::createFromFormat('YmdHie', $request->input('end_service')),
-            'hours_service' => (!empty($request->input('hours_service'))) ? (float)$request->input('hours_service') : null,
-            'price' => (float)$request->input('price')
-        ];
-
-        $bid = Bid::updateBid($service, $bid, $data);
-        if ( isset($bid['error']) ) return $bid['response'];
-
-        return response()->json([
-            'message' => 'Successfully updated the bid.',
-            'bid' => $bid
-        ], 200);
+        return $this->manager->update($request, $bid);
     }
 
     /**
@@ -100,16 +74,6 @@ class ServiceBidController extends Controller
      */
     public function destroy(Service $service, Bid $bid)
     {
-        $user = AuthHelp::authorize($bid);
-        if ( isset($user['error']) ) return $user['response'];
-
-        if ( !$bid = Bid::deleteBid($bid) ) {
-            return response()->json(['Could not delete bid.'], 500);
-        }
-
-        return response()->json([
-            'message' => 'Successfully deleted bid.',
-            'bid' => $bid
-        ], 200);
+        return $this->manager->delete($bid);
     }
 }
