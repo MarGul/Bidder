@@ -8,36 +8,77 @@
 		<div class="modal-body">
 			<form @keydown="form.errors.clear()">
 				
-				<div class="form-group" :class="{'has-error': form.errors.has('name')}">
-					<input 
-						type="text" 
-						id="name" 
-						class="form-control" 
-						placeholder="Namn" v-model="form.name">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" :class="{'has-error': form.errors.has('start')}">
+							<datepicker
+								input-class="form-control" 
+								placeholder="Starta utförandet" 
+								language="sv"
+								:monday-first="true"
+								:disabled="{to: new Date()}"
+								v-model="form.start"
+							></datepicker>
 
-					<span class="help-block" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+							<span class="help-block" v-if="form.errors.has('start')" v-text="form.errors.get('start')"></span>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" :class="{'has-error': form.errors.has('stop')}">
+							<datepicker
+								input-class="form-control" 
+								placeholder="Avsluta utförandet" 
+								language="sv"
+								:monday-first="true"
+								:disabled="{to: new Date()}"
+								v-model="form.stop"
+							></datepicker>
+
+							<span class="help-block" v-if="form.errors.has('stop')" v-text="form.errors.get('stop')"></span>
+						</div>
+					</div>
 				</div>
 
-				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
-					<input 
-						type="email" 
-						id="email" 
-						class="form-control" 
-						placeholder="Email" 
-						v-model="form.email">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group"  :class="{'has-error': form.errors.has('hours')}">
+							<input 
+								type="number" 
+								id="hours" 
+								class="form-control" 
+								placeholder="Antal timmar" 
+								v-model.number="form.hours">
 
-					<span class="help-block" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
+							<span class="help-block" v-if="form.errors.has('hours')" v-text="form.errors.get('hours')"></span>
+						</div>
+					</div>
+	
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group"  :class="{'has-error': form.errors.has('price')}">
+							<input 
+								type="text" 
+								id="price" 
+								class="form-control" 
+								placeholder="Ditt pris" 
+								v-model="form.price">
+
+							<span class="help-block" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
+						</div>
+					</div>
 				</div>
 
-				<div class="form-group"  :class="{'has-error': form.errors.has('password')}">
-					<input 
-						type="password" 
-						id="password" 
-						class="form-control" 
-						placeholder="Lösenord" 
-						v-model="form.password">
-
-					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group" :class="{'has-error': form.errors.has('description')}">
+							<textarea 
+								id="description" 
+								rows="5" 
+								class="form-control"
+								placeholder="Beskrivning av utförandet"
+							></textarea>
+						</div>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -59,7 +100,7 @@
 		</div>
 
 		<div class="modal-footer">
-			
+			<a class="link">Se alla bud för denna tjänsten</a>
 		</div>
 
 	</div>
@@ -68,15 +109,21 @@
 <script>
 	import User from '../../includes/models/User';
 	import Form from '../../includes/classes/Form';
+	import Datepicker from 'vuejs-datepicker';
 
 	export default {
+		components: {
+			datepicker: Datepicker
+		},
 		data() {
 			return {
 				processing: false,
 				form: new Form({
-					name: '',
-					email: '',
-					password: ''
+					start: '',
+					stop: '',
+					hours: '',
+					price: '',
+					description: ''
 				})
 			}
 		},

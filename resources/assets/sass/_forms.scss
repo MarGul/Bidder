@@ -7,6 +7,16 @@
 	}
 }
 
+.form-control[readonly] {
+	background: #fff;
+}
+
+.calendar .cell:not(.blank):not(.disabled).day:hover, 
+.calendar .cell:not(.blank):not(.disabled).month:hover, 
+.calendar .cell:not(.blank):not(.disabled).year:hover {
+	border: 1px solid $primary-green !important;
+}
+
 .help-block {
 	margin: 1px 0;
 	font-size: 12px;
