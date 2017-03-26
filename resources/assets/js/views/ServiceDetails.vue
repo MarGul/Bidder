@@ -9,7 +9,10 @@
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="service-bids white-container">
-						Bids
+						<button 
+							class="btn btn-primary full-width"
+							@click.prevent="$store.dispatch('openModal', {component: 'createBid', size: 'large'})"
+						>Lägg ett bud</button>
 					</div>
 					<div class="service-description white-container" v-if="breakpoints.small">
 						Description

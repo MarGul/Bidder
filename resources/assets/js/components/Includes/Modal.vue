@@ -14,11 +14,13 @@
 <script>
 	import Register from '../Register/Register.vue';
     import Login from '../Auth/Login.vue';
+    import CreateBid from '../Bids/CreateBid.vue';
 
 	export default {
 		components: {
 			register: Register,
-			login: Login
+			login: Login,
+			createBid: CreateBid
 		},
 		methods: {
 			close() {
