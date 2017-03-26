@@ -7758,6 +7758,10 @@ a {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
+.btn:focus, .btn:active {
+  outline: none !important;
+}
+
 .btn .processing {
   margin-left: 5px;
 }
@@ -7775,7 +7779,16 @@ a {
 .btn-primary:focus, .btn-primary:active {
   background-color: #55AE3A !important;
   border-color: #42882d !important;
-  outline: none;
+}
+
+.btn-default {
+  background-color: #e6e5e5;
+  border-color: #adadad;
+}
+
+.btn-default:hover {
+  background-color: #cdcbcb;
+  border-color: #949393;
 }
 
 a {
@@ -7800,6 +7813,10 @@ a {
 
 .margin-bottom-7 {
   margin-bottom: 7px !important;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px !important;
 }
 
 .no-underline {
