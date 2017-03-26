@@ -1,6 +1,6 @@
 import Model from './Model';
 
-class Services extends Model {
+class Comment extends Model {
 
 	constructor() {
 		super('services');
@@ -8,4 +8,4 @@ class Services extends Model {
 
 }
 
-export default new Services;
+export default new Comment;

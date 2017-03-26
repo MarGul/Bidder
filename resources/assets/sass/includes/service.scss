@@ -5,6 +5,7 @@
 	margin: 15px 0;
 	height: auto;
 	cursor: pointer;
+	color: $text-color;
 
 	@media screen and (min-width: $screen-md-min) {
 		display: flex;

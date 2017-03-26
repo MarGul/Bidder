@@ -17,6 +17,15 @@ class Category extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id'
+    ];
+
+    /**
      * Disable timestamps on the model.
      * 
      * @var boolean

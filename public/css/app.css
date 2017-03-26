@@ -7693,6 +7693,65 @@ button.close {
   text-align: center;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  html,
+  body {
+    width: auto;
+    height: auto;
+  }
+}
+
+a {
+  outline: 0;
+}
+
+#site {
+  width: 100%;
+  height: 100%;
+}
+
+#site-wrap {
+  min-height: calc(100% - 50px);
+  min-width: 100%;
+  background: #f6f6f6;
+  position: relative;
+  top: 0;
+  bottom: 100%;
+  left: 0;
+  z-index: 1;
+  -webkit-transition: left 0.5s ease-in-out;
+  transition: left 0.5s ease-in-out;
+}
+
+.content {
+  margin: 60px 0px;
+}
+
+.no-hero-view {
+  margin-top: 35px;
+}
+
+.white-container {
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  padding: 20px 15px;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 992px) {
+  .white-container {
+    margin-bottom: 0;
+  }
+}
+
 .btn {
   border-radius: 0;
   padding: 5px 9px;
@@ -7733,6 +7792,22 @@ a {
 
 .margin-25 {
   margin: 25px 0px;
+}
+
+.margin-50 {
+  margin: 50px 0px;
+}
+
+.margin-bottom-7 {
+  margin-bottom: 7px !important;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.no-underline:hover {
+  text-decoration: none;
 }
 
 .form-control {
@@ -7830,7 +7905,6 @@ a {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-image: url("https://www.biography.com/.image/c_fill,cs_srgb,g_face,h_300,w_300/MTE1ODA0OTcxOTUyMDE0ODYx/elon-musk-20837159-1-402.png");
 }
 
 .mobile-nav .auth-user .auth-name {
@@ -7959,6 +8033,7 @@ body.mobile-nav-open .overlay {
 
 .desktop-navigation {
   background: #f6f6f6;
+  border-bottom: 1px solid #d7d7d7;
 }
 
 .desktop-nav {
@@ -8037,7 +8112,6 @@ body.mobile-nav-open .overlay {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-image: url("https://www.biography.com/.image/c_fill,cs_srgb,g_face,h_300,w_300/MTE1ODA0OTcxOTUyMDE0ODYx/elon-musk-20837159-1-402.png");
 }
 
 .desktop-header-right .auth-user .auth-name {
@@ -8200,6 +8274,8 @@ body.mobile-nav-open .overlay {
 }
 
 .hero {
+  position: relative;
+  top: -1px;
   -webkit-background: -webkit-linear-gradient(135deg, #55AE3A, #264e1a);
   -moz-background: linear-gradient(-45deg, #55AE3A, #264e1a);
   background: linear-gradient(-45deg, #55AE3A, #264e1a);
@@ -8502,6 +8578,7 @@ body.mobile-nav-open .overlay {
   margin: 15px 0;
   height: auto;
   cursor: pointer;
+  color: #636b6f;
 }
 
 @media screen and (min-width: 992px) {
@@ -8635,6 +8712,106 @@ body.mobile-nav-open .overlay {
   text-align: right;
 }
 
+@media screen and (min-width: 992px) {
+  .service-bids {
+    margin-bottom: 20px;
+  }
+}
+
+.add-comment-component h4 {
+  font-weight: bold;
+}
+
+.add-comment-component .comments-as {
+  font-size: 0.9em;
+  padding-right: 10px;
+}
+
+.add-comment-component textarea {
+  resize: none;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.top-comments {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment-replies {
+  list-style-type: none;
+  margin: 0 0 0 30px;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .comment-replies {
+    margin: 0 0 0 70px;
+  }
+}
+
+.comment-component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.comment-component .comment-avatar {
+  border: 3px solid #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.comment-component .comment-content {
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0 0 20px 20px;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.comment-component .comment-content:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #d7d7d7;
+}
+
+.comment-component .comment-content .comment-head {
+  padding: 7.5px 15px;
+  border-bottom: 1px solid #d7d7d7;
+  background: #fafafa;
+}
+
+.comment-component .comment-content .comment-head .comment-author {
+  font-weight: bold;
+}
+
+.comment-component .comment-content .comment-head .comment-time {
+  margin-left: 10px;
+}
+
+.comment-component .comment-content .comment-head i {
+  float: right;
+}
+
+.comment-component .comment-content .comment-body {
+  padding: 7.5px 15px;
+}
+
 .slide-in-enter-active {
   -webkit-animation: slide-in 800ms ease-out forwards;
   animation: slide-in 800ms ease-out forwards;
@@ -8686,6 +8863,24 @@ body.mobile-nav-open .overlay {
     -webkit-transform: translateX(-90px);
             transform: translateX(-90px);
     opacity: 0;
+  }
+}
+
+.slide-in-left-enter-active {
+  -webkit-animation: slide-in-left 400ms ease-out forwards;
+  animation: slide-in-left 400ms ease-out forwards;
+}
+
+@keyFrames slide-in-left {
+  from {
+    -webkit-transform: translateX(-90px);
+            transform: translateX(-90px);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -8792,45 +8987,4 @@ body.mobile-nav-open .overlay {
   to {
     opacity: 0;
   }
-}
-
-html,
-body {
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-@media (min-width: 768px) {
-  html,
-  body {
-    width: auto;
-    height: auto;
-  }
-}
-
-a {
-  outline: 0;
-}
-
-#site {
-  width: 100%;
-  height: 100%;
-}
-
-#site-wrap {
-  min-height: calc(100% - 50px);
-  min-width: 100%;
-  background: #f6f6f6;
-  position: relative;
-  top: 0;
-  bottom: 100%;
-  left: 0;
-  z-index: 1;
-  -webkit-transition: left 0.5s ease-in-out;
-  transition: left 0.5s ease-in-out;
-}
-
-.content {
-  margin: 60px 0px;
 }

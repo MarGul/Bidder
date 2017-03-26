@@ -9,3 +9,19 @@
 .margin-25 {
 	margin: 25px 0px;
 }
+
+.margin-50 {
+	margin: 50px 0px;
+}
+
+.margin-bottom-7 {
+	margin-bottom: 7px !important;
+}
+
+.no-underline {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+}

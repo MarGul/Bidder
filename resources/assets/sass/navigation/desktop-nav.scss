@@ -39,6 +39,7 @@
 
 .desktop-navigation {
 	background: $body-bg;
+	border-bottom: 1px solid $border-color-gray;
 }
 
 .desktop-nav {
@@ -108,7 +109,6 @@
 			background-repeat: no-repeat;
 			background-position: center center;
 			background-size: cover;
-			background-image: url('https://www.biography.com/.image/c_fill,cs_srgb,g_face,h_300,w_300/MTE1ODA0OTcxOTUyMDE0ODYx/elon-musk-20837159-1-402.png');
 		}
 
 		.auth-name {
