@@ -63,7 +63,7 @@ return [
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => ':attribute måste vara ett nummer.',
+    'numeric'              => 'Fältet måste vara ett giltigt nummer.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
     'required'             => 'Ett obligatoriskt fält.',

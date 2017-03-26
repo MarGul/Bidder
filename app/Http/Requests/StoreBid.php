@@ -27,7 +27,7 @@ class StoreBid extends FormRequest
             'description' => 'required',
             'start' => 'required|date_format:Y-m-d|after_or_equal:today',
             'end' => 'required|date_format:Y-m-d|after_or_equal:today',
-            'hours' => 'numeric',
+            'hours' => 'nullable|numeric',
             'price' => 'required|numeric'
         ];
     }

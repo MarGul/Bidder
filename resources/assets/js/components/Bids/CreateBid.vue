@@ -13,7 +13,7 @@
 						<div class="form-group" :class="{'has-error': form.errors.has('start')}">
 							<datepicker
 								input-class="form-control" 
-								placeholder="Starta utförandet" 
+								placeholder="Starta utförandet*" 
 								language="sv"
 								:monday-first="true"
 								:disabled="{to: new Date()}"
@@ -25,17 +25,17 @@
 					</div>
 
 					<div class="col-xs-12 col-md-6">
-						<div class="form-group" :class="{'has-error': form.errors.has('stop')}">
+						<div class="form-group" :class="{'has-error': form.errors.has('end')}">
 							<datepicker
 								input-class="form-control" 
-								placeholder="Avsluta utförandet" 
+								placeholder="Avsluta utförandet*" 
 								language="sv"
 								:monday-first="true"
 								:disabled="{to: new Date()}"
-								v-model="form.stop"
+								v-model="form.end"
 							></datepicker>
 
-							<span class="help-block" v-if="form.errors.has('stop')" v-text="form.errors.get('stop')"></span>
+							<span class="help-block" v-if="form.errors.has('end')" v-text="form.errors.get('end')"></span>
 						</div>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 								type="text" 
 								id="price" 
 								class="form-control" 
-								placeholder="Ditt pris" 
+								placeholder="Ditt pris*" 
 								v-model="form.price">
 
 							<span class="help-block" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
@@ -75,8 +75,10 @@
 								id="description" 
 								rows="5" 
 								class="form-control"
-								placeholder="Beskrivning av utförandet"
+								placeholder="Beskrivning av utförandet*"
 							></textarea>
+
+							<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
 						</div>
 					</div>
 				</div>
@@ -85,7 +87,7 @@
 					<button 
 						type="submit" 
 						class="btn btn-primary full-width" 
-						@click.prevent="register"
+						@click.prevent="create"
 						:disabled="processing || this.form.errors.any()"
 					>
 						Lägg ditt bud
@@ -107,7 +109,7 @@
 </template>
 
 <script>
-	import User from '../../includes/models/User';
+	import Bid from '../../includes/models/Bid';
 	import Form from '../../includes/classes/Form';
 	import Datepicker from 'vuejs-datepicker';
 
@@ -120,15 +122,30 @@
 				processing: false,
 				form: new Form({
 					start: '',
-					stop: '',
+					end: '',
 					hours: '',
 					price: '',
 					description: ''
 				})
 			}
 		},
+		computed: {
+			id() {
+				return this.$store.getters.modalData.id;
+			}
+		},
 		methods: {
-			
+			create() {
+				this.processing = true;
+				Bid.setId(this.id).create(this.form.data())
+				.then(response => {
+
+				})
+				.catch(error => {
+					this.form.errors.record(error);
+					this.processing = false;
+				});
+			}
 		}
 	}
 </script>

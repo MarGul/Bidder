@@ -25,8 +25,8 @@ class BidManager {
 	/**
 	 * Create a bid
 	 * 
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  App\Service               $service
+	 * @param  \App\Http\Requests\StoreBid  $request
+	 * @param  App\Service               	$service
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create($request, $service) {

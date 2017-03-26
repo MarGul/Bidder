@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return response()->json(['message' => 'Not implemented at the moment.'], 403);
+        return response()->json(['message' => 'Not implemented at the moment.'], 404);
     }
 
     /**

@@ -2,6 +2,7 @@ const modal = {
 	state: {
 		open: false,
 		component: '',
+		data: {},
 		size: 'small'
 	},
 	mutations: {
@@ -16,11 +17,15 @@ const modal = {
 		},
 		'SET_MODAL_SIZE'(state, size) {
 			state.size = size;
+		},
+		'SET_MODAL_DATA'(state, data) {
+			state.data = data;
 		}
 	},
 	actions: {
-		openModal({commit}, {component, size = "small"}) {
+		openModal({commit}, {component, data = {}, size = "small"}) {
 			commit('SET_MODAL_COMPONENT', component);
+			commit('SET_MODAL_DATA', data);
 			commit('SET_MODAL_SIZE', size);
 			commit('OPEN_MODAL');
 		},
@@ -32,6 +37,7 @@ const modal = {
 	getters: {
 		modalOpen: state => state.open,
 		modalComponent: state => state.component,
+		modalData: state => state.data,
 		modalSize: state => state.size
 	}
 }
