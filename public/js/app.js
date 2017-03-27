@@ -24826,8 +24826,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -27473,7 +27471,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12 col-md-4"
   }, [_c('div', {
     staticClass: "service-bids white-container"
-  }, [_vm._m(0), _vm._v(" "), _c('button', {
+  }, [_c('div', {
+    staticClass: "margin-bottom-10"
+  }, [_vm._v("\n\t\t\t\t\t\t0 Aktiva bud. Visa alla bud.\n\t\t\t\t\t")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary full-width",
     on: {
       "click": function($event) {
@@ -27524,13 +27524,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       })], 1)
     }))], 1) : _vm._e()], 1)
   }))], 1)])], 1)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "margin-bottom-10"
-  }, [_c('button', {
-    staticClass: "btn btn-default full-width"
-  }, [_vm._v("Visa alla bud")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

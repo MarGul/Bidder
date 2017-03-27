@@ -10,9 +10,7 @@
 				<div class="col-xs-12 col-md-4">
 					<div class="service-bids white-container">
 						<div class="margin-bottom-10">
-							<button
-								class="btn btn-default full-width"
-							>Visa alla bud</button>
+							0 Aktiva bud. Visa alla bud.
 						</div>
 						<button 
 							class="btn btn-primary full-width"
