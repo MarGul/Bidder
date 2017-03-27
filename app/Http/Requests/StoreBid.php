@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Carbon\Carbon;
 
 class StoreBid extends FormRequest
 {
@@ -13,7 +14,9 @@ class StoreBid extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // Make sure the bid time hasn't gone out.
+        $bidStop = Carbon::createFromFormat('Y-m-d H:i:s', $this->route('service')->bid_stop, 'Europe/Stockholm');
+        return Carbon::now('Europe/Stockholm') < $bidStop;
     }
 
     /**

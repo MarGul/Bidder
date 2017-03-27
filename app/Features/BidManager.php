@@ -30,13 +30,6 @@ class BidManager {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create($request, $service) {
-		// Make sure the time for bidding hasn't run out.
-		$bidStop = Carbon::createFromFormat('Y-m-d H:i:s', $service->bid_stop, 'Europe/Stockholm');
-
-		if ( Carbon::now('Europe/Stockholm') > $bidStop) {
-			return response()->json(['message' => 'Bidding has ended for this service.'], 401);
-		}
-
 		$bid = new Bid([
 			'service_id' => $service->id,
 			'user_id' => $request->user()->id,
