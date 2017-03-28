@@ -23,15 +23,17 @@ const modal = {
 		}
 	},
 	actions: {
-		openModal({commit}, {component, data = {}, size = "small"}) {
+		openModal({commit}, {component, size = "small", data = {}}) {
 			commit('SET_MODAL_COMPONENT', component);
-			commit('SET_MODAL_DATA', data);
 			commit('SET_MODAL_SIZE', size);
+			commit('SET_MODAL_DATA', data);
 			commit('OPEN_MODAL');
 		},
 		closeModal({commit}) {
 			commit('CLOSE_MODAL');
 			commit('SET_MODAL_COMPONENT', '');
+			commit('SET_MODAL_DATA', {});
+			commit('SET_MODAL_SIZE', 'small');
 		}
 	},
 	getters: {

@@ -77,6 +77,7 @@
 									rows="5" 
 									class="form-control"
 									placeholder="Beskrivning av utförandet*"
+									v-model="form.description"
 								></textarea>
 
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
@@ -138,7 +139,7 @@
 		},
 		computed: {
 			id() {
-				return this.$store.getters.modalData.id;
+				return this.$store.getters.getService.id;
 			}
 		},
 		methods: {

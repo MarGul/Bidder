@@ -14,7 +14,7 @@
 						</div>
 						<button 
 							class="btn btn-primary full-width"
-							@click.prevent="openCreateBid"
+							@click.prevent="createBid"
 						>Lägg ett bud</button>
 					</div>
 					<div class="service-description white-container" v-if="breakpoints.small">
@@ -73,12 +73,8 @@
 			addComment({comment}) {
 				this.service.comments.unshift(comment);
 			},
-			openCreateBid() {
-				this.$store.dispatch('openModal', {
-					component: 'createBid',
-					data: {id: this.$route.params.id},
-					size: 'large'
-				});
+			createBid() {
+				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
 			}
 		},
 		created() {
