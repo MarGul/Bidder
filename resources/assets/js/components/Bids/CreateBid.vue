@@ -147,7 +147,7 @@
 				this.processing = true;
 				Bid.setId(this.id).create(this.form.data())
 				.then(response => {
-
+					// Add bid
 				})
 				.catch(error => {
 					this.form.errors.record(error);

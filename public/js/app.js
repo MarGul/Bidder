@@ -23634,7 +23634,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.id).create(this.form.data()).then(function (response) {}).catch(function (error) {
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.id).create(this.form.data()).then(function (response) {
+				// Add bid
+			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
 			});
@@ -24827,6 +24829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -24840,6 +24843,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		service: function service() {
 			return this.$store.getters.getService;
+		},
+		bids: function bids() {
+			return this.service.bids.length;
 		},
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
@@ -25469,7 +25475,7 @@ var regions = {
 
 var service = {
 	state: {
-		service: {}
+		service: { comments: [], bids: [] }
 	},
 	mutations: {
 		'SET_SERVICE': function SET_SERVICE(state, service) {
@@ -25481,7 +25487,7 @@ var service = {
 			var commit = _ref.commit;
 
 			// Set the base state first.
-			commit('SET_SERVICE', {});
+			commit('SET_SERVICE', { comments: [], bids: [] });
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_Service__["a" /* default */].find(payload.id).then(function (response) {
 				commit('SET_SERVICE', response.service);
 			}).catch(function (error) {});
@@ -27519,8 +27525,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "service-bids white-container"
   }, [_c('div', {
-    staticClass: "margin-bottom-10"
-  }, [_vm._v("\n\t\t\t\t\t\t0 Aktiva bud. Visa alla bud.!\n\t\t\t\t\t")]), _vm._v(" "), _c('button', {
+    staticClass: "active-bids text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-gavel",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.bids))]), _vm._v(" bud. "), _c('a', {
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showBids($event)
+      }
+    }
+  }, [_vm._v("Visa alla bud")])]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary full-width",
     on: {
       "click": function($event) {

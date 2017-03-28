@@ -8754,6 +8754,25 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.service-bids .active-bids {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.service-bids .active-bids i {
+  margin-right: 5px;
+}
+
+.service-bids .active-bids span {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.service-bids .active-bids a {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
 .add-comment-component h4 {
   font-weight: bold;
 }

@@ -9,8 +9,9 @@
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="service-bids white-container">
-						<div class="margin-bottom-10">
-							0 Aktiva bud. Visa alla bud.!
+						<div class="active-bids text-center">
+							<i class="fa fa-gavel" aria-hidden="true"></i>
+							<span>{{ bids }}</span> bud. <a @click.prevent="showBids">Visa alla bud</a>
 						</div>
 						<button 
 							class="btn btn-primary full-width"
@@ -64,6 +65,9 @@
 		computed: {
 			service() {
 				return this.$store.getters.getService;
+			},
+			bids() {
+				return this.service.bids.length;
 			},
 			breakpoints() {
 				return window.breakpoints;
