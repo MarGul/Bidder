@@ -10,7 +10,7 @@
 				<div class="col-xs-12 col-md-4">
 					<div class="service-bids white-container">
 						<div class="margin-bottom-10">
-							0 Aktiva bud. Visa alla bud.
+							0 Aktiva bud. Visa alla bud.!
 						</div>
 						<button 
 							class="btn btn-primary full-width"
@@ -61,12 +61,10 @@
 			appComment: Comment,
 			appAddComment: AddComment
 		},
-		data() {
-			return {
-				service: {}
-			}
-		},
 		computed: {
+			service() {
+				return this.$store.getters.getService;
+			},
 			breakpoints() {
 				return window.breakpoints;
 			}
@@ -84,13 +82,7 @@
 			}
 		},
 		created() {
-			Service.find(this.$route.params.id)
-			.then(response => {
-				this.service = response.service;
-			})
-			.catch(error => {
-
-			});
+			this.$store.dispatch('getService', {id: this.$route.params.id});
 		}
 	}
 </script>
