@@ -19,7 +19,6 @@ class ServiceCommentController extends Controller
 
     public function __construct(CommentManager $manager) {
         $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);
-
         $this->manager = $manager;
     }
 
@@ -31,7 +30,7 @@ class ServiceCommentController extends Controller
      */
     public function index(Service $service)
     {
-        return $this->manager->get($service);
+        return $this->manager->all($service);
     }
 
     /**

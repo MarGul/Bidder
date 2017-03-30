@@ -3,4 +3,23 @@
 	@media screen and (min-width: $screen-md-min) {
 		margin-bottom: 20px;
 	}
+
+	.active-bids {
+		margin-bottom: 5px;
+		font-size: 16px;
+
+		i {
+			margin-right: 5px;
+		}
+
+		span {
+			font-weight: bold;
+			font-size: 20px;
+		}
+
+		a {
+			font-weight: bold;
+			margin-left: 5px;
+		}
+	}
 }

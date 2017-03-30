@@ -9,7 +9,14 @@
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<div class="service-bids white-container">
-						Bids
+						<div class="active-bids text-center">
+							<i class="fa fa-gavel" aria-hidden="true"></i>
+							<span>{{ bids }}</span> bud. <a @click.prevent="showBids">Visa alla bud</a>
+						</div>
+						<button 
+							class="btn btn-primary full-width"
+							@click.prevent="createBid"
+						>Lägg ett bud</button>
 					</div>
 					<div class="service-description white-container" v-if="breakpoints.small">
 						Description
@@ -55,12 +62,13 @@
 			appComment: Comment,
 			appAddComment: AddComment
 		},
-		data() {
-			return {
-				service: {}
-			}
-		},
 		computed: {
+			service() {
+				return this.$store.getters.getService;
+			},
+			bids() {
+				return this.service.bids.length;
+			},
 			breakpoints() {
 				return window.breakpoints;
 			}
@@ -68,16 +76,13 @@
 		methods: {
 			addComment({comment}) {
 				this.service.comments.unshift(comment);
+			},
+			createBid() {
+				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
 			}
 		},
 		created() {
-			Service.find(this.$route.params.id)
-			.then(response => {
-				this.service = response.service;
-			})
-			.catch(error => {
-
-			});
+			this.$store.dispatch('getService', {id: this.$route.params.id});
 		}
 	}
 </script>

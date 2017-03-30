@@ -5,9 +5,7 @@
         <app-desktop-header v-else></app-desktop-header>
 
         <transition name="slide-down-up">
-            <app-modal v-if="$store.getters.modalOpen">
-                <component :is="$store.getters.modalComponent"></component>
-            </app-modal>
+            <app-modal v-if="$store.getters.modalOpen"></app-modal>
         </transition>
         
         <div id="site-wrap">
@@ -31,8 +29,6 @@
     import MobileHeader from './components/Layout/Header/MobileHeader.vue';
     import DesktopHeader from './components/Layout/Header/DesktopHeader.vue';
     import Modal from './components/Includes/Modal.vue';
-    import Register from './components/Register/Register.vue';
-    import Login from './components/Auth/Login.vue';
     import Search from './components/Includes/Search.vue';
     import Footer from './components/Layout/Footer/Footer.vue';
 
@@ -51,8 +47,6 @@
             appMobileHeader: MobileHeader,
             appDesktopHeader: DesktopHeader,
             appModal: Modal,
-            register: Register,
-            login: Login,
             appSearch: Search,
             appFooter: Footer
         },

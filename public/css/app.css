@@ -7758,6 +7758,10 @@ a {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
+.btn:focus, .btn:active {
+  outline: none !important;
+}
+
 .btn .processing {
   margin-left: 5px;
 }
@@ -7775,7 +7779,16 @@ a {
 .btn-primary:focus, .btn-primary:active {
   background-color: #55AE3A !important;
   border-color: #42882d !important;
-  outline: none;
+}
+
+.btn-default {
+  background-color: #e6e5e5;
+  border-color: #adadad;
+}
+
+.btn-default:hover {
+  background-color: #cdcbcb;
+  border-color: #949393;
 }
 
 a {
@@ -7802,6 +7815,10 @@ a {
   margin-bottom: 7px !important;
 }
 
+.margin-bottom-10 {
+  margin-bottom: 10px !important;
+}
+
 .no-underline {
   text-decoration: none;
 }
@@ -7817,6 +7834,16 @@ a {
 
 .form-control:focus {
   border-color: #55AE3A;
+}
+
+.form-control[readonly] {
+  background: #fff;
+}
+
+.calendar .cell:not(.blank):not(.disabled).day:hover,
+.calendar .cell:not(.blank):not(.disabled).month:hover,
+.calendar .cell:not(.blank):not(.disabled).year:hover {
+  border: 1px solid #55AE3A !important;
 }
 
 .help-block {
@@ -8238,17 +8265,26 @@ body.mobile-nav-open .overlay {
   .modal-container {
     width: 60%;
   }
+  .modal-container.large {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 992px) {
   .modal-container {
     width: 45%;
   }
+  .modal-container.large {
+    width: 60%;
+  }
 }
 
 @media screen and (min-width: 992px) {
   .modal-container {
     width: 450px;
+  }
+  .modal-container.large {
+    width: 750px;
   }
 }
 
@@ -8716,6 +8752,25 @@ body.mobile-nav-open .overlay {
   .service-bids {
     margin-bottom: 20px;
   }
+}
+
+.service-bids .active-bids {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.service-bids .active-bids i {
+  margin-right: 5px;
+}
+
+.service-bids .active-bids span {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.service-bids .active-bids a {
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 .add-comment-component h4 {

@@ -11,6 +11,11 @@ class Model {
 		return this;
 	}
 
+	setId(id, match = '{id}') {
+		this.resource = this.resource.replace(match, id);
+		return this;
+	}
+
 	setUrl(url) {
 		this.url = url;
 		return this;

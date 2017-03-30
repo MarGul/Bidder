@@ -3,6 +3,11 @@
 	padding: 5px 9px;
 	box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
 
+	&:focus,
+	&:active {
+		outline: none !important;
+	}
+
 	.processing {
 		margin-left: 5px;
 	}
@@ -21,6 +26,15 @@
 	&:active {
 		background-color: $primary-green !important;
 		border-color: $dark-green !important;
-		outline: none;
+	}
+}
+
+.btn-default {
+	background-color: #e6e5e5;
+	border-color: #adadad;
+
+	&:hover {
+		background-color: darken(#e6e5e5, 10%);
+		border-color: darken(#adadad, 10%);
 	}
 }

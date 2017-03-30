@@ -13,7 +13,7 @@ class CommentManager {
 	 * @param  App\Service $service
 	 * @return \Illuminate\Http\Response
 	 */
-	public function get($service) {
+	public function all($service) {
 		$comments = Comment::with('user', 'replies.user')
 					->where('service_id', $service->id)
 					->where('parent', null)
