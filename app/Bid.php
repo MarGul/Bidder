@@ -16,6 +16,15 @@ class Bid extends Model
         'service_id', 'user_id', 'description', 'start', 'end', 'hours', 'price', 'status'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id'
+    ];
+
 	/**
 	 * A bid belongs to a service.
 	 * 

@@ -23627,15 +23627,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		id: function id() {
 			return this.$store.getters.getService.id;
+		},
+		finalData: function finalData() {
+			var data = this.form.data();
+			data.start = this.stripTime(data.start);
+			data.end = this.stripTime(data.end);
+
+			return data;
 		}
 	},
 	methods: {
+		stripTime: function stripTime(date) {
+			return date instanceof Date ? date.getFullYear() + '-' + this.pad(date.getMonth() + 1) + '-' + this.pad(date.getDate()) : date;
+		},
+		pad: function pad(number) {
+			return number < 10 ? "0" + number : number;
+		},
 		create: function create() {
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.id).create(this.form.data()).then(function (response) {
-				// Add bid
+
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.id).create(this.finalData).then(function (response) {
+				_this.$store.commit('ADD_BID', { bid: response.bid });
+				_this.form.reset();
+				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -25480,6 +25496,9 @@ var service = {
 	mutations: {
 		'SET_SERVICE': function SET_SERVICE(state, service) {
 			state.service = service;
+		},
+		'ADD_BID': function ADD_BID(state, payload) {
+			state.service.bids.unshift(payload.bid);
 		}
 	},
 	actions: {
@@ -25496,6 +25515,9 @@ var service = {
 	getters: {
 		getService: function getService(state) {
 			return state.service;
+		},
+		getBids: function getBids(state) {
+			return state.service.bids;
 		}
 	}
 };

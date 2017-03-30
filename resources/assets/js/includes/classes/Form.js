@@ -41,6 +41,7 @@ class Form {
 
         this.errors.clear();
     }
+    
 }
 
 export default Form;

@@ -7,6 +7,9 @@ const service = {
 	mutations: {
 		'SET_SERVICE'(state, service) {
 			state.service = service;
+		},
+		'ADD_BID'(state, payload) {
+			state.service.bids.unshift(payload.bid);
 		}
 	},
 	actions: {
@@ -20,7 +23,8 @@ const service = {
 		}
 	},
 	getters: {
-		getService: state => state.service
+		getService: state => state.service,
+		getBids: state => state.service.bids
 	}
 }
 

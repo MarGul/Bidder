@@ -34,8 +34,8 @@ class BidManager {
 			'service_id' => $service->id,
 			'user_id' => $request->user()->id,
 			'description' => $request->description,
-			'start' => Carbon::createFromFormat('Y-m-d', $request->start, 'Europe/Stockholm'),
-			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm'),
+			'start' => Carbon::createFromFormat('Y-m-d', $request->start, 'Europe/Stockholm')->toDateString(),
+			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm')->toDateString(),
 			'hours' => $request->hours,
 			'price' => (float)$request->price,
 			'status' => 'active'

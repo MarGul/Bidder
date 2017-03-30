@@ -15,7 +15,7 @@ class ServiceManager {
 	 */
 	public function get($service) {
 		$s = Service::where('id', $service->id)->first();
-		$s->load(['user', 'category', 'region', 'city', 'bids', 'comments' => function($query) {
+		$s->load(['user', 'category', 'region', 'city', 'bids.user', 'comments' => function($query) {
 			$query->with(['user', 'replies.user'])->where('parent', null);
 		}]);
 

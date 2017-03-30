@@ -140,14 +140,30 @@
 		computed: {
 			id() {
 				return this.$store.getters.getService.id;
+			},
+			finalData() {
+				let data = this.form.data();
+				data.start = this.stripTime(data.start);
+				data.end = this.stripTime(data.end);
+
+				return data;
 			}
 		},
 		methods: {
+			stripTime(date) {
+				return (date instanceof Date) ? `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}` : date;
+			},
+			pad(number) {
+				return ( number < 10 ) ? "0" + number : number;
+			},
 			create() {
 				this.processing = true;
-				Bid.setId(this.id).create(this.form.data())
+
+				Bid.setId(this.id).create(this.finalData)
 				.then(response => {
-					// Add bid
+					this.$store.commit('ADD_BID', {bid: response.bid});
+					this.form.reset();
+					this.processing = false;
 				})
 				.catch(error => {
 					this.form.errors.record(error);
