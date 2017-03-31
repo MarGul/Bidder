@@ -79,6 +79,9 @@
 			},
 			createBid() {
 				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
+			},
+			showBids() {
+				this.$store.dispatch('openModal', {component: 'showBids', size: 'large'});
 			}
 		},
 		created() {

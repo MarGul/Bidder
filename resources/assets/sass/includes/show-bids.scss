@@ -1,0 +1,53 @@
+.list-bids {
+
+	li {
+		border: 1px solid $border-color-gray;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+		margin-bottom: 10px;
+
+		.bid-header {
+			padding: 5px 15px;
+			background-color: #f1f1f1;
+			border-bottom: 1px solid $border-color-gray;
+
+			.user-reviews {
+				margin-left: 5px;
+
+				i {
+					color: #FFC100;
+				}
+			}
+		}
+
+		.bid-info {
+			padding: 15px;
+
+			.info-section {
+				margin-bottom: 10px;
+
+				@media screen and (min-width: $screen-md-min) {
+					margin-bottom: 0;
+				}
+			}
+
+			.info-head {
+				color: $primary-green;
+				font-weight: bold;
+			}
+		}
+
+		.bid-description {
+			padding: 10px 15px;
+		}
+
+		.bid-time {
+			font-style: italic;
+			font-size: 12px;
+			line-height: 20px;
+
+			@media screen and (min-width: $screen-sm-min) {
+				text-align: right;
+			}
+		}
+	}
+}

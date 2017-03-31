@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
 
         <title>Bidder</title>
-        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         
         <script>
             window.Laravel = <?php echo json_encode([
@@ -28,6 +28,8 @@
             <span class="device-lg visible-lg"></span>
         </div>
         
-        <script src="{{ URL::asset('js/app.js') }}"></script>
+        <script src="{{ mix('js/manifest.js') }}"></script>
+        <script src="{{ mix('js/vendor.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

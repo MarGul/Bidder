@@ -7693,6 +7693,10 @@ button.close {
   text-align: center;
 }
 
+.alert .link {
+  font-weight: bold;
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -8771,6 +8775,61 @@ body.mobile-nav-open .overlay {
 .service-bids .active-bids a {
   font-weight: bold;
   margin-left: 5px;
+}
+
+.list-bids li {
+  border: 1px solid #d7d7d7;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+}
+
+.list-bids li .bid-header {
+  padding: 5px 15px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.list-bids li .bid-header .user-reviews {
+  margin-left: 5px;
+}
+
+.list-bids li .bid-header .user-reviews i {
+  color: #FFC100;
+}
+
+.list-bids li .bid-info {
+  padding: 15px;
+}
+
+.list-bids li .bid-info .info-section {
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 992px) {
+  .list-bids li .bid-info .info-section {
+    margin-bottom: 0;
+  }
+}
+
+.list-bids li .bid-info .info-head {
+  color: #55AE3A;
+  font-weight: bold;
+}
+
+.list-bids li .bid-description {
+  padding: 10px 15px;
+}
+
+.list-bids li .bid-time {
+  font-style: italic;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .list-bids li .bid-time {
+    text-align: right;
+  }
 }
 
 .add-comment-component h4 {

@@ -110,7 +110,7 @@
 		</div>
 
 		<div class="modal-footer">
-			<a class="link">Se alla bud för denna tjänsten</a>
+			<a class="link" @click.prevent="openShowBids">Se alla bud för denna tjänsten</a>
 		</div>
 
 	</div>
@@ -169,6 +169,9 @@
 					this.form.errors.record(error);
 					this.processing = false;
 				});
+			},
+			openShowBids() {
+				this.$store.dispatch('openModal', { component: 'showBids', size: 'large' });
 			}
 		}
 	}
