@@ -21,6 +21,9 @@ import Hero from './components/Includes/Hero.vue';
 Vue.component('app-hero', Hero);
 
 
+import Filters from './includes/filters';
+Vue.prototype.filters = Filters;
+
 /**
  * Load in Axios HTTP framework.
  */

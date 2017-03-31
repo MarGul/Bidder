@@ -4472,7 +4472,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Hero_vue__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Hero_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Hero_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_BootstrapBreakpoints__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_filters__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__ = __webpack_require__(65);
 /**
  * Load in jQuery
  */
@@ -4495,6 +4496,9 @@ Vue.use(__webpack_require__(19));
 
 Vue.component('app-hero', __WEBPACK_IMPORTED_MODULE_0__components_Includes_Hero_vue___default.a);
 
+
+Vue.prototype.filters = __WEBPACK_IMPORTED_MODULE_1__includes_filters__["a" /* default */];
+
 /**
  * Load in Axios HTTP framework.
  */
@@ -4510,7 +4514,7 @@ window.axios.defaults.headers.common = {
  * Object to handle Twitter bootstrap breakpoints
  */
 
-window.breakpoints = new __WEBPACK_IMPORTED_MODULE_1__includes_classes_BootstrapBreakpoints__["a" /* default */]();
+window.breakpoints = new __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__["a" /* default */]();
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
@@ -7722,7 +7726,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
       staticClass: "info-value",
       domProps: {
-        "textContent": _vm._s(bid.hours)
+        "textContent": _vm._s(_vm.filters.commaSeparator(bid.hours))
       }
     })]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-6 col-md-3 text-center info-section"
@@ -7731,7 +7735,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
       staticClass: "info-value",
       domProps: {
-        "textContent": _vm._s(bid.price)
+        "textContent": _vm._s(_vm.filters.currency(bid.price))
       }
     })])])]), _vm._v(" "), _c('div', {
       staticClass: "bid-description",
@@ -8897,6 +8901,31 @@ return index;
 __webpack_require__(20);
 module.exports = __webpack_require__(21);
 
+
+/***/ }),
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var filters = {
+	currency: function currency(value) {
+		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ',') + ' kr';
+	},
+	commaSeparator: function commaSeparator(value) {
+		return value.toString().replace('.', ',');
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = filters;
 
 /***/ })
 ],[133]);

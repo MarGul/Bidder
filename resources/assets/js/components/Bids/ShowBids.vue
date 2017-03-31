@@ -34,11 +34,11 @@
 							</div>
 							<div class="col-xs-6 col-md-3 text-center info-section">
 								<div class="info-head">Antal timmar</div>
-								<div class="info-value" v-text="bid.hours"></div>
+								<div class="info-value" v-text="filters.commaSeparator(bid.hours)"></div>
 							</div>
 							<div class="col-xs-6 col-md-3 text-center info-section">
 								<div class="info-head">Pris</div>
-								<div class="info-value" v-text="bid.price"></div>
+								<div class="info-value" v-text="filters.currency(bid.price)"></div>
 							</div>
 						</div>
 					</div>
