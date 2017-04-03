@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
 					<div class="service-description white-container" v-if="!breakpoints.small">
-						Description
+						<app-service-description></app-service-description>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-4">
@@ -19,7 +19,7 @@
 						>Lägg ett bud</button>
 					</div>
 					<div class="service-description white-container" v-if="breakpoints.small">
-						Description
+						<app-service-description></app-service-description>
 					</div>
 					<div class="service-about white-container">
 						About
@@ -56,11 +56,13 @@
 	import Service from '../includes/models/Service';
 	import AddComment from '../components/Comments/AddComment.vue';
 	import Comment from '../components/Comments/Comment.vue';
+	import ServiceDescription from '../components/Services/ServiceDescription.vue';
 
 	export default {
 		components: {
 			appComment: Comment,
-			appAddComment: AddComment
+			appAddComment: AddComment,
+			appServiceDescription: ServiceDescription
 		},
 		computed: {
 			service() {

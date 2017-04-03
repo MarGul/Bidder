@@ -23,3 +23,55 @@
 		}
 	}
 }
+
+.service_description-component {
+	.waiting {
+		text-align: center;
+		padding: 20px 0;
+	}
+
+	.title {
+		font-weight: bold;
+		font-size: 18px;
+		margin: 0 0 10px 0;
+
+		@media screen and (min-width: $screen-sm-min) {
+			text-align: center;
+		}
+	}
+
+	.info {
+		border-bottom: 1px solid $border-color-gray;
+		margin: 0 -15px 0 -15px;
+		padding: 5px 15px;
+
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+		}
+
+		.info-item {
+			font-weight: bold;
+			margin: 3px 0;
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+				text-align: center;
+			}
+
+			.info-item-value {
+				font-weight: normal;
+				margin-left: 3px;
+			}
+
+			i {
+				color: $primary-green;
+				width: 30px;
+				text-align: center;
+			}
+		}
+	}
+
+	.description {
+		margin: 20px 0 0 0;
+	}
+}
