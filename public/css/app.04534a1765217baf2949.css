@@ -8835,6 +8835,7 @@ body.mobile-nav-open .overlay {
 
 .service_description-component .description {
   margin: 20px 0 0 0;
+  white-space: pre-wrap;
 }
 
 .list-bids li {
@@ -8890,6 +8891,10 @@ body.mobile-nav-open .overlay {
   .list-bids li .bid-time {
     text-align: right;
   }
+}
+
+.add-comment-component {
+  margin-top: 30px;
 }
 
 .add-comment-component h4 {
