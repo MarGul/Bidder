@@ -76,3 +76,37 @@
 		white-space: pre-wrap;
 	}
 }
+
+.service-user {
+
+	.user-avatar {
+		text-align: center;
+		margin: 0 0 5px 0;
+
+		img {
+			width: 45%;
+			border-radius: 50%;
+			border: 3px solid $primary-green;
+		}
+	}
+
+	.user-displayname {
+		text-align: center;
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	.user-ratings {
+		text-align: center;
+		padding: 8px 0;
+		margin: 0 -15px 0 -15px;
+		background: #fafafa;
+		border-top: 1px solid $border-color-gray;
+		border-bottom: 1px solid $border-color-gray;
+
+		.link {
+			color: #636b6f;
+			font-size: 13px;
+		}
+	}
+}

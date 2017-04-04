@@ -21,8 +21,15 @@
 					<div class="service-description white-container" v-if="breakpoints.small">
 						<app-service-description></app-service-description>
 					</div>
-					<div class="service-about white-container">
-						About
+					<div class="service-user white-container">
+						<template v-if="$store.getters.getServiceLoaded">	
+							<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
+							<div class="user-displayname" v-text="service.user.displayname"></div>
+							<div class="user-ratings">
+								<app-ratings :rating="3.7" :total="7" size="large"></app-ratings>
+								<a class="link">Visa omdömmen</a>
+							</div>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -57,12 +64,14 @@
 	import AddComment from '../components/Comments/AddComment.vue';
 	import Comment from '../components/Comments/Comment.vue';
 	import ServiceDescription from '../components/Services/ServiceDescription.vue';
+	import Ratings from '../components/Includes/Ratings.vue';
 
 	export default {
 		components: {
 			appComment: Comment,
 			appAddComment: AddComment,
-			appServiceDescription: ServiceDescription
+			appServiceDescription: ServiceDescription,
+			appRatings: Ratings
 		},
 		computed: {
 			service() {
@@ -73,6 +82,9 @@
 			},
 			breakpoints() {
 				return window.breakpoints;
+			},
+			avatarAlt() {
+				return `Avatar bild för användare ${this.service.user.displayname}`;
 			}
 		},
 		methods: {

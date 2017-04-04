@@ -3,7 +3,7 @@ import ServiceModel from "../../includes/models/Service";
 const service = {
 	state: {
 		loaded: false,
-		service: {comments: [], bids: []}
+		service: {comments: [], bids: [], user: {}}
 	},
 	mutations: {
 		'SET_LOADED'(state, loaded) {
@@ -20,7 +20,7 @@ const service = {
 		getService({commit}, payload) {
 			// Set the base state first.
 			commit('SET_LOADED', false);
-			commit('SET_SERVICE', {comments: [], bids: []});
+			commit('SET_SERVICE', {comments: [], bids: [], user: {}});
 			ServiceModel.find(payload.id)
 			.then(response => {
 				commit('SET_SERVICE', response.service);
