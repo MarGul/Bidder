@@ -18,7 +18,7 @@
 						<div class="service-bids white-container">
 							<div class="time-left text-center">
 								<app-timer :ends="service.bid_stop"></app-timer>
-								<div class="ends">Avslutas: <i>{{ service.bid_stop }}</i></div>
+								<div class="ends">{{ ends }}</div>
 							</div>
 							<div class="active-bids text-center">
 								<i class="fa fa-gavel" aria-hidden="true"></i>
@@ -96,6 +96,9 @@
 			},
 			breakpoints() {
 				return window.breakpoints;
+			},
+			ends() {
+				return moment(this.service.bid_stop).format("LLL");
 			},
 			avatarAlt() {
 				return `Avatar bild för användare ${this.service.user.displayname}`;

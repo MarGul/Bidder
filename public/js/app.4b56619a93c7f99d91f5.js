@@ -4860,6 +4860,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
 		},
+		ends: function ends() {
+			return moment(this.service.bid_stop).format("LLL");
+		},
 		avatarAlt: function avatarAlt() {
 			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.displayname;
 		}
@@ -7740,7 +7743,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "ends"
-  }, [_vm._v("Avslutas: "), _c('i', [_vm._v(_vm._s(_vm.service.bid_stop))])])], 1), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.ends))])], 1), _vm._v(" "), _c('div', {
     staticClass: "active-bids text-center"
   }, [_c('i', {
     staticClass: "fa fa-gavel",
