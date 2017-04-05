@@ -13,7 +13,7 @@
 								<div class="bid-user">
 									<a class="link">{{ bid.user.displayname }}</a>
 									<span class="user-reviews">
-										<i class="fa fa-star" aria-hidden="true" v-for="n in 5"></i> (43)
+										<app-ratings :rating="4.5" :total="8"></app-ratings>
 									</span>
 								</div>
 							</div>
@@ -58,7 +58,12 @@
 </template>
 
 <script>
+	import Ratings from "../Includes/Ratings.vue";
+
 	export default {
+		components: {
+			appRatings: Ratings
+		},
 		computed: {
 			bids() {
 				return this.$store.getters.getBids;

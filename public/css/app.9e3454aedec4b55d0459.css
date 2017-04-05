@@ -8898,6 +8898,7 @@ body.mobile-nav-open .overlay {
 
 .list-bids li .bid-header .user-reviews {
   margin-left: 5px;
+  display: inline-block;
 }
 
 .list-bids li .bid-header .user-reviews i {

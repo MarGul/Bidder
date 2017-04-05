@@ -3437,6 +3437,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue__);
 //
 //
 //
@@ -3497,7 +3499,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue___default.a
+	},
 	computed: {
 		bids: function bids() {
 			return this.$store.getters.getBids;
@@ -8361,14 +8368,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "link"
     }, [_vm._v(_vm._s(bid.user.displayname))]), _vm._v(" "), _c('span', {
       staticClass: "user-reviews"
-    }, [_vm._l((5), function(n) {
-      return _c('i', {
-        staticClass: "fa fa-star",
-        attrs: {
-          "aria-hidden": "true"
-        }
-      })
-    }), _vm._v(" (43)\n\t\t\t\t\t\t\t\t")], 2)])]), _vm._v(" "), _c('div', {
+    }, [_c('app-ratings', {
+      attrs: {
+        "rating": 4.5,
+        "total": 8
+      }
+    })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5"
     }, [_c('div', {
       staticClass: "bid-time",
