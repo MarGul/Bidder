@@ -43,25 +43,27 @@
 
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
-							<div class="form-group"  :class="{'has-error': form.errors.has('hours')}">
+							<div class="form-group" :class="{'has-error': form.errors.has('hours')}">
 								<input 
-									type="number" 
+									type="text" 
 									id="hours" 
 									class="form-control" 
 									placeholder="Antal timmar" 
-									v-model.number="form.hours">
+									@keypress="isNumber($event)"
+									v-model="form.hours">
 
 								<span class="help-block" v-if="form.errors.has('hours')" v-text="form.errors.get('hours')"></span>
 							</div>
 						</div>
 		
 						<div class="col-xs-12 col-md-6">
-							<div class="form-group"  :class="{'has-error': form.errors.has('price')}">
+							<div class="form-group" :class="{'has-error': form.errors.has('price')}">
 								<input 
 									type="text" 
 									id="price" 
 									class="form-control" 
 									placeholder="Ditt pris*" 
+									@keypress="isNumber($event)"
 									v-model="form.price">
 
 								<span class="help-block" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
@@ -145,11 +147,21 @@
 				let data = this.form.data();
 				data.start = this.stripTime(data.start);
 				data.end = this.stripTime(data.end);
+				data.hours = parseFloat(data.hours.replace(',', '.'));
+				data.price = parseFloat(data.price.replace(',', '.'));
 
 				return data;
 			}
 		},
 		methods: {
+			isNumber(event) {
+				let code = event.keyCode || event.which;
+				if ( (code >= 48 && code <= 57) || code == 44 ) {
+					return true;
+				} else {
+					event.preventDefault();
+				}
+			},
 			stripTime(date) {
 				return (date instanceof Date) ? `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}` : date;
 			},
