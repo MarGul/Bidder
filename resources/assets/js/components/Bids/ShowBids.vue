@@ -18,7 +18,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-5">
-								<div class="bid-time" v-text="bid.created_at"></div>
+								<div class="bid-time" v-text="time(bid.created_at)"></div>
 							</div>
 						</div>
 					</div>
@@ -67,6 +67,9 @@
 		methods: {
 			openCreateBid() {
 				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
+			},
+			time(t) {
+				return moment(t).format("LLL");
 			}
 		}
 	}

@@ -3506,6 +3506,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		openCreateBid: function openCreateBid() {
 			this.$store.dispatch('openModal', { component: 'createBid', size: 'large' });
+		},
+		time: function time(t) {
+			return moment(t).format("LLL");
 		}
 	}
 };
@@ -8370,7 +8373,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('div', {
       staticClass: "bid-time",
       domProps: {
-        "textContent": _vm._s(bid.created_at)
+        "textContent": _vm._s(_vm.time(bid.created_at))
       }
     })])])]), _vm._v(" "), _c('div', {
       staticClass: "bid-info"
