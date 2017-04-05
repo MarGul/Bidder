@@ -4,7 +4,7 @@
 		<div class="comment-content">
 			<div class="comment-head">
 				<span class="comment-author" v-text="comment.user.displayname"></span>
-				<small class="comment-time" v-text="comment.updated_at"></small>
+				<small class="comment-time" v-text="time"></small>
 				<i class="fa fa-reply" aria-hidden="true" v-if="comment.canReply"></i>
 			</div>
 			<div class="comment-body" v-text="comment.body"></div>
@@ -13,12 +13,24 @@
 </template>
 
 <script>
+	import { HeartBeat } from '../../includes/heartbeat';
+
 	export default {
 		props: ['comment'],
+		data() {
+			return {
+				time: moment(this.comment.updated_at).fromNow()
+			}
+		},
 		computed: {
 			avatar() {
 				return `url('${this.comment.user.avatar}')`;
 			}
+		},
+		created() {
+			HeartBeat.$on('beat', () => {
+				this.time = moment(this.comment.updated_at).fromNow();
+			});
 		}
 	}
 </script>

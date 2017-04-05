@@ -8758,6 +8758,17 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.service-bids .time-left {
+  border-bottom: 1px solid #d7d7d7;
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+}
+
+.service-bids .time-left .timer-component {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .service-bids .active-bids {
   margin-bottom: 5px;
   font-size: 16px;
@@ -8867,6 +8878,10 @@ body.mobile-nav-open .overlay {
 .service-user .user-ratings .link {
   color: #636b6f;
   font-size: 13px;
+}
+
+.service-user .user-ratings .link:hover {
+  color: #55AE3A;
 }
 
 .list-bids li {

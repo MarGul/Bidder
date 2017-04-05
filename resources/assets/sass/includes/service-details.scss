@@ -4,6 +4,17 @@
 		margin-bottom: 20px;
 	}
 
+	.time-left {
+		border-bottom: 1px solid $border-color-gray;
+		margin-bottom: 10px;
+		padding-bottom: 15px;
+
+		.timer-component {
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+
 	.active-bids {
 		margin-bottom: 5px;
 		font-size: 16px;
@@ -107,6 +118,10 @@
 		.link {
 			color: #636b6f;
 			font-size: 13px;
+
+			&:hover {
+				color: $primary-green;
+			}
 		}
 	}
 }

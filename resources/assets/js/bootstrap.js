@@ -4,6 +4,12 @@
 window.$ = window.jQuery = require('jquery');
 
 /**
+ *  Load in Moment.js
+ */
+window.moment = require('moment');
+window.moment.locale('sv')
+
+/**
  * Load in vue
  */
 window.Vue = require('vue');
