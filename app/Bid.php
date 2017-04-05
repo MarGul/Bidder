@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Bid extends Model
 {
@@ -41,6 +42,18 @@ class Bid extends Model
      */
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Add a global scope to this model to always sort by created_at DESC
+     * 
+     * @return void
+     */
+    protected static function boot() {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
     }
 
 }
