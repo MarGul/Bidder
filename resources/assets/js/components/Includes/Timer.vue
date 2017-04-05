@@ -5,6 +5,8 @@
 </template>
 
 <script>
+	import { HeartBeat } from '../../includes/heartbeat';
+
 	export default {
 		props: ['ends'],
 		data() {
@@ -44,13 +46,13 @@
 			}
 		},
 		mounted() {
-			this.timer = setInterval(() => {
+			HeartBeat.$on('beat', () => {
 				this.now = Math.trunc((new Date()).getTime() / 1000);
 
 				if ( this.now == this.ending ) {
 					this.$emit('ended');
 				}
-			}, 1000);
+			});
 		}
 	}
 </script>

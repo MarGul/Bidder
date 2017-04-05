@@ -31,6 +31,7 @@
     import Modal from './components/Includes/Modal.vue';
     import Search from './components/Includes/Search.vue';
     import Footer from './components/Layout/Footer/Footer.vue';
+    import { HeartBeat } from './includes/heartbeat';
 
     export default {
         data() {
@@ -56,6 +57,10 @@
             this.$store.dispatch('fetchRegions');
             // Check if we are logged in.
             this.$store.dispatch('getAuthUser');
+            // Start the applications heartbeat
+            setInterval(function() {
+                HeartBeat.$emit('beat');
+            }, 1000)
         }
     }
 </script>
