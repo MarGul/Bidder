@@ -79,7 +79,8 @@
 
 				User.new().setUrl('login').post(this.form.data())
 					.then((response) => {
-						this.$store.dispatch('getAuthUser');
+						this.$store.commit('SET_AUTHENTICATED', {authenticated: response.authenticated});
+						this.$store.commit('SET_USER', {user: response.user});
 						this.processing = false;
 						this.$store.dispatch('closeModal');
 					})

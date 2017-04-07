@@ -3321,8 +3321,8 @@ var app = new Vue({
         // Initialize Data
         this.$store.dispatch('fetchCategories');
         this.$store.dispatch('fetchRegions');
-        // Check if we are logged in.
-        this.$store.dispatch('getAuthUser');
+        this.$store.commit('SET_AUTHENTICATED', { authenticated: window.Laravel.authenticated });
+        this.$store.commit('SET_USER', { user: window.Laravel.user || {} });
         // Start the applications heartbeat
         setInterval(function () {
             __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
@@ -3422,7 +3422,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].new().setUrl('login').post(this.form.data()).then(function (response) {
-				_this.$store.dispatch('getAuthUser');
+				_this.$store.commit('SET_AUTHENTICATED', { authenticated: response.authenticated });
+				_this.$store.commit('SET_USER', { user: response.user });
 				_this.processing = false;
 				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
@@ -5515,23 +5516,11 @@ var auth = {
 		user: {}
 	},
 	mutations: {
-		'SET_AUTHENTICATED': function SET_AUTHENTICATED(state, value) {
-			state.authenticated = value;
+		'SET_AUTHENTICATED': function SET_AUTHENTICATED(state, payload) {
+			state.authenticated = payload.authenticated;
 		},
-		'SET_USER': function SET_USER(state, user) {
-			state.user = user;
-		}
-	},
-	actions: {
-		getAuthUser: function getAuthUser(_ref) {
-			var commit = _ref.commit;
-
-			axios.get('auth/user').then(function (response) {
-				commit('SET_AUTHENTICATED', true);
-				commit('SET_USER', response.data.user);
-			}).catch(function (error) {
-				commit('SET_AUTHENTICATED', false);
-			});
+		'SET_USER': function SET_USER(state, payload) {
+			state.user = payload.user;
 		}
 	},
 	getters: {

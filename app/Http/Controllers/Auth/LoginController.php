@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return response()->json(['authenticated' => true], 200);
+        return response()->json(['authenticated' => true, 'user' => $user], 200);
     }
 
     /**
