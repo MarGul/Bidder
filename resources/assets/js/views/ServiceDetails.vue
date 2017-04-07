@@ -46,7 +46,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-md-8">
-						<app-add-comment @added="addComment"></app-add-comment>
+						<app-add-comment></app-add-comment>
 						<div class="margin-50">
 							<ul class="top-comments">
 								<transition-group name="slide-in-left">
@@ -105,9 +105,6 @@
 			}
 		},
 		methods: {
-			addComment({comment}) {
-				this.service.comments.unshift(comment);
-			},
 			createBid() {
 				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
 			},

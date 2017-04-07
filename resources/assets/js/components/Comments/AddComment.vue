@@ -40,18 +40,24 @@
 				processing: false
 			}
 		},
+		computed: {
+			serviceId() {
+				return this.$store.getters.getService.id;
+			}
+		},
 		methods: {
 			add() {
 				// Validation
 				if ( !this.comment ) return this.error = true;
 				this.processing = true;
 
-				Comment.setUrl(`services/${this.$route.params.id}/comments`).create({
+				Comment.setUrl(`services/${this.serviceId}/comments`).create({
 					body: this.comment, 
 					parent: this.parent
 				})
 				.then(response => {
-					this.$emit('added', {comment: response.comment});
+					console.log(response.comment);
+					this.$store.commit('ADD_COMMENT', {comment: response.comment});
 
 					// Clear input and stop processing
 					this.comment = '';

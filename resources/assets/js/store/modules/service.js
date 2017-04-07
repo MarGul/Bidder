@@ -14,6 +14,9 @@ const service = {
 		},
 		'ADD_BID'(state, payload) {
 			state.service.bids.unshift(payload.bid);
+		},
+		'ADD_COMMENT'(state, payload) {
+			state.service.comments.unshift(payload.comment);
 		}
 	},
 	actions: {
