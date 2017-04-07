@@ -4299,6 +4299,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -4310,7 +4315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			register: false
+			dropdown: false
 		};
 	},
 
@@ -8017,13 +8022,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-search')], 1), _vm._v(" "), _c('div', {
     staticClass: "hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right"
   }, [(_vm.$store.getters.isAuthenticated) ? _c('div', {
-    staticClass: "auth-user"
+    staticClass: "auth-user",
+    on: {
+      "click": function($event) {
+        _vm.dropdown = !_vm.dropdown
+      }
+    }
   }, [_c('div', {
     staticClass: "auth-avatar",
     style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.displayname))])]) : _c('ul', {
+  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.displayname))])]) : _vm._e(), _vm._v(" "), (_vm.dropdown) ? _c('ul', {
+    staticClass: "auth-dropdown"
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1)]) : _vm._e(), _vm._v(" "), (!_vm.$store.getters.isAuthenticated) ? _c('ul', {
     staticClass: "desktop-header-nav"
   }, [_c('li', [_c('a', {
     staticClass: "register",
@@ -8045,7 +8057,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         })
       }
     }
-  }, [_vm._v("Logga In")])])])])])])]), _vm._v(" "), _c('nav', {
+  }, [_vm._v("Logga In")])])]) : _vm._e()])])])]), _vm._v(" "), _c('nav', {
     staticClass: "desktop-navigation"
   }, [_c('div', {
     staticClass: "container"
@@ -8084,7 +8096,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('li', {
+  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
@@ -8097,6 +8109,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" Information")])], 1)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Profil")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-sign-out",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Logga Ut")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "nav-item"
   }, [_c('a', {

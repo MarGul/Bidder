@@ -16,12 +16,17 @@
 					</div>
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
-						<div v-if="$store.getters.isAuthenticated" class="auth-user">
+						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="dropdown = !dropdown">
 							<div class="auth-avatar" :style="avatar"></div>
 							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
 						</div>
 
-						<ul v-else class="desktop-header-nav">
+						<ul class="auth-dropdown" v-if="dropdown">
+							<li><a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</a></li>
+							<li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut</a></li>
+						</ul>
+
+						<ul v-if="!$store.getters.isAuthenticated" class="desktop-header-nav">
 							<li>
 								<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
 							</li>
@@ -70,7 +75,7 @@
 		},
 		data() {
 			return {
-				register: false
+				dropdown: false
 			}
 		},
 		computed: {
