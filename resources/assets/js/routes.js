@@ -10,6 +10,7 @@ let routes = [
 	{ path: "/services", name: 'services', component: require('./views/Services.vue') },
 	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails.vue') },
 	{ path: "/information", name: 'information', component: require('./views/Information.vue') },
+	{ path: "/user", name: 'user', component: require('./views/User.vue') },
 	
 	/* 404 is handled by the vue application */
 	{ path: "*", component: require('./views/404.vue') }

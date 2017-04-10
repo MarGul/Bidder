@@ -22,7 +22,9 @@
 						</div>
 
 						<ul class="auth-dropdown" v-if="dropdown">
-							<li><a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</a></li>
+							<li>
+								<router-link to="/user"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</router-link>
+							</li>
 							<li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut</a></li>
 						</ul>
 

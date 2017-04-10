@@ -9091,6 +9091,92 @@ body.mobile-nav-open .overlay {
   padding: 7.5px 15px;
 }
 
+.user-component .mobile-user-nav-button {
+  float: right;
+}
+
+.user-component .mobile-user-nav-button i {
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+}
+
+.user-component .mobile-user-nav-button.open i {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-nav {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+
+.user-component .user-ui-container .user-ui-content {
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  margin-top: 20px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-content {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+    margin-top: 0px;
+    border-left: none;
+  }
+}
+
+.user-component .user-nav {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border-top: 1px solid #d7d7d7;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.user-component .user-nav li a {
+  display: block;
+  padding: 10px 15px;
+  font-weight: bold;
+  background-color: #f1f1f1;
+  color: #7d8793;
+  border: 1px solid #d7d7d7;
+  border-top: 1px solid transparent;
+}
+
+.user-component .user-nav li a.active {
+  cursor: default;
+  background-color: #fff;
+  color: #55AE3A;
+  border-left: 3px solid #d7d7d7;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-nav li a.active {
+    box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-right: none;
+  }
+}
+
+.user-component .user-nav li a:hover {
+  text-decoration: none;
+  color: #55AE3A;
+}
+
 .slide-in-enter-active {
   -webkit-animation: slide-in 800ms ease-out forwards;
   animation: slide-in 800ms ease-out forwards;
@@ -9226,6 +9312,34 @@ body.mobile-nav-open .overlay {
     -webkit-transform: translateY(-200px);
             transform: translateY(-200px);
     opacity: 0;
+  }
+}
+
+.slide-down-enter-active {
+  -webkit-animation: slide-down-in 400ms ease-out forwards;
+  animation: slide-down-in 400ms ease-out forwards;
+}
+
+.slide-down-leave-active {
+  -webkit-animation: slide-down-out 400ms ease-out forwards;
+  animation: slide-down-out 400ms ease-out forwards;
+}
+
+@keyFrames slide-down-in {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyFrames slide-down-out {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
   }
 }
 
