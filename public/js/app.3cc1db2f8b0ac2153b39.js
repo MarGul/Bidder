@@ -5548,7 +5548,9 @@ var Region = function (_Model) {
 /**
  * All of the applications routes
  */
-var routes = [{ path: "/", name: 'home', component: __webpack_require__(224) }, { path: "/categories", name: 'categories', component: __webpack_require__(223) }, { path: "/locations", name: 'locations', component: __webpack_require__(226) }, { path: "/services", name: 'services', component: __webpack_require__(228) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(227) }, { path: "/information", name: 'information', component: __webpack_require__(225) }, { path: "/user", name: 'user', component: __webpack_require__(229) },
+var routes = [{ path: "/", name: 'home', component: __webpack_require__(224) }, { path: "/categories", name: 'categories', component: __webpack_require__(223) }, { path: "/locations", name: 'locations', component: __webpack_require__(226) }, { path: "/services", name: 'services', component: __webpack_require__(228) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(227) }, { path: "/information", name: 'information', component: __webpack_require__(225) }, { path: "/user", name: 'user', component: __webpack_require__(229),
+	children: [{ path: '', component: __webpack_require__(275) }, { path: 'profile', component: __webpack_require__(275) }, { path: 'notifications', component: __webpack_require__(277) }, { path: 'create-service', component: __webpack_require__(276) }, { path: 'my-services', component: __webpack_require__(278) }, { path: 'my-bids', component: __webpack_require__(279) }, { path: 'payments', component: __webpack_require__(280) }]
+},
 
 /* 404 is handled by the vue application */
 { path: "*", component: __webpack_require__(222) }];
@@ -8120,7 +8122,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "auth-dropdown"
   }, [_c('li', [_c('router-link', {
     attrs: {
-      "to": "/user"
+      "to": "/user/profile"
     }
   }, [_c('i', {
     staticClass: "fa fa-user-circle",
@@ -8399,47 +8401,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "user-ui-nav"
   }, [(_vm.mobileNavOpen || !_vm.breakpoints.isSmallDevices()) ? _c('ul', {
     staticClass: "user-nav"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/profile"
+    }
+  }, [_vm._v("Profil")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/notifications"
+    }
+  }, [_vm._v("Notifikationer")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/create-service"
+    }
+  }, [_vm._v("Skapa tjänst")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/my-services"
+    }
+  }, [_vm._v("Mina tjänster")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/my-bids"
+    }
+  }, [_vm._v("Mina bud")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/payments"
+    }
+  }, [_vm._v("Betalningar")])], 1)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "user-ui-content"
-  }, [_vm._v("\n\t\t\t\tbla\n\t\t\t")])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Profil")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Notifikationer")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    staticClass: "active",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Skapa tjänst")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Mina tjänster")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Mina bud")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Betalningar")])])
-}]}
+  }, [_c('router-view')], 1)])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -9727,6 +9716,134 @@ return index;
 
 __webpack_require__(141);
 module.exports = __webpack_require__(142);
+
+
+/***/ }),
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Profile.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/CreateService.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Notifications.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/MyServices.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/MyBids.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Payments.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
 
 
 /***/ })

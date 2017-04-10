@@ -12,16 +12,16 @@
 			<div class="user-ui-container">
 				<div class="user-ui-nav">
 					<ul class="user-nav" v-if="mobileNavOpen || !breakpoints.isSmallDevices()">
-						<li><a href="#">Profil</a></li>
-						<li><a href="#">Notifikationer</a></li>
-						<li><a href="#" class="active">Skapa tjänst</a></li>
-						<li><a href="#">Mina tjänster</a></li>
-						<li><a href="#">Mina bud</a></li>
-						<li><a href="#">Betalningar</a></li>
+						<li><router-link to="/user/profile">Profil</router-link></li>
+						<li><router-link to="/user/notifications">Notifikationer</router-link></li>
+						<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
+						<li><router-link to="/user/my-services">Mina tjänster</router-link></li>
+						<li><router-link to="/user/my-bids">Mina bud</router-link></li>
+						<li><router-link to="/user/payments">Betalningar</router-link></li>
 					</ul>
 				</div>
 				<div class="user-ui-content">
-					bla
+					<router-view></router-view>
 				</div>
 			</div>
 			

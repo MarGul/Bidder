@@ -9154,7 +9154,19 @@ body.mobile-nav-open .overlay {
   background-color: #f1f1f1;
   color: #7d8793;
   border: 1px solid #d7d7d7;
-  border-top: 1px solid transparent;
+  border-top: none;
+}
+
+.user-component .user-nav li a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-nav li a {
+    font-size: 1.2em;
+    padding: 15px 20px;
+  }
 }
 
 .user-component .user-nav li a.active {
