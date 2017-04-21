@@ -21,9 +21,9 @@ class Category extends Model
      *
      * @var array
      */
-    protected $hidden = [
+    /*protected $hidden = [
         'id'
-    ];
+    ];*/
 
     /**
      * Disable timestamps on the model.

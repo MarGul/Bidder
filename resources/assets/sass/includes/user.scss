@@ -46,6 +46,17 @@
 				margin-top: 0px;
 				border-left: none;
 			}
+
+			.user-component-title {
+				margin: 10px 0 35px 0;
+				padding-bottom: 15px;
+				font-size: 26px;
+				border-bottom: 1px solid $primary-green;
+
+				@media screen and (min-width: $screen-md-min) {
+					font-size: 34px;
+				}
+			}
 		}
 	}
 

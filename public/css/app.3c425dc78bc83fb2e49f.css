@@ -9139,6 +9139,19 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.user-component .user-ui-container .user-ui-content .user-component-title {
+  margin: 10px 0 35px 0;
+  padding-bottom: 15px;
+  font-size: 26px;
+  border-bottom: 1px solid #55AE3A;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-content .user-component-title {
+    font-size: 34px;
+  }
+}
+
 .user-component .user-nav {
   margin: 0;
   padding: 0;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreService;
 use App\Service;
 use Carbon\Carbon;
 use App\Features\ServiceManager;
@@ -46,9 +47,9 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreService $request)
     {
-        $this->manager->create($request);
+        return $this->manager->create($request);
     }
 
     /**
