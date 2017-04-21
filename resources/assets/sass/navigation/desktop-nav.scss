@@ -41,6 +41,8 @@
 	background: darken($body-bg, 2%);
 	border-bottom: 1px solid $border-color-gray;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.25);
+	position: relative;
+	z-index: 50;
 }
 
 .desktop-nav {

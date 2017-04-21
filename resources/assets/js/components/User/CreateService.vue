@@ -133,7 +133,7 @@
 				</button> 
 			</div>
 		</form>
-
+		
 	</div>
 </template>
 
@@ -193,7 +193,9 @@
 				this.processing = true;
 				Service.create(this.finalData)
 				.then(response => {
-					this.form.clear();
+					this.form.reset();
+					this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 					this.processing = false;
 				})
 				.catch(error => {
