@@ -26,8 +26,15 @@ let routes = [
 	{ path: "*", component: require('./views/404.vue') }
 ];
 
-export default new VueRouter({
+const router = new VueRouter({
 	routes,
 	linkActiveClass: 'active',
 	mode: 'history'
 });
+
+router.beforeEach((to, from, next) => {
+  
+  next();
+});
+
+export default router;

@@ -133,7 +133,7 @@
 				</button> 
 			</div>
 		</form>
-		
+
 	</div>
 </template>
 
@@ -195,7 +195,7 @@
 				.then(response => {
 					this.form.reset();
 					this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$("html, body").animate({ scrollTop: 0 }, "fast");
 					this.processing = false;
 				})
 				.catch(error => {

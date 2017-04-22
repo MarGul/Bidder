@@ -1,5 +1,8 @@
 <template>
 	<div class="user-component no-hero-view">
+		
+		<app-notifications v-if="$store.getters.showingNotification"></app-notifications>
+
 		<div class="container">
 			<button class="btn btn-primary clearfix mobile-user-nav-button" 
 					:class="{open: mobileNavOpen}"
@@ -30,12 +33,20 @@
 </template>
 
 <script>
+	import Notifications from '../components/Includes/Notifications.vue';
+
 	export default {
+		components: {
+			appNotifications: Notifications
+		},
 		data() {
 			return {
 				breakpoints: window.breakpoints,
 				mobileNavOpen: false
 			}
+		},
+		destroyed() {
+			this.$store.dispatch('closeNotification');
 		}
 	}
 </script>

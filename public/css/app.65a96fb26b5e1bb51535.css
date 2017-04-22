@@ -8165,6 +8165,16 @@ body.mobile-nav-open .overlay {
       align-self: center;
 }
 
+.desktop-header-right .auth-user .auth-name .auth-arrow {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.desktop-header-right .auth-user .auth-name .auth-arrow.up {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
 .desktop-header-right .auth-dropdown {
   z-index: 100;
   position: absolute;

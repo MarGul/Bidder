@@ -4,6 +4,10 @@
 			<div class="notification-area">
 				<div class="notification-message">
 					{{ $store.getters.notificationMessage }}
+					<template v-if="$store.getters.notificationLink">
+						&nbsp;&mdash;&nbsp;
+						<router-link :to="$store.getters.notificationLink">{{ $store.getters.notificationLinkText }}</router-link>
+					</template>
 				</div>
 				<div class="close-notification">
 					<i class="fa fa-times" aria-hidden="true" @click="$store.dispatch('closeNotification')"></i>
@@ -22,10 +26,16 @@
 <style lang="scss" scoped>
 	.notifications-component {
 		padding: 16px;
+		border: 1px solid rgba(27,31,35,0.15);
+		margin: -35px 0 35px 0;
 
 		&.success {
 			background-color: #A6D785;
-			color: #215E21;
+			color: #444;
+
+			a {
+				color: #008B00;
+			}
 		}
 
 		.notification-area {

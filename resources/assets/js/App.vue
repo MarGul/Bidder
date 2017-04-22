@@ -16,8 +16,6 @@
                 <app-search></app-search>
             </div>
 
-            <app-notifications v-if="$store.getters.showingNotification"></app-notifications>
-
             <!-- This is where the router view component will be loaded -->
             <router-view></router-view>
 
@@ -31,7 +29,7 @@
     import MobileHeader from './components/Layout/Header/MobileHeader.vue';
     import DesktopHeader from './components/Layout/Header/DesktopHeader.vue';
     import Modal from './components/Includes/Modal.vue';
-    import Notifications from './components/Includes/Notifications.vue';
+
     import Search from './components/Includes/Search.vue';
     import Footer from './components/Layout/Footer/Footer.vue';
     import { HeartBeat } from './includes/heartbeat';
@@ -51,7 +49,6 @@
             appMobileHeader: MobileHeader,
             appDesktopHeader: DesktopHeader,
             appModal: Modal,
-            appNotifications: Notifications,
             appSearch: Search,
             appFooter: Footer
         },

@@ -122,6 +122,18 @@
 			font-size: 15px;
 			font-weight: bold;
 			align-self: center;
+
+			.auth-arrow {
+				font-weight: bold;
+				margin-left: 5px;
+
+				&.up {
+					-webkit-transform: rotate(180deg);
+					-moz-transform: rotate(180deg);
+					-ms-transform: rotate(180deg);
+					transform: rotate(180deg);
+				}
+			}
 		}
 	}
 

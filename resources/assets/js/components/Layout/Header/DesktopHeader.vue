@@ -18,7 +18,10 @@
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
 						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="dropdown = !dropdown">
 							<div class="auth-avatar" :style="avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
+							<div class="auth-name">
+								{{ $store.getters.authUser.displayname }}
+								<i class="fa fa-angle-down auth-arrow" :class="{up: dropdown}" aria-hidden="true"></i>
+							</div>
 						</div>
 
 						<ul class="auth-dropdown" v-if="dropdown">
