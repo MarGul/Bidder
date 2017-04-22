@@ -49,4 +49,7 @@ Route::group(['prefix' => 'v1'], function() {
 		'except' => ['create', 'edit']
 	]);
 
+	/* user/services */
+	Route::get('user/services')->uses('UserServicesController@index');
+
 });

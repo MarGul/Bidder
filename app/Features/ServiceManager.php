@@ -24,6 +24,20 @@ class ServiceManager {
 	}
 
 	/**
+	 * Get services for a user
+	 * 
+	 * @param  App\User 	$user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function byUser($user) {
+		$services = Service::where('user_id', $user->id)
+							->orderBy('created_at', 'desc')
+							->get();
+
+		return response()->json(['message' => 'Displaying services for a user', 'services' => $services], 200);
+	}
+
+	/**
 	 * Create a service
 	 * 
 	 * @param  \App\Http\Requests\StoreService 	$request 
