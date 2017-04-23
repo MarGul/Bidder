@@ -16,7 +16,7 @@
 					</div>
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
-						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="dropdown = !dropdown">
+						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="toggleDropdown">
 							<div class="auth-avatar" :style="avatar"></div>
 							<div class="auth-name">
 								{{ $store.getters.authUser.displayname }}
@@ -78,14 +78,17 @@
 			appSearch: Search,
 			appRegister: Register
 		},
-		data() {
-			return {
-				dropdown: false
-			}
-		},
 		computed: {
 			avatar() {
 				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
+			},
+			dropdown() {
+				return this.$store.getters.authDropdown;
+			}
+		},
+		methods: {
+			toggleDropdown() {
+				this.$store.commit('SET_DROPDOWN', {dropdown: !this.$store.getters.authDropdown});
 			}
 		}
 	}

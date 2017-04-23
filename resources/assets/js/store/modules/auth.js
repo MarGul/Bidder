@@ -4,6 +4,7 @@ const auth = {
 	state: {
 		authenticated: false,
 		user: {},
+		dropdown: false,
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
@@ -15,6 +16,9 @@ const auth = {
 		},
 		'SET_USER'(state, payload) {
 			state.user = payload.user;
+		},
+		'SET_DROPDOWN'(state, payload) {
+			state.dropdown = payload.dropdown;
 		},
 		'SET_USER_SERVICES'(state, payload) {
 			state.userServices = payload.userServices;
@@ -48,6 +52,7 @@ const auth = {
 	getters: {
 		isAuthenticated: state => state.authenticated,
 		authUser: state => state.user,
+		authDropdown: state => state.dropdown,
 		userServices: state => state.userServices,
 		userServicesFetched: state => state.userServicesFetched,
 		userBids: state => state.userBids,

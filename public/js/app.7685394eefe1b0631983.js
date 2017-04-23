@@ -4389,15 +4389,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appSearch: __WEBPACK_IMPORTED_MODULE_0__Includes_Search_vue___default.a,
 		appRegister: __WEBPACK_IMPORTED_MODULE_1__Register_Register_vue___default.a
 	},
-	data: function data() {
-		return {
-			dropdown: false
-		};
-	},
-
 	computed: {
 		avatar: function avatar() {
 			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar };
+		},
+		dropdown: function dropdown() {
+			return this.$store.getters.authDropdown;
+		}
+	},
+	methods: {
+		toggleDropdown: function toggleDropdown() {
+			this.$store.commit('SET_DROPDOWN', { dropdown: !this.$store.getters.authDropdown });
 		}
 	}
 };
@@ -5932,6 +5934,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router___default.a({
 
 router.beforeEach(function (to, from, next) {
 
+	// Close the userNav dropdown.
+	router.app.$store.commit('SET_DROPDOWN', { dropdown: false });
+
 	next();
 });
 
@@ -5949,6 +5954,7 @@ var auth = {
 	state: {
 		authenticated: false,
 		user: {},
+		dropdown: false,
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
@@ -5960,6 +5966,9 @@ var auth = {
 		},
 		'SET_USER': function SET_USER(state, payload) {
 			state.user = payload.user;
+		},
+		'SET_DROPDOWN': function SET_DROPDOWN(state, payload) {
+			state.dropdown = payload.dropdown;
 		},
 		'SET_USER_SERVICES': function SET_USER_SERVICES(state, payload) {
 			state.userServices = payload.userServices;
@@ -5998,6 +6007,9 @@ var auth = {
 		},
 		authUser: function authUser(state) {
 			return state.user;
+		},
+		authDropdown: function authDropdown(state) {
+			return state.dropdown;
 		},
 		userServices: function userServices(state) {
 			return state.userServices;
@@ -8859,9 +8871,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.$store.getters.isAuthenticated) ? _c('div', {
     staticClass: "auth-user",
     on: {
-      "click": function($event) {
-        _vm.dropdown = !_vm.dropdown
-      }
+      "click": _vm.toggleDropdown
     }
   }, [_c('div', {
     staticClass: "auth-avatar",

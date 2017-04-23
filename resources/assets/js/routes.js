@@ -34,6 +34,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   
+	// Close the userNav dropdown.
+	router.app.$store.commit('SET_DROPDOWN', {dropdown: false});
+
   next();
 });
 
