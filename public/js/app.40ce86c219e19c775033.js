@@ -9436,11 +9436,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.services), function(service) {
     return _c('li', [_c('span', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t" + _vm._s(service.title) + "\n\t\t\t\t"), (service.status == 'active') ? _c('span', {
+    }, [_vm._v("\n\t\t\t\t" + _vm._s(service.title) + "\n\t\t\t\t"), (service.active) ? _c('span', {
       staticClass: "item-link"
     }, [_vm._v("\n\t\t\t\t\t — "), _c('router-link', {
       attrs: {
-        "to": ("services/" + (service.id))
+        "to": ("/services/" + (service.id))
       }
     }, [_vm._v("visa tjänst")])], 1) : _vm._e()]), _vm._v(" "), _vm._m(0, true)])
   })) : _c('div', {

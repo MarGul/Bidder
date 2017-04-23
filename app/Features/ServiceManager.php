@@ -55,7 +55,7 @@ class ServiceManager {
 			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm')->toDateString(),
 			'bid_start' => Carbon::now('Europe/Stockholm'),
 			'bid_stop' => Carbon::now('Europe/Stockholm')->addDays($request->bidding),
-			'status' => 'active'
+			'active' => true
 		]);
 
 		if ( !$service->save() ) {

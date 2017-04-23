@@ -21,12 +21,11 @@ class ServicesTableSeeder extends Seeder
                 'city_id' => 1,
                 'title' => 'This is the first test service that I need help with',
                 'description' => 'This is the first test service that I need help with description',
-                'physical' => false,
                 'start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'end' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(4),
                 'bid_start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'bid_stop' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(2),
-                'status' => 'active'
+                'active' => true
             ],
             [
                 'user_id' => 2,
@@ -35,12 +34,11 @@ class ServicesTableSeeder extends Seeder
                 'city_id' => 1,
                 'title' => 'This is the second test service that I need help with',
                 'description' => 'This is the second test service that I need help with description',
-                'physical' => false,
                 'start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'end' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(4),
                 'bid_start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'bid_stop' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(2),
-                'status' => 'active'
+                'active' => true
             ],
             [
                 'user_id' => 2,
@@ -49,12 +47,11 @@ class ServicesTableSeeder extends Seeder
                 'city_id' => 1,
                 'title' => 'This is the third test service that I need help with',
                 'description' => 'This is the third test service that I need help with description',
-                'physical' => false,
                 'start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'end' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(4),
                 'bid_start' => Carbon::now(new DateTimeZone('Europe/Stockholm')),
                 'bid_stop' => Carbon::now(new DateTimeZone('Europe/Stockholm'))->addWeeks(2),
-                'status' => 'active'
+                'active' => true
             ]
         ];
 

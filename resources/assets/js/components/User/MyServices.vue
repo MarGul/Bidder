@@ -7,8 +7,8 @@
 			<li v-for="service in services">
 				<span class="item-content">
 					{{ service.title }}
-					<span class="item-link" v-if="service.status == 'active'">
-						&nbsp;&mdash;&nbsp;<router-link :to="`services/${service.id}`">visa tjänst</router-link>
+					<span class="item-link" v-if="service.active">
+						&nbsp;&mdash;&nbsp;<router-link :to="`/services/${service.id}`">visa tjänst</router-link>
 					</span>
 				</span>
 				<span class="item-actions">
