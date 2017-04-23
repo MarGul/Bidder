@@ -33,7 +33,9 @@
 			}
 		},
 		created() {
-			this.$store.dispatch('fetchUserServices');
+			if ( !this.$store.getters.userServicesFetched ) {
+				this.$store.dispatch('fetchUserServices');
+			}
 		}
 	}
 </script>

@@ -5127,7 +5127,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
-		this.$store.dispatch('fetchUserServices');
+		if (!this.$store.getters.userServicesFetched) {
+			this.$store.dispatch('fetchUserServices');
+		}
 	}
 };
 
@@ -5947,7 +5949,10 @@ var auth = {
 	state: {
 		authenticated: false,
 		user: {},
-		userServices: []
+		userServices: [],
+		userServicesFetched: false,
+		userBids: [],
+		userBidsFetched: false
 	},
 	mutations: {
 		'SET_AUTHENTICATED': function SET_AUTHENTICATED(state, payload) {
@@ -5958,6 +5963,15 @@ var auth = {
 		},
 		'SET_USER_SERVICES': function SET_USER_SERVICES(state, payload) {
 			state.userServices = payload.userServices;
+		},
+		'SET_USER_SERVICES_FETCHED': function SET_USER_SERVICES_FETCHED(state, payload) {
+			state.userServicesFetched = payload.userServicesFetched;
+		},
+		'SET_USER_BIDS': function SET_USER_BIDS(state, payload) {
+			state.userBids = payload.userBids;
+		},
+		'SET_USER_BIDS_FETCHED': function SET_USER_BIDS_FETCHED(state, payload) {
+			state.userBidsFetched = payload.userBidsFetched;
 		}
 	},
 	actions: {
@@ -5966,6 +5980,15 @@ var auth = {
 
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/services').get().then(function (response) {
 				commit('SET_USER_SERVICES', { userServices: response.services });
+				commit('SET_USER_SERVICES_FETCHED', { userServicesFetched: true });
+			});
+		},
+		fetchUserBids: function fetchUserBids(_ref2) {
+			var commit = _ref2.commit;
+
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/bids').get().then(function (response) {
+				commit('SET_USER_BIDS', { userBids: response.bids });
+				commit('SET_USER_BIDS_FETCHED', { userBidsFetched: true });
 			});
 		}
 	},
@@ -5978,6 +6001,15 @@ var auth = {
 		},
 		userServices: function userServices(state) {
 			return state.userServices;
+		},
+		userServicesFetched: function userServicesFetched(state) {
+			return state.userServicesFetched;
+		},
+		userBids: function userBids(state) {
+			return state.userBids;
+		},
+		userBidsFetched: function userBidsFetched(state) {
+			return state.userBidsFetched;
 		}
 	}
 };
@@ -6996,9 +7028,9 @@ module.exports = Component.exports
 
 var Component = __webpack_require__(1)(
   /* script */
-  null,
+  __webpack_require__(293),
   /* template */
-  null,
+  __webpack_require__(294),
   /* scopeId */
   null,
   /* cssModules */
@@ -7006,6 +7038,20 @@ var Component = __webpack_require__(1)(
 )
 Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/MyBids.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MyBids.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e274dfe4", Component.options)
+  } else {
+    hotAPI.reload("data-v-e274dfe4", Component.options)
+  }
+})()}
 
 module.exports = Component.exports
 
@@ -10926,6 +10972,91 @@ return index;
 __webpack_require__(143);
 module.exports = __webpack_require__(144);
 
+
+/***/ }),
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	computed: {
+		bids: function bids() {
+			return this.$store.getters.userBids;
+		}
+	},
+	created: function created() {
+		if (!this.$store.getters.userBidsFetched) {
+			this.$store.dispatch('fetchUserBids');
+		}
+	}
+};
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_bids-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Mina Bud")]), _vm._v(" "), (_vm.bids.length > 0) ? _c('ul', {
+    staticClass: "user-items-list"
+  }, _vm._l((_vm.bids), function(bid) {
+    return _c('li', [_c('span', {
+      staticClass: "item-content"
+    }, [_vm._v("\n\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t")]), _vm._v(" "), _c('span', {
+      staticClass: "item-actions"
+    })])
+  })) : _c('div', {
+    staticClass: "load-spinner text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e274dfe4", module.exports)
+  }
+}
 
 /***/ })
 ],[284]);

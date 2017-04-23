@@ -52,4 +52,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* user/services */
 	Route::get('user/services')->uses('UserServicesController@index');
 
+	/* user/bids */
+	Route::get('user/bids')->uses('UserBidsController@index');
+
 });
