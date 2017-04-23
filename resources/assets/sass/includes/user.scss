@@ -57,6 +57,41 @@
 					font-size: 34px;
 				}
 			}
+
+			.user-items-list {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				border: 1px solid $border-color-gray;
+				border-radius: 6px;
+
+				li {
+					display: flex;
+					padding: 15px;
+					border-bottom: 1px solid $border-color-gray;
+
+					&:last-child {
+						border-bottom-color: transparent;
+					}
+
+					.item-content {
+						flex: 6;
+
+						@media screen and (min-width: $screen-sm-min) {
+							flex: 8;
+						}
+					}
+
+					.item-actions {
+						flex: 1;
+						text-align: right;
+
+						i {
+							cursor: pointer;
+						}
+					}
+				}
+			}
 		}
 	}
 
