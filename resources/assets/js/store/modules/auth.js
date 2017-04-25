@@ -34,6 +34,22 @@ const auth = {
 		}
 	},
 	actions: {
+		logout({commit}) {
+			commit('SET_DROPDOWN', {dropdown: false});
+			User.new().setUrl('logout').post().then((response) => {
+				commit('SET_AUTHENTICATED', {authenticated: false});
+				commit('SET_USER', {user: {}});
+				commit('SET_USER_SERVICES', {userServices: []});
+				commit('SET_USER_SERVICES_FETCHED', {userServicesFetched: false});
+				commit('SET_USER_BIDS', {userBids: []});
+				commit('SET_USER_BIDS_FETCHED', {userBidsFetched: false});
+				// Set the new csrf token
+				window.Laravel.csrfToken = response.csrfToken;
+				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken
+			}).catch((error) => {
+				
+			});
+		},
 		fetchUserServices({commit}) {
 			User.setUrl('user/services').get()
 				.then(response => {

@@ -4391,6 +4391,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6062,16 +6066,32 @@ var auth = {
 		}
 	},
 	actions: {
-		fetchUserServices: function fetchUserServices(_ref) {
+		logout: function logout(_ref) {
 			var commit = _ref.commit;
+
+			commit('SET_DROPDOWN', { dropdown: false });
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].new().setUrl('logout').post().then(function (response) {
+				commit('SET_AUTHENTICATED', { authenticated: false });
+				commit('SET_USER', { user: {} });
+				commit('SET_USER_SERVICES', { userServices: [] });
+				commit('SET_USER_SERVICES_FETCHED', { userServicesFetched: false });
+				commit('SET_USER_BIDS', { userBids: [] });
+				commit('SET_USER_BIDS_FETCHED', { userBidsFetched: false });
+				// Set the new csrf token
+				window.Laravel.csrfToken = response.csrfToken;
+				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+			}).catch(function (error) {});
+		},
+		fetchUserServices: function fetchUserServices(_ref2) {
+			var commit = _ref2.commit;
 
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/services').get().then(function (response) {
 				commit('SET_USER_SERVICES', { userServices: response.services });
 				commit('SET_USER_SERVICES_FETCHED', { userServicesFetched: true });
 			});
 		},
-		fetchUserBids: function fetchUserBids(_ref2) {
-			var commit = _ref2.commit;
+		fetchUserBids: function fetchUserBids(_ref3) {
+			var commit = _ref3.commit;
 
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/bids').get().then(function (response) {
 				commit('SET_USER_BIDS', { userBids: response.bids });
@@ -9001,7 +9021,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("Profil")])], 1), _vm._v(" "), _vm._m(0)]) : _vm._e(), _vm._v(" "), (!_vm.$store.getters.isAuthenticated) ? _c('ul', {
+  }), _vm._v("Profil")])], 1), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "/logout"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$store.dispatch('logout')
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-sign-out",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Logga Ut\n\t\t\t\t\t\t\t")])])]) : _vm._e(), _vm._v(" "), (!_vm.$store.getters.isAuthenticated) ? _c('ul', {
     staticClass: "desktop-header-nav"
   }, [_c('li', [_c('a', {
     staticClass: "register",
@@ -9062,7 +9097,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('li', {
+  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
@@ -9075,17 +9110,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" Information")])], 1)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-sign-out",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Logga Ut")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "nav-item"
   }, [_c('a', {

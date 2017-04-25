@@ -28,7 +28,11 @@
 							<li>
 								<router-link to="/user/profile"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</router-link>
 							</li>
-							<li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut</a></li>
+							<li>
+								<a href="/logout" @click.prevent="$store.dispatch('logout')">
+									<i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut
+								</a>
+							</li>
 						</ul>
 
 						<ul v-if="!$store.getters.isAuthenticated" class="desktop-header-nav">
