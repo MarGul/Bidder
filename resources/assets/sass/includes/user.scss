@@ -83,6 +83,11 @@
 				@media screen and (min-width: $screen-md-min) {
 					font-size: 34px;
 				}
+
+				&.subsection {
+					margin: 20px 0 35px 0;
+					font-size: 20px;
+				}
 			}
 
 			.user-items-list {
