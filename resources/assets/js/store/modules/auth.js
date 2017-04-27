@@ -5,6 +5,7 @@ const auth = {
 		authenticated: false,
 		user: {},
 		dropdown: false,
+		mobileDropdown: false,
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
@@ -19,6 +20,9 @@ const auth = {
 		},
 		'SET_DROPDOWN'(state, payload) {
 			state.dropdown = payload.dropdown;
+		},
+		'SET_MOBILE_DROPDOWN'(state, payload) {
+			state.mobileDropdown = payload.mobileDropdown;
 		},
 		'SET_USER_SERVICES'(state, payload) {
 			state.userServices = payload.userServices;
@@ -69,6 +73,7 @@ const auth = {
 		isAuthenticated: state => state.authenticated,
 		authUser: state => state.user,
 		authDropdown: state => state.dropdown,
+		mobileAuthDropdown: state => state.mobileDropdown,
 		userServices: state => state.userServices,
 		userServicesFetched: state => state.userServicesFetched,
 		userBids: state => state.userBids,

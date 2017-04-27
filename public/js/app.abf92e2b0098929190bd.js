@@ -4415,6 +4415,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		toggleDropdown: function toggleDropdown() {
 			this.$store.commit('SET_DROPDOWN', { dropdown: !this.$store.getters.authDropdown });
+		},
+		logout: function logout() {
+			this.$store.dispatch('logout');
+			this.$router.push('/');
 		}
 	}
 };
@@ -5601,6 +5605,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5610,9 +5621,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			breakpoints: window.breakpoints,
-			mobileNavOpen: false
+			breakpoints: window.breakpoints
 		};
+	},
+
+	methods: {
+		toggleDropdown: function toggleDropdown() {
+			this.$store.commit('SET_MOBILE_DROPDOWN', {
+				mobileDropdown: !this.$store.getters.mobileAuthDropdown
+			});
+		},
+		logout: function logout() {
+			this.$store.dispatch('logout');
+			this.$router.push('/');
+		}
 	},
 	destroyed: function destroyed() {
 		this.$store.dispatch('closeNotification');
@@ -5998,6 +6020,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router___default.a({
 router.beforeEach(function (to, from, next) {
 	if (to.meta.requiresAuth) {
 		if (!router.app.$store.getters.isAuthenticated) {
+			console.log('not auth');
 			next('/');
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
@@ -6020,6 +6043,8 @@ router.beforeEach(function (to, from, next) {
 router.afterEach(function (to, from) {
 	// Close the userNav dropdown.
 	router.app.$store.commit('SET_DROPDOWN', { dropdown: false });
+	// Close the mobile user navigation dropdown.
+	router.app.$store.commit('SET_MOBILE_DROPDOWN', { mobileDropdown: false });
 });
 
 /* harmony default export */ __webpack_exports__["a"] = router;
@@ -6037,6 +6062,7 @@ var auth = {
 		authenticated: false,
 		user: {},
 		dropdown: false,
+		mobileDropdown: false,
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
@@ -6051,6 +6077,9 @@ var auth = {
 		},
 		'SET_DROPDOWN': function SET_DROPDOWN(state, payload) {
 			state.dropdown = payload.dropdown;
+		},
+		'SET_MOBILE_DROPDOWN': function SET_MOBILE_DROPDOWN(state, payload) {
+			state.mobileDropdown = payload.mobileDropdown;
 		},
 		'SET_USER_SERVICES': function SET_USER_SERVICES(state, payload) {
 			state.userServices = payload.userServices;
@@ -6108,6 +6137,9 @@ var auth = {
 		},
 		authDropdown: function authDropdown(state) {
 			return state.dropdown;
+		},
+		mobileAuthDropdown: function mobileAuthDropdown(state) {
+			return state.mobileDropdown;
 		},
 		userServices: function userServices(state) {
 			return state.userServices;
@@ -8766,7 +8798,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
-      "to": "/information"
+      "to": "/user/profile"
     }
   }, [_c('div', {
     staticClass: "auth-user"
@@ -9028,7 +9060,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.$store.dispatch('logout')
+        _vm.logout($event)
       }
     }
   }, [_c('i', {
@@ -9753,28 +9785,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "user-component no-hero-view"
   }, [(_vm.$store.getters.showingNotification) ? _c('app-notifications') : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "container"
-  }, [(_vm.breakpoints.isSmallDevices()) ? _c('button', {
-    staticClass: "btn btn-primary clearfix mobile-user-nav-button",
-    class: {
-      open: _vm.mobileNavOpen
-    },
+  }, [(_vm.breakpoints.isSmallDevices()) ? _c('div', {
+    staticClass: "mobile-user-buttons clearfix"
+  }, [_c('button', {
+    staticClass: "mobile-user-logout-button",
     on: {
       "click": function($event) {
-        _vm.mobileNavOpen = !_vm.mobileNavOpen
+        $event.preventDefault();
+        _vm.logout($event)
       }
     }
-  }, [_vm._v("\n\t\t\tMeny "), _c('i', {
+  }, [_vm._v("\n\t\t\t\tLogga Ut "), _c('i', {
+    staticClass: "fa fa-sign-out",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), (_vm.breakpoints.isSmallDevices()) ? _c('button', {
+    staticClass: "mobile-user-nav-button",
+    class: {
+      open: _vm.$store.getters.mobileAuthDropdown
+    },
+    on: {
+      "click": _vm.toggleDropdown
+    }
+  }, [_vm._v("\n\t\t\t\tMeny "), _c('i', {
     staticClass: "fa fa-chevron-down",
     attrs: {
       "aria-hidden": "true"
     }
-  })]) : _vm._e(), _vm._v(" "), _c('div', {
+  })]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   }), _vm._v(" "), _c('div', {
     staticClass: "user-ui-container"
   }, [_c('div', {
     staticClass: "user-ui-nav"
-  }, [(_vm.mobileNavOpen || !_vm.breakpoints.isSmallDevices()) ? _c('ul', {
+  }, [(_vm.$store.getters.mobileAuthDropdown || !_vm.breakpoints.isSmallDevices()) ? _c('ul', {
     staticClass: "user-nav"
   }, [_c('li', [_c('router-link', {
     attrs: {

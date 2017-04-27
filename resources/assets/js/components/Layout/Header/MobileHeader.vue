@@ -19,7 +19,7 @@
 				</li>
 				<li class="spacer"></li>
 				<li v-if="$store.getters.isAuthenticated" class="nav-item">
-					<router-link to="/information">
+					<router-link to="/user/profile">
 						<div class="auth-user">
 							<div class="auth-avatar" :style="avatar"></div>
 							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>

@@ -9103,8 +9103,36 @@ body.mobile-nav-open .overlay {
   padding: 7.5px 15px;
 }
 
-.user-component .mobile-user-nav-button {
+.user-component .mobile-user-buttons {
   float: right;
+}
+
+.user-component .mobile-user-nav-button,
+.user-component .mobile-user-logout-button {
+  padding: 6px 12px;
+  border: 1px solid transparent;
+}
+
+.user-component .mobile-user-nav-button i,
+.user-component .mobile-user-logout-button i {
+  margin-left: 5px;
+}
+
+.user-component .mobile-user-nav-button:focus, .user-component .mobile-user-nav-button:active,
+.user-component .mobile-user-logout-button:focus,
+.user-component .mobile-user-logout-button:active {
+  outline: none !important;
+}
+
+.user-component .mobile-user-logout-button {
+  border-color: #636b6f;
+  margin-right: 5px;
+}
+
+.user-component .mobile-user-nav-button {
+  background-color: #55AE3A;
+  color: #fff;
+  border-color: #42882d;
 }
 
 .user-component .mobile-user-nav-button i {

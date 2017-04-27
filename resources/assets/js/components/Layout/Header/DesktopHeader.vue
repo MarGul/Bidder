@@ -29,7 +29,7 @@
 								<router-link to="/user/profile"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</router-link>
 							</li>
 							<li>
-								<a href="/logout" @click.prevent="$store.dispatch('logout')">
+								<a href="/logout" @click.prevent="logout">
 									<i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut
 								</a>
 							</li>
@@ -93,6 +93,10 @@
 		methods: {
 			toggleDropdown() {
 				this.$store.commit('SET_DROPDOWN', {dropdown: !this.$store.getters.authDropdown});
+			},
+			logout() {
+				this.$store.dispatch('logout');
+				this.$router.push('/');
 			}
 		}
 	}

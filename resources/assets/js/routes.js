@@ -39,6 +39,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 	if ( to.meta.requiresAuth ) {
 		if ( !router.app.$store.getters.isAuthenticated ) {
+			console.log('not auth');
 			next('/');
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
@@ -61,6 +62,8 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from) => {
 	// Close the userNav dropdown.
 	router.app.$store.commit('SET_DROPDOWN', {dropdown: false});
+	// Close the mobile user navigation dropdown.
+	router.app.$store.commit('SET_MOBILE_DROPDOWN', {mobileDropdown: false});
 });
 
 export default router;
