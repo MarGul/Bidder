@@ -22,7 +22,7 @@
 					<router-link to="/user/profile">
 						<div class="auth-user">
 							<div class="auth-avatar" :style="avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
+							<div class="auth-name">{{ $store.getters.authUser.username }}</div>
 						</div>
 					</router-link>
 				</li>

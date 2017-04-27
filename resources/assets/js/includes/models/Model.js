@@ -16,6 +16,11 @@ class Model {
 		return this;
 	}
 
+	setResource(resource) {
+		this.resource = resource;
+		return this;
+	}
+
 	setUrl(url) {
 		this.url = url;
 		return this;
@@ -27,6 +32,10 @@ class Model {
 
 	post(data = {}) {
 		return this.send('post', this.resource, data);
+	}
+
+	patch(data = {}) {
+		return this.send('patch', this.resource, data);
 	}
 
 	all() {
@@ -42,7 +51,8 @@ class Model {
 	}
 
 	update(identifier, data) {
-		
+		this.setId(identifier);
+		return this.send('patch', this.resource, data);
 	}
 
 	delete(identifier) {

@@ -19,7 +19,7 @@
 						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="toggleDropdown">
 							<div class="auth-avatar" :style="avatar"></div>
 							<div class="auth-name">
-								{{ $store.getters.authUser.displayname }}
+								{{ $store.getters.authUser.username }}
 								<i class="fa fa-angle-down auth-arrow" :class="{up: dropdown}" aria-hidden="true"></i>
 							</div>
 						</div>

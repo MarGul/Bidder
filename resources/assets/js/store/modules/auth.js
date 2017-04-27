@@ -40,6 +40,7 @@ const auth = {
 	actions: {
 		logout({commit}) {
 			commit('SET_DROPDOWN', {dropdown: false});
+			commit('SET_MOBILE_DROPDOWN', {dropdown: false});
 			User.new().setUrl('logout').post().then((response) => {
 				commit('SET_AUTHENTICATED', {authenticated: false});
 				commit('SET_USER', {user: {}});

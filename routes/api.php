@@ -14,6 +14,9 @@ Route::group(['prefix' => 'v1'], function() {
 		'only' => ['store', 'show', 'update', 'destroy']
 	]);
 
+	/* users/{user}/profile */
+	Route::patch('users/{user}/profile', 'UserProfileController@update');
+
 	/* regions/{region} */
 	Route::resource('regions', 'RegionController', [
 		'only' => ['index', 'show']

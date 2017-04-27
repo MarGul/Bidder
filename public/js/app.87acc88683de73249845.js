@@ -89,6 +89,12 @@ var Model = function () {
 			return this;
 		}
 	}, {
+		key: 'setResource',
+		value: function setResource(resource) {
+			this.resource = resource;
+			return this;
+		}
+	}, {
 		key: 'setUrl',
 		value: function setUrl(url) {
 			this.url = url;
@@ -109,6 +115,13 @@ var Model = function () {
 			return this.send('post', this.resource, data);
 		}
 	}, {
+		key: 'patch',
+		value: function patch() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('patch', this.resource, data);
+		}
+	}, {
 		key: 'all',
 		value: function all() {
 			return this.send('get', this.resource);
@@ -125,7 +138,10 @@ var Model = function () {
 		}
 	}, {
 		key: 'update',
-		value: function update(identifier, data) {}
+		value: function update(identifier, data) {
+			this.setId(identifier);
+			return this.send('patch', this.resource, data);
+		}
 	}, {
 		key: 'delete',
 		value: function _delete(identifier) {}
@@ -561,8 +577,6 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__(4);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -579,21 +593,6 @@ var User = function (_Model) {
 
 		return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this, 'users'));
 	}
-
-	/**
-  * Instead of having a model just for authenticate.
-  * 
-  * @param  {Object} data [The email and password data]
-  * @return {Primise}     [The send returns a promise that we then return]
-  */
-
-
-	_createClass(User, [{
-		key: 'authenticate',
-		value: function authenticate(data) {
-			return this.send('post', 'auth', data);
-		}
-	}]);
 
 	return User;
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
@@ -5203,7 +5202,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_User__ = __webpack_require__(13);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5211,7 +5260,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = {};
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	data: function data() {
+		return {
+			profile: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
+				name: this.$store.getters.authUser.name,
+				username: this.$store.getters.authUser.username,
+				bio: this.$store.getters.authUser.bio
+			}),
+			profileProcessing: false
+		};
+	},
+
+	methods: {
+		update: function update() {
+			var _this = this;
+
+			this.profileProcessing = true;
+			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].setResource('users/{id}/profile').update(this.$store.getters.authUser.id, this.profile.data()).then(function (response) {
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade din profil.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				_this.$store.commit('SET_USER', { user: response.user });
+				_this.profileProcessing = false;
+			}).catch(function (error) {
+				_this.profile.errors.record(error);
+				_this.profileProcessing = false;
+			});
+		}
+	}
+};
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 187 */
@@ -6020,7 +6101,6 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router___default.a({
 router.beforeEach(function (to, from, next) {
 	if (to.meta.requiresAuth) {
 		if (!router.app.$store.getters.isAuthenticated) {
-			console.log('not auth');
 			next('/');
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
@@ -6045,6 +6125,8 @@ router.afterEach(function (to, from) {
 	router.app.$store.commit('SET_DROPDOWN', { dropdown: false });
 	// Close the mobile user navigation dropdown.
 	router.app.$store.commit('SET_MOBILE_DROPDOWN', { mobileDropdown: false });
+	// Close notifications
+	router.app.$store.dispatch('closeNotification');
 });
 
 /* harmony default export */ __webpack_exports__["a"] = router;
@@ -6099,6 +6181,7 @@ var auth = {
 			var commit = _ref.commit;
 
 			commit('SET_DROPDOWN', { dropdown: false });
+			commit('SET_MOBILE_DROPDOWN', { dropdown: false });
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].new().setUrl('logout').post().then(function (response) {
 				commit('SET_AUTHENTICATED', { authenticated: false });
 				commit('SET_USER', { user: {} });
@@ -8485,7 +8568,137 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile-component"
-  })
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Min Profil")]), _vm._v(" "), _c('form', {
+    on: {
+      "keydown": function($event) {
+        _vm.profile.errors.clear()
+      }
+    }
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-7"
+  }, [_c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.profile.errors.has('name')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.profile.name),
+      expression: "profile.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.profile.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.profile.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.profile.errors.has('name')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.profile.errors.get('name'))
+    }
+  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("Namnet som visas på din publika profil.")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.profile.errors.has('username')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Användarnamn")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.profile.username),
+      expression: "profile.username"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.profile.username)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.profile.username = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.profile.errors.has('username')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.profile.errors.get('username'))
+    }
+  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("Ditt unika namn")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.profile.errors.has('bio')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Profiltext")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.profile.bio),
+      expression: "profile.bio"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    },
+    domProps: {
+      "value": _vm._s(_vm.profile.bio)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.profile.bio = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.profile.errors.has('bio')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.profile.errors.get('bio'))
+    }
+  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    attrs: {
+      "type": "submit",
+      "disabled": _vm.profileProcessing || this.profile.errors.any()
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.update($event)
+      }
+    }
+  }, [_vm._v("\n\t\t\t\t\t\tUppdatera din profil\n\t\t\t\t\t\t"), (_vm.profileProcessing) ? _c('span', {
+    staticClass: "processing"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])]) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-5"
+  }, [_vm._v("\n\t\t\t\tProfile Picture\n\t\t\t")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -8807,7 +9020,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.displayname))])])])], 1) : [_c('li', {
+  }, [_vm._v(_vm._s(_vm.$store.getters.authUser.username))])])])], 1) : [_c('li', {
     staticClass: "nav-item"
   }, [_c('a', {
     staticClass: "register",
@@ -8932,7 +9145,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })]), _vm._v(" "), _c('div', {
     staticClass: "user-displayname",
     domProps: {
-      "textContent": _vm._s(_vm.service.user.displayname)
+      "textContent": _vm._s(_vm.service.user.username)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "user-ratings"
@@ -9034,7 +9247,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.$store.getters.authUser.displayname) + "\n\t\t\t\t\t\t\t"), _c('i', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.$store.getters.authUser.username) + "\n\t\t\t\t\t\t\t"), _c('i', {
     staticClass: "fa fa-angle-down auth-arrow",
     class: {
       up: _vm.dropdown
