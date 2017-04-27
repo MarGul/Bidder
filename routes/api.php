@@ -17,6 +17,9 @@ Route::group(['prefix' => 'v1'], function() {
 	/* users/{user}/profile */
 	Route::patch('users/{user}/profile', 'UserProfileController@update');
 
+	/* users/{user}/password */
+	Route::put('users/{user}/password', 'UserPasswordController@update');
+
 	/* regions/{region} */
 	Route::resource('regions', 'RegionController', [
 		'only' => ['index', 'show']

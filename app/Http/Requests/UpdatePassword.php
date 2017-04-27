@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfile extends FormRequest
+class UpdatePassword extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class UpdateProfile extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'username' => 'required|alpha_num|unique:users,username,' . $this->route('user')->id
+            'old' => 'required',
+            'new' => 'required|min:6',
+            'again' => 'required|same:new'
         ];
     }
 }
