@@ -5346,6 +5346,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].setResource('users/{id}/password').update(this.$store.getters.authUser.id, this.password.data(), 'put').then(function (response) {
 				_this2.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.' });
 				$("html, body").animate({ scrollTop: 0 }, "fast");
+				_this2.password.reset();
 				_this2.passwordProcessing = false;
 			}).catch(function (error) {
 				_this2.password.errors.record(error);
@@ -8788,7 +8789,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text"
+      "type": "password"
     },
     domProps: {
       "value": _vm._s(_vm.password.old)
@@ -8820,7 +8821,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text"
+      "type": "password"
     },
     domProps: {
       "value": _vm._s(_vm.password.new)
@@ -8852,7 +8853,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text"
+      "type": "password"
     },
     domProps: {
       "value": _vm._s(_vm.password.again)

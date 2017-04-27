@@ -56,19 +56,19 @@
 				<div class="col-xs-12 col-md-7">
 					<div class="form-group" :class="{'has-error': password.errors.has('old')}">
 						<label class="control-label">Ditt gamla lösenord</label>
-						<input type="text" class="form-control" v-model="password.old">
+						<input type="password" class="form-control" v-model="password.old">
 						<span class="help-block" v-if="password.errors.has('old')" v-text="password.errors.get('old')"></span>
 					</div>
 
 					<div class="form-group" :class="{'has-error': password.errors.has('new')}">
 						<label class="control-label">Nytt lösenord</label>
-						<input type="text" class="form-control" v-model="password.new">
+						<input type="password" class="form-control" v-model="password.new">
 						<span class="help-block" v-if="password.errors.has('new')" v-text="password.errors.get('new')"></span>
 					</div>
 
 					<div class="form-group" :class="{'has-error': password.errors.has('again')}">
 						<label class="control-label">Repetera nytt lösenord</label>
-						<input type="text" class="form-control" v-model="password.again">
+						<input type="password" class="form-control" v-model="password.again">
 						<span class="help-block" v-if="password.errors.has('again')" v-text="password.errors.get('again')"></span>
 					</div>
 
@@ -135,6 +135,7 @@
 					.then(response => {
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.'});
 						$("html, body").animate({ scrollTop: 0 }, "fast");
+						this.password.reset();
 						this.passwordProcessing = false;
 					})
 					.catch(error => {
