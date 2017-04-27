@@ -23,6 +23,20 @@ class BidManager {
 	}
 
 	/**
+	 * Get bids for a user
+	 * 
+	 * @param  App\User 	$user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function byUser($user) {
+		$bids = Bid::where('user_id', $user->id)
+					->orderBy('created_at', 'desc')
+					->get();
+
+		return response()->json(['message' => 'Displaying bids for a user', 'bids' => $bids], 200);
+	}
+
+	/**
 	 * Create a bid
 	 * 
 	 * @param  \App\Http\Requests\StoreBid  $request

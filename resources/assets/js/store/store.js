@@ -9,6 +9,7 @@ import regions from './modules/regions';
 import modal from './modules/modal';
 import auth from './modules/auth';
 import service from './modules/service';
+import notifications from './modules/notifications';
 
 export default new Vuex.Store({
 	modules: {
@@ -16,6 +17,7 @@ export default new Vuex.Store({
 		regions,
 		modal,
 		auth,
-		service
+		service,
+		notifications
 	}
 });

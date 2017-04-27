@@ -14,6 +14,9 @@ Route::group(['prefix' => 'v1'], function() {
 		'only' => ['store', 'show', 'update', 'destroy']
 	]);
 
+	/* users/{user}/profile */
+	Route::patch('users/{user}/profile', 'UserProfileController@update');
+
 	/* regions/{region} */
 	Route::resource('regions', 'RegionController', [
 		'only' => ['index', 'show']
@@ -48,5 +51,11 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::resource('services.bids', 'ServiceBidController', [
 		'except' => ['create', 'edit']
 	]);
+
+	/* user/services */
+	Route::get('user/services')->uses('UserServicesController@index');
+
+	/* user/bids */
+	Route::get('user/bids')->uses('UserBidsController@index');
 
 });

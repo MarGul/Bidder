@@ -21,12 +21,11 @@ class CreateServicesTable extends Migration
             $table->integer('city_id')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->boolean('physical')->default(false);
             $table->dateTime('start');
             $table->dateTime('end');
             $table->dateTime('bid_start');
             $table->dateTime('bid_stop');
-            $table->string('status');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

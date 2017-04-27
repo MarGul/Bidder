@@ -35,7 +35,7 @@
 						<div class="service-user white-container">
 							<template v-if="$store.getters.getServiceLoaded">	
 								<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
-								<div class="user-displayname" v-text="service.user.displayname"></div>
+								<div class="user-displayname" v-text="service.user.username"></div>
 								<div class="user-ratings">
 									<app-ratings :rating="3.7" :total="7" size="large"></app-ratings>
 									<a class="link">Visa omdömmen</a>

@@ -6,6 +6,9 @@
 		</div>
 
 		<div class="modal-body">
+
+			<div class="alert" :class="[alertType]" v-if="alertMessage" v-text="alertMessage"></div>
+
 			<form @keydown="form.errors.clear()">
 				
 				<div 
@@ -71,6 +74,14 @@
 					email: '',
 					password: ''
 				})
+			}
+		},
+		computed: {
+			alertType() {
+				return `alert-${this.$store.getters.modalAlert}`;
+			},
+			alertMessage() {
+				return this.$store.getters.modalMessage;
 			}
 		},
 		methods: {

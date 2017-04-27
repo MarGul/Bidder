@@ -29,6 +29,7 @@
     import MobileHeader from './components/Layout/Header/MobileHeader.vue';
     import DesktopHeader from './components/Layout/Header/DesktopHeader.vue';
     import Modal from './components/Includes/Modal.vue';
+
     import Search from './components/Includes/Search.vue';
     import Footer from './components/Layout/Footer/Footer.vue';
     import { HeartBeat } from './includes/heartbeat';

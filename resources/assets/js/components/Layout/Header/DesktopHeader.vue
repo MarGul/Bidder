@@ -16,12 +16,26 @@
 					</div>
 
 					<div class="hidden-xs hidden-sm col-md-3 col-lg-3 desktop-header-right">
-						<div v-if="$store.getters.isAuthenticated" class="auth-user">
+						<div v-if="$store.getters.isAuthenticated" class="auth-user" @click="toggleDropdown">
 							<div class="auth-avatar" :style="avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.displayname }}</div>
+							<div class="auth-name">
+								{{ $store.getters.authUser.username }}
+								<i class="fa fa-angle-down auth-arrow" :class="{up: dropdown}" aria-hidden="true"></i>
+							</div>
 						</div>
 
-						<ul v-else class="desktop-header-nav">
+						<ul class="auth-dropdown" v-if="dropdown">
+							<li>
+								<router-link to="/user/profile"><i class="fa fa-user-circle" aria-hidden="true"></i>Profil</router-link>
+							</li>
+							<li>
+								<a href="/logout" @click.prevent="logout">
+									<i class="fa fa-sign-out" aria-hidden="true"></i>Logga Ut
+								</a>
+							</li>
+						</ul>
+
+						<ul v-if="!$store.getters.isAuthenticated" class="desktop-header-nav">
 							<li>
 								<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
 							</li>
@@ -68,14 +82,21 @@
 			appSearch: Search,
 			appRegister: Register
 		},
-		data() {
-			return {
-				register: false
-			}
-		},
 		computed: {
 			avatar() {
 				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
+			},
+			dropdown() {
+				return this.$store.getters.authDropdown;
+			}
+		},
+		methods: {
+			toggleDropdown() {
+				this.$store.commit('SET_DROPDOWN', {dropdown: !this.$store.getters.authDropdown});
+			},
+			logout() {
+				this.$store.dispatch('logout');
+				this.$router.push('/');
 			}
 		}
 	}
