@@ -139,8 +139,10 @@ var Model = function () {
 	}, {
 		key: 'update',
 		value: function update(identifier, data) {
+			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'patch';
+
 			this.setId(identifier);
-			return this.send('patch', this.resource, data);
+			return this.send(type, this.resource, data);
 		}
 	}, {
 		key: 'delete',
@@ -5336,6 +5338,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.profile.errors.record(error);
 				_this.profileProcessing = false;
 			});
+		},
+		updatePassword: function updatePassword() {
+			var _this2 = this;
+
+			this.passwordProcessing = true;
+			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].setResource('users/{id}/password').update(this.$store.getters.authUser.id, this.password.data(), 'put').then(function (response) {
+				_this2.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				_this2.passwordProcessing = false;
+			}).catch(function (error) {
+				_this2.password.errors.record(error);
+				_this2.passwordProcessing = false;
+			});
 		}
 	}
 };
@@ -8747,7 +8762,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12 col-md-5"
   }, [_vm._v("\n\t\t\t\tProfile Picture\n\t\t\t")])])]), _vm._v(" "), _c('h2', {
     staticClass: "user-component-title subsection"
-  }, [_vm._v("Uppdatera ditt lösenord")]), _vm._v(" "), _c('form', [_c('div', {
+  }, [_vm._v("Uppdatera ditt lösenord")]), _vm._v(" "), _c('form', {
+    on: {
+      "keydown": function($event) {
+        _vm.password.errors.clear()
+      }
+    }
+  }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-7"

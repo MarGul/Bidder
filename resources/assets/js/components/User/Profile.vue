@@ -51,7 +51,7 @@
 
 		<h2 class="user-component-title subsection">Uppdatera ditt lösenord</h2>
 
-		<form>
+		<form @keydown="password.errors.clear()">
 			<div class="row">
 				<div class="col-xs-12 col-md-7">
 					<div class="form-group" :class="{'has-error': password.errors.has('old')}">
@@ -127,6 +127,19 @@
 					.catch(error => {
 						this.profile.errors.record(error);
 						this.profileProcessing = false;
+					});
+			},
+			updatePassword() {
+				this.passwordProcessing = true;
+				User.setResource('users/{id}/password').update(this.$store.getters.authUser.id, this.password.data(), 'put')
+					.then(response => {
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.'});
+						$("html, body").animate({ scrollTop: 0 }, "fast");
+						this.passwordProcessing = false;
+					})
+					.catch(error => {
+						this.password.errors.record(error);
+						this.passwordProcessing = false;
 					});
 			}
 		}
