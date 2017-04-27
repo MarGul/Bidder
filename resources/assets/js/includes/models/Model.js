@@ -50,9 +50,9 @@ class Model {
 		return this.send('post', this.resource, data)
 	}
 
-	update(identifier, data) {
+	update(identifier, data, type = 'patch') {
 		this.setId(identifier);
-		return this.send('patch', this.resource, data);
+		return this.send(type, this.resource, data);
 	}
 
 	delete(identifier) {
