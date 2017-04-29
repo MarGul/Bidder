@@ -14,7 +14,7 @@ class Service extends Model
      */
     protected $fillable = [
     	'user_id', 'category_id', 'region_id', 'city_id', 'title', 'description', 'physical', 'start', 'end',
-        'bid_start', 'bid_stop', 'status'
+        'bid_start', 'bid_stop', 'active'
     ];
 
     /**

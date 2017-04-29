@@ -98,28 +98,53 @@
 				border-radius: 6px;
 
 				li {
-					display: flex;
 					padding: 15px;
 					border-bottom: 1px solid $border-color-gray;
+
+					@media screen and (min-width: $screen-md-min) {
+						display: flex;
+					} 
 
 					&:last-child {
 						border-bottom-color: transparent;
 					}
 
 					.item-content {
-						flex: 6;
 
-						@media screen and (min-width: $screen-sm-min) {
-							flex: 8;
+						@media screen and (min-width: $screen-md-min) {
+							flex: 2;
+							padding-right: 10px;
 						}
 					}
 
 					.item-actions {
-						flex: 1;
-						text-align: right;
+						display: flex;
+						margin-top: 10px;
 
-						i {
-							cursor: pointer;
+						@media screen and (min-width: $screen-md-min) {
+							flex: 1;
+							margin-top: 0;
+							align-self: flex-start;
+						}
+
+						button {
+							flex: 1;
+
+							@media screen and (min-width: $screen-md-min) {
+								padding: 3px 5px;
+							}
+
+							i {
+								margin-right: 5px;
+							}
+
+							&.show-bids {
+								margin-right: 3px;
+							}
+
+							&.edit {
+								margin-left: 3px
+							}
 						}
 					}
 				}

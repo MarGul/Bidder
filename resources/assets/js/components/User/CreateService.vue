@@ -120,7 +120,6 @@
 
 			<div class="form-group">
 				<button 
-					type="submit" 
 					class="btn btn-primary full-width" 
 					@click.prevent="create"
 					:disabled="processing || this.form.errors.any()"
@@ -192,16 +191,16 @@
 			create() {
 				this.processing = true;
 				Service.create(this.finalData)
-				.then(response => {
-					this.form.reset();
-					this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
-					$("html, body").animate({ scrollTop: 0 }, "fast");
-					this.processing = false;
-				})
-				.catch(error => {
-					this.form.errors.record(error);
-					this.processing = false;
-				});
+					.then(response => {
+						this.form.reset();
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
+						$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+						this.processing = false;
+					})
+					.catch(error => {
+						this.form.errors.record(error);
+						this.processing = false;
+					});
 			}
 		}
 	}

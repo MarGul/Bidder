@@ -7770,6 +7770,15 @@ a {
   margin-left: 5px;
 }
 
+.btn-flat {
+  padding: 6px 12px;
+  border: 1px solid transparent;
+}
+
+.btn-flat:focus, .btn-flat:active {
+  outline: none !important;
+}
+
 .btn-primary {
   background-color: #55AE3A;
   border-color: #42882d;
@@ -9206,40 +9215,71 @@ body.mobile-nav-open .overlay {
 }
 
 .user-component .user-ui-container .user-ui-content .user-items-list li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   padding: 15px;
   border-bottom: 1px solid #d7d7d7;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-content .user-items-list li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .user-component .user-ui-container .user-ui-content .user-items-list li:last-child {
   border-bottom-color: transparent;
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-content {
-  -webkit-box-flex: 6;
-      -ms-flex: 6;
-          flex: 6;
-}
-
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .user-component .user-ui-container .user-ui-content .user-items-list li .item-content {
-    -webkit-box-flex: 8;
-        -ms-flex: 8;
-            flex: 8;
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    padding-right: 10px;
   }
 }
 
 .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin-top: 0;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+  }
+}
+
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  text-align: right;
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions i {
-  cursor: pointer;
+@media screen and (min-width: 992px) {
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button {
+    padding: 3px 5px;
+  }
+}
+
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button i {
+  margin-right: 5px;
+}
+
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button.show-bids {
+  margin-right: 3px;
+}
+
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button.edit {
+  margin-left: 3px;
 }
 
 .user-component .user-nav {

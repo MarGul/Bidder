@@ -5034,7 +5034,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -5095,7 +5094,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			__WEBPACK_IMPORTED_MODULE_1__includes_models_Service__["a" /* default */].create(this.finalData).then(function (response) {
 				_this.form.reset();
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Woohoo! Vi skapade din tjänst.' });
-				$("html, body").animate({ scrollTop: 0 }, "fast");
+				$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);
@@ -5156,6 +5155,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9969,7 +9973,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
     attrs: {
-      "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
     },
     on: {
@@ -10049,7 +10052,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Mina Tjänster")]), _vm._v(" "), (_vm.services.length > 0) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.services), function(service) {
-    return _c('li', [_c('span', {
+    return _c('li', [_c('div', {
       staticClass: "item-content"
     }, [_vm._v("\n\t\t\t\t" + _vm._s(service.title) + "\n\t\t\t\t"), (service.active) ? _c('span', {
       staticClass: "item-link"
@@ -10066,15 +10069,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "sr-only"
   }, [_vm._v("Loading...")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
+  return _c('div', {
     staticClass: "item-actions"
+  }, [_c('button', {
+    staticClass: "btn-flat btn-default show-bids"
+  }, [_c('i', {
+    staticClass: "fa fa-gavel",
+    attrs: {
+      "aria-hidden": "true",
+      "title": "Visa bud"
+    }
+  }), _vm._v(" Visa bud\n\t\t\t\t")]), _vm._v(" "), _c('button', {
+    staticClass: "btn-flat btn-default edit"
   }, [_c('i', {
     staticClass: "fa fa-pencil",
     attrs: {
       "aria-hidden": "true",
       "title": "Redigera"
     }
-  })])
+  }), _vm._v(" Redigera\n\t\t\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
