@@ -56,8 +56,6 @@
             // Initialize Data
             this.$store.dispatch('fetchCategories');
             this.$store.dispatch('fetchRegions');
-            this.$store.commit('SET_AUTHENTICATED', {authenticated: window.Laravel.authenticated});
-            this.$store.commit('SET_USER', {user: window.Laravel.user || {} });
             // Start the applications heartbeat
             setInterval(function() {
                 HeartBeat.$emit('beat');

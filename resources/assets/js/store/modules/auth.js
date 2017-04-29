@@ -2,8 +2,8 @@ import User from '../../includes/models/User';
 
 const auth = {
 	state: {
-		authenticated: false,
-		user: {},
+		authenticated: window.Laravel.authenticated,
+		user: window.Laravel.user || {},
 		dropdown: false,
 		mobileDropdown: false,
 		userServices: [],

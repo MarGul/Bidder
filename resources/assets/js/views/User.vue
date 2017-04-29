@@ -61,9 +61,6 @@
 				this.$store.dispatch('logout');
 				this.$router.push('/');
 			}
-		},
-		destroyed() {
-			this.$store.dispatch('closeNotification');
 		}
 	}
 </script>
