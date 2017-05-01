@@ -9,14 +9,15 @@
 					<div class="bid-header">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-7">
-								<div class="bid-user">
+								<div class="bid-user history-padding">
 									<a class="link">{{ bid.user.username }}</a>
 									<span class="user-reviews">
 										<app-ratings :rating="4.5" :total="8"></app-ratings>
 									</span>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-6 col-md-5">
+							<div class="col-xs-12 col-sm-6 col-md-5 bid-head-right">
+								<button class="btn-flat btn-info">Acceptera budet</button>
 								<div class="bid-time" v-text="time(bid.created_at)"></div>
 							</div>
 						</div>
@@ -78,7 +79,6 @@
 		},
 		created() {
 			// Fetch bids for the service.
-			console.log(this.$route.params.id);
 			Bid.setId(this.$route.params.id).get()
 				.then(response => {
 					this.bids = response.bids;

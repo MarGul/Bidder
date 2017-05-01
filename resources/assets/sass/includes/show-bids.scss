@@ -10,6 +10,12 @@
 			background-color: #f1f1f1;
 			border-bottom: 1px solid $border-color-gray;
 
+			.history-padding {
+				@media screen and (min-width: $screen-sm-min) {
+					padding: 6px 0px;
+				}
+			}
+
 			.user-reviews {
 				margin-left: 5px;
 				display: inline-block;
@@ -41,10 +47,25 @@
 			padding: 10px 15px;
 		}
 
+		.bid-head-right {
+			margin: 5px 0;
+
+			@media screen and (min-width: $screen-sm-min) {
+				text-align: right;
+				margin: 0;
+			}
+
+			.btn-flat {
+				padding: 5px 6px;
+			}
+		}
+
 		.bid-time {
+			display: inline-block;
 			font-style: italic;
 			font-size: 12px;
 			line-height: 20px;
+			padding-left: 10px;
 
 			@media screen and (min-width: $screen-sm-min) {
 				text-align: right;
