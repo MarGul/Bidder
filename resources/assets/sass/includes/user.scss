@@ -115,6 +115,10 @@
 							flex: 2;
 							padding-right: 10px;
 						}
+
+						@media screen and (min-width: $screen-lg-min) {
+							flex: 3;
+						}
 					}
 
 					.item-actions {
@@ -127,7 +131,8 @@
 							align-self: flex-start;
 						}
 
-						button {
+						a {
+							text-align: center;
 							flex: 1;
 
 							@media screen and (min-width: $screen-md-min) {

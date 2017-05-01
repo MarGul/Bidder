@@ -21,6 +21,10 @@
 	&:active {
 		outline: none !important;
 	}
+
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 .btn-primary {

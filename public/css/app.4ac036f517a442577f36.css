@@ -7779,6 +7779,10 @@ a {
   outline: none !important;
 }
 
+.btn-flat:hover {
+  text-decoration: none;
+}
+
 .btn-primary {
   background-color: #55AE3A;
   border-color: #42882d;
@@ -9240,6 +9244,14 @@ body.mobile-nav-open .overlay {
   }
 }
 
+@media screen and (min-width: 1200px) {
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-content {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+  }
+}
+
 .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -9258,27 +9270,28 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button {
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a {
+  text-align: center;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
 @media screen and (min-width: 992px) {
-  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button {
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a {
     padding: 3px 5px;
   }
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button i {
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a i {
   margin-right: 5px;
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button.show-bids {
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a.show-bids {
   margin-right: 3px;
 }
 
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions button.edit {
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a.edit {
   margin-left: 3px;
 }
 

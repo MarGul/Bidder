@@ -1,10 +1,9 @@
 <template>
-	<div class="show_bids-component">
-		<div class="modal-header">
-			<h3 class="text-center">Visar budhistorik</h3>
-		</div>
+	<div class="bid_history-component">
+		
+		<h1 class="user-component-title">Budhistorik</h1>
 
-		<div class="modal-body">
+		<template v-if="bidsFetched">
 			<ul class="list-unstyled list-bids" v-if="bids.length > 0">
 				<li v-for="bid in bids">
 					<div class="bid-header">
@@ -45,37 +44,49 @@
 					<div class="bid-description" v-text="bid.description"></div>
 				</li>
 			</ul>
-			<div class="alert alert-info text-center" v-else>
-				Denna tjänsten har ännu inga lagda bud. Vill du bli den första? 
-				<a class="link" @click.prevent="openCreateBid">Lägg ett bud nu</a>
-			</div>
-		</div>
 
-		<div class="modal-footer">
-			<a class="link" @click.prevent="openCreateBid">Lägg ett bud för denna tjänsten</a>
+			<div class="alert alert-info text-center" v-else>
+				Där finns inga bud för denna tjänsten.
+			</div>
+		</template>
+
+		<div class="load-spinner text-center" v-else>
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<span class="sr-only">Loading...</span>
 		</div>
 	</div>
 </template>
 
 <script>
+	import Bid from "../../includes/models/Bid";
 	import Ratings from "../Includes/Ratings.vue";
 
 	export default {
 		components: {
 			appRatings: Ratings
 		},
-		computed: {
-			bids() {
-				return this.$store.getters.getBids;
+		data() {
+			return {
+				bids: [],
+				bidsFetched: false
 			}
 		},
 		methods: {
-			openCreateBid() {
-				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
-			},
 			time(t) {
 				return moment(t).format("LLL");
 			}
+		},
+		created() {
+			// Fetch bids for the service.
+			console.log(this.$route.params.id);
+			Bid.setId(this.$route.params.id).get()
+				.then(response => {
+					this.bids = response.bids;
+					this.bidsFetched = true;
+				})
+				.catch(error => {
+
+				});
 		}
 	}
 </script>

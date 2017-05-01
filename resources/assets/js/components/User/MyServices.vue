@@ -12,12 +12,12 @@
 					</span>
 				</div>
 				<div class="item-actions">
-					<button class="btn-flat btn-default show-bids">
+					<router-link :to="`/user/service/${service.id}/bids`" class="btn-flat btn-default show-bids">
 						<i class="fa fa-gavel" aria-hidden="true" title="Visa bud"></i> Visa bud
-					</button>
-					<button class="btn-flat btn-default edit">
+					</router-link>
+					<router-link :to="`/user/service/${service.id}/edit`" class="btn-flat btn-default edit">
 						<i class="fa fa-pencil" aria-hidden="true" title="Redigera"></i> Redigera
-					</button>
+					</router-link>
 				</div>
 			</li>
 		</ul>

@@ -6144,7 +6144,7 @@ var Region = function (_Model) {
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(239) }, { path: "/categories", name: 'categories', component: __webpack_require__(238) }, { path: "/locations", name: 'locations', component: __webpack_require__(241) }, { path: "/services", name: 'services', component: __webpack_require__(243) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(242) }, { path: "/information", name: 'information', component: __webpack_require__(240) }, { path: "/user", name: 'user', component: __webpack_require__(244),
-	children: [{ path: '', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(235), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(232), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__(234), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__(233), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__(236), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(235), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(232), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__(234), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__(233), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__(236), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__(295), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -10060,7 +10060,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "to": ("/services/" + (service.id))
       }
-    }, [_vm._v("visa tjänst")])], 1) : _vm._e()]), _vm._v(" "), _vm._m(0, true)])
+    }, [_vm._v("visa tjänst")])], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+      staticClass: "item-actions"
+    }, [_c('router-link', {
+      staticClass: "btn-flat btn-default show-bids",
+      attrs: {
+        "to": ("/user/service/" + (service.id) + "/bids")
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-gavel",
+      attrs: {
+        "aria-hidden": "true",
+        "title": "Visa bud"
+      }
+    }), _vm._v(" Visa bud\n\t\t\t\t")]), _vm._v(" "), _c('router-link', {
+      staticClass: "btn-flat btn-default edit",
+      attrs: {
+        "to": ("/user/service/" + (service.id) + "/edit")
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-pencil",
+      attrs: {
+        "aria-hidden": "true",
+        "title": "Redigera"
+      }
+    }), _vm._v(" Redigera\n\t\t\t\t")])], 1)])
   })) : _c('div', {
     staticClass: "load-spinner text-center"
   }, [_c('i', {
@@ -10068,27 +10092,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('span', {
     staticClass: "sr-only"
   }, [_vm._v("Loading...")])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "item-actions"
-  }, [_c('button', {
-    staticClass: "btn-flat btn-default show-bids"
-  }, [_c('i', {
-    staticClass: "fa fa-gavel",
-    attrs: {
-      "aria-hidden": "true",
-      "title": "Visa bud"
-    }
-  }), _vm._v(" Visa bud\n\t\t\t\t")]), _vm._v(" "), _c('button', {
-    staticClass: "btn-flat btn-default edit"
-  }, [_c('i', {
-    staticClass: "fa fa-pencil",
-    attrs: {
-      "aria-hidden": "true",
-      "title": "Redigera"
-    }
-  }), _vm._v(" Redigera\n\t\t\t\t")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -10547,7 +10551,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "bid-user"
     }, [_c('a', {
       staticClass: "link"
-    }, [_vm._v(_vm._s(bid.user.displayname))]), _vm._v(" "), _c('span', {
+    }, [_vm._v(_vm._s(bid.user.username))]), _vm._v(" "), _c('span', {
       staticClass: "user-reviews"
     }, [_c('app-ratings', {
       attrs: {
@@ -11600,6 +11604,248 @@ return index;
 __webpack_require__(143);
 module.exports = __webpack_require__(144);
 
+
+/***/ }),
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(296),
+  /* template */
+  __webpack_require__(297),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/BidHistory.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] BidHistory.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ff20e4fa", Component.options)
+  } else {
+    hotAPI.reload("data-v-ff20e4fa", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		appRatings: __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default.a
+	},
+	data: function data() {
+		return {
+			bids: [],
+			bidsFetched: false
+		};
+	},
+
+	methods: {
+		time: function time(t) {
+			return moment(t).format("LLL");
+		}
+	},
+	created: function created() {
+		var _this = this;
+
+		// Fetch bids for the service.
+		console.log(this.$route.params.id);
+		__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.$route.params.id).get().then(function (response) {
+			_this.bids = response.bids;
+			_this.bidsFetched = true;
+		}).catch(function (error) {});
+	}
+};
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "bid_history-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Budhistorik")]), _vm._v(" "), (_vm.bidsFetched) ? [(_vm.bids.length > 0) ? _c('ul', {
+    staticClass: "list-unstyled list-bids"
+  }, _vm._l((_vm.bids), function(bid) {
+    return _c('li', [_c('div', {
+      staticClass: "bid-header"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-xs-12 col-sm-6 col-md-7"
+    }, [_c('div', {
+      staticClass: "bid-user"
+    }, [_c('a', {
+      staticClass: "link"
+    }, [_vm._v(_vm._s(bid.user.username))]), _vm._v(" "), _c('span', {
+      staticClass: "user-reviews"
+    }, [_c('app-ratings', {
+      attrs: {
+        "rating": 4.5,
+        "total": 8
+      }
+    })], 1)])]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-12 col-sm-6 col-md-5"
+    }, [_c('div', {
+      staticClass: "bid-time",
+      domProps: {
+        "textContent": _vm._s(_vm.time(bid.created_at))
+      }
+    })])])]), _vm._v(" "), _c('div', {
+      staticClass: "bid-info"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(bid.start)
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(bid.end)
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(_vm.filters.commaSeparator(bid.hours))
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(_vm.filters.currency(bid.price))
+      }
+    })])])]), _vm._v(" "), _c('div', {
+      staticClass: "bid-description",
+      domProps: {
+        "textContent": _vm._s(bid.description)
+      }
+    })])
+  })) : _c('div', {
+    staticClass: "alert alert-info text-center"
+  }, [_vm._v("\n\t\t\tDär finns inga bud för denna tjänsten.\n\t\t")])] : _c('div', {
+    staticClass: "load-spinner text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])])], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ff20e4fa", module.exports)
+  }
+}
 
 /***/ })
 ],[286]);
