@@ -17,7 +17,8 @@ window.Vue = require('vue');
 /**
  * Tell vue to use the first-package vue-router
  */
-Vue.use(require('vue-router'));
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
 /**
  * Global Vue components 
