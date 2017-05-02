@@ -31,6 +31,9 @@ class ServiceBidAcceptController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create(Service $service, Bid $bid, Request $request) {
+		// Policy to make sure user can accept bids for this service.
+		$this->authorize('accept-bid', $service);
+
 		if ( !$this->manager->accept($bid) ) {
 			return response()->json(['message' => 'Could not accept the bid'], 500);
 		}

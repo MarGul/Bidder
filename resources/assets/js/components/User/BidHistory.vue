@@ -84,10 +84,10 @@
 			accept(bid) {
 				Bid.setResource(`services/${bid.service_id}/bids/${bid.id}/accept`).post()
 					.then(response => {
-
+						console.log(response);
 					})
 					.catch(error => {
-
+						console.log(error);
 					});
 			}
 		},

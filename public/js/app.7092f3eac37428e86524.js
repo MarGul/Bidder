@@ -5008,7 +5008,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return moment(t).format("LLL");
 		},
 		accept: function accept(bid) {
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setResource("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {}).catch(function (error) {});
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setResource("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	},
 	created: function created() {
