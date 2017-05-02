@@ -17,7 +17,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-5 bid-head-right">
-								<button class="btn-flat btn-info">Acceptera budet</button>
+								<button class="btn-flat btn-info" @click.prevent="accept(bid)">Acceptera budet</button>
 								<div class="bid-time" v-text="time(bid.created_at)"></div>
 							</div>
 						</div>
@@ -72,9 +72,17 @@
 				bidsFetched: false
 			}
 		},
+		computed: {
+			acceptBid() {
+				// Logic for determine if we should show the "Accept Bid" button
+			}
+		},
 		methods: {
 			time(t) {
 				return moment(t).format("LLL");
+			},
+			showAcceptConfirm(bid) {
+				console.log(bid.id);
 			}
 		},
 		created() {

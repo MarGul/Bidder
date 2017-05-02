@@ -1698,9 +1698,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
+	computed: {
+		acceptBid: function acceptBid() {
+			// Logic for determine if we should show the "Accept Bid" button
+		}
+	},
 	methods: {
 		time: function time(t) {
 			return moment(t).format("LLL");
+		},
+		showAcceptConfirm: function showAcceptConfirm(bid) {
+			console.log(bid.id);
 		}
 	},
 	created: function created() {
@@ -5746,7 +5754,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
     }, [_c('button', {
-      staticClass: "btn-flat btn-info"
+      staticClass: "btn-flat btn-info",
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.accept(bid)
+        }
+      }
     }, [_vm._v("Acceptera budet")]), _vm._v(" "), _c('div', {
       staticClass: "bid-time",
       domProps: {

@@ -9017,6 +9017,8 @@ body.mobile-nav-open .overlay {
 @media screen and (min-width: 768px) {
   .list-bids li .bid-time {
     text-align: right;
+    float: right;
+    padding: 6px 0 6px 10px;
   }
 }
 
