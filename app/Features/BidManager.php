@@ -74,7 +74,7 @@ class BidManager {
 			return false;
 		}
 
-		// Create a contract between the two parties.
+		// Create a project between the two parties.
 		$data = [
 			'service_user' => Service::find($bid->service_id)->user_id,
 			'bid_user' => $bid->user_id,
@@ -82,7 +82,7 @@ class BidManager {
 			'active' => true
 		];
 
-		if ( !app(ContractManager::class)->create($data) ) {
+		if ( !app(ProjectManager::class)->create($data) ) {
 			return false;
 		}
 

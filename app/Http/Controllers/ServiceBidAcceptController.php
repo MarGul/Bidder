@@ -18,6 +18,7 @@ class ServiceBidAcceptController extends Controller
 	private $manager;
 
 	public function __construct(BidManager $manager) {
+		$this->middleware('auth:api');
 		$this->manager = $manager;
 	}
 
@@ -34,7 +35,7 @@ class ServiceBidAcceptController extends Controller
 			return response()->json(['message' => 'Could not accept the bid'], 500);
 		}
 
-		return response()->json(['message' => 'Bid was accepted and a contract created.'], 201);
+		return response()->json(['message' => 'Bid was accepted and a project created.'], 201);
 	}
 
 }
