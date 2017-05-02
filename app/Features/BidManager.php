@@ -3,6 +3,7 @@
 namespace App\Features;
 
 use App\Bid;
+use App\Service;
 use Carbon\Carbon;
 
 class BidManager {
@@ -52,7 +53,7 @@ class BidManager {
 			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm')->toDateString(),
 			'hours' => $request->hours,
 			'price' => (float)$request->price,
-			'status' => 'active'
+			'accepted' => false
 		]);
 
 		if ( !$bid->save() ) {
@@ -60,6 +61,32 @@ class BidManager {
 		}
 
 		return response()->json(['message' => 'Bid was successfully created.', 'bid' => $bid], 201);
+	}
+
+	/**
+	 * Accept a bid for a service.
+	 * 
+	 * @param  App\Bid $bid
+	 * @return boolean
+	 */
+	public function accept($bid) {
+		if ( !$bid->update(['accepted' => true]) ) {
+			return false;
+		}
+
+		// Create a contract between the two parties.
+		$data = [
+			'service_user' => Service::find($bid->service_id)->user_id,
+			'bid_user' => $bid->user_id,
+			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString(),
+			'active' => true
+		];
+
+		if ( !app(ContractManager::class)->create($data) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

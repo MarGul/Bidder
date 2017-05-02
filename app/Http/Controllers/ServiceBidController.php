@@ -10,6 +10,11 @@ use App\Features\BidManager;
 
 class ServiceBidController extends Controller
 {
+    /**
+     * Class to manage bids
+     * 
+     * @var App\Features\BidManager
+     */
     private $manager;
 
     public function __construct(BidManager $manager) {

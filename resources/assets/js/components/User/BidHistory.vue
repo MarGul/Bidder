@@ -81,8 +81,14 @@
 			time(t) {
 				return moment(t).format("LLL");
 			},
-			showAcceptConfirm(bid) {
-				console.log(bid.id);
+			accept(bid) {
+				Bid.setResource(`services/${bid.service_id}/bids/${bid.id}/accept`).post()
+					.then(response => {
+
+					})
+					.catch(error => {
+
+					});
 			}
 		},
 		created() {

@@ -22,7 +22,7 @@ class CreateBidsTable extends Migration
             $table->date('end');
             $table->float('hours')->nullable();
             $table->double('price');
-            $table->string('status');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }
