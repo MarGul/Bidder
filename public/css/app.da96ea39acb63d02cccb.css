@@ -7773,6 +7773,7 @@ a {
 .btn-flat {
   padding: 6px 12px;
   border: 1px solid transparent;
+  box-shadow: none;
 }
 
 .btn-flat:focus, .btn-flat:active {
@@ -8974,12 +8975,6 @@ body.mobile-nav-open .overlay {
   border-bottom: 1px solid #d7d7d7;
 }
 
-@media screen and (min-width: 768px) {
-  .list-bids li .bid-header .history-padding {
-    padding: 6px 0px;
-  }
-}
-
 .list-bids li .bid-header .user-reviews {
   margin-left: 5px;
   display: inline-block;
@@ -8987,6 +8982,46 @@ body.mobile-nav-open .overlay {
 
 .list-bids li .bid-header .user-reviews i {
   color: #FFC100;
+}
+
+@media screen and (min-width: 768px) {
+  .list-bids li .bid-header .history-padding {
+    padding: 6px 0px;
+  }
+}
+
+.list-bids li .bid-header .bid-accept-confirm {
+  margin: 10px 0 7px 0;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .list-bids li .bid-header .bid-accept-confirm {
+    margin: 15px 0 7px 0;
+  }
+}
+
+.list-bids li .bid-header .bid-accept-confirm:before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 40px;
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-bottom: 13px solid #f5d99e;
+  border-right: 13px solid transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .list-bids li .bid-header .bid-accept-confirm:before {
+    left: auto;
+    right: 165px;
+  }
+}
+
+.list-bids li .bid-header .bid-accept-confirm .confirm-buttons {
+  margin-top: 5px;
 }
 
 .list-bids li .bid-info {

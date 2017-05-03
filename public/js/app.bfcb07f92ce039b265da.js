@@ -4983,6 +4983,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4994,7 +5003,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			bids: [],
-			bidsFetched: false
+			bidsFetched: false,
+			focus: ''
 		};
 	},
 
@@ -10832,7 +10842,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.accept(bid)
+          _vm.focus = bid.id
         }
       }
     }, [_vm._v("Acceptera budet")]), _vm._v(" "), _c('div', {
@@ -10840,7 +10850,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "textContent": _vm._s(_vm.time(bid.created_at))
       }
-    })])])]), _vm._v(" "), _c('div', {
+    })]), _vm._v(" "), (_vm.focus == bid.id) ? _c('div', {
+      staticClass: "col-xs-12"
+    }, [_c('div', {
+      staticClass: "alert alert-warning bid-accept-confirm"
+    }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
+      staticClass: "confirm-buttons text-center"
+    }, [_c('button', {
+      staticClass: "btn btn-success btn-flat"
+    }, [_vm._v("Acceptera")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-danger btn-flat",
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.focus = ''
+        }
+      }
+    }, [_vm._v("Avbryt")])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
       staticClass: "bid-info"
     }, [_c('div', {
       staticClass: "row"

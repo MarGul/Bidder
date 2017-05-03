@@ -10,18 +10,49 @@
 			background-color: #f1f1f1;
 			border-bottom: 1px solid $border-color-gray;
 
-			.history-padding {
-				@media screen and (min-width: $screen-sm-min) {
-					padding: 6px 0px;
-				}
-			}
-
 			.user-reviews {
 				margin-left: 5px;
 				display: inline-block;
 
 				i {
 					color: #FFC100;
+				}
+			}
+
+			.history-padding {
+				@media screen and (min-width: $screen-sm-min) {
+					padding: 6px 0px;
+				}
+			}
+
+			.bid-accept-confirm {
+				margin: 10px 0 7px 0;
+				position: relative;
+
+				@media screen and (min-width: $screen-sm-min) {
+					margin: 15px 0 7px 0;
+				}
+
+				&:before {
+					content: "";
+					position: absolute;
+					top: -13px;
+					left: 40px;
+					width: 0; 
+					height: 0; 
+					border-left: 13px solid transparent;
+					border-bottom: 13px solid darken(#faebcc, 10%); 
+					border-right: 13px solid transparent;
+
+					@media screen and (min-width: $screen-sm-min) {
+						left: auto;
+						right: 165px;
+					}
+				}
+
+
+				.confirm-buttons {
+					margin-top: 5px;
 				}
 			}
 		}

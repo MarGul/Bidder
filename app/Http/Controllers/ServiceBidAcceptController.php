@@ -11,9 +11,9 @@ class ServiceBidAcceptController extends Controller
 {
     
 	/**
-     * Class to manage comments
+     * Class to manage bids
      * 
-     * @var App\Features\CommentManager
+     * @var App\Features\BidManager
      */
 	private $manager;
 

@@ -17,8 +17,17 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-5 bid-head-right">
-								<button class="btn-flat btn-info" @click.prevent="accept(bid)">Acceptera budet</button>
+								<button class="btn-flat btn-info" @click.prevent="focus = bid.id">Acceptera budet</button>
 								<div class="bid-time" v-text="time(bid.created_at)"></div>
+							</div>
+							<div class="col-xs-12" v-if="focus == bid.id">
+								<div class="alert alert-warning bid-accept-confirm">
+									När du accepterar ett bud kommer budgivningen för tjänsten att stoppas.
+									<div class="confirm-buttons text-center">
+										<button class="btn btn-success btn-flat">Acceptera</button>
+										<button class="btn btn-danger btn-flat" @click.prevent="focus = ''">Avbryt</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -69,7 +78,8 @@
 		data() {
 			return {
 				bids: [],
-				bidsFetched: false
+				bidsFetched: false,
+				focus: '',
 			}
 		},
 		computed: {
