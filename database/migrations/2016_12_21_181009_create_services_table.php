@@ -25,6 +25,7 @@ class CreateServicesTable extends Migration
             $table->dateTime('end');
             $table->dateTime('bid_start');
             $table->dateTime('bid_stop');
+            $table->boolean('bid_accepted')->default(false);
             $table->boolean('active');
             $table->timestamps();
         });

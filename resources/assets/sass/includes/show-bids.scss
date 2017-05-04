@@ -50,9 +50,19 @@
 					}
 				}
 
-
 				.confirm-buttons {
 					margin-top: 5px;
+				}
+			}
+
+			.accepted-bid {
+				display: inline-block;
+				padding: 6px 12px;
+				color: $dark-black;
+				font-weight: bold;
+
+				i {
+					margin-right: 3px;
 				}
 			}
 		}

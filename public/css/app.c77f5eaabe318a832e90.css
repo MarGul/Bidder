@@ -9024,6 +9024,17 @@ body.mobile-nav-open .overlay {
   margin-top: 5px;
 }
 
+.list-bids li .bid-header .accepted-bid {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #4D545D;
+  font-weight: bold;
+}
+
+.list-bids li .bid-header .accepted-bid i {
+  margin-right: 3px;
+}
+
 .list-bids li .bid-info {
   padding: 15px;
 }
@@ -9301,6 +9312,7 @@ body.mobile-nav-open .overlay {
         -ms-flex: 2;
             flex: 2;
     padding-right: 10px;
+    line-height: 30px;
   }
 }
 

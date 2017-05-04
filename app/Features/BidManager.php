@@ -17,10 +17,7 @@ class BidManager {
 	public function all($service) {
 		$bids = Bid::with('user')->where('service_id', $service->id)->get();
 
-		return response()->json([
-			'message' => 'Displaying bids for serviceId: ' . $service->id,
-			'bids' => $bids
-		], 200);
+		return $bids;
 	}
 
 	/**
@@ -70,23 +67,26 @@ class BidManager {
 	 * @return boolean
 	 */
 	public function accept($bid) {
+		// Flag the bid as accepted.
 		if ( !$bid->update(['accepted' => true]) ) {
+			return false;
+		}
+
+		// Update the status of the service. When a bid is accepted a flag is set and the service is not longer active.
+		$service = Service::find($bid->service_id);
+		if ( !$service->update(['bid_accepted' => true, 'active' => false]) ) {
 			return false;
 		}
 
 		// Create a project between the two parties.
 		$data = [
-			'service_user' => Service::find($bid->service_id)->user_id,
+			'service_user' => $service->user_id,
 			'bid_user' => $bid->user_id,
 			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString(),
 			'active' => true
 		];
 
-		if ( !app(ProjectManager::class)->create($data) ) {
-			return false;
-		}
-
-		return true;
+		return (app(ProjectManager::class)->create($data)) ? true : false;
 	}
 
 }

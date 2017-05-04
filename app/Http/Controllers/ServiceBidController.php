@@ -30,7 +30,15 @@ class ServiceBidController extends Controller
      */
     public function index(Service $service)
     {
-        return $this->manager->all($service);
+        $bids = $this->manager->all($service);
+
+        return response()->json([
+            'message' => 'Displaying bids for serviceId: ' . $service->id,
+            'bids' => $bids,
+            'meta' => [
+                'bid_accepted' => $service->bid_accepted
+            ]
+        ], 200);
     }
 
     /**

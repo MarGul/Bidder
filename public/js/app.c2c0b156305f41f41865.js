@@ -4919,10 +4919,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5004,37 +5015,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			bids: [],
 			bidsFetched: false,
-			focus: ''
+			bidAccepted: false,
+			focus: '',
+			processing: false
 		};
 	},
 
-	computed: {
-		acceptBid: function acceptBid() {
-			// Logic for determine if we should show the "Accept Bid" button
-		}
-	},
 	methods: {
 		time: function time(t) {
 			return moment(t).format("LLL");
 		},
 		accept: function accept(bid) {
+			var _this = this;
+
+			this.processing = true;
 			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setResource("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
-				console.log(response);
+				_this.bidAccepted = true;
+				_this.$store.dispatch('showNotification', {
+					type: 'success',
+					msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+				});
+				$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+				bid.accepted = true;
+				_this.processing = false;
 			}).catch(function (error) {
 				console.log(error);
 			});
 		}
 	},
 	created: function created() {
-		var _this = this;
+		var _this2 = this;
 
 		// Fetch bids for the service.
 		__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.$route.params.id).get().then(function (response) {
-			_this.bids = response.bids;
-			_this.bidsFetched = true;
+			_this2.bids = response.bids;
+			_this2.bidAccepted = !!response.meta.bid_accepted;
+			_this2.bidsFetched = true;
 		}).catch(function (error) {});
 	}
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 185 */
@@ -10837,28 +10857,53 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
-    }, [_c('button', {
+    }, [(!_vm.bidAccepted) ? _c('button', {
       staticClass: "btn-flat btn-info",
+      attrs: {
+        "disabled": _vm.processing
+      },
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.focus = bid.id
         }
       }
-    }, [_vm._v("Acceptera budet")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t\tAcceptera budet\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.bidAccepted && bid.accepted) ? _c('div', {
+      staticClass: "accepted-bid"
+    }, [_c('i', {
+      staticClass: "fa fa-check",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Accepterat bud\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('div', {
       staticClass: "bid-time",
       domProps: {
         "textContent": _vm._s(_vm.time(bid.created_at))
       }
-    })]), _vm._v(" "), (_vm.focus == bid.id) ? _c('div', {
+    })]), _vm._v(" "), (!_vm.bidAccepted && _vm.focus == bid.id) ? _c('div', {
       staticClass: "col-xs-12"
     }, [_c('div', {
       staticClass: "alert alert-warning bid-accept-confirm"
     }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
       staticClass: "confirm-buttons text-center"
     }, [_c('button', {
-      staticClass: "btn btn-success btn-flat"
-    }, [_vm._v("Acceptera")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-success btn-flat",
+      attrs: {
+        "disabled": _vm.processing
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.accept(bid)
+        }
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t\t"), (_vm.processing) ? _c('span', {
+      staticClass: "processing"
+    }, [_c('i', {
+      staticClass: "fa fa-spinner fa-pulse fa-fw"
+    }), _vm._v(" "), _c('span', {
+      staticClass: "sr-only"
+    }, [_vm._v("Loading...")])]) : _vm._e()]), _vm._v(" "), _c('button', {
       staticClass: "btn btn-danger btn-flat",
       on: {
         "click": function($event) {

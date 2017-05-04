@@ -17,14 +17,25 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-5 bid-head-right">
-								<button class="btn-flat btn-info" @click.prevent="focus = bid.id">Acceptera budet</button>
+								<button class="btn-flat btn-info" @click.prevent="focus = bid.id" v-if="!bidAccepted" :disabled="processing">
+									Acceptera budet
+								</button>
+								<div class="accepted-bid" v-if="bidAccepted && bid.accepted">
+									<i class="fa fa-check" aria-hidden="true"></i> Accepterat bud
+								</div>
 								<div class="bid-time" v-text="time(bid.created_at)"></div>
 							</div>
-							<div class="col-xs-12" v-if="focus == bid.id">
+							<div class="col-xs-12" v-if="!bidAccepted && focus == bid.id">
 								<div class="alert alert-warning bid-accept-confirm">
 									När du accepterar ett bud kommer budgivningen för tjänsten att stoppas.
 									<div class="confirm-buttons text-center">
-										<button class="btn btn-success btn-flat">Acceptera</button>
+										<button class="btn btn-success btn-flat" @click.prevent="accept(bid)" :disabled="processing">
+											Acceptera
+											<span class="processing" v-if="processing">
+												<i class="fa fa-spinner fa-pulse fa-fw"></i>
+												<span class="sr-only">Loading...</span>
+											</span>
+										</button>
 										<button class="btn btn-danger btn-flat" @click.prevent="focus = ''">Avbryt</button>
 									</div>
 								</div>
@@ -79,12 +90,9 @@
 			return {
 				bids: [],
 				bidsFetched: false,
+				bidAccepted: false,
 				focus: '',
-			}
-		},
-		computed: {
-			acceptBid() {
-				// Logic for determine if we should show the "Accept Bid" button
+				processing: false
 			}
 		},
 		methods: {
@@ -92,9 +100,17 @@
 				return moment(t).format("LLL");
 			},
 			accept(bid) {
+				this.processing = true;
 				Bid.setResource(`services/${bid.service_id}/bids/${bid.id}/accept`).post()
 					.then(response => {
-						console.log(response);
+						this.bidAccepted = true;
+						this.$store.dispatch('showNotification', {
+							type: 'success', 
+							msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+						});
+						$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+						bid.accepted = true;
+						this.processing = false;
 					})
 					.catch(error => {
 						console.log(error);
@@ -106,6 +122,7 @@
 			Bid.setId(this.$route.params.id).get()
 				.then(response => {
 					this.bids = response.bids;
+					this.bidAccepted = !!response.meta.bid_accepted;
 					this.bidsFetched = true;
 				})
 				.catch(error => {
