@@ -55,6 +55,9 @@ Route::group(['prefix' => 'v1'], function() {
 		'except' => ['create', 'edit']
 	]);
 
+	/* Accept a bid */
+	Route::post('services/{service}/bids/{bid}/accept')->uses('ServiceBidAcceptController@create');
+
 	/* user/services */
 	Route::get('user/services')->uses('UserServicesController@index');
 

@@ -10,6 +10,11 @@ use App\Features\BidManager;
 
 class ServiceBidController extends Controller
 {
+    /**
+     * Class to manage bids
+     * 
+     * @var App\Features\BidManager
+     */
     private $manager;
 
     public function __construct(BidManager $manager) {
@@ -25,7 +30,15 @@ class ServiceBidController extends Controller
      */
     public function index(Service $service)
     {
-        return $this->manager->all($service);
+        $bids = $this->manager->all($service);
+
+        return response()->json([
+            'message' => 'Displaying bids for serviceId: ' . $service->id,
+            'bids' => $bids,
+            'meta' => [
+                'bid_accepted' => $service->bid_accepted
+            ]
+        ], 200);
     }
 
     /**

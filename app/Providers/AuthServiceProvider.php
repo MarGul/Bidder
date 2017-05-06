@@ -27,5 +27,10 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        // Can a user accept bids for a service?
+        Gate::define('accept-bid', function($user, $service) {
+            return $user->id === $service->user_id;
+        });
     }
 }

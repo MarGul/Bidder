@@ -26,6 +26,13 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('tester'),
                 'name' => 'Elon Musk',
                 'avatar' => 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg'
+            ],
+            [
+                'username' => 'PThiel',
+                'email' => 'peter@paypal.com',
+                'password' => bcrypt('tester'),
+                'name' => 'Pieter Thiel',
+                'avatar' => 'http://static4.businessinsider.com/image/552568d2ecad04377e91955f-480/peter-thiel.jpg'
             ]
         ];
 
