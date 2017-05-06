@@ -3,7 +3,7 @@
 		
 		<h1 class="user-component-title">Mina Tjänster</h1>
 
-		<ul class="user-items-list" v-if="services.length > 0">
+		<ul class="user-items-list" v-if="fetched">
 			<li v-for="service in services">
 				<div class="item-content">
 					{{ service.title }}
@@ -33,12 +33,15 @@
 <script>
 	export default {
 		computed: {
+			fetched() {
+				return this.$store.getters.userServicesFetched;
+			},
 			services() {
 				return this.$store.getters.userServices;
 			}
 		},
 		created() {
-			if ( !this.$store.getters.userServicesFetched ) {
+			if ( !this.fetched ) {
 				this.$store.dispatch('fetchUserServices');
 			}
 		}

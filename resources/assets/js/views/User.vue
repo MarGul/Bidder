@@ -27,6 +27,7 @@
 						<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
 						<li><router-link to="/user/my-services">Mina tjänster</router-link></li>
 						<li><router-link to="/user/my-bids">Mina bud</router-link></li>
+						<li><router-link to="/user/my-projects">Mina projekt</router-link></li>
 						<li><router-link to="/user/payments">Betalningar</router-link></li>
 					</ul>
 				</div>

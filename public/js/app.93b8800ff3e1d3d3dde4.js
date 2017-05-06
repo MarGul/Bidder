@@ -5360,12 +5360,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userServicesFetched;
+		},
 		services: function services() {
 			return this.$store.getters.userServices;
 		}
 	},
 	created: function created() {
-		if (!this.$store.getters.userServicesFetched) {
+		if (!this.fetched) {
 			this.$store.dispatch('fetchUserServices');
 		}
 	}
@@ -5928,6 +5931,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -6289,7 +6293,7 @@ var Region = function (_Model) {
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(241) }, { path: "/categories", name: 'categories', component: __webpack_require__(240) }, { path: "/locations", name: 'locations', component: __webpack_require__(243) }, { path: "/services", name: 'services', component: __webpack_require__(245) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(244) }, { path: "/information", name: 'information', component: __webpack_require__(242) }, { path: "/user", name: 'user', component: __webpack_require__(246),
-	children: [{ path: '', component: __webpack_require__(141), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(141), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(237), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(234), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__(236), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__(235), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__(238), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__(233), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__(141), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(141), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(237), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(234), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__(236), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__(235), meta: { requiresAuth: true } }, { path: 'my-projects', component: __webpack_require__(299), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__(238), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__(233), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -6355,7 +6359,9 @@ var auth = {
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
-		userBidsFetched: false
+		userBidsFetched: false,
+		userProjects: [],
+		userProjectsFetched: false
 	},
 	mutations: {
 		'SET_AUTHENTICATED': function SET_AUTHENTICATED(state, payload) {
@@ -6381,6 +6387,12 @@ var auth = {
 		},
 		'SET_USER_BIDS_FETCHED': function SET_USER_BIDS_FETCHED(state, payload) {
 			state.userBidsFetched = payload.userBidsFetched;
+		},
+		'SET_USER_PROJECTS': function SET_USER_PROJECTS(state, payload) {
+			state.userProjects = payload.userProjects;
+		},
+		'SET_USER_PROJECTS_FETCHED': function SET_USER_PROJECTS_FETCHED(state, payload) {
+			state.userProjectsFetched = payload.userProjectsFetched;
 		}
 	},
 	actions: {
@@ -6416,6 +6428,15 @@ var auth = {
 				commit('SET_USER_BIDS', { userBids: response.bids });
 				commit('SET_USER_BIDS_FETCHED', { userBidsFetched: true });
 			});
+		},
+		fetchUserProjects: function fetchUserProjects(_ref4) {
+			var commit = _ref4.commit,
+			    state = _ref4.state;
+
+			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/' + state.user.id + '/projects').get().then(function (response) {
+				commit('SET_USER_PROJECTS', { userProjects: response.projects });
+				commit('SET_USER_PROJECTS_FETCHED', { userProjectsFetched: true });
+			});
 		}
 	},
 	getters: {
@@ -6442,6 +6463,12 @@ var auth = {
 		},
 		userBidsFetched: function userBidsFetched(state) {
 			return state.userBidsFetched;
+		},
+		userProjects: function userProjects(state) {
+			return state.userProjects;
+		},
+		userProjectsFetched: function userProjectsFetched(state) {
+			return state.userProjectsFetched;
 		}
 	}
 };
@@ -10228,7 +10255,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "my_services-component"
   }, [_c('h1', {
     staticClass: "user-component-title"
-  }, [_vm._v("Mina Tjänster")]), _vm._v(" "), (_vm.services.length > 0) ? _c('ul', {
+  }, [_vm._v("Mina Tjänster")]), _vm._v(" "), (_vm.fetched) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.services), function(service) {
     return _c('li', [_c('div', {
@@ -10437,6 +10464,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/my-bids"
     }
   }, [_vm._v("Mina bud")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/my-projects"
+    }
+  }, [_vm._v("Mina projekt")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": "/user/payments"
     }
@@ -11932,6 +11963,150 @@ return index;
 __webpack_require__(144);
 module.exports = __webpack_require__(145);
 
+
+/***/ }),
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userProjectsFetched;
+		},
+		projects: function projects() {
+			return this.$store.getters.userProjects;
+		}
+	},
+	created: function created() {
+		if (!this.fetched) {
+			this.$store.dispatch('fetchUserProjects');
+		}
+	}
+};
+
+/***/ }),
+/* 299 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(298),
+  /* template */
+  __webpack_require__(300),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/MyProjects.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MyProjects.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3394f91c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3394f91c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_projects-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Mina projekt")]), _vm._v(" "), (_vm.fetched) ? _c('ul', {
+    staticClass: "user-items-list"
+  }, _vm._l((_vm.projects), function(project) {
+    return _c('li', [_c('span', {
+      staticClass: "item-content"
+    }, [_vm._v("\n\t\t\t\t#" + _vm._s(project.id) + "\n\t\t\t")]), _vm._v(" "), _c('span', {
+      staticClass: "item-actions"
+    }, [_c('router-link', {
+      staticClass: "btn-flat btn-default",
+      attrs: {
+        "to": ("/user/project/" + (project.id))
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-briefcase",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Visa projekt\n\t\t\t\t")]), _vm._v(" "), _c('div', {
+      staticClass: "status"
+    }, [(project.active) ? [_vm._v("\n\t\t\t\t\t\tPågående\n\t\t\t\t\t")] : [_vm._v("\n\t\t\t\t\t\tAvslutad\n\t\t\t\t\t")]], 2)], 1)])
+  })) : _c('div', {
+    staticClass: "load-spinner text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3394f91c", module.exports)
+  }
+}
 
 /***/ })
 ],[289]);

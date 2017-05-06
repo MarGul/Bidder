@@ -9,7 +9,9 @@ const auth = {
 		userServices: [],
 		userServicesFetched: false,
 		userBids: [],
-		userBidsFetched: false
+		userBidsFetched: false,
+		userProjects: [],
+		userProjectsFetched: false
 	},
 	mutations: {
 		'SET_AUTHENTICATED'(state, payload) {
@@ -35,6 +37,12 @@ const auth = {
 		},
 		'SET_USER_BIDS_FETCHED'(state, payload) {
 			state.userBidsFetched = payload.userBidsFetched;
+		},
+		'SET_USER_PROJECTS'(state, payload) {
+			state.userProjects = payload.userProjects;
+		},
+		'SET_USER_PROJECTS_FETCHED'(state, payload) {
+			state.userProjectsFetched = payload.userProjectsFetched;
 		}
 	},
 	actions: {
@@ -68,6 +76,13 @@ const auth = {
 					commit('SET_USER_BIDS', {userBids: response.bids});
 					commit('SET_USER_BIDS_FETCHED', {userBidsFetched: true});
 				});
+		},
+		fetchUserProjects({commit, state}) {
+			User.setUrl(`user/${state.user.id}/projects`).get()
+				.then(response => {
+					commit('SET_USER_PROJECTS', {userProjects: response.projects});
+					commit('SET_USER_PROJECTS_FETCHED', {userProjectsFetched: true});
+				});
 		}
 	},
 	getters: {
@@ -78,7 +93,9 @@ const auth = {
 		userServices: state => state.userServices,
 		userServicesFetched: state => state.userServicesFetched,
 		userBids: state => state.userBids,
-		userBidsFetched: state => state.userBidsFetched
+		userBidsFetched: state => state.userBidsFetched,
+		userProjects: state => state.userProjects,
+		userProjectsFetched: state => state.userProjectsFetched
 	}
 }
 

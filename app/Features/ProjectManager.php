@@ -18,4 +18,19 @@ class ProjectManager {
 		return ($project->save()) ? true : false;
 	}
 
+	/**
+	 * Show a users projects.
+	 * 
+	 * @param  App\User 	$user
+	 * @return collection
+	 */
+	public function byUser($user) {
+		$projects = Project::where('service_user', $user->id)
+							->orWhere('bid_user', $user->id)
+							->orderBy('created_at', 'desc')
+							->get();
+
+		return $projects;
+	}
+
 }

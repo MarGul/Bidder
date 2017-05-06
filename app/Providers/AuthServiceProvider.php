@@ -32,5 +32,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('accept-bid', function($user, $service) {
             return $user->id === $service->user_id;
         });
+
     }
 }

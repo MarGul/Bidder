@@ -64,4 +64,6 @@ Route::group(['prefix' => 'v1'], function() {
 	/* user/bids */
 	Route::get('user/bids')->uses('UserBidsController@index');
 
+	Route::resource('user.projects', 'UserProjectsController', ['only' => ['index']]);
+
 });

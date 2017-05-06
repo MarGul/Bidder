@@ -152,6 +152,15 @@
 								margin-left: 3px
 							}
 						}
+
+						.status {
+							margin-left: 10px;
+							line-height: 36px;
+
+							@media screen and (min-width: $screen-md-min) {
+								line-height: 30px;
+							}
+						}
 					}
 				}
 			}
