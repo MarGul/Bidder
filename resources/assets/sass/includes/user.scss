@@ -153,11 +153,18 @@
 							}
 						}
 
+						.btn-flat {
+							@media screen and (min-width: $screen-md-min) {
+								padding: 3px 5px;
+							}
+						}
+
 						.status {
 							margin-left: 10px;
 							line-height: 36px;
 
 							@media screen and (min-width: $screen-md-min) {
+								margin-left: 5px;
 								line-height: 30px;
 							}
 						}

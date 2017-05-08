@@ -19,6 +19,7 @@ let routes = [
 			{ path: 'my-services', component: require('./components/User/MyServices.vue'), meta: { requiresAuth: true } },
 			{ path: 'my-bids', component: require('./components/User/MyBids.vue'), meta: { requiresAuth: true } },
 			{ path: 'my-projects', component: require('./components/User/MyProjects.vue'), meta: { requiresAuth: true } },
+			{ path: 'project/:id', component: require('./components/User/Project.vue'), meta: { requiresAuth: true } },
 			{ path: 'payments', component: require('./components/User/Payments.vue'), meta: { requiresAuth: true } },
 			{ path: 'service/:id/bids', component: require('./components/User/BidHistory.vue'), meta: { requiresAuth: true } },
 		],

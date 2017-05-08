@@ -9,9 +9,9 @@
 					#{{ project.id }}
 				</span>
 				<span class="item-actions">
-					<router-link :to="`/user/project/${project.id}`" class="btn-flat btn-default">
+					<button @click.prevent="show(project)" class="btn-flat btn-default">
 						<i class="fa fa-briefcase" aria-hidden="true"></i> Visa projekt
-					</router-link>
+					</button>
 					<div class="status">
 						<template v-if="project.active">
 							Pågående
@@ -40,6 +40,12 @@
 			},
 			projects() {
 				return this.$store.getters.userProjects;
+			}
+		},
+		methods: {
+			show(project) {
+				this.$store.commit('SET_PROJECT_FOCUS', {project});
+				this.$router.push(`/user/project/${project.id}`);
 			}
 		},
 		created() {
