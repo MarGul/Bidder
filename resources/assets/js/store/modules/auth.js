@@ -22,12 +22,14 @@ const auth = {
 		}
 	},
 	actions: {
-		logout({commit}) {
+		logout({commit, dispatch}) {
 			commit('SET_DROPDOWN', {dropdown: false});
 			commit('SET_MOBILE_DROPDOWN', {dropdown: false});
+			commit('SET_AUTHENTICATED', {authenticated: false});
+			commit('SET_USER', {user: {}});
+			// Clear user cached state
+			dispatch('clearUserState');
 			User.new().setUrl('logout').post().then((response) => {
-				commit('SET_AUTHENTICATED', {authenticated: false});
-				commit('SET_USER', {user: {}});
 				// Set the new csrf token
 				window.Laravel.csrfToken = response.csrfToken;
 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken

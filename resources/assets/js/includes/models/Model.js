@@ -71,6 +71,9 @@ class Model {
 				.catch(error => {
 					reject(error.response.data);
 				});
+			// If a new instance or a custom URL has been used, reset that.
+			this.instance = null;
+			this.url = null;
 		});
 	}
 }
