@@ -3,6 +3,7 @@
 namespace App\Features;
 
 use App\Project;
+Use App\Message;
 
 class ProjectManager {
 
@@ -31,6 +32,28 @@ class ProjectManager {
 							->get();
 
 		return $projects;
+	}
+
+	/**
+	 * Create a message for a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  App\User 	$user
+	 * @param  string 		$message
+	 * @return boolean
+	 */
+	public function createMessage($project, $user, $message) {
+		$message = new Message([
+			'project_id' => $project->id,
+			'user_id' => $user->id,
+			'message' => $message
+		]);
+
+		if ( !$message->save() ) return false;
+
+		$message->user = $user;
+
+		return $message;
 	}
 
 }

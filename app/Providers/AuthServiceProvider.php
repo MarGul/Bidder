@@ -29,9 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         // Can a user accept bids for a service?
-        Gate::define('accept-bid', function($user, $service) {
-            return $user->id === $service->user_id;
-        });
+        Gate::define('accept-bid', function($user, $service) { return $user->id === $service->user_id; });
+        // Is a user part of a project?
+        Gate::define('in-project', function($user, $project) { return in_array($user->id, [$project->service_user, $project->bid_user]); });
 
     }
 }

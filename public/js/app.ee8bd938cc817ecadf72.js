@@ -5612,7 +5612,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Messages_MessageBoard_vue__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Messages_MessageBoard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Messages_MessageBoard_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5622,14 +5633,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		messageBoard: __WEBPACK_IMPORTED_MODULE_0__Messages_MessageBoard_vue___default.a
+	},
 	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userProjectsFetched;
+		},
 		project: function project() {
 			return this.$store.getters.userProjectFocus;
 		}
 	},
 	created: function created() {
-		if ($.isEmptyObject(this.$store.getters.userProjectFocus)) {
+		if (!this.fetched) {
 			this.$store.dispatch('fetchUserProjects', { focusId: this.$route.params.id });
 		}
 	},
@@ -5637,7 +5656,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		this.$store.commit('SET_PROJECT_FOCUS', { project: null });
 	}
 };
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 191 */
@@ -8769,14 +8787,18 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "project-component"
-  }, [_c('h1', {
+  }, [(_vm.fetched) ? [_c('h1', {
     staticClass: "user-component-title"
-  })])
-}]}
+  }, [_vm._v("#" + _vm._s(_vm.project.id))]), _vm._v(" "), _c('message-board')] : _c('div', {
+    staticClass: "load-spinner text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])])], 2)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -12258,6 +12280,225 @@ return index;
 __webpack_require__(144);
 module.exports = __webpack_require__(145);
 
+
+/***/ }),
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SendMessage_vue__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SendMessage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SendMessage_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		sendMessage: __WEBPACK_IMPORTED_MODULE_0__SendMessage_vue___default.a
+	}
+};
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(305),
+  /* template */
+  __webpack_require__(307),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Messages/MessageBoard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MessageBoard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4550cb6a", Component.options)
+  } else {
+    hotAPI.reload("data-v-4550cb6a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "message_board-component"
+  }, [_c('send-message')], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4550cb6a", module.exports)
+  }
+}
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(309),
+  /* template */
+  __webpack_require__(310),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Messages/SendMessage.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SendMessage.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0501e2e4", Component.options)
+  } else {
+    hotAPI.reload("data-v-0501e2e4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 309 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	data: function data() {
+		return {
+			message: '',
+			processing: false
+		};
+	},
+
+	methods: {
+		send: function send() {
+			var _this = this;
+
+			this.processing = true;
+			axios.post('projects/' + this.$route.params.id + '/messages', { message: this.message }).then(function (response) {
+				console.log(response);
+				_this.message = '';
+				_this.processing = false;
+			}).catch(function (error) {
+				console.log(error);
+				_this.processing = false;
+			});
+		}
+	}
+};
+
+/***/ }),
+/* 310 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "send_message-component clearfix"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.message),
+      expression: "message"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4",
+      "placeholder": "Skriv ditt meddelande här..."
+    },
+    domProps: {
+      "value": _vm._s(_vm.message)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.message = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-flat btn-primary",
+    attrs: {
+      "disabled": !_vm.message || _vm.processing
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.send($event)
+      }
+    }
+  }, [_vm._v("\n\t\tSkicka\n\t\t"), (_vm.processing) ? _c('span', {
+    staticClass: "processing"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])]) : _vm._e()])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0501e2e4", module.exports)
+  }
+}
 
 /***/ })
 ],[296]);

@@ -9435,6 +9435,31 @@ body.mobile-nav-open .overlay {
   color: #55AE3A;
 }
 
+.send_message-component {
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #d7d7d7;
+}
+
+.send_message-component textarea {
+  resize: none;
+  border-color: #ddddd;
+}
+
+.send_message-component button {
+  font-weight: bold;
+  margin: 10px 0 0 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 992px) {
+  .send_message-component button {
+    width: auto;
+    float: right;
+  }
+}
+
 .slide-in-enter-active {
   -webkit-animation: slide-in 800ms ease-out forwards;
   animation: slide-in 800ms ease-out forwards;
