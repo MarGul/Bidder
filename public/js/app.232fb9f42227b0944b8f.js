@@ -12311,6 +12311,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = {
 	components: {
 		sendMessage: __WEBPACK_IMPORTED_MODULE_0__SendMessage_vue___default.a
+	},
+	methods: {
+		add: function add(msg) {
+			console.log(msg);
+		}
 	}
 };
 
@@ -12355,7 +12360,11 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "message_board-component"
-  }, [_c('send-message')], 1)
+  }, [_c('send-message', {
+    on: {
+      "added": _vm.add
+    }
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -12415,31 +12424,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	data: function data() {
 		return {
-			message: '',
-			processing: false
+			message: ''
 		};
 	},
 
 	methods: {
 		send: function send() {
-			var _this = this;
-
-			this.processing = true;
-			axios.post('projects/' + this.$route.params.id + '/messages', { message: this.message }).then(function (response) {
+			// Instantly add the new message to the messages array
+			var msg = this.message;
+			this.$emit('added', { msg: msg });
+			this.message = '';
+			axios.post('projects/' + this.$route.params.id + '/messages', { message: msg }).then(function (response) {
 				console.log(response);
-				_this.message = '';
-				_this.processing = false;
 			}).catch(function (error) {
 				console.log(error);
-				_this.processing = false;
 			});
 		}
 	}
@@ -12476,7 +12478,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('button', {
     staticClass: "btn btn-flat btn-primary",
     attrs: {
-      "disabled": !_vm.message || _vm.processing
+      "disabled": !_vm.message
     },
     on: {
       "click": function($event) {
@@ -12484,13 +12486,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.send($event)
       }
     }
-  }, [_vm._v("\n\t\tSkicka\n\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])
+  }, [_vm._v("\n\t\tSkicka\n\t")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

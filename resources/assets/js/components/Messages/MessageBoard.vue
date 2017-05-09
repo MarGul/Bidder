@@ -1,7 +1,7 @@
 <template>
 	<div class="message_board-component">
 		
-		<send-message></send-message>
+		<send-message @added="add"></send-message>
 
 	</div>
 </template>
@@ -12,6 +12,11 @@
 	export default {
 		components: {
 			sendMessage
+		},
+		methods: {
+			add(msg) {
+				console.log(msg);
+			}
 		}
 	}
 </script>
