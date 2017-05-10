@@ -35,6 +35,19 @@ class ProjectManager {
 	}
 
 	/**
+	 * Get the messages for a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return collection
+	 */
+	public function messages($project) {
+		$messages = Message::where('project_id', $project->id)->get();
+		$messages->load('user');
+
+		return $messages;
+	}
+
+	/**
 	 * Create a message for a project.
 	 * 
 	 * @param  App\Project 	$project

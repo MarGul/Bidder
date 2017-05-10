@@ -22,8 +22,18 @@ class ProjectMessagesController extends Controller
 		$this->manager = $manager;
 	}
 
+    /**
+     * Display a listing of the resource
+     * 
+     * @param  Project  $project
+     * @return \Illuminate\Http\Response
+     */
     public function index(Project $project) {
+        $this->authorize('in-project', $project);
 
+        $messages = $this->manager->messages($project);
+
+        return response()->json(['message' => 'Displaying messages for project.', 'messages' => $messages], 200);
     }
 
     /**

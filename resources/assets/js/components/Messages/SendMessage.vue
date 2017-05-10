@@ -9,6 +9,8 @@
 </template>
 
 <script>
+	import Model from '../../includes/models/Model';
+
 	export default {
 		data() {
 			return {
@@ -18,13 +20,11 @@
 		methods: {
 			send() {
 				// Instantly add the new message to the messages array
-				let msg = this.message;
-				this.$emit('added', {msg});
+				let message = this.message;
+				this.$emit('added', {message});
 				this.message = '';
-				axios.post(`projects/${this.$route.params.id}/messages`, {message: msg})
-					.then(response => {
-						console.log(response);
-					})
+				
+				new Model('projects/{id}/messages').setId(this.$route.params.id).post({message: message})
 					.catch(error => {
 						console.log(error);
 					});

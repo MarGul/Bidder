@@ -25,7 +25,7 @@
 				</li>
 			</ul>
 
-			<div class="alert alert-info">
+			<div class="alert alert-info" v-else>
 				Du har ännu inga skapade projekt.
 			</div>
 		</template>
