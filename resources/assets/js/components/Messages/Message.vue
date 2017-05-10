@@ -18,7 +18,7 @@
 		props: ['message'],
 		computed: {
 			me() {
-				return this.message.user_id === this.$store.getters.authUser.id ? true : false;
+				return this.message.user.id === this.$store.getters.authUser.id ? true : false;
 			},
 			image() {
 				let image = this.me ? this.$store.getters.authUser.avatar : this.message.user.avatar;

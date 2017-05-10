@@ -4579,7 +4579,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		add: function add(msg) {
-			this.messages.push(msg);
+			var message = {
+				project_id: this.$route.params.id,
+				user: this.$store.getters.authUser,
+				message: msg.message,
+				created_at: ''
+			};
+			this.messages.push(message);
 		}
 	},
 	created: function created() {
@@ -12620,7 +12626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['message'],
 	computed: {
 		me: function me() {
-			return this.message.user_id === this.$store.getters.authUser.id ? true : false;
+			return this.message.user.id === this.$store.getters.authUser.id ? true : false;
 		},
 		image: function image() {
 			var image = this.me ? this.$store.getters.authUser.avatar : this.message.user.avatar;

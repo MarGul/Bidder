@@ -39,7 +39,13 @@
 		},
 		methods: {
 			add(msg) {
-				this.messages.push(msg);
+				let message = {
+					project_id: this.$route.params.id,
+					user: this.$store.getters.authUser,
+					message: msg.message,
+					created_at: ''
+				}
+				this.messages.push(message);
 			}
 		},
 		created() {
