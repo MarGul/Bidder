@@ -45,11 +45,15 @@
 }
 
 .btn-default {
-	background-color: #e6e5e5;
-	border-color: #adadad;
+	background-color: #eaeaea;
+	border-color: #cfcfcf;
 
 	&:hover {
-		background-color: darken(#e6e5e5, 10%);
-		border-color: darken(#adadad, 10%);
+		background-color: darken(#eaeaea, 5%);
+		border-color: darken(#cfcfcf, 5%);
 	}
+}
+
+.btn-transparent {
+	background-color: transparent;
 }
