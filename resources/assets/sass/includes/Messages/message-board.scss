@@ -1,0 +1,12 @@
+.message-board-top {
+	border-radius: 6px 6px 0 0;
+	background: #fafafa;
+	border: 1px solid $border-color-gray;
+	border-bottom: none;
+	padding: 10px 20px;
+	font-weight: bold;
+
+	i {
+		margin-left: 5px;
+	}
+}

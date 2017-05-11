@@ -7829,6 +7829,10 @@ a {
   margin: 25px 0px;
 }
 
+.margin-40 {
+  margin: 40px 0;
+}
+
 .margin-50 {
   margin: 50px 0px;
 }
@@ -9425,6 +9429,19 @@ body.mobile-nav-open .overlay {
   color: #55AE3A;
 }
 
+.message-board-top {
+  border-radius: 6px 6px 0 0;
+  background: #fafafa;
+  border: 1px solid #d7d7d7;
+  border-bottom: none;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.message-board-top i {
+  margin-left: 5px;
+}
+
 .send_message-component {
   background: #fafafa;
   padding: 20px;
@@ -9516,10 +9533,17 @@ body.mobile-nav-open .overlay {
 .message-component .right .user-name .name {
   font-weight: bold;
   color: #222;
+  display: inline-block;
 }
 
 .message-component .right .user-name a {
   font-weight: bold;
+}
+
+.message-component .right .message-time {
+  text-align: right;
+  font-size: 80%;
+  font-style: italic;
 }
 
 .slide-in-enter-active {

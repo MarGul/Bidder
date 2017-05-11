@@ -11,7 +11,7 @@
 
 		<div class="form-group text-right">
 			<span class="comments-as" v-if="$store.getters.isAuthenticated">
-				Du kommenterar som <a class="link">@{{ $store.getters.authUser.displayname }}</a>
+				Du kommenterar som <a class="link">@{{ $store.getters.authUser.username }}</a>
 			</span>
 			<span class="comments-as" v-else>Du måste <a class="link" @click="$store.dispatch('openModal', {component: 'login'})">logga in</a> innan du kan kommentera</span>
 			<button 

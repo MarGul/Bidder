@@ -1,7 +1,11 @@
 <template>
 	<div class="message_board-component">
-		
+
 		<template v-if="fetched">
+			<div class="message-board-top">
+				<i class="fa fa-envelope-o" aria-hidden="true"></i> Meddelanden
+			</div>
+
 			<template v-if="messages.length > 0">
 				<message :message="message" v-for="message in messages"></message>
 			</template>
@@ -9,14 +13,14 @@
 			<div class="alert alert-warning" v-else>
 				Det finns inga meddelanden än. Bli den första att säga hej genom att skicka ett meddelande nedan.
 			</div>
+
+			<send-message @added="add"></send-message>
 		</template>
 
-		<div class="load-spinner text-center margin-25" v-else>
+		<div class="load-spinner text-center margin-40" v-else>
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			<span class="sr-only">Loading...</span>
 		</div>
-
-		<send-message @added="add"></send-message>
 
 	</div>
 </template>
@@ -43,7 +47,7 @@
 					project_id: this.$route.params.id,
 					user: this.$store.getters.authUser,
 					message: msg.message,
-					created_at: ''
+					created_at: moment().format('YYYY-MM-DD HH:mm:ss')
 				}
 				this.messages.push(message);
 			}
@@ -62,5 +66,7 @@
 	.alert {
 		padding: 40px 15px;
 		margin: 0;
+		border: 1px solid #d7d7d7;
+		border-bottom: none;
 	}
 </style>
