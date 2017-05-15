@@ -5838,23 +5838,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		service_user: function service_user() {
 			// Is the user the one who created the service?
 			return this.project.service_user === this.$store.getters.authUser.id ? true : false;
-		},
-		title: function title() {
-			return this.service_user ? this.project.service_user_title : this.project.bid_user_title;
-		}
-	},
-	methods: {
-		titleUpdate: function titleUpdate(data) {
-			if (data.title) {
-				// Update the projectFocus
-				var project = this.project;
-				if (this.service_user) {
-					project.service_user_title = data.title;
-				} else {
-					project.bid_user_title = data.title;
-				}
-				this.$store.commit('SET_PROJECT_FOCUS', { project: project });
-			}
 		}
 	},
 	created: function created() {
@@ -5909,11 +5892,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		change: function change() {
 			this.edit = false;
-			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('projects/{id}/title').setId(this.$route.params.id).put({ title: this.newTitle }).then(function (response) {
-				console.log(response);
-			}).catch(function (error) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('projects/{id}/title').setId(this.$route.params.id).put({ title: this.newTitle }).catch(function (error) {
 				console.log(error);
 			});
+			// Update the title in store for project in focus
+			var project = this.$store.getters.userProjectFocus;
+			project.title = this.newTitle;
+			this.$store.commit('SET_PROJECT_FOCUS', { project: project });
+			// Update the title in store for the projects
+			var projects = this.$store.getters.userProjects;
+			for (var i = 0; i < projects.length; i++) {
+				if (projects[i].id === project.id) {
+					projects[i] = project;
+					break;
+				}
+			}
+			this.$store.commit('SET_PROJECTS', { projects: projects });
 		}
 	},
 	created: function created() {
@@ -9668,11 +9662,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "project-component"
   }, [(_vm.fetched) ? [_c('project-title', {
     attrs: {
-      "title": _vm.title,
+      "title": _vm.project.title,
       "default": ("# " + (_vm.project.id))
-    },
-    on: {
-      "changed": _vm.titleUpdate
     }
   }), _vm._v(" "), _c('message-board')] : _c('div', {
     staticClass: "load-spinner text-center"

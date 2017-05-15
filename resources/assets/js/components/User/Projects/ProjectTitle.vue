@@ -33,12 +33,21 @@
 			change() {
 				this.edit = false;
 				new Model('projects/{id}/title').setId(this.$route.params.id).put({title: this.newTitle})
-					.then(response => {
-						console.log(response);
-					})
-					.catch(error => {
-						console.log(error);
-					});
+					.catch(error => { console.log(error); });
+				// Update the title in store for project in focus
+				let project = this.$store.getters.userProjectFocus;
+				project.title = this.newTitle;
+				this.$store.commit('SET_PROJECT_FOCUS', {project});
+				// Update the title in store for the projects
+				let projects = this.$store.getters.userProjects;
+				for (let i = 0; i < projects.length; i++) {
+					if ( projects[i].id === project.id ) {
+						projects[i] = project;
+						break;
+					}
+				}
+				this.$store.commit('SET_PROJECTS', {projects});
+
 			}
 		},
 		created() {
