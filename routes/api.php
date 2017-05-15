@@ -9,62 +9,33 @@ use Illuminate\Http\Request;
 */
 Route::group(['prefix' => 'v1'], function() {
 
-	/* users/{user} */
-	Route::resource('users', 'UserController', [
-		'only' => ['store', 'show', 'update', 'destroy']
-	]);
-
-	/* users/{user}/profile */
+	/* Handle users */
+	Route::resource('users', 'UserController', ['only' => ['store', 'show', 'update', 'destroy']]);
+	/* Update a users profile */
 	Route::patch('users/{user}/profile', 'UserProfileController@update');
-
-	/* users/{user}/password */
+	/* Update a users password */
 	Route::put('users/{user}/password', 'UserPasswordController@update');
-
-	/* regions/{region} */
-	Route::resource('regions', 'RegionController', [
-		'only' => ['index', 'show']
-	]);
-
-	/* regions/{region}/services */
-	Route::resource('regions.services', 'RegionServiceController', [
-		'only' => ['index']
-	]);
-
-	/* categories/{category} */
-	Route::resource('categories', 'CategoryController', [
-		'only' => ['index', 'show']
-	]);
-
-	/* categories/{category}/services */
-	Route::resource('categories.services', 'CategoryServiceController', [
-		'only' => ['index']
-	]);
-
-	/* services/{service} */
-	Route::resource('services', 'ServiceController', [
-		'except' => ['create', 'edit']
-	]);
-
-	/* services/{service}/comments/{comment} */
-	Route::resource('services.comments', 'ServiceCommentController', [
-		'except' => ['create', 'edit', 'show']
-	]);
-
-	/* services/{service}/bids/{bid} */
-	Route::resource('services.bids', 'ServiceBidController', [
-		'except' => ['create', 'edit']
-	]);
-
+	/* Handle regions */
+	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
+	/* Handle categories */
+	Route::resource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+	/* Handle services */
+	Route::resource('services', 'ServiceController', ['except' => ['create', 'edit']]);
+	/* Handle a services comments */
+	Route::resource('services.comments', 'ServiceCommentController', ['except' => ['create', 'edit', 'show']]);
+	/* Handle a services bids */
+	Route::resource('services.bids', 'ServiceBidController', ['except' => ['create', 'edit']]);
 	/* Accept a bid */
 	Route::post('services/{service}/bids/{bid}/accept')->uses('ServiceBidAcceptController@create');
-
-	/* user/services */
+	/* Get a users services */
 	Route::get('user/services')->uses('UserServicesController@index');
-
-	/* user/bids */
+	/* Get a users bids */
 	Route::get('user/bids')->uses('UserBidsController@index');
-
+	/* Get a users projects */
 	Route::resource('user.projects', 'UserProjectsController', ['only' => ['index']]);
+	/* Create and show messages for a project */
 	Route::resource('projects.messages', 'ProjectMessagesController', ['only' => ['index', 'store']]);
+	/* Update a projects title */
+	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 
 });

@@ -7853,6 +7853,10 @@ a {
   text-decoration: none;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .form-control {
   border-radius: 0;
   border: 1px solid #d7d7d7;
@@ -9427,6 +9431,45 @@ body.mobile-nav-open .overlay {
 .user-component .user-nav li a:hover {
   text-decoration: none;
   color: #55AE3A;
+}
+
+.project-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.project-title .left {
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+@media screen and (min-width: 992px) {
+  .project-title .left {
+    -webkit-box-flex: 7;
+        -ms-flex: 7;
+            flex: 7;
+  }
+}
+
+.project-title .left .form-control {
+  font-size: 30px;
+}
+
+.project-title .right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+  padding-left: 10px;
+}
+
+.project-title .right i {
+  font-size: 20px;
 }
 
 .message-board-top {

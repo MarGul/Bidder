@@ -16,7 +16,6 @@ class ProjectMessagesController extends Controller
 	 */
 	private $manager;
 
-
 	public function __construct(ProjectManager $manager) {
 		$this->middleware('auth:api');
 		$this->manager = $manager;

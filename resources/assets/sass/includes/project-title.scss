@@ -1,0 +1,26 @@
+.project-title {
+	display: flex;
+	align-items: flex-end;
+
+	.left {
+		flex: 6;
+
+		@media screen and (min-width: $screen-md-min) {
+			flex: 7;
+		}
+
+		.form-control {
+			font-size: 30px;
+		}
+	}
+
+	.right {
+		flex: 1;
+		text-align: right;
+		padding-left: 10px;
+
+		i {
+			font-size: 20px;
+		}
+	}
+}

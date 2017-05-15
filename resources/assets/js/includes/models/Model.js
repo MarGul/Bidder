@@ -38,6 +38,10 @@ class Model {
 		return this.send('patch', this.resource, data);
 	}
 
+	put(data = {}) {
+		return this.send('put', this.resource, data);
+	}
+
 	all() {
 		return this.send('get', this.resource);
 	}

@@ -110,6 +110,8 @@
 						});
 						$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
 						bid.accepted = true;
+						// Set the projects fetched to false so we break the cache.
+						this.$store.commit('SET_PROJECTS_FETCHED', {fetched: false});
 						this.processing = false;
 					})
 					.catch(error => {
