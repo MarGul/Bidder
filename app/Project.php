@@ -44,4 +44,24 @@ class Project extends Model
     	return Auth::user()->id === $this->service_user ? $this->service_user_title : $this->bid_user_title;
     }
 
+    /**
+     * Each project has one bid user.
+     * 
+     * @return Eloquent relationship
+     */
+    public function bid_user()
+    {
+        return $this->hasOne('App\User', 'id', 'bid_user');
+    }
+
+    /**
+     * Each project has one service user.
+     * 
+     * @return Eloquent relationship
+     */
+    public function service_user()
+    {
+        return $this->hasOne('App\User', 'id', 'service_user');
+    }
+
 }

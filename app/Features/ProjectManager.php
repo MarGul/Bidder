@@ -40,7 +40,8 @@ class ProjectManager
 	 */
 	public function byUser($user) 
 	{
-		$projects = Project::where('service_user', $user->id)
+		$projects = Project::with('service_user', 'bid_user')
+							->where('service_user', $user->id)
 							->orWhere('bid_user', $user->id)
 							->orderBy('created_at', 'desc')
 							->get();

@@ -65,7 +65,10 @@
 @import "includes/user.scss";
 
 // Project Title
-@import "includes/project-title.scss";
+@import "includes/User/Projects/project-title.scss";
+
+// Info Accept for projects
+@import "includes/User/Projects/info-accept.scss";
 
 // Message Board
 @import "includes/Messages/message-board.scss";

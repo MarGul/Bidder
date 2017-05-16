@@ -9,6 +9,18 @@
 				och du som la det accepterade budet kommer inte att behöva betala.</p>
 				<p>Direkt när båda parterna har godkänt projektet så kan ni starta och kommer inte att höra av er ifrån oss förän projektet är klart och det är dags att lämna omdömmen om varandra.</p>
 
+				<div class="project-users">
+					<div class="me">
+						<div class="avatar" :style="myAvatar"></div>
+					</div>
+					<div class="time-left">
+						Time left is:
+					</div>
+					<div class="other">
+						<div class="avatar" :style="otherAvatar"></div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -16,20 +28,15 @@
 
 <script>
 	export default {
+		props: ['project', 'me', 'other'],
+		computed: {
+			myAvatar() {
+				return {backgroundImage: `url('${this.me.avatar}')`};
+			},
+			otherAvatar() {
+				return {backgroundImage: `url('${this.other.avatar}')`};
+			}
+		}
 
 	}
 </script>
-
-<style lang="scss">
-	.info_accept-component {
-		
-		h4 {
-			border-bottom: 1px solid darken(#bce8f1, 20%);
-			padding-bottom: 10px;
-		}
-
-		.alert {
-			text-align: left;
-		}
-	}
-</style>
