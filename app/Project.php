@@ -21,7 +21,8 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-    	'service_user', 'bid_user', 'service_user_accept', 'bid_user_accept', 'service_user_title', 'bid_user_title', 'finish', 'active'
+    	'service_user', 'bid_user', 'service_user_accept', 'bid_user_accept', 'accept_end',
+        'service_user_title', 'bid_user_title', 'finish', 'completed'
     ];
 
     /**

@@ -63,7 +63,7 @@
 </script>
 
 <style lang="scss">
-	.alert {
+	.message_board-component .alert {
 		padding: 40px 15px;
 		margin: 0;
 		border: 1px solid #d7d7d7;

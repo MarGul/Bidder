@@ -3,10 +3,18 @@
 namespace App\Features;
 
 use App\Project;
-Use App\Message;
+use App\Message;
+use Carbon\Carbon;
 
 class ProjectManager 
 {
+
+	/**
+	 * The amount of days after a project is created that users have to accept the project.
+	 * 
+	 * @var integer
+	 */
+	protected $acceptDays = 7;
 
 	/**
 	 * Create a project.
@@ -16,6 +24,9 @@ class ProjectManager
 	 */
 	public function create($data) 
 	{
+		// The end time for acccepting the project is at midnight $this->acceptDays from now.
+		$data['accept_end'] = Carbon::now('Europe/Stockholm')->addDays($this->acceptDays)->setTime(00,00,00);
+
 		$project = new Project($data);
 
 		return ($project->save()) ? true : false;

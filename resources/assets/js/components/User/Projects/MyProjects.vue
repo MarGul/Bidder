@@ -12,11 +12,11 @@
 							<i class="fa fa-briefcase" aria-hidden="true"></i> Visa projekt
 						</button>
 						<div class="status">
-							<template v-if="project.active">
-								Pågående
+							<template v-if="project.completed">
+								Avslutad
 							</template>
 							<template v-else>
-								Avslutad
+								Pågående
 							</template>
 						</div>
 					</span>

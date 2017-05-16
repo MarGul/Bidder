@@ -4,6 +4,8 @@
 		<template v-if="fetched">
 			<project-title :title="project.title" :default="`# ${project.id}`"></project-title>
 
+			<info-accept :project="project"></info-accept>
+
 			<message-board></message-board>
 		</template>
 
@@ -18,11 +20,13 @@
 <script>
 	import projectTitle from './ProjectTitle';
 	import messageBoard from '../../Messages/MessageBoard';
+	import infoAccept from './InfoAccept';
 
 	export default {
 		components: {
 			messageBoard,
-			projectTitle
+			projectTitle,
+			infoAccept
 		},
 		computed: {
 			fetched() {
