@@ -7811,6 +7811,10 @@ a {
   margin: 25px 0px;
 }
 
+.margin-40 {
+  margin: 40px 0;
+}
+
 .margin-50 {
   margin: 50px 0px;
 }
@@ -7829,6 +7833,10 @@ a {
 
 .no-underline:hover {
   text-decoration: none;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .form-control {
@@ -9403,6 +9411,58 @@ body.mobile-nav-open .overlay {
   color: #55AE3A;
 }
 
+.project-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.project-title .left {
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+@media screen and (min-width: 992px) {
+  .project-title .left {
+    -webkit-box-flex: 7;
+        -ms-flex: 7;
+            flex: 7;
+  }
+}
+
+.project-title .left .form-control {
+  font-size: 30px;
+}
+
+.project-title .right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+  padding-left: 10px;
+}
+
+.project-title .right i {
+  font-size: 20px;
+}
+
+.message-board-top {
+  border-radius: 6px 6px 0 0;
+  background: #fafafa;
+  border: 1px solid #d7d7d7;
+  border-bottom: none;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.message-board-top i {
+  margin-left: 5px;
+}
+
 .send_message-component {
   background: #fafafa;
   padding: 20px;
@@ -9426,6 +9486,85 @@ body.mobile-nav-open .overlay {
     width: auto;
     float: right;
   }
+}
+
+.message-component {
+  border: 1px solid #d7d7d7;
+  border-bottom: none;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.message-component.me {
+  background-color: #fafafa;
+}
+
+.message-component .left {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.message-component .left .user-image {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #55AE3A;
+}
+
+.message-component .right {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+@media screen and (min-width: 768px) {
+  .message-component .right {
+    -webkit-box-flex: 6;
+        -ms-flex: 6;
+            flex: 6;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .message-component .right {
+    -webkit-box-flex: 7;
+        -ms-flex: 7;
+            flex: 7;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .message-component .right {
+    -webkit-box-flex: 8;
+        -ms-flex: 8;
+            flex: 8;
+  }
+}
+
+.message-component .right .user-name {
+  margin-bottom: 7px;
+}
+
+.message-component .right .user-name .name {
+  font-weight: bold;
+  color: #222;
+  display: inline-block;
+}
+
+.message-component .right .user-name a {
+  font-weight: bold;
+}
+
+.message-component .right .message-time {
+  text-align: right;
+  font-size: 80%;
+  font-style: italic;
 }
 
 .slide-in-enter-active {

@@ -7,7 +7,7 @@
 			</div>
 
 			<template v-if="messages.length > 0">
-				<message :message="message" v-for="message in messages"></message>
+				<message :message="message" v-for="message in messages" :key="message.id"></message>
 			</template>
 			
 			<div class="alert alert-warning" v-else>
