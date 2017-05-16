@@ -19,6 +19,10 @@
 			.time-left {
 				display: flex;
 				justify-content: center;
+
+				@media screen and (min-width: $screen-sm-min) {
+					align-items: center;
+				}
 			}
 
 			.time-left {
