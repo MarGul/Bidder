@@ -49,7 +49,7 @@ class Project extends Model
      * 
      * @return Eloquent relationship
      */
-    public function bid_user()
+    public function bidUser()
     {
         return $this->hasOne('App\User', 'id', 'bid_user');
     }
@@ -59,7 +59,7 @@ class Project extends Model
      * 
      * @return Eloquent relationship
      */
-    public function service_user()
+    public function serviceUser()
     {
         return $this->hasOne('App\User', 'id', 'service_user');
     }

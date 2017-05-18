@@ -28,13 +28,13 @@
 
 <script>
 	export default {
-		props: ['project', 'me', 'other'],
+		props: ['project'],
 		computed: {
 			myAvatar() {
-				return {backgroundImage: `url('${this.me.avatar}')`};
+				return {backgroundImage: `url('${this.project.me.avatar}')`};
 			},
 			otherAvatar() {
-				return {backgroundImage: `url('${this.other.avatar}')`};
+				return {backgroundImage: `url('${this.project.other.avatar}')`};
 			}
 		}
 

@@ -5,16 +5,18 @@ namespace App\Features;
 use App\Project;
 use App\Message;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectManager 
 {
 
 	/**
 	 * The amount of days after a project is created that users have to accept the project.
+	 * With 8 it will technically be 7 because it ends on midnight between 7-8
 	 * 
 	 * @var integer
 	 */
-	protected $acceptDays = 7;
+	protected $acceptDays = 8;
 
 	/**
 	 * Create a project.
@@ -40,13 +42,13 @@ class ProjectManager
 	 */
 	public function byUser($user) 
 	{
-		$projects = Project::with('service_user', 'bid_user')
+		$projects = Project::with('serviceUser', 'bidUser')
 							->where('service_user', $user->id)
 							->orWhere('bid_user', $user->id)
 							->orderBy('created_at', 'desc')
 							->get();
 
-		return $projects;
+		return $this->parseProjects($projects);
 	}
 
 	/**
@@ -103,6 +105,31 @@ class ProjectManager
 		}
 
 		return $project->update() ? true : false;
+	}
+
+	/**
+	 * Need to parse the projects in order to set the users correctly.
+	 * 
+	 * @param  collection 	$projects
+	 * @return collection
+	 */
+	private function parseProjects($projects)
+	{
+		foreach ($projects as $project) {
+			$service_user = Auth::user()->id === $project->service_user ? true : false;
+
+			$project->me = $service_user ? $project->serviceUser : $project->bidUser;
+			$project->me->accepted =  $service_user ? $project->service_user_accept : $project->bid_user_accept;
+			$project->other = $service_user ? $project->bidUser : $project->serviceUser;
+			$project->other->accepted = $service_user ? $project->bid_user_accept : $project->service_user_accept;
+
+			unset($project->serviceUser);
+			unset($project->service_user_accept);
+			unset($project->bidUser);
+			unset($project->bid_user_accept);
+		}
+
+		return $projects;
 	}
 
 }

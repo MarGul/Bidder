@@ -4,7 +4,7 @@
 		<template v-if="fetched">
 			<project-title :title="project.title" :default="`# ${project.id}`"></project-title>
 
-			<info-accept :project="project" :me="me" :other="other"></info-accept>
+			<info-accept :project="project"></info-accept>
 
 			<message-board></message-board>
 		</template>
@@ -34,16 +34,6 @@
 			},
 			project() {
 				return this.$store.getters.userProjectFocus;
-			},
-			service_user() {
-				// Is the user the one who created the service?
-				return this.project.service_user.id === this.$store.getters.authUser.id ? true : false;
-			},
-			me() {
-				return this.service_user ? this.project.service_user : this.project.bid_user;
-			},
-			other() {
-				return this.service_user ? this.project.bid_user : this.project.service_user
 			}
 		},
 		created() {
