@@ -68,7 +68,7 @@
 		},
 		components: {
 			appTagsInput: TagsInput,
-			appService: ServiceGrid
+			appService: ServiceGrid,
 		},
 		data() {
 			return {

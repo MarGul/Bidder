@@ -1,7 +1,7 @@
 <template>
 	<div class="modal-mask">
-		<div class="modal-container" :class="[size]">
-			<span class="close" @click="close">
+		<div class="modal-container" :class="[$store.getters.modalSize]">
+			<span class="close" @click="$store.dispatch('closeModal')">
 				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
 			</span>
 
@@ -12,27 +12,17 @@
 </template>
 
 <script>
-	import Register from '../Register/Register.vue';
-    import Login from '../Auth/Login.vue';
-    import CreateBid from '../Bids/CreateBid.vue';
-    import ShowBids from '../Bids/ShowBids.vue';
+	import register from '../Auth/Register';
+    import login from '../Auth/Login';
+    import createBid from '../Bids/CreateBid';
+    import showBids from '../Bids/ShowBids';
 
 	export default {
 		components: {
-			register: Register,
-			login: Login,
-			createBid: CreateBid,
-			showBids: ShowBids
-		},
-		methods: {
-			close() {
-				this.$store.dispatch('closeModal');
-			}
-		},
-		computed: {
-			size() {
-				return this.$store.getters.modalSize;
-			}
+			register,
+			login,
+			createBid,
+			showBids
 		}
 	}
 </script>

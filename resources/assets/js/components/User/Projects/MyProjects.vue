@@ -28,10 +28,7 @@
 			</div>
 		</template>
 
-		<div class="load-spinner text-center" v-else>
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-			<span class="sr-only">Loading...</span>
-		</div>
+		<app-loading v-else></app-loading>
 
 	</div>
 </template>
