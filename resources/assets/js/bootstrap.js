@@ -21,15 +21,12 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 /**
- * Global Vue components 
+ * Global Vue components and Prototypes
  */
-import Hero from './components/Includes/Hero.vue';
+Vue.component('app-hero', require('./components/Includes/Hero'));
+Vue.component('app-loading', require('./components/Includes/Loading'));
 
-Vue.component('app-hero', Hero);
-
-
-import Filters from './includes/filters';
-Vue.prototype.filters = Filters;
+Vue.prototype.filters = require('./includes/filters');
 
 /**
  * Load in Axios HTTP framework.

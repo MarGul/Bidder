@@ -3,7 +3,7 @@
 		<div class="comment-avatar" :style="{'background-image': avatar}"></div>
 		<div class="comment-content">
 			<div class="comment-head">
-				<span class="comment-author" v-text="comment.user.displayname"></span>
+				<span class="comment-author" v-text="comment.user.username"></span>
 				<small class="comment-time" v-text="time"></small>
 				<i class="fa fa-reply" aria-hidden="true" v-if="comment.canReply"></i>
 			</div>

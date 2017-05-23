@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 // Variables
 @import "variables";
 
@@ -63,6 +63,17 @@
 
 // User
 @import "includes/user.scss";
+
+// Project Title
+@import "includes/User/Projects/project-title.scss";
+
+// Info Accept for projects
+@import "includes/User/Projects/info-accept.scss";
+
+// Message Board
+@import "includes/Messages/message-board.scss";
+@import "includes/Messages/send-message.scss";
+@import "includes/Messages/message.scss";
 
 // Animations
 @import "animations/_slide-in.scss";

@@ -3,7 +3,7 @@
 		
 		<h1 class="user-component-title">Mina Tjänster</h1>
 
-		<ul class="user-items-list" v-if="services.length > 0">
+		<ul class="user-items-list" v-if="fetched">
 			<li v-for="service in services">
 				<div class="item-content">
 					{{ service.title }}
@@ -22,10 +22,7 @@
 			</li>
 		</ul>
 
-		<div class="load-spinner text-center" v-else>
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-			<span class="sr-only">Loading...</span>
-		</div>
+		<app-loading v-else></app-loading>
 
 	</div>
 </template>
@@ -33,12 +30,15 @@
 <script>
 	export default {
 		computed: {
+			fetched() {
+				return this.$store.getters.userServicesFetched;
+			},
 			services() {
 				return this.$store.getters.userServices;
 			}
 		},
 		created() {
-			if ( !this.$store.getters.userServicesFetched ) {
+			if ( !this.fetched ) {
 				this.$store.dispatch('fetchUserServices');
 			}
 		}

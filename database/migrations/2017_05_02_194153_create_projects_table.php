@@ -19,8 +19,11 @@ class CreateProjectsTable extends Migration
             $table->integer('bid_user');
             $table->boolean('service_user_accept')->default(false);
             $table->boolean('bid_user_accept')->default(false);
+            $table->datetime('accept_end');
+            $table->string('service_user_title')->nullable();
+            $table->string('bid_user_title')->nullable();
             $table->date('finish');
-            $table->boolean('active');
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

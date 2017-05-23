@@ -4,20 +4,20 @@
 		<app-notifications v-if="$store.getters.showingNotification"></app-notifications>
 
 		<div class="container">
-			<div class="mobile-user-buttons clearfix" v-if="breakpoints.isSmallDevices()">
-				<button class="mobile-user-logout-button" @click.prevent="logout">
-					Logga Ut <i class="fa fa-sign-out" aria-hidden="true"></i>
-				</button>
+			<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
+				<div class="mobile-user-buttons">
+					<button class="btn-flat btn-transparent logout-btn" @click.prevent="logout">
+						Logga Ut <i class="fa fa-sign-out" aria-hidden="true"></i>
+					</button>
 
-				<button class="mobile-user-nav-button" 
-						:class="{open: $store.getters.mobileAuthDropdown}"
-						@click="toggleDropdown" 
-						v-if="breakpoints.isSmallDevices()">
-					Meny <i class="fa fa-chevron-down" aria-hidden="true"></i>
-				</button>
+					<button class="btn-flat btn-primary nav-btn" 
+							:class="{open: $store.getters.mobileAuthDropdown}"
+							@click="toggleDropdown" 
+							v-if="breakpoints.isSmallDevices()">
+						Meny <i class="fa fa-chevron-down" aria-hidden="true"></i>
+					</button>
+				</div>
 			</div>
-
-			<div class="clearfix"></div>
 
 			<div class="user-ui-container">
 				<div class="user-ui-nav">
@@ -27,6 +27,7 @@
 						<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
 						<li><router-link to="/user/my-services">Mina tjänster</router-link></li>
 						<li><router-link to="/user/my-bids">Mina bud</router-link></li>
+						<li><router-link to="/user/my-projects">Mina projekt</router-link></li>
 						<li><router-link to="/user/payments">Betalningar</router-link></li>
 					</ul>
 				</div>
@@ -40,11 +41,11 @@
 </template>
 
 <script>
-	import Notifications from '../components/Includes/Notifications.vue';
+	import appNotifications from '../components/Includes/Notifications';
 
 	export default {
 		components: {
-			appNotifications: Notifications
+			appNotifications
 		},
 		data() {
 			return {

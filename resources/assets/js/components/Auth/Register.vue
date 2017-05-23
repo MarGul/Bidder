@@ -66,7 +66,7 @@
 </template>
 
 <script>
-	import User from '../../includes/models/User';
+	import Model from '../../includes/Model';
 	import Form from '../../includes/classes/Form';
 
 	export default {
@@ -83,18 +83,9 @@
 		methods: {
 			register() {
 				this.processing = true;
-				User.create(this.form.data())
+				new Model('users').create(this.form.data())
 					.then((response) => {
-						// Authenticate the user
-						User.new().setUrl('login').post({email: this.form.email, password: this.form.password})
-							.then((response) => {
-								this.$store.dispatch('getAuthUser');
-								this.processing = false;
-								this.$store.dispatch('closeModal');
-							})
-							.catch((error) => {
-								console.log(error);
-							});
+						console.log('Registered, now authenticate the user with the available data.')
 					})
 					.catch((error) => {
 						this.form.errors.record(error);

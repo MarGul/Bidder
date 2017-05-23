@@ -34,7 +34,7 @@
 
 		<div class="services margin-25">
 			<!-- v-for loop through the services with a component -->
-			<div class="row">
+			<div class="row" v-if="fetched">
 				<transition-group name="slide-out" mode="out-in">
 					<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
 						<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
@@ -47,18 +47,15 @@
 				</transition-group>
 			</div>
 			
-			<div class="load-spinner text-center" v-if="loading">
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-				<span class="sr-only">Loading...</span>
-			</div>
+			<app-loading v-else></app-loading>
 		</div>
 	</div>
 </template>
 
 <script>
-	import TagsInput from '../Includes/TagsInput.vue';
-	import Service from '../../includes/models/Service';
-	import ServiceGrid from './Service.vue';
+	import appTagsInput from '../Includes/TagsInput';
+	import appService from './Service.vue';
+	import Model from '../../includes/Model';
 
 	export default {
 		props: {
@@ -67,13 +64,13 @@
 			cities: { type: Array, default: () => [] }
 		},
 		components: {
-			appTagsInput: TagsInput,
-			appService: ServiceGrid
+			appTagsInput,
+			appService,
 		},
 		data() {
 			return {
 				filterText: '',
-				loading: false,
+				fetched: false,
 				services: [],
 				page: 1
 			}
@@ -105,9 +102,8 @@
 				if (index != -1) target.splice(index, 1);
 			},
 			getServices(append) {
-				this.loading = true;
 				this.services = (append) ? this.services : [];
-				Service.get({
+				new Model('services').get({
 					page: this.page,
 					text: this.filterText, 
 					categories: this.categories.map(el => el.value),
@@ -116,7 +112,7 @@
 				})
 				.then(({services}) => {
 					this.services = this.services.concat(services);
-					this.loading = false;
+					this.fetched = true;
 				})
 				.catch(error => {
 					console.log(error);

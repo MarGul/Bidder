@@ -137,13 +137,13 @@
 </template>
 
 <script>
-	import Form from '../../includes/classes/Form';
-	import Service from "../../includes/models/Service";
-	import Datepicker from 'vuejs-datepicker';
+	import Form from '../../../includes/classes/Form';
+	import Model from "../../../includes/Model";
+	import datepicker from 'vuejs-datepicker';
 
 	export default {
 		components: {
-			datepicker: Datepicker
+			datepicker
 		},
 		data() {
 			return {
@@ -190,11 +190,11 @@
 			},
 			create() {
 				this.processing = true;
-				Service.create(this.finalData)
+				new Model('services').create(this.finalData)
 					.then(response => {
 						this.form.reset();
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
-						$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+						$("html, body").animate({ scrollTop: 0 }, "fast");
 						this.processing = false;
 					})
 					.catch(error => {

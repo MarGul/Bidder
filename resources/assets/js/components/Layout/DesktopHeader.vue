@@ -74,17 +74,15 @@
 </template>
 
 <script>
-	import Search from '../../Includes/Search.vue';
-	import Register from '../../Register/Register.vue';
+	import appSearch from '../Includes/Search';
 
 	export default {
 		components: {
-			appSearch: Search,
-			appRegister: Register
+			appSearch
 		},
 		computed: {
 			avatar() {
-				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
+				return { backgroundImage: `url(${this.$store.getters.authUser.avatar})` };
 			},
 			dropdown() {
 				return this.$store.getters.authDropdown;

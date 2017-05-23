@@ -119,7 +119,7 @@
 </template>
 
 <script>
-	import Bid from '../../includes/models/Bid';
+	import Model from '../../includes/Model';
 	import Form from '../../includes/classes/Form';
 	import Datepicker from 'vuejs-datepicker';
 
@@ -171,7 +171,7 @@
 			create() {
 				this.processing = true;
 
-				Bid.setId(this.id).create(this.finalData)
+				new Model('services/{id}/bids').setId(this.id).create(this.finalData)
 				.then(response => {
 					this.$store.commit('ADD_BID', {bid: response.bid});
 					this.form.reset();

@@ -1,15 +1,11 @@
-import User from '../../includes/models/User';
+import Model from '../../includes/Model';
 
 const auth = {
 	state: {
 		authenticated: window.Laravel.authenticated,
 		user: window.Laravel.user || {},
 		dropdown: false,
-		mobileDropdown: false,
-		userServices: [],
-		userServicesFetched: false,
-		userBids: [],
-		userBidsFetched: false
+		mobileDropdown: false
 	},
 	mutations: {
 		'SET_AUTHENTICATED'(state, payload) {
@@ -23,62 +19,30 @@ const auth = {
 		},
 		'SET_MOBILE_DROPDOWN'(state, payload) {
 			state.mobileDropdown = payload.mobileDropdown;
-		},
-		'SET_USER_SERVICES'(state, payload) {
-			state.userServices = payload.userServices;
-		},
-		'SET_USER_SERVICES_FETCHED'(state, payload) {
-			state.userServicesFetched = payload.userServicesFetched;
-		},
-		'SET_USER_BIDS'(state, payload) {
-			state.userBids = payload.userBids;
-		},
-		'SET_USER_BIDS_FETCHED'(state, payload) {
-			state.userBidsFetched = payload.userBidsFetched;
 		}
 	},
 	actions: {
-		logout({commit}) {
+		logout({commit, dispatch}) {
 			commit('SET_DROPDOWN', {dropdown: false});
 			commit('SET_MOBILE_DROPDOWN', {dropdown: false});
-			User.new().setUrl('logout').post().then((response) => {
-				commit('SET_AUTHENTICATED', {authenticated: false});
-				commit('SET_USER', {user: {}});
-				commit('SET_USER_SERVICES', {userServices: []});
-				commit('SET_USER_SERVICES_FETCHED', {userServicesFetched: false});
-				commit('SET_USER_BIDS', {userBids: []});
-				commit('SET_USER_BIDS_FETCHED', {userBidsFetched: false});
+			commit('SET_AUTHENTICATED', {authenticated: false});
+			commit('SET_USER', {user: {}});
+			// Clear user cached state
+			dispatch('clearUserState');
+			new Model().new().setUrl('logout').post().then((response) => {
 				// Set the new csrf token
 				window.Laravel.csrfToken = response.csrfToken;
 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken
 			}).catch((error) => {
 				
 			});
-		},
-		fetchUserServices({commit}) {
-			User.setUrl('user/services').get()
-				.then(response => {
-					commit('SET_USER_SERVICES', {userServices: response.services});
-					commit('SET_USER_SERVICES_FETCHED', {userServicesFetched: true});
-				});
-		},
-		fetchUserBids({commit}) {
-			User.setUrl('user/bids').get()
-				.then(response => {
-					commit('SET_USER_BIDS', {userBids: response.bids});
-					commit('SET_USER_BIDS_FETCHED', {userBidsFetched: true});
-				});
 		}
 	},
 	getters: {
 		isAuthenticated: state => state.authenticated,
 		authUser: state => state.user,
 		authDropdown: state => state.dropdown,
-		mobileAuthDropdown: state => state.mobileDropdown,
-		userServices: state => state.userServices,
-		userServicesFetched: state => state.userServicesFetched,
-		userBids: state => state.userBids,
-		userBidsFetched: state => state.userBidsFetched
+		mobileAuthDropdown: state => state.mobileDropdown
 	}
 }
 

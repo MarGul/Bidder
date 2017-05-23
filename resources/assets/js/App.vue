@@ -26,15 +26,21 @@
 </template>
 
 <script>
-    import MobileHeader from './components/Layout/Header/MobileHeader.vue';
-    import DesktopHeader from './components/Layout/Header/DesktopHeader.vue';
-    import Modal from './components/Includes/Modal.vue';
-
-    import Search from './components/Includes/Search.vue';
-    import Footer from './components/Layout/Footer/Footer.vue';
+    import appMobileHeader from './components/Layout/MobileHeader';
+    import appDesktopHeader from './components/Layout/DesktopHeader';
+    import appModal from './components/Includes/Modal';
+    import appSearch from './components/Includes/Search';
+    import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
 
     export default {
+        components: {
+            appMobileHeader,
+            appDesktopHeader,
+            appModal,
+            appSearch,
+            appFooter
+        },
         data() {
             return {
                 breakpoints: window.breakpoints,
@@ -44,13 +50,6 @@
             hideMobileNav() {
                 $('body').removeClass('mobile-nav-open');
             }
-        },
-        components: {
-            appMobileHeader: MobileHeader,
-            appDesktopHeader: DesktopHeader,
-            appModal: Modal,
-            appSearch: Search,
-            appFooter: Footer
         },
         created() {
             // Initialize Data

@@ -1,4 +1,4 @@
-import ServiceModel from "../../includes/models/Service"; 
+import Model from "../../includes/Model"; 
 
 const service = {
 	state: {
@@ -24,7 +24,7 @@ const service = {
 			// Set the base state first.
 			commit('SET_LOADED', false);
 			commit('SET_SERVICE', {comments: [], bids: [], user: {}});
-			ServiceModel.find(payload.id)
+			new Model('services').find(payload.id)
 			.then(response => {
 				commit('SET_SERVICE', response.service);
 				commit('SET_LOADED', true);

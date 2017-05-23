@@ -8,6 +8,7 @@ import categories from './modules/categories';
 import regions from './modules/regions';
 import modal from './modules/modal';
 import auth from './modules/auth';
+import user from './modules/user';
 import service from './modules/service';
 import notifications from './modules/notifications';
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 		regions,
 		modal,
 		auth,
+		user,
 		service,
 		notifications
 	}

@@ -38,8 +38,8 @@ class Model {
 		return this.send('patch', this.resource, data);
 	}
 
-	all() {
-		return this.send('get', this.resource);
+	put(data = {}) {
+		return this.send('put', this.resource, data);
 	}
 
 	find(identifier) {
@@ -71,6 +71,9 @@ class Model {
 				.catch(error => {
 					reject(error.response.data);
 				});
+			// If a new instance or a custom URL has been used, reset that.
+			this.instance = null;
+			this.url = null;
 		});
 	}
 }

@@ -58,11 +58,11 @@
 </template>
 
 <script>
-	import Ratings from "../Includes/Ratings.vue";
+	import appRatings from "../Includes/Ratings";
 
 	export default {
 		components: {
-			appRatings: Ratings
+			appRatings
 		},
 		computed: {
 			bids() {
