@@ -1,4 +1,4 @@
-import UserModel from '../../includes/models/User';
+import Model from '../../includes/Model';
 
 const user = {
 	state: {
@@ -44,21 +44,21 @@ const user = {
 			commit('SET_PROJECT_FOCUS', {project: null});
 		},
 		fetchUserServices({commit}) {
-			UserModel.setUrl('user/services').get()
+			new Model('user/services').get()
 				.then(response => {
 					commit('SET_SERVICES', {services: response.services});
 					commit('SET_SERVICES_FETCHED', {fetched: true});
 				});
 		},
 		fetchUserBids({commit}) {
-			UserModel.setUrl('user/bids').get()
+			new Model('user/bids').get()
 				.then(response => {
 					commit('SET_BIDS', {bids: response.bids});
 					commit('SET_BIDS_FETCHED', {fetched: true});
 				});
 		},
 		fetchUserProjects({commit, rootState}, payload = {}) {
-			UserModel.setUrl(`user/${rootState.auth.user.id}/projects`).get()
+			new Model('user/{id}/projects').setId(rootState.auth.user.id).get()
 				.then(response => {
 					commit('SET_PROJECTS', {projects: response.projects});
 					commit('SET_PROJECTS_FETCHED', {fetched: true});

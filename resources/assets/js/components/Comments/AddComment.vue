@@ -16,7 +16,7 @@
 			<span class="comments-as" v-else>Du måste <a class="link" @click="$store.dispatch('openModal', {component: 'login'})">logga in</a> innan du kan kommentera</span>
 			<button 
 				class="btn btn-primary" 
-				:disabled="error || !$store.getters.isAuthenticated || processing"
+				:disabled="disabled || !$store.getters.isAuthenticated || processing"
 				@click="add">
 					Kommentera
 					<span class="processing" v-if="processing">
@@ -29,34 +29,33 @@
 </template>
 
 <script>
-	import Comment from '../../includes/models/Comment';
+	import Model from '../../includes/Model';
 
 	export default {
 		data() {
 			return {
 				comment: '',
 				parent: null,
-				error: false,
 				processing: false
 			}
 		},
 		computed: {
 			serviceId() {
 				return this.$store.getters.getService.id;
+			},
+			disabled() {
+				return !this.comment;
 			}
 		},
 		methods: {
 			add() {
-				// Validation
-				if ( !this.comment ) return this.error = true;
 				this.processing = true;
 
-				Comment.setUrl(`services/${this.serviceId}/comments`).create({
+				new Model('services/{id}/comments').setId(this.serviceId).create({
 					body: this.comment, 
 					parent: this.parent
 				})
 				.then(response => {
-					console.log(response.comment);
 					this.$store.commit('ADD_COMMENT', {comment: response.comment});
 
 					// Clear input and stop processing

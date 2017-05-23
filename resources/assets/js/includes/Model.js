@@ -42,10 +42,6 @@ class Model {
 		return this.send('put', this.resource, data);
 	}
 
-	all() {
-		return this.send('get', this.resource);
-	}
-
 	find(identifier) {
 		return this.send('get', this.resource + '/' + identifier);
 	}

@@ -76,12 +76,12 @@
 </template>
 
 <script>
-	import Model from "../../../includes/models/Model";
-	import Ratings from "../../Includes/Ratings.vue";
+	import Model from "../../../includes/Model";
+	import appRatings from "../../Includes/Ratings";
 
 	export default {
 		components: {
-			appRatings: Ratings
+			appRatings
 		},
 		data() {
 			return {

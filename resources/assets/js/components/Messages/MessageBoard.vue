@@ -28,7 +28,7 @@
 <script>
 	import sendMessage from './SendMessage';
 	import message from './Message';
-	import Model from '../../includes/models/Model';
+	import Model from '../../includes/Model';
 
 	export default {
 		components: {

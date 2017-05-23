@@ -34,12 +34,12 @@
 </template>
 
 <script>
-	import Timer from '../Includes/Timer.vue';
+	import appTimer from '../Includes/Timer';
 
 	export default {
 		props: ['service'],
 		components: {
-			appTimer: Timer
+			appTimer
 		},
 		methods: {
 			bidStop() {

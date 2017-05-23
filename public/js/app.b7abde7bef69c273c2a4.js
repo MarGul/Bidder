@@ -89,7 +89,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_User__ = __webpack_require__("./resources/assets/js/includes/models/User.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -183,7 +183,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 
-			__WEBPACK_IMPORTED_MODULE_1__includes_models_User__["a" /* default */].new().setUrl('login').post(this.form.data()).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]().new().setUrl('login').post(this.form.data()).then(function (response) {
 				_this.$store.commit('SET_AUTHENTICATED', { authenticated: response.authenticated });
 				_this.$store.commit('SET_USER', { user: response.user });
 				_this.processing = false;
@@ -203,7 +203,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_User__ = __webpack_require__("./resources/assets/js/includes/models/User.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
 //
 //
@@ -293,15 +293,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].create(this.form.data()).then(function (response) {
-				// Authenticate the user
-				__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].new().setUrl('login').post({ email: _this.form.email, password: _this.form.password }).then(function (response) {
-					_this.$store.dispatch('getAuthUser');
-					_this.processing = false;
-					_this.$store.dispatch('closeModal');
-				}).catch(function (error) {
-					console.log(error);
-				});
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users').create(this.form.data()).then(function (response) {
+				console.log('Registered, now authenticate the user with the available data.');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -317,7 +310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__ = __webpack_require__("./resources/assets/js/includes/models/Bid.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__("./node_modules/vuejs-datepicker/dist/build.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
@@ -497,7 +490,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.id).create(this.finalData).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.id).create(this.finalData).then(function (response) {
 				_this.$store.commit('ADD_BID', { bid: response.bid });
 				_this.form.reset();
 				_this.processing = false;
@@ -519,8 +512,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
 //
 //
 //
@@ -585,7 +578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings_vue___default.a
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
 	},
 	computed: {
 		bids: function bids() {
@@ -609,7 +602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Comment__ = __webpack_require__("./resources/assets/js/includes/models/Comment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -648,7 +641,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			comment: '',
 			parent: null,
-			error: false,
 			processing: false
 		};
 	},
@@ -656,21 +648,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		serviceId: function serviceId() {
 			return this.$store.getters.getService.id;
+		},
+		disabled: function disabled() {
+			return !this.comment;
 		}
 	},
 	methods: {
 		add: function add() {
 			var _this = this;
 
-			// Validation
-			if (!this.comment) return this.error = true;
 			this.processing = true;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Comment__["a" /* default */].setUrl('services/' + this.serviceId + '/comments').create({
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/comments').setId(this.serviceId).create({
 				body: this.comment,
 				parent: this.parent
 			}).then(function (response) {
-				console.log(response.comment);
 				_this.$store.commit('ADD_COMMENT', { comment: response.comment });
 
 				// Clear input and stop processing
@@ -1398,7 +1390,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SendMessage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SendMessage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Message__ = __webpack_require__("./resources/assets/js/components/Messages/Message.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Message__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -1457,7 +1449,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	created: function created() {
 		var _this = this;
 
-		new __WEBPACK_IMPORTED_MODULE_2__includes_models_Model__["a" /* default */]('projects/{id}/messages').setId(this.$route.params.id).get().then(function (response) {
+		new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('projects/{id}/messages').setId(this.$route.params.id).get().then(function (response) {
 			_this.messages = response.messages;
 			_this.fetched = true;
 		});
@@ -1471,7 +1463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -1499,7 +1491,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$emit('added', { message: message });
 			this.message = '';
 
-			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('projects/{id}/messages').setId(this.$route.params.id).post({ message: message }).catch(function (error) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/{id}/messages').setId(this.$route.params.id).post({ message: message }).catch(function (error) {
 				console.log(error);
 			});
 		}
@@ -1513,8 +1505,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
 //
 //
 //
@@ -1556,7 +1548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['service'],
 	components: {
-		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer_vue___default.a
+		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default.a
 	},
 	methods: {
 		bidStop: function bidStop() {
@@ -1615,14 +1607,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__ = __webpack_require__("./resources/assets/js/components/Includes/TagsInput.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_Service__ = __webpack_require__("./resources/assets/js/includes/models/Service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Service_vue__ = __webpack_require__("./resources/assets/js/components/Services/Service.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Service_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Service_vue__);
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__("./resources/assets/js/components/Includes/TagsInput.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Service_vue__ = __webpack_require__("./resources/assets/js/components/Services/Service.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Service_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Service_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -1695,13 +1684,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			} }
 	},
 	components: {
-		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput_vue___default.a,
-		appService: __WEBPACK_IMPORTED_MODULE_2__Service_vue___default.a
+		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a,
+		appService: __WEBPACK_IMPORTED_MODULE_1__Service_vue___default.a
 	},
 	data: function data() {
 		return {
 			filterText: '',
-			loading: false,
+			fetched: false,
 			services: [],
 			page: 1
 		};
@@ -1742,9 +1731,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getServices: function getServices(append) {
 			var _this = this;
 
-			this.loading = true;
 			this.services = append ? this.services : [];
-			__WEBPACK_IMPORTED_MODULE_1__includes_models_Service__["a" /* default */].get({
+			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('services').get({
 				page: this.page,
 				text: this.filterText,
 				categories: this.categories.map(function (el) {
@@ -1760,7 +1748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				var services = _ref3.services;
 
 				_this.services = _this.services.concat(services);
-				_this.loading = false;
+				_this.fetched = true;
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -1794,9 +1782,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings__);
 //
 //
 //
@@ -1880,7 +1868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appRatings: __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default.a
+		appRatings: __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings___default.a
 	},
 	data: function data() {
 		return {
@@ -1900,7 +1888,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
 				_this.accepted = true;
 				_this.$store.dispatch('showNotification', {
 					type: 'success',
@@ -1920,7 +1908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this2 = this;
 
 		// Fetch bids for the service.
-		new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('services/{id}/bids').setId(this.$route.params.id).get().then(function (response) {
+		new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.$route.params.id).get().then(function (response) {
 			_this2.bids = response.bids;
 			_this2.accepted = !!response.meta.bid_accepted;
 			_this2.fetched = true;
@@ -1987,7 +1975,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -2051,7 +2039,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_models_Model__["a" /* default */]('users/{id}/profile').update(this.$store.getters.authUser.id, this.form.data()).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('users/{id}/profile').update(this.$store.getters.authUser.id, this.form.data()).then(function (response) {
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade din profil.' });
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				_this.$store.commit('SET_USER', { user: response.user });
@@ -2072,7 +2060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -2133,7 +2121,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_models_Model__["a" /* default */]('users/{id}/password').update(this.$store.getters.authUser.id, this.form.data(), 'put').then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('users/{id}/password').update(this.$store.getters.authUser.id, this.form.data(), 'put').then(function (response) {
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.' });
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				_this.form.reset();
@@ -2394,7 +2382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -2430,7 +2418,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		change: function change() {
 			this.edit = false;
-			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('projects/{id}/title').setId(this.$route.params.id).put({ title: this.newTitle }).catch(function (error) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/{id}/title').setId(this.$route.params.id).put({ title: this.newTitle }).catch(function (error) {
 				console.log(error);
 			});
 			// Update the title in store for project in focus
@@ -2466,7 +2454,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_models_Service__ = __webpack_require__("./resources/assets/js/includes/models/Service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__("./node_modules/vuejs-datepicker/dist/build.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 //
@@ -2664,10 +2652,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_1__includes_models_Service__["a" /* default */].create(this.finalData).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('services').create(this.finalData).then(function (response) {
 				_this.form.reset();
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Woohoo! Vi skapade din tjänst.' });
-				$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+				$("html, body").animate({ scrollTop: 0 }, "fast");
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);
@@ -2921,17 +2909,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Service__ = __webpack_require__("./resources/assets/js/includes/models/Service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue__ = __webpack_require__("./resources/assets/js/components/Comments/AddComment.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue__ = __webpack_require__("./resources/assets/js/components/Comments/Comment.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceDescription_vue__ = __webpack_require__("./resources/assets/js/components/Services/ServiceDescription.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceDescription_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceDescription_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment__ = __webpack_require__("./resources/assets/js/components/Comments/AddComment.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment__ = __webpack_require__("./resources/assets/js/components/Comments/Comment.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription__ = __webpack_require__("./resources/assets/js/components/Services/ServiceDescription.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer__);
 //
 //
 //
@@ -3005,7 +2992,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -3015,11 +3001,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appComment: __WEBPACK_IMPORTED_MODULE_2__components_Comments_Comment_vue___default.a,
-		appAddComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_AddComment_vue___default.a,
-		appServiceDescription: __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceDescription_vue___default.a,
-		appRatings: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings_vue___default.a,
-		appTimer: __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer_vue___default.a
+		appComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment___default.a,
+		appAddComment: __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment___default.a,
+		appServiceDescription: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription___default.a,
+		appRatings: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings___default.a,
+		appTimer: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer___default.a
 	},
 	computed: {
 		service: function service() {
@@ -3035,7 +3021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return moment(this.service.bid_stop).format("LLL");
 		},
 		avatarAlt: function avatarAlt() {
-			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.displayname;
+			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.username;
 		}
 	},
 	methods: {
@@ -4276,7 +4262,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("logga in")]), _vm._v(" innan du kan kommentera")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "disabled": _vm.error || !_vm.$store.getters.isAuthenticated || _vm.processing
+      "disabled": _vm.disabled || !_vm.$store.getters.isAuthenticated || _vm.processing
     },
     on: {
       "click": _vm.add
@@ -5038,7 +5024,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Hitta Tjänster")])])])]), _vm._v(" "), _c('div', {
     staticClass: "services margin-25"
-  }, [_c('div', {
+  }, [(_vm.fetched) ? _c('div', {
     staticClass: "row"
   }, [_c('transition-group', {
     attrs: {
@@ -5067,13 +5053,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "bidStop": _vm.removeService
       }
     })], 1)], 1)
-  }))], 1), _vm._v(" "), (_vm.loading) ? _c('div', {
-    staticClass: "load-spinner text-center"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])
+  }))], 1) : _c('app-loading')], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -12034,6 +12014,130 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/includes/Model.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Model = function () {
+	function Model(resource) {
+		_classCallCheck(this, Model);
+
+		this.resource = resource;
+		this.instance = null;
+		this.url = null;
+	}
+
+	_createClass(Model, [{
+		key: 'new',
+		value: function _new() {
+			var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { baseURL: 'http://bidder.dev' };
+
+			this.instance = axios.create(config);
+			return this;
+		}
+	}, {
+		key: 'setId',
+		value: function setId(id) {
+			var match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '{id}';
+
+			this.resource = this.resource.replace(match, id);
+			return this;
+		}
+	}, {
+		key: 'setResource',
+		value: function setResource(resource) {
+			this.resource = resource;
+			return this;
+		}
+	}, {
+		key: 'setUrl',
+		value: function setUrl(url) {
+			this.url = url;
+			return this;
+		}
+	}, {
+		key: 'get',
+		value: function get() {
+			var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('get', this.resource, { params: params });
+		}
+	}, {
+		key: 'post',
+		value: function post() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('post', this.resource, data);
+		}
+	}, {
+		key: 'patch',
+		value: function patch() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('patch', this.resource, data);
+		}
+	}, {
+		key: 'put',
+		value: function put() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('put', this.resource, data);
+		}
+	}, {
+		key: 'find',
+		value: function find(identifier) {
+			return this.send('get', this.resource + '/' + identifier);
+		}
+	}, {
+		key: 'create',
+		value: function create(data) {
+			return this.send('post', this.resource, data);
+		}
+	}, {
+		key: 'update',
+		value: function update(identifier, data) {
+			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'patch';
+
+			this.setId(identifier);
+			return this.send(type, this.resource, data);
+		}
+	}, {
+		key: 'delete',
+		value: function _delete(identifier) {}
+	}, {
+		key: 'send',
+		value: function send(requestType, url) {
+			var _this = this;
+
+			var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+			return new Promise(function (resolve, reject) {
+				var instance = _this.instance || axios;
+				var path = _this.url || url;
+
+				instance[requestType](path, config).then(function (response) {
+					resolve(response.data);
+				}).catch(function (error) {
+					reject(error.response.data);
+				});
+				// If a new instance or a custom URL has been used, reset that.
+				_this.instance = null;
+				_this.url = null;
+			});
+		}
+	}]);
+
+	return Model;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+
 /***/ "./resources/assets/js/includes/classes/BootstrapBreakpoints.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12293,309 +12397,6 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 
-/***/ "./resources/assets/js/includes/models/Bid.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var Bid = function (_Model) {
-	_inherits(Bid, _Model);
-
-	function Bid() {
-		_classCallCheck(this, Bid);
-
-		return _possibleConstructorReturn(this, (Bid.__proto__ || Object.getPrototypeOf(Bid)).call(this, 'services/{id}/bids'));
-	}
-
-	return Bid;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new Bid());
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/Category.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var Category = function (_Model) {
-	_inherits(Category, _Model);
-
-	function Category() {
-		_classCallCheck(this, Category);
-
-		return _possibleConstructorReturn(this, (Category.__proto__ || Object.getPrototypeOf(Category)).call(this, 'categories'));
-	}
-
-	return Category;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new Category());
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/Comment.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var Comment = function (_Model) {
-	_inherits(Comment, _Model);
-
-	function Comment() {
-		_classCallCheck(this, Comment);
-
-		return _possibleConstructorReturn(this, (Comment.__proto__ || Object.getPrototypeOf(Comment)).call(this, 'services'));
-	}
-
-	return Comment;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new Comment());
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/Model.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Model = function () {
-	function Model(resource) {
-		_classCallCheck(this, Model);
-
-		this.resource = resource;
-		this.instance = null;
-		this.url = null;
-	}
-
-	_createClass(Model, [{
-		key: 'new',
-		value: function _new() {
-			var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { baseURL: 'http://bidder.dev' };
-
-			this.instance = axios.create(config);
-			return this;
-		}
-	}, {
-		key: 'setId',
-		value: function setId(id) {
-			var match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '{id}';
-
-			this.resource = this.resource.replace(match, id);
-			return this;
-		}
-	}, {
-		key: 'setResource',
-		value: function setResource(resource) {
-			this.resource = resource;
-			return this;
-		}
-	}, {
-		key: 'setUrl',
-		value: function setUrl(url) {
-			this.url = url;
-			return this;
-		}
-	}, {
-		key: 'get',
-		value: function get() {
-			var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			return this.send('get', this.resource, { params: params });
-		}
-	}, {
-		key: 'post',
-		value: function post() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			return this.send('post', this.resource, data);
-		}
-	}, {
-		key: 'patch',
-		value: function patch() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			return this.send('patch', this.resource, data);
-		}
-	}, {
-		key: 'put',
-		value: function put() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			return this.send('put', this.resource, data);
-		}
-	}, {
-		key: 'all',
-		value: function all() {
-			return this.send('get', this.resource);
-		}
-	}, {
-		key: 'find',
-		value: function find(identifier) {
-			return this.send('get', this.resource + '/' + identifier);
-		}
-	}, {
-		key: 'create',
-		value: function create(data) {
-			return this.send('post', this.resource, data);
-		}
-	}, {
-		key: 'update',
-		value: function update(identifier, data) {
-			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'patch';
-
-			this.setId(identifier);
-			return this.send(type, this.resource, data);
-		}
-	}, {
-		key: 'delete',
-		value: function _delete(identifier) {}
-	}, {
-		key: 'send',
-		value: function send(requestType, url) {
-			var _this = this;
-
-			var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-			return new Promise(function (resolve, reject) {
-				var instance = _this.instance || axios;
-				var path = _this.url || url;
-
-				instance[requestType](path, config).then(function (response) {
-					resolve(response.data);
-				}).catch(function (error) {
-					reject(error.response.data);
-				});
-				// If a new instance or a custom URL has been used, reset that.
-				_this.instance = null;
-				_this.url = null;
-			});
-		}
-	}]);
-
-	return Model;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Model);
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/Region.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var Region = function (_Model) {
-	_inherits(Region, _Model);
-
-	function Region() {
-		_classCallCheck(this, Region);
-
-		return _possibleConstructorReturn(this, (Region.__proto__ || Object.getPrototypeOf(Region)).call(this, 'regions'));
-	}
-
-	return Region;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new Region());
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/Service.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var Service = function (_Model) {
-	_inherits(Service, _Model);
-
-	function Service() {
-		_classCallCheck(this, Service);
-
-		return _possibleConstructorReturn(this, (Service.__proto__ || Object.getPrototypeOf(Service)).call(this, 'services'));
-	}
-
-	return Service;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new Service());
-
-/***/ }),
-
-/***/ "./resources/assets/js/includes/models/User.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var User = function (_Model) {
-	_inherits(User, _Model);
-
-	function User() {
-		_classCallCheck(this, User);
-
-		return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this, 'users'));
-	}
-
-	return User;
-}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new User());
-
-/***/ }),
-
 /***/ "./resources/assets/js/routes.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12662,7 +12463,7 @@ router.afterEach(function (to, from) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_User__ = __webpack_require__("./resources/assets/js/includes/models/User.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 
 
 var auth = {
@@ -12697,7 +12498,7 @@ var auth = {
 			commit('SET_USER', { user: {} });
 			// Clear user cached state
 			dispatch('clearUserState');
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].new().setUrl('logout').post().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]().new().setUrl('logout').post().then(function (response) {
 				// Set the new csrf token
 				window.Laravel.csrfToken = response.csrfToken;
 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
@@ -12728,7 +12529,7 @@ var auth = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Category__ = __webpack_require__("./resources/assets/js/includes/models/Category.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 
 
 var categories = {
@@ -12744,7 +12545,7 @@ var categories = {
 		fetchCategories: function fetchCategories(_ref) {
 			var commit = _ref.commit;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Category__["a" /* default */].all().then(function (_ref2) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('categories').get().then(function (_ref2) {
 				var categories = _ref2.categories;
 
 				commit('SET_CATEGORIES', categories);
@@ -12945,7 +12746,7 @@ var notifications = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Region__ = __webpack_require__("./resources/assets/js/includes/models/Region.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 
 
 var regions = {
@@ -12961,7 +12762,7 @@ var regions = {
 		fetchRegions: function fetchRegions(_ref) {
 			var commit = _ref.commit;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Region__["a" /* default */].all().then(function (_ref2) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('regions').get().then(function (_ref2) {
 				var regions = _ref2.regions;
 
 				commit('SET_REGIONS', regions);
@@ -13001,7 +12802,7 @@ var regions = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Service__ = __webpack_require__("./resources/assets/js/includes/models/Service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 
 
 var service = {
@@ -13030,7 +12831,7 @@ var service = {
 			// Set the base state first.
 			commit('SET_LOADED', false);
 			commit('SET_SERVICE', { comments: [], bids: [], user: {} });
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Service__["a" /* default */].find(payload.id).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services').find(payload.id).then(function (response) {
 				commit('SET_SERVICE', response.service);
 				commit('SET_LOADED', true);
 			}).catch(function (error) {});
@@ -13081,7 +12882,7 @@ var service = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_User__ = __webpack_require__("./resources/assets/js/includes/models/User.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 
 
 var user = {
@@ -13132,7 +12933,7 @@ var user = {
 		fetchUserServices: function fetchUserServices(_ref2) {
 			var commit = _ref2.commit;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/services').get().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/services').get().then(function (response) {
 				commit('SET_SERVICES', { services: response.services });
 				commit('SET_SERVICES_FETCHED', { fetched: true });
 			});
@@ -13140,7 +12941,7 @@ var user = {
 		fetchUserBids: function fetchUserBids(_ref3) {
 			var commit = _ref3.commit;
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/bids').get().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
 				commit('SET_BIDS', { bids: response.bids });
 				commit('SET_BIDS_FETCHED', { fetched: true });
 			});
@@ -13150,7 +12951,7 @@ var user = {
 			    rootState = _ref4.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_User__["a" /* default */].setUrl('user/' + rootState.auth.user.id + '/projects').get().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/{id}/projects').setId(rootState.auth.user.id).get().then(function (response) {
 				commit('SET_PROJECTS', { projects: response.projects });
 				commit('SET_PROJECTS_FETCHED', { fetched: true });
 				// If we have passed in a focusId then set the project with that Id as focus.

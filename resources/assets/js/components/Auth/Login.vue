@@ -64,7 +64,7 @@
 
 <script>
 	import Form from '../../includes/classes/Form';
-	import User from '../../includes/models/User';
+	import Model from '../../includes/Model';
 
 	export default {
 		data() {
@@ -88,7 +88,7 @@
 			authenticate() {
 				this.processing = true;
 
-				User.new().setUrl('login').post(this.form.data())
+				new Model().new().setUrl('login').post(this.form.data())
 					.then((response) => {
 						this.$store.commit('SET_AUTHENTICATED', {authenticated: response.authenticated});
 						this.$store.commit('SET_USER', {user: response.user});

@@ -1,4 +1,4 @@
-import Region from '../../includes/models/Region';
+import Model from '../../includes/Model';
 
 const regions = {
 	state: {
@@ -11,7 +11,7 @@ const regions = {
 	},
 	actions: {
 		fetchRegions({commit}) {
-			Region.all().then(({regions}) => {
+			new Model('regions').get().then(({regions}) => {
 				commit('SET_REGIONS', regions);
 			});
 		}

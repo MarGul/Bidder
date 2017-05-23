@@ -72,20 +72,19 @@
 </template>
 
 <script>
-	import Service from '../includes/models/Service';
-	import AddComment from '../components/Comments/AddComment.vue';
-	import Comment from '../components/Comments/Comment.vue';
-	import ServiceDescription from '../components/Services/ServiceDescription.vue';
-	import Ratings from '../components/Includes/Ratings.vue';
-	import Timer from '../components/Includes/Timer.vue';
+	import appAddComment from '../components/Comments/AddComment';
+	import appComment from '../components/Comments/Comment';
+	import appServiceDescription from '../components/Services/ServiceDescription';
+	import appRatings from '../components/Includes/Ratings';
+	import appTimer from '../components/Includes/Timer';
 
 	export default {
 		components: {
-			appComment: Comment,
-			appAddComment: AddComment,
-			appServiceDescription: ServiceDescription,
-			appRatings: Ratings,
-			appTimer: Timer
+			appComment,
+			appAddComment,
+			appServiceDescription,
+			appRatings,
+			appTimer
 		},
 		computed: {
 			service() {
@@ -101,7 +100,7 @@
 				return moment(this.service.bid_stop).format("LLL");
 			},
 			avatarAlt() {
-				return `Avatar bild för användare ${this.service.user.displayname}`;
+				return `Avatar bild för användare ${this.service.user.username}`;
 			}
 		},
 		methods: {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-	import Model from '../../../includes/models/Model';
+	import Model from '../../../includes/Model';
 
 	export default {
 		props: ['title', 'default'],

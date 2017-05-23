@@ -1,4 +1,4 @@
-import User from '../../includes/models/User';
+import Model from '../../includes/Model';
 
 const auth = {
 	state: {
@@ -29,7 +29,7 @@ const auth = {
 			commit('SET_USER', {user: {}});
 			// Clear user cached state
 			dispatch('clearUserState');
-			User.new().setUrl('logout').post().then((response) => {
+			new Model().new().setUrl('logout').post().then((response) => {
 				// Set the new csrf token
 				window.Laravel.csrfToken = response.csrfToken;
 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken

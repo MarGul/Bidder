@@ -39,7 +39,7 @@
 
 <script>
 	import Form from '../../../includes/classes/Form';
-	import Model from "../../../includes/models/Model";
+	import Model from "../../../includes/Model";
 
 	export default {
 		data() {

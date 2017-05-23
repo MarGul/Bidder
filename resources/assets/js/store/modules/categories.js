@@ -1,4 +1,4 @@
-import Category from '../../includes/models/Category';
+import Model from '../../includes/Model';
 
 const categories = {
 	state: {
@@ -11,7 +11,7 @@ const categories = {
 	},
 	actions: {
 		fetchCategories({commit}) {
-			Category.all().then(({categories}) => {
+			new Model('categories').get().then(({categories}) => {
 				commit('SET_CATEGORIES', categories);
 			});
 		}
