@@ -79,8 +79,8 @@
 </template>
 
 <script>
-	import Bid from "../../includes/models/Bid";
-	import Ratings from "../Includes/Ratings.vue";
+	import Model from "../../../includes/models/Model";
+	import Ratings from "../../Includes/Ratings.vue";
 
 	export default {
 		components: {
@@ -101,14 +101,14 @@
 			},
 			accept(bid) {
 				this.processing = true;
-				Bid.setResource(`services/${bid.service_id}/bids/${bid.id}/accept`).post()
+				new Model(`services/${bid.service_id}/bids/${bid.id}/accept`).post()
 					.then(response => {
 						this.bidAccepted = true;
 						this.$store.dispatch('showNotification', {
 							type: 'success', 
 							msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 						});
-						$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+						$("html, body").animate({ scrollTop: 0 }, "fast");
 						bid.accepted = true;
 						// Set the projects fetched to false so we break the cache.
 						this.$store.commit('SET_PROJECTS_FETCHED', {fetched: false});
@@ -121,7 +121,7 @@
 		},
 		created() {
 			// Fetch bids for the service.
-			Bid.setId(this.$route.params.id).get()
+			new Model('services/{id}/bids').setId(this.$route.params.id).get()
 				.then(response => {
 					this.bids = response.bids;
 					this.bidAccepted = !!response.meta.bid_accepted;

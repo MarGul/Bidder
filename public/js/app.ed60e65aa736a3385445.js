@@ -1788,12 +1788,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/BidHistory.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Bids/BidHistory.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__ = __webpack_require__("./resources/assets/js/includes/models/Bid.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__ = __webpack_require__("./resources/assets/js/includes/models/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings_vue__);
 //
@@ -1902,13 +1902,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setResource("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
 				_this.bidAccepted = true;
 				_this.$store.dispatch('showNotification', {
 					type: 'success',
 					msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 				});
-				$("html, body").animate({ scrollTop: 0 }, "fast"); // Not working?
+				$("html, body").animate({ scrollTop: 0 }, "fast");
 				bid.accepted = true;
 				// Set the projects fetched to false so we break the cache.
 				_this.$store.commit('SET_PROJECTS_FETCHED', { fetched: false });
@@ -1922,7 +1922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this2 = this;
 
 		// Fetch bids for the service.
-		__WEBPACK_IMPORTED_MODULE_0__includes_models_Bid__["a" /* default */].setId(this.$route.params.id).get().then(function (response) {
+		new __WEBPACK_IMPORTED_MODULE_0__includes_models_Model__["a" /* default */]('services/{id}/bids').setId(this.$route.params.id).get().then(function (response) {
 			_this2.bids = response.bids;
 			_this2.bidAccepted = !!response.meta.bid_accepted;
 			_this2.bidsFetched = true;
@@ -1932,7 +1932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/MyBids.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Bids/MyBids.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4162,6 +4162,156 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-16b10a9a", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-180989d8\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Bids/BidHistory.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "bid_history-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Budhistorik")]), _vm._v(" "), (_vm.bidsFetched) ? [(_vm.bids.length > 0) ? _c('ul', {
+    staticClass: "list-unstyled list-bids"
+  }, _vm._l((_vm.bids), function(bid) {
+    return _c('li', [_c('div', {
+      staticClass: "bid-header"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-xs-12 col-sm-6 col-md-7"
+    }, [_c('div', {
+      staticClass: "bid-user history-padding"
+    }, [_c('a', {
+      staticClass: "link"
+    }, [_vm._v(_vm._s(bid.user.username))]), _vm._v(" "), _c('span', {
+      staticClass: "user-reviews"
+    }, [_c('app-ratings', {
+      attrs: {
+        "rating": 4.5,
+        "total": 8
+      }
+    })], 1)])]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
+    }, [(!_vm.bidAccepted) ? _c('button', {
+      staticClass: "btn-flat btn-info",
+      attrs: {
+        "disabled": _vm.processing
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.focus = bid.id
+        }
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\tAcceptera budet\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.bidAccepted && bid.accepted) ? _c('div', {
+      staticClass: "accepted-bid"
+    }, [_c('i', {
+      staticClass: "fa fa-check",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Accepterat bud\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "bid-time",
+      domProps: {
+        "textContent": _vm._s(_vm.time(bid.created_at))
+      }
+    })]), _vm._v(" "), (!_vm.bidAccepted && _vm.focus == bid.id) ? _c('div', {
+      staticClass: "col-xs-12"
+    }, [_c('div', {
+      staticClass: "alert alert-warning bid-accept-confirm"
+    }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
+      staticClass: "confirm-buttons text-center"
+    }, [_c('button', {
+      staticClass: "btn btn-success btn-flat",
+      attrs: {
+        "disabled": _vm.processing
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.accept(bid)
+        }
+      }
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t\t"), (_vm.processing) ? _c('span', {
+      staticClass: "processing"
+    }, [_c('i', {
+      staticClass: "fa fa-spinner fa-pulse fa-fw"
+    }), _vm._v(" "), _c('span', {
+      staticClass: "sr-only"
+    }, [_vm._v("Loading...")])]) : _vm._e()]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-danger btn-flat",
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.focus = ''
+        }
+      }
+    }, [_vm._v("Avbryt")])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
+      staticClass: "bid-info"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(bid.start)
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(bid.end)
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(_vm.filters.commaSeparator(bid.hours))
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "col-xs-6 col-md-3 text-center info-section"
+    }, [_c('div', {
+      staticClass: "info-head"
+    }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
+      staticClass: "info-value",
+      domProps: {
+        "textContent": _vm._s(_vm.filters.currency(bid.price))
+      }
+    })])])]), _vm._v(" "), _c('div', {
+      staticClass: "bid-description",
+      domProps: {
+        "textContent": _vm._s(bid.description)
+      }
+    })])
+  })) : _c('div', {
+    staticClass: "alert alert-info text-center"
+  }, [_vm._v("\n\t\t\tDär finns inga bud för denna tjänsten.\n\t\t")])] : _c('div', {
+    staticClass: "load-spinner text-center"
+  }, [_c('i', {
+    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v("Loading...")])])], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-180989d8", module.exports)
   }
 }
 
@@ -6520,42 +6670,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e274dfe4\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/MyBids.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "my_bids-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Mina Bud")]), _vm._v(" "), (_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
-    staticClass: "user-items-list"
-  }, _vm._l((_vm.bids), function(bid) {
-    return _c('li', [_c('span', {
-      staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
-      staticClass: "item-actions"
-    })])
-  })) : _c('div', {
-    staticClass: "alert alert-info"
-  }, [_vm._v("\n\t\t\tDu har ännu inte lagt några bud.\n\t\t")])] : _c('div', {
-    staticClass: "load-spinner text-center"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])])], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-e274dfe4", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-f427bc18\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Bids/ShowBids.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6675,139 +6789,25 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-ff20e4fa\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/BidHistory.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-ffbea3c2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Bids/MyBids.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "bid_history-component"
+    staticClass: "my_bids-component"
   }, [_c('h1', {
     staticClass: "user-component-title"
-  }, [_vm._v("Budhistorik")]), _vm._v(" "), (_vm.bidsFetched) ? [(_vm.bids.length > 0) ? _c('ul', {
-    staticClass: "list-unstyled list-bids"
+  }, [_vm._v("Mina Bud")]), _vm._v(" "), (_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
+    staticClass: "user-items-list"
   }, _vm._l((_vm.bids), function(bid) {
-    return _c('li', [_c('div', {
-      staticClass: "bid-header"
-    }, [_c('div', {
-      staticClass: "row"
-    }, [_c('div', {
-      staticClass: "col-xs-12 col-sm-6 col-md-7"
-    }, [_c('div', {
-      staticClass: "bid-user history-padding"
-    }, [_c('a', {
-      staticClass: "link"
-    }, [_vm._v(_vm._s(bid.user.username))]), _vm._v(" "), _c('span', {
-      staticClass: "user-reviews"
-    }, [_c('app-ratings', {
-      attrs: {
-        "rating": 4.5,
-        "total": 8
-      }
-    })], 1)])]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
-    }, [(!_vm.bidAccepted) ? _c('button', {
-      staticClass: "btn-flat btn-info",
-      attrs: {
-        "disabled": _vm.processing
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.focus = bid.id
-        }
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\tAcceptera budet\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.bidAccepted && bid.accepted) ? _c('div', {
-      staticClass: "accepted-bid"
-    }, [_c('i', {
-      staticClass: "fa fa-check",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Accepterat bud\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('div', {
-      staticClass: "bid-time",
-      domProps: {
-        "textContent": _vm._s(_vm.time(bid.created_at))
-      }
-    })]), _vm._v(" "), (!_vm.bidAccepted && _vm.focus == bid.id) ? _c('div', {
-      staticClass: "col-xs-12"
-    }, [_c('div', {
-      staticClass: "alert alert-warning bid-accept-confirm"
-    }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
-      staticClass: "confirm-buttons text-center"
-    }, [_c('button', {
-      staticClass: "btn btn-success btn-flat",
-      attrs: {
-        "disabled": _vm.processing
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.accept(bid)
-        }
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t\t"), (_vm.processing) ? _c('span', {
-      staticClass: "processing"
-    }, [_c('i', {
-      staticClass: "fa fa-spinner fa-pulse fa-fw"
-    }), _vm._v(" "), _c('span', {
-      staticClass: "sr-only"
-    }, [_vm._v("Loading...")])]) : _vm._e()]), _vm._v(" "), _c('button', {
-      staticClass: "btn btn-danger btn-flat",
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.focus = ''
-        }
-      }
-    }, [_vm._v("Avbryt")])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
-      staticClass: "bid-info"
-    }, [_c('div', {
-      staticClass: "row"
-    }, [_c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(bid.start)
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(bid.end)
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(_vm.filters.commaSeparator(bid.hours))
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(_vm.filters.currency(bid.price))
-      }
-    })])])]), _vm._v(" "), _c('div', {
-      staticClass: "bid-description",
-      domProps: {
-        "textContent": _vm._s(bid.description)
-      }
+    return _c('li', [_c('span', {
+      staticClass: "item-content"
+    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
+      staticClass: "item-actions"
     })])
   })) : _c('div', {
-    staticClass: "alert alert-info text-center"
-  }, [_vm._v("\n\t\t\tDär finns inga bud för denna tjänsten.\n\t\t")])] : _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("\n\t\t\tDu har ännu inte lagt några bud.\n\t\t")])] : _c('div', {
     staticClass: "load-spinner text-center"
   }, [_c('i', {
     staticClass: "fa fa-spinner fa-pulse fa-3x fa-fw"
@@ -6819,7 +6819,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ff20e4fa", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-ffbea3c2", module.exports)
   }
 }
 
@@ -11467,20 +11467,20 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/User/BidHistory.vue":
+/***/ "./resources/assets/js/components/User/Bids/BidHistory.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
-  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/BidHistory.vue"),
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Bids/BidHistory.vue"),
   /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-ff20e4fa\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/BidHistory.vue"),
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-180989d8\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Bids/BidHistory.vue"),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/BidHistory.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Bids/BidHistory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] BidHistory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11491,9 +11491,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ff20e4fa", Component.options)
+    hotAPI.createRecord("data-v-180989d8", Component.options)
   } else {
-    hotAPI.reload("data-v-ff20e4fa", Component.options)
+    hotAPI.reload("data-v-180989d8", Component.options)
   }
 })()}
 
@@ -11502,20 +11502,20 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/User/MyBids.vue":
+/***/ "./resources/assets/js/components/User/Bids/MyBids.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
-  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/MyBids.vue"),
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Bids/MyBids.vue"),
   /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e274dfe4\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/MyBids.vue"),
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-ffbea3c2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Bids/MyBids.vue"),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/MyBids.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Bids/MyBids.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] MyBids.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11526,9 +11526,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e274dfe4", Component.options)
+    hotAPI.createRecord("data-v-ffbea3c2", Component.options)
   } else {
-    hotAPI.reload("data-v-e274dfe4", Component.options)
+    hotAPI.reload("data-v-ffbea3c2", Component.options)
   }
 })()}
 
@@ -12501,7 +12501,7 @@ var User = function (_Model) {
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: __webpack_require__("./resources/assets/js/views/Home.vue") }, { path: "/categories", name: 'categories', component: __webpack_require__("./resources/assets/js/views/Categories.vue") }, { path: "/locations", name: 'locations', component: __webpack_require__("./resources/assets/js/views/Locations.vue") }, { path: "/services", name: 'services', component: __webpack_require__("./resources/assets/js/views/Services.vue") }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__("./resources/assets/js/views/ServiceDetails.vue") }, { path: "/information", name: 'information', component: __webpack_require__("./resources/assets/js/views/Information.vue") }, { path: "/user", name: 'user', component: __webpack_require__("./resources/assets/js/views/User.vue"),
-	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__("./resources/assets/js/components/User/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'my-projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__("./resources/assets/js/components/User/Payments.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/BidHistory.vue"), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'my-projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__("./resources/assets/js/components/User/Payments.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/BidHistory.vue"), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 

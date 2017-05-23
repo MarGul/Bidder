@@ -17,11 +17,11 @@ let routes = [
 			{ path: 'notifications', component: require('./components/User/Notifications.vue'), meta: { requiresAuth: true } },
 			{ path: 'create-service', component: require('./components/User/Services/CreateService.vue'), meta: { requiresAuth: true } },
 			{ path: 'my-services', component: require('./components/User/Services/MyServices.vue'), meta: { requiresAuth: true } },
-			{ path: 'my-bids', component: require('./components/User/MyBids.vue'), meta: { requiresAuth: true } },
+			{ path: 'my-bids', component: require('./components/User/Bids/MyBids.vue'), meta: { requiresAuth: true } },
 			{ path: 'my-projects', component: require('./components/User/Projects/MyProjects.vue'), meta: { requiresAuth: true } },
 			{ path: 'project/:id', component: require('./components/User/Projects/Project.vue'), meta: { requiresAuth: true } },
 			{ path: 'payments', component: require('./components/User/Payments.vue'), meta: { requiresAuth: true } },
-			{ path: 'service/:id/bids', component: require('./components/User/BidHistory.vue'), meta: { requiresAuth: true } },
+			{ path: 'service/:id/bids', component: require('./components/User/Bids/BidHistory.vue'), meta: { requiresAuth: true } },
 		],
 		meta: { requiresAuth: true }
 	},
