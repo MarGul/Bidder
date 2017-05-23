@@ -137,8 +137,8 @@
 </template>
 
 <script>
-	import Form from '../../includes/classes/Form';
-	import Service from "../../includes/models/Service";
+	import Form from '../../../includes/classes/Form';
+	import Service from "../../../includes/models/Service";
 	import Datepicker from 'vuejs-datepicker';
 
 	export default {
