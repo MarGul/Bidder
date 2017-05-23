@@ -41,11 +41,11 @@
 </template>
 
 <script>
-	import Notifications from '../components/Includes/Notifications.vue';
+	import appNotifications from '../components/Includes/Notifications';
 
 	export default {
 		components: {
-			appNotifications: Notifications
+			appNotifications
 		},
 		data() {
 			return {

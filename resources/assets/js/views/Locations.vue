@@ -22,11 +22,11 @@
 </template>
 
 <script>
-	import ItemsBlock from '../components/Includes/ItemsBlock.vue';
+	import appItemsBlock from '../components/Includes/ItemsBlock';
 
 	export default {
 		components: {
-			appItemsBlock: ItemsBlock
+			appItemsBlock
 		},
 		computed: {
 			regions() {

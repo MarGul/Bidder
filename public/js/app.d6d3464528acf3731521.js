@@ -2743,8 +2743,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__ = __webpack_require__("./resources/assets/js/components/Includes/ItemsBlock.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock__ = __webpack_require__("./resources/assets/js/components/Includes/ItemsBlock.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock__);
 //
 //
 //
@@ -2773,7 +2773,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default.a
+		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock___default.a
 	},
 	computed: {
 		categories: function categories() {
@@ -2863,8 +2863,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__ = __webpack_require__("./resources/assets/js/components/Includes/ItemsBlock.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock__ = __webpack_require__("./resources/assets/js/components/Includes/ItemsBlock.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock__);
 //
 //
 //
@@ -2893,7 +2893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock_vue___default.a
+		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock___default.a
 	},
 	computed: {
 		regions: function regions() {
@@ -3044,8 +3044,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue__ = __webpack_require__("./resources/assets/js/components/Services/Services.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services__ = __webpack_require__("./resources/assets/js/components/Services/Services.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Services_Services__);
 //
 //
 //
@@ -3065,11 +3065,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-;
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appServices: __WEBPACK_IMPORTED_MODULE_0__components_Services_Services_vue___default.a
+		appServices: __WEBPACK_IMPORTED_MODULE_0__components_Services_Services___default.a
 	}
 });
 
@@ -3080,8 +3080,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications_vue__ = __webpack_require__("./resources/assets/js/components/Includes/Notifications.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__("./resources/assets/js/components/Includes/Notifications.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__);
 //
 //
 //
@@ -3129,7 +3129,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appNotifications: __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications_vue___default.a
+		appNotifications: __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default.a
 	},
 	data: function data() {
 		return {
