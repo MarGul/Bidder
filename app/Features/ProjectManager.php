@@ -108,6 +108,24 @@ class ProjectManager
 	}
 
 	/**
+	 * Accepting to start a project
+	 * 
+	 * @param  App\User 	$user
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function accept($user, $project)
+	{
+		if ( $user->id === $project->service_user ) {
+			$project->service_user_accept = true;
+		} else {
+			$project->bid_user_accept = true;
+		}
+
+		return $project->update() ? true : false;
+	}
+
+	/**
 	 * Need to parse the projects in order to set the users correctly.
 	 * 
 	 * @param  collection 	$projects

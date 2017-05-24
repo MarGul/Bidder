@@ -37,5 +37,7 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::resource('projects.messages', 'ProjectMessagesController', ['only' => ['index', 'store']]);
 	/* Update a projects title */
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
+	/* Accept the start of a project */
+	Route::post('projects/{project}/accept')->uses('ProjectAcceptController@store');
 
 });

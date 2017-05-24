@@ -25,6 +25,9 @@
 // Forms
 @import "_forms.scss";
 
+// Panels
+@import "_panels.scss";
+
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";
 
@@ -68,7 +71,7 @@
 @import "includes/User/Projects/project-title.scss";
 
 // Info Accept for projects
-@import "includes/User/Projects/info-accept.scss";
+@import "includes/User/Projects/project-accept.scss";
 
 // Message Board
 @import "includes/Messages/message-board.scss";

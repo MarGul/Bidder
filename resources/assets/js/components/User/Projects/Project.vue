@@ -3,8 +3,8 @@
 		
 		<template v-if="fetched">
 			<project-title :title="project.title" :default="`# ${project.id}`"></project-title>
-
-			<info-accept :project="project"></info-accept>
+			
+			<project-accept :project="project"></project-accept>
 
 			<message-board></message-board>
 		</template>
@@ -17,13 +17,13 @@
 <script>
 	import projectTitle from './ProjectTitle';
 	import messageBoard from '../../Messages/MessageBoard';
-	import infoAccept from './InfoAccept';
+	import projectAccept from './ProjectAccept';
 
 	export default {
 		components: {
 			messageBoard,
 			projectTitle,
-			infoAccept
+			projectAccept
 		},
 		computed: {
 			fetched() {
