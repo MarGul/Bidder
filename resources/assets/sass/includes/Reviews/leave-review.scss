@@ -1,0 +1,41 @@
+.leave_review-component {
+	
+	.stars-container {
+		display: flex;
+		flex-wrap: wrap;
+		
+		.communication,
+		.as-described,
+		.would-recommend {
+			flex: 0 1 100%;
+			text-align: center;
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+			}
+
+			.review-heading {
+				font-weight: bold;
+				font-size: 16px;
+				margin: 0 0 5px 0;
+			}
+		}
+	}
+
+	.comment-container {
+
+		textarea {
+			resize: none;
+		}
+	}
+
+	.action-container {
+		flex: 0 1 100%;
+		text-align: center;
+
+		.action-text {
+			font-style: italic;
+			display: block;
+		}
+	}
+}

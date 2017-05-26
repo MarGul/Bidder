@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->string('bid_user_title')->nullable();
             $table->date('finish');
             $table->double('price')->default(0.0);
+            $table->boolean('started')->default(false);
             $table->boolean('completed')->default(false);
             $table->timestamps();
         });

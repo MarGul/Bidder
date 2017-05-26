@@ -7851,6 +7851,14 @@ a {
   margin-top: 5px;
 }
 
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mtb20 {
+  margin: 20px 0;
+}
+
 .margin-25 {
   margin: 25px 0px;
 }
@@ -7869,6 +7877,14 @@ a {
 
 .margin-bottom-10 {
   margin-bottom: 10px !important;
+}
+
+.ptb5 {
+  padding: 5px 0;
+}
+
+.plr3 {
+  padding: 0 3px;
 }
 
 .form-control {
@@ -7913,6 +7929,14 @@ a {
 }
 
 .panel.panel-info {
+  border-top-color: #8eb4cb;
+}
+
+.panel.panel-warning {
+  border-top-color: #cbb956;
+}
+
+.panel.panel-success {
   border-top-color: #55AE3A;
 }
 
@@ -9795,6 +9819,57 @@ body.mobile-nav-open .overlay {
   text-align: right;
   font-size: 80%;
   font-style: italic;
+}
+
+.leave_review-component .stars-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.leave_review-component .stars-container .communication,
+.leave_review-component .stars-container .as-described,
+.leave_review-component .stars-container .would-recommend {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 100%;
+          flex: 0 1 100%;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .leave_review-component .stars-container .communication,
+  .leave_review-component .stars-container .as-described,
+  .leave_review-component .stars-container .would-recommend {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+
+.leave_review-component .stars-container .communication .review-heading,
+.leave_review-component .stars-container .as-described .review-heading,
+.leave_review-component .stars-container .would-recommend .review-heading {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+
+.leave_review-component .comment-container textarea {
+  resize: none;
+}
+
+.leave_review-component .action-container {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 100%;
+          flex: 0 1 100%;
+  text-align: center;
+}
+
+.leave_review-component .action-container .action-text {
+  font-style: italic;
+  display: block;
 }
 
 .slide-in-enter-active {

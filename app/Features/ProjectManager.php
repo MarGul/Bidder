@@ -137,7 +137,22 @@ class ProjectManager
 			$project->bid_user_accept = true;
 		}
 
+		if ( $this->shouldStart($project) ) {
+			$project->started = true;
+		}
+
 		return $project->update() ? true : false;
+	}
+
+	/**
+	 * Have both parties accepted so we should start the project?
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	protected function shouldStart($project)
+	{
+		return $project->service_user_accept && $project->bid_user_accept;
 	}
 
 	/**
@@ -146,7 +161,7 @@ class ProjectManager
 	 * @param  collection 	$projects
 	 * @return collection
 	 */
-	private function parseProjects($projects)
+	protected function parseProjects($projects)
 	{
 		foreach ($projects as $project) {
 			$service_user = Auth::user()->id === $project->service_user ? true : false;

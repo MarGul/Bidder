@@ -7,8 +7,17 @@
 	border-radius: 0;
 
 	&.panel-info {
+		border-top-color: $brand-info;
+	}
+
+	&.panel-warning {
+		border-top-color: $brand-warning;
+	}
+
+	&.panel-success {
 		border-top-color: $primary-green;
 	}
+
 
 	.panel-heading {
 		background-color: #f1f1f1;

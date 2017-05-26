@@ -41,5 +41,7 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 	/* Accept the start of a project */
 	Route::post('projects/{project}/accept')->uses('ProjectAcceptController@store');
+	/* Start a project */
+	Route::put('projects/{project}/start')->uses('ProjectStartController@update');
 
 });
