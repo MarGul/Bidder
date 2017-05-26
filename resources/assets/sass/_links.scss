@@ -1,3 +1,13 @@
 a {
 	cursor: pointer;
 }
+
+.is-link {
+	color: $primary-green;
+	cursor: pointer;
+
+	&:hover {
+		color: $dark-green;
+		text-decoration: underline;
+	}
+}

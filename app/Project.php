@@ -22,7 +22,7 @@ class Project extends Model
      */
     protected $fillable = [
     	'service_user', 'bid_user', 'service_user_accept', 'bid_user_accept', 'accept_end',
-        'service_user_title', 'bid_user_title', 'finish', 'completed'
+        'service_user_title', 'bid_user_title', 'finish', 'price', 'completed'
     ];
 
     /**

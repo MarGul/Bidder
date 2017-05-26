@@ -35,6 +35,21 @@ class ProjectManager
 	}
 
 	/**
+	 * Update a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  array 		$data
+	 * @return boolean
+	 */
+	public function update($project, $data)
+	{
+		// When the details are updated both of the users need to accept again if they already have accepted.
+		$update = array_merge(['service_user_accept' => false, 'bid_user_accept' => false], $data);
+		
+		return $project->update($update) ? true : false;
+	}
+
+	/**
 	 * Show a users projects.
 	 * 
 	 * @param  App\User 	$user

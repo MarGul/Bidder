@@ -13,17 +13,42 @@
 
 				<div class="project-users">
 					<div class="me">
-						<div class="avatar" :style="myAvatar"></div>
-						<div v-if="project.me.accepted">Accepterat</div>
-						<button @click.prevent="accept" v-else>
-							Starta projektet
-						</button>
+						<div class="user-name" v-text="project.me.username"></div>
+						<div class="avatar-container"><div class="avatar" :style="myAvatar"></div></div>
+						<div class="user-actions">
+							<button class="btn btn-default" disabled v-if="project.me.accepted">Du är redo!</button>
+							<button class="btn btn-primary" @click.prevent="accept" v-else>Starta projektet</button>
+						</div>
 					</div>
 					<div class="details">
-						Time left is:
+						<template v-if="!change">
+							<div class="timer">
+								<app-timer :ends="project.accept_end"></app-timer>
+								<div class="timer-text">Till automatisk start av projektet</div>
+							</div>
+							<div class="project-details">
+								<div class="finish">
+									<span class="heading"><i class="fa fa-clock-o"></i> Ska avslutas:</span>
+									<span class="value" v-text="project.finish"></span>
+								</div>
+								<div class="price">
+									<span class="heading"><i class="fa fa-money"></i> Pris: </span>
+									<span class="value" v-text="filters.currency(project.price)"></span>
+								</div>
+								<div class="change">
+									<span class="is-link" @click="change = !change">Ändra uppgifterna</span>
+								</div>
+							</div>
+						</template>
+						<app-change-project-details @updated="change = false" @close="change = false" v-else></app-change-project-details>
 					</div>
 					<div class="other">
-						<div class="avatar" :style="otherAvatar"></div>
+						<div class="user-name" v-text="project.other.username"></div>
+						<div class="avatar-container"><div class="avatar" :style="otherAvatar"></div></div>
+						<div class="user-actions">
+							<button class="btn btn-default" disabled v-if="project.other.accepted">Godkänt</button>
+							<button class="btn btn-default" disabled v-else>Ej godkänt</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -33,9 +58,20 @@
 
 <script>
 	import Model from "../../../includes/Model";
+	import appTimer from "../../Includes/Timer";
+	import appChangeProjectDetails from "./ChangeProjectDetails";
 
 	export default {
 		props: ['project'],
+		components: {
+			appTimer,
+			appChangeProjectDetails
+		},
+		data() {
+			return {
+				change: false
+			}
+		},
 		computed: {
 			myAvatar() {
 				return {backgroundImage: `url('${this.project.me.avatar}')`};
@@ -46,13 +82,20 @@
 		},
 		methods: {
 			accept() {
-				new Model(`projects/${this.project.id}/accept`).post()
-					.then(response => {
-						console.log(response);
-					})
-					.catch(error => {
-						console.log(error);
-					});
+				new Model(`projects/${this.project.id}/accept`).post().catch(error => { console.log(error); });
+				// Update the acceptance in store for project in focus
+				let project = this.$store.getters.userProjectFocus;
+				project.me.accepted = true;
+				this.$store.commit('SET_PROJECT_FOCUS', {project});
+				// Update the acceptance in store for the projects
+				let projects = this.$store.getters.userProjects;
+				for (let i = 0; i < projects.length; i++) {
+					if ( projects[i].id === project.id ) {
+						projects[i] = project;
+						break;
+					}
+				}
+				this.$store.commit('SET_PROJECTS', {projects});
 			}
 		}
 	}
