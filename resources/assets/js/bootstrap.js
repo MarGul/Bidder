@@ -26,7 +26,8 @@ Vue.use(VueRouter);
 Vue.component('app-hero', require('./components/Includes/Hero'));
 Vue.component('app-loading', require('./components/Includes/Loading'));
 
-Vue.prototype.filters = require('./includes/filters');
+import filters from "./includes/filters";
+Vue.prototype.filters = filters;
 
 /**
  * Load in Axios HTTP framework.

@@ -82,7 +82,8 @@ class BidManager {
 		$data = [
 			'service_user' => $service->user_id,
 			'bid_user' => $bid->user_id,
-			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString()
+			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString(),
+			'price' => $bid->price
 		];
 
 		return app(ProjectManager::class)->create($data) ? true : false;

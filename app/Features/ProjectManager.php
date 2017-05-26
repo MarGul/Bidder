@@ -35,6 +35,21 @@ class ProjectManager
 	}
 
 	/**
+	 * Update a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  array 		$data
+	 * @return boolean
+	 */
+	public function update($project, $data)
+	{
+		// When the details are updated both of the users need to accept again if they already have accepted.
+		$update = array_merge(['service_user_accept' => false, 'bid_user_accept' => false], $data);
+		
+		return $project->update($update) ? true : false;
+	}
+
+	/**
 	 * Show a users projects.
 	 * 
 	 * @param  App\User 	$user
@@ -102,6 +117,24 @@ class ProjectManager
 			$project->service_user_title = $title;
 		} else {
 			$project->bid_user_title = $title;
+		}
+
+		return $project->update() ? true : false;
+	}
+
+	/**
+	 * Accepting to start a project
+	 * 
+	 * @param  App\User 	$user
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function accept($user, $project)
+	{
+		if ( $user->id === $project->service_user ) {
+			$project->service_user_accept = true;
+		} else {
+			$project->bid_user_accept = true;
 		}
 
 		return $project->update() ? true : false;

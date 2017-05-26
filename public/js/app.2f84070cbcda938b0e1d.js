@@ -2205,55 +2205,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/InfoAccept.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['project'],
-	computed: {
-		myAvatar: function myAvatar() {
-			return { backgroundImage: 'url(\'' + this.project.me.avatar + '\')' };
-		},
-		otherAvatar: function otherAvatar() {
-			return { backgroundImage: 'url(\'' + this.project.other.avatar + '\')' };
-		}
-	}
-
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/MyProjects.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2328,8 +2279,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectTitle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProjectTitle__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Messages_MessageBoard__ = __webpack_require__("./resources/assets/js/components/Messages/MessageBoard.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Messages_MessageBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Messages_MessageBoard__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__InfoAccept__ = __webpack_require__("./resources/assets/js/components/User/Projects/InfoAccept.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__InfoAccept___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__InfoAccept__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectAccept__ = __webpack_require__("./resources/assets/js/components/User/Projects/ProjectAccept.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectAccept___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProjectAccept__);
 //
 //
 //
@@ -2355,7 +2306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		messageBoard: __WEBPACK_IMPORTED_MODULE_1__Messages_MessageBoard___default.a,
 		projectTitle: __WEBPACK_IMPORTED_MODULE_0__ProjectTitle___default.a,
-		infoAccept: __WEBPACK_IMPORTED_MODULE_2__InfoAccept___default.a
+		projectAccept: __WEBPACK_IMPORTED_MODULE_2__ProjectAccept___default.a
 	},
 	computed: {
 		fetched: function fetched() {
@@ -2372,6 +2323,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	destroyed: function destroyed() {
 		this.$store.commit('SET_PROJECT_FOCUS', { project: null });
+	}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/ProjectAccept.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['project'],
+	computed: {
+		myAvatar: function myAvatar() {
+			return { backgroundImage: "url('" + this.project.me.avatar + "')" };
+		},
+		otherAvatar: function otherAvatar() {
+			return { backgroundImage: "url('" + this.project.other.avatar + "')" };
+		}
+	},
+	methods: {
+		accept: function accept() {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/accept").post().then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
 	}
 });
 
@@ -4834,7 +4850,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "title": _vm.project.title,
       "default": ("# " + (_vm.project.id))
     }
-  }), _vm._v(" "), _c('info-accept', {
+  }), _vm._v(" "), _c('project-accept', {
     attrs: {
       "project": _vm.project
     }
@@ -5092,6 +5108,58 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-4a52aae0", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4d9778b8\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Projects/ProjectAccept.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_accept-component"
+  }, [_c('div', {
+    staticClass: "panel panel-info"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('p', [_vm._v("Efter att ett projekt har skapats så är det sista du behöver göra att godkänna att vi ska starta projektet.\n\t\t\tDetta görs för er bådas säkerhet och ni får chansen att disskutera lite mer genom meddelanden som du finner här nere innan projektet räknas som godkänt.")]), _vm._v(" "), _c('p', [_vm._v("Ifall där är något som du inte gillar med detta projektet så kan du välja att inte godkänna projektet. Du som la ut tjänsten kan snabbt och enkelt starta budgivningen för tjänsten igen\n\t\t\toch du som la det accepterade budet kommer inte att behöva betala.")]), _vm._v(" "), _c('p', [_vm._v("Direkt när båda parterna har godkänt projektet så kan ni starta och kommer inte att höra av er ifrån oss förän projektet är klart och det är dags att lämna omdömmen om varandra.")]), _vm._v(" "), _c('div', {
+    staticClass: "project-users"
+  }, [_c('div', {
+    staticClass: "me"
+  }, [_c('div', {
+    staticClass: "avatar",
+    style: (_vm.myAvatar)
+  }), _vm._v(" "), (_vm.project.me.accepted) ? _c('div', [_vm._v("Accepterat")]) : _c('button', {
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.accept($event)
+      }
+    }
+  }, [_vm._v("\n\t\t\t\t\t\tStarta projektet\n\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "details"
+  }, [_vm._v("\n\t\t\t\t\tTime left is:\n\t\t\t\t")]), _vm._v(" "), _c('div', {
+    staticClass: "other"
+  }, [_c('div', {
+    staticClass: "avatar",
+    style: (_vm.otherAvatar)
+  })])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-heading"
+  }, [_c('i', {
+    staticClass: "fa fa-thumbs-o-up",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Är du redo att starta projektet?\n\t\t")])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4d9778b8", module.exports)
   }
 }
 
@@ -6322,44 +6390,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-82ec9b96", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9387d3a2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Projects/InfoAccept.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "info_accept-component"
-  }, [_c('div', {
-    staticClass: "alert alert-info"
-  }, [_c('h4', {
-    staticClass: "text-center"
-  }, [_vm._v("Som en sista sak behöver du godkänna projektet.")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('p', [_vm._v("Efter att ett projekt har skapats så är det sista du behöver göra att godkänna att vi ska starta projektet.\n\t\t\tDetta görs för er bådas säkerhet och ni får chansen att disskutera lite mer genom meddelanden som du finner här nere innan projektet räknas som godkänt.")]), _vm._v(" "), _c('p', [_vm._v("Ifall där är något som du inte gillar med detta projektet så kan du välja att inte godkänna projektet. Du som la ut tjänsten kan snabbt och enkelt starta budgivningen för tjänsten igen\n\t\t\toch du som la det accepterade budet kommer inte att behöva betala.")]), _vm._v(" "), _c('p', [_vm._v("Direkt när båda parterna har godkänt projektet så kan ni starta och kommer inte att höra av er ifrån oss förän projektet är klart och det är dags att lämna omdömmen om varandra.")]), _vm._v(" "), _c('div', {
-    staticClass: "project-users"
-  }, [_c('div', {
-    staticClass: "me"
-  }, [_c('div', {
-    staticClass: "avatar",
-    style: (_vm.myAvatar)
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "time-left"
-  }, [_vm._v("\n\t\t\t\t\tTime left is:\n\t\t\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "other"
-  }, [_c('div', {
-    staticClass: "avatar",
-    style: (_vm.otherAvatar)
-  })])])])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-9387d3a2", module.exports)
   }
 }
 
@@ -10646,7 +10676,8 @@ var app = new Vue({
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__("./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_BootstrapBreakpoints__ = __webpack_require__("./resources/assets/js/includes/classes/BootstrapBreakpoints.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_filters__ = __webpack_require__("./resources/assets/js/includes/filters.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__ = __webpack_require__("./resources/assets/js/includes/classes/BootstrapBreakpoints.js");
 /**
  * Load in jQuery
  */
@@ -10675,7 +10706,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 Vue.component('app-hero', __webpack_require__("./resources/assets/js/components/Includes/Hero.vue"));
 Vue.component('app-loading', __webpack_require__("./resources/assets/js/components/Includes/Loading.vue"));
 
-Vue.prototype.filters = __webpack_require__("./resources/assets/js/includes/filters.js");
+
+Vue.prototype.filters = __WEBPACK_IMPORTED_MODULE_1__includes_filters__["a" /* default */];
 
 /**
  * Load in Axios HTTP framework.
@@ -10692,7 +10724,7 @@ window.axios.defaults.headers.common = {
  * Object to handle Twitter bootstrap breakpoints
  */
 
-window.breakpoints = new __WEBPACK_IMPORTED_MODULE_1__includes_classes_BootstrapBreakpoints__["a" /* default */]();
+window.breakpoints = new __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__["a" /* default */]();
 
 /***/ }),
 
@@ -11804,41 +11836,6 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/User/Projects/InfoAccept.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
-  /* script */
-  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/InfoAccept.vue"),
-  /* template */
-  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9387d3a2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Projects/InfoAccept.vue"),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/InfoAccept.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] InfoAccept.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9387d3a2", Component.options)
-  } else {
-    hotAPI.reload("data-v-9387d3a2", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/User/Projects/MyProjects.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11901,6 +11898,41 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-2ec874e0", Component.options)
   } else {
     hotAPI.reload("data-v-2ec874e0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/User/Projects/ProjectAccept.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/ProjectAccept.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4d9778b8\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Projects/ProjectAccept.vue"),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectAccept.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectAccept.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4d9778b8", Component.options)
+  } else {
+    hotAPI.reload("data-v-4d9778b8", Component.options)
   }
 })()}
 
@@ -12371,7 +12403,6 @@ var Form = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var filters = {
 	currency: function currency(value) {
 		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ',') + ' kr';
@@ -12381,7 +12412,7 @@ var filters = {
 	}
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (filters);
+/* harmony default export */ __webpack_exports__["a"] = (filters);
 
 /***/ }),
 
