@@ -145,6 +145,25 @@ class ProjectManager
 	}
 
 	/**
+	 * Complete a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function complete($project)
+	{
+		// Attach reviews for both users.
+		if ( !app(ReviewManager::class)->attach($project->bid_user, $project->service_user) ) {
+			return false;
+		}
+
+		// Mark the project as complete
+		$project->completed = true;
+
+		return $project->save() ? true : false;
+	}
+
+	/**
 	 * Have both parties accepted so we should start the project?
 	 * 
 	 * @param  App\Project 	$project
