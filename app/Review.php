@@ -13,7 +13,7 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-    	'reviewing', 'reviewed', 'communication', 'as_described', 'would_recommend', 'review'
+    	'reviewing', 'reviewed', 'submitted', 'communication', 'as_described', 'would_recommend', 'review'
     ];
 
 }
