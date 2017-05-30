@@ -5,7 +5,7 @@
 				<i class="fa fa-star" aria-hidden="true"></i> Projektet är avslutat. Dags att lämna omdömme.
 			</div>
 			<div class="panel-body">
-				<app-leave-review :forUser="other"></app-leave-review>
+				<app-leave-review :forUser="other" :submitted="submitted"></app-leave-review>
 			</div>
 		</div>
 	</div>
@@ -21,6 +21,9 @@
 		computed: {
 			other() {
 				return this.$store.getters.userProjectFocus.other.id;
+			},
+			submitted() {
+				return this.$store.getters.userProjectFocus.me.review_submitted;
 			}
 		}
 	}

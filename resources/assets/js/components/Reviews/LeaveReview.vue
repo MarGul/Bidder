@@ -15,33 +15,53 @@
 			</div>
 		</div>
 		<div class="comment-container">
-			<textarea rows="3" class="form-control mtb20"></textarea>
+			<textarea rows="3" class="form-control mtb20" v-model="review"></textarea>
 		</div>
 		<div class="action-container text-center">
-			<small class="action-text mb10">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
-			<button class="btn btn-primary" @click.prevent="send">Lämna omdömme</button>
+			<small class="action-text mb10 alert alert-info" v-if="submitted">
+				Du har redan lämnat omdömme för detta projektet.
+			</small>
+			<template v-else>
+				<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
+				<button class="btn btn-primary" @click.prevent="send">Lämna omdömme</button>
+			</template>
 		</div>
 	</div>
 </template>
 
 <script>
 	import appPickStars from "./PickStars";
+	import Model from "../../includes/Model";
 
 	export default {
-		props: ['forUser'],
+		props: ['forUser', 'submitted'],
 		components: {
 			appPickStars
 		},
 		data() {
 			return {
-				communication: 0,
-				as_described: 0,
-				would_recommend: 0
+				communication: null,
+				as_described: null,
+				would_recommend: null,
+				review: '',
+				processing: false,
+				error: false
 			}
 		},
 		methods: {
 			send() {
-				alert('sending');
+				this.processing = true
+				new Model(`users/${this.forUser}/review`).post({
+					project_id: this.$store.getters.userProjectFocus.id,
+					communication: this.communication,
+					as_described: this.as_described,
+					would_recommend: this.would_recommend,
+					review: this.review
+				}).then(response => {
+					console.log(response);
+				}).catch(error => {
+					this.error = true;
+				});
 			}
 		}
 	}

@@ -17,6 +17,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('reviewing');
             $table->integer('reviewed');
+            $table->integer('project_id');
             $table->boolean('submitted')->default(false);
             $table->float('communication')->nullable();
             $table->float('as_described')->nullable();

@@ -16,8 +16,9 @@ class UserReviewsController extends Controller
 	 */
 	private $manager;
 
+	
 	public function __construct(ReviewManager $manager) {
-		//$this->middleware('auth:api');
+		$this->middleware('auth:api');
 		$this->manager = $manager;
 	}
     
@@ -32,7 +33,7 @@ class UserReviewsController extends Controller
 	{
 		$data = $request->only(['communication', 'as_described', 'would_recommend', 'review']);
 
-		if ( !$this->manager->submit(1, $reviewed, $data) ) {
+		if ( !$this->manager->submit($request->user()->id, $reviewed, $request->project_id, $data) ) {
 			return response()->json(['message' => 'Could not store your review.'], 500);
 		}
 

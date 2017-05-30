@@ -1507,6 +1507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars__ = __webpack_require__("./resources/assets/js/components/Reviews/PickStars.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PickStars__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -1533,25 +1534,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['forUser'],
+	props: ['forUser', 'submitted'],
 	components: {
 		appPickStars: __WEBPACK_IMPORTED_MODULE_0__PickStars___default.a
 	},
 	data: function data() {
 		return {
-			communication: 0,
-			as_described: 0,
-			would_recommend: 0
+			communication: null,
+			as_described: null,
+			would_recommend: null,
+			review: '',
+			processing: false,
+			error: false
 		};
 	},
 
 	methods: {
 		send: function send() {
-			alert('sending');
+			var _this = this;
+
+			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]("users/" + this.forUser + "/review").post({
+				project_id: this.$store.getters.userProjectFocus.id,
+				communication: this.communication,
+				as_described: this.as_described,
+				would_recommend: this.would_recommend,
+				review: this.review
+			}).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				_this.error = true;
+			});
 		}
 	}
 });
@@ -2740,6 +2763,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		other: function other() {
 			return this.$store.getters.userProjectFocus.other.id;
+		},
+		submitted: function submitted() {
+			return this.$store.getters.userProjectFocus.me.review_submitted;
 		}
 	}
 });
@@ -5148,10 +5174,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.would_recommend = $event.stars
       }
     }
-  })], 1)]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "comment-container"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.review),
+      expression: "review"
+    }],
+    staticClass: "form-control mtb20",
+    attrs: {
+      "rows": "3"
+    },
+    domProps: {
+      "value": (_vm.review)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.review = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "action-container text-center"
-  }, [_c('small', {
-    staticClass: "action-text mb10"
+  }, [(_vm.submitted) ? _c('small', {
+    staticClass: "action-text mb10 alert alert-info"
+  }, [_vm._v("\n\t\t\tDu har redan lämnat omdömme för detta projektet.\n\t\t")]) : [_c('small', {
+    staticClass: "action-text mb10",
+    class: {
+      'alert alert-danger': _vm.error
+    }
   }, [_vm._v("Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     on: {
@@ -5160,17 +5213,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.send($event)
       }
     }
-  }, [_vm._v("Lämna omdömme")])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "comment-container"
-  }, [_c('textarea', {
-    staticClass: "form-control mtb20",
-    attrs: {
-      "rows": "3"
-    }
-  })])
-}]}
+  }, [_vm._v("Lämna omdömme")])]], 2)])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -5393,7 +5437,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('app-leave-review', {
     attrs: {
-      "forUser": _vm.other
+      "forUser": _vm.other,
+      "submitted": _vm.submitted
     }
   })], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

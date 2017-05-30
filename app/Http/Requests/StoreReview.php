@@ -24,6 +24,7 @@ class StoreReview extends FormRequest
     public function rules()
     {
         return [
+            'project_id' => 'required|numeric',
             'communication' => 'required|numeric',
             'as_described' => 'required|numeric',
             'would_recommend' => 'required|numeric',

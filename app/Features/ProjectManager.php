@@ -153,7 +153,7 @@ class ProjectManager
 	public function complete($project)
 	{
 		// Attach reviews for both users.
-		if ( !app(ReviewManager::class)->attach($project->bid_user, $project->service_user) ) {
+		if ( !app(ReviewManager::class)->attach($project->bid_user, $project->service_user, $project->id) ) {
 			return false;
 		}
 
