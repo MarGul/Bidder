@@ -164,6 +164,28 @@ class ProjectManager
 	}
 
 	/**
+	 * Mark a user that he has left a review for a project.
+	 * 
+	 * @param  integer  	$user
+	 * @param  integer  	$project_id
+	 * @return boolean
+	 */
+	public function hasReviewed($user, $project_id)
+	{
+		$project = Project::find($project_id);
+
+		if ( !$project ) return false;
+
+		if ( $this->isServiceUser($user, $project) ) {
+			$project->service_user_review = true;
+		} else {
+			$project->bid_user_review = true;
+		}
+
+		return $project->save() ? true : false;
+	}
+
+	/**
 	 * Have both parties accepted so we should start the project?
 	 * 
 	 * @param  App\Project 	$project
@@ -172,6 +194,18 @@ class ProjectManager
 	protected function shouldStart($project)
 	{
 		return $project->service_user_accept && $project->bid_user_accept;
+	}
+
+	/**
+	 * Is the user the service user of the project?
+	 * 
+	 * @param  integer  	$user_id
+	 * @param  App\Project  $project
+	 * @return boolean
+	 */
+	protected function isServiceUser($user_id, $project)
+	{
+		return $user_id === $project->service_user;
 	}
 
 	/**

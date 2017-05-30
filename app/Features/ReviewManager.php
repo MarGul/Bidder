@@ -58,6 +58,8 @@ class ReviewManager
 
 		if ( !$review ) return false;
 
+		if ( !app(ProjectManager::class)->hasReviewed($reviewing, $project_id) ) return false;
+
 		return $review->update(array_merge($data, ['submitted' => true])) ? true : false;
 	}
 
