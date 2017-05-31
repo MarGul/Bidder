@@ -1,6 +1,6 @@
 <template>
 	<div class="project_accept-component">
-		<div class="panel panel-info">
+		<div class="panel panel-success">
 			<div class="panel-heading">
 				<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Är du redo att starta projektet?
 			</div>
@@ -36,7 +36,7 @@
 									<span class="value" v-text="filters.currency(project.price)"></span>
 								</div>
 								<div class="change">
-									<span class="is-link" @click="change = !change">Ändra uppgifterna</span>
+									<span class="is-link ptb5" @click="change = !change">Ändra uppgifterna</span>
 								</div>
 							</div>
 						</template>

@@ -137,7 +137,75 @@ class ProjectManager
 			$project->bid_user_accept = true;
 		}
 
+		if ( $this->shouldStart($project) ) {
+			$project->started = true;
+		}
+
 		return $project->update() ? true : false;
+	}
+
+	/**
+	 * Complete a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function complete($project)
+	{
+		// Attach reviews for both users.
+		if ( !app(ReviewManager::class)->attach($project->bid_user, $project->service_user, $project->id) ) {
+			return false;
+		}
+
+		// Mark the project as complete
+		$project->completed = true;
+
+		return $project->save() ? true : false;
+	}
+
+	/**
+	 * Mark a user that he has left a review for a project.
+	 * 
+	 * @param  integer  	$user
+	 * @param  integer  	$project_id
+	 * @return boolean
+	 */
+	public function hasReviewed($user, $project_id)
+	{
+		$project = Project::find($project_id);
+
+		if ( !$project ) return false;
+
+		if ( $this->isServiceUser($user, $project) ) {
+			$project->service_user_review = true;
+		} else {
+			$project->bid_user_review = true;
+		}
+
+		return $project->save() ? true : false;
+	}
+
+	/**
+	 * Have both parties accepted so we should start the project?
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	protected function shouldStart($project)
+	{
+		return $project->service_user_accept && $project->bid_user_accept;
+	}
+
+	/**
+	 * Is the user the service user of the project?
+	 * 
+	 * @param  integer  	$user_id
+	 * @param  App\Project  $project
+	 * @return boolean
+	 */
+	protected function isServiceUser($user_id, $project)
+	{
+		return $user_id === $project->service_user;
 	}
 
 	/**
@@ -146,20 +214,23 @@ class ProjectManager
 	 * @param  collection 	$projects
 	 * @return collection
 	 */
-	private function parseProjects($projects)
+	protected function parseProjects($projects)
 	{
 		foreach ($projects as $project) {
 			$service_user = Auth::user()->id === $project->service_user ? true : false;
 
 			$project->me = $service_user ? $project->serviceUser : $project->bidUser;
 			$project->me->accepted =  $service_user ? $project->service_user_accept : $project->bid_user_accept;
+			$project->me->reviewed = $service_user ? $project->service_user_review : $project->bid_user_review;
 			$project->other = $service_user ? $project->bidUser : $project->serviceUser;
 			$project->other->accepted = $service_user ? $project->bid_user_accept : $project->service_user_accept;
 
 			unset($project->serviceUser);
 			unset($project->service_user_accept);
+			unset($project->service_user_review);
 			unset($project->bidUser);
 			unset($project->bid_user_accept);
+			unset($project->bid_user_review);
 		}
 
 		return $projects;

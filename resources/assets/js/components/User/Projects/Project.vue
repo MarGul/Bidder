@@ -4,7 +4,7 @@
 		<template v-if="fetched">
 			<project-title :title="project.title" :default="`# ${project.id}`"></project-title>
 			
-			<project-accept :project="project"></project-accept>
+			<component :is="panel" :project="project"></component>
 
 			<message-board></message-board>
 		</template>
@@ -18,12 +18,16 @@
 	import projectTitle from './ProjectTitle';
 	import messageBoard from '../../Messages/MessageBoard';
 	import projectAccept from './ProjectAccept';
+	import projectStarted from './ProjectStarted';
+	import projectCompleted from './ProjectCompleted';
 
 	export default {
 		components: {
 			messageBoard,
 			projectTitle,
-			projectAccept
+			projectAccept,
+			projectStarted,
+			projectCompleted
 		},
 		computed: {
 			fetched() {
@@ -31,6 +35,13 @@
 			},
 			project() {
 				return this.$store.getters.userProjectFocus;
+			},
+			panel() {
+				if ( this.project.completed ) {
+					return 'projectCompleted';
+				}
+
+				return this.project.started ? 'projectStarted' : 'projectAccept';
 			}
 		},
 		created() {

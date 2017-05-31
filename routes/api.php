@@ -12,9 +12,9 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle users */
 	Route::resource('users', 'UserController', ['only' => ['store', 'show', 'update', 'destroy']]);
 	/* Update a users profile */
-	Route::patch('users/{user}/profile', 'UserProfileController@update');
+	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
 	/* Update a users password */
-	Route::put('users/{user}/password', 'UserPasswordController@update');
+	Route::put('users/{user}/password')->uses('UserPasswordController@update');
 	/* Handle regions */
 	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
 	/* Handle categories */
@@ -41,5 +41,9 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 	/* Accept the start of a project */
 	Route::post('projects/{project}/accept')->uses('ProjectAcceptController@store');
+	/* Start a project */
+	Route::put('projects/{project}/start')->uses('ProjectStartController@update');
+	/* Submit a review for a user */
+	Route::post('users/{id}/review')->uses('UserReviewsController@store');
 
 });

@@ -22,8 +22,11 @@ class CreateProjectsTable extends Migration
             $table->datetime('accept_end');
             $table->string('service_user_title')->nullable();
             $table->string('bid_user_title')->nullable();
+            $table->boolean('service_user_review')->default(false);
+            $table->boolean('bid_user_review')->default(false);
             $table->date('finish');
             $table->double('price')->default(0.0);
+            $table->boolean('started')->default(false);
             $table->boolean('completed')->default(false);
             $table->timestamps();
         });
