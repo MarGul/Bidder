@@ -53,11 +53,12 @@ class ReviewManager
 			['reviewing', $reviewing], 
 			['reviewed', $reviewed], 
 			['project_id', $project_id],
-			['submitted', false] ]
-		)->first();
+			['submitted', false] 
+		])->first();
 
 		if ( !$review ) return false;
 
+		// Mark, in the project, that the user ($reviewing) has left a review.
 		if ( !app(ProjectManager::class)->hasReviewed($reviewing, $project_id) ) return false;
 
 		return $review->update(array_merge($data, ['submitted' => true])) ? true : false;

@@ -2765,7 +2765,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.userProjectFocus.other.id;
 		},
 		submitted: function submitted() {
-			return this.$store.getters.userProjectFocus.me.review_submitted;
+			return this.$store.getters.userProjectFocus.me.reviewed;
 		}
 	}
 });

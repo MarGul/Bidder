@@ -23,7 +23,7 @@
 				return this.$store.getters.userProjectFocus.other.id;
 			},
 			submitted() {
-				return this.$store.getters.userProjectFocus.me.review_submitted;
+				return this.$store.getters.userProjectFocus.me.reviewed;
 			}
 		}
 	}

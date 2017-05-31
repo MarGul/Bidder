@@ -49,7 +49,7 @@ class CompleteProjects extends Command
      */
     public function handle()
     {
-        $projects = Project::where([ ['started', true], ['completed', false], ['finish' , '>', Carbon::now('Europe/Stockholm')] ])->get();
+        $projects = Project::where([ ['started', true], ['completed', false], ['finish' , '<', Carbon::now('Europe/Stockholm')] ])->get();
 
         if ( $projects->isEmpty() ) {
             $this->line('No projects to complete');

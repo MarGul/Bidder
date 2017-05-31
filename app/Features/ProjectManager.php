@@ -221,13 +221,16 @@ class ProjectManager
 
 			$project->me = $service_user ? $project->serviceUser : $project->bidUser;
 			$project->me->accepted =  $service_user ? $project->service_user_accept : $project->bid_user_accept;
+			$project->me->reviewed = $service_user ? $project->service_user_review : $project->bid_user_review;
 			$project->other = $service_user ? $project->bidUser : $project->serviceUser;
 			$project->other->accepted = $service_user ? $project->bid_user_accept : $project->service_user_accept;
 
 			unset($project->serviceUser);
 			unset($project->service_user_accept);
+			unset($project->service_user_review);
 			unset($project->bidUser);
 			unset($project->bid_user_accept);
+			unset($project->bid_user_review);
 		}
 
 		return $projects;
