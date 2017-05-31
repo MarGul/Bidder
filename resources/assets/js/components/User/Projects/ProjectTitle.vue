@@ -3,10 +3,15 @@
 		<h1 class="user-component-title project-title" :class="{clickable: !edit}" @click="edit = true">
 			<div class="left">
 				<template v-if="!edit">{{ titleText }}</template>
-				<input type="text" class="form-control" v-model="newTitle" autofocus v-else>
+				<div class="input-container" v-else>
+					<input type="text" class="form-control" v-model="newTitle" autofocus>
+					<span class="input-icon" @click.stop="edit = false">
+						<i class="fa fa-times clickable" aria-hidden="true"></i>
+					</span>
+				</div>
 			</div>
 			<div class="right">
-				<i class="fa fa-pencil" aria-hidden="true" v-if="!edit"></i>
+				<i class="fa fa-pencil" aria-hidden="true" title="Redigera Titel" v-if="!edit"></i>
 				<button class="btn btn-flat btn-primary full-width" @click.stop="change" v-else>Ändra</button>
 			</div>
 		</h1>
@@ -52,11 +57,6 @@
 		},
 		created() {
 			this.newTitle = this.titleText;
-			$('.project-title').on('click', function(event) {
-				if ( event.target !== this) return;
-
-				console.log(event);
-			});
 		}
 	}
 </script>

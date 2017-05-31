@@ -9503,8 +9503,49 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.project-title .left .form-control {
-  font-size: 30px;
+.project-title .left .input-container {
+  border: 1px solid #d7d7d7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.project-title .left .input-container .form-control {
+  height: 34px;
+  font-size: 26px;
+  border: none;
+  box-shadow: none;
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+}
+
+@media screen and (min-width: 992px) {
+  .project-title .left .input-container .form-control {
+    -webkit-box-flex: 10;
+        -ms-flex: 10;
+            flex: 10;
+  }
+}
+
+.project-title .left .input-container .input-icon {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 28px;
+  color: #ccd0d2;
+}
+
+.project-title .left .input-container .input-icon:hover {
+  color: #636b6f;
 }
 
 .project-title .right {

@@ -9,8 +9,35 @@
 			flex: 7;
 		}
 
-		.form-control {
-			font-size: 30px;
+		.input-container {
+			border: 1px solid $border-color-gray;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.form-control {
+				height: 34px;
+				font-size: 26px;
+				border: none;
+				box-shadow: none;
+				flex: 8;
+
+				@media screen and (min-width: $screen-md-min) {
+					flex: 10;
+				}
+			}
+
+			.input-icon {
+				flex: 1;
+				text-align: right;
+				padding-right: 5px;
+				font-size: 28px;
+				color: $input-border;
+
+				&:hover {
+					color: $text-color;
+				}
+			}
 		}
 	}
 

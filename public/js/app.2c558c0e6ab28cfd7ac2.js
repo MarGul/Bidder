@@ -2816,6 +2816,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2856,11 +2861,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	created: function created() {
 		this.newTitle = this.titleText;
-		$('.project-title').on('click', function (event) {
-			if (event.target !== this) return;
-
-			console.log(event);
-		});
 	}
 });
 
@@ -4342,7 +4342,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "left"
-  }, [(!_vm.edit) ? [_vm._v(_vm._s(_vm.titleText))] : _c('input', {
+  }, [(!_vm.edit) ? [_vm._v(_vm._s(_vm.titleText))] : _c('div', {
+    staticClass: "input-container"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4363,12 +4365,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newTitle = $event.target.value
       }
     }
-  })], 2), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    staticClass: "input-icon",
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.edit = false
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-times clickable",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])])], 2), _vm._v(" "), _c('div', {
     staticClass: "right"
   }, [(!_vm.edit) ? _c('i', {
     staticClass: "fa fa-pencil",
     attrs: {
-      "aria-hidden": "true"
+      "aria-hidden": "true",
+      "title": "Redigera Titel"
     }
   }) : _c('button', {
     staticClass: "btn btn-flat btn-primary full-width",
