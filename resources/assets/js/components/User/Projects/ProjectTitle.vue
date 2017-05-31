@@ -12,7 +12,7 @@
 			</div>
 			<div class="right">
 				<i class="fa fa-pencil" aria-hidden="true" title="Redigera Titel" v-if="!edit"></i>
-				<button class="btn btn-flat btn-primary full-width" @click.stop="change" v-else>Ändra</button>
+				<button class="btn btn-primary full-width" @click.stop="change" v-else>Ändra</button>
 			</div>
 		</h1>
 	</div>

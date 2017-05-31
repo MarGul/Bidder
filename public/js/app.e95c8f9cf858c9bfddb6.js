@@ -149,11 +149,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -267,11 +262,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -314,11 +304,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__("./node_modules/vuejs-datepicker/dist/build.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -603,14 +588,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2004,10 +1981,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2159,11 +2132,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -2207,11 +2175,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2360,10 +2323,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__("./node_modules/vuejs-datepicker/dist/build.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
-//
-//
-//
-//
 //
 //
 //
@@ -3008,11 +2967,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -3217,44 +3171,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-	methods: {
-		auth: function auth() {
-			var credentials = { email: 'first@tester.com', password: 'tester' };
-
-			var instance = axios.create({
-				baseURL: 'http://bidder.dev'
-			});
-
-			instance.post('login', credentials).then(function (response) {
-				console.log(response);
-			}).catch(function (error) {
-				console.log(error);
-			});
-		},
-		logout: function logout() {
-			var instance = axios.create({
-				baseURL: 'http://bidder.dev'
-			});
-
-			instance.post('logout').then(function (response) {
-				console.log(response);
-			}).catch(function (error) {
-				console.log(error);
-			});
-		},
-		ajax: function ajax() {
-			axios.post('test').then(function (response) {
-				console.log(response);
-			}).catch(function (error) {
-				console.log(error);
-			});
-		}
-	}
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -3937,7 +3855,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-flat btn-primary",
+    staticClass: "btn btn-primary",
     attrs: {
       "disabled": !_vm.message
     },
@@ -4093,6 +4011,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
@@ -4103,13 +4024,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.authenticate($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\tLogga In\n\t\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Logga In")])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_vm._v("\n\t\tHar du inte ett konto än? "), _c('a', {
     on: {
@@ -4249,6 +4164,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
@@ -4259,13 +4177,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.update($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\tUppdatera ditt lösenord\n\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])])
+  }, [_vm._v("Uppdatera ditt lösenord")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -4387,7 +4299,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "title": "Redigera Titel"
     }
   }) : _c('button', {
-    staticClass: "btn btn-flat btn-primary full-width",
+    staticClass: "btn btn-primary full-width",
     on: {
       "click": function($event) {
         $event.stopPropagation();
@@ -4596,6 +4508,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
@@ -4606,13 +4521,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.create($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\tLägg ditt bud\n\t\t\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])] : _c('div', {
+  }, [_vm._v("Lägg ditt bud")])])])] : _c('div', {
     staticClass: "alert alert-warning text-center"
   }, [_vm._v("\n\t\t\tDu måste vara inloggad för att lägga ett bud. \n\t\t\t"), _c('a', {
     staticClass: "link",
@@ -4669,10 +4578,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "add-comment-component"
   }, [_c('h4', [_vm._v("Lägg till en kommentar")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group margin-bottom-7",
-    class: {
-      'has-error': _vm.error
-    }
+    staticClass: "form-group mb7"
   }, [_c('textarea', {
     directives: [{
       name: "model",
@@ -4685,12 +4591,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": (_vm.comment)
     },
     on: {
-      "input": [function($event) {
+      "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.comment = $event.target.value
-      }, function($event) {
-        _vm.error = false
-      }]
+      }
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group text-right"
@@ -4711,19 +4615,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("logga in")]), _vm._v(" innan du kan kommentera")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "disabled": _vm.disabled || !_vm.$store.getters.isAuthenticated || _vm.processing
     },
     on: {
       "click": _vm.add
     }
-  }, [_vm._v("\n\t\t\t\tKommentera\n\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])
+  }, [_vm._v("Kommentera")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -4788,7 +4689,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
     }, [(!_vm.accepted) ? _c('button', {
-      staticClass: "btn-flat btn-info",
+      staticClass: "btn btn-info",
       attrs: {
         "disabled": _vm.processing
       },
@@ -4817,7 +4718,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
       staticClass: "confirm-buttons text-center"
     }, [_c('button', {
-      staticClass: "btn btn-success btn-flat",
+      staticClass: "btn btn-success",
+      class: {
+        'processing': _vm.processing
+      },
       attrs: {
         "disabled": _vm.processing
       },
@@ -4827,14 +4731,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.accept(bid)
         }
       }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t\t"), (_vm.processing) ? _c('span', {
-      staticClass: "processing"
-    }, [_c('i', {
-      staticClass: "fa fa-spinner fa-pulse fa-fw"
-    }), _vm._v(" "), _c('span', {
-      staticClass: "sr-only"
-    }, [_vm._v("Loading...")])]) : _vm._e()]), _vm._v(" "), _c('button', {
-      staticClass: "btn btn-danger btn-flat",
+    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-danger",
       on: {
         "click": function($event) {
           $event.preventDefault();
@@ -4920,7 +4818,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('span', {
       staticClass: "item-actions"
     }, [_c('button', {
-      staticClass: "btn-flat btn-default",
+      staticClass: "btn btn-default",
       on: {
         "click": function($event) {
           $event.preventDefault();
@@ -5223,6 +5121,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
+    class: {
+      'processing': _vm.processing
+    },
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -5997,6 +5898,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _vm._e()]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "disabled": _vm.processing || this.form.errors.any()
     },
@@ -6006,13 +5910,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.change($event)
       }
     }
-  }, [_vm._v("\n\t\t\tÄndra uppgifterna\n\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])
+  }, [_vm._v("\n\t\t\tÄndra uppgifterna\n\t\t")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -6190,6 +6088,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
@@ -6200,13 +6101,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.update($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\tUppdatera din profil\n\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])])
+  }, [_vm._v("Uppdatera din profil")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -6332,6 +6227,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
@@ -6342,13 +6240,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.register($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\tRegistrera\n\t\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Registrera")])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_vm._v("\n\t\tÄr du redan registrad? "), _c('a', {
     on: {
@@ -6828,6 +6720,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
     attrs: {
       "disabled": _vm.processing || this.form.errors.any()
     },
@@ -6837,13 +6732,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.create($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\tSkapa din tjänst\n\t\t\t\t"), (_vm.processing) ? _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])]) : _vm._e()])])])])
+  }, [_vm._v("Skapa din tjänst")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -7251,7 +7140,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "mobile-user-buttons"
   }, [_c('button', {
-    staticClass: "btn-flat btn-transparent logout-btn",
+    staticClass: "btn btn-transparent logout-btn",
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -7264,7 +7153,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })]), _vm._v(" "), (_vm.breakpoints.isSmallDevices()) ? _c('button', {
-    staticClass: "btn-flat btn-primary nav-btn",
+    staticClass: "btn btn-primary nav-btn",
     class: {
       open: _vm.$store.getters.mobileAuthDropdown
     },
@@ -7363,24 +7252,16 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "home-view"
   }, [_c('div', {
     staticClass: "container"
   }, [_c('h2', [_vm._v("Home Page")]), _vm._v(" "), _c('button', {
-    on: {
-      "click": _vm.auth
-    }
-  }, [_vm._v("Auth")]), _vm._v(" "), _c('button', {
-    on: {
-      "click": _vm.logout
-    }
-  }, [_vm._v("Logout")]), _vm._v(" "), _c('button', {
-    on: {
-      "click": _vm.ajax
-    }
-  }, [_vm._v("Run Ajax")])])])
-},staticRenderFns: []}
+    staticClass: "btn btn-primary processing"
+  }, [_vm._v("Skapa bud")])])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

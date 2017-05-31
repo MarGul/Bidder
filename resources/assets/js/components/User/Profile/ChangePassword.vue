@@ -23,15 +23,10 @@
 				<button 
 					type="submit" 
 					class="btn btn-primary full-width" 
+					:class="{'processing': processing}"
 					@click.prevent="update"
 					:disabled="processing || this.form.errors.any()"
-				>
-					Uppdatera ditt lösenord
-					<span class="processing" v-if="processing">
-						<i class="fa fa-spinner fa-pulse fa-fw"></i>
-						<span class="sr-only">Loading...</span>
-					</span>
-				</button> 
+				>Uppdatera ditt lösenord</button> 
 			</div>
 		</form>
 	</div>

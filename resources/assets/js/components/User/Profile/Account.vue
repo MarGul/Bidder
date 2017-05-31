@@ -25,16 +25,11 @@
 			<div class="form-group">
 				<button 
 					type="submit" 
-					class="btn btn-primary full-width" 
+					class="btn btn-primary full-width"
+					:class="{'processing': processing}" 
 					@click.prevent="update"
 					:disabled="processing || this.form.errors.any()"
-				>
-					Uppdatera din profil
-					<span class="processing" v-if="processing">
-						<i class="fa fa-spinner fa-pulse fa-fw"></i>
-						<span class="sr-only">Loading...</span>
-					</span>
-				</button> 
+				>Uppdatera din profil</button> 
 			</div>
 		</form>
 	</div>

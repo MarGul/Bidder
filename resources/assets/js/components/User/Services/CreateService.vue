@@ -120,16 +120,11 @@
 
 			<div class="form-group">
 				<button 
-					class="btn btn-primary full-width" 
+					class="btn btn-primary full-width"
+					:class="{'processing': processing}" 
 					@click.prevent="create"
 					:disabled="processing || this.form.errors.any()"
-				>
-					Skapa din tjänst
-					<span class="processing" v-if="processing">
-						<i class="fa fa-spinner fa-pulse fa-fw"></i>
-						<span class="sr-only">Loading...</span>
-					</span>
-				</button> 
+				>Skapa din tjänst</button> 
 			</div>
 		</form>
 

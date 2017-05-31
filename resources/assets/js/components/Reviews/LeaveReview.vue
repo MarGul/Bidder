@@ -23,7 +23,7 @@
 			</small>
 			<template v-else>
 				<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
-				<button class="btn btn-primary" @click.prevent="send">Lämna omdömme</button>
+				<button class="btn btn-primary" :class="{'processing': processing}" @click.prevent="send">Lämna omdömme</button>
 			</template>
 		</div>
 	</div>

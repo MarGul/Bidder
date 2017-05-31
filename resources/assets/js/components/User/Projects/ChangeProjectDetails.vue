@@ -22,12 +22,8 @@
 				<span class="help-block" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
 			</div>
 
-			<button class="btn btn-primary full-width" @click.prevent="change" :disabled="processing ||this.form.errors.any()">
+			<button class="btn btn-primary full-width" :class="{'processing': processing}" @click.prevent="change" :disabled="processing ||this.form.errors.any()">
 				Ändra uppgifterna
-				<span class="processing" v-if="processing">
-					<i class="fa fa-spinner fa-pulse fa-fw"></i>
-					<span class="sr-only">Loading...</span>
-				</span>
 			</button> 
 		</form>
 	</div>

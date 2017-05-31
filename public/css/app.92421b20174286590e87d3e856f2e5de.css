@@ -7741,29 +7741,32 @@ a {
 .btn {
   border-radius: 0;
   padding: 5px 9px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .btn:focus, .btn:active {
   outline: none !important;
 }
 
-.btn .processing {
-  margin-left: 5px;
+.btn.processing {
+  color: transparent !important;
+  position: relative;
 }
 
-.btn-flat {
-  padding: 6px 12px;
-  border: 1px solid transparent;
-  box-shadow: none;
-}
-
-.btn-flat:focus, .btn-flat:active {
-  outline: none !important;
-}
-
-.btn-flat:hover {
-  text-decoration: none;
+.btn.processing:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px;
+  border-radius: 50%;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+  border-right: 2px solid rgba(255, 255, 255, 0.9);
+  -webkit-animation: rotate 0.8s linear infinite;
+  animation: rotate 0.8s linear infinite;
 }
 
 .btn-primary {
@@ -7793,6 +7796,28 @@ a {
 
 .btn-transparent {
   background-color: transparent;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 a {
@@ -7831,6 +7856,10 @@ a {
 
 .mt5 {
   margin-top: 5px;
+}
+
+.mb7 {
+  margin-bottom: 7px;
 }
 
 .mb10 {
@@ -9129,7 +9158,7 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.list-bids li .bid-head-right .btn-flat {
+.list-bids li .bid-head-right .btn {
   padding: 5px 6px;
 }
 
@@ -9413,7 +9442,7 @@ body.mobile-nav-open .overlay {
 }
 
 @media screen and (min-width: 992px) {
-  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions .btn-flat {
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions .btn {
     padding: 3px 5px;
   }
 }

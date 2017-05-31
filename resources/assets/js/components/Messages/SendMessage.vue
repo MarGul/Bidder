@@ -2,7 +2,7 @@
 	<div class="send_message-component clearfix">
 		<textarea rows="4" class="form-control" v-model="message"
 					placeholder="Skriv ditt meddelande här..."></textarea>
-		<button class="btn btn-flat btn-primary" @click.prevent="send" :disabled="!message">
+		<button class="btn btn-primary" @click.prevent="send" :disabled="!message">
 			Skicka
 		</button>
 	</div>

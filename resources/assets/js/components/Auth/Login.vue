@@ -41,16 +41,11 @@
 				<div class="form-group">
 					<button 
 						type="submit" 
-						class="btn btn-primary full-width" 
+						class="btn btn-primary full-width"
+						:class="{'processing': processing}" 
 						@click.prevent="authenticate"
 						:disabled="processing || this.form.errors.any()"
-					>
-						Logga In
-						<span class="processing" v-if="processing">
-							<i class="fa fa-spinner fa-pulse fa-fw"></i>
-							<span class="sr-only">Loading...</span>
-						</span>
-					</button> 
+					>Logga In</button> 
 				</div>
 			</form>
 		</div>

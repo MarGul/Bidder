@@ -8,7 +8,7 @@
 				<li v-for="project in projects">
 					<span class="item-content" v-text="project.title || `# ${project.id}`"></span>
 					<span class="item-actions">
-						<button @click.prevent="show(project)" class="btn-flat btn-default">
+						<button @click.prevent="show(project)" class="btn btn-default">
 							<i class="fa fa-briefcase" aria-hidden="true"></i> Visa projekt
 						</button>
 						<div class="status">

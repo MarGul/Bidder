@@ -17,7 +17,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-5 bid-head-right">
-								<button class="btn-flat btn-info" @click.prevent="focus = bid.id" v-if="!accepted" :disabled="processing">
+								<button class="btn btn-info" @click.prevent="focus = bid.id" v-if="!accepted" :disabled="processing">
 									Acceptera budet
 								</button>
 								<div class="accepted-bid" v-if="accepted && bid.accepted">
@@ -29,14 +29,10 @@
 								<div class="alert alert-warning bid-accept-confirm">
 									När du accepterar ett bud kommer budgivningen för tjänsten att stoppas.
 									<div class="confirm-buttons text-center">
-										<button class="btn btn-success btn-flat" @click.prevent="accept(bid)" :disabled="processing">
+										<button class="btn btn-success" @click.prevent="accept(bid)" :disabled="processing" :class="{'processing': processing}">
 											Acceptera
-											<span class="processing" v-if="processing">
-												<i class="fa fa-spinner fa-pulse fa-fw"></i>
-												<span class="sr-only">Loading...</span>
-											</span>
 										</button>
-										<button class="btn btn-danger btn-flat" @click.prevent="focus = ''">Avbryt</button>
+										<button class="btn btn-danger" @click.prevent="focus = ''">Avbryt</button>
 									</div>
 								</div>
 							</div>

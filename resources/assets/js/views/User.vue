@@ -6,11 +6,11 @@
 		<div class="container">
 			<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
 				<div class="mobile-user-buttons">
-					<button class="btn-flat btn-transparent logout-btn" @click.prevent="logout">
+					<button class="btn btn-transparent logout-btn" @click.prevent="logout">
 						Logga Ut <i class="fa fa-sign-out" aria-hidden="true"></i>
 					</button>
 
-					<button class="btn-flat btn-primary nav-btn" 
+					<button class="btn btn-primary nav-btn" 
 							:class="{open: $store.getters.mobileAuthDropdown}"
 							@click="toggleDropdown" 
 							v-if="breakpoints.isSmallDevices()">
