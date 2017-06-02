@@ -145,6 +145,19 @@ class ProjectManager
 	}
 
 	/**
+	 * Start a project
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function start($project)
+	{
+		$project->started = true;
+
+		return $project->save() ? true : false;
+	}
+
+	/**
 	 * Complete a project.
 	 * 
 	 * @param  App\Project 	$project

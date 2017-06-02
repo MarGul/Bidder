@@ -5898,6 +5898,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			// Remove the project focus
 			//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
 			//this.$router.push('/user/my-projects');
+		},
+		start: function start() {
+			var _this2 = this;
+
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/start").put().then(function (response) {
+				// Update the acceptance in store for project in focus
+				var project = _this2.$store.getters.userProjectFocus;
+				project.started = true;
+				_this2.$store.commit('SET_PROJECT_FOCUS', { project: project });
+				// Update the acceptance in store for the projects
+				var projects = _this2.$store.getters.userProjects;
+				for (var i = 0; i < projects.length; i++) {
+					if (projects[i].id === project.id) {
+						projects[i] = project;
+						break;
+					}
+				}
+				_this2.$store.commit('SET_PROJECTS', { projects: projects });
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 };
@@ -11288,6 +11309,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-timer', {
     attrs: {
       "ends": _vm.project.accept_end
+    },
+    on: {
+      "ended": _vm.start
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "timer-text"

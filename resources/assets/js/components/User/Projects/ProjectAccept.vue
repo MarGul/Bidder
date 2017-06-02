@@ -33,7 +33,7 @@
 					<div class="details">
 						<template v-if="!change">
 							<div class="timer">
-								<app-timer :ends="project.accept_end"></app-timer>
+								<app-timer :ends="project.accept_end" @ended="start"></app-timer>
 								<div class="timer-text">Till automatisk start av projektet</div>
 							</div>
 							<div class="project-details">
@@ -130,6 +130,25 @@
 				// Remove the project focus
 				//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
 				//this.$router.push('/user/my-projects');
+			},
+			start() {
+				new Model(`projects/${this.project.id}/start`).put()
+					.then(response => {
+						// Update the acceptance in store for project in focus
+						let project = this.$store.getters.userProjectFocus;
+						project.started = true;
+						this.$store.commit('SET_PROJECT_FOCUS', {project});
+						// Update the acceptance in store for the projects
+						let projects = this.$store.getters.userProjects;
+						for (let i = 0; i < projects.length; i++) {
+							if ( projects[i].id === project.id ) {
+								projects[i] = project;
+								break;
+							}
+						}
+						this.$store.commit('SET_PROJECTS', {projects});
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}
