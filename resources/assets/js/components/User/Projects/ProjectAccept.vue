@@ -16,8 +16,18 @@
 						<div class="user-name" v-text="project.me.username"></div>
 						<div class="avatar-container"><div class="avatar" :style="myAvatar"></div></div>
 						<div class="user-actions">
-							<button class="btn btn-default" disabled v-if="project.me.accepted">Du är redo!</button>
-							<button class="btn btn-primary" @click.prevent="accept" v-else>Starta projektet</button>
+							<template v-if="project.me.accepted">
+								<button class="btn btn-default" disabled>Du är redo!</button>
+							</template>
+							<template v-else>
+								<div class="action-text mt10 pb5">Starta projektet?</div>
+								<button class="btn btn-primary" @click.prevent="accept">
+									<i class="fa fa-check mr5" aria-hidden="true"></i> Ja
+								</button>
+								<button class="btn btn-danger" @click.prevent="cancel">
+									<i class="fa fa-exclamation-triangle mr5" aria-hidden="true"></i> Nej
+								</button>
+							</template>
 						</div>
 					</div>
 					<div class="details">
@@ -46,6 +56,7 @@
 						<div class="user-name" v-text="project.other.username"></div>
 						<div class="avatar-container"><div class="avatar" :style="otherAvatar"></div></div>
 						<div class="user-actions">
+							<div class="action-text mt10 pb5">Har godkänt?</div>
 							<button class="btn btn-default" disabled v-if="project.other.accepted">Godkänt</button>
 							<button class="btn btn-default" disabled v-else>Ej godkänt</button>
 						</div>
@@ -82,20 +93,43 @@
 		},
 		methods: {
 			accept() {
-				new Model(`projects/${this.project.id}/accept`).post().catch(error => { console.log(error); });
-				// Update the acceptance in store for project in focus
-				let project = this.$store.getters.userProjectFocus;
-				project.me.accepted = true;
-				this.$store.commit('SET_PROJECT_FOCUS', {project});
+				new Model(`projects/${this.project.id}/accept`).post()
+					.then(response => {
+						// Update the acceptance in store for project in focus
+						let project = this.$store.getters.userProjectFocus;
+						project.started = response.start;
+						project.me.accepted = true;
+						this.$store.commit('SET_PROJECT_FOCUS', {project});
+						// Update the acceptance in store for the projects
+						let projects = this.$store.getters.userProjects;
+						for (let i = 0; i < projects.length; i++) {
+							if ( projects[i].id === project.id ) {
+								projects[i] = project;
+								break;
+							}
+						}
+						this.$store.commit('SET_PROJECTS', {projects});
+					})
+					.catch(error => { console.log(error); });
+			},
+			cancel() {
+				/* NOOOOOT DOOONE YET */
+
+				new Model(`projects/${this.project.id}/cancel`).post().catch(error => { console.log(error); });
 				// Update the acceptance in store for the projects
 				let projects = this.$store.getters.userProjects;
 				for (let i = 0; i < projects.length; i++) {
-					if ( projects[i].id === project.id ) {
-						projects[i] = project;
+					if ( projects[i].id === this.project.id ) {
+						projects.splice(i, 1);
 						break;
 					}
 				}
 				this.$store.commit('SET_PROJECTS', {projects});
+				// Show a notification and redirect back to project listings.
+				this.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.'});
+				// Remove the project focus
+				//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+				//this.$router.push('/user/my-projects');
 			}
 		}
 	}

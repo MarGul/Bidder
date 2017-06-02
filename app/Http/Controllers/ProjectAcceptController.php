@@ -35,7 +35,10 @@ class ProjectAcceptController extends Controller
 			return response()->json(['message' => 'Could not accept the project for you.'], 500);
 		}
 
-		return response()->json(['message' => 'Successfully accepted the project.'], 200);
+		return response()->json([
+			'message' => 'Successfully accepted the project.',
+			'start' => $this->manager->shouldStart($project)
+		], 200);
 	}
 
 }

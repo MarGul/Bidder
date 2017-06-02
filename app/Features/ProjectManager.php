@@ -191,7 +191,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
-	protected function shouldStart($project)
+	public function shouldStart($project)
 	{
 		return $project->service_user_accept && $project->bid_user_accept;
 	}
