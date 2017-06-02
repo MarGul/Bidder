@@ -58,6 +58,7 @@ class ProjectManager
 	public function byUser($user) 
 	{
 		$projects = Project::with('serviceUser', 'bidUser')
+							->where('canceled', '<>', true)
 							->where('service_user', $user->id)
 							->orWhere('bid_user', $user->id)
 							->orderBy('created_at', 'desc')
@@ -142,6 +143,19 @@ class ProjectManager
 		}
 
 		return $project->update() ? true : false;
+	}
+
+	/**
+	 * Cancel a project
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	public function cancel($project)
+	{
+		$project->canceled = true;
+
+		return $project->save() ? true : false;
 	}
 
 	/**

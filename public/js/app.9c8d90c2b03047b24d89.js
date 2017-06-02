@@ -5843,7 +5843,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			change: false
+			change: false,
+			accepting: false,
+			canceling: false
 		};
 	},
 
@@ -5859,6 +5861,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		accept: function accept() {
 			var _this = this;
 
+			this.accepting = true;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/accept").post().then(function (response) {
 				// Update the acceptance in store for project in focus
 				var project = _this.$store.getters.userProjectFocus;
@@ -5874,48 +5877,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}
 				}
 				_this.$store.commit('SET_PROJECTS', { projects: projects });
+				_this.accepting = false;
 			}).catch(function (error) {
 				console.log(error);
 			});
 		},
 		cancel: function cancel() {
-			/* NOOOOOT DOOONE YET */
+			var _this2 = this;
 
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/cancel").post().catch(function (error) {
+			this.canceling = true;
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/cancel").post().then(function (response) {
+				// Update the acceptance in store for the projects
+				var projects = _this2.$store.getters.userProjects;
+				for (var i = 0; i < projects.length; i++) {
+					if (projects[i].id === _this2.project.id) {
+						projects.splice(i, 1);
+						break;
+					}
+				}
+				_this2.$store.commit('SET_PROJECTS', { projects: projects });
+				// Show a notification and redirect back to project listings.
+				_this2.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.' });
+				// Remove the project focus
+				//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+				//this.$router.push('/user/my-projects');
+				_this2.canceling = false;
+			}).catch(function (error) {
 				console.log(error);
 			});
-			// Update the acceptance in store for the projects
-			var projects = this.$store.getters.userProjects;
-			for (var i = 0; i < projects.length; i++) {
-				if (projects[i].id === this.project.id) {
-					projects.splice(i, 1);
-					break;
-				}
-			}
-			this.$store.commit('SET_PROJECTS', { projects: projects });
-			// Show a notification and redirect back to project listings.
-			this.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.' });
-			// Remove the project focus
-			//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
-			//this.$router.push('/user/my-projects');
 		},
 		start: function start() {
-			var _this2 = this;
+			var _this3 = this;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/start").put().then(function (response) {
 				// Update the acceptance in store for project in focus
-				var project = _this2.$store.getters.userProjectFocus;
+				var project = _this3.$store.getters.userProjectFocus;
 				project.started = true;
-				_this2.$store.commit('SET_PROJECT_FOCUS', { project: project });
+				_this3.$store.commit('SET_PROJECT_FOCUS', { project: project });
 				// Update the acceptance in store for the projects
-				var projects = _this2.$store.getters.userProjects;
+				var projects = _this3.$store.getters.userProjects;
 				for (var i = 0; i < projects.length; i++) {
 					if (projects[i].id === project.id) {
 						projects[i] = project;
 						break;
 					}
 				}
-				_this2.$store.commit('SET_PROJECTS', { projects: projects });
+				_this3.$store.commit('SET_PROJECTS', { projects: projects });
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -11278,6 +11285,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "action-text mt10 pb5"
   }, [_vm._v("Starta projektet?")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
+    class: {
+      'processing': _vm.accepting
+    },
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -11291,6 +11301,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" Ja\n\t\t\t\t\t\t\t")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-danger",
+    class: {
+      'processing': _vm.canceling
+    },
     on: {
       "click": function($event) {
         $event.preventDefault();

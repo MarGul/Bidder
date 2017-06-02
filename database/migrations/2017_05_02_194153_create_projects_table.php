@@ -28,6 +28,7 @@ class CreateProjectsTable extends Migration
             $table->double('price')->default(0.0);
             $table->boolean('started')->default(false);
             $table->boolean('completed')->default(false);
+            $table->boolean('canceled')->default(false);
             $table->timestamps();
         });
     }

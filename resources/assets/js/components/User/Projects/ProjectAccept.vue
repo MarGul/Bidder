@@ -21,10 +21,10 @@
 							</template>
 							<template v-else>
 								<div class="action-text mt10 pb5">Starta projektet?</div>
-								<button class="btn btn-primary" @click.prevent="accept">
+								<button class="btn btn-primary" :class="{'processing': accepting}" @click.prevent="accept">
 									<i class="fa fa-check mr5" aria-hidden="true"></i> Ja
 								</button>
-								<button class="btn btn-danger" @click.prevent="cancel">
+								<button class="btn btn-danger" :class="{'processing': canceling}" @click.prevent="cancel">
 									<i class="fa fa-exclamation-triangle mr5" aria-hidden="true"></i> Nej
 								</button>
 							</template>
@@ -80,7 +80,9 @@
 		},
 		data() {
 			return {
-				change: false
+				change: false,
+				accepting: false,
+				canceling: false
 			}
 		},
 		computed: {
@@ -93,6 +95,7 @@
 		},
 		methods: {
 			accept() {
+				this.accepting = true;
 				new Model(`projects/${this.project.id}/accept`).post()
 					.then(response => {
 						// Update the acceptance in store for project in focus
@@ -109,27 +112,31 @@
 							}
 						}
 						this.$store.commit('SET_PROJECTS', {projects});
+						this.accepting = false;
 					})
 					.catch(error => { console.log(error); });
 			},
 			cancel() {
-				/* NOOOOOT DOOONE YET */
-
-				new Model(`projects/${this.project.id}/cancel`).post().catch(error => { console.log(error); });
-				// Update the acceptance in store for the projects
-				let projects = this.$store.getters.userProjects;
-				for (let i = 0; i < projects.length; i++) {
-					if ( projects[i].id === this.project.id ) {
-						projects.splice(i, 1);
-						break;
-					}
-				}
-				this.$store.commit('SET_PROJECTS', {projects});
-				// Show a notification and redirect back to project listings.
-				this.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.'});
-				// Remove the project focus
-				//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
-				//this.$router.push('/user/my-projects');
+				this.canceling = true;
+				new Model(`projects/${this.project.id}/cancel`).post()
+					.then(response => {
+						// Update the acceptance in store for the projects
+						let projects = this.$store.getters.userProjects;
+						for (let i = 0; i < projects.length; i++) {
+							if ( projects[i].id === this.project.id ) {
+								projects.splice(i, 1);
+								break;
+							}
+						}
+						this.$store.commit('SET_PROJECTS', {projects});
+						// Show a notification and redirect back to project listings.
+						this.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.'});
+						// Remove the project focus
+						//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+						//this.$router.push('/user/my-projects');
+						this.canceling = false;
+					})
+					.catch(error => { console.log(error); });
 			},
 			start() {
 				new Model(`projects/${this.project.id}/start`).put()
