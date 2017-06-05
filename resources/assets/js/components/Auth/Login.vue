@@ -38,6 +38,12 @@
 					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
 				</div>
 
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" v-model="form.remember"> Kom ihåg mig
+					</label>
+				</div>
+
 				<div class="form-group">
 					<button 
 						type="submit" 
@@ -67,7 +73,8 @@
 				processing: false,
 				form: new Form({
 					email: '',
-					password: ''
+					password: '',
+					remember: false
 				})
 			}
 		},
