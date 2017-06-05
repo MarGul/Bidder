@@ -2800,6 +2800,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Timer__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Timer__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2814,7 +2823,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		appTimer: __WEBPACK_IMPORTED_MODULE_1__Includes_Timer___default.a
+	},
+	computed: {
+		project: function project() {
+			return this.$store.getters.userProjectFocus;
+		}
+	},
+	methods: {
+		complete: function complete() {
+			var _this = this;
+
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("projects/" + this.project.id + "/complete").put().then(function (response) {
+				// Update the acceptance in store for project in focus
+				var project = _this.$store.getters.userProjectFocus;
+				project.completed = true;
+				_this.$store.commit('SET_PROJECT_FOCUS', { project: project });
+				// Update the acceptance in store for the projects
+				var projects = _this.$store.getters.userProjects;
+				for (var i = 0; i < projects.length; i++) {
+					if (projects[i].id === project.id) {
+						projects[i] = project;
+						break;
+					}
+				}
+				_this.$store.commit('SET_PROJECTS', { projects: projects });
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}
+});
 
 /***/ }),
 
@@ -3557,6 +3601,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
 exports.push([module.i, "\n.notifications-component[data-v-05633b28] {\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  margin: -35px 0 35px 0;\n}\n.notifications-component.success[data-v-05633b28] {\n    background-color: #A6D785;\n    color: #444;\n}\n.notifications-component.success a[data-v-05633b28] {\n      color: #008B00;\n}\n.notifications-component .notification-area[data-v-05633b28] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-05633b28] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-05633b28] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-05633b28] {\n        cursor: pointer;\n}\n", ""]);
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports.push([module.i, "\n.finish-text[data-v-1de8cefe] {\n  font-size: 16px;\n}\n.timer-component[data-v-1de8cefe] {\n  font-size: 20px;\n  font-weight: bold;\n  margin: 5px 0;\n}\n.finish-date[data-v-1de8cefe] {\n  font-style: italic;\n  font-size: 13px;\n}\n", ""]);
 
 /***/ }),
 
@@ -4953,22 +5005,38 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "project_started-component"
   }, [_c('div', {
     staticClass: "panel panel-success"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
   }, [_c('div', {
+    staticClass: "time-finish-container text-center"
+  }, [_c('div', {
+    staticClass: "finish-text"
+  }, [_vm._v("Projektet avslutas om:")]), _vm._v(" "), _c('app-timer', {
+    attrs: {
+      "ends": _vm.project.finish
+    },
+    on: {
+      "ended": _vm.complete
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "finish-date",
+    domProps: {
+      "textContent": _vm._s(_vm.project.finish)
+    }
+  })], 1)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "panel-heading"
   }, [_c('i', {
     staticClass: "fa fa-refresh",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Projektet är i full gång!\n\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  })])])
+  }), _vm._v(" Projektet är i full gång!\n\t\t")])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -5742,7 +5810,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "avatar",
     style: (_vm.myAvatar)
   })]), _vm._v(" "), _c('div', {
-    staticClass: "user-actions"
+    staticClass: "user-actions text-center"
   }, [(_vm.project.me.accepted) ? [_c('button', {
     staticClass: "btn btn-default",
     attrs: {
@@ -5842,7 +5910,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "avatar",
     style: (_vm.otherAvatar)
   })]), _vm._v(" "), _c('div', {
-    staticClass: "user-actions"
+    staticClass: "user-actions text-center"
   }, [_c('div', {
     staticClass: "action-text mt10 pb5"
   }, [_vm._v("Har godkänt?")]), _vm._v(" "), (_vm.project.other.accepted) ? _c('button', {
@@ -10228,6 +10296,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("efce6592", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStarted.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProjectStarted.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2a250a49\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Includes/Timer.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12965,13 +13060,17 @@ module.exports = Component.exports
 /***/ "./resources/assets/js/components/User/Projects/ProjectStarted.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1de8cefe\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue")
+
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue"),
   /* template */
   __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1de8cefe\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Projects/ProjectStarted.vue"),
   /* scopeId */
-  null,
+  "data-v-1de8cefe",
   /* cssModules */
   null
 )

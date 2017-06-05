@@ -15,7 +15,7 @@
 					<div class="me">
 						<div class="user-name" v-text="project.me.username"></div>
 						<div class="avatar-container"><div class="avatar" :style="myAvatar"></div></div>
-						<div class="user-actions">
+						<div class="user-actions text-center">
 							<template v-if="project.me.accepted">
 								<button class="btn btn-default" disabled>Du är redo!</button>
 							</template>
@@ -55,7 +55,7 @@
 					<div class="other">
 						<div class="user-name" v-text="project.other.username"></div>
 						<div class="avatar-container"><div class="avatar" :style="otherAvatar"></div></div>
-						<div class="user-actions">
+						<div class="user-actions text-center">
 							<div class="action-text mt10 pb5">Har godkänt?</div>
 							<button class="btn btn-default" disabled v-if="project.other.accepted">Godkänt</button>
 							<button class="btn btn-default" disabled v-else>Ej godkänt</button>

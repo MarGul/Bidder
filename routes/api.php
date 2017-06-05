@@ -45,6 +45,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::post('projects/{project}/cancel')->uses('ProjectCancelController@store');
 	/* Start a project */
 	Route::put('projects/{project}/start')->uses('ProjectStartController@update');
+	/* Complete a project */
+	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
 	/* Submit a review for a user */
 	Route::post('users/{id}/review')->uses('UserReviewsController@store');
 
