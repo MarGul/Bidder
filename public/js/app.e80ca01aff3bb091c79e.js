@@ -149,6 +149,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -159,7 +165,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			processing: false,
 			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
 				email: '',
-				password: ''
+				password: '',
+				remember: false
 			})
 		};
 	},
@@ -181,6 +188,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]().new().setUrl('login').post(this.form.data()).then(function (response) {
 				_this.$store.commit('SET_AUTHENTICATED', { authenticated: response.authenticated });
 				_this.$store.commit('SET_USER', { user: response.user });
+
+				if (_this.$store.getters.authIntended) {
+					_this.$router.push(_this.$store.getters.authIntended);
+					_this.$store.commit('SET_INTENDED', { intended: null });
+				}
+
 				_this.processing = false;
 				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
@@ -4124,6 +4137,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.form.errors.get('password'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.remember),
+      expression: "form.remember"
+    }],
+    attrs: {
+      "type": "checkbox"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.form.remember) ? _vm._i(_vm.form.remember, null) > -1 : (_vm.form.remember)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.form.remember,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$c) {
+            $$i < 0 && (_vm.form.remember = $$a.concat($$v))
+          } else {
+            $$i > -1 && (_vm.form.remember = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.form.remember = $$c
+        }
+      }
+    }
+  }), _vm._v(" Kom ihåg mig\n\t\t\t\t")])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
@@ -13614,6 +13660,7 @@ router.beforeEach(function (to, from, next) {
 	if (to.meta.requiresAuth) {
 		if (!router.app.$store.getters.isAuthenticated) {
 			next('/');
+			router.app.$store.commit('SET_INTENDED', { intended: to.path });
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
 				alert: {
@@ -13656,6 +13703,7 @@ var auth = {
 	state: {
 		authenticated: window.Laravel.authenticated,
 		user: window.Laravel.user || {},
+		intended: null,
 		dropdown: false,
 		mobileDropdown: false
 	},
@@ -13665,6 +13713,9 @@ var auth = {
 		},
 		'SET_USER': function SET_USER(state, payload) {
 			state.user = payload.user;
+		},
+		'SET_INTENDED': function SET_INTENDED(state, payload) {
+			state.intended = payload.intended;
 		},
 		'SET_DROPDOWN': function SET_DROPDOWN(state, payload) {
 			state.dropdown = payload.dropdown;
@@ -13697,6 +13748,9 @@ var auth = {
 		},
 		authUser: function authUser(state) {
 			return state.user;
+		},
+		authIntended: function authIntended(state) {
+			return state.intended;
 		},
 		authDropdown: function authDropdown(state) {
 			return state.dropdown;

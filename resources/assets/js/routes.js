@@ -43,6 +43,7 @@ router.beforeEach((to, from, next) => {
 	if ( to.meta.requiresAuth ) {
 		if ( !router.app.$store.getters.isAuthenticated ) {
 			next('/');
+			router.app.$store.commit('SET_INTENDED', {intended: to.path});
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
 				alert: {

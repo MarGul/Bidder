@@ -4,6 +4,7 @@ const auth = {
 	state: {
 		authenticated: window.Laravel.authenticated,
 		user: window.Laravel.user || {},
+		intended: null,
 		dropdown: false,
 		mobileDropdown: false
 	},
@@ -13,6 +14,9 @@ const auth = {
 		},
 		'SET_USER'(state, payload) {
 			state.user = payload.user;
+		},
+		'SET_INTENDED'(state, payload) {
+			state.intended = payload.intended;
 		},
 		'SET_DROPDOWN'(state, payload) {
 			state.dropdown = payload.dropdown;
@@ -41,6 +45,7 @@ const auth = {
 	getters: {
 		isAuthenticated: state => state.authenticated,
 		authUser: state => state.user,
+		authIntended: state => state.intended,
 		authDropdown: state => state.dropdown,
 		mobileAuthDropdown: state => state.mobileDropdown
 	}
