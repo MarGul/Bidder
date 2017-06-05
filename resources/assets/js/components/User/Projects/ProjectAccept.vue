@@ -129,11 +129,11 @@
 							}
 						}
 						this.$store.commit('SET_PROJECTS', {projects});
+						// Remove the project focus
+						this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+						this.$router.push('/user/my-projects');
 						// Show a notification and redirect back to project listings.
 						this.$store.dispatch('showNotification', { type: 'success', msg: 'Projektet blev avbrutet.'});
-						// Remove the project focus
-						//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
-						//this.$router.push('/user/my-projects');
 						this.canceling = false;
 					})
 					.catch(error => { console.log(error); });
