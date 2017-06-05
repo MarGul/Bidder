@@ -47,7 +47,7 @@
 				</transition-group>
 			</div>
 			
-			<app-loading v-else></app-loading>
+			<app-loading bg="gray" v-else></app-loading>
 		</div>
 	</div>
 </template>

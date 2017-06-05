@@ -834,8 +834,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		bg: {
+			type: String,
+			default: "white"
+		}
+	}
+});
 
 /***/ }),
 
@@ -5787,7 +5799,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "bidStop": _vm.removeService
       }
     })], 1)], 1)
-  }))], 1) : _c('app-loading')], 1)])
+  }))], 1) : _c('app-loading', {
+    attrs: {
+      "bg": "gray"
+    }
+  })], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -7133,7 +7149,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "loading-component text-center"
-  }, [_c('svg', {
+  }, [(_vm.bg === 'white') ? [_c('svg', {
     staticClass: "uil-facebook",
     attrs: {
       "width": "78px",
@@ -7232,7 +7248,106 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "keyTimes": "0;1",
       "values": "2;1"
     }
-  })], 1)])])])
+  })], 1)])])] : _vm._e(), _vm._v(" "), (_vm.bg === 'gray') ? [_c('svg', {
+    staticClass: "uil-facebook",
+    attrs: {
+      "width": "78px",
+      "height": "78px",
+      "xmlns": "http://www.w3.org/2000/svg",
+      "viewBox": "0 0 100 100",
+      "preserveAspectRatio": "xMidYMid"
+    }
+  }, [_c('rect', {
+    staticClass: "bk",
+    attrs: {
+      "x": "0",
+      "y": "0",
+      "width": "100",
+      "height": "100",
+      "fill": "#f6f6f6"
+    }
+  }), _c('g', {
+    attrs: {
+      "transform": "translate(20 50)"
+    }
+  }, [_c('rect', {
+    attrs: {
+      "x": "-10",
+      "y": "-30",
+      "width": "20",
+      "height": "60",
+      "fill": "#55ae3a",
+      "opacity": "0.6"
+    }
+  }, [_c('animateTransform', {
+    attrs: {
+      "attributeName": "transform",
+      "type": "scale",
+      "from": "2",
+      "to": "1",
+      "begin": "0s",
+      "repeatCount": "indefinite",
+      "dur": "1s",
+      "calcMode": "spline",
+      "keySplines": "0.1 0.9 0.4 1",
+      "keyTimes": "0;1",
+      "values": "2;1"
+    }
+  })], 1)]), _c('g', {
+    attrs: {
+      "transform": "translate(50 50)"
+    }
+  }, [_c('rect', {
+    attrs: {
+      "x": "-10",
+      "y": "-30",
+      "width": "20",
+      "height": "60",
+      "fill": "#55ae3a",
+      "opacity": "0.8"
+    }
+  }, [_c('animateTransform', {
+    attrs: {
+      "attributeName": "transform",
+      "type": "scale",
+      "from": "2",
+      "to": "1",
+      "begin": "0.1s",
+      "repeatCount": "indefinite",
+      "dur": "1s",
+      "calcMode": "spline",
+      "keySplines": "0.1 0.9 0.4 1",
+      "keyTimes": "0;1",
+      "values": "2;1"
+    }
+  })], 1)]), _c('g', {
+    attrs: {
+      "transform": "translate(80 50)"
+    }
+  }, [_c('rect', {
+    attrs: {
+      "x": "-10",
+      "y": "-30",
+      "width": "20",
+      "height": "60",
+      "fill": "#55ae3a",
+      "opacity": "0.9"
+    }
+  }, [_c('animateTransform', {
+    attrs: {
+      "attributeName": "transform",
+      "type": "scale",
+      "from": "2",
+      "to": "1",
+      "begin": "0.2s",
+      "repeatCount": "indefinite",
+      "dur": "1s",
+      "calcMode": "spline",
+      "keySplines": "0.1 0.9 0.4 1",
+      "keyTimes": "0;1",
+      "values": "2;1"
+    }
+  })], 1)])])] : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
