@@ -87,6 +87,12 @@
 					.then((response) => {
 						this.$store.commit('SET_AUTHENTICATED', {authenticated: response.authenticated});
 						this.$store.commit('SET_USER', {user: response.user});
+						
+						if ( this.$store.getters.authIntended ) {
+							this.$router.push(this.$store.getters.authIntended);
+							this.$store.commit('SET_INTENDED', {intended: null});
+						}
+
 						this.processing = false;
 						this.$store.dispatch('closeModal');
 					})

@@ -181,6 +181,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]().new().setUrl('login').post(this.form.data()).then(function (response) {
 				_this.$store.commit('SET_AUTHENTICATED', { authenticated: response.authenticated });
 				_this.$store.commit('SET_USER', { user: response.user });
+
+				if (_this.$store.getters.authIntended) {
+					_this.$router.push(_this.$store.getters.authIntended);
+					_this.$store.commit('SET_INTENDED', { intended: null });
+				}
+
 				_this.processing = false;
 				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
@@ -13614,6 +13620,7 @@ router.beforeEach(function (to, from, next) {
 	if (to.meta.requiresAuth) {
 		if (!router.app.$store.getters.isAuthenticated) {
 			next('/');
+			router.app.$store.commit('SET_INTENDED', { intended: to.path });
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
 				alert: {
@@ -13656,6 +13663,7 @@ var auth = {
 	state: {
 		authenticated: window.Laravel.authenticated,
 		user: window.Laravel.user || {},
+		intended: null,
 		dropdown: false,
 		mobileDropdown: false
 	},
@@ -13665,6 +13673,9 @@ var auth = {
 		},
 		'SET_USER': function SET_USER(state, payload) {
 			state.user = payload.user;
+		},
+		'SET_INTENDED': function SET_INTENDED(state, payload) {
+			state.intended = payload.intended;
 		},
 		'SET_DROPDOWN': function SET_DROPDOWN(state, payload) {
 			state.dropdown = payload.dropdown;
@@ -13697,6 +13708,9 @@ var auth = {
 		},
 		authUser: function authUser(state) {
 			return state.user;
+		},
+		authIntended: function authIntended(state) {
+			return state.intended;
 		},
 		authDropdown: function authDropdown(state) {
 			return state.dropdown;
