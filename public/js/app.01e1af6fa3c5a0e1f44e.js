@@ -3225,6 +3225,107 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Subscriptions/AddSubscription.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			processing: false
+		};
+	},
+
+	computed: {
+		categories: function categories() {
+			return this.$store.getters.getCategoriesFlatten;
+		},
+		regions: function regions() {
+			return this.$store.getters.getRegions;
+		},
+		cities: function cities() {
+			return this.$store.getters.getCities;
+		}
+	},
+	methods: {
+		add: function add() {
+			this.processing = true;
+		}
+	}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__("./resources/assets/js/components/User/Subscriptions/AddSubscription.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddSubscription__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		appAddSubscription: __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default.a
+	}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/404.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3551,6 +3652,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__("./resources/assets/js/components/Includes/Notifications.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__);
+//
 //
 //
 //
@@ -6969,6 +7071,26 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5f7c3375\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_subscriptions-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription')], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5f7c3375", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6398b14f\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/ServiceDetails.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7509,17 +7631,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Skapa tjänst")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
-      "to": "/user/my-services"
+      "to": "/user/services"
     }
   }, [_vm._v("Mina tjänster")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
-      "to": "/user/my-bids"
+      "to": "/user/bids"
     }
   }, [_vm._v("Mina bud")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
-      "to": "/user/my-projects"
+      "to": "/user/projects"
     }
   }, [_vm._v("Mina projekt")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/subscriptions"
+    }
+  }, [_vm._v("Prenumerationer")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": "/user/payments"
     }
@@ -7745,6 +7871,98 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-b8890c0c", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cd1a1dae\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Subscriptions/AddSubscription.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "add_subscription-component"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-4"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("För kategori:")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control"
+  }, _vm._l((_vm.categories), function(category) {
+    return _c('option', {
+      domProps: {
+        "value": category.id,
+        "textContent": _vm._s(category.name)
+      }
+    })
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("För region:")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control"
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("Välj region")]), _vm._v(" "), _vm._l((_vm.regions), function(region) {
+    return _c('option', {
+      domProps: {
+        "value": region.id,
+        "textContent": _vm._s(region.name)
+      }
+    })
+  })], 2)])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Eller för stad:")]), _vm._v(" "), _c('select', {
+    staticClass: "form-control"
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("Välj stad")]), _vm._v(" "), _vm._l((_vm.cities), function(city) {
+    return _c('option', {
+      domProps: {
+        "value": city.id,
+        "textContent": _vm._s(city.name)
+      }
+    })
+  })], 2)])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
+    attrs: {
+      "type": "button",
+      "disabled": _vm.processing
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.add($event)
+      }
+    }
+  }, [_vm._v("\n\t\t\t\tLägg till prenumeration\n\t\t\t")])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-cd1a1dae", module.exports)
   }
 }
 
@@ -13362,6 +13580,76 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/User/Subscriptions/AddSubscription.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Subscriptions/AddSubscription.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-cd1a1dae\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Subscriptions/AddSubscription.vue"),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Subscriptions/AddSubscription.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] AddSubscription.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cd1a1dae", Component.options)
+  } else {
+    hotAPI.reload("data-v-cd1a1dae", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5f7c3375\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MySubscriptions.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f7c3375", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f7c3375", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/includes/Model.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13755,7 +14043,7 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: __webpack_require__("./resources/assets/js/views/Home.vue") }, { path: "/categories", name: 'categories', component: __webpack_require__("./resources/assets/js/views/Categories.vue") }, { path: "/locations", name: 'locations', component: __webpack_require__("./resources/assets/js/views/Locations.vue") }, { path: "/services", name: 'services', component: __webpack_require__("./resources/assets/js/views/Services.vue") }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__("./resources/assets/js/views/ServiceDetails.vue") }, { path: "/information", name: 'information', component: __webpack_require__("./resources/assets/js/views/Information.vue") }, { path: "/user", name: 'user', component: __webpack_require__("./resources/assets/js/views/User.vue"),
-	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'my-services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'my-bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'my-projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__("./resources/assets/js/components/User/Payments.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/BidHistory.vue"), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__("./resources/assets/js/components/User/Payments.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/BidHistory.vue"), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__("./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -14145,6 +14433,15 @@ var regions = {
 			flatten(state.regions);
 
 			return flattenedRegions;
+		},
+		getCities: function getCities(state) {
+			var cities = [];
+			state.regions.forEach(function (region, index) {
+				cities = cities.concat(region.cities);
+			});
+			return cities.sort(function (a, b) {
+				return a.name < b.name ? -1 : 1;
+			});
 		}
 	}
 };

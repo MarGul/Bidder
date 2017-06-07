@@ -35,6 +35,13 @@ const regions = {
 			flatten(state.regions);
 
 			return flattenedRegions;
+		},
+		getCities(state) {
+			let cities = [];
+			state.regions.forEach(function(region, index) {
+				cities = cities.concat(region.cities);
+			});
+			return cities.sort((a,b) => a.name < b.name ? -1 : 1);
 		}
 	}
 }
