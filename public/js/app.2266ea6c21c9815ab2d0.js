@@ -3230,6 +3230,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
+//
+//
+//
+//
 //
 //
 //
@@ -3272,10 +3278,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			processing: false
+			processing: false,
+			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
+				category_id: '',
+				region_id: '',
+				city_id: ''
+			})
 		};
 	},
 
@@ -3286,13 +3300,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		regions: function regions() {
 			return this.$store.getters.getRegions;
 		},
+		regionDisabled: function regionDisabled() {
+			return this.form.city_id ? true : false;
+		},
 		cities: function cities() {
 			return this.$store.getters.getCities;
+		},
+		citiesDisabled: function citiesDisabled() {
+			return this.form.region_id ? true : false;
 		}
 	},
 	methods: {
 		add: function add() {
+			var _this = this;
+
 			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').post(this.form.data()).then(function (response) {
+				console.log(response);
+				_this.form.reset();
+				_this.processing = false;
+			}).catch(function (error) {
+				_this.form.errors.record(error);
+				_this.processing = false;
+			});
 		}
 	}
 });
@@ -7882,6 +7912,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "add_subscription-component"
+  }, [_c('form', {
+    on: {
+      "keydown": function($event) {
+        _vm.form.errors.clear()
+      }
+    }
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -7891,22 +7927,68 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("För kategori:")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control"
-  }, _vm._l((_vm.categories), function(category) {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.category_id),
+      expression: "form.category_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.form.category_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("Välj kategori")]), _vm._v(" "), _vm._l((_vm.categories), function(category) {
     return _c('option', {
       domProps: {
         "value": category.id,
         "textContent": _vm._s(category.name)
       }
     })
-  }))])]), _vm._v(" "), _c('div', {
+  })], 2), _vm._v(" "), (_vm.form.errors.has('category_id')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('category_id'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-4"
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("För region:")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control"
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.region_id),
+      expression: "form.region_id"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": _vm.regionDisabled
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.form.region_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
   }, [_c('option', {
     attrs: {
       "value": ""
@@ -7925,7 +8007,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("Eller för stad:")]), _vm._v(" "), _c('select', {
-    staticClass: "form-control"
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.city_id),
+      expression: "form.city_id"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": _vm.citiesDisabled
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.form.city_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
   }, [_c('option', {
     attrs: {
       "value": ""
@@ -7948,7 +8050,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "button",
-      "disabled": _vm.processing
+      "disabled": _vm.processing || !_vm.form.category_id
     },
     on: {
       "click": function($event) {
@@ -7956,7 +8058,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.add($event)
       }
     }
-  }, [_vm._v("\n\t\t\t\tLägg till prenumeration\n\t\t\t")])])])])
+  }, [_vm._v("\n\t\t\t\t\tLägg till prenumeration\n\t\t\t\t")])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
