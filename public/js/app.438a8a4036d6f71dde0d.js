@@ -3340,6 +3340,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__("./resources/assets/js/components/User/Subscriptions/AddSubscription.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddSubscription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -3362,6 +3363,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3375,6 +3383,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		subscriptions: function subscriptions() {
 			return this.$store.getters.userSubscriptions;
+		}
+	},
+	methods: {
+		remove: function remove(id) {
+			var _this = this;
+
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]("subscriptions/" + id).delete().then(function (response) {
+				var subscriptions = _this.subscriptions;
+				subscriptions.forEach(function (sub, key) {
+					console.log(sub);
+					if (id == sub.id) {
+						subscriptions.splice(key, 1);
+					}
+				});
+				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Prenumerationen är borttagen.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	},
 	created: function created() {
@@ -3828,6 +3856,14 @@ exports.push([module.i, "\n.message_board-component .alert {\n  padding: 40px 15
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
 exports.push([module.i, "\n.change_project_details-component[data-v-4f3a1e5c] {\n  position: relative;\n}\n.change_project_details-component .close[data-v-4f3a1e5c] {\n    position: absolute;\n    top: -10px;\n    right: 0;\n}\nlabel[data-v-4f3a1e5c] {\n  margin-bottom: 2px;\n}\n.form-group[data-v-4f3a1e5c] {\n  margin-bottom: 5px;\n}\n.btn[data-v-4f3a1e5c] {\n  margin-bottom: 0;\n}\n", ""]);
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports.push([module.i, "\n.item-actions[data-v-5f7c3375] {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n", ""]);
 
 /***/ }),
 
@@ -7139,15 +7175,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "my_subscriptions-component"
   }, [_c('h1', {
     staticClass: "user-component-title"
-  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription'), _vm._v(" "), (_vm.fetched) ? _c('ul', {
+  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription'), _vm._v(" "), (_vm.fetched) ? [(_vm.subscriptions.length > 0) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.subscriptions), function(subscription) {
     return _c('li', [_c('div', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\tTest\n\t\t\t")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(subscription.category_id) + "\n\t\t\t\t")]), _vm._v(" "), _c('div', {
       staticClass: "item-actions"
-    }, [_vm._v("\n\t\t\t\tRadera\n\t\t\t")])])
-  })) : _c('app-loading')], 1)
+    }, [_c('button', {
+      staticClass: "btn btn-default",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.remove(subscription.id)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-times",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Ta bort\n\t\t\t\t\t")])])])
+  })) : _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -10950,6 +11004,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("75b28cc2", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MySubscriptions.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MySubscriptions.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6398b14f\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/views/ServiceDetails.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13758,13 +13839,17 @@ module.exports = Component.exports
 /***/ "./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue")
+
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"),
   /* template */
   __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5f7c3375\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"),
   /* scopeId */
-  null,
+  "data-v-5f7c3375",
   /* cssModules */
   null
 )
@@ -13864,6 +13949,11 @@ var Model = function () {
 			return this.send('put', this.resource, data);
 		}
 	}, {
+		key: 'delete',
+		value: function _delete() {
+			return this.send('delete', this.resource);
+		}
+	}, {
 		key: 'find',
 		value: function find(identifier) {
 			return this.send('get', this.resource + '/' + identifier);
@@ -13881,9 +13971,6 @@ var Model = function () {
 			this.setId(identifier);
 			return this.send(type, this.resource, data);
 		}
-	}, {
-		key: 'delete',
-		value: function _delete(identifier) {}
 	}, {
 		key: 'send',
 		value: function send(requestType, url) {

@@ -5,16 +5,22 @@
 
 		<app-add-subscription></app-add-subscription>
 
-		<ul class="user-items-list" v-if="fetched">
-			<li v-for="subscription in subscriptions">
-				<div class="item-content">
-					Test
-				</div>
-				<div class="item-actions">
-					Radera
-				</div>
-			</li>
-		</ul>
+		<template v-if="fetched">
+			<ul class="user-items-list" v-if="subscriptions.length > 0">
+				<li v-for="subscription in subscriptions">
+					<div class="item-content">
+						{{ subscription.category_id }}
+					</div>
+					<div class="item-actions">
+						<button type="button" class="btn btn-default" @click.prevent="remove(subscription.id)">
+							<i class="fa fa-times" aria-hidden="true"></i> Ta bort
+						</button>
+					</div>
+				</li>
+			</ul>
+
+			<div class="alert alert-info" v-else>Du har ännu inga prenumerationer. Skapa din första ovan.</div>
+		</template>
 
 		<app-loading v-else></app-loading>
 	</div>
@@ -22,6 +28,7 @@
 
 <script>
 	import appAddSubscription from "./AddSubscription";
+	import Model from "../../../includes/Model";
 
 	export default {
 		components: {
@@ -35,6 +42,24 @@
 				return this.$store.getters.userSubscriptions;
 			}
 		},
+		methods: {
+			remove(id) {
+				new Model(`subscriptions/${id}`).delete()
+					.then(response => {
+						let subscriptions = this.subscriptions;
+						subscriptions.forEach(function(sub, key) {
+							console.log(sub);
+							if (id == sub.id) {
+								subscriptions.splice(key, 1);
+							}
+						});
+						this.$store.commit('SET_SUBSCRIPTIONS', {subscriptions});
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Prenumerationen är borttagen.'});
+						$("html, body").animate({ scrollTop: 0 }, "fast");
+					})
+					.catch(error => { console.log(error); });
+			} 
+		},
 		created() {
 			if ( !this.fetched ) {
 				this.$store.dispatch('fetchUserSubscriptions');
@@ -42,3 +67,9 @@
 		}
 	}
 </script>
+
+<style lang="scss" scoped>
+	.item-actions {
+		justify-content: flex-end;
+	}
+</style>
