@@ -26,9 +26,11 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $subscriptions = $this->manager->get($request->user()->id);
+
+        return response()->json(['message' => 'Displaying users subscriptions.', 'subscriptions' => $subscriptions], 200);
     }
 
     /**
@@ -39,11 +41,11 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        if ( !$this->manager->add($request->user()->id, $request->only('category_id', 'region_id', 'city_id')) ) {
+        if ( !$subscription = $this->manager->add($request->user()->id, $request->only('category_id', 'region_id', 'city_id')) ) {
             return response()->json(['message' => 'Could not add the subscription'], 500);
         }
 
-        return response()->json(['message' => 'Successfully added your subscription'], 201);
+        return response()->json(['message' => 'Successfully added your subscription', 'subscription' => $subscription], 201);
     }
 
     /**

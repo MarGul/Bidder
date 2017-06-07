@@ -3316,7 +3316,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').post(this.form.data()).then(function (response) {
-				console.log(response);
+				var subscriptions = _this.$store.getters.userSubscriptions;
+				subscriptions.push(response.subscription);
+				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
 				_this.form.reset();
 				_this.processing = false;
 			}).catch(function (error) {
@@ -3345,12 +3349,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
 		appAddSubscription: __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default.a
+	},
+	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userSubscriptionsFetched;
+		},
+		subscriptions: function subscriptions() {
+			return this.$store.getters.userSubscriptions;
+		}
+	},
+	created: function created() {
+		if (!this.fetched) {
+			this.$store.dispatch('fetchUserSubscriptions');
+		}
 	}
 });
 
@@ -7109,7 +7139,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "my_subscriptions-component"
   }, [_c('h1', {
     staticClass: "user-component-title"
-  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription')], 1)
+  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription'), _vm._v(" "), (_vm.fetched) ? _c('ul', {
+    staticClass: "user-items-list"
+  }, _vm._l((_vm.subscriptions), function(subscription) {
+    return _c('li', [_c('div', {
+      staticClass: "item-content"
+    }, [_vm._v("\n\t\t\t\tTest\n\t\t\t")]), _vm._v(" "), _c('div', {
+      staticClass: "item-actions"
+    }, [_vm._v("\n\t\t\t\tRadera\n\t\t\t")])])
+  })) : _c('app-loading')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -7911,7 +7949,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "add_subscription-component"
+    staticClass: "add_subscription-component mb40"
   }, [_c('form', {
     on: {
       "keydown": function($event) {
@@ -14647,7 +14685,9 @@ var user = {
 		bidsFetched: false,
 		projects: [],
 		projectsFetched: false,
-		projectFocus: null
+		projectFocus: null,
+		subscriptions: [],
+		subscriptionsFetched: false
 	},
 	mutations: {
 		'SET_SERVICES': function SET_SERVICES(state, payload) {
@@ -14670,6 +14710,12 @@ var user = {
 		},
 		'SET_PROJECT_FOCUS': function SET_PROJECT_FOCUS(state, payload) {
 			state.projectFocus = payload.project;
+		},
+		'SET_SUBSCRIPTIONS': function SET_SUBSCRIPTIONS(state, payload) {
+			state.subscriptions = payload.subscriptions;
+		},
+		'SET_SUBSCRIPTIONS_FETCHED': function SET_SUBSCRIPTIONS_FETCHED(state, payload) {
+			state.subscriptionsFetched = payload.fetched;
 		}
 	},
 	actions: {
@@ -14716,6 +14762,14 @@ var user = {
 					commit('SET_PROJECT_FOCUS', { project: focus });
 				}
 			});
+		},
+		fetchUserSubscriptions: function fetchUserSubscriptions(_ref5) {
+			var commit = _ref5.commit;
+
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('subscriptions').get().then(function (response) {
+				commit('SET_SUBSCRIPTIONS', { subscriptions: response.subscriptions });
+				commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: true });
+			});
 		}
 	},
 	getters: {
@@ -14739,6 +14793,12 @@ var user = {
 		},
 		userProjectFocus: function userProjectFocus(state) {
 			return state.projectFocus;
+		},
+		userSubscriptions: function userSubscriptions(state) {
+			return state.subscriptions;
+		},
+		userSubscriptionsFetched: function userSubscriptionsFetched(state) {
+			return state.subscriptionsFetched;
 		}
 	}
 };

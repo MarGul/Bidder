@@ -1,5 +1,5 @@
 <template>
-	<div class="add_subscription-component">
+	<div class="add_subscription-component mb40">
 		<form @keydown="form.errors.clear()">
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
@@ -80,7 +80,11 @@
 				this.processing = true;
 				new Model('subscriptions').post(this.form.data())
 					.then(response => {
-						console.log(response);
+						let subscriptions = this.$store.getters.userSubscriptions;
+						subscriptions.push(response.subscription);
+						this.$store.commit('SET_SUBSCRIPTIONS', {subscriptions});
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.'});
+						$("html, body").animate({ scrollTop: 0 }, "fast");
 						this.form.reset();
 						this.processing = false;
 					})

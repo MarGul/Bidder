@@ -7862,12 +7862,24 @@ a {
   margin-top: 10px;
 }
 
+.mt20 {
+  margin-top: 20px;
+}
+
 .mb7 {
   margin-bottom: 7px;
 }
 
 .mb10 {
   margin-bottom: 10px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.mb40 {
+  margin-bottom: 40px;
 }
 
 .mtb20 {
@@ -7900,6 +7912,10 @@ a {
 
 .pb5 {
   padding-bottom: 5px;
+}
+
+.pb20 {
+  padding-bottom: 20px;
 }
 
 .ptb5 {
