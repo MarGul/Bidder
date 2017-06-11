@@ -8,6 +8,17 @@ class SubscriptionManager
 {
 
 	/**
+	 * Get a users subscriptions.
+	 * 
+	 * @param  integer 	$user_id
+	 * @return collection
+	 */
+	public function byUser($user_id)
+	{
+		return Subscription::where('user_id', $user_id)->get();
+	}
+
+	/**
 	 * Add a new subscription for a user.
 	 * 
 	 * @param integer 	$user_id
@@ -25,9 +36,15 @@ class SubscriptionManager
 		return $subscription->save() ? $subscription : false;
 	}
 
-	public function get($user_id)
+	/**
+	 * Delete a subscription
+	 * 
+	 * @param  integer 	$subscription_id
+	 * @return boolean
+	 */
+	public function delete($subscription_id)
 	{
-		return Subscription::where('user_id', $user_id)->get();
+		return Subscription::where('id', $subscription_id)->first()->delete() ? true : false;
 	}
 
 }

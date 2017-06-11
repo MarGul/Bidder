@@ -48,7 +48,6 @@
 					.then(response => {
 						let subscriptions = this.subscriptions;
 						subscriptions.forEach(function(sub, key) {
-							console.log(sub);
 							if (id == sub.id) {
 								subscriptions.splice(key, 1);
 							}

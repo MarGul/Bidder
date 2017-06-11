@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $subscriptions = $this->manager->get($request->user()->id);
+        $subscriptions = $this->manager->byUser($request->user()->id);
 
         return response()->json(['message' => 'Displaying users subscriptions.', 'subscriptions' => $subscriptions], 200);
     }
@@ -56,6 +56,10 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ( !$this->manager->delete($id) ) {
+            return response()->json(['message' => 'Could not delete your subscription.'], 500);
+        }
+
+        return response()->json(['message' => 'Successfully deleted your subscription.', 200]);
     }
 }
