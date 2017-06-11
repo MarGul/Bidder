@@ -18,6 +18,9 @@ const regions = {
 	},
 	getters: {
 		getRegions: state => state.regions,
+		getRegionById: state => id => {
+			return state.regions.filter(r => r.id === id)[0];
+		},
 		getRegionsFlatten(state) {
 			let flattenedRegions = [];
 			let flatten = function(regions) {
@@ -35,6 +38,19 @@ const regions = {
 			flatten(state.regions);
 
 			return flattenedRegions;
+		},
+		getCityById: state => id => {
+			let c = null;
+			state.regions.forEach(function(region, index) {
+				region.cities.forEach(function(city, index) {
+					if ( city.id === id) {
+						c = city;
+						return;
+					}
+				});
+				if ( c ) return;
+			});
+			return c;
 		},
 		getCities(state) {
 			let cities = [];

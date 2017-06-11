@@ -9,7 +9,7 @@
 			<ul class="user-items-list" v-if="subscriptions.length > 0">
 				<li v-for="subscription in subscriptions">
 					<div class="item-content">
-						{{ subscription.category_id }}
+						{{ title(subscription) }}
 					</div>
 					<div class="item-actions">
 						<button type="button" class="btn btn-default" @click.prevent="remove(subscription.id)">
@@ -57,7 +57,15 @@
 						$("html, body").animate({ scrollTop: 0 }, "fast");
 					})
 					.catch(error => { console.log(error); });
-			} 
+			},
+			title(sub) {
+				let isRegion = sub.region_id ? true : false;
+				let locationId = isRegion ? sub.region_id : sub.city_id;
+				let location = isRegion ? this.$store.getters.getRegionById(locationId) : this.$store.getters.getCityById(locationId);
+				let category = this.$store.getters.getCategoryById(sub.category_id);
+
+				return `${category.name} i ${location.name}`;
+			}
 		},
 		created() {
 			if ( !this.fetched ) {

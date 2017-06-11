@@ -6575,6 +6575,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).catch(function (error) {
 				console.log(error);
 			});
+		},
+		title: function title(sub) {
+			var isRegion = sub.region_id ? true : false;
+			var locationId = isRegion ? sub.region_id : sub.city_id;
+			var location = isRegion ? this.$store.getters.getRegionById(locationId) : this.$store.getters.getCityById(locationId);
+			var category = this.$store.getters.getCategoryById(sub.category_id);
+
+			return category.name + " i " + location.name;
 		}
 	},
 	created: function created() {
@@ -7373,6 +7381,25 @@ var categories = {
 		}
 	},
 	getters: {
+		getCategoryById: function getCategoryById(state) {
+			return function (id) {
+				var c = null;
+				state.categories.forEach(function (category, index) {
+					if (category.id === id) {
+						c = category;
+						return;
+					}
+
+					category.sub_categories.forEach(function (sub, index) {
+						if (sub.id === id) {
+							c = sub;
+							return;
+						}
+					});
+				});
+				return c;
+			};
+		},
 		getCategories: function getCategories(state) {
 			return state.categories;
 		},
@@ -7590,6 +7617,13 @@ var regions = {
 		getRegions: function getRegions(state) {
 			return state.regions;
 		},
+		getRegionById: function getRegionById(state) {
+			return function (id) {
+				return state.regions.filter(function (r) {
+					return r.id === id;
+				})[0];
+			};
+		},
 		getRegionsFlatten: function getRegionsFlatten(state) {
 			var flattenedRegions = [];
 			var flatten = function flatten(regions) {
@@ -7607,6 +7641,22 @@ var regions = {
 			flatten(state.regions);
 
 			return flattenedRegions;
+		},
+
+		getCityById: function getCityById(state) {
+			return function (id) {
+				var c = null;
+				state.regions.forEach(function (region, index) {
+					region.cities.forEach(function (city, index) {
+						if (city.id === id) {
+							c = city;
+							return;
+						}
+					});
+					if (c) return;
+				});
+				return c;
+			};
 		},
 		getCities: function getCities(state) {
 			var cities = [];
@@ -12849,7 +12899,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.subscriptions), function(subscription) {
     return _c('li', [_c('div', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(subscription.category_id) + "\n\t\t\t\t")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.title(subscription)) + "\n\t\t\t\t")]), _vm._v(" "), _c('div', {
       staticClass: "item-actions"
     }, [_c('button', {
       staticClass: "btn btn-default",
