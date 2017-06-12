@@ -47,4 +47,15 @@ class SubscriptionManager
 		return Subscription::where('id', $subscription_id)->first()->delete() ? true : false;
 	}
 
+	/**
+	 * Send out notifications for a newly created service.
+	 * 
+	 * @param  [type] $service [description]
+	 * @return [type]          [description]
+	 */
+	public function send($service)
+	{
+
+	}
+
 }

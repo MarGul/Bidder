@@ -6333,6 +6333,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('services').create(this.finalData).then(function (response) {
 				_this.form.reset();
+				// Break the cache
+				_this.$store.commit('SET_SERVICES_FETCHED', { fetched: false });
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Woohoo! Vi skapade din tjänst.' });
 				$("html, body").animate({ scrollTop: 0 }, "fast");
 				_this.processing = false;
