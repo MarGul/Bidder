@@ -4,6 +4,7 @@ namespace App\Features;
 
 use App\Subscription;
 use App\User;
+use App\Notifications\NewSubscriptionService;
 
 class SubscriptionManager
 {
@@ -57,6 +58,8 @@ class SubscriptionManager
 	public function sendNotifications($service)
 	{
 		$subscribers = $this->subscriptionUsers($service);
+
+		\Notification::send($subscribers, new NewSubscriptionService($service));
 	}
 
 	/**

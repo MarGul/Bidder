@@ -11,8 +11,7 @@
 Route::get('test', function() {
 	$service = App\Service::find(1);
 
-	$man = new App\Features\SubscriptionManager;
-	$man->sendNotifications($service);
+	dispatch(new App\Jobs\SendSubscriptionEmails($service));
 });
 
 Route::post('login', 'Auth\LoginController@login');

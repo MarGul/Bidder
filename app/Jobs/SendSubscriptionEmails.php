@@ -38,6 +38,6 @@ class SendSubscriptionEmails implements ShouldQueue
      */
     public function handle(SubscriptionManager $subscriptionManager)
     {
-        $subscriptionManager->send($this->service);
+        $subscriptionManager->sendNotifications($this->service);
     }
 }
