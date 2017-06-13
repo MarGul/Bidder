@@ -3,6 +3,7 @@
 namespace App\Features;
 
 use App\Subscription;
+use App\User;
 
 class SubscriptionManager
 {
@@ -50,12 +51,46 @@ class SubscriptionManager
 	/**
 	 * Send out notifications for a newly created service.
 	 * 
-	 * @param  [type] $service [description]
-	 * @return [type]          [description]
+	 * @param  App\Service 	$service
+	 * @return void
 	 */
-	public function send($service)
+	public function sendNotifications($service)
 	{
+		$subscribers = $this->subscriptionUsers($service);
+	}
 
+	/**
+	 * Based on a service, get the users that has subscribed to being notified to this service.
+	 * 
+	 * @param  App\Service 	$service
+	 * @return Eloquent Collection
+	 */
+	protected function subscriptionUsers($service)
+	{
+		$categorySubs = Subscription::where('category_id', $service->category_id)->get();
+		$subscribers = collect();
+
+		foreach ($categorySubs as $subscription) {
+			// If we already have the user_id in our collection we don't have to care about this subscription.
+			if ( $subscribers->contains($subscription->user_id) ) {
+				continue;
+			}
+
+			// The user has subscribed to everything in this category
+			if ( is_null($subscription->region_id) && is_null($subscription->city_id) ) {
+				$subscribers->push($subscription->user_id);
+			}
+
+			// If the user has subscribed only to the region or city of the service.
+			if ( $subscription->region_id === $service->region_id || $subscription->city_id === $service->city_id ) {
+				$subscribers->push($subscription->user_id);
+			}
+		}
+
+		// Get the user models for the subscribers.
+		$users = User::whereIn('id', $subscribers->toArray())->get();
+
+		return $users;
 	}
 
 }
