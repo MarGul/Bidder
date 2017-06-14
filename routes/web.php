@@ -8,11 +8,7 @@
 | handle all of the routing.
 */
 
-Route::get('test', function() {
-	$service = App\Service::find(1);
-
-	dispatch(new App\Jobs\SendSubscriptionEmails($service));
-});
+Route::get('test', 'TestController@index');
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');

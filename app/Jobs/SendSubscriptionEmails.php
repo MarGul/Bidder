@@ -10,9 +10,18 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Service;
 use App\Features\SubscriptionManager;
 
+I
+
 class SendSubscriptionEmails implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 5;
 
     /**
      * The service to send subscription emails about
@@ -39,5 +48,16 @@ class SendSubscriptionEmails implements ShouldQueue
     public function handle(SubscriptionManager $subscriptionManager)
     {
         $subscriptionManager->sendNotifications($this->service);
+    }
+
+    /**
+     * The job failed to process.
+     *
+     * @param  Exception  $exception
+     * @return void
+     */
+    public function failed(Exception $exception)
+    {
+        // Log that an job has failed.
     }
 }
