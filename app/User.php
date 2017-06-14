@@ -32,7 +32,8 @@ class User extends Authenticatable
      * 
      * @return Eloquent Relationship
      */
-    public function services() {
+    public function services() 
+    {
     	return $this->hasMany('App\Service');
     }
 
@@ -41,17 +42,32 @@ class User extends Authenticatable
      * 
      * @return Eloquent Relationship
      */
-    public function comments() {
+    public function comments() 
+    {
     	return $this->hasMany('App\Comment');
     }
 
     /**
      * A user may have many bids.
      * 
-     * @return [type] [description]
+     * @return Eloquent Relationship
      */
-    public function bids() {
+    public function bids() 
+    {
     	return $this->hasMany('App\Bid');
+    }
+
+    /**
+     * Relationship to get the review count and average.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function reviews()
+    {
+        return $this->hasOne('App\Review', 'reviewed')
+                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg')
+                    ->where('submitted', true)
+                    ->groupBy('reviewed');
     }
 
 }

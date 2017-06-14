@@ -64,7 +64,10 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return $this->manager->get($service);
+        return response()->json([
+            'message' => 'Showing service details.', 
+            'service' => $this->manager->get($service)
+        ], 200);
     }
 
     /**

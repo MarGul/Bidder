@@ -15,12 +15,11 @@ class ServiceManager {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function get($service) {
-		$s = Service::where('id', $service->id)->first();
-		$s->load(['user', 'category', 'region', 'city', 'bids.user', 'comments' => function($query) {
+		$service->load(['user.reviews', 'category', 'region', 'city', 'bids.user', 'comments' => function($query) {
 			$query->with(['user', 'replies.user'])->where('parent', null);
 		}]);
 
-		return response()->json(['message' => 'Service details', 'service' => $s], 200);
+		return $service;
 	}
 
 	/**
