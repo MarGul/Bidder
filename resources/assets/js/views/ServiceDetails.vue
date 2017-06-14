@@ -37,7 +37,7 @@
 								<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
 								<div class="user-displayname" v-text="service.user.username"></div>
 								<div class="user-ratings">
-									<app-ratings :rating="3.7" :total="7" size="large"></app-ratings>
+									<app-ratings :rating="ratingAvg" :total="ratingCount" size="large"></app-ratings>
 									<a class="link">Visa omdömmen</a>
 								</div>
 							</template>
@@ -101,6 +101,12 @@
 			},
 			avatarAlt() {
 				return `Avatar bild för användare ${this.service.user.username}`;
+			},
+			ratingCount() {
+				return this.service.user.reviews ? this.service.user.reviews.count : 0;
+			},
+			ratingAvg() {
+				return this.service.user.reviews ? this.service.user.reviews.avg : 0;
 			}
 		},
 		methods: {
