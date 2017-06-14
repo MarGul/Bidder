@@ -43,9 +43,9 @@ class ServiceManager {
 	 * @param  \App\Http\Requests\StoreService 	$request 
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create($request) {
+	public function create($user, $request) {
 		$service = new Service([
-			'user_id' => $request->user()->id,
+			'user_id' => $user->id,
 			'category_id' => $request->category,
 			'region_id' => $request->region,
 			'city_id' => $request->city,
@@ -58,11 +58,14 @@ class ServiceManager {
 			'active' => true
 		]);
 
-		if ( !$service->save() ) {
-			return response()->json(['message' => 'Could not store the service in the database.'], 500);
+		if ( $service->save() ) {
+			return false;
 		}
 
-		return response()->json(['message' => 'Service was successfully created.', 'service' => $service], 201);
+		// Send out notifications to the people that has subscribed.
+		app(SubscriptionManager::class)->send($service);
+
+		return true;
 	}
 
 }

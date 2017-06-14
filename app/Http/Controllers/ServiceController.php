@@ -49,7 +49,11 @@ class ServiceController extends Controller
      */
     public function store(StoreService $request)
     {
-        return $this->manager->create($request);
+        if ( !$this->manager->create($request->user(), $request) ) {
+            return response()->json(['message' => 'Could not store the service in the database.'], 500);
+        }
+        
+        return response()->json(['message' => 'Service was successfully created.', 'service' => $service], 201);
     }
 
     /**

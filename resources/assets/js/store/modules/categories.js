@@ -17,6 +17,23 @@ const categories = {
 		}
 	},
 	getters: {
+		getCategoryById: state => id => {
+			let c = null;
+			state.categories.forEach(function(category, index) {
+				if ( category.id === id) {
+					c = category;
+					return;
+				}
+
+				category.sub_categories.forEach(function(sub, index) {
+					if ( sub.id === id) {
+						c = sub;
+						return;
+					}
+				});
+			});
+			return c;
+		},
 		getCategories: state => state.categories,
 		getCategoriesFlatten(state) {
 			let flattenCategories = [];

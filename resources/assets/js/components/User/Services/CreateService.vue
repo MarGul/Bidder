@@ -188,6 +188,8 @@
 				new Model('services').create(this.finalData)
 					.then(response => {
 						this.form.reset();
+						// Break the cache
+						this.$store.commit('SET_SERVICES_FETCHED', {fetched: false});
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
 						$("html, body").animate({ scrollTop: 0 }, "fast");
 						this.processing = false;

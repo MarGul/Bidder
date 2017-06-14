@@ -42,6 +42,10 @@ class Model {
 		return this.send('put', this.resource, data);
 	}
 
+	delete() {
+		return this.send('delete', this.resource)
+	}
+
 	find(identifier) {
 		return this.send('get', this.resource + '/' + identifier);
 	}
@@ -53,10 +57,6 @@ class Model {
 	update(identifier, data, type = 'patch') {
 		this.setId(identifier);
 		return this.send(type, this.resource, data);
-	}
-
-	delete(identifier) {
-		
 	}
 
 	send(requestType, url, config = {}) {

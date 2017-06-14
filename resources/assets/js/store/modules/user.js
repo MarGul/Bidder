@@ -8,7 +8,9 @@ const user = {
 		bidsFetched: false,
 		projects: [],
 		projectsFetched: false,
-		projectFocus: null
+		projectFocus: null,
+		subscriptions: [],
+		subscriptionsFetched: false,
 	},
 	mutations: {
 		'SET_SERVICES'(state, payload) {
@@ -31,7 +33,13 @@ const user = {
 		},
 		'SET_PROJECT_FOCUS'(state, payload) {
 			state.projectFocus = payload.project;
-		}
+		},
+		'SET_SUBSCRIPTIONS'(state, payload) {
+			state.subscriptions = payload.subscriptions;
+		},
+		'SET_SUBSCRIPTIONS_FETCHED'(state, payload) {
+			state.subscriptionsFetched = payload.fetched;
+		},
 	},
 	actions: {
 		clearUserState({commit}) {
@@ -68,7 +76,14 @@ const user = {
 						commit('SET_PROJECT_FOCUS', {project: focus});
 					}
 				});
-		}
+		},
+		fetchUserSubscriptions({commit}) {
+			new Model('subscriptions').get()
+				.then(response => {
+					commit('SET_SUBSCRIPTIONS', {subscriptions: response.subscriptions});
+					commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: true});
+				});
+		},
 	},
 	getters: {
 		userServices: state => state.services,
@@ -77,7 +92,9 @@ const user = {
 		userBidsFetched: state => state.bidsFetched,
 		userProjects: state => state.projects,
 		userProjectsFetched: state => state.projectsFetched,
-		userProjectFocus: state => state.projectFocus
+		userProjectFocus: state => state.projectFocus,
+		userSubscriptions: state => state.subscriptions,
+		userSubscriptionsFetched: state => state.subscriptionsFetched
 	}
 }
 
