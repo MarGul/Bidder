@@ -10,8 +10,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Service;
 use App\Features\SubscriptionManager;
 
-I
-
 class SendSubscriptionEmails implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
