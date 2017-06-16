@@ -173,13 +173,8 @@
 						// Increment the bid_count for service in store.
 						let service = this.$store.getters.getService;
 						let bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
-						
-						if ( bidCount === 1 ) {
-							service.bid_count = {count: 1};
-						} else {
-							service.bid_count.count = bidCount;
-						}
-						
+						service.bid_count = {count: bidCount};
+
 						this.$store.commit('SET_SERVICE', service);
 
 						this.form.reset();

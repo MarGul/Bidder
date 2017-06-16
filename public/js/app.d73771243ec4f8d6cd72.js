@@ -3705,12 +3705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				// Increment the bid_count for service in store.
 				var service = _this.$store.getters.getService;
 				var bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
-
-				if (bidCount === 1) {
-					service.bid_count = { count: 1 };
-				} else {
-					service.bid_count.count = bidCount;
-				}
+				service.bid_count = { count: bidCount };
 
 				_this.$store.commit('SET_SERVICE', service);
 
