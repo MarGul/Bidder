@@ -9,6 +9,18 @@ use Carbon\Carbon;
 class ServiceManager {
 
 	/**
+	 * Display a listing of the service based on filtering.
+	 * 
+	 * @return [type]          [description]
+	 */
+	public function filter()
+	{
+		$services = Service::with('bid_count', 'comment_count')->get();
+
+		return $services;
+	}
+
+	/**
 	 * Get a single service.
 	 * 
 	 * @param  App\Service $service
@@ -38,7 +50,7 @@ class ServiceManager {
 	 * Create a service
 	 * 
 	 * @param  \App\Http\Requests\StoreService 	$request 
-	 * @return \Illuminate\Http\Response
+	 * @return boolean
 	 */
 	public function create($user, $request) {
 		$service = new Service([

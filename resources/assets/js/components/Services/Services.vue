@@ -38,10 +38,10 @@
 				<transition-group name="slide-out" mode="out-in">
 					<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
 						<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
-							<app-service 
+							<app-service-multi 
 								:service="service"
 								@bidStop="removeService"
-							></app-service>
+							></app-service-multi>
 						</router-link>
 					</div>
 				</transition-group>
@@ -54,7 +54,7 @@
 
 <script>
 	import appTagsInput from '../Includes/TagsInput';
-	import appService from './Service.vue';
+	import appServiceMulti from './ServiceMulti.vue';
 	import Model from '../../includes/Model';
 
 	export default {
@@ -65,7 +65,7 @@
 		},
 		components: {
 			appTagsInput,
-			appService,
+			appServiceMulti,
 		},
 		data() {
 			return {
@@ -127,7 +127,7 @@
 				});
 			}
 		},
-		mounted() {
+		created() {
 			this.getServices();
 		}
 	}
