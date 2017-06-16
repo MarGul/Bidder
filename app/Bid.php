@@ -22,16 +22,15 @@ class Bid extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'user_id'
-    ];
+    protected $hidden = ['user_id'];
 
 	/**
 	 * A bid belongs to a service.
 	 * 
 	 * @return Eloquent Relationship
 	 */
-    public function service() {
+    public function service() 
+    {
     	return $this->belongsTo('App\Service');
     }
 
@@ -40,20 +39,9 @@ class Bid extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function user() {
+    public function user() 
+    {
         return $this->belongsTo('App\User');
-    }
-
-    /**
-     * Add a global scope to this model to always sort by created_at DESC
-     * 
-     * @return void
-     */
-    protected static function boot() {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('created_at', 'desc');
-        });
     }
 
 }

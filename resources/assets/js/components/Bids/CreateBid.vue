@@ -167,15 +167,34 @@
 				this.processing = true;
 
 				new Model('services/{id}/bids').setId(this.id).create(this.finalData)
-				.then(response => {
-					this.$store.commit('ADD_BID', {bid: response.bid});
-					this.form.reset();
-					this.processing = false;
-				})
-				.catch(error => {
-					this.form.errors.record(error);
-					this.processing = false;
-				});
+					.then(response => {
+						// Break the bids cache
+						this.$store.commit('SET_BIDS_LOADED', {loaded: false});
+						// Increment the bid_count for service in store.
+						let service = this.$store.getters.getService;
+						let bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
+						
+						if ( bidCount === 1 ) {
+							service.bid_count = {count: 1};
+						} else {
+							service.bid_count.count = bidCount;
+						}
+						
+						this.$store.commit('SET_SERVICE', service);
+
+						this.form.reset();
+						this.processing = false;
+
+						// Show a success notification for bid created
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Snyggt! Vi skapade ditt bud.'});
+						$("html, body").animate({ scrollTop: 0 }, "fast");
+						// Close the modal
+						this.$store.dispatch('closeModal');
+					})
+					.catch(error => {
+						this.form.errors.record(error);
+						this.processing = false;
+					});
 			},
 			openShowBids() {
 				this.$store.dispatch('openModal', { component: 'showBids', size: 'large' });

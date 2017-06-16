@@ -3216,13 +3216,15 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Search__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__ = __webpack_require__(247);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__ = __webpack_require__(9);
 //
 //
 //
@@ -3250,6 +3252,9 @@ var app = new Vue({
 //
 //
 //
+//
+//
+
 
 
 
@@ -3262,9 +3267,10 @@ var app = new Vue({
     components: {
         appMobileHeader: __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader___default.a,
         appDesktopHeader: __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default.a,
-        appModal: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal___default.a,
-        appSearch: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search___default.a,
-        appFooter: __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default.a
+        appNotifications: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default.a,
+        appModal: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default.a,
+        appSearch: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default.a,
+        appFooter: __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default.a
     },
     data: function data() {
         return {
@@ -3283,7 +3289,7 @@ var app = new Vue({
         this.$store.dispatch('fetchRegions');
         // Start the applications heartbeat
         setInterval(function () {
-            __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
+            __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
         }, 1000);
     }
 };
@@ -3517,7 +3523,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(14);
@@ -3694,9 +3700,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.id).create(this.finalData).then(function (response) {
-				_this.$store.commit('ADD_BID', { bid: response.bid });
+				// Break the bids cache
+				_this.$store.commit('SET_BIDS_LOADED', { loaded: false });
+				// Increment the bid_count for service in store.
+				var service = _this.$store.getters.getService;
+				var bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
+
+				if (bidCount === 1) {
+					service.bid_count = { count: 1 };
+				} else {
+					service.bid_count.count = bidCount;
+				}
+
+				_this.$store.commit('SET_SERVICE', service);
+
 				_this.form.reset();
 				_this.processing = false;
+
+				// Show a success notification for bid created
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Snyggt! Vi skapade ditt bud.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				// Close the modal
+				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -3707,6 +3732,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	}
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 163 */
@@ -3775,6 +3801,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3783,16 +3814,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
 	},
 	computed: {
+		loaded: function loaded() {
+			return this.$store.getters.getBidsLoaded;
+		},
 		bids: function bids() {
 			return this.$store.getters.getBids;
 		}
 	},
 	methods: {
+		rating: function rating(bid) {
+			return bid.user.rating ? bid.user.rating.avg : 0;
+		},
+		ratingCount: function ratingCount(bid) {
+			return bid.user.rating ? bid.user.rating.count : 0;
+		},
 		openCreateBid: function openCreateBid() {
 			this.$store.dispatch('openModal', { component: 'createBid', size: 'large' });
 		},
 		time: function time(t) {
 			return moment(t).format("LLL");
+		}
+	},
+	created: function created() {
+		if (!this.loaded) {
+			this.$store.dispatch('getBids');
 		}
 	}
 };
@@ -4918,17 +4963,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	computed: {
-		title: function title() {
-			return this.$store.getters.getServiceTitle;
-		},
-		description: function description() {
-			return this.$store.getters.getServiceDescription;
+		service: function service() {
+			return this.$store.getters.getService;
 		},
 		category: function category() {
-			return this.$store.getters.getServiceCategoryName;
+			var category = this.$store.getters.getCategoryById(this.service.category_id);
+			return category.name;
 		},
 		location: function location() {
-			return this.$store.getters.getServiceCityName + ", " + this.$store.getters.getServiceRegionName;
+			var city = this.$store.getters.getCityById(this.service.city_id);
+			var region = this.$store.getters.getRegionById(this.service.region_id);
+			return city.name + ", " + region.name;
 		}
 	}
 };
@@ -6816,17 +6861,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6847,7 +6881,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.getService;
 		},
 		bids: function bids() {
-			return this.service.bids.length;
+			return this.service.bid_count ? this.service.bid_count.count : 0;
 		},
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
@@ -6859,10 +6893,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.username;
 		},
 		ratingCount: function ratingCount() {
-			return this.service.user.reviews ? this.service.user.reviews.count : 0;
+			return this.service.user.rating ? this.service.user.rating.count : 0;
 		},
 		ratingAvg: function ratingAvg() {
-			return this.service.user.reviews ? this.service.user.reviews.avg : 0;
+			return this.service.user.rating ? this.service.user.rating.avg : 0;
 		}
 	},
 	methods: {
@@ -6921,8 +6955,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__);
-//
-//
 //
 //
 //
@@ -7691,7 +7723,9 @@ var regions = {
 var service = {
 	state: {
 		loaded: false,
-		service: { comments: [], bids: [], user: {} }
+		service: { comments: [], user: {} },
+		bids_loaded: false,
+		bids: []
 	},
 	mutations: {
 		'SET_LOADED': function SET_LOADED(state, loaded) {
@@ -7700,8 +7734,11 @@ var service = {
 		'SET_SERVICE': function SET_SERVICE(state, service) {
 			state.service = service;
 		},
-		'ADD_BID': function ADD_BID(state, payload) {
-			state.service.bids.unshift(payload.bid);
+		'SET_BIDS_LOADED': function SET_BIDS_LOADED(state, loaded) {
+			state.bids_loaded = loaded;
+		},
+		'SET_BIDS': function SET_BIDS(state, bids) {
+			state.bids = bids;
 		},
 		'ADD_COMMENT': function ADD_COMMENT(state, payload) {
 			state.service.comments.unshift(payload.comment);
@@ -7713,10 +7750,22 @@ var service = {
 
 			// Set the base state first.
 			commit('SET_LOADED', false);
-			commit('SET_SERVICE', { comments: [], bids: [], user: {} });
+			commit('SET_SERVICE', { comments: [], user: {} });
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services').find(payload.id).then(function (response) {
 				commit('SET_SERVICE', response.service);
 				commit('SET_LOADED', true);
+			}).catch(function (error) {});
+		},
+		getBids: function getBids(_ref2, payload) {
+			var commit = _ref2.commit,
+			    state = _ref2.state;
+
+			// Set the base state first.
+			commit('SET_BIDS_LOADED', false);
+			commit('SET_BIDS', { bids: [] });
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(state.service.id).get().then(function (response) {
+				commit('SET_BIDS', response.bids);
+				commit('SET_BIDS_LOADED', true);
 			}).catch(function (error) {});
 		}
 	},
@@ -7727,32 +7776,11 @@ var service = {
 		getService: function getService(state) {
 			return state.service;
 		},
-		getServiceTitle: function getServiceTitle(state) {
-			return state.service.title ? state.service.title : '';
-		},
-		getServiceDescription: function getServiceDescription(state) {
-			return state.service.description ? state.service.description : '';
-		},
-		getServiceCategory: function getServiceCategory(state) {
-			return state.service.category ? state.service.category : {};
-		},
-		getServiceCategoryName: function getServiceCategoryName(state) {
-			return state.service.category ? state.service.category.name : '';
-		},
-		getServiceRegion: function getServiceRegion(state) {
-			return state.service.region ? state.service.region : {};
-		},
-		getServiceRegionName: function getServiceRegionName(state) {
-			return state.service.region ? state.service.region.name : '';
-		},
-		getServiceCity: function getServiceCity(state) {
-			return state.service.city ? state.service.city : {};
-		},
-		getServiceCityName: function getServiceCityName(state) {
-			return state.service.city ? state.service.city.name : '';
+		getBidsLoaded: function getBidsLoaded(state) {
+			return state.bids_loaded;
 		},
 		getBids: function getBids(state) {
-			return state.service.bids;
+			return state.bids;
 		}
 	}
 };
@@ -7946,7 +7974,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, "\n.notifications-component[data-v-05633b28] {\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  margin: -35px 0 35px 0;\n}\n.notifications-component.success[data-v-05633b28] {\n    background-color: #A6D785;\n    color: #444;\n}\n.notifications-component.success a[data-v-05633b28] {\n      color: #008B00;\n}\n.notifications-component .notification-area[data-v-05633b28] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-05633b28] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-05633b28] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-05633b28] {\n        cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.notifications-component[data-v-05633b28] {\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  margin: 0 0 35px 0;\n}\n.notifications-component.success[data-v-05633b28] {\n    background-color: #A6D785;\n    color: #444;\n}\n.notifications-component.success a[data-v-05633b28] {\n      color: #008B00;\n}\n.notifications-component .notification-area[data-v-05633b28] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-05633b28] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-05633b28] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-05633b28] {\n        cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -11352,7 +11380,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "site"
     }
-  }, [(_vm.breakpoints.mobile) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), _c('transition', {
+  }, [(_vm.breakpoints.mobile) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), (_vm.$store.getters.showingNotification) ? _c('app-notifications') : _vm._e(), _vm._v(" "), _c('transition', {
     attrs: {
       "name": "slide-down-up"
     }
@@ -12077,7 +12105,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "title",
     domProps: {
-      "textContent": _vm._s(_vm.title)
+      "textContent": _vm._s(_vm.service.title)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "info"
@@ -12108,7 +12136,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "description",
     domProps: {
-      "textContent": _vm._s(_vm.description)
+      "textContent": _vm._s(_vm.service.description)
     }
   })])
 },staticRenderFns: []}
@@ -12947,9 +12975,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "service-details-view no-hero-view"
   }, [_c('div', {
     staticClass: "container"
-  }, [(!_vm.$store.getters.getServiceLoaded) ? _c('div', {
-    staticClass: "waiting"
-  }, [_vm._m(0)]) : [_c('div', {
+  }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-8"
@@ -13034,31 +13060,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "comment": comment
       }
-    }), _vm._v(" "), (comment.replies.length > 0) ? _c('ul', {
-      staticClass: "comment-replies"
-    }, [_c('transition-group', {
-      attrs: {
-        "name": "slide-in-left"
-      }
-    }, _vm._l((comment.replies), function(reply) {
-      return _c('li', {
-        key: reply.id
-      }, [_c('app-comment', {
-        attrs: {
-          "comment": reply
-        }
-      })], 1)
-    }))], 1) : _vm._e()], 1)
-  }))], 1)])], 1)])]], 2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw fa-4x"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])])
-}]}
+    })], 1)
+  }))], 1)])], 1)])] : _c('app-loading', {
+    attrs: {
+      "bg": "gray"
+    }
+  })], 2)])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -13423,7 +13431,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "user-component no-hero-view"
-  }, [(_vm.$store.getters.showingNotification) ? _c('app-notifications') : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "container"
   }, [(_vm.breakpoints.isSmallDevices()) ? _c('div', {
     staticClass: "mobile-user-nav clearfix"
@@ -13495,7 +13503,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Betalningar")])], 1)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "user-ui-content"
-  }, [_c('router-view')], 1)])])], 1)
+  }, [_c('router-view')], 1)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13939,7 +13947,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "show_bids-component"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
-  }, [(_vm.bids.length > 0) ? _c('ul', {
+  }, [(_vm.loaded) ? [(_vm.bids.length > 0) ? _c('ul', {
     staticClass: "list-unstyled list-bids"
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', [_c('div', {
@@ -13956,8 +13964,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "user-reviews"
     }, [_c('app-ratings', {
       attrs: {
-        "rating": 4.5,
-        "total": 8
+        "rating": _vm.rating(bid),
+        "total": _vm.ratingCount(bid)
       }
     })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5"
@@ -14014,7 +14022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })])
   })) : _c('div', {
     staticClass: "alert alert-info text-center"
-  }, [_vm._v("\n\t\t\tDenna tjänsten har ännu inga lagda bud. Vill du bli den första? \n\t\t\t"), _c('a', {
+  }, [_vm._v("\n\t\t\t\tDenna tjänsten har ännu inga lagda bud. Vill du bli den första? \n\t\t\t\t"), _c('a', {
     staticClass: "link",
     on: {
       "click": function($event) {
@@ -14022,7 +14030,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.openCreateBid($event)
       }
     }
-  }, [_vm._v("Lägg ett bud nu")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Lägg ett bud nu")])])] : _c('app-loading')], 2), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_c('a', {
     staticClass: "link",

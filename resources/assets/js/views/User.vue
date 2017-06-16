@@ -1,7 +1,5 @@
 <template>
 	<div class="user-component no-hero-view">
-		
-		<app-notifications v-if="$store.getters.showingNotification"></app-notifications>
 
 		<div class="container">
 			<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">

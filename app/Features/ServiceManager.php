@@ -12,12 +12,10 @@ class ServiceManager {
 	 * Get a single service.
 	 * 
 	 * @param  App\Service $service
-	 * @return \Illuminate\Http\Response
+	 * @return collection
 	 */
 	public function get($service) {
-		$service->load(['user.reviews', 'category', 'region', 'city', 'bids.user', 'comments' => function($query) {
-			$query->with(['user', 'replies.user'])->where('parent', null);
-		}]);
+		$service->load(['user.rating', 'bid_count', 'comments.user']);
 
 		return $service;
 	}

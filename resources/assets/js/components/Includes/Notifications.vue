@@ -27,7 +27,7 @@
 	.notifications-component {
 		padding: 16px;
 		border: 1px solid rgba(27,31,35,0.15);
-		margin: -35px 0 35px 0;
+		margin: 0 0 35px 0;
 
 		&.success {
 			background-color: #A6D785;

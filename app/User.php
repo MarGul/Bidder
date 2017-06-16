@@ -58,11 +58,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Relationship to get the review count and average.
+     * Relationship to get the rating count and average.
      * 
      * @return Eloquent Relationship
      */
-    public function reviews()
+    public function rating()
     {
         return $this->hasOne('App\Review', 'reviewed')
                     ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg')
