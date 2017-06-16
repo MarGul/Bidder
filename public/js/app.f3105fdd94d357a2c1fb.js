@@ -4921,40 +4921,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(245);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ServiceFilter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4986,62 +4957,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: {
-		categories: { type: Array, default: function _default() {
-				return [];
-			} },
-		regions: { type: Array, default: function _default() {
-				return [];
-			} },
-		cities: { type: Array, default: function _default() {
-				return [];
-			} }
-	},
 	components: {
-		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a,
+		appServiceFilter: __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default.a,
 		appServiceMulti: __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default.a
 	},
 	data: function data() {
 		return {
-			filterText: '',
 			fetched: false,
 			services: [],
 			page: 1
 		};
 	},
 
-	computed: {
-		locations: function locations() {
-			return this.regions.concat(this.cities);
-		},
-		allCategories: function allCategories() {
-			return this.$store.getters.getCategoriesFlatten;
-		},
-		allLocations: function allLocations() {
-			return this.$store.getters.getRegionsFlatten;
-		}
-	},
 	methods: {
-		categoryAdd: function categoryAdd(item) {
-			this.categories.push(item);
-		},
-		categoryRemove: function categoryRemove(_ref) {
-			var index = _ref.index;
-
-			this.categories.splice(index, 1);
-		},
-		locationAdd: function locationAdd(item) {
-			item.type == 'region' ? this.regions.push(item) : this.cities.push(item);
-		},
-		locationRemove: function locationRemove(_ref2) {
-			var item = _ref2.item;
-
-			var target = item.type == 'region' ? this.regions : this.cities;
-			var index = target.findIndex(function (el) {
-				return el.value == item.value;
-			});
-			if (index != -1) target.splice(index, 1);
-		},
 		getServices: function getServices(append) {
 			var _this = this;
 
@@ -5058,8 +4986,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				cities: this.cities.map(function (el) {
 					return el.value;
 				})
-			}).then(function (_ref3) {
-				var services = _ref3.services;
+			}).then(function (_ref) {
+				var services = _ref.services;
 
 				_this.services = _this.services.concat(services);
 				_this.fetched = true;
@@ -5067,10 +4995,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				console.log(error);
 			});
 		},
-		removeService: function removeService(_ref4) {
+		removeService: function removeService(_ref2) {
 			var _this2 = this;
 
-			var id = _ref4.id;
+			var id = _ref2.id;
 
 			var sleep = function sleep(ms) {
 				return new Promise(function (resolve) {
@@ -5085,7 +5013,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
-		this.getServices();
+		//this.getServices();
 	}
 };
 
@@ -7874,14 +7802,16 @@ var user = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_modal__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_auth__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_user__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_notifications__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_servicesFilter__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_service__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_notifications__ = __webpack_require__(219);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex___default.a);
 
 // Import modules
+
 
 
 
@@ -7897,8 +7827,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		modal: __WEBPACK_IMPORTED_MODULE_4__modules_modal__["a" /* default */],
 		auth: __WEBPACK_IMPORTED_MODULE_5__modules_auth__["a" /* default */],
 		user: __WEBPACK_IMPORTED_MODULE_6__modules_user__["a" /* default */],
-		service: __WEBPACK_IMPORTED_MODULE_7__modules_service__["a" /* default */],
-		notifications: __WEBPACK_IMPORTED_MODULE_8__modules_notifications__["a" /* default */]
+		serviesFilter: __WEBPACK_IMPORTED_MODULE_7__modules_servicesFilter__["a" /* default */],
+		service: __WEBPACK_IMPORTED_MODULE_8__modules_service__["a" /* default */],
+		notifications: __WEBPACK_IMPORTED_MODULE_9__modules_notifications__["a" /* default */]
 	}
 });
 
@@ -11556,105 +11487,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "services-component"
-  }, [_c('div', {
-    staticClass: "service-filter-container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.filterText),
-      expression: "filterText"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "filter_text"
-    },
-    domProps: {
-      "value": _vm._s(_vm.filterText)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.filterText = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
-    attrs: {
-      "items": _vm.categories,
-      "options": _vm.allCategories
-    },
-    on: {
-      "add": _vm.categoryAdd,
-      "remove": _vm.categoryRemove
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
-    attrs: {
-      "items": _vm.locations,
-      "options": _vm.allLocations
-    },
-    on: {
-      "add": _vm.locationAdd,
-      "remove": _vm.locationRemove
-    }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.getServices(false)
-      }
-    }
-  }, [_vm._v("Hitta Tjänster")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "services margin-25"
-  }, [(_vm.fetched) ? _c('div', {
-    staticClass: "row"
-  }, [_c('transition-group', {
-    attrs: {
-      "name": "slide-out",
-      "mode": "out-in"
-    }
-  }, _vm._l((_vm.services), function(service) {
-    return _c('div', {
-      key: service.id,
-      staticClass: "col-xs-12 col-sm-6"
-    }, [_c('router-link', {
-      staticClass: "no-underline",
-      attrs: {
-        "to": {
-          name: 'serviceDetails',
-          params: {
-            id: service.id
-          }
-        }
-      }
-    }, [_c('app-service-multi', {
-      attrs: {
-        "service": service
-      },
-      on: {
-        "bidStop": _vm.removeService
-      }
-    })], 1)], 1)
-  }))], 1) : _c('app-loading', {
-    attrs: {
-      "bg": "gray"
-    }
-  })], 1)])
+  }, [_c('app-service-filter')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -15194,6 +15027,331 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-ba203706", module.exports)
   }
 }
+
+/***/ }),
+/* 360 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a
+	},
+	computed: {
+		filterText: {
+			get: function get() {
+				return this.$store.getters.getFilterText;
+			},
+			set: function set(value) {
+				this.$store.commit('SET_FILTER_TEXT', { text: value });
+			}
+		},
+		categories: function categories() {
+			return this.$store.getters.getFilterCategories;
+		},
+		allCategories: function allCategories() {
+			return this.$store.getters.getCategoriesFlatten;
+		},
+		locations: function locations() {
+			return this.$store.getters.getFilterLocations;
+		},
+		allLocations: function allLocations() {
+			return this.$store.getters.getRegionsFlatten;
+		}
+	},
+	methods: {
+		addCategory: function addCategory(item) {
+			this.$store.dispatch('addFilterCategory', { category: item });
+		},
+		removeCategory: function removeCategory(_ref) {
+			var index = _ref.index;
+
+			this.$store.dispatch('removeFilterCategory', { index: index });
+		},
+		addLocation: function addLocation(item) {
+			this.$store.dispatch('addFilterLocation', { location: item });
+		},
+		removeLocation: function removeLocation(_ref2) {
+			var item = _ref2.item;
+
+			this.$store.dispatch('removeFilterLocation', { location: item });
+		}
+	}
+};
+
+/***/ }),
+/* 361 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(360),
+  /* template */
+  __webpack_require__(362),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServiceFilter.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ServiceFilter.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-169f8664", Component.options)
+  } else {
+    hotAPI.reload("data-v-169f8664", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "service-filter-container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filterText),
+      expression: "filterText"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "filter_text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.filterText)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filterText = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.categories,
+      "options": _vm.allCategories
+    },
+    on: {
+      "add": _vm.addCategory,
+      "remove": _vm.removeCategory
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.locations,
+      "options": _vm.allLocations
+    },
+    on: {
+      "add": _vm.addLocation,
+      "remove": _vm.removeLocation
+    }
+  })], 1)]), _vm._v(" "), _vm._m(0)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Hitta Tjänster")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-169f8664", module.exports)
+  }
+}
+
+/***/ }),
+/* 363 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+
+
+var servicesFilter = {
+	state: {
+		text: '',
+		categories: [],
+		regions: [],
+		cities: [],
+		locations: []
+	},
+	mutations: {
+		'SET_FILTER_TEXT': function SET_FILTER_TEXT(state, payload) {
+			state.text = payload.text;
+		},
+		'SET_FILTER_CATEGORIES': function SET_FILTER_CATEGORIES(state, payload) {
+			state.categories = payload.categories;
+		},
+		'SET_FILTER_REGIONS': function SET_FILTER_REGIONS(state, payload) {
+			state.regions = payload.regions;
+		},
+		'SET_FILTER_CITIES': function SET_FILTER_CITIES(state, payload) {
+			state.cities = payload.cities;
+		},
+		'SET_FILTER_LOCATIONS': function SET_FILTER_LOCATIONS(state, payload) {
+			state.locations = payload.locations;
+		}
+	},
+	actions: {
+		addFilterCategory: function addFilterCategory(_ref, payload) {
+			var commit = _ref.commit,
+			    state = _ref.state;
+
+			var categories = state.categories;
+			categories.push(payload.category);
+			commit('SET_FILTER_CATEGORIES', { categories: categories });
+		},
+		removeFilterCategory: function removeFilterCategory(_ref2, payload) {
+			var commit = _ref2.commit,
+			    state = _ref2.state;
+
+			var categories = state.categories;
+			categories.splice(payload.index, 1);
+			commit('SET_FILTER_CATEGORIES', { categories: categories });
+		},
+		addFilterLocation: function addFilterLocation(_ref3, payload) {
+			var commit = _ref3.commit,
+			    state = _ref3.state;
+
+			var locations = state.locations;
+			locations.push(payload.location);
+			commit('SET_FILTER_LOCATIONS', { locations: locations });
+			// Also add the location to either region or city.
+			if (payload.location.type === 'region') {
+				var regions = state.regions;
+				regions.push(payload.location);
+				commit('SET_FILTER_REGIONS', { regions: regions });
+			} else {
+				var cities = state.cities;
+				cities.push(payload.location);
+				commit('SET_FILTER_CITIES', { cities: cities });
+			}
+		},
+		removeFilterLocation: function removeFilterLocation(_ref4, payload) {
+			var commit = _ref4.commit,
+			    state = _ref4.state;
+
+			// Remove it from locations array.
+			var locations = state.locations;
+			locations.forEach(function (location, index) {
+				if (location.value === payload.location.value) {
+					locations.splice(index, 1);
+				}
+			});
+			commit('SET_FILTER_LOCATIONS', { locations: locations });
+			// Remove it from either regions or cities
+			if (payload.location.type === 'region') {
+				(function () {
+					var regions = state.regions;
+					regions.forEach(function (region, index) {
+						if (region.value === payload.location.value) {
+							regions.splice(index, 1);
+						}
+					});
+					commit('SET_FILTER_REGIONS', { regions: regions });
+				})();
+			} else {
+				(function () {
+					var cities = state.cities;
+					cities.forEach(function (city, index) {
+						if (city.value === payload.location.value) {
+							cities.splice(index, 1);
+						}
+					});
+					commit('SET_FILTER_CITIES', { cities: cities });
+				})();
+			}
+		}
+	},
+	getters: {
+		getFilterText: function getFilterText(state) {
+			return state.filterText;
+		},
+		getFilterCategories: function getFilterCategories(state) {
+			return state.categories;
+		},
+		getFilterRegions: function getFilterRegions(state) {
+			return state.regions;
+		},
+		getFilterCities: function getFilterCities(state) {
+			return state.cities;
+		},
+		getFilterLocations: function getFilterLocations(state) {
+			return state.locations;
+		}
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = servicesFilter;
 
 /***/ })
 ],[348]);
