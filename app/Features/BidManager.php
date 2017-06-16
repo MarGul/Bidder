@@ -12,10 +12,13 @@ class BidManager {
 	 * Get bids for a service
 	 * 
 	 * @param  App\Service $service
-	 * @return \Illuminate\Http\Response
+	 * @return collection
 	 */
 	public function all($service) {
-		$bids = Bid::with('user')->where('service_id', $service->id)->get();
+		$bids = Bid::with('user.rating')
+					->where('service_id', $service->id)
+					->orderBy('created_at', 'desc')
+					->get();
 
 		return $bids;
 	}

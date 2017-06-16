@@ -1,13 +1,7 @@
 <template>
 	<div class="service-details-view no-hero-view">
 		<div class="container">
-			<div class="waiting" v-if="!$store.getters.getServiceLoaded">
-				<span class="processing">
-					<i class="fa fa-spinner fa-pulse fa-fw fa-4x"></i>
-					<span class="sr-only">Loading...</span>
-				</span>
-			</div>
-			<template v-else>
+			<template v-if="$store.getters.getServiceLoaded">
 				<div class="row">
 					<div class="col-xs-12 col-md-8">
 						<div class="service-description white-container" v-if="!breakpoints.small">
@@ -37,7 +31,7 @@
 								<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
 								<div class="user-displayname" v-text="service.user.username"></div>
 								<div class="user-ratings">
-									<app-ratings :rating="3.7" :total="7" size="large"></app-ratings>
+									<app-ratings :rating="ratingAvg" :total="ratingCount" size="large"></app-ratings>
 									<a class="link">Visa omdömmen</a>
 								</div>
 							</template>
@@ -52,14 +46,6 @@
 								<transition-group name="slide-in-left">
 									<li v-for="comment in service.comments" :key="comment.id">
 										<app-comment :comment="comment"></app-comment>
-									
-										<ul class="comment-replies" v-if="comment.replies.length > 0">
-											<transition-group name="slide-in-left">
-												<li v-for="reply in comment.replies" :key="reply.id">
-													<app-comment :comment="reply"></app-comment>
-												</li>
-											</transition-group>
-										</ul>
 									</li>
 								</transition-group>
 							</ul>
@@ -67,6 +53,9 @@
 					</div>
 				</div>
 			</template>
+
+			<app-loading bg="gray" v-else></app-loading>
+
 		</div>
 	</div>
 </template>
@@ -91,7 +80,7 @@
 				return this.$store.getters.getService;
 			},
 			bids() {
-				return this.service.bids.length;
+				return this.service.bid_count ? this.service.bid_count.count : 0;
 			},
 			breakpoints() {
 				return window.breakpoints;
@@ -101,6 +90,12 @@
 			},
 			avatarAlt() {
 				return `Avatar bild för användare ${this.service.user.username}`;
+			},
+			ratingCount() {
+				return this.service.user.rating ? this.service.user.rating.count : 0;
+			},
+			ratingAvg() {
+				return this.service.user.rating ? this.service.user.rating.avg : 0;
 			}
 		},
 		methods: {

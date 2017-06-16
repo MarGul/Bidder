@@ -1,6 +1,6 @@
 <template>
 	<div class="service_description-component">
-		<div class="title" v-text="title"></div>
+		<div class="title" v-text="service.title"></div>
 		<div class="info">
 			<div class="info-item info-category">
 				<i aria-hidden="true" class="fa fa-list-ul"></i> 
@@ -11,17 +11,25 @@
 				Plats: <span class="info-item-value" v-text="location"></span>
 			</div>
 		</div>
-		<div class="description" v-text="description"></div>
+		<div class="description" v-text="service.description"></div>
 	</div>
 </template>
 
 <script>
 	export default {
 		computed: {
-			title() { return this.$store.getters.getServiceTitle; },
-			description() { return this.$store.getters.getServiceDescription; },
-			category() { return this.$store.getters.getServiceCategoryName; },
-			location() { return `${this.$store.getters.getServiceCityName}, ${this.$store.getters.getServiceRegionName}`; }
+			service() {
+				return this.$store.getters.getService;
+			},
+			category() {
+				let category = this.$store.getters.getCategoryById(this.service.category_id);
+				return category.name;
+			},
+			location() {
+				let city = this.$store.getters.getCityById(this.service.city_id);
+				let region = this.$store.getters.getRegionById(this.service.region_id);
+				return `${city.name}, ${region.name}`;
+			}
 		}
 	}
 </script>

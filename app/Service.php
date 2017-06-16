@@ -22,16 +22,15 @@ class Service extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'user_id', 'category_id', 'region_id', 'city_id'
-    ];
+    protected $hidden = ['user_id'];
 
     /**
      * A service belongs to a user.
      * 
      * @return Eloquent Relationship
      */
-    public function user() {
+    public function user() 
+    {
         return $this->belongsTo('App\User');
     }
 
@@ -40,7 +39,8 @@ class Service extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function category() {
+    public function category() 
+    {
     	return $this->belongsTo('App\Category');
     }
 
@@ -49,7 +49,8 @@ class Service extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function region() {
+    public function region() 
+    {
     	return $this->belongsTo('App\Region');
     }
 
@@ -58,7 +59,8 @@ class Service extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function city() {
+    public function city() 
+    {
         return $this->belongsTo('App\City');
     }
 
@@ -67,7 +69,8 @@ class Service extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function comments() {
+    public function comments() 
+    {
         return $this->hasMany('App\Comment');
     }
 
@@ -76,8 +79,19 @@ class Service extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function bids() {
+    public function bids() 
+    {
         return $this->hasMany('App\Bid');
+    }
+
+    /**
+     * The count of bids for the service
+     * 
+     * @return Eloquent Relationship
+     */
+    public function bid_count()
+    {
+        return $this->hasOne('App\Bid')->selectRaw('service_id, count(*) as count')->groupBy('service_id');
     }
 
     /**
