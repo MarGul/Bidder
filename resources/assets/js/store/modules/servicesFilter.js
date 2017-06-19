@@ -81,7 +81,7 @@ const servicesFilter = {
 		}
 	},
 	getters: {
-		getFilterText: state => state.filterText,
+		getFilterText: state => state.text,
 		getFilterCategories: state => state.categories,
 		getFilterRegions: state => state.regions,
 		getFilterCities: state => state.cities,

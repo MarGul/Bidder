@@ -107,3 +107,32 @@
 		}
 	}
 }
+
+.services-component {
+
+	.load-more {
+
+		&:before {
+			content: "";
+			display: block;
+			height: 1px;
+			background-color: $border-color-gray;
+			position: absolute;
+			left: 15px;
+			top: 26px;
+			right: calc(50% + 60px);
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			height: 1px;
+			background-color: $border-color-gray;
+			position: absolute;
+			right: 15px;
+			top: 26px;
+			left: calc(50% + 60px);
+		}
+	}
+
+}

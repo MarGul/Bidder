@@ -1,5 +1,5 @@
 <template>
-	<div class="service-filter-container">
+	<div class="service_filter-component">
 		<div class="row">
 			<div class="col-xs-12 col-md-4 column">
 				<label>Fritext</label>
@@ -22,11 +22,6 @@
 					@add="addLocation"
 					@remove="removeLocation"
 				></app-tags-input>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<button type="button" class="btn btn-primary full-width">Hitta Tjänster</button>
 			</div>
 		</div>
 	</div>

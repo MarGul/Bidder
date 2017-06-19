@@ -61,6 +61,11 @@
 
 .btn-transparent {
 	background-color: transparent;
+
+	&.processing:after {
+		border-bottom: 2px solid rgba(0,0,0,0.3) !important;
+		border-right: 2px solid rgba(0,0,0,0.3) !important;
+	}
 }
 
 @-webkit-keyframes rotate {

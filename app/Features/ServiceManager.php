@@ -11,11 +11,15 @@ class ServiceManager {
 	/**
 	 * Display a listing of the service based on filtering.
 	 * 
-	 * @return [type]          [description]
+	 * @param  string $text
+	 * @param  string $categories
+	 * @param  string $regions
+	 * @param  string $cities
+	 * @return Illuminate\Contracts\Pagination\LengthAwarePaginator
 	 */
-	public function filter()
+	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
 	{
-		$services = Service::with('bid_count', 'comment_count')->get();
+		$services = Service::with('bid_count', 'comment_count')->simplePaginate(2, ['*'], 'page', $page);
 
 		return $services;
 	}

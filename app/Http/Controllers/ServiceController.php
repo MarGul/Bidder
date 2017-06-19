@@ -33,7 +33,7 @@ class ServiceController extends Controller
     {
         return response()->json([
             'message' => 'Listing all services.',
-            'services' => $this->manager->filter()
+            'services' => $this->manager->filter($request->page, $request->categories, $request->regions, $request->cities)
         ], 200);
     }
 
