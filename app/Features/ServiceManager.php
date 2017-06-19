@@ -19,7 +19,24 @@ class ServiceManager {
 	 */
 	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
 	{
-		$services = Service::with('bid_count', 'comment_count')->simplePaginate(2, ['*'], 'page', $page);
+		$query = Service::query();
+		if ( $text ) {
+			$query = $query->where('description', 'LIKE', '%'.$text.'%');
+		}
+
+		if ( $categories ) {
+			$query = $query->whereIn('category_id', explode(',', $categories));
+		}
+
+		if ( $regions ) {
+			$query = $query->whereIn('region_id', explode(',', $regions));
+		}
+
+		if ( $cities ) {
+			$query = $query->whereIn('city_id', explode(',', $cities));
+		}
+
+		$services = $query->orderBy('bid_stop', 'asc')->simplePaginate(20, ['*'], 'page', $page);
 
 		return $services;
 	}

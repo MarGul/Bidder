@@ -5,7 +5,7 @@
 			<app-service-filter></app-service-filter>
 			<div class="row">
 				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary full-width" @click="fetchServices">Hitta Tjänster</button>
+					<button type="button" class="btn btn-primary full-width" @click="fetchServices(false)">Hitta Tjänster</button>
 				</div>
 			</div>
 		</div>
@@ -28,7 +28,13 @@
 				<div class="row" v-if="canLoadMore">
 					<div class="col-xs-12">
 						<div class="load-more text-center mt10">
-							<button type="button" class="btn btn-default btn-transparent is-italic" :class="{'processing': loadingMore}">Hämta fler</button>
+							<button 
+								type="button" 
+								class="btn btn-default btn-transparent is-bold-italic" 
+								:class="{'processing': loadingMore}"
+								@click.prevent="fetchServices(true)">
+									Hämta fler
+								</button>
 						</div>
 					</div>
 				</div>
@@ -60,7 +66,9 @@
 			}
 		},
 		methods: {
-			fetchServices() {
+			fetchServices(append) {
+				this.page = append ? this.page + 1 : 1;
+				this.loadingMore = append ? true : false;
 				let data = {page: this.page};
 				if ( this.$store.getters.getFilterText ) data.text = this.$store.getters.getFilterText;
 				if ( this.$store.getters.getFilterCategories.length > 0 ) data.categories = this.$store.getters.getFilterCategories.map(cat => cat.value).join();
@@ -70,8 +78,9 @@
 				new Model('services').get(data)
 					.then(({services}) => {
 						this.canLoadMore = services.next_page_url ? true : false;
-						this.services = this.services.concat(services.data);
+						this.services = append ? this.services.concat(services.data) : this.services = services.data;
 						this.fetched = true;
+						this.loadingMore = false;
 					})
 					.catch(error => { console.log(error); });
 			},
@@ -85,7 +94,7 @@
 			}
 		},
 		created() {
-			this.fetchServices();
+			this.fetchServices(false);
 		}
 	}
 </script>

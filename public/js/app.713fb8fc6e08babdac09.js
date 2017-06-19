@@ -1944,6 +1944,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1965,9 +1971,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
-		fetchServices: function fetchServices() {
+		fetchServices: function fetchServices(append) {
 			var _this = this;
 
+			this.page = append ? this.page + 1 : 1;
+			this.loadingMore = append ? true : false;
 			var data = { page: this.page };
 			if (this.$store.getters.getFilterText) data.text = this.$store.getters.getFilterText;
 			if (this.$store.getters.getFilterCategories.length > 0) data.categories = this.$store.getters.getFilterCategories.map(function (cat) {
@@ -1984,8 +1992,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				var services = _ref.services;
 
 				_this.canLoadMore = services.next_page_url ? true : false;
-				_this.services = _this.services.concat(services.data);
+				_this.services = append ? _this.services.concat(services.data) : _this.services = services.data;
 				_this.fetched = true;
+				_this.loadingMore = false;
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -2008,7 +2017,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
-		this.fetchServices();
+		this.fetchServices(false);
 	}
 });
 
@@ -6071,7 +6080,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     },
     on: {
-      "click": _vm.fetchServices
+      "click": function($event) {
+        _vm.fetchServices(false)
+      }
     }
   }, [_vm._v("Hitta Tjänster")])])])], 1), _vm._v(" "), _c('div', {
     staticClass: "services mtb20"
@@ -6111,14 +6122,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "load-more text-center mt10"
   }, [_c('button', {
-    staticClass: "btn btn-default btn-transparent is-italic",
+    staticClass: "btn btn-default btn-transparent is-bold-italic",
     class: {
       'processing': _vm.loadingMore
     },
     attrs: {
       "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.fetchServices(true)
+      }
     }
-  }, [_vm._v("Hämta fler")])])])]) : _vm._e()] : _c('app-loading', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }

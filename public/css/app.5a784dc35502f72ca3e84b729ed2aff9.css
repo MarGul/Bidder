@@ -7738,8 +7738,12 @@ a {
   }
 }
 
-.is-italic {
+.is-italic, .is-bold-italic {
   font-style: italic !important;
+}
+
+.is-bold, .is-bold-italic {
+  font-weight: bold !important;
 }
 
 .btn {
