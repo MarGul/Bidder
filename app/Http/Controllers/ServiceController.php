@@ -31,7 +31,13 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $services = $this->manager->filter($request->page, $request->text, $request->categories, $request->regions, $request->cities);
+        $services = $this->manager->filter(
+            $request->page, 
+            $request->text, 
+            $request->categories, 
+            $request->regions, 
+            $request->cities
+        );
 
         return response()->json([
             'message' => 'Listing all services.',

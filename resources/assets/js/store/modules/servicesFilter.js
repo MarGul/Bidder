@@ -55,8 +55,9 @@ const servicesFilter = {
 			// Remove it from locations array.
 			let locations = state.locations;
 			locations.forEach((location, index) => {
-				if ( location.value === payload.location.value ) {
+				if ( location.value === payload.location.value && location.type == payload.location.type ) {
 					locations.splice(index, 1);
+					return;
 				}
 			});
 			commit('SET_FILTER_LOCATIONS', {locations});

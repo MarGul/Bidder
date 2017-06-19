@@ -20,23 +20,15 @@ class ServiceManager {
 	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
 	{
 		$query = Service::query();
-		if ( $text ) {
-			$query = $query->where('description', 'LIKE', '%'.$text.'%');
-		}
 
-		if ( $categories ) {
-			$query = $query->whereIn('category_id', explode(',', $categories));
-		}
+		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
+		if ( $categories ) $query = $query->whereIn('category_id', explode(',', $categories));
+		if ( $regions ) $query = $query->whereIn('region_id', explode(',', $regions));
+		if ( $cities ) $query = $query->whereIn('city_id', explode(',', $cities));
 
-		if ( $regions ) {
-			$query = $query->whereIn('region_id', explode(',', $regions));
-		}
-
-		if ( $cities ) {
-			$query = $query->whereIn('city_id', explode(',', $cities));
-		}
-
-		$services = $query->orderBy('bid_stop', 'asc')->simplePaginate(20, ['*'], 'page', $page);
+		$services = $query->where('active', true)
+						  ->where('bid_stop', '>', Carbon::now())
+						  ->orderBy('bid_stop', 'asc')->simplePaginate(20, ['*'], 'page', $page);
 
 		return $services;
 	}
