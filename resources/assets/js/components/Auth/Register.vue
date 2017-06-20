@@ -72,7 +72,8 @@
 				this.processing = true;
 				new Model('register').new().post(this.form.data())
 					.then(response => {
-						console.log(response);
+						this.$store.commit('SET_AUTHENTICATED', {authenticated: true});
+						this.$store.commit('SET_USER', {user: response.user});
 						this.$store.dispatch('closeModal');
 						this.$router.push('/welcome');
 					})
