@@ -8,6 +8,29 @@ use Illuminate\Support\Facades\Hash;
 class UserManager {
 
 	/**
+	 * Create a new user
+	 * 
+	 * @param  array 	$data
+	 * @return App\User
+	 */
+	public function create($data)
+	{
+		$user = User::create([
+			'email' => $data['email'],
+			'username' => $data['username'],
+			'password' => bcrypt($data['password']),
+			'name' => '',
+			'bio' => '',
+			'avatar' => 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg' // Need to change
+		]);
+
+		// Send out email confirmation email.
+		// Send out welcome email with a delay.
+
+		return $user;
+	}
+
+	/**
 	 * Update the users profile.
 	 * 
 	 * @param  App\Http\Requests\UpdateProfile 	$request
