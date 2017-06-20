@@ -75,6 +75,16 @@ class Service extends Model
     }
 
     /**
+     * The count of comments for the service
+     * 
+     * @return Eloquent Relationship
+     */
+    public function comment_count()
+    {
+        return $this->hasOne('App\Comment')->selectRaw('service_id, count(*) as count')->groupBy('service_id');
+    }
+
+    /**
      * A service has many bids.
      * 
      * @return Eloquent Relationship
@@ -94,36 +104,4 @@ class Service extends Model
         return $this->hasOne('App\Bid')->selectRaw('service_id, count(*) as count')->groupBy('service_id');
     }
 
-    /**
-     * Run the services through this private function to add hypermedia links
-     * and other things that needs to be done to the service.
-     * 
-     * @param  Collection $services [Collection of App\Service objects]
-     * @return Collection           [Collection of parsed App\Service objects]
-     */
-    public static function parseServices($services) {
-       foreach ($services as $service) {
-            self::parseService($service);
-        }
-    }
-
-    public static function parseService($service) {
-        $service->hypermedia = [
-            'view_service' => [
-                'href' => 'api/v1/services/' . $service->id
-            ],
-            'view_category_services' => [
-                'href' => 'api/v1/categories/' . $service->category->slug . '/services',
-                'method' => 'GET'
-            ]
-        ];
-
-        // If it's the user's requesting service, have delete and update service hypermedia.
-
-        // No need for category_id, region_id, city_id and user_id. They are in the relationships
-        unset($service->category_id);
-        unset($service->region_id);
-        unset($service->city_id);
-        unset($service->user_id);
-    }
  }

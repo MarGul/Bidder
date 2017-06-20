@@ -53,16 +53,4 @@ class Comment extends Model
         return $this->hasMany(self::class, 'parent', 'id');
     }
 
-    /**
-     * Add a global scope to this model to always sort by updated_at DESC
-     * 
-     * @return void
-     */
-    protected static function boot() {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('updated_at', 'desc');
-        });
-    }
-
 }

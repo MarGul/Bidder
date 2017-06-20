@@ -1,51 +1,45 @@
 <template>
 	<div class="services-component">
+		
 		<div class="service-filter-container">
-			<div class="row">
-				<div class="col-xs-12 col-md-4 column">
-					<label>Fritext</label>
-					<input type="text" id="filter_text" class="form-control" v-model="filterText">
-				</div>
-				<div class="col-xs-12 col-md-4 column">
-					<label>Kategorier</label>
-					<app-tags-input 
-						:items="categories"
-						:options="allCategories"
-						@add="categoryAdd" 
-						@remove="categoryRemove"
-					></app-tags-input>
-				</div>
-				<div class="col-xs-12 col-md-4 column">
-					<label>Platser</label>
-					<app-tags-input 
-						:items="locations"
-						:options="allLocations"
-						@add="locationAdd"
-						@remove="locationRemove"
-					></app-tags-input>
-				</div>
-			</div>
+			<app-service-filter></app-service-filter>
 			<div class="row">
 				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary full-width" @click="getServices(false)">Hitta Tjänster</button>
+					<button type="button" class="btn btn-primary full-width" @click="fetchServices(false)">Hitta Tjänster</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="services margin-25">
-			<!-- v-for loop through the services with a component -->
-			<div class="row" v-if="fetched">
-				<transition-group name="slide-out" mode="out-in">
-					<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
-						<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
-							<app-service 
-								:service="service"
-								@bidStop="removeService"
-							></app-service>
-						</router-link>
+		<div class="services mtb20">
+			<template  v-if="fetched">
+				<div class="row">
+					<transition-group name="slide-out" mode="out-in">
+						<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
+							<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
+								<app-service-multi 
+									:service="service"
+									@bidStop="removeService"
+								></app-service-multi>
+							</router-link>
+						</div>
+					</transition-group>
+				</div>
+
+				<div class="row" v-if="canLoadMore">
+					<div class="col-xs-12">
+						<div class="load-more text-center mt10">
+							<button 
+								type="button" 
+								class="btn btn-default btn-transparent is-bold-italic" 
+								:class="{'processing': loadingMore}"
+								@click.prevent="fetchServices(true)">
+									Hämta fler
+								</button>
+						</div>
 					</div>
-				</transition-group>
-			</div>
+				</div>
+
+			</template>
 			
 			<app-loading bg="gray" v-else></app-loading>
 		</div>
@@ -53,70 +47,42 @@
 </template>
 
 <script>
-	import appTagsInput from '../Includes/TagsInput';
-	import appService from './Service.vue';
+	import appServiceFilter from './ServiceFilter';
+	import appServiceMulti from './ServiceMulti.vue';
 	import Model from '../../includes/Model';
 
 	export default {
-		props: {
-			categories: { type: Array, default: () => [] },
-			regions: { type: Array, default: () => [] },
-			cities: { type: Array, default: () => [] }
-		},
 		components: {
-			appTagsInput,
-			appService,
+			appServiceFilter,
+			appServiceMulti,
 		},
 		data() {
 			return {
-				filterText: '',
 				fetched: false,
-				services: [],
-				page: 1
-			}
-		},
-		computed: {
-			locations() {
-				return this.regions.concat(this.cities);
-			},
-			allCategories() {
-				return this.$store.getters.getCategoriesFlatten;
-			},
-			allLocations() {
-				return this.$store.getters.getRegionsFlatten;
+				canLoadMore: false,
+				loadingMore: false,
+				page: 1,
+				services: []
 			}
 		},
 		methods: {
-			categoryAdd(item) {
-				this.categories.push(item);
-			},
-			categoryRemove({index}) {
-				this.categories.splice(index, 1);
-			},
-			locationAdd(item) {
-				(item.type == 'region') ? this.regions.push(item) : this.cities.push(item);
-			},
-			locationRemove({item}) {
-				let target = (item.type == 'region') ? this.regions : this.cities;
-				let index = target.findIndex(el => el.value == item.value);
-				if (index != -1) target.splice(index, 1);
-			},
-			getServices(append) {
-				this.services = (append) ? this.services : [];
-				new Model('services').get({
-					page: this.page,
-					text: this.filterText, 
-					categories: this.categories.map(el => el.value),
-					regions: this.regions.map(el => el.value),
-					cities: this.cities.map(el => el.value)
-				})
-				.then(({services}) => {
-					this.services = this.services.concat(services);
-					this.fetched = true;
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			fetchServices(append) {
+				this.page = append ? this.page + 1 : 1;
+				this.loadingMore = append ? true : false;
+				let data = {page: this.page};
+				if ( this.$store.getters.getFilterText ) data.text = this.$store.getters.getFilterText;
+				if ( this.$store.getters.getFilterCategories.length > 0 ) data.categories = this.$store.getters.getFilterCategories.map(cat => cat.value).join();
+				if ( this.$store.getters.getFilterRegions.length > 0 ) data.regions = this.$store.getters.getFilterRegions.map(reg => reg.value).join();
+				if ( this.$store.getters.getFilterCities.length > 0 ) data.cities = this.$store.getters.getFilterCities.map(cit => cit.value).join();
+
+				new Model('services').get(data)
+					.then(({services}) => {
+						this.canLoadMore = services.next_page_url ? true : false;
+						this.services = append ? this.services.concat(services.data) : this.services = services.data;
+						this.fetched = true;
+						this.loadingMore = false;
+					})
+					.catch(error => { console.log(error); });
 			},
 			removeService({id}) {
 				let sleep = function(ms) {
@@ -127,8 +93,8 @@
 				});
 			}
 		},
-		mounted() {
-			this.getServices();
+		created() {
+			this.fetchServices(false);
 		}
 	}
 </script>

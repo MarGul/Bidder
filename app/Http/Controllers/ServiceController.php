@@ -31,9 +31,13 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $services = Service::with('comments', 'bids', 'region', 'city', 'category')->get();
-
-        Service::parseServices($services);
+        $services = $this->manager->filter(
+            $request->page, 
+            $request->text, 
+            $request->categories, 
+            $request->regions, 
+            $request->cities
+        );
 
         return response()->json([
             'message' => 'Listing all services.',

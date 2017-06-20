@@ -1,0 +1,12 @@
+.is-italic {
+	font-style: italic !important;
+}
+
+.is-bold {
+	font-weight: bold !important;
+}
+
+.is-bold-italic {
+	@extend .is-italic;
+	@extend .is-bold;
+}

@@ -9,6 +9,31 @@ use Carbon\Carbon;
 class ServiceManager {
 
 	/**
+	 * Display a listing of the service based on filtering.
+	 * 
+	 * @param  string $text
+	 * @param  string $categories
+	 * @param  string $regions
+	 * @param  string $cities
+	 * @return Illuminate\Contracts\Pagination\LengthAwarePaginator
+	 */
+	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
+	{
+		$query = Service::query();
+
+		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
+		if ( $categories ) $query = $query->whereIn('category_id', explode(',', $categories));
+		if ( $regions ) $query = $query->whereIn('region_id', explode(',', $regions));
+		if ( $cities ) $query = $query->whereIn('city_id', explode(',', $cities));
+
+		$services = $query->where('active', true)
+						  ->where('bid_stop', '>', Carbon::now())
+						  ->orderBy('bid_stop', 'asc')->simplePaginate(20, ['*'], 'page', $page);
+
+		return $services;
+	}
+
+	/**
 	 * Get a single service.
 	 * 
 	 * @param  App\Service $service
@@ -38,7 +63,7 @@ class ServiceManager {
 	 * Create a service
 	 * 
 	 * @param  \App\Http\Requests\StoreService 	$request 
-	 * @return \Illuminate\Http\Response
+	 * @return boolean
 	 */
 	public function create($user, $request) {
 		$service = new Service([

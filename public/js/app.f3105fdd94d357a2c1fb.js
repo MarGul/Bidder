@@ -3216,13 +3216,15 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Search__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__ = __webpack_require__(247);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__ = __webpack_require__(9);
 //
 //
 //
@@ -3250,6 +3252,9 @@ var app = new Vue({
 //
 //
 //
+//
+//
+
 
 
 
@@ -3262,9 +3267,10 @@ var app = new Vue({
     components: {
         appMobileHeader: __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader___default.a,
         appDesktopHeader: __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default.a,
-        appModal: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Modal___default.a,
-        appSearch: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Search___default.a,
-        appFooter: __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default.a
+        appNotifications: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default.a,
+        appModal: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default.a,
+        appSearch: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default.a,
+        appFooter: __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default.a
     },
     data: function data() {
         return {
@@ -3283,7 +3289,7 @@ var app = new Vue({
         this.$store.dispatch('fetchRegions');
         // Start the applications heartbeat
         setInterval(function () {
-            __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
+            __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
         }, 1000);
     }
 };
@@ -3517,7 +3523,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(14);
@@ -3694,9 +3700,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.id).create(this.finalData).then(function (response) {
-				_this.$store.commit('ADD_BID', { bid: response.bid });
+				// Break the bids cache
+				_this.$store.commit('SET_BIDS_LOADED', { loaded: false });
+				// Increment the bid_count for service in store.
+				var service = _this.$store.getters.getService;
+				var bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
+				service.bid_count = { count: bidCount };
+
+				_this.$store.commit('SET_SERVICE', service);
+
 				_this.form.reset();
 				_this.processing = false;
+
+				// Show a success notification for bid created
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Snyggt! Vi skapade ditt bud.' });
+				$("html, body").animate({ scrollTop: 0 }, "fast");
+				// Close the modal
+				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -3707,6 +3727,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	}
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
 
 /***/ }),
 /* 163 */
@@ -3775,6 +3796,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3783,16 +3809,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
 	},
 	computed: {
+		loaded: function loaded() {
+			return this.$store.getters.getBidsLoaded;
+		},
 		bids: function bids() {
 			return this.$store.getters.getBids;
 		}
 	},
 	methods: {
+		rating: function rating(bid) {
+			return bid.user.rating ? bid.user.rating.avg : 0;
+		},
+		ratingCount: function ratingCount(bid) {
+			return bid.user.rating ? bid.user.rating.count : 0;
+		},
 		openCreateBid: function openCreateBid() {
 			this.$store.dispatch('openModal', { component: 'createBid', size: 'large' });
 		},
 		time: function time(t) {
 			return moment(t).format("LLL");
+		}
+	},
+	created: function created() {
+		if (!this.loaded) {
+			this.$store.dispatch('getBids');
 		}
 	}
 };
@@ -4834,65 +4874,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 183 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-	props: ['service'],
-	components: {
-		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default.a
-	},
-	methods: {
-		bidStop: function bidStop() {
-			// Emit an event to bidStop so that the Services component can remove the service from the list.
-			this.$emit('bidStop', { id: this.service.id });
-		}
-	}
-};
-
-/***/ }),
+/* 183 */,
 /* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4918,17 +4900,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	computed: {
-		title: function title() {
-			return this.$store.getters.getServiceTitle;
-		},
-		description: function description() {
-			return this.$store.getters.getServiceDescription;
+		service: function service() {
+			return this.$store.getters.getService;
 		},
 		category: function category() {
-			return this.$store.getters.getServiceCategoryName;
+			var category = this.$store.getters.getCategoryById(this.service.category_id);
+			return category.name;
 		},
 		location: function location() {
-			return this.$store.getters.getServiceCityName + ", " + this.$store.getters.getServiceRegionName;
+			var city = this.$store.getters.getCityById(this.service.city_id);
+			var region = this.$store.getters.getRegionById(this.service.region_id);
+			return city.name + ", " + region.name;
 		}
 	}
 };
@@ -4939,10 +4921,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(245);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Service_vue__ = __webpack_require__(254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Service_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Service_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ServiceFilter__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(358);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(2);
 //
 //
@@ -4969,97 +4951,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
-	props: {
-		categories: { type: Array, default: function _default() {
-				return [];
-			} },
-		regions: { type: Array, default: function _default() {
-				return [];
-			} },
-		cities: { type: Array, default: function _default() {
-				return [];
-			} }
-	},
 	components: {
-		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a,
-		appService: __WEBPACK_IMPORTED_MODULE_1__Service_vue___default.a
+		appServiceFilter: __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default.a,
+		appServiceMulti: __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default.a
 	},
 	data: function data() {
 		return {
-			filterText: '',
 			fetched: false,
 			services: [],
 			page: 1
 		};
 	},
 
-	computed: {
-		locations: function locations() {
-			return this.regions.concat(this.cities);
-		},
-		allCategories: function allCategories() {
-			return this.$store.getters.getCategoriesFlatten;
-		},
-		allLocations: function allLocations() {
-			return this.$store.getters.getRegionsFlatten;
-		}
-	},
 	methods: {
-		categoryAdd: function categoryAdd(item) {
-			this.categories.push(item);
-		},
-		categoryRemove: function categoryRemove(_ref) {
-			var index = _ref.index;
-
-			this.categories.splice(index, 1);
-		},
-		locationAdd: function locationAdd(item) {
-			item.type == 'region' ? this.regions.push(item) : this.cities.push(item);
-		},
-		locationRemove: function locationRemove(_ref2) {
-			var item = _ref2.item;
-
-			var target = item.type == 'region' ? this.regions : this.cities;
-			var index = target.findIndex(function (el) {
-				return el.value == item.value;
-			});
-			if (index != -1) target.splice(index, 1);
-		},
 		getServices: function getServices(append) {
 			var _this = this;
 
@@ -5076,8 +4986,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				cities: this.cities.map(function (el) {
 					return el.value;
 				})
-			}).then(function (_ref3) {
-				var services = _ref3.services;
+			}).then(function (_ref) {
+				var services = _ref.services;
 
 				_this.services = _this.services.concat(services);
 				_this.fetched = true;
@@ -5085,10 +4995,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				console.log(error);
 			});
 		},
-		removeService: function removeService(_ref4) {
+		removeService: function removeService(_ref2) {
 			var _this2 = this;
 
-			var id = _ref4.id;
+			var id = _ref2.id;
 
 			var sleep = function sleep(ms) {
 				return new Promise(function (resolve) {
@@ -5102,8 +5012,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		}
 	},
-	mounted: function mounted() {
-		this.getServices();
+	created: function created() {
+		//this.getServices();
 	}
 };
 
@@ -6816,17 +6726,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6847,7 +6746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.getService;
 		},
 		bids: function bids() {
-			return this.service.bids.length;
+			return this.service.bid_count ? this.service.bid_count.count : 0;
 		},
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
@@ -6857,6 +6756,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		avatarAlt: function avatarAlt() {
 			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.username;
+		},
+		ratingCount: function ratingCount() {
+			return this.service.user.rating ? this.service.user.rating.count : 0;
+		},
+		ratingAvg: function ratingAvg() {
+			return this.service.user.rating ? this.service.user.rating.avg : 0;
 		}
 	},
 	methods: {
@@ -6915,8 +6820,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__);
-//
-//
 //
 //
 //
@@ -7685,7 +7588,9 @@ var regions = {
 var service = {
 	state: {
 		loaded: false,
-		service: { comments: [], bids: [], user: {} }
+		service: { comments: [], user: {} },
+		bids_loaded: false,
+		bids: []
 	},
 	mutations: {
 		'SET_LOADED': function SET_LOADED(state, loaded) {
@@ -7694,8 +7599,11 @@ var service = {
 		'SET_SERVICE': function SET_SERVICE(state, service) {
 			state.service = service;
 		},
-		'ADD_BID': function ADD_BID(state, payload) {
-			state.service.bids.unshift(payload.bid);
+		'SET_BIDS_LOADED': function SET_BIDS_LOADED(state, loaded) {
+			state.bids_loaded = loaded;
+		},
+		'SET_BIDS': function SET_BIDS(state, bids) {
+			state.bids = bids;
 		},
 		'ADD_COMMENT': function ADD_COMMENT(state, payload) {
 			state.service.comments.unshift(payload.comment);
@@ -7707,10 +7615,22 @@ var service = {
 
 			// Set the base state first.
 			commit('SET_LOADED', false);
-			commit('SET_SERVICE', { comments: [], bids: [], user: {} });
+			commit('SET_SERVICE', { comments: [], user: {} });
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services').find(payload.id).then(function (response) {
 				commit('SET_SERVICE', response.service);
 				commit('SET_LOADED', true);
+			}).catch(function (error) {});
+		},
+		getBids: function getBids(_ref2, payload) {
+			var commit = _ref2.commit,
+			    state = _ref2.state;
+
+			// Set the base state first.
+			commit('SET_BIDS_LOADED', false);
+			commit('SET_BIDS', { bids: [] });
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(state.service.id).get().then(function (response) {
+				commit('SET_BIDS', response.bids);
+				commit('SET_BIDS_LOADED', true);
 			}).catch(function (error) {});
 		}
 	},
@@ -7721,32 +7641,11 @@ var service = {
 		getService: function getService(state) {
 			return state.service;
 		},
-		getServiceTitle: function getServiceTitle(state) {
-			return state.service.title ? state.service.title : '';
-		},
-		getServiceDescription: function getServiceDescription(state) {
-			return state.service.description ? state.service.description : '';
-		},
-		getServiceCategory: function getServiceCategory(state) {
-			return state.service.category ? state.service.category : {};
-		},
-		getServiceCategoryName: function getServiceCategoryName(state) {
-			return state.service.category ? state.service.category.name : '';
-		},
-		getServiceRegion: function getServiceRegion(state) {
-			return state.service.region ? state.service.region : {};
-		},
-		getServiceRegionName: function getServiceRegionName(state) {
-			return state.service.region ? state.service.region.name : '';
-		},
-		getServiceCity: function getServiceCity(state) {
-			return state.service.city ? state.service.city : {};
-		},
-		getServiceCityName: function getServiceCityName(state) {
-			return state.service.city ? state.service.city.name : '';
+		getBidsLoaded: function getBidsLoaded(state) {
+			return state.bids_loaded;
 		},
 		getBids: function getBids(state) {
-			return state.service.bids;
+			return state.bids;
 		}
 	}
 };
@@ -7903,14 +7802,16 @@ var user = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_modal__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_auth__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_user__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_notifications__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_servicesFilter__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_service__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_notifications__ = __webpack_require__(219);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex___default.a);
 
 // Import modules
+
 
 
 
@@ -7926,8 +7827,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		modal: __WEBPACK_IMPORTED_MODULE_4__modules_modal__["a" /* default */],
 		auth: __WEBPACK_IMPORTED_MODULE_5__modules_auth__["a" /* default */],
 		user: __WEBPACK_IMPORTED_MODULE_6__modules_user__["a" /* default */],
-		service: __WEBPACK_IMPORTED_MODULE_7__modules_service__["a" /* default */],
-		notifications: __WEBPACK_IMPORTED_MODULE_8__modules_notifications__["a" /* default */]
+		serviesFilter: __WEBPACK_IMPORTED_MODULE_7__modules_servicesFilter__["a" /* default */],
+		service: __WEBPACK_IMPORTED_MODULE_8__modules_service__["a" /* default */],
+		notifications: __WEBPACK_IMPORTED_MODULE_9__modules_notifications__["a" /* default */]
 	}
 });
 
@@ -7940,7 +7842,7 @@ exports = module.exports = __webpack_require__(5)();
 
 
 // module
-exports.push([module.i, "\n.notifications-component[data-v-05633b28] {\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  margin: -35px 0 35px 0;\n}\n.notifications-component.success[data-v-05633b28] {\n    background-color: #A6D785;\n    color: #444;\n}\n.notifications-component.success a[data-v-05633b28] {\n      color: #008B00;\n}\n.notifications-component .notification-area[data-v-05633b28] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-05633b28] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-05633b28] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-05633b28] {\n        cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.notifications-component[data-v-05633b28] {\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  margin: 0 0 35px 0;\n}\n.notifications-component.success[data-v-05633b28] {\n    background-color: #A6D785;\n    color: #444;\n}\n.notifications-component.success a[data-v-05633b28] {\n      color: #008B00;\n}\n.notifications-component .notification-area[data-v-05633b28] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-05633b28] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-05633b28] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-05633b28] {\n        cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -8751,40 +8653,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(183),
-  /* template */
-  __webpack_require__(327),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/Service.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Service.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b132dc68", Component.options)
-  } else {
-    hotAPI.reload("data-v-b132dc68", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 254 */,
 /* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11346,7 +11215,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "site"
     }
-  }, [(_vm.breakpoints.mobile) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), _c('transition', {
+  }, [(_vm.breakpoints.mobile) ? _c('app-mobile-header') : _c('app-desktop-header'), _vm._v(" "), (_vm.$store.getters.showingNotification) ? _c('app-notifications') : _vm._e(), _vm._v(" "), _c('transition', {
     attrs: {
       "name": "slide-down-up"
     }
@@ -11618,105 +11487,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "services-component"
-  }, [_c('div', {
-    staticClass: "service-filter-container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.filterText),
-      expression: "filterText"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "filter_text"
-    },
-    domProps: {
-      "value": _vm._s(_vm.filterText)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.filterText = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
-    attrs: {
-      "items": _vm.categories,
-      "options": _vm.allCategories
-    },
-    on: {
-      "add": _vm.categoryAdd,
-      "remove": _vm.categoryRemove
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
-  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
-    attrs: {
-      "items": _vm.locations,
-      "options": _vm.allLocations
-    },
-    on: {
-      "add": _vm.locationAdd,
-      "remove": _vm.locationRemove
-    }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.getServices(false)
-      }
-    }
-  }, [_vm._v("Hitta Tjänster")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "services margin-25"
-  }, [(_vm.fetched) ? _c('div', {
-    staticClass: "row"
-  }, [_c('transition-group', {
-    attrs: {
-      "name": "slide-out",
-      "mode": "out-in"
-    }
-  }, _vm._l((_vm.services), function(service) {
-    return _c('div', {
-      key: service.id,
-      staticClass: "col-xs-12 col-sm-6"
-    }, [_c('router-link', {
-      staticClass: "no-underline",
-      attrs: {
-        "to": {
-          name: 'serviceDetails',
-          params: {
-            id: service.id
-          }
-        }
-      }
-    }, [_c('app-service', {
-      attrs: {
-        "service": service
-      },
-      on: {
-        "bidStop": _vm.removeService
-      }
-    })], 1)], 1)
-  }))], 1) : _c('app-loading', {
-    attrs: {
-      "bg": "gray"
-    }
-  })], 1)])
+  }, [_c('app-service-filter')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -12071,7 +11842,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "title",
     domProps: {
-      "textContent": _vm._s(_vm.title)
+      "textContent": _vm._s(_vm.service.title)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "info"
@@ -12102,7 +11873,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "description",
     domProps: {
-      "textContent": _vm._s(_vm.description)
+      "textContent": _vm._s(_vm.service.description)
     }
   })])
 },staticRenderFns: []}
@@ -12941,9 +12712,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "service-details-view no-hero-view"
   }, [_c('div', {
     staticClass: "container"
-  }, [(!_vm.$store.getters.getServiceLoaded) ? _c('div', {
-    staticClass: "waiting"
-  }, [_vm._m(0)]) : [_c('div', {
+  }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-8"
@@ -13003,8 +12772,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "user-ratings"
   }, [_c('app-ratings', {
     attrs: {
-      "rating": 3.7,
-      "total": 7,
+      "rating": _vm.ratingAvg,
+      "total": _vm.ratingCount,
       "size": "large"
     }
   }), _vm._v(" "), _c('a', {
@@ -13028,31 +12797,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "comment": comment
       }
-    }), _vm._v(" "), (comment.replies.length > 0) ? _c('ul', {
-      staticClass: "comment-replies"
-    }, [_c('transition-group', {
-      attrs: {
-        "name": "slide-in-left"
-      }
-    }, _vm._l((comment.replies), function(reply) {
-      return _c('li', {
-        key: reply.id
-      }, [_c('app-comment', {
-        attrs: {
-          "comment": reply
-        }
-      })], 1)
-    }))], 1) : _vm._e()], 1)
-  }))], 1)])], 1)])]], 2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "processing"
-  }, [_c('i', {
-    staticClass: "fa fa-spinner fa-pulse fa-fw fa-4x"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "sr-only"
-  }, [_vm._v("Loading...")])])
-}]}
+    })], 1)
+  }))], 1)])], 1)])] : _c('app-loading', {
+    attrs: {
+      "bg": "gray"
+    }
+  })], 2)])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -13417,7 +13168,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "user-component no-hero-view"
-  }, [(_vm.$store.getters.showingNotification) ? _c('app-notifications') : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "container"
   }, [(_vm.breakpoints.isSmallDevices()) ? _c('div', {
     staticClass: "mobile-user-nav clearfix"
@@ -13489,7 +13240,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Betalningar")])], 1)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "user-ui-content"
-  }, [_c('router-view')], 1)])])], 1)
+  }, [_c('router-view')], 1)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13557,72 +13308,7 @@ if (false) {
 }
 
 /***/ }),
-/* 327 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "service-container"
-  }, [_c('div', {
-    staticClass: "service-img"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "service-content"
-  }, [_c('div', {
-    staticClass: "service-title"
-  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.service.title) + "\n\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "service-bottom"
-  }, [_c('ul', {
-    staticClass: "list-unstyled bottom-info"
-  }, [_c('li', {
-    staticClass: "category"
-  }, [_c('i', {
-    staticClass: "fa fa-list-ul",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.service.category.name) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "location"
-  }, [_c('i', {
-    staticClass: "fa fa-map-marker",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.service.city.name) + ", " + _vm._s(_vm.service.region.name) + "\n\t\t\t\t")])]), _vm._v(" "), _c('ul', {
-    staticClass: "list-unstyled bottom-meta"
-  }, [_c('li', {
-    staticClass: "bid"
-  }, [_c('i', {
-    staticClass: "fa fa-gavel",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.service.bids.length) + " bud\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "comments"
-  }, [_c('i', {
-    staticClass: "fa fa-commenting",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.service.comments.length) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "time"
-  }, [_c('app-timer', {
-    attrs: {
-      "ends": _vm.service.bid_stop
-    },
-    on: {
-      "ended": _vm.bidStop
-    }
-  })], 1)])])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-b132dc68", module.exports)
-  }
-}
-
-/***/ }),
+/* 327 */,
 /* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13933,7 +13619,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "show_bids-component"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
-  }, [(_vm.bids.length > 0) ? _c('ul', {
+  }, [(_vm.loaded) ? [(_vm.bids.length > 0) ? _c('ul', {
     staticClass: "list-unstyled list-bids"
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', [_c('div', {
@@ -13950,8 +13636,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "user-reviews"
     }, [_c('app-ratings', {
       attrs: {
-        "rating": 4.5,
-        "total": 8
+        "rating": _vm.rating(bid),
+        "total": _vm.ratingCount(bid)
       }
     })], 1)])]), _vm._v(" "), _c('div', {
       staticClass: "col-xs-12 col-sm-6 col-md-5"
@@ -14008,7 +13694,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })])
   })) : _c('div', {
     staticClass: "alert alert-info text-center"
-  }, [_vm._v("\n\t\t\tDenna tjänsten har ännu inga lagda bud. Vill du bli den första? \n\t\t\t"), _c('a', {
+  }, [_vm._v("\n\t\t\t\tDenna tjänsten har ännu inga lagda bud. Vill du bli den första? \n\t\t\t\t"), _c('a', {
     staticClass: "link",
     on: {
       "click": function($event) {
@@ -14016,7 +13702,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.openCreateBid($event)
       }
     }
-  }, [_vm._v("Lägg ett bud nu")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Lägg ett bud nu")])])] : _c('app-loading')], 2), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_c('a', {
     staticClass: "link",
@@ -15158,6 +14844,514 @@ return index;
 __webpack_require__(140);
 module.exports = __webpack_require__(141);
 
+
+/***/ }),
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	props: ['service'],
+	components: {
+		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default.a
+	},
+	computed: {
+		category: function category() {
+			return this.$store.getters.getCategoryById(this.service.category_id).name;
+		},
+		location: function location() {
+			var city = this.$store.getters.getCityById(this.service.city_id).name;
+			var region = this.$store.getters.getRegionById(this.service.region_id).name;
+			return city + ', ' + region;
+		},
+		commentCount: function commentCount() {
+			return this.service.comment_count ? this.service.comment_count.count : 0;
+		},
+		bidCount: function bidCount() {
+			return this.service.bid_count ? this.service.bid_count.count : 0;
+		}
+	},
+	methods: {
+		bidStop: function bidStop() {
+			// Emit an event to bidStop so that the Services component can remove the service from the list.
+			this.$emit('bidStop', { id: this.service.id });
+		}
+	}
+};
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(357),
+  /* template */
+  __webpack_require__(359),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServiceMulti.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ServiceMulti.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ba203706", Component.options)
+  } else {
+    hotAPI.reload("data-v-ba203706", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 359 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "service-container"
+  }, [_c('div', {
+    staticClass: "service-img"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "service-content"
+  }, [_c('div', {
+    staticClass: "service-title"
+  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.service.title) + "\n\t\t")]), _vm._v(" "), _c('div', {
+    staticClass: "service-bottom"
+  }, [_c('ul', {
+    staticClass: "list-unstyled bottom-info"
+  }, [_c('li', {
+    staticClass: "category"
+  }, [_c('i', {
+    staticClass: "fa fa-list-ul",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.category) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
+    staticClass: "location"
+  }, [_c('i', {
+    staticClass: "fa fa-map-marker",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.location) + "\n\t\t\t\t")])]), _vm._v(" "), _c('ul', {
+    staticClass: "list-unstyled bottom-meta"
+  }, [_c('li', {
+    staticClass: "bid"
+  }, [_c('i', {
+    staticClass: "fa fa-gavel",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.bidCount) + " bud\n\t\t\t\t")]), _vm._v(" "), _c('li', {
+    staticClass: "comments"
+  }, [_c('i', {
+    staticClass: "fa fa-commenting",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" " + _vm._s(_vm.commentCount) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
+    staticClass: "time"
+  }, [_c('app-timer', {
+    attrs: {
+      "ends": _vm.service.bid_stop
+    },
+    on: {
+      "ended": _vm.bidStop
+    }
+  })], 1)])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ba203706", module.exports)
+  }
+}
+
+/***/ }),
+/* 360 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	components: {
+		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a
+	},
+	computed: {
+		filterText: {
+			get: function get() {
+				return this.$store.getters.getFilterText;
+			},
+			set: function set(value) {
+				this.$store.commit('SET_FILTER_TEXT', { text: value });
+			}
+		},
+		categories: function categories() {
+			return this.$store.getters.getFilterCategories;
+		},
+		allCategories: function allCategories() {
+			return this.$store.getters.getCategoriesFlatten;
+		},
+		locations: function locations() {
+			return this.$store.getters.getFilterLocations;
+		},
+		allLocations: function allLocations() {
+			return this.$store.getters.getRegionsFlatten;
+		}
+	},
+	methods: {
+		addCategory: function addCategory(item) {
+			this.$store.dispatch('addFilterCategory', { category: item });
+		},
+		removeCategory: function removeCategory(_ref) {
+			var index = _ref.index;
+
+			this.$store.dispatch('removeFilterCategory', { index: index });
+		},
+		addLocation: function addLocation(item) {
+			this.$store.dispatch('addFilterLocation', { location: item });
+		},
+		removeLocation: function removeLocation(_ref2) {
+			var item = _ref2.item;
+
+			this.$store.dispatch('removeFilterLocation', { location: item });
+		}
+	}
+};
+
+/***/ }),
+/* 361 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(360),
+  /* template */
+  __webpack_require__(362),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServiceFilter.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ServiceFilter.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-169f8664", Component.options)
+  } else {
+    hotAPI.reload("data-v-169f8664", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "service-filter-container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filterText),
+      expression: "filterText"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "filter_text"
+    },
+    domProps: {
+      "value": _vm._s(_vm.filterText)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filterText = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.categories,
+      "options": _vm.allCategories
+    },
+    on: {
+      "add": _vm.addCategory,
+      "remove": _vm.removeCategory
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-12 col-md-4 column"
+  }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
+    attrs: {
+      "items": _vm.locations,
+      "options": _vm.allLocations
+    },
+    on: {
+      "add": _vm.addLocation,
+      "remove": _vm.removeLocation
+    }
+  })], 1)]), _vm._v(" "), _vm._m(0)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Hitta Tjänster")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-169f8664", module.exports)
+  }
+}
+
+/***/ }),
+/* 363 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+
+
+var servicesFilter = {
+	state: {
+		text: '',
+		categories: [],
+		regions: [],
+		cities: [],
+		locations: []
+	},
+	mutations: {
+		'SET_FILTER_TEXT': function SET_FILTER_TEXT(state, payload) {
+			state.text = payload.text;
+		},
+		'SET_FILTER_CATEGORIES': function SET_FILTER_CATEGORIES(state, payload) {
+			state.categories = payload.categories;
+		},
+		'SET_FILTER_REGIONS': function SET_FILTER_REGIONS(state, payload) {
+			state.regions = payload.regions;
+		},
+		'SET_FILTER_CITIES': function SET_FILTER_CITIES(state, payload) {
+			state.cities = payload.cities;
+		},
+		'SET_FILTER_LOCATIONS': function SET_FILTER_LOCATIONS(state, payload) {
+			state.locations = payload.locations;
+		}
+	},
+	actions: {
+		addFilterCategory: function addFilterCategory(_ref, payload) {
+			var commit = _ref.commit,
+			    state = _ref.state;
+
+			var categories = state.categories;
+			categories.push(payload.category);
+			commit('SET_FILTER_CATEGORIES', { categories: categories });
+		},
+		removeFilterCategory: function removeFilterCategory(_ref2, payload) {
+			var commit = _ref2.commit,
+			    state = _ref2.state;
+
+			var categories = state.categories;
+			categories.splice(payload.index, 1);
+			commit('SET_FILTER_CATEGORIES', { categories: categories });
+		},
+		addFilterLocation: function addFilterLocation(_ref3, payload) {
+			var commit = _ref3.commit,
+			    state = _ref3.state;
+
+			var locations = state.locations;
+			locations.push(payload.location);
+			commit('SET_FILTER_LOCATIONS', { locations: locations });
+			// Also add the location to either region or city.
+			if (payload.location.type === 'region') {
+				var regions = state.regions;
+				regions.push(payload.location);
+				commit('SET_FILTER_REGIONS', { regions: regions });
+			} else {
+				var cities = state.cities;
+				cities.push(payload.location);
+				commit('SET_FILTER_CITIES', { cities: cities });
+			}
+		},
+		removeFilterLocation: function removeFilterLocation(_ref4, payload) {
+			var commit = _ref4.commit,
+			    state = _ref4.state;
+
+			// Remove it from locations array.
+			var locations = state.locations;
+			locations.forEach(function (location, index) {
+				if (location.value === payload.location.value) {
+					locations.splice(index, 1);
+				}
+			});
+			commit('SET_FILTER_LOCATIONS', { locations: locations });
+			// Remove it from either regions or cities
+			if (payload.location.type === 'region') {
+				(function () {
+					var regions = state.regions;
+					regions.forEach(function (region, index) {
+						if (region.value === payload.location.value) {
+							regions.splice(index, 1);
+						}
+					});
+					commit('SET_FILTER_REGIONS', { regions: regions });
+				})();
+			} else {
+				(function () {
+					var cities = state.cities;
+					cities.forEach(function (city, index) {
+						if (city.value === payload.location.value) {
+							cities.splice(index, 1);
+						}
+					});
+					commit('SET_FILTER_CITIES', { cities: cities });
+				})();
+			}
+		}
+	},
+	getters: {
+		getFilterText: function getFilterText(state) {
+			return state.filterText;
+		},
+		getFilterCategories: function getFilterCategories(state) {
+			return state.categories;
+		},
+		getFilterRegions: function getFilterRegions(state) {
+			return state.regions;
+		},
+		getFilterCities: function getFilterCities(state) {
+			return state.cities;
+		},
+		getFilterLocations: function getFilterLocations(state) {
+			return state.locations;
+		}
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = servicesFilter;
 
 /***/ })
 ],[348]);
