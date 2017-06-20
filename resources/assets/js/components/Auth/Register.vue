@@ -7,42 +7,33 @@
 
 		<div class="modal-body">
 			<form @keydown="form.errors.clear()">
-				
-				<div class="form-group" :class="{'has-error': form.errors.has('name')}">
-					<input 
-						type="text" 
-						id="name" 
-						class="form-control" 
-						placeholder="Namn" v-model="form.name">
 
+				<div class="form-group" :class="{'has-error': form.errors.has('name')}">
+					<label for="name" class="control-label">Namn</label>
+					<input type="text" name="name" class="form-control" v-model="form.name">
 					<span class="help-block" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
 				</div>
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
-					<input 
-						type="email" 
-						id="email" 
-						class="form-control" 
-						placeholder="Email" 
-						v-model="form.email">
-
+					<label for="email" class="control-label">Email</label>
+					<input type="email" name="email" class="form-control" v-model="form.email">
 					<span class="help-block" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
 				</div>
 
 				<div class="form-group"  :class="{'has-error': form.errors.has('password')}">
-					<input 
-						type="password" 
-						id="password" 
-						class="form-control" 
-						placeholder="Lösenord" 
-						v-model="form.password">
-
+					<label for="password" class="control-label">Lösenord</label>
+					<input type="password" name="password" class="form-control" v-model="form.password">
 					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
+				</div>
+
+				<div class="form-group"  :class="{'has-error': form.errors.has('password_confirmation')}">
+					<label for="password_confirmation" class="control-label">Bekräfta lösenordet</label>
+					<input type="password" name="password_confirmation" class="form-control" v-model="form.password_confirmation">
+					<span class="help-block" v-if="form.errors.has('password_confirmation')" v-text="form.errors.get('password_confirmation')"></span>
 				</div>
 
 				<div class="form-group">
 					<button 
-						type="submit" 
 						class="btn btn-primary full-width" 
 						:class="{'processing': processing}"
 						@click.prevent="register"
@@ -71,16 +62,19 @@
 				form: new Form({
 					name: '',
 					email: '',
-					password: ''
+					password: '',
+					password_confirmation: ''
 				})
 			}
 		},
 		methods: {
 			register() {
 				this.processing = true;
-				new Model('users').create(this.form.data())
-					.then((response) => {
-						console.log('Registered, now authenticate the user with the available data.')
+				new Model('register').new().post(this.form.data())
+					.then(response => {
+						console.log(response);
+						this.$store.dispatch('closeModal');
+						this.$router.push('/welcome');
 					})
 					.catch((error) => {
 						this.form.errors.record(error);

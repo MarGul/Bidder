@@ -30,7 +30,7 @@ return [
         'array'   => 'The :attribute must have between :min and :max items.',
     ],
     'boolean'              => 'The :attribute field must be true or false.',
-    'confirmed'            => 'The :attribute confirmation does not match.',
+    'confirmed'            => 'Bekräftelsefältet matchar inte.',
     'date'                 => 'The :attribute is not a valid date.',
     'date_format'          => 'Måste vara i formatet :format.',
     'different'            => 'The :attribute and :other must be different.',

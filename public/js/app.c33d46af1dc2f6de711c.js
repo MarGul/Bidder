@@ -272,15 +272,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -292,7 +283,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			form: new __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__["a" /* default */]({
 				name: '',
 				email: '',
-				password: ''
+				password: '',
+				password_confirmation: ''
 			})
 		};
 	},
@@ -302,8 +294,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users').create(this.form.data()).then(function (response) {
-				console.log('Registered, now authenticate the user with the available data.');
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('register').new().post(this.form.data()).then(function (response) {
+				console.log(response);
+				_this.$store.dispatch('closeModal');
+				_this.$router.push('/welcome');
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -6693,7 +6687,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('name')
     }
-  }, [_c('input', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6703,8 +6702,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "id": "name",
-      "placeholder": "Namn"
+      "name": "name"
     },
     domProps: {
       "value": (_vm.form.name)
@@ -6725,7 +6723,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('email')
     }
-  }, [_c('input', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("Email")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6735,8 +6738,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "email",
-      "id": "email",
-      "placeholder": "Email"
+      "name": "email"
     },
     domProps: {
       "value": (_vm.form.email)
@@ -6757,7 +6759,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('password')
     }
-  }, [_c('input', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "password"
+    }
+  }, [_vm._v("Lösenord")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6767,8 +6774,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "password",
-      "id": "password",
-      "placeholder": "Lösenord"
+      "name": "password"
     },
     domProps: {
       "value": (_vm.form.password)
@@ -6785,6 +6791,42 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.form.errors.get('password'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.form.errors.has('password_confirmation')
+    }
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "password_confirmation"
+    }
+  }, [_vm._v("Bekräfta lösenordet")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.password_confirmation),
+      expression: "form.password_confirmation"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "password",
+      "name": "password_confirmation"
+    },
+    domProps: {
+      "value": (_vm.form.password_confirmation)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.password_confirmation = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.form.errors.has('password_confirmation')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('password_confirmation'))
+    }
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
@@ -6792,7 +6834,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'processing': _vm.processing
     },
     attrs: {
-      "type": "submit",
       "disabled": _vm.processing || this.form.errors.any()
     },
     on: {
