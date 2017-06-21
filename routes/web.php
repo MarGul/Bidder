@@ -11,6 +11,7 @@
 Route::get('test', 'TestController@index');
 
 Route::post('register', 'Auth\RegisterController@register');
+Route::get('email-verify/{code}', 'Auth\EmailVerificationController@verify');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 

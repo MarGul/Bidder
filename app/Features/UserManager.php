@@ -71,4 +71,22 @@ class UserManager {
 		return response()->json(['message' => 'Updated your password.'], 200);
 	}
 
+	/**
+	 * Verify a users email address
+	 * 
+	 * @param  string 	$code
+	 * @return boolean
+	 */
+	public function verifyEmail($code)
+	{
+		$user = User::where('email_verification_code', $code)->first();
+
+		if ( !$user ) return false;
+
+		$user->email_verified = true;
+		$user->email_verification_code = null;
+
+		return $user->save();
+	}
+
 }
