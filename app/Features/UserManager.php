@@ -4,6 +4,7 @@ namespace App\Features;
 
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\EmailVerification;
 
 class UserManager {
 
@@ -21,11 +22,12 @@ class UserManager {
 			'password' => bcrypt($data['password']),
 			'name' => '',
 			'bio' => '',
-			'avatar' => 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg' // Need to change
+			'avatar' => 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg', // Need to change
+			'email_verification_code' => str_random(35)
 		]);
 
-		// Send out email confirmation email.
-		// Send out welcome email with a delay.
+		// Send out email for confirming the users email adress
+		\Notification::send($user, new EmailVerification($user));
 
 		return $user;
 	}
