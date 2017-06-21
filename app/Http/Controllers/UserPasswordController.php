@@ -13,7 +13,7 @@ class UserPasswordController extends Controller
 	/**
      *  Class to manage users.
      * 
-     * @var App\Features\ServiceManager;
+     * @var App\Features\UserManager
      */
 	private $manager;
 
