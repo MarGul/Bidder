@@ -7,26 +7,25 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewSubscriptionService extends Notification implements ShouldQueue
+class EmailVerification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    
     /**
-     * The service that we will notifify about
+     * User that needs to verify email
      * 
-     * @var App\Service
+     * @var App\User
      */
-    protected $service;
+    protected $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($service)
+    public function __construct($user)
     {
-        $this->service = $service;
+        $this->user = $user;
     }
 
     /**
@@ -49,12 +48,11 @@ class NewSubscriptionService extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('En ny tjänst som passar dig har lagts ut!')
+                    ->subject('Välkommen till Bidder!')
                     ->greeting('Hej!')
-                    ->line('Det har lagts ut en ny tjänst som passar dig. Klicka på länken nedan för att gå till tjänsten och lägg ett bud.')
-                    ->line('Tänk på att det bara kostar dig något ifall du skulle vinna budningen så du har inget att förlora!')
-                    ->action('Se tjänsten', url('/services/'.$this->service->id))
-                    ->line('Tack så mycket för att du använder Bidder.');
+                    ->line('Först och främst så vill vi hälsa dig hjärtligt välkommen till Bidder!')
+                    ->line('Innan du börjar använda tjänsten så skulle vi be dig om att verifiera din email adress.')
+                    ->action('Verifiera din email', url('/email-verify/'.$this->user->email_verification_code));
     }
 
     /**
