@@ -11,7 +11,7 @@
 				Vi har skickat ett email till dig med en länk för att återställa ditt lösenord.
 			</div>
 
-			<form @keydown="form.errors.clear()">
+			<form @keydown="form.errors.clear()" v-else>
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
 					<label for="email" class="control-label">

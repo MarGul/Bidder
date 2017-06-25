@@ -13909,7 +13909,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-body"
   }, [(_vm.success) ? _c('div', {
     staticClass: "alert alert-success"
-  }, [_vm._v("\n\t\t\tVi har skickat ett email till dig med en länk för att återställa ditt lösenord.\n\t\t")]) : _vm._e(), _vm._v(" "), _c('form', {
+  }, [_vm._v("\n\t\t\tVi har skickat ett email till dig med en länk för att återställa ditt lösenord.\n\t\t")]) : _c('form', {
     on: {
       "keydown": function($event) {
         _vm.form.errors.clear()

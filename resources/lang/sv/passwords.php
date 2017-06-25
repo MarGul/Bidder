@@ -14,7 +14,7 @@ return [
     */
 
     'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
+    'reset' => 'Ditt lösenord har blivit återställt!',
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'Din lösenordsåterställnings-token är fel.',
     'user' => "Vi kan inte hitta en användare med den emailadressen.",
