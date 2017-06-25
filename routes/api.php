@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 */
 Route::group(['prefix' => 'v1'], function() {
 
-	/* Handle users */
-	Route::resource('users', 'UserController', ['only' => ['store', 'show', 'update', 'destroy']]);
 	/* Update a users profile */
 	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
 	/* Update a users password */

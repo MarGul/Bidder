@@ -18,23 +18,15 @@
 				</div>
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
-					<input 
-						type="email" 
-						id="email" 
-						class="form-control" 
-						placeholder="Email" v-model="form.email">
-
+					<label for="email" class="control-label">Email</label>
+					<input type="email" name="email" class="form-control" v-model="form.email">
 					<span class="help-block" v-if="form.errors.has('email')" v-text="form.errors.get('email')"></span>
 				</div>
 
 				<div class="form-group"  :class="{'has-error': form.errors.has('password')}">
-					<input 
-						type="password" 
-						id="password" 
-						class="form-control" 
-						placeholder="Lösenord" 
-						v-model="form.password">
-
+					<label for="password" class="control-label">Lösenord</label>
+					<a class="link is-bold pull-right" @click.prevent="$store.dispatch('openModal', {component: 'passwordReset'})">Glömt lösenordet?</a>
+					<input type="password" name="password" class="form-control" v-model="form.password">
 					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
 				</div>
 
@@ -45,8 +37,7 @@
 				</div>
 
 				<div class="form-group">
-					<button 
-						type="submit" 
+					<button
 						class="btn btn-primary full-width"
 						:class="{'processing': processing}" 
 						@click.prevent="authenticate"

@@ -5,6 +5,7 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPassword;
 
 
 class User extends Authenticatable
@@ -26,6 +27,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'email', 'remember_token', 'email_verification_code', 'created_at', 'updated_at'
     ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
 
     /**
      * A user may have many services.
