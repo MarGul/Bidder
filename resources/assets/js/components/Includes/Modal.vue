@@ -14,6 +14,7 @@
 <script>
 	import register from '../Auth/Register';
     import login from '../Auth/Login';
+    import passwordReset from '../Auth/PasswordReset';
     import createBid from '../Bids/CreateBid';
     import showBids from '../Bids/ShowBids';
 
@@ -21,6 +22,7 @@
 		components: {
 			register,
 			login,
+			passwordReset,
 			createBid,
 			showBids
 		}
