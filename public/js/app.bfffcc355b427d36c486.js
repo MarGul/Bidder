@@ -1281,14 +1281,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
 		avatar: function avatar() {
-			return { backgroundImage: "url(" + this.$store.getters.authUser.avatar + ")" };
+			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar + ')' };
 		},
 		dropdown: function dropdown() {
-			return false;
+			return this.$store.getters.authDropdown;
+		}
+	},
+	methods: {
+		toggleDropdown: function toggleDropdown() {
+			this.$store.commit('SET_DROPDOWN', { dropdown: !this.$store.getters.authDropdown });
 		}
 	}
 });
@@ -4206,7 +4222,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("Registrera")])]) : _c('div', {
-    staticClass: "auth-user"
+    staticClass: "auth-user",
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.toggleDropdown($event)
+      }
+    }
   }, [_c('div', {
     staticClass: "auth-avatar",
     style: (_vm.avatar)
@@ -4220,7 +4242,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })])])])])])])
+  })])]), _vm._v(" "), (_vm.dropdown) ? _c('ul', {
+    staticClass: "auth-dropdown"
+  }, [_c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/profile"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Profil")])], 1), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "/logout"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.logout($event)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-sign-out",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Logga Ut\n\t\t\t\t\t\t")])])]) : _vm._e()])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
