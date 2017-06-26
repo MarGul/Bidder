@@ -8026,8 +8026,7 @@ a {
   position: relative;
   height: 50px;
   width: 100%;
-  background: #f3f3f1;
-  border-bottom: 1px solid #d7d7d7;
+  background: #313a45;
 }
 
 .mobile-nav {
@@ -8117,7 +8116,7 @@ a {
   border-radius: 1px;
   height: 5px;
   width: 35px;
-  background: #7d8793;
+  background: #adb0b5;
   position: absolute;
   display: block;
   content: "";

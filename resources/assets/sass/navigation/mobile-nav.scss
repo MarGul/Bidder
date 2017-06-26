@@ -10,8 +10,7 @@
 	position: relative;
 	height: $mobile-nav-height;
 	width: 100%;
-	background: $body-bg;
-	border-bottom: 1px solid $border-color-gray;
+	background: $navbar-bg;
 }
 
 .mobile-nav {
@@ -96,7 +95,7 @@
 		border-radius: 1px;
 		height: 5px;
 		width: 35px;
-		background: #7d8793;
+		background: $navbar-icon-color;
 		position: absolute;
 		display: block;
 		content: "";
