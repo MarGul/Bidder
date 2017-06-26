@@ -4169,9 +4169,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" Information")])], 1)])]), _vm._v(" "), _vm._m(0)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }), _vm._v(" Information")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "desktop-user-container"
   }, [_c('div', {
     staticClass: "guest-actions"
@@ -4179,14 +4177,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-transparent",
     attrs: {
       "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$store.dispatch('openModal', {
+          component: 'login'
+        })
+      }
     }
   }, [_vm._v("Logga In")]), _vm._v(" "), _c('a', {
     staticClass: "btn btn-primary",
     attrs: {
       "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.$store.dispatch('openModal', {
+          component: 'register'
+        })
+      }
     }
-  }, [_vm._v("Registrera")])])])
-}]}
+  }, [_vm._v("Registrera")])])])])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

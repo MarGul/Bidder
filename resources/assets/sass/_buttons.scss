@@ -41,6 +41,13 @@
 	&:hover {
 		background-color: $brand-primary-hover;
 	}
+
+	&:focus,
+	&:active,
+	&:active:focus, {
+		background-color: $brand-primary;
+		border: 0;
+	}
 }
 
 .btn-default {

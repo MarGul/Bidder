@@ -7787,6 +7787,11 @@ a {
   background-color: #00caca;
 }
 
+.btn-primary:focus, .btn-primary:active, .btn-primary:active:focus {
+  background-color: #009999;
+  border: 0;
+}
+
 .btn-default {
   background-color: #eaeaea;
   border-color: #cfcfcf;

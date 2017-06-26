@@ -25,8 +25,8 @@
 				</nav>
 				<div class="desktop-user-container">
 					<div class="guest-actions">
-						<a href="#" class="btn btn-transparent">Logga In</a>
-						<a href="#" class="btn btn-primary">Registrera</a>
+						<a href="#" class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+						<a href="#" class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 					</div>
 				</div>
 			</div>
