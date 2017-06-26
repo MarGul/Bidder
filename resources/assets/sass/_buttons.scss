@@ -1,6 +1,8 @@
 .btn {
-	border-radius: 0;
-	padding: 5px 9px;
+	border-radius: 3px;
+	padding: 5px 14px;
+	font-weight: 500;
+	border: 0;
 
 	&:focus,
 	&:active {
@@ -34,18 +36,10 @@
 }
 
 .btn-primary {
-	background-color: $primary-green;
-	border-color: $dark-green;
+	background-color: $brand-primary;
 
 	&:hover {
-		background-color: $dark-green;
-		border-color: $darkest-green;
-	}
-
-	&:focus,
-	&:active {
-		background-color: $primary-green !important;
-		border-color: $dark-green !important;
+		background-color: $brand-primary-hover;
 	}
 }
 
