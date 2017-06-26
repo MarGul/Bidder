@@ -1278,8 +1278,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+	computed: {
+		avatar: function avatar() {
+			return { backgroundImage: "url(" + this.$store.getters.authUser.avatar + ")" };
+		},
+		dropdown: function dropdown() {
+			return false;
+		}
+	}
+});
 
 /***/ }),
 
@@ -4171,13 +4188,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" Information")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "desktop-user-container"
-  }, [_c('div', {
+  }, [(!_vm.$store.getters.isAuthenticated) ? _c('div', {
     staticClass: "guest-actions"
   }, [_c('a', {
     staticClass: "btn btn-transparent",
-    attrs: {
-      "href": "#"
-    },
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -4188,9 +4202,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Logga In")]), _vm._v(" "), _c('a', {
     staticClass: "btn btn-primary",
-    attrs: {
-      "href": "#"
-    },
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -4199,7 +4210,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         })
       }
     }
-  }, [_vm._v("Registrera")])])])])])])
+  }, [_vm._v("Registrera")])]) : _c('div', {
+    staticClass: "auth-user"
+  }, [_c('div', {
+    staticClass: "auth-avatar",
+    style: (_vm.avatar)
+  }), _vm._v(" "), _c('div', {
+    staticClass: "auth-name"
+  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.$store.getters.authUser.username) + "\n\t\t\t\t\t\t"), _c('i', {
+    staticClass: "fa fa-angle-down auth-arrow",
+    class: {
+      up: _vm.dropdown
+    },
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

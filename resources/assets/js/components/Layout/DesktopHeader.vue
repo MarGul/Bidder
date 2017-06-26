@@ -24,9 +24,17 @@
 					</ul>
 				</nav>
 				<div class="desktop-user-container">
-					<div class="guest-actions">
-						<a href="#" class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
-						<a href="#" class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+					<div class="guest-actions" v-if="!$store.getters.isAuthenticated">
+						<a class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+						<a class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+					</div>
+
+					<div class="auth-user" v-else>
+						<div class="auth-avatar" :style="avatar"></div>
+						<div class="auth-name">
+							{{ $store.getters.authUser.username }}
+							<i class="fa fa-angle-down auth-arrow" :class="{up: dropdown}" aria-hidden="true"></i>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -36,6 +44,13 @@
 
 <script>
 	export default {
-
+		computed: {
+			avatar() {
+				return { backgroundImage: `url(${this.$store.getters.authUser.avatar})` };
+			},
+			dropdown() {
+				return false;
+			}
+		}
 	}
 </script>
