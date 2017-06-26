@@ -8041,7 +8041,7 @@ a {
   right: 0;
   z-index: 0;
   list-style-type: none;
-  background: #4D545D;
+  background: #313a45;
 }
 
 .mobile-nav .nav-item a {
@@ -8050,7 +8050,7 @@ a {
   color: #fff;
   font-size: 1.2em;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .mobile-nav .nav-item a i {
@@ -8060,17 +8060,17 @@ a {
 }
 
 .mobile-nav .nav-item a:hover {
-  background: #55AE3A;
+  background: #009999;
 }
 
 .mobile-nav .active {
-  background: #55AE3A;
+  background: #009999;
   cursor: default;
 }
 
 .mobile-nav .spacer {
   margin: 10px 15px;
-  border-top: 1px solid #55AE3A;
+  border-top: 1px solid #009999;
 }
 
 .mobile-nav .auth-user {
@@ -8082,7 +8082,7 @@ a {
 .mobile-nav .auth-user .auth-avatar {
   width: 40px;
   height: 40px;
-  border: 2px solid #55AE3A;
+  border: 2px solid #009999;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -8092,7 +8092,7 @@ a {
 .mobile-nav .auth-user .auth-name {
   padding-left: 15px;
   color: #fff;
-  font-weight: bold;
+  font-weight: 500;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;

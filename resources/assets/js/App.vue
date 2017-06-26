@@ -13,11 +13,6 @@
         <div id="site-wrap">
             <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
 
-            <!-- Show the search component here if we're on mobile -->
-            <div class="mobile-search-header" v-if="breakpoints.mobile">
-                <app-search></app-search>
-            </div>
-
             <!-- This is where the router view component will be loaded -->
             <router-view></router-view>
 
