@@ -85,7 +85,7 @@
 				return bid.user.rating ? bid.user.rating.count : 0;
 			},
 			openCreateBid() {
-				this.$store.dispatch('openModal', { component: 'createBid', size: 'large'});
+				this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large'});
 			},
 			time(t) {
 				return moment(t).format("LLL");

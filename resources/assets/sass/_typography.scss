@@ -6,6 +6,10 @@
 	font-weight: bold !important;
 }
 
+.is-weight-500 {
+	font-weight: 500 !important;
+}
+
 .is-bold-italic {
 	@extend .is-italic;
 	@extend .is-bold;
