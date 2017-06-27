@@ -7717,19 +7717,16 @@ a {
 }
 
 .content {
-  margin: 60px 0px;
-}
-
-.no-hero-view {
-  margin-top: 35px;
+  padding: 40px 0;
 }
 
 .white-container {
   background: #fff;
-  border: 1px solid #d7d7d7;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ededed;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
   padding: 20px 15px;
   margin-bottom: 15px;
+  border-radius: 6px;
 }
 
 @media screen and (min-width: 992px) {
@@ -8188,6 +8185,8 @@ body.mobile-nav-open .overlay {
   background-color: #313a45;
   border-top: 2px solid #009999;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 500;
 }
 
 .desktop-header .desktop-nav {
@@ -8461,7 +8460,7 @@ body.mobile-nav-open .overlay {
 }
 
 .nav-search-form .glyphicon {
-  color: #d7d7d7;
+  color: #c7c7c7;
   font-size: 2em;
   line-height: 1.4;
   margin-right: 15px;
@@ -8493,20 +8492,20 @@ body.mobile-nav-open .overlay {
 }
 
 .search-input ::-webkit-input-placeholder {
-  color: #d7d7d7;
+  color: #c7c7c7;
   font-weight: bold;
   letter-spacing: 1px;
 }
 
 .search-input :-moz-placeholder {
-  color: #d7d7d7;
+  color: #c7c7c7;
   font-weight: bold;
   letter-spacing: 1px;
   opacity: 1;
 }
 
 .search-input ::-moz-placeholder {
-  color: #d7d7d7;
+  color: #c7c7c7;
   font-weight: bold;
   letter-spacing: 1px;
   opacity: 1;
@@ -8657,7 +8656,7 @@ body.mobile-nav-open .overlay {
 }
 
 .items-block {
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   background: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8677,7 +8676,7 @@ body.mobile-nav-open .overlay {
   color: #7d8793;
   font-weight: bold;
   font-size: 1.2em;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
   cursor: pointer;
 }
 
@@ -8687,7 +8686,7 @@ body.mobile-nav-open .overlay {
 
 @media screen and (min-width: 768px) {
   .items-block .root-container .root-nav .nav-head {
-    border-right: 1px solid #d7d7d7;
+    border-right: 1px solid #c7c7c7;
   }
 }
 
@@ -8700,8 +8699,8 @@ body.mobile-nav-open .overlay {
   position: relative;
   background: #fff;
   color: #55AE3A;
-  border-bottom: 1px solid #d7d7d7;
-  border-left: 3px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
+  border-left: 3px solid #c7c7c7;
   border-right: none;
   cursor: default;
   box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.1);
@@ -8712,7 +8711,7 @@ body.mobile-nav-open .overlay {
       -ms-flex: 1;
           flex: 1;
   padding: 15px 20px;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
   box-shadow: inset 0px -3px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -8808,15 +8807,15 @@ body.mobile-nav-open .overlay {
 .tags-input-container .tags-input {
   position: relative;
   width: 100%;
-  min-height: 36px;
+  min-height: 40px;
   overflow: hidden;
   display: inline-block;
   box-sizing: border-box;
   z-index: 1;
-  border: 1px solid #d7d7d7;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border: 1px solid #c7c7c7;
   cursor: text;
   padding: 0 8px 4px 8px;
+  border-radius: 3px;
 }
 
 .tags-input-container .tags-input.hasError {
@@ -8826,7 +8825,7 @@ body.mobile-nav-open .overlay {
 .tags-input-container .tags-input .tag {
   display: inline-block;
   background: #f3f3f1;
-  border: 1px solid #bebdbd;
+  border: 1px solid #aeadad;
   padding: 1px 4px;
   margin: 4px 4px 0 0;
   cursor: default;
@@ -8846,7 +8845,7 @@ body.mobile-nav-open .overlay {
   border: 0px solid transparent;
   width: 20px;
   max-width: 100%;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .tags-input-container .tags-input input:focus {
@@ -8861,9 +8860,10 @@ body.mobile-nav-open .overlay {
   overflow-y: scroll;
   z-index: 5;
   background: #fff;
-  border: 1px solid #d7d7d7;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  border: 1px solid #c7c7c7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 10px;
+  top: 41px;
 }
 
 .tags-input-container .tags-help li {
@@ -8873,13 +8873,15 @@ body.mobile-nav-open .overlay {
 }
 
 .tags-input-container .tags-help li:hover {
-  color: #55AE3A;
+  color: #009999;
 }
 
 .service-filter-container {
   background: #fff;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #ededed;
   padding: 15px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
 }
 
 .service-filter-container .column {
@@ -8910,7 +8912,7 @@ body.mobile-nav-open .overlay {
 .service-container {
   position: relative;
   background: #fff;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   margin: 15px 0;
   height: auto;
   cursor: pointer;
@@ -9029,7 +9031,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service-container .service-content .service-bottom ul.bottom-meta {
-  background: #d7d7d7;
+  background: #c7c7c7;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9052,7 +9054,7 @@ body.mobile-nav-open .overlay {
   content: "";
   display: block;
   height: 1px;
-  background-color: #d7d7d7;
+  background-color: #c7c7c7;
   position: absolute;
   left: 15px;
   top: 26px;
@@ -9063,7 +9065,7 @@ body.mobile-nav-open .overlay {
   content: "";
   display: block;
   height: 1px;
-  background-color: #d7d7d7;
+  background-color: #c7c7c7;
   position: absolute;
   right: 15px;
   top: 26px;
@@ -9077,7 +9079,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service-bids .time-left {
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
   margin-bottom: 10px;
   padding-bottom: 15px;
 }
@@ -9102,7 +9104,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service-bids .active-bids a {
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 5px;
 }
 
@@ -9124,8 +9126,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service_description-component .info {
-  border-bottom: 1px solid #d7d7d7;
-  margin: 0 -15px 0 -15px;
+  border-bottom: 1px solid #c7c7c7;
   padding: 5px 15px;
 }
 
@@ -9138,7 +9139,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service_description-component .info .info-item {
-  font-weight: bold;
+  font-weight: 500;
   margin: 3px 0;
 }
 
@@ -9157,7 +9158,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service_description-component .info .info-item i {
-  color: #55AE3A;
+  color: #009999;
   width: 30px;
   text-align: center;
 }
@@ -9175,7 +9176,7 @@ body.mobile-nav-open .overlay {
 .service-user .user-avatar img {
   width: 45%;
   border-radius: 50%;
-  border: 3px solid #55AE3A;
+  border: 3px solid #009999;
 }
 
 .service-user .user-displayname {
@@ -9189,8 +9190,8 @@ body.mobile-nav-open .overlay {
   padding: 8px 0;
   margin: 0 -15px 0 -15px;
   background: #fafafa;
-  border-top: 1px solid #d7d7d7;
-  border-bottom: 1px solid #d7d7d7;
+  border-top: 1px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
 }
 
 .service-user .user-ratings .link {
@@ -9199,11 +9200,11 @@ body.mobile-nav-open .overlay {
 }
 
 .service-user .user-ratings .link:hover {
-  color: #55AE3A;
+  color: #009999;
 }
 
 .list-bids li {
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   margin-bottom: 10px;
 }
@@ -9211,7 +9212,7 @@ body.mobile-nav-open .overlay {
 .list-bids li .bid-header {
   padding: 5px 15px;
   background-color: #f1f1f1;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
 }
 
 .list-bids li .bid-header .user-reviews {
@@ -9388,8 +9389,9 @@ body.mobile-nav-open .overlay {
           flex: 1;
   margin: 0 0 20px 20px;
   background: #fff;
-  border: 1px solid #d7d7d7;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  border: 1px solid #c7c7c7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
 }
 
 .comment-component .comment-content:before {
@@ -9401,13 +9403,15 @@ body.mobile-nav-open .overlay {
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid #d7d7d7;
+  border-right: 10px solid #c7c7c7;
 }
 
 .comment-component .comment-content .comment-head {
   padding: 7.5px 15px;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
   background: #fafafa;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 .comment-component .comment-content .comment-head .comment-author {
@@ -9428,7 +9432,7 @@ body.mobile-nav-open .overlay {
 
 .user-component .mobile-user-nav {
   background-color: #fff;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-bottom: none;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
 }
@@ -9469,10 +9473,12 @@ body.mobile-nav-open .overlay {
 
 .user-component .user-ui-container .user-ui-content {
   background: #fff;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-top: none;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
   padding: 10px 25px 25px 25px;
+  border-radius: 6px;
+  border-top-left-radius: 0;
 }
 
 @media screen and (min-width: 992px) {
@@ -9483,7 +9489,7 @@ body.mobile-nav-open .overlay {
     margin-top: 0px;
     border-left: none;
     padding: 25px;
-    border-top: 1px solid #d7d7d7;
+    border-top: 1px solid #c7c7c7;
   }
 }
 
@@ -9491,7 +9497,7 @@ body.mobile-nav-open .overlay {
   margin: 10px 0 35px 0;
   padding-bottom: 15px;
   font-size: 26px;
-  border-bottom: 1px solid #55AE3A;
+  border-bottom: 1px solid #009999;
 }
 
 @media screen and (min-width: 992px) {
@@ -9509,13 +9515,13 @@ body.mobile-nav-open .overlay {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-radius: 6px;
 }
 
 .user-component .user-ui-container .user-ui-content .user-items-list li {
   padding: 15px;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
 }
 
 @media screen and (min-width: 992px) {
@@ -9613,17 +9619,17 @@ body.mobile-nav-open .overlay {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  border-top: 1px solid #d7d7d7;
+  border-top: 1px solid #c7c7c7;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .user-component .user-nav li a {
   display: block;
   padding: 10px 15px;
-  font-weight: bold;
+  font-weight: 500;
   background-color: #f1f1f1;
   color: #7d8793;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-top: none;
 }
 
@@ -9642,8 +9648,8 @@ body.mobile-nav-open .overlay {
 .user-component .user-nav li a.active {
   cursor: default;
   background-color: #fff;
-  color: #55AE3A;
-  border-left: 3px solid #d7d7d7;
+  color: #009999;
+  border-left: 3px solid #c7c7c7;
 }
 
 @media screen and (min-width: 992px) {
@@ -9656,7 +9662,7 @@ body.mobile-nav-open .overlay {
 
 .user-component .user-nav li a:hover {
   text-decoration: none;
-  color: #55AE3A;
+  color: #009999;
 }
 
 .project-title {
@@ -9683,7 +9689,7 @@ body.mobile-nav-open .overlay {
 }
 
 .project-title .left .input-container {
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9788,7 +9794,7 @@ body.mobile-nav-open .overlay {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
   margin-bottom: 15px;
   padding-bottom: 15px;
 }
@@ -9813,7 +9819,7 @@ body.mobile-nav-open .overlay {
 
 @media screen and (min-width: 768px) {
   .project_accept-component .project-users .details .timer {
-    border-bottom: 1px solid #d7d7d7;
+    border-bottom: 1px solid #c7c7c7;
     padding-bottom: 15px;
   }
 }
@@ -9904,13 +9910,13 @@ body.mobile-nav-open .overlay {
 
 .project_accept-component .project-users .action-text {
   font-weight: bold;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid #c7c7c7;
 }
 
 .message-board-top {
   border-radius: 6px 6px 0 0;
   background: #fafafa;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-bottom: none;
   padding: 10px 20px;
   font-weight: bold;
@@ -9924,7 +9930,7 @@ body.mobile-nav-open .overlay {
   background: #fafafa;
   padding: 20px;
   border-radius: 0 0 6px 6px;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
 }
 
 .send_message-component textarea {
@@ -9946,7 +9952,7 @@ body.mobile-nav-open .overlay {
 }
 
 .message-component {
-  border: 1px solid #d7d7d7;
+  border: 1px solid #c7c7c7;
   border-bottom: none;
   padding: 20px;
   display: -webkit-box;

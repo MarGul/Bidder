@@ -1,11 +1,11 @@
 <template>
-	<div class="user-component no-hero-view">
+	<div class="user-component">
 
 		<div class="container">
 			<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
 				<div class="mobile-user-buttons">
 					<button class="btn btn-transparent logout-btn" @click.prevent="logout">
-						Logga Ut <i class="fa fa-sign-out" aria-hidden="true"></i>
+						Logga Ut <i class="fa fa-power-off" aria-hidden="true"></i>
 					</button>
 
 					<button class="btn btn-primary nav-btn" 

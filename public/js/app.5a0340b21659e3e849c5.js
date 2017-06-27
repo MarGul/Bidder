@@ -42,6 +42,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -5857,7 +5859,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.hideMobileNav
     }
-  }) : _vm._e(), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('app-footer')], 1)], 1)
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "content"
+  }, [_c('router-view')], 1), _vm._v(" "), _c('app-footer')], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -7432,7 +7436,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "service-details-view no-hero-view"
+    staticClass: "service-details-view"
   }, [_c('div', {
     staticClass: "container"
   }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
@@ -7894,7 +7898,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "user-component no-hero-view"
+    staticClass: "user-component"
   }, [_c('div', {
     staticClass: "container"
   }, [(_vm.breakpoints.isSmallDevices()) ? _c('div', {
@@ -7910,7 +7914,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("\n\t\t\t\t\tLogga Ut "), _c('i', {
-    staticClass: "fa fa-sign-out",
+    staticClass: "fa fa-power-off",
     attrs: {
       "aria-hidden": "true"
     }

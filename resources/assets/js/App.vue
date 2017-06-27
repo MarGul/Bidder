@@ -13,8 +13,10 @@
         <div id="site-wrap">
             <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
 
-            <!-- This is where the router view component will be loaded -->
-            <router-view></router-view>
+            <div class="content">
+                <!-- This is where the router view component will be loaded -->
+                <router-view></router-view>
+            </div>
 
             <app-footer></app-footer>
         </div>

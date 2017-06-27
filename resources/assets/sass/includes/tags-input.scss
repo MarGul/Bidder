@@ -15,15 +15,15 @@
 	.tags-input {
 		position: relative;
 		width: 100%;
-		min-height: 36px;
+		min-height: 40px;
 		overflow: hidden;
 		display: inline-block;
 		box-sizing: border-box;
 		z-index: 1;
 		border: 1px solid $border-color-gray;
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 		cursor: text;
 		padding: 0 8px 4px 8px;
+		border-radius: 3px;
 
 		&.hasError {
 			border: 1px solid $brand-danger;
@@ -52,7 +52,7 @@
 			border: 0px solid transparent;
 			width: 20px;
 			max-width: 100%;
-			margin-top: 5px;
+			margin-top: 8px;
 
 			&:focus {
 				outline: none;
@@ -69,8 +69,9 @@
 		z-index: 5;
 		background: #fff;
 		border: 1px solid $border-color-gray;
-		box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+		box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 		padding: 10px;
+		top: 41px;
 
 		li {
 			font-size: 1.1em;
@@ -78,7 +79,7 @@
 			cursor: pointer;
 
 			&:hover {
-				color: $primary-green;
+				color: $brand-primary;
 			}
 		}
 	}

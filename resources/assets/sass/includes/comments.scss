@@ -52,7 +52,8 @@
 		margin: 0 0 20px 20px;
 		background: #fff;
 		border: 1px solid $border-color-gray;
-		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+		border-radius: 6px;
 
 		&:before {
 			content: "";
@@ -70,6 +71,8 @@
 			padding: 7.5px 15px;
 			border-bottom: 1px solid $border-color-gray;
 			background: #fafafa;
+			border-top-right-radius: 6px;
+			border-top-left-radius: 6px;
 
 			.comment-author {
 				font-weight: bold;

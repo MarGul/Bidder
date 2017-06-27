@@ -35,19 +35,16 @@ a {
 }
 
 .content {
-	margin: 60px 0px;
-}
-
-.no-hero-view {
-	margin-top: 35px;
+	padding: 40px 0;
 }
 
 .white-container {
 	background: #fff;
-	border: 1px solid $border-color-gray;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+	border: 1px solid #ededed;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 	padding: 20px 15px;
 	margin-bottom: 15px;
+	border-radius: 6px;
 
 	@media screen and (min-width: $screen-md-min) {
 		margin-bottom: 0;

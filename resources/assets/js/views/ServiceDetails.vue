@@ -1,5 +1,5 @@
 <template>
-	<div class="service-details-view no-hero-view">
+	<div class="service-details-view">
 		<div class="container">
 			<template v-if="$store.getters.getServiceLoaded">
 				<div class="row">
