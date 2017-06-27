@@ -337,6 +337,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6736,7 +6740,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('username')
     }
@@ -6756,7 +6760,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "text",
       "name": "username",
-      "placeholder": "Välj ett användarnamn"
+      "placeholder": "Välj användarnamn"
     },
     domProps: {
       "value": (_vm.form.username)
@@ -6767,13 +6771,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.username = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-user-circle form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('username')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('username'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('email')
     }
@@ -6793,7 +6799,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "email",
       "name": "email",
-      "placeholder": "Din email adress"
+      "placeholder": "Din emailadress"
     },
     domProps: {
       "value": (_vm.form.email)
@@ -6804,13 +6810,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.email = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-envelope form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('email')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('email'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('password')
     }
@@ -6830,7 +6838,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "password",
       "name": "password",
-      "placeholder": "Skapa ett lösenord"
+      "placeholder": "Skapa lösenord"
     },
     domProps: {
       "value": (_vm.form.password)
@@ -6841,6 +6849,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.password = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-key form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('password')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
@@ -6878,9 +6888,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Registrera. Det är helt gratis")])])
+  }, [_c('h3', [_vm._v("Registrera")]), _vm._v(" "), _c('div', {
+    staticClass: "header-text"
+  }, [_vm._v("Tar 60 sekunder och är helt gratis!")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
