@@ -147,6 +147,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -287,6 +289,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__("./resources/assets/js/includes/classes/Form.js");
+//
+//
+//
+//
 //
 //
 //
@@ -575,7 +581,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		openShowBids: function openShowBids() {
-			this.$store.dispatch('openModal', { component: 'showBids', size: 'large' });
+			this.$store.dispatch('openModal', { component: 'showBids', size: 'size-large' });
 		}
 	}
 });
@@ -676,7 +682,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return bid.user.rating ? bid.user.rating.count : 0;
 		},
 		openCreateBid: function openCreateBid() {
-			this.$store.dispatch('openModal', { component: 'createBid', size: 'large' });
+			this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large' });
 		},
 		time: function time(t) {
 			return moment(t).format("LLL");
@@ -4411,7 +4417,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.form.errors.getValue('invalid_login'))
     }
   }) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('email')
     }
@@ -4441,13 +4447,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.email = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-envelope form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('email')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('email'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('password')
     }
@@ -4457,7 +4465,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "password"
     }
   }, [_vm._v("Lösenord")]), _vm._v(" "), _c('a', {
-    staticClass: "link is-bold pull-right",
+    staticClass: "link is-weight-500 pull-right",
     on: {
       "click": function($event) {
         $event.preventDefault();
@@ -4487,6 +4495,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.password = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-key form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('password')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
@@ -4555,9 +4565,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Logga In")])])
+  }, [_c('h3', [_vm._v("Logga In")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -6732,7 +6740,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('username')
     }
@@ -6752,7 +6760,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "text",
       "name": "username",
-      "placeholder": "Välj ett användarnamn"
+      "placeholder": "Välj användarnamn"
     },
     domProps: {
       "value": (_vm.form.username)
@@ -6763,13 +6771,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.username = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-user-circle form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('username')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('username'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('email')
     }
@@ -6789,7 +6799,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "email",
       "name": "email",
-      "placeholder": "Din email adress"
+      "placeholder": "Din emailadress"
     },
     domProps: {
       "value": (_vm.form.email)
@@ -6800,13 +6810,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.email = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-envelope form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('email')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('email'))
     }
   }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+    staticClass: "form-group has-feedback",
     class: {
       'has-error': _vm.form.errors.has('password')
     }
@@ -6826,7 +6838,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "password",
       "name": "password",
-      "placeholder": "Skapa ett lösenord"
+      "placeholder": "Skapa lösenord"
     },
     domProps: {
       "value": (_vm.form.password)
@@ -6837,6 +6849,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.form.password = $event.target.value
       }
     }
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fa fa-key form-control-feedback"
   }), _vm._v(" "), (_vm.form.errors.has('password')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
@@ -6874,9 +6888,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Registrera. Det är helt gratis")])])
+  }, [_c('h3', [_vm._v("Registrera")]), _vm._v(" "), _c('div', {
+    staticClass: "header-text"
+  }, [_vm._v("Tar 60 sekunder och är helt gratis!")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -8033,9 +8047,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Skicka lösenordsåterställning")])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
-  }, [_vm._v("\n\t\tHar du inte ett konto än? "), _c('a', {
+  }, [_c('a', {
     on: {
       "click": function($event) {
+        $event.preventDefault();
+        _vm.$store.dispatch('openModal', {
+          component: 'login'
+        })
+      }
+    }
+  }, [_vm._v("Logga In")]), _vm._v(" eller "), _c('a', {
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
         _vm.$store.dispatch('openModal', {
           component: 'register'
         })
@@ -8045,9 +8069,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Återställ ditt lösenord")])])
+  }, [_c('h3', [_vm._v("Återställ ditt lösenord")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -14821,7 +14843,7 @@ var modal = {
 		open: false,
 		component: '',
 		data: {},
-		size: 'small',
+		size: 'size-small',
 		alert: '',
 		message: ''
 	},
@@ -14853,7 +14875,7 @@ var modal = {
 			var commit = _ref.commit;
 			var component = _ref2.component,
 			    _ref2$size = _ref2.size,
-			    size = _ref2$size === undefined ? "small" : _ref2$size,
+			    size = _ref2$size === undefined ? "size-small" : _ref2$size,
 			    _ref2$data = _ref2.data,
 			    data = _ref2$data === undefined ? {} : _ref2$data,
 			    _ref2$alert = _ref2.alert,

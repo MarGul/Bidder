@@ -192,7 +192,7 @@
 					});
 			},
 			openShowBids() {
-				this.$store.dispatch('openModal', { component: 'showBids', size: 'large' });
+				this.$store.dispatch('openModal', { component: 'showBids', size: 'size-large' });
 			}
 		}
 	}

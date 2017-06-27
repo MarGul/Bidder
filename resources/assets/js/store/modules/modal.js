@@ -3,7 +3,7 @@ const modal = {
 		open: false,
 		component: '',
 		data: {},
-		size: 'small',
+		size: 'size-small',
 		alert: '',
 		message: ''
 	},
@@ -31,7 +31,7 @@ const modal = {
 		}
 	},
 	actions: {
-		openModal({commit}, {component, size = "small", data = {}, alert = {}}) {
+		openModal({commit}, {component, size = "size-small", data = {}, alert = {}}) {
 			commit('SET_MODAL_COMPONENT', component);
 			commit('SET_MODAL_SIZE', size);
 			commit('SET_MODAL_DATA', data);

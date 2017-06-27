@@ -2,7 +2,7 @@
 	<div class="login-component">
 		
 		<div class="modal-header">
-			<h3 class="text-center">Återställ ditt lösenord</h3>
+			<h3>Återställ ditt lösenord</h3>
 		</div>
 
 		<div class="modal-body">
@@ -33,7 +33,7 @@
 		</div>
 
 		<div class="modal-footer">
-			Har du inte ett konto än? <a @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			<a @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a> eller <a @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 		</div>
 
 	</div>
