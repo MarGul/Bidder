@@ -8047,9 +8047,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Skicka lösenordsåterställning")])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
-  }, [_vm._v("\n\t\tHar du inte ett konto än? "), _c('a', {
+  }, [_c('a', {
     on: {
       "click": function($event) {
+        $event.preventDefault();
+        _vm.$store.dispatch('openModal', {
+          component: 'login'
+        })
+      }
+    }
+  }, [_vm._v("Logga In")]), _vm._v(" eller "), _c('a', {
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
         _vm.$store.dispatch('openModal', {
           component: 'register'
         })
@@ -8059,9 +8069,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Återställ ditt lösenord")])])
+  }, [_c('h3', [_vm._v("Återställ ditt lösenord")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
