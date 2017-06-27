@@ -8170,7 +8170,8 @@ body.mobile-nav-open .overlay {
 
 .desktop-header {
   background-color: #313a45;
-  border-top: 2.4px solid #009999;
+  border-top: 2px solid #009999;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .desktop-header .desktop-nav {
@@ -8288,6 +8289,7 @@ body.mobile-nav-open .overlay {
 }
 
 .desktop-header .desktop-nav .desktop-user-container {
+  position: relative;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -8363,18 +8365,32 @@ body.mobile-nav-open .overlay {
 .desktop-header .desktop-nav .desktop-user-container .auth-dropdown {
   z-index: 100;
   position: absolute;
-  top: 50px;
-  left: 30px;
-  width: 80%;
+  top: 55px;
+  right: 0;
+  width: 70%;
   background-color: #fff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.38);
   margin: 0;
   padding: 0;
   list-style-type: none;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border: 1px solid #d7d7d7;
-  border-top: 3px solid #55AE3A;
+  border-radius: 4px;
+}
+
+.desktop-header .desktop-nav .desktop-user-container .auth-dropdown:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  right: 30px;
+  top: -8px;
+}
+
+.desktop-header .desktop-nav .desktop-user-container .auth-dropdown li:first-child a {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .desktop-header .desktop-nav .desktop-user-container .auth-dropdown li:last-child a {
@@ -8386,7 +8402,8 @@ body.mobile-nav-open .overlay {
   display: block;
   padding: 6px 15px;
   color: #7d8793;
-  font-weight: bold;
+  font-weight: 500;
+  text-decoration: none !important;
 }
 
 .desktop-header .desktop-nav .desktop-user-container .auth-dropdown li a:hover {
@@ -8400,9 +8417,10 @@ body.mobile-nav-open .overlay {
 }
 
 .desktop-header .desktop-nav .desktop-user-container .auth-dropdown li a i {
-  width: 30px;
-  text-align: center;
-  color: #009999;
+  width: 27px;
+  margin-left: 5px;
+  text-align: left;
+  color: #adb0b5;
 }
 
 .mobile-search-header {

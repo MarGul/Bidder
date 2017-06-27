@@ -1292,6 +1292,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -1305,6 +1306,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		toggleDropdown: function toggleDropdown() {
 			this.$store.commit('SET_DROPDOWN', { dropdown: !this.$store.getters.authDropdown });
+		},
+		logout: function logout() {
+			this.$store.dispatch('logout');
+			this.$router.push('/');
 		}
 	}
 });
@@ -4246,14 +4251,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "auth-dropdown"
   }, [_c('li', [_c('router-link', {
     attrs: {
-      "to": "/user/profile"
+      "to": "/profile/margul"
     }
   }, [_c('i', {
     staticClass: "fa fa-user-circle",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("Profil")])], 1), _vm._v(" "), _c('li', [_c('a', {
+  }), _vm._v("Min profil")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
+      "to": "/user/profile"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-cogs",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Inställningar")])], 1), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": "/logout"
     },
@@ -4264,11 +4278,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('i', {
-    staticClass: "fa fa-sign-out",
+    staticClass: "fa fa-power-off",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("Logga Ut\n\t\t\t\t\t\t")])])]) : _vm._e()])])])])
+  }), _vm._v("Logga Ut")])])]) : _vm._e()])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
