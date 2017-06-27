@@ -149,6 +149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -4565,7 +4566,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', [_vm._v("Logga In")])])
+  }, [_c('h3', [_vm._v("Logga In")]), _vm._v(" "), _c('div', {
+    staticClass: "header-text"
+  }, [_vm._v("Välkommen in i värmen.")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

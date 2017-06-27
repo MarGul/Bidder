@@ -3,6 +3,7 @@
 		
 		<div class="modal-header">
 			<h3>Logga In</h3>
+			<div class="header-text">Välkommen in i värmen.</div>
 		</div>
 
 		<div class="modal-body">

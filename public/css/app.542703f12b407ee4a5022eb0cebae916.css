@@ -8576,13 +8576,14 @@ body.mobile-nav-open .overlay {
 
 .modal-container .modal-header {
   padding: 10px 0;
-  background: #f3f3f1;
+  background: #009999;
   position: relative;
   border-bottom: none;
   text-align: center;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.18);
+  color: #fff;
 }
 
 .modal-container .modal-header:after {
@@ -8594,7 +8595,7 @@ body.mobile-nav-open .overlay {
   left: calc(50% - 7.5px);
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-top: 15px solid #f3f3f1;
+  border-top: 15px solid #009999;
 }
 
 .modal-container .modal-body {
