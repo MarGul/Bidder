@@ -8912,11 +8912,13 @@ body.mobile-nav-open .overlay {
 .service-container {
   position: relative;
   background: #fff;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #ededed;
   margin: 15px 0;
   height: auto;
   cursor: pointer;
   color: #636b6f;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 @media screen and (min-width: 992px) {
@@ -8927,16 +8929,14 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.service-container:hover {
-  box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
-}
-
 .service-container .service-img {
   height: 75px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-image: url(http://www.kilatunik.com/wp-content/uploads/2016/04/landscaping-pics-for-front-yard-christmas-decorating-front-porch-flocked-christmas-tree-decorating-500x500.jpg);
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 @media screen and (min-width: 992px) {
@@ -8945,6 +8945,9 @@ body.mobile-nav-open .overlay {
         -ms-flex: 1;
             flex: 1;
     height: 150px;
+    border-radius: 0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 }
 
@@ -8980,16 +8983,13 @@ body.mobile-nav-open .overlay {
 
 .service-container .service-content .service-title {
   padding: 15px 15px 5px 15px;
+  font-weight: 500;
 }
 
 @media screen and (min-width: 768px) {
   .service-container .service-content .service-title {
     height: 65px;
   }
-}
-
-.service-container .service-content .service-bottom {
-  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
@@ -9027,23 +9027,27 @@ body.mobile-nav-open .overlay {
 }
 
 .service-container .service-content .service-bottom ul.bottom-info li i {
-  color: #55AE3A;
+  color: #009999;
 }
 
 .service-container .service-content .service-bottom ul.bottom-meta {
-  background: #c7c7c7;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 2px 15px;
-  border-top: 1px solid #bbb;
-  border-bottom: 1px solid #bbb;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid #ededed;
+  color: #787c84;
 }
 
 .service-container .service-content .service-bottom ul.bottom-meta li {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.service-container .service-content .service-bottom ul.bottom-meta li i {
+  color: #adb0b5;
 }
 
 .service-container .service-content .service-bottom ul.bottom-meta li.time {

@@ -26,6 +26,7 @@
 							:ends="service.bid_stop"
 							@ended="bidStop"
 						></app-timer>
+						kvar
 					</li>
 				</ul>
 			</div>

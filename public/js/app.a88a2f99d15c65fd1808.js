@@ -1904,6 +1904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -8315,7 +8316,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "ended": _vm.bidStop
     }
-  })], 1)])])])])
+  }), _vm._v("\n\t\t\t\t\tkvar\n\t\t\t\t")], 1)])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
