@@ -70,6 +70,18 @@ class User extends Authenticatable
     }
 
     /**
+     * A user may have many reviews.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review', 'reviewed')
+                    ->select(['reviewed', 'communication', 'as_described', 'would_recommend', 'review', 'created_at'])
+                    ->where('submitted', true);
+    }
+
+    /**
      * Relationship to get the rating count and average.
      * 
      * @return Eloquent Relationship

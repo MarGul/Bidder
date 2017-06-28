@@ -33,7 +33,7 @@ class UserProfileController extends Controller
 			return response()->json(['message' => 'Could not fetch the user right now.'], 500);
 		}
 
-		return response()->json(['message' => 'Displaying users profile.', 'user' => $user], 200);
+		return response()->json(['message' => 'Displaying user profile.', 'user' => $user], 200);
 	}
 
 	/**

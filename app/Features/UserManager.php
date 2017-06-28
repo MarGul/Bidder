@@ -16,7 +16,9 @@ class UserManager {
 	 */
 	public function profile($username)
 	{
-		$user = User::where('username', $username)->firstOrFail();
+		$user = User::with('rating', 'reviews')
+					->where('username', $username)
+					->firstOrFail();
 
 		return $user;
 	}
