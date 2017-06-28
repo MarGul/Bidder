@@ -1059,13 +1059,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			type: Number,
 			default: 5
 		},
+		total: {
+			type: Number,
+			default: 0
+		},
 		size: {
 			type: String,
 			default: ''
 		},
-		total: {
-			type: Number,
-			default: 0
+		showAvg: {
+			type: Boolean,
+			default: false
 		}
 	},
 	computed: {
@@ -1728,6 +1732,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.hover = false;
 			this.hoverStars = 0;
 		}
+	}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Reviews/ShowReviews.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['username', 'rating', 'reviews'],
+	components: {
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
 	}
 });
 
@@ -3721,6 +3757,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews__ = __webpack_require__("./resources/assets/js/components/Reviews/ShowReviews.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3728,7 +3779,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		appShowReviews: __WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews___default.a
+	},
 	data: function data() {
 		return {
 			fetched: false,
@@ -3736,7 +3793,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	created: function created() {
-		console.log(this.$route.params.username);
+		var _this = this;
+
+		new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$route.params.username).get().then(function (response) {
+			_this.user = response.user;
+			_this.fetched = true;
+		}).catch(function (error) {
+			console.log(error);
+		});
 	}
 });
 
@@ -5876,7 +5940,25 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile-component"
-  })
+  }, [(_vm.fetched) ? _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-8 col-lg-push-4"
+  }, [_c('div', {
+    staticClass: "white-container"
+  }, [_c('app-show-reviews', {
+    attrs: {
+      "username": _vm.user.username,
+      "rating": _vm.user.rating,
+      "reviews": _vm.user.reviews
+    }
+  })], 1)])])]) : _c('app-loading', {
+    attrs: {
+      "bg": "gray"
+    }
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -6101,6 +6183,37 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-3c54c5f2", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-41476a92\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Reviews/ShowReviews.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "show_reviews-component"
+  }, [_c('div', {
+    staticClass: "rating-container"
+  }, [_c('h4', {
+    staticClass: "review-username"
+  }, [_vm._v(_vm._s(_vm.username) + "'s omdömmen")]), _vm._v(" "), _c('div', {
+    staticClass: "review-ratings"
+  }, [_c('app-ratings', {
+    attrs: {
+      "rating": _vm.rating.avg,
+      "total": _vm.rating.count,
+      "showAvg": true,
+      "size": "large"
+    }
+  })], 1)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-41476a92", module.exports)
   }
 }
 
@@ -8293,7 +8406,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-hidden": "true"
       }
     })
-  }), _vm._v("\n (" + _vm._s(_vm.total) + ")\n")], 2)
+  }), _vm._v(" "), (_vm.showAvg) ? _c('span', {
+    staticClass: "rating-avg"
+  }, [_vm._v(_vm._s(_vm.rating.toFixed(1)) + " ")]) : _vm._e(), _vm._v("(" + _vm._s(_vm.total) + ")\n")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13522,6 +13637,41 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-2da456f4", Component.options)
   } else {
     hotAPI.reload("data-v-2da456f4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Reviews/ShowReviews.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Reviews/ShowReviews.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-41476a92\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Reviews/ShowReviews.vue"),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Reviews/ShowReviews.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ShowReviews.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-41476a92", Component.options)
+  } else {
+    hotAPI.reload("data-v-41476a92", Component.options)
   }
 })()}
 

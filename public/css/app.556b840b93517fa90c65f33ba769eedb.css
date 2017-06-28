@@ -10108,6 +10108,66 @@ body.mobile-nav-open .overlay {
   display: block;
 }
 
+.show_reviews-component .rating-container {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .show_reviews-component .rating-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: left;
+  }
+}
+
+.show_reviews-component .rating-container .review-username {
+  margin: 10px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .show_reviews-component .rating-container .review-username {
+    margin: 0;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .show_reviews-component .rating-container .review-ratings {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.show_reviews-component .rating-container .review-ratings .ratings-component {
+  color: #adb0b5;
+}
+
+@media screen and (min-width: 768px) {
+  .show_reviews-component .rating-container .review-ratings .ratings-component {
+    margin-left: 15px;
+  }
+}
+
+.show_reviews-component .rating-container .review-ratings .ratings-component .rating-avg {
+  margin-right: 7px;
+}
+
 .slide-in-enter-active {
   -webkit-animation: slide-in 800ms ease-out forwards;
   animation: slide-in 800ms ease-out forwards;

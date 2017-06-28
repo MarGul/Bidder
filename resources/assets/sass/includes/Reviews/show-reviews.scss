@@ -1,0 +1,44 @@
+.show_reviews-component {
+	
+	.rating-container {
+		text-align: center;
+
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+			text-align: left;
+		}
+
+		.review-username {
+			margin: 10px 0;
+
+			@media screen and (min-width: $screen-sm-min) {
+				margin: 0;
+				flex: 1;
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		.review-ratings {
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 3;
+				display: flex;
+				align-items: center;
+			}
+
+			.ratings-component {
+				color: $navbar-icon-color;
+
+				@media screen and (min-width: $screen-sm-min) {
+					margin-left: 15px;
+				}
+
+				.rating-avg {
+					margin-right: 7px;
+				}
+			}
+		}
+	}
+
+}
