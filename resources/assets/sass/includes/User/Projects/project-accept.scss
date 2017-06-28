@@ -22,8 +22,8 @@
 
 			.btn-default {
 				color: #222;
-				font-weight: bold;
-				border-color: #77787c;
+				font-weight: 500;
+				border: 1px solid $border-color-gray;
 			}
 
 		}
@@ -32,8 +32,7 @@
 			flex: 0 1 100%;
 			order: 1;
 			border-bottom: 1px solid $border-color-gray;
-			margin-bottom: 15px;
-			padding-bottom: 15px;
+			margin: 0 15px 15px 15px;
 
 			@media screen and (min-width: $screen-sm-min) {
 				order: 2;
@@ -66,8 +65,13 @@
 				margin: 16px 0;
 
 				.heading {
-					font-weight: bold;
+					font-weight: 500;
 					margin: 5px 0;
+
+					i {
+						margin-right: 2px;
+						color: $navbar-icon-color;
+					}
 				}
 			}
 		}
@@ -94,7 +98,7 @@
 		}
 
 		.user-name {
-			font-weight: bold;
+			font-weight: 500;
 			margin-bottom: 5px;;
 		}
 
@@ -108,14 +112,14 @@
 				background-size: cover;
 				background-position: center center;
 				border-radius: 50%;
-				border: 2px solid $primary-green;
+				border: 2px solid $brand-primary;
 				width: 80px;
 				height: 80px;
 			}
 		}
 
 		.action-text {
-			font-weight: bold;
+			font-weight: 500;
 			border-bottom: 1px solid $border-color-gray;
 		}
 	}

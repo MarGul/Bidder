@@ -3,11 +3,11 @@ a {
 }
 
 .is-link {
-	color: $primary-green;
+	color: $brand-primary;
 	cursor: pointer;
 
 	&:hover {
-		color: $dark-green;
+		color: $brand-primary-hover;
 		text-decoration: underline;
 	}
 }

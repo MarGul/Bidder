@@ -7839,12 +7839,12 @@ a {
 }
 
 .is-link {
-  color: #55AE3A;
+  color: #009999;
   cursor: pointer;
 }
 
 .is-link:hover {
-  color: #42882d;
+  color: #00caca;
   text-decoration: underline;
 }
 
@@ -8006,7 +8006,7 @@ a {
 }
 
 .panel.panel-success {
-  border-top-color: #55AE3A;
+  border-top-color: #009999;
 }
 
 .panel .panel-heading {
@@ -9760,6 +9760,10 @@ body.mobile-nav-open .overlay {
   padding-left: 10px;
 }
 
+.project-title .right .btn {
+  padding: 7px 14px;
+}
+
 .project-title .right i {
   font-size: 20px;
 }
@@ -9802,8 +9806,8 @@ body.mobile-nav-open .overlay {
 .project_accept-component .project-users .other .btn-default,
 .project_accept-component .project-users .details .btn-default {
   color: #222;
-  font-weight: bold;
-  border-color: #77787c;
+  font-weight: 500;
+  border: 1px solid #c7c7c7;
 }
 
 .project_accept-component .project-users .details {
@@ -9814,8 +9818,7 @@ body.mobile-nav-open .overlay {
       -ms-flex-order: 1;
           order: 1;
   border-bottom: 1px solid #c7c7c7;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
+  margin: 0 15px 15px 15px;
 }
 
 @media screen and (min-width: 768px) {
@@ -9858,8 +9861,13 @@ body.mobile-nav-open .overlay {
 }
 
 .project_accept-component .project-users .details .project-details .heading {
-  font-weight: bold;
+  font-weight: 500;
   margin: 5px 0;
+}
+
+.project_accept-component .project-users .details .project-details .heading i {
+  margin-right: 2px;
+  color: #adb0b5;
 }
 
 .project_accept-component .project-users .me {
@@ -9902,7 +9910,7 @@ body.mobile-nav-open .overlay {
 }
 
 .project_accept-component .project-users .user-name {
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 5px;
 }
 
@@ -9922,13 +9930,13 @@ body.mobile-nav-open .overlay {
   background-size: cover;
   background-position: center center;
   border-radius: 50%;
-  border: 2px solid #55AE3A;
+  border: 2px solid #009999;
   width: 80px;
   height: 80px;
 }
 
 .project_accept-component .project-users .action-text {
-  font-weight: bold;
+  font-weight: 500;
   border-bottom: 1px solid #c7c7c7;
 }
 
@@ -9996,7 +10004,7 @@ body.mobile-nav-open .overlay {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid #55AE3A;
+  border: 2px solid #009999;
 }
 
 .message-component .right {
@@ -10034,13 +10042,13 @@ body.mobile-nav-open .overlay {
 }
 
 .message-component .right .user-name .name {
-  font-weight: bold;
+  font-weight: 500;
   color: #222;
   display: inline-block;
 }
 
 .message-component .right .user-name a {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .message-component .right .message-time {
@@ -10079,7 +10087,7 @@ body.mobile-nav-open .overlay {
 .leave_review-component .stars-container .communication .review-heading,
 .leave_review-component .stars-container .as-described .review-heading,
 .leave_review-component .stars-container .would-recommend .review-heading {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   margin: 0 0 5px 0;
 }

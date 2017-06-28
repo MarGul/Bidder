@@ -18,7 +18,7 @@
 			width: 50px;
 			height: 50px;
 			border-radius: 50%;
-			border: 2px solid $primary-green;
+			border: 2px solid $brand-primary;
 		}
 	}
 
@@ -41,13 +41,13 @@
 			margin-bottom: 7px;
 
 			.name {
-				font-weight: bold;
+				font-weight: 500;
 				color: #222;
 				display: inline-block;
 			}
 
 			a {
-				font-weight: bold;
+				font-weight: 500;
 			}
 		}
 
