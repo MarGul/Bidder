@@ -10,6 +10,7 @@ let routes = [
 	{ path: "/services", name: 'services', component: require('./views/Services.vue') },
 	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails.vue') },
 	{ path: "/information", name: 'information', component: require('./views/Information.vue') },
+	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile.vue')},
 	{ path: "/user", name: 'user', component: require('./views/User.vue'),
 		children: [
 			{ path: '', component: require('./components/User/Profile/Profile.vue'), meta: { requiresAuth: true } },
