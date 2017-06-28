@@ -2,6 +2,13 @@
 	border: 1px solid $border-color-gray;
 	background: #fff;
 	display: flex;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+	
+	@media screen and (min-width: $screen-sm-min) {
+		border-radius: 6px;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
 
 	.root-container {
 		display: inline-block;
@@ -19,7 +26,7 @@
 				cursor: pointer;
 
 				&:hover {
-					color: $primary-green;
+					color: $brand-primary;
 				}
 
 				@media screen and (min-width: $screen-sm-min) {
@@ -35,7 +42,7 @@
 			.active {
 				position: relative;
 				background: #fff;
-				color: $primary-green;
+				color: $brand-primary;
 				border-bottom: 1px solid $border-color-gray;
 				border-left: 3px solid $border-color-gray;
 				border-right: none;
@@ -49,7 +56,6 @@
 		flex: 1;
 		padding: 15px 20px;
 		border-bottom: 1px solid $border-color-gray;
-		box-shadow: inset 0px -3px 3px rgba(0,0,0,0.1);
 
 		@media screen and (min-width: $screen-sm-min) {
 			padding: 25px 50px;
@@ -62,7 +68,7 @@
 		}
 
 		h1 {
-			border-bottom: 1px solid $primary-green;
+			border-bottom: 1px solid $brand-primary;
 			padding-bottom: 10px;
 			margin: 0 0 10px 0;
 			font-size: 26px;
@@ -99,7 +105,7 @@
 					}
 
 					&:hover {
-						color: $primary-green;
+						color: $brand-primary;
 						text-decoration: none;
 					}
 
