@@ -504,6 +504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -598,6 +599,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__("./resources/assets/js/components/Includes/Ratings.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
+//
 //
 //
 //
@@ -3830,10 +3832,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	methods: {
 		createBid: function createBid() {
-			this.$store.dispatch('openModal', { component: 'createBid', size: 'large' });
+			this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large' });
 		},
 		showBids: function showBids() {
-			this.$store.dispatch('openModal', { component: 'showBids', size: 'large' });
+			this.$store.dispatch('openModal', { component: 'showBids', size: 'size-large' });
 		}
 	},
 	created: function created() {
@@ -4871,10 +4873,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('start')
     }
-  }, [_c('datepicker', {
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
-      "placeholder": "Starta utförandet*",
       "language": "sv",
       "monday-first": true,
       "disabled": {
@@ -4893,17 +4896,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('start'))
     }
-  }) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("När kan du påbörja utförandet av tjänsten?")])], 1)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-6"
   }, [_c('div', {
     staticClass: "form-group",
     class: {
       'has-error': _vm.form.errors.has('end')
     }
-  }, [_c('datepicker', {
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
-      "placeholder": "Avsluta utförandet*",
       "language": "sv",
       "monday-first": true,
       "disabled": {
@@ -4922,7 +4928,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('end'))
     }
-  }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("När är du klar med tjänsten?")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 col-md-6"
@@ -4931,7 +4939,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('hours')
     }
-  }, [_c('input', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "hours"
+    }
+  }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4941,8 +4954,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "id": "hours",
-      "placeholder": "Antal timmar"
+      "name": "hours"
     },
     domProps: {
       "value": (_vm.form.hours)
@@ -4961,14 +4973,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('hours'))
     }
-  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Hur många timmar kommer det att ta dig?")])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-6"
   }, [_c('div', {
     staticClass: "form-group",
     class: {
       'has-error': _vm.form.errors.has('price')
     }
-  }, [_c('input', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "price"
+    }
+  }, [_vm._v("Ditt pris")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4978,8 +4997,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "id": "price",
-      "placeholder": "Ditt pris*"
+      "name": "price"
     },
     domProps: {
       "value": (_vm.form.price)
@@ -4998,7 +5016,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('price'))
     }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Hur mycket tar du för att utföra tjänsten?")])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12"
@@ -5007,7 +5027,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'has-error': _vm.form.errors.has('description')
     }
-  }, [_c('textarea', {
+  }, [_c('label', {
+    staticClass: "control-label",
+    attrs: {
+      "for": "description"
+    }
+  }, [_vm._v("Beskrivning av utförandet")]), _vm._v(" "), _c('textarea', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5016,9 +5041,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "id": "description",
-      "rows": "5",
-      "placeholder": "Beskrivning av utförandet*"
+      "name": "description",
+      "rows": "5"
     },
     domProps: {
       "value": (_vm.form.description)
@@ -5034,7 +5058,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "help-block"
+  }, [_vm._v("Vad skiljer dig åt från dem andra?")])])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
@@ -5087,9 +5113,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Lägg ett bud")])])
+  }, [_c('h3', [_vm._v("Lägg ett bud")]), _vm._v(" "), _c('div', {
+    staticClass: "header-text"
+  }, [_vm._v("Berätta varför just du ska få utföra tjänsten.")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -8629,9 +8655,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
-  }, [_c('h3', {
-    staticClass: "text-center"
-  }, [_vm._v("Visar budhistorik")])])
+  }, [_c('h3', [_vm._v("Visar budhistorik")]), _vm._v(" "), _c('div', {
+    staticClass: "header-text"
+  }, [_vm._v("Det senaste budet kommer först i listan. Kan du slå det?")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

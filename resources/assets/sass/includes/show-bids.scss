@@ -2,13 +2,20 @@
 
 	li {
 		border: 1px solid $border-color-gray;
-		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+		box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.18);
 		margin-bottom: 10px;
+		border-radius: 6px;
 
 		.bid-header {
 			padding: 5px 15px;
 			background-color: #f1f1f1;
 			border-bottom: 1px solid $border-color-gray;
+			border-top-right-radius: 6px;
+			border-top-left-radius: 6px;
+
+			.bid-user {
+				margin-top: 5px;
+			}
 
 			.user-reviews {
 				margin-left: 5px;
@@ -79,8 +86,8 @@
 			}
 
 			.info-head {
-				color: $primary-green;
-				font-weight: bold;
+				color: $brand-primary;
+				font-weight: 500;
 			}
 		}
 

@@ -9205,14 +9205,21 @@ body.mobile-nav-open .overlay {
 
 .list-bids li {
   border: 1px solid #c7c7c7;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.18);
   margin-bottom: 10px;
+  border-radius: 6px;
 }
 
 .list-bids li .bid-header {
   padding: 5px 15px;
   background-color: #f1f1f1;
   border-bottom: 1px solid #c7c7c7;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.list-bids li .bid-header .bid-user {
+  margin-top: 5px;
 }
 
 .list-bids li .bid-header .user-reviews {
@@ -9290,8 +9297,8 @@ body.mobile-nav-open .overlay {
 }
 
 .list-bids li .bid-info .info-head {
-  color: #55AE3A;
-  font-weight: bold;
+  color: #009999;
+  font-weight: 500;
 }
 
 .list-bids li .bid-description {

@@ -2,7 +2,8 @@
 	<div class="create_bid-component">
 
 		<div class="modal-header">
-			<h3 class="text-center">Lägg ett bud</h3>
+			<h3>Lägg ett bud</h3>
+			<div class="header-text">Berätta varför just du ska få utföra tjänsten.</div>
 		</div>
 
 		<div class="modal-body">
@@ -12,31 +13,31 @@
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group" :class="{'has-error': form.errors.has('start')}">
+								<label class="control-label">Starta utförandet</label>
 								<datepicker
 									input-class="form-control" 
-									placeholder="Starta utförandet*" 
 									language="sv"
 									:monday-first="true"
 									:disabled="{to: new Date()}"
 									v-model="form.start"
 								></datepicker>
-
 								<span class="help-block" v-if="form.errors.has('start')" v-text="form.errors.get('start')"></span>
+								<span class="help-block">När kan du påbörja utförandet av tjänsten?</span>
 							</div>
 						</div>
 
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group" :class="{'has-error': form.errors.has('end')}">
+								<label class="control-label">Avsluta utförandet</label>
 								<datepicker
 									input-class="form-control" 
-									placeholder="Avsluta utförandet*" 
 									language="sv"
 									:monday-first="true"
 									:disabled="{to: new Date()}"
 									v-model="form.end"
 								></datepicker>
-
 								<span class="help-block" v-if="form.errors.has('end')" v-text="form.errors.get('end')"></span>
+								<span class="help-block">När är du klar med tjänsten?</span>
 							</div>
 						</div>
 					</div>
@@ -44,29 +45,29 @@
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group" :class="{'has-error': form.errors.has('hours')}">
+								<label for="hours" class="control-label">Antal timmar</label>
 								<input 
-									type="text" 
-									id="hours" 
+									type="text"
+									name="hours" 
 									class="form-control" 
-									placeholder="Antal timmar" 
 									@keypress="isNumber($event)"
 									v-model="form.hours">
-
 								<span class="help-block" v-if="form.errors.has('hours')" v-text="form.errors.get('hours')"></span>
+								<span class="help-block">Hur många timmar kommer det att ta dig?</span>
 							</div>
 						</div>
 		
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group" :class="{'has-error': form.errors.has('price')}">
+								<label for="price" class="control-label">Ditt pris</label>
 								<input 
 									type="text" 
-									id="price" 
+									name="price" 
 									class="form-control" 
-									placeholder="Ditt pris*" 
 									@keypress="isNumber($event)"
 									v-model="form.price">
-
 								<span class="help-block" v-if="form.errors.has('price')" v-text="form.errors.get('price')"></span>
+								<span class="help-block">Hur mycket tar du för att utföra tjänsten?</span>
 							</div>
 						</div>
 					</div>
@@ -74,15 +75,15 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="form-group" :class="{'has-error': form.errors.has('description')}">
+								<label for="description" class="control-label">Beskrivning av utförandet</label>
 								<textarea 
-									id="description" 
+									name="description" 
 									rows="5" 
 									class="form-control"
-									placeholder="Beskrivning av utförandet*"
 									v-model="form.description"
 								></textarea>
-
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
+								<span class="help-block">Vad skiljer dig åt från dem andra?</span>
 							</div>
 						</div>
 					</div>

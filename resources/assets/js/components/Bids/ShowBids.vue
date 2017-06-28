@@ -1,7 +1,8 @@
 <template>
 	<div class="show_bids-component">
 		<div class="modal-header">
-			<h3 class="text-center">Visar budhistorik</h3>
+			<h3>Visar budhistorik</h3>
+			<div class="header-text">Det senaste budet kommer först i listan. Kan du slå det?</div>
 		</div>
 
 		<div class="modal-body">
