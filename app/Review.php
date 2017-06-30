@@ -16,4 +16,9 @@ class Review extends Model
     	'reviewing', 'reviewed', 'project_id', 'submitted', 'communication', 'as_described', 'would_recommend', 'review'
     ];
 
+    public function reviewer()
+    {
+    	return $this->hasOne('App\User', 'id', 'reviewing')->select(['username', 'avatar']);
+    }
+
 }

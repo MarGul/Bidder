@@ -89,7 +89,7 @@ class User extends Authenticatable
     public function rating()
     {
         return $this->hasOne('App\Review', 'reviewed')
-                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg')
+                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg, avg(communication) as communication, avg(as_described) as as_described')
                     ->where('submitted', true)
                     ->groupBy('reviewed');
     }
