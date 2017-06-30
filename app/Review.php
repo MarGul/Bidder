@@ -18,7 +18,7 @@ class Review extends Model
 
     public function reviewer()
     {
-    	return $this->hasOne('App\User', 'id', 'reviewing')->select(['username', 'avatar']);
+    	return $this->hasOne('App\User', 'id', 'reviewed')->select(['username', 'avatar', 'id']);;
     }
 
 }

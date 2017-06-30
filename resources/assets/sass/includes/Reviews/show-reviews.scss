@@ -60,4 +60,69 @@
 		}
 	}
 
+	.reviewes-container {
+
+		.review {
+			display: flex;
+			margin: 0 -15px;
+			padding: 10px 15px;
+			border-bottom: 1px solid $border-color-gray;
+
+			&:last-child {
+				border-bottom: 0px solid transparent;
+			}
+
+			.reviewer {
+				flex: 1;
+				font-size: 90%;
+
+				.reviewer-avatar {
+					width: 50px;
+					height: 50px;
+					border-radius: 50%;
+					border: 2px solid $brand-primary;
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: cover;
+					margin: 0 auto;
+				}
+
+				.reviewed-by {
+					color: $navbar-icon-color;
+				}
+			}
+
+			.review-text {
+				flex: 2;
+				padding-left: 20px;
+
+				@media screen and (min-width: $screen-sm-min) {
+					flex: 4;
+				}
+
+				@media screen and (min-width: $screen-lg-min) {
+					flex: 5;
+				}
+
+				.review-text-header {
+					
+					.ratings-component {
+						float: left;
+					}
+
+					.reviewed-at {
+						color: $navbar-icon-color;
+						display: inline-block;
+						padding-left: 5px;
+						font-size: 90%;
+					}
+				}
+
+				.review-text-body {
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+
 }

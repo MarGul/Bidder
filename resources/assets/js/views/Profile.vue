@@ -3,7 +3,7 @@
 		
 		<div class="container" v-if="fetched">
 			<div class="row">
-				<div class="col-lg-8 col-lg-push-4">
+				<div class="col-md-8 col-md-push-4">
 					<div class="white-container">
 						<app-show-reviews :username="user.username" :rating="user.rating" :reviews="user.reviews"></app-show-reviews>
 					</div>

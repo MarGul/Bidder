@@ -4938,6 +4938,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Review__ = __webpack_require__(371);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Review___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Review__);
 //
 //
 //
@@ -4965,13 +4967,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['username', 'rating', 'reviews'],
 	components: {
-		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a,
+		appReview: __WEBPACK_IMPORTED_MODULE_1__Review___default.a
 	},
 	computed: {
 		avg: function avg() {
@@ -11949,7 +11956,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-lg-8 col-lg-push-4"
+    staticClass: "col-md-8 col-md-push-4"
   }, [_c('div', {
     staticClass: "white-container"
   }, [_c('app-show-reviews', {
@@ -12232,7 +12239,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "rating": _vm.avg,
       "showCount": false
     }
-  })], 1)])])
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "reviewes-container"
+  }, _vm._l((_vm.reviews), function(review) {
+    return _c('app-review', {
+      attrs: {
+        "review": review
+      }
+    })
+  }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -15955,6 +15970,158 @@ return index;
 __webpack_require__(140);
 module.exports = __webpack_require__(141);
 
+
+/***/ }),
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_heartbeat__ = __webpack_require__(9);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	props: ['review'],
+	components: {
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a
+	},
+	data: function data() {
+		return {
+			reviewedAt: null
+		};
+	},
+
+	methods: {
+		avatar: function avatar(_avatar) {
+			return { backgroundImage: 'url(' + _avatar + ')' };
+		}
+	},
+	created: function created() {
+		var _this = this;
+
+		this.reviewedAt = moment(this.review.created_at).fromNow();
+		__WEBPACK_IMPORTED_MODULE_1__includes_heartbeat__["a" /* HeartBeat */].$on('beat', function () {
+			_this.reviewedAt = moment(_this.review.created_at).fromNow();
+		});
+	}
+};
+
+/***/ }),
+/* 371 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(370),
+  /* template */
+  __webpack_require__(372),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Reviews/Review.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Review.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-14157fd4", Component.options)
+  } else {
+    hotAPI.reload("data-v-14157fd4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 372 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "review"
+  }, [_c('div', {
+    staticClass: "reviewer text-center"
+  }, [_c('div', {
+    staticClass: "reviewer-avatar",
+    style: (_vm.avatar(_vm.review.reviewer.avatar))
+  }), _vm._v(" "), _c('div', {
+    staticClass: "reviewed-by mt5"
+  }, [_vm._v("Omdömme av")]), _vm._v(" "), _c('div', {
+    staticClass: "reviewer-username is-weight-500"
+  }, [_c('router-link', {
+    attrs: {
+      "to": ("/profile/" + (_vm.review.reviewer.username))
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.review.reviewer.username)
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "review-text"
+  }, [_c('div', {
+    staticClass: "review-text-header"
+  }, [_c('app-ratings', {
+    attrs: {
+      "rating": _vm.review.would_recommend,
+      "showCount": false
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "reviewed-at",
+    domProps: {
+      "textContent": _vm._s(_vm.reviewedAt)
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "review-text-body",
+    domProps: {
+      "textContent": _vm._s(_vm.review.review)
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-14157fd4", module.exports)
+  }
+}
 
 /***/ })
 ],[361]);

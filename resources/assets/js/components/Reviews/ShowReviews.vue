@@ -21,17 +21,22 @@
 				<app-ratings :rating="avg" :showCount="false"></app-ratings>
 			</div>
 		</div>
+		<div class="reviewes-container">
+			<app-review :review="review" v-for="review in reviews"></app-review>
+		</div>
 	
 	</div>
 </template>
 
 <script>
 	import appRatings from '../Includes/Ratings';
+	import appReview from './Review';
 
 	export default {
 		props: ['username', 'rating', 'reviews'],
 		components: {
-			appRatings
+			appRatings,
+			appReview
 		},
 		computed: {
 			avg() {

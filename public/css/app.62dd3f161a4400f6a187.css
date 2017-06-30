@@ -10197,6 +10197,79 @@ body.mobile-nav-open .overlay {
   font-weight: 500;
 }
 
+.show_reviews-component .reviewes-container .review {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 -15px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.show_reviews-component .reviewes-container .review:last-child {
+  border-bottom: 0px solid transparent;
+}
+
+.show_reviews-component .reviewes-container .review .reviewer {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 90%;
+}
+
+.show_reviews-component .reviewes-container .review .reviewer .reviewer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #009999;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.show_reviews-component .reviewes-container .review .reviewer .reviewed-by {
+  color: #adb0b5;
+}
+
+.show_reviews-component .reviewes-container .review .review-text {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  padding-left: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .show_reviews-component .reviewes-container .review .review-text {
+    -webkit-box-flex: 4;
+        -ms-flex: 4;
+            flex: 4;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .show_reviews-component .reviewes-container .review .review-text {
+    -webkit-box-flex: 5;
+        -ms-flex: 5;
+            flex: 5;
+  }
+}
+
+.show_reviews-component .reviewes-container .review .review-text .review-text-header .ratings-component {
+  float: left;
+}
+
+.show_reviews-component .reviewes-container .review .review-text .review-text-header .reviewed-at {
+  color: #adb0b5;
+  display: inline-block;
+  padding-left: 5px;
+  font-size: 90%;
+}
+
+.show_reviews-component .reviewes-container .review .review-text .review-text-body {
+  margin-top: 15px;
+}
+
 .slide-in-enter-active {
   -webkit-animation: slide-in 800ms ease-out forwards;
   animation: slide-in 800ms ease-out forwards;
