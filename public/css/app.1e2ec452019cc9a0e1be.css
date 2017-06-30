@@ -7886,6 +7886,18 @@ a {
   cursor: pointer;
 }
 
+.no-pre-style {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  border-radius: 0;
+  line-break: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+}
+
 .mt5 {
   margin-top: 5px;
 }
@@ -7912,6 +7924,10 @@ a {
 
 .mb20 {
   margin-bottom: 20px;
+}
+
+.mb30 {
+  margin-bottom: 30px;
 }
 
 .mb40 {
@@ -9704,6 +9720,19 @@ body.mobile-nav-open .overlay {
 .user-component .user-nav li a:hover {
   text-decoration: none;
   color: #009999;
+}
+
+.profile-component .user-header {
+  margin: -30px -15px 15px -15px;
+  background: #fafafa;
+  padding: 15px;
+  border-bottom: 1px solid #c7c7c7;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.profile-component .user-header .user-name {
+  margin: 0;
 }
 
 .project-title {

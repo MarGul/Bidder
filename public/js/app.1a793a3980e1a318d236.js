@@ -6987,6 +6987,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11958,6 +11969,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-md-8 col-md-push-4"
   }, [_c('div', {
+    staticClass: "white-container mb30"
+  }, [_c('div', {
+    staticClass: "user-header"
+  }, [_c('h4', {
+    staticClass: "user-name",
+    domProps: {
+      "textContent": _vm._s(_vm.user.name)
+    }
+  })]), _vm._v(" "), (_vm.user.bio) ? _c('div', {
+    staticClass: "user-bio"
+  }, [_c('pre', {
+    staticClass: "no-pre-style",
+    domProps: {
+      "textContent": _vm._s(_vm.user.bio)
+    }
+  })]) : _c('div', {
+    staticClass: "alert alert-warning text-center"
+  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.user.name) + " har ingen beskrivning än.\n\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
     staticClass: "white-container"
   }, [_c('app-show-reviews', {
     attrs: {
@@ -16078,7 +16107,7 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "review"
-  }, [_c('div', {
+  }, [(_vm.review.reviewer) ? _c('div', {
     staticClass: "reviewer text-center"
   }, [_c('div', {
     staticClass: "reviewer-avatar",
@@ -16094,7 +16123,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.review.reviewer.username)
     }
-  })], 1)]), _vm._v(" "), _c('div', {
+  })], 1)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "review-text"
   }, [_c('div', {
     staticClass: "review-text-header"

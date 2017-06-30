@@ -1,6 +1,6 @@
 <template>
 	<div class="review">
-		<div class="reviewer text-center">
+		<div class="reviewer text-center" v-if="review.reviewer">
 			<div class="reviewer-avatar" :style="avatar(review.reviewer.avatar)"></div>
 			<div class="reviewed-by mt5">Omdömme av</div>
 			<div class="reviewer-username is-weight-500">

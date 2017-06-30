@@ -1,0 +1,15 @@
+.profile-component {
+
+	.user-header {
+		margin: -30px -15px 15px -15px;
+		background: #fafafa;
+		padding: 15px;
+		border-bottom: 1px solid $border-color-gray;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+
+		.user-name {
+			margin: 0;
+		}
+	}
+}

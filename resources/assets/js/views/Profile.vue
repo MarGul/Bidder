@@ -4,6 +4,17 @@
 		<div class="container" v-if="fetched">
 			<div class="row">
 				<div class="col-md-8 col-md-push-4">
+					<div class="white-container mb30">
+						<div class="user-header">
+							<h4 class="user-name" v-text="user.name"></h4>
+						</div>
+						<div class="user-bio" v-if="user.bio">
+							<pre class="no-pre-style" v-text="user.bio"></pre>
+						</div>
+						<div class="alert alert-warning text-center" v-else>
+							{{ user.name }} har ingen beskrivning än.
+						</div>
+					</div>
 					<div class="white-container">
 						<app-show-reviews :username="user.username" :rating="user.rating" :reviews="user.reviews"></app-show-reviews>
 					</div>
