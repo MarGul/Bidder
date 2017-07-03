@@ -3,7 +3,7 @@
 		<i class="fa fa-star" aria-hidden="true" v-for="n in fullStars"></i><!--
 	 --><i class="fa fa-star-half-o" aria-hidden="true" v-if="halfStar"></i><!--
 	 --><i class="fa fa-star-o" aria-hidden="true" v-for="n in emptyStars"></i>
-	 ({{ total }})
+	 <span class="rating-avg" v-if="showAvg">{{ rating.toFixed(1) }} </span><span class="rating-count" v-if="showCount">({{ total }})</span>
 	</div>
 </template>
 
@@ -18,13 +18,21 @@
 				type: Number,
 				default: 5
 			},
+			total: {
+				type: Number,
+				default: 0
+			},
 			size: {
 				type: String,
 				default: ''
 			},
-			total: {
-				type: Number,
-				default: 0
+			showAvg: {
+				type: Boolean,
+				default: false
+			},
+			showCount: {
+				type: Boolean,
+				default: true
 			}
 		},
 		computed: {

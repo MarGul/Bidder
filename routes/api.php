@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 */
 Route::group(['prefix' => 'v1'], function() {
 
+	Route::get('users/{username}')->uses('UserProfileController@index');
 	/* Update a users profile */
 	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
 	/* Update a users password */

@@ -73,6 +73,9 @@
 // User
 @import "includes/user.scss";
 
+// Profile component
+@import "includes/profile.scss";
+
 // Project Title
 @import "includes/User/Projects/project-title.scss";
 
@@ -86,6 +89,7 @@
 
 // Reviews
 @import "includes/Reviews/leave-review.scss";
+@import "includes/Reviews/show-reviews.scss";
 
 // Animations
 @import "animations/_slide-in.scss";

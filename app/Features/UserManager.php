@@ -9,6 +9,21 @@ use App\Notifications\EmailVerification;
 class UserManager {
 
 	/**
+	 * Get the profile for a user
+	 * 
+	 * @param  string 	$username
+	 * @return [type]           [description]
+	 */
+	public function profile($username)
+	{
+		$user = User::with('rating', 'reviews.reviewer')
+					->where('username', $username)
+					->firstOrFail();
+
+		return $user;
+	}
+
+	/**
 	 * Create a new user
 	 * 
 	 * @param  array 	$data

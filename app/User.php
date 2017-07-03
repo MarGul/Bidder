@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'email', 'remember_token', 'email_verification_code', 'created_at', 'updated_at'
+        'password', 'email', 'remember_token', 'email_verification_code', 'updated_at'
     ];
 
     /**
@@ -70,6 +70,18 @@ class User extends Authenticatable
     }
 
     /**
+     * A user may have many reviews.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review', 'reviewed')
+                    ->select(['reviewing', 'reviewed', 'communication', 'as_described', 'would_recommend', 'review', 'created_at'])
+                    ->where('submitted', true);
+    }
+
+    /**
      * Relationship to get the rating count and average.
      * 
      * @return Eloquent Relationship
@@ -77,7 +89,7 @@ class User extends Authenticatable
     public function rating()
     {
         return $this->hasOne('App\Review', 'reviewed')
-                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg')
+                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg, avg(communication) as communication, avg(as_described) as as_described')
                     ->where('submitted', true)
                     ->groupBy('reviewed');
     }
