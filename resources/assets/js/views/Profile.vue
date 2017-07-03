@@ -3,9 +3,19 @@
 		
 		<div class="container" v-if="fetched">
 			<div class="row">
-				<div class="col-md-8 col-md-push-4">
+				<div class="col-sm-3" v-if="!breakpoints.isMobile()">
+					<img class="profile-picture-desktop" :src="user.avatar" :alt="`Profilbild för ${user.name}`">
+					<div class="profile-info">
+						<h3 class="profile-username" v-text="user.username"></h3>
+						<ul class="list-unstyled">
+							<li><i class="fa fa-user"></i>Medlem sedan {{ member_since }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-9">
 					<div class="white-container mb30">
 						<div class="user-header">
+							<div class="profile-picture" :style="avatar" v-if="breakpoints.isMobile()"></div>
 							<h4 class="user-name" v-text="user.name"></h4>
 						</div>
 						<div class="user-bio" v-if="user.bio">
@@ -38,18 +48,38 @@
 		data() {
 			return {
 				fetched: false,
-				user: {}
+				user: {},
+                breakpoints: window.breakpoints,
+			}
+		},
+		computed: {
+			avatar() {
+				return {backgroundImage: `url("${this.user.avatar}")`};
+			},
+			member_since() {
+				return moment(this.user.created_at).format('D MMM, YYYY');
+			}
+		},
+		watch: {
+			'$route': function() {
+				this.fetchUser();
+			}
+		},
+		methods: {
+			fetchUser() {
+				this.fetched = false;
+				new Model(`users/${this.$route.params.username}`).get()
+					.then(response => {
+						this.user = response.user;
+						this.fetched = true;
+					})
+					.catch(error => {
+						console.log(error);
+					});
 			}
 		},
 		created() {
-			new Model(`users/${this.$route.params.username}`).get()
-				.then(response => {
-					this.user = response.user;
-					this.fetched = true;
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			this.fetchUser();
 		}
 	}
 </script>

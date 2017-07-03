@@ -3887,6 +3887,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3898,18 +3908,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			fetched: false,
-			user: {}
+			user: {},
+			breakpoints: window.breakpoints
 		};
 	},
-	created: function created() {
-		var _this = this;
 
-		new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$route.params.username).get().then(function (response) {
-			_this.user = response.user;
-			_this.fetched = true;
-		}).catch(function (error) {
-			console.log(error);
-		});
+	computed: {
+		avatar: function avatar() {
+			return { backgroundImage: 'url("' + this.user.avatar + '")' };
+		},
+		member_since: function member_since() {
+			return moment(this.user.created_at).format('D MMM, YYYY');
+		}
+	},
+	watch: {
+		'$route': function $route() {
+			this.fetchUser();
+		}
+	},
+	methods: {
+		fetchUser: function fetchUser() {
+			var _this = this;
+
+			this.fetched = false;
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$route.params.username).get().then(function (response) {
+				_this.user = response.user;
+				_this.fetched = true;
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	},
+	created: function created() {
+		this.fetchUser();
 	}
 });
 
@@ -6106,13 +6137,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-push-4"
+  }, [(!_vm.breakpoints.isMobile()) ? _c('div', {
+    staticClass: "col-sm-3"
+  }, [_c('img', {
+    staticClass: "profile-picture-desktop",
+    attrs: {
+      "src": _vm.user.avatar,
+      "alt": ("Profilbild för " + (_vm.user.name))
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "profile-info"
+  }, [_c('h3', {
+    staticClass: "profile-username",
+    domProps: {
+      "textContent": _vm._s(_vm.user.username)
+    }
+  }), _vm._v(" "), _c('ul', {
+    staticClass: "list-unstyled"
+  }, [_c('li', [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v("Medlem sedan " + _vm._s(_vm.member_since))])])])]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-9"
   }, [_c('div', {
     staticClass: "white-container mb30"
   }, [_c('div', {
     staticClass: "user-header"
-  }, [_c('h4', {
+  }, [(_vm.breakpoints.isMobile()) ? _c('div', {
+    staticClass: "profile-picture",
+    style: (_vm.avatar)
+  }) : _vm._e(), _vm._v(" "), _c('h4', {
     staticClass: "user-name",
     domProps: {
       "textContent": _vm._s(_vm.user.name)

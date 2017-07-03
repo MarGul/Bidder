@@ -9711,8 +9711,46 @@ body.mobile-nav-open .overlay {
   border-top-right-radius: 6px;
 }
 
+.profile-component .user-header .profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
+  border: 2px solid #009999;
+}
+
 .profile-component .user-header .user-name {
-  margin: 0;
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .profile-component .user-header .user-name {
+    text-align: left;
+    margin: 0;
+  }
+}
+
+.profile-component .profile-picture-desktop {
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.profile-component .profile-info {
+  margin-top: 15px;
+}
+
+.profile-component .profile-info .profile-username {
+  color: #6f787c;
+}
+
+.profile-component .profile-info i {
+  color: #adb0b5;
+  margin-right: 5px;
 }
 
 .project-title {
