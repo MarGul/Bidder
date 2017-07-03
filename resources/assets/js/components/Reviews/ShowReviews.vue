@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="reviewes-container">
-			<app-review :review="review" v-for="review in reviews"></app-review>
+			<app-review :review="review" v-for="review in reviews" :key="review.id"></app-review>
 		</div>
 	
 	</div>

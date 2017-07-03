@@ -1,7 +1,9 @@
 .profile-component {
 
 	.user-header {
-		margin: -30px -15px 15px -15px;
+		position: relative;
+		top: -20px;
+		margin: 0 -15px;
 		background: #fafafa;
 		padding: 15px;
 		border-bottom: 1px solid $border-color-gray;

@@ -77,7 +77,7 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany('App\Review', 'reviewed')
-                    ->select(['reviewed', 'communication', 'as_described', 'would_recommend', 'review', 'created_at'])
+                    ->select(['reviewing', 'reviewed', 'communication', 'as_described', 'would_recommend', 'review', 'created_at'])
                     ->where('submitted', true);
     }
 

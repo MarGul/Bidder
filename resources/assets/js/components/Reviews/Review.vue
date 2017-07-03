@@ -4,7 +4,7 @@
 			<div class="reviewer-avatar" :style="avatar(review.reviewer.avatar)"></div>
 			<div class="reviewed-by mt5">Omdömme av</div>
 			<div class="reviewer-username is-weight-500">
-				<router-link :to="`/profile/${review.reviewer.username}`" v-text="review.reviewer.username"></router-link>
+				<router-link :to="`/profile/${review.reviewer.username.toLowerCase()}`" v-text="review.reviewer.username"></router-link>
 			</div>
 		</div>
 		<div class="review-text">
