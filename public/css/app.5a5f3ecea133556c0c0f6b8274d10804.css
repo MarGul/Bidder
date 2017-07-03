@@ -7880,6 +7880,10 @@ a {
   font-family: inherit;
 }
 
+.img-responsive {
+  max-width: 100%;
+}
+
 .mt5 {
   margin-top: 5px;
 }
@@ -9751,6 +9755,25 @@ body.mobile-nav-open .overlay {
 .profile-component .profile-info i {
   color: #adb0b5;
   margin-right: 5px;
+}
+
+.profile_picture-component .profile-picture-label {
+  position: relative;
+}
+
+.profile_picture-component .profile-picture-label span {
+  position: absolute;
+  top: calc(50% - 16px);
+  left: calc(50% - 80px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.profile_picture-component .profile-picture-label span:hover {
+  background-color: #eaeaea !important;
+}
+
+.profile_picture-component .profile-picture-label:hover img {
+  opacity: 0.5;
 }
 
 .project-title {

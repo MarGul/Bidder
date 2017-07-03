@@ -2613,8 +2613,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			processing: false,
+			hover: false
+		};
+	},
+
+	computed: {
+		image: function image() {
+			return this.$store.getters.authUser.avatar;
+		}
+	}
+});
 
 /***/ }),
 
@@ -6409,7 +6430,42 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile_picture-component"
-  }, [_vm._v("\n\tProfile Picture\n")])
+  }, [_c('form', {
+    attrs: {
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('label', {
+    staticClass: "profile-picture-label clickable",
+    on: {
+      "mouseenter": function($event) {
+        _vm.hover = true
+      },
+      "mouseleave": function($event) {
+        _vm.hover = false
+      }
+    }
+  }, [_c('img', {
+    staticClass: "img-responsive",
+    attrs: {
+      "src": _vm.image
+    }
+  }), _vm._v(" "), (_vm.hover) ? _c('span', {
+    staticClass: "btn btn-default",
+    class: {
+      processing: _vm.processing
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-picture-o mr5",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Ladda upp ny bild\n\t\t\t")]) : _vm._e(), _vm._v(" "), _c('input', {
+    staticClass: "hidden",
+    attrs: {
+      "type": "file",
+      "accept": "image/*"
+    }
+  })])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
