@@ -2,11 +2,11 @@
 	<div class="profile_picture-component">
 		<form enctype="multipart/form-data">
 			<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
-				<img :src="image" class="img-responsive">
-				<span class="btn btn-default" v-if="hover" :class="{processing}">
+				<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
+				<span class="btn btn-default" v-if="hover || processing" :class="{processing}">
 					<i class="fa fa-picture-o mr5" aria-hidden="true"></i> Ladda upp ny bild
 				</span>
-				<input type="file" accept="image/*" class="hidden">
+				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)">
 			</label>
 		</form>
 	</div>
@@ -23,6 +23,13 @@
 		computed: {
 			image() {
 				return this.$store.getters.authUser.avatar;
+			}
+		},
+		methods: {
+			upload(files) {
+				if ( files.length ) {
+					this.processing = true;
+				}
 			}
 		}
 	}

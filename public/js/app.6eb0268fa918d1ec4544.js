@@ -2634,6 +2634,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		image: function image() {
 			return this.$store.getters.authUser.avatar;
 		}
+	},
+	methods: {
+		upload: function upload(files) {
+			if (files.length) {
+				this.processing = true;
+			}
+		}
 	}
 });
 
@@ -6446,10 +6453,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('img', {
     staticClass: "img-responsive",
+    class: {
+      opacity: _vm.hover || _vm.processing
+    },
     attrs: {
       "src": _vm.image
     }
-  }), _vm._v(" "), (_vm.hover) ? _c('span', {
+  }), _vm._v(" "), (_vm.hover || _vm.processing) ? _c('span', {
     staticClass: "btn btn-default",
     class: {
       processing: _vm.processing
@@ -6464,6 +6474,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "file",
       "accept": "image/*"
+    },
+    on: {
+      "change": function($event) {
+        _vm.upload($event.target.files)
+      }
     }
   })])])])
 },staticRenderFns: []}
