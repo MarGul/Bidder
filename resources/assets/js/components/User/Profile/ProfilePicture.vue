@@ -37,11 +37,14 @@
 					
 					new Model(`users/${this.$store.getters.authUser.id}/profile-picture`).post(formData)
 						.then(response => {
-							console.log(response);
+							this.$store.commit('SET_USER', {user: response.user});
+							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din profilbild.'});
+							$("html, body").animate({ scrollTop: 0 }, "fast");
 							this.processing = false;
 						})
 						.catch(error => {
-							console.log(error);
+							this.$store.dispatch('showNotification', {type: 'error', msg: 'Vi kunde inte uppdatera din profilbild. Var god försök igen.'});
+							$("html, body").animate({ scrollTop: 0 }, "fast");
 						});
 				}
 			}

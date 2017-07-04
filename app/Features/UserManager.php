@@ -74,13 +74,17 @@ class UserManager {
 	 */
 	public function updateProfilePicture($user, $picture)
 	{
-		if ( !$path = $picture->storeAs('avatars') ) {
+		if ( !$path = $picture->store('avatars') ) {
 			return false;
 		}
 
-		$user->avatar = $path;
+		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
 		
-		return $user->save();
+		if ( !$user->save() ) {
+			return false;
+		}
+
+		return $user;
 	}
 
 	/**
