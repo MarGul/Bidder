@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\EmailVerification;
 use App\Jobs\DeleteOldProfilePicture;
+use App\Jobs\ResizeProfilePicture;
 use Notification;
 
 
@@ -84,11 +85,12 @@ class UserManager {
 			dispatch(new DeleteOldProfilePicture($user->avatar));
 		}
 
-		// Resize the new avatar picture in a job
-
 		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
 		
 		if ( !$user->save() ) return false;
+
+		// Resize the new avatar picture in a job with a delay of 1 minute.
+		dispatch(new ResizeProfilePicture($user))->delay(60);
 
 		return $user;
 	}
