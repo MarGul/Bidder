@@ -5,6 +5,9 @@ namespace App\Features;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\EmailVerification;
+use App\Jobs\DeleteOldProfilePicture;
+use Notification;
+
 
 class UserManager {
 
@@ -42,7 +45,7 @@ class UserManager {
 		]);
 
 		// Send out email for confirming the users email adress
-		\Notification::send($user, new EmailVerification($user));
+		Notification::send($user, new EmailVerification($user));
 
 		return $user;
 	}
@@ -74,15 +77,18 @@ class UserManager {
 	 */
 	public function updateProfilePicture($user, $picture)
 	{
-		if ( !$path = $picture->store('avatars') ) {
-			return false;
+		if ( !$path = $picture->store('avatars') ) return false;
+
+		// Delete the old profile picture in a job
+		if ( $user->avatar ) {
+			dispatch(new DeleteOldProfilePicture($user->avatar));
 		}
+
+		// Resize the new avatar picture in a job
 
 		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
 		
-		if ( !$user->save() ) {
-			return false;
-		}
+		if ( !$user->save() ) return false;
 
 		return $user;
 	}
