@@ -74,7 +74,13 @@ class UserManager {
 	 */
 	public function updateProfilePicture($user, $picture)
 	{
-		return true;	
+		if ( !$path = $picture->storeAs('avatars') ) {
+			return false;
+		}
+
+		$user->avatar = $path;
+		
+		return $user->save();
 	}
 
 	/**

@@ -34,7 +34,7 @@ class UserProfilePictureController extends Controller
 		$this->authorize('my-resource', $user);
 		$this->validate($request, ['picture' => 'required|image']);
 
-		if ( !$this->manager->updateProfilePicture($user, $request->file('picture')) ) {
+		if ( !$request->file('picture')->isValid() || !$this->manager->updateProfilePicture($user, $request->file('picture')) ) {
 			return response()->json(['message' => 'Could not upload the profile picture.'], 500);
 		}
 
