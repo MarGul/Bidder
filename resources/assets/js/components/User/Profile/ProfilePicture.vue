@@ -13,6 +13,8 @@
 </template>
 
 <script>
+	import Model from '../../../includes/Model';
+
 	export default {
 		data() {
 			return {
@@ -29,6 +31,18 @@
 			upload(files) {
 				if ( files.length ) {
 					this.processing = true;
+					
+					const formData = new FormData();
+					formData.append('picture', files[0], files[0].name);
+					
+					new Model(`users/${this.$store.getters.authUser.id}/profile-picture`).post(formData)
+						.then(response => {
+							console.log(response);
+							this.processing = false;
+						})
+						.catch(error => {
+							console.log(error);
+						});
 				}
 			}
 		}

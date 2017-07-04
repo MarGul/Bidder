@@ -10,8 +10,7 @@ class UserProfileController extends Controller
 {
     /**
      *  Class to manage users.
-     *
-     * @param   string 		$username
+     *  
      * @var App\Features\ServiceManager;
      */
 	private $manager;

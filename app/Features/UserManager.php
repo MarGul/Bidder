@@ -12,7 +12,7 @@ class UserManager {
 	 * Get the profile for a user
 	 * 
 	 * @param  string 	$username
-	 * @return [type]           [description]
+	 * @return App\User;
 	 */
 	public function profile($username)
 	{
@@ -63,6 +63,18 @@ class UserManager {
 		}
 
 		return response()->json(['message' => 'Updated the profile', 'user' => $user], 200);
+	}
+
+	/**
+	 * Update a users profile picture.
+	 * 
+	 * @param  App\User 						$user
+	 * @param  Illuminate\Http\UploadedFile 	$picture
+	 * @return boolean
+	 */
+	public function updateProfilePicture($user, $picture)
+	{
+		return true;	
 	}
 
 	/**

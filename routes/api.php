@@ -12,6 +12,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::get('users/{username}')->uses('UserProfileController@index');
 	/* Update a users profile */
 	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
+	/* Update a users profile picture */
+	Route::post('users/{user}/profile-picture')->uses('UserProfilePictureController@store');
 	/* Update a users password */
 	Route::put('users/{user}/password')->uses('UserPasswordController@update');
 	/* Handle regions */

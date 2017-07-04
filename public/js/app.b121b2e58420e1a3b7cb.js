@@ -2607,6 +2607,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__("./resources/assets/js/includes/Model.js");
 //
 //
 //
@@ -2621,6 +2622,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -2637,8 +2640,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	methods: {
 		upload: function upload(files) {
+			var _this = this;
+
 			if (files.length) {
 				this.processing = true;
+
+				var formData = new FormData();
+				formData.append('picture', files[0], files[0].name);
+
+				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$store.getters.authUser.id + '/profile-picture').post(formData).then(function (response) {
+					console.log(response);
+					_this.processing = false;
+				}).catch(function (error) {
+					console.log(error);
+				});
 			}
 		}
 	}
