@@ -37,6 +37,10 @@
 			}
 		}
 
+		&.error {
+			// Implement the error color
+		}
+
 		.notification-area {
 			display: flex;
 

@@ -5,14 +5,28 @@ namespace App\Features;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\EmailVerification;
+use App\Jobs\DeleteOldProfilePicture;
+use App\Jobs\ResizeProfilePicture;
+use Notification;
+use Image;
+use Storage;
+
 
 class UserManager {
+
+	/**
+	 * When a user is created this is the default avatar being used. 
+	 * Also when a user is updating his avatar this one should not be deleted in the job.
+	 * 
+	 * @var string
+	 */
+	protected $defaultAvatarUrl = 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg';
 
 	/**
 	 * Get the profile for a user
 	 * 
 	 * @param  string 	$username
-	 * @return [type]           [description]
+	 * @return App\User;
 	 */
 	public function profile($username)
 	{
@@ -37,12 +51,12 @@ class UserManager {
 			'password' => bcrypt($data['password']),
 			'name' => '',
 			'bio' => '',
-			'avatar' => 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg', // Need to change
+			'avatar' => $this->defaultAvatarUrl,
 			'email_verification_code' => str_random(35)
 		]);
 
 		// Send out email for confirming the users email adress
-		\Notification::send($user, new EmailVerification($user));
+		Notification::send($user, new EmailVerification($user));
 
 		return $user;
 	}
@@ -63,6 +77,35 @@ class UserManager {
 		}
 
 		return response()->json(['message' => 'Updated the profile', 'user' => $user], 200);
+	}
+
+	/**
+	 * Update a users avatar.
+	 * 
+	 * @param  App\User 						$user
+	 * @param  Illuminate\Http\UploadedFile 	$avatar
+	 * @return boolean
+	 */
+	public function updateProfilePicture($user, $avatar)
+	{
+		$img = Image::make($avatar)->resize(400, null, function($constraint) {
+			$constraint->aspectRatio();
+		});
+
+		$path = 'avatars/' . $avatar->hashName();
+
+		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
+
+		// Delete the old profile picture in a job
+		if ( $user->avatar && ($user->avatar !== $this->defaultAvatarUrl) ) {
+			dispatch(new DeleteOldProfilePicture($user->avatar));
+		}
+
+		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
+		
+		if ( !$user->save() ) return false;
+
+		return $user;
 	}
 
 	/**

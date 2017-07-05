@@ -1,11 +1,53 @@
 <template>
 	<div class="profile_picture-component">
-		Profile Picture
+		<form enctype="multipart/form-data">
+			<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
+				<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
+				<span class="btn btn-default" v-if="hover || processing" :class="{processing}">
+					<i class="fa fa-picture-o mr5" aria-hidden="true"></i> Ladda upp ny bild
+				</span>
+				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">
+			</label>
+		</form>
 	</div>
 </template>
 
 <script>
+	import Model from '../../../includes/Model';
+
 	export default {
-		
+		data() {
+			return {
+				processing: false,
+				hover: false
+			}
+		},
+		computed: {
+			image() {
+				return this.$store.getters.authUser.avatar;
+			}
+		},
+		methods: {
+			upload(files) {
+				if ( files.length ) {
+					this.processing = true;
+					
+					const formData = new FormData();
+					formData.append('avatar', files[0], files[0].name);
+					
+					new Model(`users/${this.$store.getters.authUser.id}/avatar`).post(formData)
+						.then(response => {
+							this.$store.commit('SET_USER', {user: response.user});
+							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din avatar.'});
+							$("html, body").animate({ scrollTop: 0 }, "fast");
+							this.processing = false;
+						})
+						.catch(error => {
+							this.$store.dispatch('showNotification', {type: 'error', msg: 'Vi kunde inte uppdatera din avatar. Var god försök igen.'});
+							$("html, body").animate({ scrollTop: 0 }, "fast");
+						});
+				}
+			}
+		}
 	}
 </script>

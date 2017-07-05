@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Image;
 
 class TestController extends Controller
 {
     
 	public function index()
 	{
-		$service = \App\Service::find(1);
-
-		dispatch(new \App\Jobs\SendSubscriptionEmails($service));
+		$img = Image::make('test.png')->resize(300,200);
 	}
 
 }

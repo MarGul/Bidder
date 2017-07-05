@@ -58,6 +58,12 @@
 		background-color: darken(#eaeaea, 5%);
 		border-color: darken(#cfcfcf, 5%);
 	}
+
+	&.processing:after {
+		border-bottom: 2px solid $text-color !important;
+		border-right: 2px solid $text-color !important;
+	}
+
 }
 
 .btn-transparent {
