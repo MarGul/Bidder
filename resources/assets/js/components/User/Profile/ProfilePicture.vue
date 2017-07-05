@@ -1,9 +1,10 @@
 <template>
 	<div class="profile_picture-component">
+		<h2 class="user-component-title subsection text-left" v-if="breakpoints.isSmallDevices()">Uppdatera din avatar</h2>
 		<form enctype="multipart/form-data">
 			<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
 				<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
-				<span class="btn btn-default" v-if="hover || processing" :class="{processing}">
+				<span class="btn btn-default" v-if="hover || processing || breakpoints.isSmallDevices()" :class="{processing}">
 					<i class="fa fa-picture-o mr5" aria-hidden="true"></i> Ladda upp ny bild
 				</span>
 				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">
@@ -18,6 +19,7 @@
 	export default {
 		data() {
 			return {
+				breakpoints: window.breakpoints,
 				processing: false,
 				hover: false
 			}

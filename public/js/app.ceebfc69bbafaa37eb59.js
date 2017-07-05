@@ -5804,12 +5804,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	data: function data() {
 		return {
+			breakpoints: window.breakpoints,
 			processing: false,
 			hover: false
 		};
@@ -12453,7 +12455,9 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile_picture-component"
-  }, [_c('form', {
+  }, [(_vm.breakpoints.isSmallDevices()) ? _c('h2', {
+    staticClass: "user-component-title subsection text-left"
+  }, [_vm._v("Uppdatera din avatar")]) : _vm._e(), _vm._v(" "), _c('form', {
     attrs: {
       "enctype": "multipart/form-data"
     }
@@ -12475,7 +12479,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.image
     }
-  }), _vm._v(" "), (_vm.hover || _vm.processing) ? _c('span', {
+  }), _vm._v(" "), (_vm.hover || _vm.processing || _vm.breakpoints.isSmallDevices()) ? _c('span', {
     staticClass: "btn btn-default",
     class: {
       processing: _vm.processing

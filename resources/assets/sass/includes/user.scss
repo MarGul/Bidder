@@ -5,6 +5,8 @@
 		border: 1px solid $border-color-gray;
 		border-bottom: none;
 		box-shadow: 1px 1px 1px rgba(0,0,0,0.15);
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 
 		.mobile-user-buttons {
 			float: right;
@@ -59,8 +61,9 @@
 			border-top: none;
 			box-shadow: 0px 2px 4px rgba(0,0,0,0.18);
 			padding: 10px 25px 25px 25px;
-			border-radius: 6px;
-			border-top-left-radius: 0;
+			border-bottom-left-radius: 6px;
+			border-bottom-right-radius: 6px;
+			
 
 			@media screen and (min-width: $screen-md-min) {
 				flex: 3;
@@ -68,6 +71,8 @@
 				border-left: none;
 				padding: 25px;
 				border-top: 1px solid $border-color-gray;
+				border-radius: 6px;
+				border-top-left-radius: 0;
 			}
 
 			.user-component-title {
