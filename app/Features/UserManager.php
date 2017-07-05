@@ -15,6 +15,14 @@ use Storage;
 class UserManager {
 
 	/**
+	 * When a user is created this is the default avatar being used. 
+	 * Also when a user is updating his avatar this one should not be deleted in the job.
+	 * 
+	 * @var string
+	 */
+	protected $defaultAvatarUrl = 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg';
+
+	/**
 	 * Get the profile for a user
 	 * 
 	 * @param  string 	$username
@@ -43,7 +51,7 @@ class UserManager {
 			'password' => bcrypt($data['password']),
 			'name' => '',
 			'bio' => '',
-			'avatar' => 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg', // Need to change
+			'avatar' => $this->defaultAvatarUrl,
 			'email_verification_code' => str_random(35)
 		]);
 
@@ -89,7 +97,7 @@ class UserManager {
 		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
 
 		// Delete the old profile picture in a job
-		if ( $user->avatar ) {
+		if ( $user->avatar && ($user->avatar !== $this->defaultAvatarUrl) ) {
 			dispatch(new DeleteOldProfilePicture($user->avatar));
 		}
 
