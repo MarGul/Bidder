@@ -33,17 +33,17 @@
 					this.processing = true;
 					
 					const formData = new FormData();
-					formData.append('picture', files[0], files[0].name);
+					formData.append('avatar', files[0], files[0].name);
 					
-					new Model(`users/${this.$store.getters.authUser.id}/profile-picture`).post(formData)
+					new Model(`users/${this.$store.getters.authUser.id}/avatar`).post(formData)
 						.then(response => {
 							this.$store.commit('SET_USER', {user: response.user});
-							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din profilbild.'});
+							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din avatar.'});
 							$("html, body").animate({ scrollTop: 0 }, "fast");
 							this.processing = false;
 						})
 						.catch(error => {
-							this.$store.dispatch('showNotification', {type: 'error', msg: 'Vi kunde inte uppdatera din profilbild. Var god försök igen.'});
+							this.$store.dispatch('showNotification', {type: 'error', msg: 'Vi kunde inte uppdatera din avatar. Var god försök igen.'});
 							$("html, body").animate({ scrollTop: 0 }, "fast");
 						});
 				}

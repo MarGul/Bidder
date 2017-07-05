@@ -2646,13 +2646,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.processing = true;
 
 				var formData = new FormData();
-				formData.append('picture', files[0], files[0].name);
+				formData.append('avatar', files[0], files[0].name);
 
-				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$store.getters.authUser.id + '/profile-picture').post(formData).then(function (response) {
-					console.log(response);
+				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$store.getters.authUser.id + '/avatar').post(formData).then(function (response) {
+					_this.$store.commit('SET_USER', { user: response.user });
+					_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade din avatar.' });
+					$("html, body").animate({ scrollTop: 0 }, "fast");
 					_this.processing = false;
 				}).catch(function (error) {
-					console.log(error);
+					_this.$store.dispatch('showNotification', { type: 'error', msg: 'Vi kunde inte uppdatera din avatar. Var god försök igen.' });
+					$("html, body").animate({ scrollTop: 0 }, "fast");
 				});
 			}
 		}

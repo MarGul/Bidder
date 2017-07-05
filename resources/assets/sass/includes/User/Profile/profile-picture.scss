@@ -14,8 +14,12 @@
 			}
 		}
 
-		img.opacity {
-			opacity: 0.5;
+		img {
+			border-radius: 6px;
+
+			&.opacity {
+				opacity: 0.5;
+			}
 		}
 	}
 }

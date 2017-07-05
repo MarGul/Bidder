@@ -8,6 +8,8 @@ use App\Notifications\EmailVerification;
 use App\Jobs\DeleteOldProfilePicture;
 use App\Jobs\ResizeProfilePicture;
 use Notification;
+use Image;
+use Storage;
 
 
 class UserManager {
@@ -70,15 +72,21 @@ class UserManager {
 	}
 
 	/**
-	 * Update a users profile picture.
+	 * Update a users avatar.
 	 * 
 	 * @param  App\User 						$user
-	 * @param  Illuminate\Http\UploadedFile 	$picture
+	 * @param  Illuminate\Http\UploadedFile 	$avatar
 	 * @return boolean
 	 */
-	public function updateProfilePicture($user, $picture)
+	public function updateProfilePicture($user, $avatar)
 	{
-		if ( !$path = $picture->store('avatars') ) return false;
+		$img = Image::make($avatar)->resize(400, null, function($constraint) {
+			$constraint->aspectRatio();
+		});
+
+		$path = 'avatars/' . $avatar->hashName();
+
+		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
 
 		// Delete the old profile picture in a job
 		if ( $user->avatar ) {
@@ -88,9 +96,6 @@ class UserManager {
 		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
 		
 		if ( !$user->save() ) return false;
-
-		// Resize the new avatar picture in a job with a delay of 1 minute.
-		dispatch(new ResizeProfilePicture($user))->delay(60);
 
 		return $user;
 	}

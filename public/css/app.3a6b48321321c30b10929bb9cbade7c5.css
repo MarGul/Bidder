@@ -9777,6 +9777,10 @@ body.mobile-nav-open .overlay {
   background-color: #eaeaea !important;
 }
 
+.profile_picture-component .profile-picture-label img {
+  border-radius: 6px;
+}
+
 .profile_picture-component .profile-picture-label img.opacity {
   opacity: 0.5;
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Features\UserManager;
 use App\User;
 
-class UserProfilePictureController extends Controller
+class UserAvatarController extends Controller
 {
     
 	/**
@@ -24,7 +24,7 @@ class UserProfilePictureController extends Controller
 	}
 
 	/**
-	 * Store a new profile picture in storage.
+	 * Store a new avatar in storage.
 	 * 
 	 * @param  Request $request
 	 * @return Illuminate\Http\Response
@@ -32,13 +32,15 @@ class UserProfilePictureController extends Controller
 	public function store(User $user, Request $request)
 	{
 		$this->authorize('my-resource', $user);
-		$this->validate($request, ['picture' => 'required|image']);
+		$this->validate($request, ['avatar' => 'required|image']);
 
-		if ( !$request->file('picture')->isValid() || !$user = $this->manager->updateProfilePicture($user, $request->file('picture')) ) {
-			return response()->json(['message' => 'Could not upload the profile picture.'], 500);
+		//return response()->json(['message' => $request->file('avatar')->hashName()], 200);
+
+		if ( !$request->file('avatar')->isValid() || !$user = $this->manager->updateProfilePicture($user, $request->file('avatar')) ) {
+			return response()->json(['message' => 'Could not upload the avatar.'], 500);
 		}
 
-		return response()->json(['message' => 'Successfully uploaded the profile picture.', 'user' => $user], 200);
+		return response()->json(['message' => 'Successfully uploaded the avatar.', 'user' => $user], 200);
 	}
 
 }
