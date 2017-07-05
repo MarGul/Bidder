@@ -6,7 +6,7 @@
 				<span class="btn btn-default" v-if="hover || processing" :class="{processing}">
 					<i class="fa fa-picture-o mr5" aria-hidden="true"></i> Ladda upp ny bild
 				</span>
-				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)">
+				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">
 			</label>
 		</form>
 	</div>
