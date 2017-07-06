@@ -6673,6 +6673,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.media.push(files[i]);
 			}
 		},
+		mediaRemoved: function mediaRemoved(_ref2) {
+			var index = _ref2.index;
+
+			this.media.splice(index, 1);
+		},
 		create: function create() {
 			var _this = this;
 
@@ -13938,7 +13943,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "media": _vm.media
     },
     on: {
-      "added": _vm.mediaAdded
+      "added": _vm.mediaAdded,
+      "removed": _vm.mediaRemoved
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -16375,6 +16381,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (files.length) {
 				this.$emit('added', { files: files });
 			}
+		},
+		remove: function remove(index) {
+			this.$emit('removed', { index: index });
+		},
+		size: function size(_size) {
+			if (_size < 1000) {
+				return _size + ' b';
+			} else if (_size > 1000000) {
+				var s = _size / 1000000;
+				return s.toFixed(1) + ' mb';
+			} else {
+				var _s = _size / 1000;
+				return _s.toFixed(1) + ' kb';
+			}
 		}
 	}
 };
@@ -16428,7 +16448,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-sm-6 col-sm-push-3"
   }, [_c('ul', {
     staticClass: "media"
-  }, _vm._l((_vm.media), function(file) {
+  }, _vm._l((_vm.media), function(file, index) {
     return _c('li', [_c('i', {
       staticClass: "fa fa-picture-o icon",
       attrs: {
@@ -16438,10 +16458,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "file-name"
     }, [_vm._v(_vm._s(file.name))]), _vm._v(" "), _c('span', {
       staticClass: "file-size"
-    }, [_vm._v("7.5mb")]), _vm._v(" "), _c('i', {
+    }, [_vm._v(_vm._s(_vm.size(file.size)))]), _vm._v(" "), _c('i', {
       staticClass: "fa fa-times clickable remove",
       attrs: {
         "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.remove(index)
+        }
       }
     })])
   }))])]), _vm._v(" "), _c('label', {

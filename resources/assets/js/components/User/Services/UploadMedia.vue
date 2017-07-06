@@ -6,11 +6,11 @@
 		<div class="row">
 			<div class="col-sm-6 col-sm-push-3">
 				<ul class="media">
-					<li v-for="file in media">
+					<li v-for="(file, index) in media">
 						<i class="fa fa-picture-o icon" aria-hidden="true"></i> 
 						<span class="file-name">{{ file.name }}</span>
-						<span class="file-size">7.5mb</span>
-						<i class="fa fa-times clickable remove" aria-hidden="true"></i>
+						<span class="file-size">{{ size(file.size) }}</span>
+						<i class="fa fa-times clickable remove" aria-hidden="true" @click="remove(index)"></i>
 					</li>
 				</ul>
 			</div>
@@ -29,6 +29,20 @@
 			add(files) {
 				if ( files.length ) {
 					this.$emit('added', {files});
+				}
+			},
+			remove(index) {
+				this.$emit('removed', {index});
+			},
+			size(size) {
+				if ( size < 1000) {
+					return `${size} b`;
+				} else if ( size >  1000000) {
+					let s = size / 1000000;
+					return `${s.toFixed(1)} mb`;
+				} else {
+					let s = size / 1000;
+					return `${s.toFixed(1)} kb`;
 				}
 			}
 		}

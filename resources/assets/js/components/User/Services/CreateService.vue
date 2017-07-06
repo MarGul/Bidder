@@ -118,7 +118,7 @@
 				</div>
 			</div>
 
-			<app-upload-media :media="media" @added="mediaAdded"></app-upload-media>
+			<app-upload-media :media="media" @added="mediaAdded" @removed="mediaRemoved"></app-upload-media>
 
 			<div class="form-group">
 				<button 
@@ -192,6 +192,9 @@
 				for (var i = 0; i < files.length; i++) {
 					this.media.push(files[i]);
 				}
+			},
+			mediaRemoved({index}) {
+				this.media.splice(index, 1);
 			},
 			create() {
 				this.processing = true;
