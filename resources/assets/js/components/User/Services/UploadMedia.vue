@@ -7,7 +7,7 @@
 			<div class="col-sm-6 col-sm-push-3">
 				<ul class="media">
 					<li v-for="(file, index) in media">
-						<i class="fa fa-picture-o icon" aria-hidden="true"></i> 
+						<i class="fa" :class="[type(file.type)]" aria-hidden="true"></i> 
 						<span class="file-name">{{ file.name }}</span>
 						<span class="file-size">{{ size(file.size) }}</span>
 						<i class="fa fa-times clickable remove" aria-hidden="true" @click="remove(index)"></i>
@@ -27,12 +27,16 @@
 		props: ['media'],
 		methods: {
 			add(files) {
+				console.log(files);
 				if ( files.length ) {
 					this.$emit('added', {files});
 				}
 			},
 			remove(index) {
 				this.$emit('removed', {index});
+			},
+			type(type) {
+				return type.includes('image/') ? 'fa-file-image-o' : 'fa-file-text-o';
 			},
 			size(size) {
 				if ( size < 1000) {

@@ -16378,12 +16378,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['media'],
 	methods: {
 		add: function add(files) {
+			console.log(files);
 			if (files.length) {
 				this.$emit('added', { files: files });
 			}
 		},
 		remove: function remove(index) {
 			this.$emit('removed', { index: index });
+		},
+		type: function type(_type) {
+			return _type.includes('image/') ? 'fa-file-image-o' : 'fa-file-text-o';
 		},
 		size: function size(_size) {
 			if (_size < 1000) {
@@ -16450,7 +16454,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "media"
   }, _vm._l((_vm.media), function(file, index) {
     return _c('li', [_c('i', {
-      staticClass: "fa fa-picture-o icon",
+      staticClass: "fa",
+      class: [_vm.type(file.type)],
       attrs: {
         "aria-hidden": "true"
       }
