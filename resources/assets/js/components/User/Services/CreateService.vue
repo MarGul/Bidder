@@ -118,6 +118,8 @@
 				</div>
 			</div>
 
+			<app-upload-media :media="media" @added="mediaAdded"></app-upload-media>
+
 			<div class="form-group">
 				<button 
 					class="btn btn-primary full-width"
@@ -135,10 +137,12 @@
 	import Form from '../../../includes/classes/Form';
 	import Model from "../../../includes/Model";
 	import datepicker from 'vuejs-datepicker';
+	import appUploadMedia from './UploadMedia';
 
 	export default {
 		components: {
-			datepicker
+			datepicker,
+			appUploadMedia
 		},
 		data() {
 			return {
@@ -153,6 +157,7 @@
 					bidding: '',
 					description: ''
 				}),
+				media: [],
 				processing: false
 			}
 		},
@@ -182,6 +187,11 @@
 			},
 			pad(number) {
 				return ( number < 10 ) ? "0" + number : number;
+			},
+			mediaAdded({files}) {
+				for (var i = 0; i < files.length; i++) {
+					this.media.push(files[i]);
+				}
 			},
 			create() {
 				this.processing = true;

@@ -40,9 +40,6 @@
 // Desktop Navigation
 @import "navigation/desktop-nav.scss";
 
-// Search Form
-@import "includes/search-form.scss";
-
 // Modal
 @import "includes/modal.scss";
 
@@ -78,6 +75,9 @@
 
 // Profile picture
 @import "includes/User/Profile/profile-picture.scss";
+
+// Upload Images
+@import "includes/upload-media.scss";
 
 // Project Title
 @import "includes/User/Projects/project-title.scss";

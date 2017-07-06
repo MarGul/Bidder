@@ -4509,6 +4509,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	computed: {
@@ -6470,6 +6473,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UploadMedia__);
 //
 //
 //
@@ -6603,6 +6608,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
@@ -6610,7 +6618,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	components: {
-		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a
+		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a,
+		appUploadMedia: __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default.a
 	},
 	data: function data() {
 		return {
@@ -6625,6 +6634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				bidding: '',
 				description: ''
 			}),
+			media: [],
 			processing: false
 		};
 	},
@@ -6655,6 +6665,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		pad: function pad(number) {
 			return number < 10 ? "0" + number : number;
+		},
+		mediaAdded: function mediaAdded(_ref) {
+			var files = _ref.files;
+
+			for (var i = 0; i < files.length; i++) {
+				this.media.push(files[i]);
+			}
 		},
 		create: function create() {
 			var _this = this;
@@ -10560,6 +10577,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Min profil")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
+      "to": "/user/create-service"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-users",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Skapa tjänst")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
+    attrs: {
       "to": "/user/profile"
     }
   }, [_c('i', {
@@ -13907,7 +13933,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+  }) : _vm._e()])])]), _vm._v(" "), _c('app-upload-media', {
+    attrs: {
+      "media": _vm.media
+    },
+    on: {
+      "added": _vm.mediaAdded
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
@@ -13923,7 +13956,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.create($event)
       }
     }
-  }, [_vm._v("Skapa din tjänst")])])])])
+  }, [_vm._v("Skapa din tjänst")])])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -16292,6 +16325,152 @@ return index;
 __webpack_require__(140);
 module.exports = __webpack_require__(141);
 
+
+/***/ }),
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+	props: ['media'],
+	methods: {
+		add: function add(files) {
+			if (files.length) {
+				this.$emit('added', { files: files });
+			}
+		}
+	}
+};
+
+/***/ }),
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(376),
+  /* template */
+  __webpack_require__(378),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Services/UploadMedia.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] UploadMedia.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5eb1383e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5eb1383e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 378 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "upload_media-component"
+  }, [_c('h4', [_vm._v("Ladda upp media")]), _vm._v(" "), _c('div', {
+    staticClass: "help-text mb15"
+  }, [_vm._v("Har du bilder, ritningar eller annan media som du vill lägga till?")]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-6 col-sm-push-3"
+  }, [_c('ul', {
+    staticClass: "media"
+  }, _vm._l((_vm.media), function(file) {
+    return _c('li', [_c('i', {
+      staticClass: "fa fa-picture-o icon",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" "), _c('span', {
+      staticClass: "file-name"
+    }, [_vm._v(_vm._s(file.name))]), _vm._v(" "), _c('span', {
+      staticClass: "file-size"
+    }, [_vm._v("7.5mb")]), _vm._v(" "), _c('i', {
+      staticClass: "fa fa-times clickable remove",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])
+  }))])]), _vm._v(" "), _c('label', {
+    staticClass: "btn btn-primary"
+  }, [_c('i', {
+    staticClass: "fa fa-picture-o",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" Välj media\n\t\t"), _c('input', {
+    staticClass: "hidden",
+    attrs: {
+      "type": "file",
+      "multiple": ""
+    },
+    on: {
+      "change": function($event) {
+        _vm.add($event.target.files)
+      }
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5eb1383e", module.exports)
+  }
+}
 
 /***/ })
 ],[364]);

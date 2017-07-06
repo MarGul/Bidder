@@ -42,6 +42,9 @@
 							<router-link to="/profile/margul"><i class="fa fa-user-circle" aria-hidden="true"></i>Min profil</router-link>
 						</li>
 						<li>
+							<router-link to="/user/create-service"><i class="fa fa-users" aria-hidden="true"></i>Skapa tjänst</router-link>
+						</li>
+						<li>
 							<router-link to="/user/profile"><i class="fa fa-cogs" aria-hidden="true"></i>Inställningar</router-link>
 						</li>
 						<li>

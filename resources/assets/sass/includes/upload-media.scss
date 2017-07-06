@@ -1,0 +1,57 @@
+.upload_media-component {
+	background: $body-bg;
+	border: 2px dashed $border-color-gray;
+	padding: 25px 15px;
+	margin: 15px 0 30px 0;
+	border-radius: 6px;
+	text-align: center;
+	color: $navbar-icon-color;
+
+	i {
+		margin-right: 5px;
+	}
+
+	h4 {
+		margin: 0 0 10px 0;
+	}
+
+	.media {
+		margin: 0 0 15px 0;
+		padding: 0;
+		list-style-type: none;
+		text-align: left;
+
+		li {
+			padding: 10px 0;
+			color: $text-color;
+			border-bottom: 1px solid $border-color-gray;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			i.icon {
+				color: $navbar-icon-color;
+				margin-right: 7px;
+				font-size: 20px;
+				position: relative;
+				top: 2px;
+			}
+
+			.file-name {
+				font-weight: 500;
+				font-size: 15px;
+			}
+
+			.file-size {
+				margin-left: 7px;
+			}
+
+			i.remove {
+				float: right;
+				display: block;
+				padding: 7px 0 7px 7px;
+			}
+		}
+	}
+}
