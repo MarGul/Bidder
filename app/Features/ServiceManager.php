@@ -5,6 +5,7 @@ namespace App\Features;
 use App\Service;
 use App\Features\CommentManager;
 use App\Features\MediaManager;
+use App\Features\SubscriptionManager;
 use App\Jobs\MakeThumbnailsAndResizeMedia;
 use Carbon\Carbon;
 
@@ -82,7 +83,7 @@ class ServiceManager {
 			'active' => true
 		]);
 
-		if ( $service->save() ) {
+		if ( !$service->save() ) {
 			return false;
 		}
 

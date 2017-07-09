@@ -55,7 +55,7 @@ class SubscriptionManager
 	 * @param  App\Service 	$service
 	 * @return void
 	 */
-	public function sendNotifications($service)
+	public function send($service)
 	{
 		$subscribers = $this->subscriptionUsers($service);
 

@@ -18,7 +18,7 @@ class MakeThumbnailsAndResizeMedia implements ShouldQueue
      * 
      * @var array
      */
-    protected $filesPaths;
+    protected $filePaths;
 
     /**
      * Create a new job instance.
