@@ -33,14 +33,18 @@
 			i.icon {
 				color: $navbar-icon-color;
 				margin-right: 7px;
-				font-size: 20px;
+				font-size: 18px;
 				position: relative;
-				top: 2px;
+				top: 1px;
 			}
 
 			.file-name {
 				font-weight: 500;
 				font-size: 15px;
+
+				&.has-error {
+					color: $brand-danger;
+				}
 			}
 
 			.file-size {
@@ -51,6 +55,12 @@
 				float: right;
 				display: block;
 				padding: 7px 0 7px 7px;
+			}
+
+			.error-block {
+				font-size: 85%;
+				color: $brand-danger;
+				margin-top: 3px;
 			}
 		}
 	}

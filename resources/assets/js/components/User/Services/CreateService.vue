@@ -118,7 +118,13 @@
 				</div>
 			</div>
 
-			<app-upload-media :media="media" @added="mediaAdded" @removed="mediaRemoved"></app-upload-media>
+			<app-upload-media 
+				:media="media" 
+				:errors="mediaErrors" 
+				@added="mediaAdded" 
+				@removed="mediaRemoved" 
+				:disabled="processing">
+			</app-upload-media>
 
 			<div class="form-group">
 				<button 
@@ -158,6 +164,7 @@
 					description: ''
 				}),
 				media: [],
+				mediaErrors: [],
 				processing: false
 			}
 		},
@@ -169,16 +176,23 @@
 				return this.$store.getters.getRegions;
 			},
 			finalData() {
-				let data = this.form.data();
-				data.category = this.form.category;
-				data.region = this.form.region.id || '';
-				data.city = this.form.city;
-				data.start = this.stripTime(data.start);
-				data.end = this.stripTime(data.end);
-				// Only needed rootCategory to know what categories to show
-				delete data.rootCategory;
+				const formData = new FormData();
+				
+				formData.append('title', this.form.title);
+				formData.append('category', this.form.category);
+				formData.append('region', this.form.category || '');
+				formData.append('city', this.form.city);
+				formData.append('start', this.stripTime(this.form.start));
+				formData.append('end', this.stripTime(this.form.start));
+				formData.append('bidding', this.form.bidding);
+				formData.append('description', this.form.description);
+				
+				// Append the media if there is any.
+				for (var i = 0; i < this.media.length; i++) {
+					formData.append('media[]', this.media[i]);
+				}
 
-				return data;
+				return formData;
 			}
 		},
 		methods: {
@@ -189,18 +203,23 @@
 				return ( number < 10 ) ? "0" + number : number;
 			},
 			mediaAdded({files}) {
-				for (var i = 0; i < files.length; i++) {
+				for (let i = 0; i < files.length; i++) {
 					this.media.push(files[i]);
 				}
 			},
 			mediaRemoved({index}) {
 				this.media.splice(index, 1);
+				if ( this.mediaErrors[index] ) {
+					this.mediaErrors.splice(index, 1);
+				}
 			},
 			create() {
 				this.processing = true;
 				new Model('services').create(this.finalData)
 					.then(response => {
 						this.form.reset();
+						this.media = [];
+						this.mediaErrors = [];
 						// Break the cache
 						this.$store.commit('SET_SERVICES_FETCHED', {fetched: false});
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
@@ -209,6 +228,14 @@
 					})
 					.catch(error => {
 						this.form.errors.record(error);
+						this.mediaErrors = [];
+						// Log the media errors seperatly.
+						for ( let key in error) {
+							if ( key.includes('media') ) {
+								let index = key.split('.')[1];
+								this.mediaErrors[index] = error[key]; 
+							}
+						}
 						this.processing = false;
 					});
 			}

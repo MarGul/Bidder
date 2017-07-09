@@ -4,6 +4,8 @@ namespace App\Features;
 
 use App\Service;
 use App\Features\CommentManager;
+use App\Features\MediaManager;
+use App\Jobs\MakeThumbnailsAndResizeMedia;
 use Carbon\Carbon;
 
 class ServiceManager {
@@ -83,6 +85,11 @@ class ServiceManager {
 		if ( $service->save() ) {
 			return false;
 		}
+
+		// Locally store the media that was uploaded.
+		$paths = app(MediaManager::class)->tempStore($request->media);
+		// Create a job for further processing of the files and upload to AWS S3.
+		dispatch(new MakeThumbnailsAndResizeMedia($paths));
 
 		// Send out notifications to the people that has subscribed.
 		app(SubscriptionManager::class)->send($service);

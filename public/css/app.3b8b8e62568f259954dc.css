@@ -9773,14 +9773,18 @@ body.mobile-nav-open .overlay {
 .upload_media-component .media li i.icon {
   color: #adb0b5;
   margin-right: 7px;
-  font-size: 20px;
+  font-size: 18px;
   position: relative;
-  top: 2px;
+  top: 1px;
 }
 
 .upload_media-component .media li .file-name {
   font-weight: 500;
   font-size: 15px;
+}
+
+.upload_media-component .media li .file-name.has-error {
+  color: #cc0000;
 }
 
 .upload_media-component .media li .file-size {
@@ -9791,6 +9795,12 @@ body.mobile-nav-open .overlay {
   float: right;
   display: block;
   padding: 7px 0 7px 7px;
+}
+
+.upload_media-component .media li .error-block {
+  font-size: 85%;
+  color: #cc0000;
+  margin-top: 3px;
 }
 
 .project-title {
