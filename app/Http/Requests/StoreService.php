@@ -31,7 +31,9 @@ class StoreService extends FormRequest
             'start' => 'required|date_format:Y-m-d|after_or_equal:today',
             'end' => 'required|date_format:Y-m-d|after_or_equal:today',
             'bidding' => 'required|numeric|in:7,14,30,60',
-            'description' => 'required'
+            'description' => 'required',
+            'media' => 'array',
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
         ];
     }
 }

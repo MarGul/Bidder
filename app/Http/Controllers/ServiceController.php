@@ -48,7 +48,7 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreService  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreService $request)
@@ -57,7 +57,7 @@ class ServiceController extends Controller
             return response()->json(['message' => 'Could not store the service in the database.'], 500);
         }
         
-        return response()->json(['message' => 'Service was successfully created.', 'service' => $service], 201);
+        return response()->json(['message' => 'Service was successfully created.'], 201);
     }
 
     /**

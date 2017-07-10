@@ -40,7 +40,7 @@ return [
     'distinct'             => 'The :attribute field has a duplicate value.',
     'email'                => 'Fältet måste vara en giltig email adress.',
     'exists'               => 'The selected :attribute is invalid.',
-    'file'                 => 'The :attribute must be a file.',
+    'file'                 => 'Måste vara en fil.',
     'filled'               => 'The :attribute field is required.',
     'image'                => 'Filen måste vara en giltig bild (jpeg, png, bmp, gif or svg)',
     'in'                   => 'The selected :attribute is invalid.',
@@ -50,11 +50,11 @@ return [
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
         'numeric' => 'The :attribute may not be greater than :max.',
-        'file'    => 'The :attribute may not be greater than :max kilobytes.',
+        'file'    => 'Filen får maximalt vara :max kilobytes.',
         'string'  => 'The :attribute may not be greater than :max characters.',
         'array'   => 'The :attribute may not have more than :max items.',
     ],
-    'mimes'                => 'The :attribute must be a file of type: :values.',
+    'mimes'                => 'Måste vara en fil av typ: :values.',
     'mimetypes'            => 'The :attribute must be a file of type: :values.',
     'min'                  => [
         'numeric' => 'Fältet måste innehålla minst :min tecken.',

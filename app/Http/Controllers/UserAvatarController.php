@@ -34,8 +34,6 @@ class UserAvatarController extends Controller
 		$this->authorize('my-resource', $user);
 		$this->validate($request, ['avatar' => 'required|image']);
 
-		//return response()->json(['message' => $request->file('avatar')->hashName()], 200);
-
 		if ( !$request->file('avatar')->isValid() || !$user = $this->manager->updateProfilePicture($user, $request->file('avatar')) ) {
 			return response()->json(['message' => 'Could not upload the avatar.'], 500);
 		}
