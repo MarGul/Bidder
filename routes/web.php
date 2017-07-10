@@ -9,7 +9,7 @@
 | handle all of the routing.
 */
 
-//Route::get('test', 'TestController@index');
+Route::get('test', 'TestController@index');
 
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');

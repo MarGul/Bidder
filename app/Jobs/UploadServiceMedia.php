@@ -7,8 +7,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Service;
+use App\Features\MediaManager;
+use Storage;
 
-class MakeThumbnailsAndResizeMedia implements ShouldQueue
+class UploadServiceMedia implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,13 +24,21 @@ class MakeThumbnailsAndResizeMedia implements ShouldQueue
     protected $filePaths;
 
     /**
+     * The service that the media belongs to.
+     * 
+     * @var App\Service;
+     */
+    protected $service;
+
+    /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($filePaths)
+    public function __construct($filePaths, Service $service)
     {
         $this->filePaths = $filePaths;
+        $this->service = $service;
     }
 
     /**
@@ -37,6 +48,13 @@ class MakeThumbnailsAndResizeMedia implements ShouldQueue
      */
     public function handle()
     {
-        //
+        foreach ($this->filePaths as $path) {
+            if ( Storage::disk('local')->exists($path) ) {
+                if ( !app(MediaManager::class)->storeServiceFile($path, $this->service) ) return false;
+            }
+        }
+        
+        return true;
     }
+
 }
