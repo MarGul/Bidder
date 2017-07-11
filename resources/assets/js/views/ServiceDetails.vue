@@ -6,7 +6,7 @@
 					<div class="col-xs-12 col-md-8">
 						<div class="service-description white-container mb20" v-if="!breakpoints.small">
 							<app-service-description></app-service-description>
-							<app-service-media :media="service.media"></app-service-media>
+							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
 						</div>
 					</div>
 					<div class="col-xs-12 col-md-4">

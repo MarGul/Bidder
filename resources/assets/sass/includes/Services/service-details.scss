@@ -51,11 +51,10 @@
 	}
 
 	.info {
-		border-bottom: 1px solid $border-color-gray;
-		border-top: 1px solid $border-color-gray;
-		background-color: #fafafa;
+		border-bottom: 1px solid #ededed;
+		border-top: 1px solid #ededed;
 		margin: 0 -15px;
-		padding: 10px 15px;
+		padding: 12.5px 15px;
 
 		@media screen and (min-width: $screen-sm-min) {
 			display: flex;

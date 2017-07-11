@@ -9077,11 +9077,10 @@ body.mobile-nav-open .overlay {
 }
 
 .service_description-component .info {
-  border-bottom: 1px solid #c7c7c7;
-  border-top: 1px solid #c7c7c7;
-  background-color: #fafafa;
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
   margin: 0 -15px;
-  padding: 10px 15px;
+  padding: 12.5px 15px;
 }
 
 @media screen and (min-width: 768px) {
@@ -9156,6 +9155,24 @@ body.mobile-nav-open .overlay {
 
 .service-user .user-ratings .link:hover {
   color: #009999;
+}
+
+.service_media-component {
+  background: #fafafa;
+  border-top: 1px solid #ededed;
+  margin: 30px -15px -20px -15px;
+  padding: 20px 15px;
+}
+
+.service_media-component .files-list {
+  list-style-type: none;
+  margin: 0 0 0 15px;
+  padding: 0;
+}
+
+.service_media-component .files-list li i {
+  color: #adb0b5;
+  margin-right: 5px;
 }
 
 .list-bids li {

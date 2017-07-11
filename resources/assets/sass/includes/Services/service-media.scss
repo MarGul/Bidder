@@ -1,0 +1,20 @@
+.service_media-component {
+	background: #fafafa;
+	border-top: 1px solid #ededed;
+	margin: 30px -15px -20px -15px;
+	padding: 20px 15px;
+
+	.files-list {
+		list-style-type: none;
+		margin: 0 0 0 15px;
+		padding: 0;
+
+		li {
+
+			i {
+				color: $navbar-icon-color;
+				margin-right: 5px;
+			}
+		}
+	}
+}

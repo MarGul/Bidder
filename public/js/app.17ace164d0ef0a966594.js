@@ -2010,6 +2010,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['media'],
@@ -8233,11 +8241,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12 col-md-8"
   }, [(!_vm.breakpoints.small) ? _c('div', {
     staticClass: "service-description white-container mb20"
-  }, [_c('app-service-description'), _vm._v(" "), _c('app-service-media', {
+  }, [_c('app-service-description'), _vm._v(" "), (_vm.service.media.length > 0) ? _c('app-service-media', {
     attrs: {
       "media": _vm.service.media
     }
-  })], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+  }) : _vm._e()], 1) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12 col-md-4"
   }, [_c('div', {
     staticClass: "service-bids white-container"
@@ -8383,7 +8391,21 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "service_media-component"
-  })
+  }, [(_vm.files.length > 0) ? [_c('ul', {
+    staticClass: "files-list"
+  }, _vm._l((_vm.files), function(file) {
+    return _c('li', [_c('i', {
+      staticClass: "fa fa-file-text-o",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" "), _c('a', {
+      attrs: {
+        "href": file.media_url,
+        "target": "_blank"
+      }
+    }, [_vm._v(_vm._s(file.mime_type))])])
+  }))] : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
