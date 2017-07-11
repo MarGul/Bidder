@@ -1,6 +1,6 @@
 <template>
 	<div class="service_description-component">
-		<div class="title" v-text="service.title"></div>
+		<h4 class="title" v-text="service.title"></h4>
 		<div class="info">
 			<div class="info-item info-category">
 				<i aria-hidden="true" class="fa fa-list-ul"></i> 

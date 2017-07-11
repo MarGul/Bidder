@@ -9038,7 +9038,7 @@ body.mobile-nav-open .overlay {
 
 .service-bids .time-left .timer-component {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .service-bids .active-bids {
@@ -9051,7 +9051,7 @@ body.mobile-nav-open .overlay {
 }
 
 .service-bids .active-bids span {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 20px;
 }
 
@@ -9066,9 +9066,8 @@ body.mobile-nav-open .overlay {
 }
 
 .service_description-component .title {
-  font-weight: bold;
-  font-size: 18px;
-  margin: 0 0 10px 0;
+  font-weight: 500;
+  margin: 10px 0 20px 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -9079,7 +9078,10 @@ body.mobile-nav-open .overlay {
 
 .service_description-component .info {
   border-bottom: 1px solid #c7c7c7;
-  padding: 5px 15px;
+  border-top: 1px solid #c7c7c7;
+  background-color: #fafafa;
+  margin: 0 -15px;
+  padding: 10px 15px;
 }
 
 @media screen and (min-width: 768px) {
@@ -9126,7 +9128,8 @@ body.mobile-nav-open .overlay {
 }
 
 .service-user .user-avatar img {
-  width: 45%;
+  width: 145px;
+  height: 145px;
   border-radius: 50%;
   border: 3px solid #009999;
 }
@@ -9134,7 +9137,7 @@ body.mobile-nav-open .overlay {
 .service-user .user-displayname {
   text-align: center;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .service-user .user-ratings {
@@ -9293,7 +9296,7 @@ body.mobile-nav-open .overlay {
 }
 
 .add-comment-component h4 {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .add-comment-component .comments-as {
@@ -9374,7 +9377,7 @@ body.mobile-nav-open .overlay {
 }
 
 .comment-component .comment-content .comment-head .comment-author {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .comment-component .comment-content .comment-head .comment-time {

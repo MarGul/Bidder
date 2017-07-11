@@ -65,6 +65,16 @@ class Service extends Model
     }
 
     /**
+     * A service may have many media
+     * 
+     * @return Eloquent Relationship
+     */
+    public function media()
+    {
+        return $this->hasMany('App\Media');
+    }
+
+    /**
      * A service has many comments.
      * 
      * @return Eloquent Relationship

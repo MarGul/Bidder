@@ -11,7 +11,7 @@
 
 		.timer-component {
 			font-size: 24px;
-			font-weight: bold;
+			font-weight: 500;
 		}
 	}
 
@@ -24,7 +24,7 @@
 		}
 
 		span {
-			font-weight: bold;
+			font-weight: 500;
 			font-size: 20px;
 		}
 
@@ -42,9 +42,8 @@
 	}
 
 	.title {
-		font-weight: bold;
-		font-size: 18px;
-		margin: 0 0 10px 0;
+		font-weight: 500;
+		margin: 10px 0 20px 0;
 
 		@media screen and (min-width: $screen-sm-min) {
 			text-align: center;
@@ -53,7 +52,10 @@
 
 	.info {
 		border-bottom: 1px solid $border-color-gray;
-		padding: 5px 15px;
+		border-top: 1px solid $border-color-gray;
+		background-color: #fafafa;
+		margin: 0 -15px;
+		padding: 10px 15px;
 
 		@media screen and (min-width: $screen-sm-min) {
 			display: flex;
@@ -94,7 +96,8 @@
 		margin: 0 0 5px 0;
 
 		img {
-			width: 45%;
+			width: 145px;
+			height: 145px;
 			border-radius: 50%;
 			border: 3px solid $brand-primary;
 		}
@@ -103,7 +106,7 @@
 	.user-displayname {
 		text-align: center;
 		font-size: 24px;
-		font-weight: bold;
+		font-weight: 500;
 	}
 
 	.user-ratings {
