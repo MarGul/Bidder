@@ -87,10 +87,12 @@ class ServiceManager {
 			return false;
 		}
 
-		// Locally store the media that was uploaded.
-		$paths = app(MediaManager::class)->tempStore($request->media);
-		// Create a job for further processing of the files and upload to AWS S3.
-		dispatch(new UploadServiceMedia($paths, $service));
+		if ( $request->media ) {
+			// Locally store the media that was uploaded.
+			$files = app(MediaManager::class)->tempStore($request->media);
+			// Create a job for further processing of the files and upload to AWS S3.
+			dispatch(new UploadServiceMedia($files, $service));
+		}
 
 		// Send out notifications to the people that has subscribed.
 		app(SubscriptionManager::class)->send($service);

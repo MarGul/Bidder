@@ -13,7 +13,7 @@ class Media extends Model
      * @var array
      */
     protected $fillable = [
-    	'service_id', 'media_url', 'thumb_url', 'mime_type', 'size'
+    	'service_id', 'original_filename', 'media_url', 'thumb_url', 'mime_type', 'size'
     ];
 
 }

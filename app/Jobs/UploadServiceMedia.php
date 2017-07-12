@@ -21,7 +21,7 @@ class UploadServiceMedia implements ShouldQueue
      * 
      * @var array
      */
-    protected $filePaths;
+    protected $files;
 
     /**
      * The service that the media belongs to.
@@ -35,9 +35,9 @@ class UploadServiceMedia implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($filePaths, Service $service)
+    public function __construct($files, Service $service)
     {
-        $this->filePaths = $filePaths;
+        $this->files = $files;
         $this->service = $service;
     }
 
@@ -48,9 +48,9 @@ class UploadServiceMedia implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->filePaths as $path) {
-            if ( Storage::disk('local')->exists($path) ) {
-                if ( !app(MediaManager::class)->storeServiceFile($path, $this->service) ) return false;
+        foreach ($this->files as $file) {
+            if ( Storage::disk('local')->exists($file['path']) ) {
+                if ( !app(MediaManager::class)->storeServiceFile($file, $this->service) ) return false;
             }
         }
         

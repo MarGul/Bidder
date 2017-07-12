@@ -16,6 +16,7 @@ class CreateMediaTable extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('service_id')->nullable();
+            $table->string('original_filename');
             $table->string('media_url');
             $table->string('thumb_url')->nullable();
             $table->string('mime_type');

@@ -180,7 +180,7 @@
 				
 				formData.append('title', this.form.title);
 				formData.append('category', this.form.category);
-				formData.append('region', this.form.category || '');
+				formData.append('region', this.form.region || '');
 				formData.append('city', this.form.city);
 				formData.append('start', this.stripTime(this.form.start));
 				formData.append('end', this.stripTime(this.form.start));
