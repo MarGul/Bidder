@@ -4,8 +4,9 @@
 			<template v-if="$store.getters.getServiceLoaded">
 				<div class="row">
 					<div class="col-xs-12 col-md-8">
-						<div class="service-description white-container" v-if="!breakpoints.small">
+						<div class="service-description white-container mb20" v-if="!breakpoints.small">
 							<app-service-description></app-service-description>
+							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
 						</div>
 					</div>
 					<div class="col-xs-12 col-md-4">
@@ -25,6 +26,7 @@
 						</div>
 						<div class="service-description white-container" v-if="breakpoints.small">
 							<app-service-description></app-service-description>
+							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
 						</div>
 						<div class="service-user white-container">
 							<template v-if="$store.getters.getServiceLoaded">	
@@ -64,6 +66,7 @@
 	import appAddComment from '../components/Comments/AddComment';
 	import appComment from '../components/Comments/Comment';
 	import appServiceDescription from '../components/Services/ServiceDescription';
+	import appServiceMedia from '../components/Services/ServiceMedia';
 	import appRatings from '../components/Includes/Ratings';
 	import appTimer from '../components/Includes/Timer';
 
@@ -72,6 +75,7 @@
 			appComment,
 			appAddComment,
 			appServiceDescription,
+			appServiceMedia,
 			appRatings,
 			appTimer
 		},

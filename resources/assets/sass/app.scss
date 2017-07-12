@@ -53,13 +53,16 @@
 @import "includes/tags-input.scss";
 
 // Services Component
-@import "includes/filter-services.scss";
+@import "includes/Services/filter-services.scss";
 
 // Service Component
-@import "includes/services.scss";
+@import "includes/Services/services.scss";
 
 // Service Details
-@import "includes/service-details.scss";
+@import "includes/Services/service-details.scss";
+
+// Services Media
+@import "includes/Services/service-media.scss";
 
 // Show Bids
 @import "includes/show-bids.scss";

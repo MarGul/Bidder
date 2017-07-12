@@ -43,7 +43,7 @@ class ServiceManager {
 	 * @return collection
 	 */
 	public function get($service) {
-		$service->load(['user.rating', 'bid_count', 'comments.user']);
+		$service->load(['user.rating', 'bid_count', 'media', 'comments.user']);
 
 		return $service;
 	}
