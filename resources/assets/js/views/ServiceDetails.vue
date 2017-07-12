@@ -26,6 +26,7 @@
 						</div>
 						<div class="service-description white-container" v-if="breakpoints.small">
 							<app-service-description></app-service-description>
+							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
 						</div>
 						<div class="service-user white-container">
 							<template v-if="$store.getters.getServiceLoaded">	

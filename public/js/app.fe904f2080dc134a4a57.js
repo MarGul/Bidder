@@ -2018,9 +2018,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['media'],
+	data: function data() {
+		return {
+			showingAllImages: false,
+			hasMoreImages: false
+		};
+	},
+
 	computed: {
 		images: function images() {
 			return this.media.filter(function (media) {
@@ -2031,6 +2054,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.media.filter(function (media) {
 				return !media.mime_type.includes('image/');
 			});
+		}
+	},
+	methods: {
+		hasImagesOverflow: function hasImagesOverflow() {
+			this.hasMoreImages = this.$refs.imagesList.offsetHeight < this.$refs.imagesList.scrollHeight;
+		},
+		toggleOverflowImages: function toggleOverflowImages() {
+			if (this.showingAllImages) {
+				this.showingAllImages = false;
+				this.$refs.imagesList.classList.add('hide-overflow-images');
+			} else {
+				this.showingAllImages = true;
+				this.$refs.imagesList.classList.remove('hide-overflow-images');
+			}
+		}
+	},
+	mounted: function mounted() {
+		if (this.images.length > 0) {
+			this.hasImagesOverflow();
+			window.onresize = this.hasImagesOverflow;
 		}
 	}
 });
@@ -4159,6 +4202,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer__ = __webpack_require__("./resources/assets/js/components/Includes/Timer.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer__);
+//
 //
 //
 //
@@ -8281,7 +8325,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Lägg ett bud")])]), _vm._v(" "), (_vm.breakpoints.small) ? _c('div', {
     staticClass: "service-description white-container"
-  }, [_c('app-service-description')], 1) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_c('app-service-description'), _vm._v(" "), (_vm.service.media.length > 0) ? _c('app-service-media', {
+    attrs: {
+      "media": _vm.service.media
+    }
+  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "service-user white-container"
   }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
     staticClass: "user-avatar"
@@ -8391,8 +8439,41 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "service_media-component"
-  }, [(_vm.files.length > 0) ? [_c('ul', {
-    staticClass: "files-list"
+  }, [(_vm.images.length > 0) ? [_c('ul', {
+    ref: "imagesList",
+    staticClass: "images-list hide-overflow-images clearfix"
+  }, _vm._l((_vm.images), function(image) {
+    return _c('li', [_c('a', {
+      attrs: {
+        "href": image.media_url,
+        "target": "_blank"
+      }
+    }, [_c('div', {
+      staticClass: "image-container",
+      style: ({
+        backgroundImage: ("url('" + (image.thumb_url) + "')")
+      })
+    })])])
+  })), _vm._v(" "), (_vm.hasMoreImages) ? _c('div', {
+    staticClass: "show-more-container mt15 text-center"
+  }, [_c('button', {
+    staticClass: "btn btn-default show-all",
+    on: {
+      "click": _vm.toggleOverflowImages
+    }
+  }, [_vm._v("\n\t\t\t\tVisa alla bilder "), _c('i', {
+    staticClass: "fa",
+    class: {
+      'fa-chevron-down': !_vm.showingAllImages, 'fa-chevron-up': _vm.showingAllImages
+    },
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])]) : _vm._e()] : _vm._e(), _vm._v(" "), (_vm.files.length > 0) ? [_c('ul', {
+    staticClass: "files-list",
+    class: {
+      mt30: _vm.images.length > 0
+    }
   }, _vm._l((_vm.files), function(file) {
     return _c('li', [_c('i', {
       staticClass: "fa fa-file-text-o",
