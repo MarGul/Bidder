@@ -44,7 +44,7 @@
 			right: calc(50% + 90px);
 			top: calc(50% - 1px);
 			height: 1px;
-			background-color: $navbar-icon-color;
+			background-color: #ededed;
 		}
 
 		&:after {
@@ -54,7 +54,7 @@
 			right: 0;
 			top: calc(50% - 1px);
 			height: 1px;
-			background-color: $navbar-icon-color;
+			background-color: #ededed;
 		}
 
 		.show-all {
@@ -64,6 +64,10 @@
 				color: $navbar-icon-color;
 			}
 		}
+	}
+
+	.media-spacer {
+		border-bottom: 1px solid #ededed;
 	}
 
 	.files-list {

@@ -17,8 +17,10 @@
 			</div>
 		</template>
 
+		<div class="media-spacer" v-if="!hasMoreImages"></div>
+
 		<template v-if="files.length > 0">
-			<ul class="files-list" :class="{mt30: images.length > 0}">
+			<ul class="files-list" :class="{mt30: images.length > 0 && hasMoreImages, mt15: images.length > 0 && !hasMoreImages}">
 				<li v-for="file in files">
 					<i class="fa fa-file-text-o" aria-hidden="true"></i> 
 					<a :href="file.media_url" target="_blank">{{ file.mime_type }}</a>
