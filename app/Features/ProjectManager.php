@@ -6,6 +6,7 @@ use App\Project;
 use App\Message;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Features\InvoiceManager;
 
 class ProjectManager 
 {
@@ -167,6 +168,8 @@ class ProjectManager
 	public function start($project)
 	{
 		$project->started = true;
+
+		if ( !app(InvoiceManager::class)->create($project) ) return false;
 
 		return $project->save() ? true : false;
 	}
