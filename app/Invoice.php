@@ -13,7 +13,7 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'project_id', 'total', 'vat', 'due'
+    	'user_id', 'project_id', 'hash', 'total', 'vat', 'due', 'notes'
     ];
 
     /**
