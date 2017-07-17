@@ -64,4 +64,14 @@ class Project extends Model
         return $this->hasOne('App\User', 'id', 'service_user');
     }
 
+    /**
+     * A project has one invoice.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function invoice()
+    {
+        return $this->hasOne('App\Invoice');
+    }
+
 }

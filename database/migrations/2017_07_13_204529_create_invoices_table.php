@@ -17,7 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('project_id');
-            $table->float('sub_total');
+            $table->float('total');
             $table->float('vat');
             $table->date('due');
             $table->timestamps();

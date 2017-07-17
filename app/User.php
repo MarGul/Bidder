@@ -94,4 +94,14 @@ class User extends Authenticatable
                     ->groupBy('reviewed');
     }
 
+    /**
+     * A user may have many invoices.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function invoices()
+    {
+        return $this->hasMany('App\Invoice');
+    }
+
 }
