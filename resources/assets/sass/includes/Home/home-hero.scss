@@ -4,6 +4,10 @@
 			background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
 	padding: 40px 0;
 
+	@media screen and (min-width: $screen-sm-min) {
+		padding: 80px 0;
+	}
+
 	.hh-container {
 		@media screen and (min-width: $screen-sm-min) {
 			display: flex;

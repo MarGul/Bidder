@@ -78,7 +78,8 @@
 .btn-orange {
 	background-color: #ef6733;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: darken(#ef6733, 10%);
 		color: #fff;
 	}
