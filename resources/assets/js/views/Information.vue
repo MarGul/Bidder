@@ -1,7 +1,9 @@
 <template>
 	<div class="information-view">
 		<div class="container">
-			<h2>Information Page</h2>
+			<div class="content">
+				<h2>Information Page</h2>
+			</div>
 		</div>
 	</div>
 </template>

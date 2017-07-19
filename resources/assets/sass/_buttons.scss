@@ -75,6 +75,15 @@
 	}
 }
 
+.btn-orange {
+	background-color: #ef6733;
+
+	&:hover {
+		background-color: darken(#ef6733, 10%);
+		color: #fff;
+	}
+}
+
 @-webkit-keyframes rotate {
 	from {
 		-webkit-transform: rotate(0deg);

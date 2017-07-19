@@ -12,7 +12,7 @@ class InvoiceController extends Controller
 	 * Display the resource
 	 * 
 	 * @param  string 	$hash
-	 * @return [type]       [description]
+	 * @return Illuminate\Http\Response
 	 */
 	public function index($hash)
 	{

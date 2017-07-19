@@ -1,0 +1,59 @@
+.home_hero-component {
+	-webkit-background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
+		-moz-background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
+			background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
+	padding: 40px 0;
+
+	.hh-container {
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.hh-left {
+		color: #fff;
+		text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+		}
+
+		.hh-content {
+			font-size: 18px;
+			margin: 40px 0;
+		}
+
+		.hh-action {
+
+			@media screen and (min-width: $screen-sm-min) {
+				width: 70%;
+			}
+
+			button {
+				font-size: 18px;
+				box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+				padding: 10px 15px;
+				width: 100%;
+			}
+
+			.action-desc {
+				width: 100%;
+				text-align: center;
+				margin: 15px 0;
+				font-weight: 500;
+			}
+		}
+	}
+
+	.hh-right {
+		text-align: right;
+		margin-top: 40px;
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+			margin-top: 0;
+		}
+	}
+
+}

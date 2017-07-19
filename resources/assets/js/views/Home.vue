@@ -1,15 +1,17 @@
 <template>
 	<div class="home-view">
-		<div class="container">
-			<h2>Home Page</h2>
 
-			<button class="btn btn-primary processing">Skapa bud</button>
-		</div>
+		<app-home-hero></app-home-hero>
+			
 	</div>
 </template>
 
 <script>
+	import appHomeHero from "../components/Home/HomeHero"; 
+
 	export default {
-		
+		components: {
+			appHomeHero
+		}	
 	}
 </script>
