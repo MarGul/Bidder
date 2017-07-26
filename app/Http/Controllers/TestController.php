@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
-use App\Features\MediaManager;
+use App\Project;
+use App\Invoice;
+use App\Features\InvoiceManager;
 
 class TestController extends Controller
 {
     
 	public function index()
 	{
-		$path = 'tmp/zbuAnNRW1o7Kzi8ItjrP79UG0NZykmKumoqGlbAz.jpeg';
-		$service = Service::find(1);
+		//$invoice = \App\Invoice::find(4);
+		return app(InvoiceManager::class)->downloadInvoice('KWylEkRLu9F7yVApitXpwF2KEyBz6f92vidNMWgNEhBB6');
+		//$data = app(\App\Features\InvoiceManager::class)->invoicePDFData($invoice);
 
-		dd(app(MediaManager::class)->storeServiceFile($path, $service));
+		//return view('pdf.invoice', $data);
 	}
 
 }

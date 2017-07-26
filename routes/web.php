@@ -11,6 +11,10 @@
 
 Route::get('test', 'TestController@index');
 
+/**
+ * Auth Routes
+ * ===========
+ */
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 Route::post('register', 'Auth\RegisterController@register');
@@ -18,6 +22,12 @@ Route::get('email-verify/{code}', 'Auth\EmailVerificationController@verify');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
+/**
+ * Download Routes
+ * ===============
+ */
+Route::get('download-invoice/{hash}', 'InvoiceController@index')->name('download.invoice');
+
 
 Route::any('{all}', function () {
     return view('index');
