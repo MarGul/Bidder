@@ -2526,15 +2526,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	methods: {
 		paidClass: function paidClass(invoice) {
-			// not-paid
-			return ['paid'];
+			return invoice ? ['paid'] : ['not-paid'];
 		},
 		paidText: function paidText(invoice) {
-			return 'Betalad';
+			return invoice ? 'Betalad' : 'Ej betalad';
 		},
 		paidIcon: function paidIcon(invoice) {
-			// fa-info-circle
-			return ['fa-check-circle'];
+			return invoice ? ['fa-check-circle'] : ['fa-info-circle'];
 		}
 	},
 	created: function created() {
@@ -8899,7 +8897,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.invoices), function(invoice) {
     return _c('li', [_c('span', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t# " + _vm._s(invoice.id) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
+    }, [_vm._v("\n\t\t\t\t\tFaktura #" + _vm._s(1000000 + invoice.id) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
       staticClass: "item-actions"
     }, [_c('span', {
       staticClass: "payment-status",

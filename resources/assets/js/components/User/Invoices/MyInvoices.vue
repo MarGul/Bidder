@@ -7,7 +7,7 @@
 			<ul class="user-items-list" v-if="invoices.length > 0">
 				<li v-for="invoice in invoices">
 					<span class="item-content">
-						# {{ invoice.id }}
+						Faktura #{{ 1000000 + invoice.id }}
 					</span>
 					<span class="item-actions">
 						<span class="payment-status" :class="paidClass(invoice)">
@@ -41,15 +41,13 @@
 		},
 		methods: {
 			paidClass(invoice) {
-				// not-paid
-				return ['paid'];
+				return invoice ? ['paid'] : ['not-paid'];
 			},
 			paidText(invoice) {
-				return 'Betalad';
+				return invoice ? 'Betalad' : 'Ej betalad';
 			},
 			paidIcon(invoice) {
-				// fa-info-circle
-				return ['fa-check-circle'];
+				return invoice ? ['fa-check-circle'] : ['fa-info-circle'];
 			}
 		},
 		created() {

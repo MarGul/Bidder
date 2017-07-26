@@ -58,6 +58,13 @@ class InvoiceManager
 	 */
 	protected $vat;
 
+	/**
+	 * Increment the Id with this number to get the invoice number.
+	 * 
+	 * @var integer
+	 */
+	protected $invoiceIncrement = 1000000;
+
 	
 	public function __construct()
 	{
@@ -141,8 +148,8 @@ class InvoiceManager
 	protected function invoicePDFData($invoice)
 	{
 		return [
-			'title' => 'Faktura #' . ($invoice->id + 1000),
-			'invoice_id' => $invoice->id + 1000,
+			'title' => 'Faktura #' . ($invoice->id + $this->invoiceIncrement),
+			'invoice_id' => $invoice->id + $this->invoiceIncrement,
 			'created' => Carbon::parse($invoice->created_at)->formatLocalized('%d %B, %Y'),
 			'due' => Carbon::parse($invoice->due)->formatLocalized('%d %B, %Y'),
 			'user' => $invoice->user,
