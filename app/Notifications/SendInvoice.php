@@ -45,8 +45,8 @@ class SendInvoice extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->subject('Faktura #'. ($this->invoice->id + 1000))
-                    ->line('The introduction to the notification.')
-                    ->action('Ladda ner fakturan', url('download-invoice', ['hash' => $this->invoice->hash]))
+                    ->line('Tack så mycket för att du har använ')
+                    ->action('Ladda ner din faktura', url('download-invoice', ['hash' => $this->invoice->hash]))
                     ->line('Thank you for using our application!');
     }
 

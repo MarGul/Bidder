@@ -58,17 +58,10 @@ class InvoiceManager
 	 */
 	protected $vat;
 
-	/**
-	 * Temp path to store the invoice.
-	 * 
-	 * @var string
-	 */
-	protected $pdfTempDir;
-
 	
 	public function __construct()
 	{
-		$this->pdfTempDir = storage_path('app/tmp/');
+
 	}
 
 	/**
@@ -139,7 +132,13 @@ class InvoiceManager
 		return PDF::loadView('pdf.invoice', $data)->download($invoice->hash . '.pdf');
 	}
 
-	public function invoicePDFData($invoice)
+	/**
+	 * Fetch the data needed for the invoice.
+	 * 
+	 * @param  App\Invoice 	$invoice
+	 * @return array
+	 */
+	protected function invoicePDFData($invoice)
 	{
 		return [
 			'title' => 'Faktura #' . ($invoice->id + 1000),
@@ -184,6 +183,21 @@ class InvoiceManager
 	protected function sendInvoice($invoice)
 	{
 		return "Sending invoice";
+	}
+
+	/**
+	 * Fetch invoices for a user.
+	 * 
+	 * @param  App\User 	$user
+	 * @return boolean|collection
+	 */
+	public function byUser($user)
+	{
+		$invoices = Invoice::where('user_id', $user->id)
+							->orderBy('created_at', 'desc')
+							->get();
+
+		return $invoices;
 	}
 
 }

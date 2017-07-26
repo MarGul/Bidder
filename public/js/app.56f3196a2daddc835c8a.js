@@ -2478,6 +2478,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userInvoicesFetched;
+		},
+		invoices: function invoices() {
+			return this.$store.getters.userInvoices;
+		}
+	},
+	methods: {
+		paidClass: function paidClass(invoice) {
+			// not-paid
+			return ['paid'];
+		},
+		paidText: function paidText(invoice) {
+			return 'Betalad';
+		},
+		paidIcon: function paidIcon(invoice) {
+			// fa-info-circle
+			return ['fa-check-circle'];
+		}
+	},
+	created: function created() {
+		if (!this.fetched) {
+			this.$store.dispatch('fetchUserInvoices');
+		}
+	}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Profile/Account.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4496,6 +4564,14 @@ exports.push([module.i, "\n.item-actions[data-v-5f7c3375] {\n  -webkit-box-pack:
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
 exports.push([module.i, "\n.waiting[data-v-6398b14f] {\n  text-align: center;\n  margin: 40px 0;\n}\n", ""]);
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
+exports.push([module.i, "\n.payment-status {\n  margin-right: 10px;\n}\n.payment-status i {\n    margin-right: 3px;\n}\n.payment-status.paid {\n    color: #5cb85c;\n}\n.payment-status.not-paid {\n    color: #d9534f;\n}\n", ""]);
 
 /***/ }),
 
@@ -8810,6 +8886,50 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-880794c2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_invoices-component"
+  }, [_c('h1', {
+    staticClass: "user-component-title"
+  }, [_vm._v("Betalningar")]), _vm._v(" "), (_vm.fetched) ? [(_vm.invoices.length > 0) ? _c('ul', {
+    staticClass: "user-items-list"
+  }, _vm._l((_vm.invoices), function(invoice) {
+    return _c('li', [_c('span', {
+      staticClass: "item-content"
+    }, [_vm._v("\n\t\t\t\t\t# " + _vm._s(invoice.id) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
+      staticClass: "item-actions"
+    }, [_c('span', {
+      staticClass: "payment-status",
+      class: _vm.paidClass(invoice)
+    }, [_c('i', {
+      staticClass: "fa",
+      class: _vm.paidIcon(invoice),
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.paidText(invoice)) + "\n\t\t\t\t\t")]), _vm._v(" "), _c('button', {
+      staticClass: "btn btn-primary",
+      attrs: {
+        "type": "button"
+      }
+    }, [_vm._v("Visa detaljer")])])])
+  })) : _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("\n\t\t\tDär finns inga betalningar registrerade på dig.\n\t\t")])] : _c('app-loading')], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-880794c2", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-95a9e666\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/User.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8884,7 +9004,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Prenumerationer")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
-      "to": "/user/payments"
+      "to": "/user/invoices"
     }
   }, [_vm._v("Betalningar")])], 1)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "user-ui-content"
@@ -12282,6 +12402,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("2a3f3e12", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyInvoices.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyInvoices.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-b8890c0c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Includes/Ratings.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14695,6 +14842,45 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/User/Invoices/MyInvoices.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue")
+
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-880794c2\"}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/User/Invoices/MyInvoices.vue"),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Invoices/MyInvoices.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MyInvoices.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-880794c2", Component.options)
+  } else {
+    hotAPI.reload("data-v-880794c2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/User/Notifications.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14709,27 +14895,6 @@ var Component = __webpack_require__("./node_modules/vue-loader/lib/component-nor
   null
 )
 Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Notifications.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/User/Payments.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
-  /* script */
-  null,
-  /* template */
-  null,
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Payments.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 
 module.exports = Component.exports
@@ -15704,7 +15869,7 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: __webpack_require__("./resources/assets/js/views/Home.vue") }, { path: "/categories", name: 'categories', component: __webpack_require__("./resources/assets/js/views/Categories.vue") }, { path: "/locations", name: 'locations', component: __webpack_require__("./resources/assets/js/views/Locations.vue") }, { path: "/services", name: 'services', component: __webpack_require__("./resources/assets/js/views/Services.vue") }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__("./resources/assets/js/views/ServiceDetails.vue") }, { path: "/information", name: 'information', component: __webpack_require__("./resources/assets/js/views/Information.vue") }, { path: "/profile/:username", name: 'profile', component: __webpack_require__("./resources/assets/js/views/Profile.vue") }, { path: "/user", name: 'user', component: __webpack_require__("./resources/assets/js/views/User.vue"),
-	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'payments', component: __webpack_require__("./resources/assets/js/components/User/Payments.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/BidHistory.vue"), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__("./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__("./resources/assets/js/components/User/Profile/Profile.vue"), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__("./resources/assets/js/components/User/Notifications.vue"), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__("./resources/assets/js/components/User/Services/CreateService.vue"), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__("./resources/assets/js/components/User/Services/MyServices.vue"), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/MyBids.vue"), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__("./resources/assets/js/components/User/Projects/MyProjects.vue"), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__("./resources/assets/js/components/User/Projects/Project.vue"), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__("./resources/assets/js/components/User/Invoices/MyInvoices.vue"), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__("./resources/assets/js/components/User/Bids/BidHistory.vue"), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__("./resources/assets/js/components/User/Subscriptions/MySubscriptions.vue"), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -16369,7 +16534,9 @@ var user = {
 		projectsFetched: false,
 		projectFocus: null,
 		subscriptions: [],
-		subscriptionsFetched: false
+		subscriptionsFetched: false,
+		invoices: [],
+		invoicesFetched: false
 	},
 	mutations: {
 		'SET_SERVICES': function SET_SERVICES(state, payload) {
@@ -16398,6 +16565,12 @@ var user = {
 		},
 		'SET_SUBSCRIPTIONS_FETCHED': function SET_SUBSCRIPTIONS_FETCHED(state, payload) {
 			state.subscriptionsFetched = payload.fetched;
+		},
+		'SET_INVOICES': function SET_INVOICES(state, payload) {
+			state.invoices = payload.invoices;
+		},
+		'SET_INVOICES_FETCHED': function SET_INVOICES_FETCHED(state, payload) {
+			state.invoicesFetched = payload.fetched;
 		}
 	},
 	actions: {
@@ -16452,6 +16625,15 @@ var user = {
 				commit('SET_SUBSCRIPTIONS', { subscriptions: response.subscriptions });
 				commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: true });
 			});
+		},
+		fetchUserInvoices: function fetchUserInvoices(_ref6) {
+			var commit = _ref6.commit,
+			    rootState = _ref6.rootState;
+
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
+				commit('SET_INVOICES', { invoices: response.invoices });
+				commit('SET_INVOICES_FETCHED', { fetched: true });
+			});
 		}
 	},
 	getters: {
@@ -16481,6 +16663,12 @@ var user = {
 		},
 		userSubscriptionsFetched: function userSubscriptionsFetched(state) {
 			return state.subscriptionsFetched;
+		},
+		userInvoices: function userInvoices(state) {
+			return state.invoices;
+		},
+		userInvoicesFetched: function userInvoicesFetched(state) {
+			return state.invoicesFetched;
 		}
 	}
 };

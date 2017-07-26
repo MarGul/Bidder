@@ -73,6 +73,7 @@
 				border-top: 1px solid $border-color-gray;
 				border-radius: 6px;
 				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
 			}
 
 			.user-component-title {
@@ -104,6 +105,7 @@
 
 					@media screen and (min-width: $screen-md-min) {
 						display: flex;
+						align-items: center;
 					} 
 
 					&:last-child {
@@ -115,7 +117,6 @@
 						@media screen and (min-width: $screen-md-min) {
 							flex: 2;
 							padding-right: 10px;
-							line-height: 30px;
 						}
 
 						@media screen and (min-width: $screen-lg-min) {
@@ -130,7 +131,8 @@
 						@media screen and (min-width: $screen-md-min) {
 							flex: 1;
 							margin-top: 0;
-							align-self: flex-start;
+							justify-content: flex-end;
+							align-items: center;
 						}
 
 						a {

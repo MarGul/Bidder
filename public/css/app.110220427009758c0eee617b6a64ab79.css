@@ -9546,6 +9546,7 @@ body.mobile-nav-open .overlay {
     border-top: 1px solid #c7c7c7;
     border-radius: 6px;
     border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
 
@@ -9585,6 +9586,9 @@ body.mobile-nav-open .overlay {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
@@ -9598,7 +9602,6 @@ body.mobile-nav-open .overlay {
         -ms-flex: 2;
             flex: 2;
     padding-right: 10px;
-    line-height: 30px;
   }
 }
 
@@ -9623,8 +9626,12 @@ body.mobile-nav-open .overlay {
         -ms-flex: 1;
             flex: 1;
     margin-top: 0;
-    -ms-flex-item-align: start;
-        align-self: flex-start;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 

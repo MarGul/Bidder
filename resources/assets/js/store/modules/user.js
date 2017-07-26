@@ -11,6 +11,8 @@ const user = {
 		projectFocus: null,
 		subscriptions: [],
 		subscriptionsFetched: false,
+		invoices: [],
+		invoicesFetched: false
 	},
 	mutations: {
 		'SET_SERVICES'(state, payload) {
@@ -39,6 +41,12 @@ const user = {
 		},
 		'SET_SUBSCRIPTIONS_FETCHED'(state, payload) {
 			state.subscriptionsFetched = payload.fetched;
+		},
+		'SET_INVOICES'(state, payload) {
+			state.invoices = payload.invoices;
+		},
+		'SET_INVOICES_FETCHED'(state, payload) {
+			state.invoicesFetched = payload.fetched;
 		},
 	},
 	actions: {
@@ -84,6 +92,13 @@ const user = {
 					commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: true});
 				});
 		},
+		fetchUserInvoices({commit, rootState}) {
+			new Model('users/{id}/invoices').setId(rootState.auth.user.id).get()
+				.then(response => {
+					commit('SET_INVOICES', {invoices: response.invoices});
+					commit('SET_INVOICES_FETCHED', {fetched: true});
+				});
+		}
 	},
 	getters: {
 		userServices: state => state.services,
@@ -94,7 +109,9 @@ const user = {
 		userProjectsFetched: state => state.projectsFetched,
 		userProjectFocus: state => state.projectFocus,
 		userSubscriptions: state => state.subscriptions,
-		userSubscriptionsFetched: state => state.subscriptionsFetched
+		userSubscriptionsFetched: state => state.subscriptionsFetched,
+		userInvoices: state => state.invoices,
+		userInvoicesFetched: state => state.invoicesFetched
 	}
 }
 
