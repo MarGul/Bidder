@@ -14,7 +14,7 @@
 							<i class="fa" :class="paidIcon(invoice)" aria-hidden="true"></i>
 							{{ paidText(invoice) }}
 						</span>
-						<button type="button" class="btn btn-primary">Visa detaljer</button>
+						<button type="button" class="btn btn-primary" @click.prevent="show(invoice)">Visa detaljer</button>
 					</span>
 				</li>
 			</ul>
@@ -41,13 +41,17 @@
 		},
 		methods: {
 			paidClass(invoice) {
-				return invoice ? ['paid'] : ['not-paid'];
+				return invoice.payments.length ? ['paid'] : ['not-paid'];
 			},
 			paidText(invoice) {
-				return invoice ? 'Betalad' : 'Ej betalad';
+				return invoice.payments.length ? 'Betalad' : 'Ej betald';
 			},
 			paidIcon(invoice) {
-				return invoice ? ['fa-check-circle'] : ['fa-info-circle'];
+				return invoice.payments.length ? ['fa-check-circle'] : ['fa-info-circle'];
+			},
+			show(invoice) {
+				this.$store.commit('SET_INVOICE_FOCUS', {invoice});
+				this.$router.push(`/user/invoices/${1000000 + invoice.id}`);
 			}
 		},
 		created() {

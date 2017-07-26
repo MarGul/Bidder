@@ -22,6 +22,7 @@ let routes = [
 			{ path: 'projects', component: require('./components/User/Projects/MyProjects.vue'), meta: { requiresAuth: true } },
 			{ path: 'project/:id', component: require('./components/User/Projects/Project.vue'), meta: { requiresAuth: true } },
 			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices.vue'), meta: { requiresAuth: true } },
+			{ path: 'invoices/:id', component: require('./components/User/Invoices/InvoiceDetails.vue'), meta: { requiresAuth: true } },
 			{ path: 'service/:id/bids', component: require('./components/User/Bids/BidHistory.vue'), meta: { requiresAuth: true } },
 			{ path: 'subscriptions', component: require('./components/User/Subscriptions/MySubscriptions.vue'), meta: { requiresAuth: true } },
 		],

@@ -12,7 +12,8 @@ const user = {
 		subscriptions: [],
 		subscriptionsFetched: false,
 		invoices: [],
-		invoicesFetched: false
+		invoicesFetched: false,
+		invoiceFocus: null
 	},
 	mutations: {
 		'SET_SERVICES'(state, payload) {
@@ -48,6 +49,9 @@ const user = {
 		'SET_INVOICES_FETCHED'(state, payload) {
 			state.invoicesFetched = payload.fetched;
 		},
+		'SET_INVOICE_FOCUS'(state, payload) {
+			state.invoiceFocus = payload.invoice;
+		}
 	},
 	actions: {
 		clearUserState({commit}) {
@@ -62,6 +66,7 @@ const user = {
 			commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: false});
 			commit('SET_INVOICES', {invoices: []});
 			commit('SET_INVOICES_FETCHED', {fetched: false});
+			commit('SET_INVOICE_FOCUS', {invoice: null});
 		},
 		fetchUserServices({commit}) {
 			new Model('user/services').get()
@@ -96,11 +101,17 @@ const user = {
 					commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: true});
 				});
 		},
-		fetchUserInvoices({commit, rootState}) {
+		fetchUserInvoices({commit, rootState}, payload = {}) {
 			new Model('users/{id}/invoices').setId(rootState.auth.user.id).get()
 				.then(response => {
 					commit('SET_INVOICES', {invoices: response.invoices});
 					commit('SET_INVOICES_FETCHED', {fetched: true});
+
+					// If we have passed in a focusId then set the invoice with that Id as focus.
+					if ( payload.focusId ) {
+						let focus = response.invoices.find(invoice => invoice.id == payload.focusId);
+						commit('SET_INVOICE_FOCUS', {invoice: focus});
+					}
 				});
 		}
 	},
@@ -115,7 +126,8 @@ const user = {
 		userSubscriptions: state => state.subscriptions,
 		userSubscriptionsFetched: state => state.subscriptionsFetched,
 		userInvoices: state => state.invoices,
-		userInvoicesFetched: state => state.invoicesFetched
+		userInvoicesFetched: state => state.invoicesFetched,
+		userInvoiceFocus: state => state.invoiceFocus
 	}
 }
 
