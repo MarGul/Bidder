@@ -16582,6 +16582,10 @@ var user = {
 			commit('SET_PROJECTS', { projects: [] });
 			commit('SET_PROJECTS_FETCHED', { fetched: false });
 			commit('SET_PROJECT_FOCUS', { project: null });
+			commit('SET_SUBSCRIPTIONS', { subscriptions: [] });
+			commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: false });
+			commit('SET_INVOICES', { invoices: [] });
+			commit('SET_INVOICES_FETCHED', { fetched: false });
 		},
 		fetchUserServices: function fetchUserServices(_ref2) {
 			var commit = _ref2.commit;

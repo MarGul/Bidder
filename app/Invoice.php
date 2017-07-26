@@ -36,4 +36,14 @@ class Invoice extends Model
     	return $this->belongsTo('App\Project');
     }
 
+    /**
+     * An invoice may have many payments (mostly one)
+     * 
+     * @return Eloquent Relationship
+     */
+    public function payments()
+    {
+        return $this->hasMany('App\Payment');
+    }
+
 }
