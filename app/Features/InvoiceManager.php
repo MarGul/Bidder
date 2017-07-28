@@ -4,7 +4,10 @@ namespace App\Features;
 
 use App\Project;
 use App\Invoice;
+use App\User;
 use Carbon\Carbon;
+use Notification;
+use App\Notifications\SendInvoice;
 use PDF;
 
 class InvoiceManager
@@ -87,7 +90,9 @@ class InvoiceManager
 
 		if ( !$invoice = $this->store() ) return false;
 
-		return $this->sendInvoice($invoice);
+		$this->sendInvoice($invoice);
+
+		return true;
 	}
 
 	/**
@@ -189,7 +194,9 @@ class InvoiceManager
 	 */
 	protected function sendInvoice($invoice)
 	{
-		return "Sending invoice";
+		$user = User::find($invoice->user_id);
+		
+		Notification::send($user, new SendInvoice($invoice));
 	}
 
 	/**

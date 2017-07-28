@@ -4008,7 +4008,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['comment'],
 	data: function data() {
 		return {
-			time: moment(this.comment.updated_at).fromNow()
+			time: this.moment(this.comment.updated_at).fromNow()
 		};
 	},
 
@@ -4021,7 +4021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		__WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__["a" /* HeartBeat */].$on('beat', function () {
-			_this.time = moment(_this.comment.updated_at).fromNow();
+			_this.time = _this.moment(_this.comment.updated_at).fromNow();
 		});
 	}
 };
@@ -5711,6 +5711,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		paid: function paid() {
 			return this.invoice.payments.length > 0;
+		},
+		invoiceCreated: function invoiceCreated() {
+			return moment(this.invoice.created_at).format('LLL');
+		},
+		invoiceDue: function invoiceDue() {
+			return moment(this.invoice.due).format('D MMMM YYYY');
 		}
 	},
 	methods: {},
@@ -7767,8 +7773,8 @@ Vue.prototype.filters = __WEBPACK_IMPORTED_MODULE_1__includes_filters__["a" /* d
 /**
  *  Load in Moment.js
  */
-Vue.prototype.moment = __webpack_require__(0);
-Vue.prototype.moment.locale('sv');
+window.moment = __webpack_require__(0);
+window.moment.locale('sv');
 
 /**
  * Load in Axios HTTP framework.
@@ -15922,7 +15928,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "invoice-details"
   }, [_c('ul', {
     staticClass: "list-unstyled"
-  }, [_c('li', [_c('strong', [_vm._v("Betald:")]), _vm._v(" " + _vm._s(_vm.paid ? 'Ja' : 'Nej'))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Skapad:")]), _vm._v(" " + _vm._s(_vm.moment(_vm.invoice.created_at).format('LLL')))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Förfallodag:")]), _vm._v(" " + _vm._s(_vm.moment(_vm.invoice.due).format('D MMMM YYYY')))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Totalpris:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.total)))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Varav moms:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.vat)))]), _vm._v(" "), _c('li', {
+  }, [_c('li', [_c('strong', [_vm._v("Betald:")]), _vm._v(" " + _vm._s(_vm.paid ? 'Ja' : 'Nej'))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Skapad:")]), _vm._v(" " + _vm._s(_vm.invoiceCreated))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Förfallodag:")]), _vm._v(" " + _vm._s(_vm.invoiceDue))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Totalpris:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.total)))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Varav moms:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.vat)))]), _vm._v(" "), _c('li', {
     staticClass: "invoice-download"
   }, [_c('a', {
     staticClass: "btn btn-primary",

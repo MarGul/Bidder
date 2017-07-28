@@ -26,8 +26,8 @@ Vue.prototype.filters = filters;
 /**
  *  Load in Moment.js
  */
-Vue.prototype.moment = require('moment');
-Vue.prototype.moment.locale('sv');
+window.moment = require('moment');
+window.moment.locale('sv');
 
 /**
  * Load in Axios HTTP framework.

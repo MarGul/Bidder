@@ -11,8 +11,8 @@
 					<div class="invoice-details">
 						<ul class="list-unstyled">
 							<li><strong>Betald:</strong> {{ paid ? 'Ja' : 'Nej' }}</li>
-							<li><strong>Skapad:</strong> {{ moment(invoice.created_at).format('LLL') }}</li>
-							<li><strong>Förfallodag:</strong> {{ moment(invoice.due).format('D MMMM YYYY') }}</li>
+							<li><strong>Skapad:</strong> {{ invoiceCreated }}</li>
+							<li><strong>Förfallodag:</strong> {{ invoiceDue }}</li>
 							<li><strong>Totalpris:</strong> {{ filters.currency(invoice.total) }}</li>
 							<li><strong>Varav moms:</strong> {{ filters.currency(invoice.vat) }}</li>
 							<li class="invoice-download">
@@ -44,6 +44,12 @@
 			},
 			paid() {
 				return this.invoice.payments.length > 0;
+			},
+			invoiceCreated() {
+				return moment(this.invoice.created_at).format('LLL');
+			},
+			invoiceDue() {
+				return moment(this.invoice.due).format('D MMMM YYYY');
 			}
 		},
 		methods: {
