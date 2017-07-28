@@ -56,7 +56,7 @@ $style = [
 
     'button--green' => 'background-color: #22BC66;',
     'button--red' => 'background-color: #dc4d2f;',
-    'button--blue' => 'background-color: #3869D4;',
+    'button--blue' => 'background-color: #009999;',
 ];
 ?>
 

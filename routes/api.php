@@ -52,5 +52,7 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::post('users/{id}/review')->uses('UserReviewsController@store');
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
+	/* Show the users invoices */
+	Route::get('users/{user}/invoices')->uses('UserInvoiceController@index');
 
 });

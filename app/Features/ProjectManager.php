@@ -140,7 +140,7 @@ class ProjectManager
 		}
 
 		if ( $this->shouldStart($project) ) {
-			$project->started = true;
+			return $this->start($project);
 		}
 
 		return $project->update() ? true : false;

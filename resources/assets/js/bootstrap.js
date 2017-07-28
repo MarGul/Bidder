@@ -4,12 +4,6 @@
 window.$ = window.jQuery = require('jquery');
 
 /**
- *  Load in Moment.js
- */
-window.moment = require('moment');
-window.moment.locale('sv')
-
-/**
  * Load in vue
  */
 window.Vue = require('vue');
@@ -28,6 +22,12 @@ Vue.component('app-loading', require('./components/Includes/Loading'));
 
 import filters from "./includes/filters";
 Vue.prototype.filters = filters;
+
+/**
+ *  Load in Moment.js
+ */
+window.moment = require('moment');
+window.moment.locale('sv');
 
 /**
  * Load in Axios HTTP framework.
