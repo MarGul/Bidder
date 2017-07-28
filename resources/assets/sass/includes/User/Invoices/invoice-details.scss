@@ -1,0 +1,50 @@
+.invoice_details-component {
+
+	.panel-body {
+
+		@media screen and (min-width: $screen-md-min) {
+			display: flex;
+		}
+
+		.invoice-text {
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+			border-bottom: 1px solid $border-color-gray;
+
+
+			@media screen and (min-width: $screen-md-min) {
+				flex: 1;
+				margin: 0;
+				padding: 0;
+				border: none;
+			}
+
+			@media screen and (min-width: $screen-lg-min) {
+				flex: 2;
+			}
+		}
+
+		.invoice-details {
+
+			@media screen and (min-width: $screen-md-min) {
+				flex: 1;
+			}
+
+			strong {
+				width: 100px;
+				display: inline-block;
+			}
+
+			.invoice-download {
+				margin-top: 15px;
+				padding-top: 15px;
+				border-top: 1px solid $border-color-gray;
+
+				a {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+}
