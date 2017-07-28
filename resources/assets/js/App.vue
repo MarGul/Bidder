@@ -9,7 +9,7 @@
         <transition name="slide-down-up">
             <app-modal v-if="$store.getters.modalOpen"></app-modal>
         </transition>
-        
+
         <div id="site-wrap">
             <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
 

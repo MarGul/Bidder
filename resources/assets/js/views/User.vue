@@ -18,22 +18,22 @@
 					</div>
 				</div>
 
-
-			<div class="user-ui-container">
-				<div class="user-ui-nav">
-					<ul class="user-nav" v-if="$store.getters.mobileAuthDropdown || !breakpoints.isSmallDevices()">
-						<li><router-link to="/user/profile">Profil</router-link></li>
-						<li><router-link to="/user/notifications">Notifikationer</router-link></li>
-						<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
-						<li><router-link to="/user/services">Mina tjänster</router-link></li>
-						<li><router-link to="/user/bids">Mina bud</router-link></li>
-						<li><router-link to="/user/projects">Mina projekt</router-link></li>
-						<li><router-link to="/user/subscriptions">Prenumerationer</router-link></li>
-						<li><router-link to="/user/invoices">Betalningar</router-link></li>
-					</ul>
-				</div>
-				<div class="user-ui-content">
-					<router-view></router-view>
+				<div class="user-ui-container">
+					<div class="user-ui-nav">
+						<ul class="user-nav" v-if="$store.getters.mobileAuthDropdown || !breakpoints.isSmallDevices()">
+							<li><router-link to="/user/profile">Profil</router-link></li>
+							<li><router-link to="/user/notifications">Notifikationer</router-link></li>
+							<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
+							<li><router-link to="/user/services">Mina tjänster</router-link></li>
+							<li><router-link to="/user/bids">Mina bud</router-link></li>
+							<li><router-link to="/user/projects">Mina projekt</router-link></li>
+							<li><router-link to="/user/subscriptions">Prenumerationer</router-link></li>
+							<li><router-link to="/user/invoices">Betalningar</router-link></li>
+						</ul>
+					</div>
+					<div class="user-ui-content">
+						<router-view></router-view>
+					</div>
 				</div>
 			</div>
 		</div>

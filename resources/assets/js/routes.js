@@ -4,33 +4,33 @@ import VueRouter from 'vue-router';
  * All of the applications routes
  */
 let routes = [
-	{ path: "/", name: 'home', component: require('./views/Home.vue') },
-	{ path: "/categories", name: 'categories', component: require('./views/Categories.vue') },
-	{ path: "/locations", name: 'locations', component: require('./views/Locations.vue') },
-	{ path: "/services", name: 'services', component: require('./views/Services.vue') },
-	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails.vue') },
-	{ path: "/information", name: 'information', component: require('./views/Information.vue') },
-	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile.vue')},
-	{ path: "/user", name: 'user', component: require('./views/User.vue'),
+	{ path: "/", name: 'home', component: resolve => require(['./views/Home'], resolve) },
+	{ path: "/categories", name: 'categories', component: resolve => require(['./views/Categories'], resolve) },
+	{ path: "/locations", name: 'locations', component: resolve => require(['./views/Locations'], resolve) },
+	{ path: "/services", name: 'services', component: resolve => require(['./views/Services'], resolve) },
+	{ path: "/services/:id", name: 'serviceDetails', component: resolve => require(['./views/ServiceDetails'], resolve) },
+	{ path: "/information", name: 'information', component: resolve => require(['./views/Information'], resolve) },
+	{ path: "/profile/:username", name: 'profile', component: resolve => require(['./views/Profile'], resolve)},
+	{ path: "/user", name: 'user', component: resolve => require(['./views/User'], resolve),
 		children: [
-			{ path: '', component: require('./components/User/Profile/Profile.vue'), meta: { requiresAuth: true } },
-			{ path: 'profile', component: require('./components/User/Profile/Profile.vue'), meta: { requiresAuth: true } },
-			{ path: 'notifications', component: require('./components/User/Notifications.vue'), meta: { requiresAuth: true } },
-			{ path: 'create-service', component: require('./components/User/Services/CreateService.vue'), meta: { requiresAuth: true } },
-			{ path: 'services', component: require('./components/User/Services/MyServices.vue'), meta: { requiresAuth: true } },
-			{ path: 'bids', component: require('./components/User/Bids/MyBids.vue'), meta: { requiresAuth: true } },
-			{ path: 'projects', component: require('./components/User/Projects/MyProjects.vue'), meta: { requiresAuth: true } },
-			{ path: 'project/:id', component: require('./components/User/Projects/Project.vue'), meta: { requiresAuth: true } },
-			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices.vue'), meta: { requiresAuth: true } },
-			{ path: 'invoices/:id', component: require('./components/User/Invoices/InvoiceDetails.vue'), meta: { requiresAuth: true } },
-			{ path: 'service/:id/bids', component: require('./components/User/Bids/BidHistory.vue'), meta: { requiresAuth: true } },
-			{ path: 'subscriptions', component: require('./components/User/Subscriptions/MySubscriptions.vue'), meta: { requiresAuth: true } },
+			{ path: '', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
+			{ path: 'profile', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
+			{ path: 'notifications', component: resolve => require(['./components/User/Notifications'], resolve), meta: { requiresAuth: true } },
+			{ path: 'create-service', component: resolve => require(['./components/User/Services/CreateService'], resolve), meta: { requiresAuth: true } },
+			{ path: 'services', component: resolve => require(['./components/User/Services/MyServices'], resolve), meta: { requiresAuth: true } },
+			{ path: 'bids', component: resolve => require(['./components/User/Bids/MyBids'], resolve), meta: { requiresAuth: true } },
+			{ path: 'projects', component: resolve => require(['./components/User/Projects/MyProjects'], resolve), meta: { requiresAuth: true } },
+			{ path: 'project/:id', component: resolve => require(['./components/User/Projects/Project'], resolve), meta: { requiresAuth: true } },
+			{ path: 'invoices', component: resolve => require(['./components/User/Invoices/MyInvoices'], resolve), meta: { requiresAuth: true } },
+			{ path: 'invoices/:id', component: resolve => require(['./components/User/Invoices/InvoiceDetails'], resolve), meta: { requiresAuth: true } },
+			{ path: 'service/:id/bids', component: resolve => require(['./components/User/Bids/BidHistory'], resolve), meta: { requiresAuth: true } },
+			{ path: 'subscriptions', component: resolve => require(['./components/User/Subscriptions/MySubscriptions'], resolve), meta: { requiresAuth: true } },
 		],
 		meta: { requiresAuth: true }
 	},
 	
 	/* 404 is handled by the vue application */
-	{ path: "*", component: require('./views/404.vue') }
+	{ path: "*", component: resolve => require(['./views/404.vue'], resolve) }
 ];
 
 const router = new VueRouter({
