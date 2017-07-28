@@ -1,63 +1,64 @@
 <template>
 	<div class="service-details-view">
 		<div class="container">
-			<template v-if="$store.getters.getServiceLoaded">
-				<div class="row">
-					<div class="col-xs-12 col-md-8">
-						<div class="service-description white-container mb20" v-if="!breakpoints.small">
-							<app-service-description></app-service-description>
-							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
-						</div>
-					</div>
-					<div class="col-xs-12 col-md-4">
-						<div class="service-bids white-container">
-							<div class="time-left text-center">
-								<app-timer :ends="service.bid_stop"></app-timer>
-								<div class="ends">{{ ends }}</div>
+			<div class="content">
+				<template v-if="$store.getters.getServiceLoaded">
+					<div class="row">
+						<div class="col-xs-12 col-md-8">
+							<div class="service-description white-container mb20" v-if="!breakpoints.small">
+								<app-service-description></app-service-description>
+								<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
 							</div>
-							<div class="active-bids text-center">
-								<i class="fa fa-gavel" aria-hidden="true"></i>
-								<span>{{ bids }}</span> bud. <a @click.prevent="showBids">Visa alla bud</a>
-							</div>
-							<button 
-								class="btn btn-primary full-width"
-								@click.prevent="createBid"
-							>Lägg ett bud</button>
 						</div>
-						<div class="service-description white-container" v-if="breakpoints.small">
-							<app-service-description></app-service-description>
-							<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
-						</div>
-						<div class="service-user white-container">
-							<template v-if="$store.getters.getServiceLoaded">	
-								<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
-								<div class="user-displayname" v-text="service.user.username"></div>
-								<div class="user-ratings">
-									<app-ratings :rating="ratingAvg" :total="ratingCount" size="large"></app-ratings>
-									<a class="link">Visa omdömmen</a>
+						<div class="col-xs-12 col-md-4">
+							<div class="service-bids white-container">
+								<div class="time-left text-center">
+									<app-timer :ends="service.bid_stop"></app-timer>
+									<div class="ends">{{ ends }}</div>
 								</div>
-							</template>
+								<div class="active-bids text-center">
+									<i class="fa fa-gavel" aria-hidden="true"></i>
+									<span>{{ bids }}</span> bud. <a @click.prevent="showBids">Visa alla bud</a>
+								</div>
+								<button 
+									class="btn btn-primary full-width"
+									@click.prevent="createBid"
+								>Lägg ett bud</button>
+							</div>
+							<div class="service-description white-container" v-if="breakpoints.small">
+								<app-service-description></app-service-description>
+								<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
+							</div>
+							<div class="service-user white-container">
+								<template v-if="$store.getters.getServiceLoaded">	
+									<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
+									<div class="user-displayname" v-text="service.user.username"></div>
+									<div class="user-ratings">
+										<app-ratings :rating="ratingAvg" :total="ratingCount" size="large"></app-ratings>
+										<a class="link">Visa omdömmen</a>
+									</div>
+								</template>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 col-md-8">
-						<app-add-comment></app-add-comment>
-						<div class="margin-50">
-							<ul class="top-comments">
-								<transition-group name="slide-in-left">
-									<li v-for="comment in service.comments" :key="comment.id">
-										<app-comment :comment="comment"></app-comment>
-									</li>
-								</transition-group>
-							</ul>
+					<div class="row">
+						<div class="col-xs-12 col-md-8">
+							<app-add-comment></app-add-comment>
+							<div class="margin-50">
+								<ul class="top-comments">
+									<transition-group name="slide-in-left">
+										<li v-for="comment in service.comments" :key="comment.id">
+											<app-comment :comment="comment"></app-comment>
+										</li>
+									</transition-group>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-			</template>
+				</template>
 
-			<app-loading bg="gray" v-else></app-loading>
-
+				<app-loading bg="gray" v-else></app-loading>
+			</div>
 		</div>
 	</div>
 </template>

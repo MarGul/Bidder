@@ -1,15 +1,31 @@
 .slide-in-left-enter-active {
-	-webkit-animation: slide-in-left 400ms ease-out forwards;
-			animation: slide-in-left 400ms ease-out forwards;
+	-webkit-animation: slide-in-left 800ms ease-out forwards;
+			animation: slide-in-left 800ms ease-out forwards;
+}
+
+.slide-in-left-leave-active {
+	-webkit-animation: slide-out-left 800ms ease-out forwards;
+			animation: slide-out-left 800ms ease-out forwards;
 }
 
 @keyFrames slide-in-left {
 	from {
-		transform: translateX(-90px);
+		transform: translateX(-200px);
 		opacity: 0;
 	}
 	to {
 		transform: translateX(0);
 		opacity: 1;
+	}
+}
+
+@keyFrames slide-out-left {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(-200px);
+		opacity: 0;
 	}
 }

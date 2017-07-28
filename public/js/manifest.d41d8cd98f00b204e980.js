@@ -80,7 +80,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + {"0":"3d65e78391688296f1f5","1":"e2262019ece5ca609a2e"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/" + ({"0":"/js/app","1":"/js/vendor"}[chunkId]||chunkId) + "." + {"0":"6ce7c9042bdf366fb6e9","1":"896a8af1e3fc2f4ac84f"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

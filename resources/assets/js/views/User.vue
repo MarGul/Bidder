@@ -2,20 +2,22 @@
 	<div class="user-component">
 
 		<div class="container">
-			<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
-				<div class="mobile-user-buttons">
-					<button class="btn btn-transparent logout-btn" @click.prevent="logout">
-						Logga Ut <i class="fa fa-power-off" aria-hidden="true"></i>
-					</button>
+			<div class="content">
+				<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
+					<div class="mobile-user-buttons">
+						<button class="btn btn-transparent logout-btn" @click.prevent="logout">
+							Logga Ut <i class="fa fa-power-off" aria-hidden="true"></i>
+						</button>
 
-					<button class="btn btn-primary nav-btn" 
-							:class="{open: $store.getters.mobileAuthDropdown}"
-							@click="toggleDropdown" 
-							v-if="breakpoints.isSmallDevices()">
-						Meny <i class="fa fa-chevron-down" aria-hidden="true"></i>
-					</button>
+						<button class="btn btn-primary nav-btn" 
+								:class="{open: $store.getters.mobileAuthDropdown}"
+								@click="toggleDropdown" 
+								v-if="breakpoints.isSmallDevices()">
+							Meny <i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</button>
+					</div>
 				</div>
-			</div>
+
 
 			<div class="user-ui-container">
 				<div class="user-ui-nav">
@@ -34,7 +36,6 @@
 					<router-view></router-view>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </template>
