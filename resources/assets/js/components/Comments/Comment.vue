@@ -19,7 +19,7 @@
 		props: ['comment'],
 		data() {
 			return {
-				time: this.moment(this.comment.updated_at).fromNow()
+				time: moment(this.comment.updated_at).fromNow()
 			}
 		},
 		computed: {
@@ -29,7 +29,7 @@
 		},
 		created() {
 			HeartBeat.$on('beat', () => {
-				this.time = this.moment(this.comment.updated_at).fromNow();
+				this.time = moment(this.comment.updated_at).fromNow();
 			});
 		}
 	}

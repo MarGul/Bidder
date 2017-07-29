@@ -113,6 +113,11 @@
 		},
 		created() {
 			this.$store.dispatch('getService', {id: this.$route.params.id});
+
+			Echo.channel('service.' + this.$route.params.id)
+				.listen('CommentCreated', (e) => {
+					this.$store.commit('ADD_COMMENT', {comment: e.comment});
+				});
 		}
 	}
 </script>

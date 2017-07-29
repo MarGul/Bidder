@@ -395,7 +395,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
+		var _this = this;
+
 		this.$store.dispatch('getService', { id: this.$route.params.id });
+
+		Echo.channel('service.' + this.$route.params.id).listen('CommentCreated', function (e) {
+			_this.$store.commit('ADD_COMMENT', { comment: e.comment });
+		});
 	}
 });
 
@@ -648,7 +654,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['comment'],
 	data: function data() {
 		return {
-			time: this.moment(this.comment.updated_at).fromNow()
+			time: moment(this.comment.updated_at).fromNow()
 		};
 	},
 
@@ -661,7 +667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		__WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__["a" /* HeartBeat */].$on('beat', function () {
-			_this.time = _this.moment(_this.comment.updated_at).fromNow();
+			_this.time = moment(_this.comment.updated_at).fromNow();
 		});
 	}
 });

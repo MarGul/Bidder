@@ -22,9 +22,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'user_id'
-    ];
+    protected $hidden = [];
 
     /**
      *  A comment belongs to a service.

@@ -81,7 +81,7 @@ class Service extends Model
      */
     public function comments() 
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Features;
 
 use App\Comment;
+use App\Events\CommentCreated;
+use Auth;
 
 
 class CommentManager {
@@ -25,27 +27,28 @@ class CommentManager {
 	/**
 	 * Create a comment
 	 * 
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  App\Service               $service
-	 * @return \Illuminate\Http\Response
+	 * @param  array  			$data
+	 * @param  App\Service      $service
+	 * @return boolean
 	 */
-	public function create($request, $service) {
+	public function add($data, $service) {
 		$comment = new Comment([
 			'service_id' => $service->id,
-			'user_id' => $request->user()->id,
-			'body' => $request->body,
-			'parent' => $request->parent ?: null
+			'user_id' => Auth::user()->id,
+			'body' => $data['body'],
+			'parent' => $data['parent'] ?: null
 		]);
 
-		if ( !$comment->save() ) {
-			return response()->json(['message' => 'Could not store the comment in the database. Please try again.'], 500);
-		}
+		if ( !$comment->save() ) { return false; }
+
+		// Broadcast an event that a comment was created
+		event(new CommentCreated($comment));
 
 		// Pass with the user and empty replies as well.
-		$comment->user = $request->user();
+		$comment->user = Auth::user();
 		$comment->replies = [];
 
-		return response()->json(['message' => 'Created comment', 'comment' => $comment], 201);
+		return $comment;
 	}
 
 }
