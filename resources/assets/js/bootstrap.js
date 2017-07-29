@@ -1,9 +1,4 @@
 /**
- * Load in jQuery
- */
-window.$ = window.jQuery = require('jquery');
-
-/**
  * Load in vue
  */
 window.Vue = require('vue');
