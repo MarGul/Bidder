@@ -46,7 +46,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Notifications__);
 //
 //

@@ -133,7 +133,7 @@ exports.push([module.i, "\n.critical[data-v-2a250a49] {\n  color: #cc0000;\n}\n"
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(131);
 //
 //
 //
@@ -828,7 +828,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(131);
 //
 //
 //
@@ -1288,7 +1288,7 @@ exports.push([module.i, "\n.change_project_details-component[data-v-4f3a1e5c] {\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 //
 //
@@ -1390,7 +1390,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					type: 'success',
 					msg: 'Nice! Vi har ändrat uppgifterna för projektet. Nu måste båda parter bara godkänna projektet igen.'
 				});
-				$("html, body").animate({ scrollTop: 0 }, "fast");
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 			});

@@ -133,7 +133,7 @@ exports.push([module.i, "\n.critical[data-v-2a250a49] {\n  color: #cc0000;\n}\n"
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(131);
 //
 //
 //
@@ -644,10 +644,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		addItem: function addItem(text) {
-			var current = $.grep(this.options, function (e) {
-				return e.name.toLowerCase() == text.toLowerCase();
-			})[0];
+		addItem: function addItem(item) {
+			var current = this.options.find(function (opt) {
+				return opt.name.toLowerCase() == item.toLowerCase();
+			});
 
 			if (current) {
 				this.$emit('add', {
@@ -655,6 +655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					value: current.id,
 					type: current.type
 				});
+				this.error = false;
 				return this.input = '';
 			}
 

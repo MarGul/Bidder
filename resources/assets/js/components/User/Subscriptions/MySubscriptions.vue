@@ -54,7 +54,6 @@
 						});
 						this.$store.commit('SET_SUBSCRIPTIONS', {subscriptions});
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Prenumerationen är borttagen.'});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 					})
 					.catch(error => { console.log(error); });
 			},

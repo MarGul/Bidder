@@ -56,7 +56,6 @@
 				new Model('users/{id}/profile').update(this.$store.getters.authUser.id, this.form.data())
 					.then(response => {
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din profil.'});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 						this.$store.commit('SET_USER', {user: response.user});
 						this.processing = false;
 					})

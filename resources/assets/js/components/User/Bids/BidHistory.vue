@@ -101,7 +101,6 @@
 							type: 'success', 
 							msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 						});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 						bid.accepted = true;
 						// Set the projects fetched to false so we break the cache.
 						this.$store.commit('SET_PROJECTS_FETCHED', {fetched: false});

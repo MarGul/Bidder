@@ -183,7 +183,6 @@
 
 						// Show a success notification for bid created
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Snyggt! Vi skapade ditt bud.'});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 						// Close the modal
 						this.$store.dispatch('closeModal');
 					})

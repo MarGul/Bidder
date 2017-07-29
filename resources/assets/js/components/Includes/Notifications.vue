@@ -9,9 +9,6 @@
 						<router-link :to="$store.getters.notificationLink">{{ $store.getters.notificationLinkText }}</router-link>
 					</template>
 				</div>
-				<div class="close-notification">
-					<i class="fa fa-times" aria-hidden="true" @click="$store.dispatch('closeNotification')"></i>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -19,18 +16,28 @@
 
 <script>
 	export default {
-
+		created() {
+			setTimeout(() => {
+				this.$store.dispatch('closeNotification');
+			}, 4000)
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.notifications-component {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 1000;
 		padding: 16px;
 		border: 1px solid rgba(27,31,35,0.15);
+		text-align: center;
 
 		&.success {
-			background-color: #A6D785;
-			color: #444;
+			background-color: rgba(81,163,81,0.95);
+			color: #fff;
 
 			a {
 				color: #008B00;

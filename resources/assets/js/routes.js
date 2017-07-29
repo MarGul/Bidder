@@ -71,7 +71,7 @@ router.afterEach((to, from) => {
 	// Close the mobile user navigation dropdown.
 	router.app.$store.commit('SET_MOBILE_DROPDOWN', {mobileDropdown: false});
 	// Close notifications
-	router.app.$store.dispatch('closeNotification');
+	//router.app.$store.dispatch('closeNotification');
 });
 
 export default router;

@@ -41,12 +41,10 @@
 						.then(response => {
 							this.$store.commit('SET_USER', {user: response.user});
 							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din avatar.'});
-							$("html, body").animate({ scrollTop: 0 }, "fast");
 							this.processing = false;
 						})
 						.catch(error => {
 							this.$store.dispatch('showNotification', {type: 'error', msg: 'Vi kunde inte uppdatera din avatar. Var god försök igen.'});
-							$("html, body").animate({ scrollTop: 0 }, "fast");
 						});
 				}
 			}

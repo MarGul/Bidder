@@ -52,14 +52,14 @@
 		},
 		methods: {
 			navToggle() {
-				if ( $('body').hasClass('mobile-nav-open') ) {
-					$('body').removeClass('mobile-nav-open');
+				if ( document.body.classList.contains('mobile-nav-open') ) {
+					document.body.classList.remove('mobile-nav-open');
 				} else {
-					$('body').addClass('mobile-nav-open');
+					document.body.classList.add('mobile-nav-open');
 				}
 			},
 			hideMenu() {
-				$('body').removeClass('mobile-nav-open');
+				document.body.classList.remove('mobile-nav-open');
 			}
 		}
 	}

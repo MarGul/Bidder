@@ -1,10 +1,11 @@
 <template>
     <div id="site">
-        
+        <transition name="notification-slide-down-up">
+            <app-notifications v-if="$store.getters.showingNotification"></app-notifications>
+        </transition>
+
         <app-mobile-header v-if="breakpoints.mobile"></app-mobile-header>
         <app-desktop-header v-else></app-desktop-header>
-
-        <app-notifications v-if="$store.getters.showingNotification"></app-notifications>
 
         <transition name="slide-down-up">
             <app-modal v-if="$store.getters.modalOpen"></app-modal>
@@ -47,7 +48,7 @@
         },
         methods: {
             hideMobileNav() {
-                $('body').removeClass('mobile-nav-open');
+                document.body.classList.remove('mobile-nav-open');
             }
         },
         created() {

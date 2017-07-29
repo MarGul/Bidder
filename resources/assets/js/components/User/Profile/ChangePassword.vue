@@ -53,7 +53,6 @@
 				new Model('users/{id}/password').update(this.$store.getters.authUser.id, this.form.data(), 'put')
 					.then(response => {
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade ditt lösenord.'});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 						this.form.reset();
 						this.processing = false;
 					})

@@ -37,8 +37,8 @@
 			}
 		},
 		methods: {
-			addItem(text) {
-				let current = $.grep(this.options, e => e.name.toLowerCase() == text.toLowerCase())[0];
+			addItem(item) {
+				let current = this.options.find(opt => opt.name.toLowerCase() == item.toLowerCase());
 
 				if ( current ) {
 					this.$emit('add', {
@@ -46,6 +46,7 @@
 						value: current.id,
 						type: current.type
 					});
+					this.error = false;
 					return this.input = '';
 				}
 

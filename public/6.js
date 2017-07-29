@@ -152,7 +152,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				});
 				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Prenumerationen är borttagen.' });
-				$("html, body").animate({ scrollTop: 0 }, "fast");
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -310,8 +309,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				var subscriptions = _this.$store.getters.userSubscriptions;
 				subscriptions.push(response.subscription);
 				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
-				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.' });
-				$("html, body").animate({ scrollTop: 0 }, "fast");
+				_this.$store.dispatch('showNotification', {
+					type: 'success',
+					msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.'
+				});
 				_this.form.reset();
 				_this.processing = false;
 			}).catch(function (error) {

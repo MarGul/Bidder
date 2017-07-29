@@ -3,9 +3,9 @@ class BootstrapBreakpoints {
 	constructor() {
 		this._update();
 
-		$(window).resize(function() {
+		window.onresize = function() {
 			this._update();
-		}.bind(this));
+		}.bind(this);
 	}
 
 	_update(bb) {
@@ -15,7 +15,12 @@ class BootstrapBreakpoints {
 	}
 
 	_getCurrentBreakpoint() {
-		return $('#detect-breakpoints').find('span:visible:first')[0].className.split(/\s+/)[0].replace('device-', '');
+		let breakpoints = document.querySelectorAll('#detect-breakpoints span');
+		for ( let i = 0; i < breakpoints.length; i++) {
+			if ( breakpoints[i].offsetParent !== null) {
+				return breakpoints[i].classList[0].replace('device-', '');
+			}
+		}
 	}
 
 	is(breakpoint) {

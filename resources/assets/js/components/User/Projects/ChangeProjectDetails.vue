@@ -96,7 +96,6 @@
 							type: 'success', 
 							msg: 'Nice! Vi har ändrat uppgifterna för projektet. Nu måste båda parter bara godkänna projektet igen.'
 						});
-						$("html, body").animate({ scrollTop: 0 }, "fast");
 					})
 					.catch(error => { this.form.errors.record(error); });
 			}
