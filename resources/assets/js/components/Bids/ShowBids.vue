@@ -8,44 +8,46 @@
 		<div class="modal-body">
 			<template v-if="loaded">
 				<ul class="list-unstyled list-bids" v-if="bids.length > 0">
-					<li v-for="bid in bids">
-						<div class="bid-header">
-							<div class="row">
-								<div class="col-xs-12 col-sm-6 col-md-7">
-									<div class="bid-user">
-										<a class="link">{{ bid.user.username }}</a>
-										<span class="user-reviews">
-											<app-ratings :rating="rating(bid)" :total="ratingCount(bid)"></app-ratings>
-										</span>
+					<transition-group name="fade-in">
+						<li v-for="bid in bids" :key="bid.id">
+							<div class="bid-header">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-7">
+										<div class="bid-user">
+											<a class="link">{{ bid.user.username }}</a>
+											<span class="user-reviews">
+												<app-ratings :rating="rating(bid)" :total="ratingCount(bid)"></app-ratings>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-5">
+										<div class="bid-time" v-text="time(bid.created_at)"></div>
 									</div>
 								</div>
-								<div class="col-xs-12 col-sm-6 col-md-5">
-									<div class="bid-time" v-text="time(bid.created_at)"></div>
+							</div>
+							<div class="bid-info">
+								<div class="row">
+									<div class="col-xs-6 col-md-3 text-center info-section">
+										<div class="info-head">Starta utförandet</div>
+										<div class="info-value" v-text="bid.start"></div>
+									</div>
+									<div class="col-xs-6 col-md-3 text-center info-section">
+										<div class="info-head">Avsluta utförandet</div>
+										<div class="info-value" v-text="bid.end"></div>
+									</div>
+									<div class="col-xs-6 col-md-3 text-center info-section">
+										<div class="info-head">Antal timmar</div>
+										<div class="info-value" v-text="filters.commaSeparator(bid.hours)"></div>
+									</div>
+									<div class="col-xs-6 col-md-3 text-center info-section">
+										<div class="info-head">Pris</div>
+										<div class="info-value" v-text="filters.currency(bid.price)"></div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="bid-info">
-							<div class="row">
-								<div class="col-xs-6 col-md-3 text-center info-section">
-									<div class="info-head">Starta utförandet</div>
-									<div class="info-value" v-text="bid.start"></div>
-								</div>
-								<div class="col-xs-6 col-md-3 text-center info-section">
-									<div class="info-head">Avsluta utförandet</div>
-									<div class="info-value" v-text="bid.end"></div>
-								</div>
-								<div class="col-xs-6 col-md-3 text-center info-section">
-									<div class="info-head">Antal timmar</div>
-									<div class="info-value" v-text="filters.commaSeparator(bid.hours)"></div>
-								</div>
-								<div class="col-xs-6 col-md-3 text-center info-section">
-									<div class="info-head">Pris</div>
-									<div class="info-value" v-text="filters.currency(bid.price)"></div>
-								</div>
-							</div>
-						</div>
-						<div class="bid-description" v-text="bid.description"></div>
-					</li>
+							<div class="bid-description" v-text="bid.description"></div>
+						</li>
+					</transition-group>
 				</ul>
 
 				<div class="alert alert-info text-center" v-else>

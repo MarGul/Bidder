@@ -23,6 +23,7 @@ class ServiceManager {
 	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
 	{
 		$query = Service::query();
+		$query->with('bid_count', 'comment_count');
 
 		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
 		if ( $categories ) $query = $query->whereIn('category_id', explode(',', $categories));

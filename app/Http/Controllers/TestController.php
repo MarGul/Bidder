@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Comment;
-use App\Events\CommentCreated;
+use App\Bid;
+use App\Events\NewBid;
 
 class TestController extends Controller
 {
     
 	public function index()
 	{
-		$comment = Comment::find(2);
-		event(new CommentCreated($comment));
+		$bid = Bid::find(3);
+		event(new NewBid($bid));
 	}
 
 }

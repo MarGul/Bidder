@@ -169,18 +169,10 @@
 
 				new Model('services/{id}/bids').setId(this.id).create(this.finalData)
 					.then(response => {
-						// Break the bids cache
-						this.$store.commit('SET_BIDS_LOADED', {loaded: false});
-						// Increment the bid_count for service in store.
-						let service = this.$store.getters.getService;
-						let bidCount = service.bid_count ? service.bid_count.count + 1 : 1;
-						service.bid_count = {count: bidCount};
-
-						this.$store.commit('SET_SERVICE', service);
-
+						// Add the new bid to the store.
+						this.$store.dispatch('addBid', {bid: response.bid});
 						this.form.reset();
 						this.processing = false;
-
 						// Show a success notification for bid created
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Snyggt! Vi skapade ditt bud.'});
 						// Close the modal

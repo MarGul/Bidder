@@ -10,21 +10,20 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentCreated implements ShouldBroadcast
+class NewBid implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    
-    public $comment;
+    public $bid;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($comment)
+    public function __construct($bid)
     {
-        $this->comment = $comment;
+        $this->bid = $bid;
 
         $this->dontBroadcastToCurrentUser();
     }
@@ -36,7 +35,7 @@ class CommentCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('service.'.$this->comment->service_id);
+        return new Channel('service.'.$this->bid->service_id);
     }
 
     /**
@@ -46,8 +45,8 @@ class CommentCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        $this->comment->user;
+        $this->bid->load('user.rating');
 
-        return ['comment' => $this->comment];
+        return ['bid' => $this->bid];
     }
 }

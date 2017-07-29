@@ -5,7 +5,9 @@
 			<app-service-filter></app-service-filter>
 			<div class="row">
 				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary full-width" @click="fetchServices(false)">Hitta Tjänster</button>
+					<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices(false, true)">
+						Hitta Tjänster
+					</button>
 				</div>
 			</div>
 		</div>
@@ -62,11 +64,13 @@
 				canLoadMore: false,
 				loadingMore: false,
 				page: 1,
-				services: []
+				services: [],
+				processing: false
 			}
 		},
 		methods: {
-			fetchServices(append) {
+			fetchServices(append, processing = false) {
+				this.processing = processing ? true : false;
 				this.page = append ? this.page + 1 : 1;
 				this.loadingMore = append ? true : false;
 				let data = {page: this.page};
@@ -81,6 +85,7 @@
 						this.services = append ? this.services.concat(services.data) : this.services = services.data;
 						this.fetched = true;
 						this.loadingMore = false;
+						this.processing = false;
 					})
 					.catch(error => { console.log(error); });
 			},

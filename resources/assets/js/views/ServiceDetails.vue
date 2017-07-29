@@ -117,6 +117,9 @@
 			Echo.channel('service.' + this.$route.params.id)
 				.listen('CommentCreated', (e) => {
 					this.$store.commit('ADD_COMMENT', {comment: e.comment});
+				})
+				.listen('NewBid', (e) => {
+					this.$store.dispatch('addBid', {bid: e.bid});
 				});
 		}
 	}

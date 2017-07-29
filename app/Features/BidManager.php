@@ -4,6 +4,8 @@ namespace App\Features;
 
 use App\Bid;
 use App\Service;
+use App\Events\NewBid;
+use Auth;
 use Carbon\Carbon;
 
 class BidManager {
@@ -40,27 +42,28 @@ class BidManager {
 	/**
 	 * Create a bid
 	 * 
-	 * @param  \App\Http\Requests\StoreBid  $request
-	 * @param  App\Service               	$service
-	 * @return \Illuminate\Http\Response
+	 * @param  array  			$data
+	 * @param  App\Service      $service
+	 * @return boolean|App\Bid
 	 */
-	public function create($request, $service) {
+	public function add($data, $service) {
 		$bid = new Bid([
 			'service_id' => $service->id,
-			'user_id' => $request->user()->id,
-			'description' => $request->description,
-			'start' => Carbon::createFromFormat('Y-m-d', $request->start, 'Europe/Stockholm')->toDateString(),
-			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm')->toDateString(),
-			'hours' => $request->hours,
-			'price' => (float)$request->price,
+			'user_id' => Auth::user()->id,
+			'description' => $data['description'],
+			'start' => Carbon::createFromFormat('Y-m-d', $data['start'], 'Europe/Stockholm')->toDateString(),
+			'end' => Carbon::createFromFormat('Y-m-d', $data['end'], 'Europe/Stockholm')->toDateString(),
+			'hours' => $data['hours'],
+			'price' => (float)$data['price'],
 			'accepted' => false
 		]);
 
-		if ( !$bid->save() ) {
-			return response()->json(['message' => 'Could not store the bid in the database.'], 500);
-		}
+		if ( !$bid->save() ) { return false; }
 
-		return response()->json(['message' => 'Bid was successfully created.', 'bid' => $bid], 201);
+		// Broadcast that a new bid has been created
+		event(new NewBid($bid));
+
+		return $bid;
 	}
 
 	/**
