@@ -116,7 +116,7 @@ if(false) {
 /***/ 247:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -560,7 +560,7 @@ if(false) {
 /***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -643,6 +643,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('projects/{id}/messages').setId(this.$route.params.id).get().then(function (response) {
 			_this.messages = response.messages;
 			_this.fetched = true;
+		});
+
+		Echo.private('project.' + this.$route.params.id + '.messages').listen('NewMessage', function (e) {
+			_this.messages.push(e.message);
 		});
 	}
 });
@@ -932,14 +936,16 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "message_board-component"
-  }, [(_vm.fetched) ? [_vm._m(0), _vm._v(" "), (_vm.messages.length > 0) ? _vm._l((_vm.messages), function(message) {
+  }, [(_vm.fetched) ? [_vm._m(0), _vm._v(" "), (_vm.messages.length > 0) ? _c('div', {
+    staticClass: "messages-container"
+  }, _vm._l((_vm.messages), function(message) {
     return _c('message', {
       key: message.id,
       attrs: {
         "message": message
       }
     })
-  }) : _c('div', {
+  })) : _c('div', {
     staticClass: "alert alert-warning"
   }, [_vm._v("\n\t\t\tDet finns inga meddelanden än. Bli den första att säga hej genom att skicka ett meddelande nedan.\n\t\t")]), _vm._v(" "), _c('send-message', {
     on: {
@@ -1269,7 +1275,7 @@ if(false) {
 /***/ 349:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -1762,7 +1768,7 @@ if(false) {
 /***/ 355:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -2165,7 +2171,7 @@ if(false) {
 /***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 

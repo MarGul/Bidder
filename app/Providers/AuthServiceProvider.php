@@ -34,6 +34,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('accept-bid', function($user, $service) { return $user->id === $service->user_id; });
         // Is a user part of a project?
         Gate::define('in-project', function($user, $project) { return in_array($user->id, [$project->service_user, $project->bid_user]); });
-
     }
 }
