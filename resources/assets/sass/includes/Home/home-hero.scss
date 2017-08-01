@@ -1,7 +1,7 @@
 .home_hero-component {
-	-webkit-background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
-		-moz-background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
-			background: linear-gradient(-45deg, $brand-primary-hover, $brand-primary);
+	-webkit-background: linear-gradient(-45deg, $brand-primary, $brand-primary-hover);
+		-moz-background: linear-gradient(-45deg, $brand-primary, $brand-primary-hover);
+			background: linear-gradient(-45deg, $brand-primary, $brand-primary-hover);
 	padding: 40px 0;
 
 	@media screen and (min-width: $screen-sm-min) {

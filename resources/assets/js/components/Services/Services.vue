@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="services mtb20">
-			<template  v-if="fetched">
+			<template  v-if="servicesLoaded">
 				<div class="row">
 					<transition-group name="slide-out" mode="out-in">
 						<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
@@ -27,13 +27,13 @@
 					</transition-group>
 				</div>
 
-				<div class="row" v-if="canLoadMore">
+				<div class="row" v-if="servicesCanLoadMore">
 					<div class="col-xs-12">
 						<div class="load-more text-center mt10">
 							<button 
 								type="button" 
 								class="btn btn-default btn-transparent is-bold-italic" 
-								:class="{'processing': loadingMore}"
+								:class="{'processing': servicesLoadingMore}"
 								@click.prevent="fetchServices(true)">
 									Hämta fler
 								</button>
@@ -51,7 +51,7 @@
 <script>
 	import appServiceFilter from './ServiceFilter';
 	import appServiceMulti from './ServiceMulti.vue';
-	import Model from '../../includes/Model';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
@@ -60,34 +60,25 @@
 		},
 		data() {
 			return {
-				fetched: false,
-				canLoadMore: false,
-				loadingMore: false,
-				page: 1,
-				services: [],
 				processing: false
 			}
 		},
+		computed: {
+			...mapGetters([
+				'servicesLoaded',
+				'servicesLoadingMore',
+				'servicesCanLoadMore',
+				'services'
+			])
+		},
 		methods: {
-			fetchServices(append, processing = false) {
+			fetchServices(appending = false, processing = false) {
+				console.log(processing);
 				this.processing = processing ? true : false;
-				this.page = append ? this.page + 1 : 1;
-				this.loadingMore = append ? true : false;
-				let data = {page: this.page};
-				if ( this.$store.getters.getFilterText ) data.text = this.$store.getters.getFilterText;
-				if ( this.$store.getters.getFilterCategories.length > 0 ) data.categories = this.$store.getters.getFilterCategories.map(cat => cat.value).join();
-				if ( this.$store.getters.getFilterRegions.length > 0 ) data.regions = this.$store.getters.getFilterRegions.map(reg => reg.value).join();
-				if ( this.$store.getters.getFilterCities.length > 0 ) data.cities = this.$store.getters.getFilterCities.map(cit => cit.value).join();
-
-				new Model('services').get(data)
-					.then(({services}) => {
-						this.canLoadMore = services.next_page_url ? true : false;
-						this.services = append ? this.services.concat(services.data) : this.services = services.data;
-						this.fetched = true;
-						this.loadingMore = false;
-						this.processing = false;
-					})
-					.catch(error => { console.log(error); });
+				console.log(this.processing);
+				
+				this.$store.dispatch('getServices', {appending})
+					.then(success => { this.processing = false; })
 			},
 			removeService({id}) {
 				let sleep = function(ms) {
@@ -99,7 +90,14 @@
 			}
 		},
 		created() {
-			this.fetchServices(false);
+			if ( !this.servicesLoaded ) {
+				this.fetchServices();
+			}
+
+			Echo.channel('services')
+				.listen('NewService', (e) => {
+
+				});
 		}
 	}
 </script>

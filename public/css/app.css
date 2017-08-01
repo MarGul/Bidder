@@ -8543,9 +8543,9 @@ body.mobile-nav-open .overlay {
 }
 
 .home_hero-component {
-  -webkit-background: linear-gradient(-45deg, #00caca, #009999);
-  -moz-background: linear-gradient(-45deg, #00caca, #009999);
-  background: linear-gradient(-45deg, #00caca, #009999);
+  -webkit-background: linear-gradient(-45deg, #009999, #00caca);
+  -moz-background: linear-gradient(-45deg, #009999, #00caca);
+  background: linear-gradient(-45deg, #009999, #00caca);
   padding: 40px 0;
 }
 
@@ -8755,9 +8755,9 @@ body.mobile-nav-open .overlay {
 
 .hero {
   position: relative;
-  -webkit-background: linear-gradient(-45deg, #55AE3A, #264e1a);
-  -moz-background: linear-gradient(-45deg, #55AE3A, #264e1a);
-  background: linear-gradient(-45deg, #55AE3A, #264e1a);
+  -webkit-background: linear-gradient(-45deg, #009999, #00caca);
+  -moz-background: linear-gradient(-45deg, #009999, #00caca);
+  background: linear-gradient(-45deg, #009999, #00caca);
   padding: 40px 0px;
   color: #fff;
   -webkit-box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);

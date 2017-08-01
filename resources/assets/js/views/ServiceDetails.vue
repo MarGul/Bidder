@@ -120,6 +120,7 @@
 				})
 				.listen('NewBid', (e) => {
 					this.$store.dispatch('addBid', {bid: e.bid});
+					this.$store.dispatch('showNotification', {type: 'info', msg: 'Det kom precis in ett bud för denna tjänsten!'})
 				});
 		}
 	}
