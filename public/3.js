@@ -381,29 +381,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			var appending = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 			var processing = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-			console.log(processing);
 			this.processing = processing ? true : false;
-			console.log(this.processing);
 
 			this.$store.dispatch('getServices', { appending: appending }).then(function (success) {
 				_this.processing = false;
 			});
 		},
 		removeService: function removeService(_ref) {
-			var _this2 = this;
-
 			var id = _ref.id;
 
-			var sleep = function sleep(ms) {
-				return new Promise(function (resolve) {
-					return setTimeout(resolve, ms);
-				});
-			};
-			sleep(Math.random() * 10).then(function () {
-				_this2.services.splice(_this2.services.findIndex(function (e) {
-					return e.id == id;
-				}), 1);
-			});
+			this.$store.dispatch('removeService', { id: id });
 		}
 	},
 	created: function created() {

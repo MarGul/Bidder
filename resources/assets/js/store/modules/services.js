@@ -51,6 +51,17 @@ const services = {
 					})
 					.catch(error => { console.log(error); });
 			});
+		},
+		addService({commit, state}, payload) {
+
+		},
+		removeService({commit, state}, payload) {
+			let sleep = function(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms));
+			}
+			sleep(Math.random() * 10).then(() => {
+				state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
+			});
 		}
 	},
 	getters: {

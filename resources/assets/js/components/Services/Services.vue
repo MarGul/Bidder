@@ -73,20 +73,13 @@
 		},
 		methods: {
 			fetchServices(appending = false, processing = false) {
-				console.log(processing);
 				this.processing = processing ? true : false;
-				console.log(this.processing);
 				
 				this.$store.dispatch('getServices', {appending})
 					.then(success => { this.processing = false; })
 			},
 			removeService({id}) {
-				let sleep = function(ms) {
-					return new Promise(resolve => setTimeout(resolve, ms));
-				}
-				sleep(Math.random() * 10).then(() => {
-					this.services.splice(this.services.findIndex(e => e.id == id), 1)
-				});
+				this.$store.dispatch('removeService', {id});
 			}
 		},
 		created() {

@@ -13451,6 +13451,25 @@ var services = {
 					console.log(error);
 				});
 			});
+		},
+		addService: function addService(_ref3, payload) {
+			var commit = _ref3.commit,
+			    state = _ref3.state;
+		},
+		removeService: function removeService(_ref4, payload) {
+			var commit = _ref4.commit,
+			    state = _ref4.state;
+
+			var sleep = function sleep(ms) {
+				return new Promise(function (resolve) {
+					return setTimeout(resolve, ms);
+				});
+			};
+			sleep(Math.random() * 10).then(function () {
+				state.services.splice(state.services.findIndex(function (e) {
+					return e.id == payload.id;
+				}), 1);
+			});
 		}
 	},
 	getters: {
