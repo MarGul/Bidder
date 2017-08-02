@@ -9796,9 +9796,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this = this;
+
         // Initialize Data
         this.$store.dispatch('fetchCategories');
         this.$store.dispatch('fetchRegions');
+        // Listen to global broadcasts
+        Echo.channel('services').listen('NewService', function (e) {
+            _this.$store.dispatch('addService', { service: e.service });
+        }).listen('RemoveService', function (e) {});
+
         // Start the applications heartbeat
         setInterval(function () {
             __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
@@ -13454,22 +13461,42 @@ var services = {
 		},
 		addService: function addService(_ref3, payload) {
 			var commit = _ref3.commit,
-			    state = _ref3.state;
+			    state = _ref3.state,
+			    rootState = _ref3.rootState;
+
+			if (rootState.servicesFilter.text && !payload.service.title.includes(rootState.servicesFilter.text)) {
+				return;
+			}
+			if (rootState.servicesFilter.categories.length && !rootState.servicesFilter.categories.find(function (e) {
+				return e.value === payload.service.category_id;
+			})) {
+				return;
+			}
+			if (rootState.servicesFilter.regions.length && !rootState.servicesFilter.regions.find(function (e) {
+				return e.value === payload.service.region_id;
+			})) {
+				return;
+			}
+			if (rootState.servicesFilter.cities.length && !rootState.servicesFilter.cities.find(function (e) {
+				return e.value === payload.service.city_id;
+			})) {
+				return;
+			}
+
+			var services = state.services;
+			services.push(payload.service);
+			services = services.sort(function (a, b) {
+				return a.bid_stop.localeCompare(b.bid_stop);
+			});
+			commit('SET_SERVICES', services);
 		},
 		removeService: function removeService(_ref4, payload) {
 			var commit = _ref4.commit,
 			    state = _ref4.state;
 
-			var sleep = function sleep(ms) {
-				return new Promise(function (resolve) {
-					return setTimeout(resolve, ms);
-				});
-			};
-			sleep(Math.random() * 10).then(function () {
-				state.services.splice(state.services.findIndex(function (e) {
-					return e.id == payload.id;
-				}), 1);
-			});
+			state.services.splice(state.services.findIndex(function (e) {
+				return e.id == payload.id;
+			}), 1);
 		}
 	},
 	getters: {

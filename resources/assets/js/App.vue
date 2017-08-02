@@ -55,6 +55,15 @@
             // Initialize Data
             this.$store.dispatch('fetchCategories');
             this.$store.dispatch('fetchRegions');
+            // Listen to global broadcasts
+            Echo.channel('services')
+                .listen('NewService', (e) => {
+                    this.$store.dispatch('addService', {service: e.service});
+                })
+                .listen('RemoveService', (e) => {
+
+                });
+
             // Start the applications heartbeat
             setInterval(function() {
                 HeartBeat.$emit('beat');

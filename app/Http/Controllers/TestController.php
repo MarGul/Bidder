@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Bid;
-use App\Events\NewBid;
+use App\Service;
+use App\Events\NewService;
 
 class TestController extends Controller
 {
     
 	public function index()
 	{
-		$bid = Bid::find(3);
-		event(new NewBid($bid));
+		$service = Service::find(1);
+		event(new NewService($service));
 	}
 
 }

@@ -397,8 +397,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		if (!this.servicesLoaded) {
 			this.fetchServices();
 		}
-
-		Echo.channel('services').listen('NewService', function (e) {});
 	}
 });
 

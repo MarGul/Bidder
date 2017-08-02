@@ -52,16 +52,30 @@ const services = {
 					.catch(error => { console.log(error); });
 			});
 		},
-		addService({commit, state}, payload) {
+		addService({commit, state, rootState}, payload) {
+			if ( rootState.servicesFilter.text && !payload.service.title.includes(rootState.servicesFilter.text) ) {
+				return;
+			} 
+			if ( rootState.servicesFilter.categories.length && 
+				!rootState.servicesFilter.categories.find(e => e.value === payload.service.category_id) ) {
+				return;
+			}
+			if ( rootState.servicesFilter.regions.length && 
+				!rootState.servicesFilter.regions.find(e => e.value === payload.service.region_id) ) {
+				return;
+			}
+			if ( rootState.servicesFilter.cities.length && 
+				!rootState.servicesFilter.cities.find(e => e.value === payload.service.city_id) ) {
+				return;
+			}
 
+			let services = state.services;
+			services.push(payload.service);
+			services = services.sort((a,b) => a.bid_stop.localeCompare(b.bid_stop));
+			commit('SET_SERVICES', services);
 		},
 		removeService({commit, state}, payload) {
-			let sleep = function(ms) {
-				return new Promise(resolve => setTimeout(resolve, ms));
-			}
-			sleep(Math.random() * 10).then(() => {
-				state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
-			});
+			state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
 		}
 	},
 	getters: {

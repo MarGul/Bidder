@@ -24,8 +24,6 @@ class NewService implements ShouldBroadcast
     public function __construct($service)
     {
         $this->service = $service;
-
-        $this->dontBroadcastToCurrentUser();
     }
 
     /**

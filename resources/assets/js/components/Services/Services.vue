@@ -86,11 +86,6 @@
 			if ( !this.servicesLoaded ) {
 				this.fetchServices();
 			}
-
-			Echo.channel('services')
-				.listen('NewService', (e) => {
-
-				});
 		}
 	}
 </script>
