@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 228:
+/***/ 230:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(264),
+  __webpack_require__(266),
   /* template */
-  __webpack_require__(277),
+  __webpack_require__(279),
   /* styles */
   null,
   /* scopeId */
@@ -41,19 +41,19 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 244:
+/***/ 246:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(245)
+  __webpack_require__(247)
 }
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(247),
+  __webpack_require__(249),
   /* template */
-  __webpack_require__(248),
+  __webpack_require__(250),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -86,13 +86,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 245:
+/***/ 247:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(246);
+var content = __webpack_require__(248);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -113,7 +113,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 246:
+/***/ 248:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(undefined);
@@ -128,7 +128,7 @@ exports.push([module.i, "\n.critical[data-v-2a250a49] {\n  color: #cc0000;\n}\n"
 
 /***/ }),
 
-/***/ 247:
+/***/ 249:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -197,7 +197,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 248:
+/***/ 250:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -218,12 +218,12 @@ if (false) {
 
 /***/ }),
 
-/***/ 264:
+/***/ 266:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services__ = __webpack_require__(267);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Services_Services__);
 //
 //
@@ -254,15 +254,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 265:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(266),
+  __webpack_require__(268),
   /* template */
-  __webpack_require__(276),
+  __webpack_require__(278),
   /* styles */
   null,
   /* scopeId */
@@ -295,16 +295,25 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 266:
+/***/ 268:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter__ = __webpack_require__(269);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ServiceFilter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(135);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -365,76 +374,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			fetched: false,
-			canLoadMore: false,
-			loadingMore: false,
-			page: 1,
-			services: []
+			processing: false
 		};
 	},
 
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])(['servicesLoaded', 'servicesLoadingMore', 'servicesCanLoadMore', 'services'])),
 	methods: {
-		fetchServices: function fetchServices(append) {
+		fetchServices: function fetchServices() {
 			var _this = this;
 
-			this.page = append ? this.page + 1 : 1;
-			this.loadingMore = append ? true : false;
-			var data = { page: this.page };
-			if (this.$store.getters.getFilterText) data.text = this.$store.getters.getFilterText;
-			if (this.$store.getters.getFilterCategories.length > 0) data.categories = this.$store.getters.getFilterCategories.map(function (cat) {
-				return cat.value;
-			}).join();
-			if (this.$store.getters.getFilterRegions.length > 0) data.regions = this.$store.getters.getFilterRegions.map(function (reg) {
-				return reg.value;
-			}).join();
-			if (this.$store.getters.getFilterCities.length > 0) data.cities = this.$store.getters.getFilterCities.map(function (cit) {
-				return cit.value;
-			}).join();
+			var appending = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+			var processing = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('services').get(data).then(function (_ref) {
-				var services = _ref.services;
+			this.processing = processing ? true : false;
 
-				_this.canLoadMore = services.next_page_url ? true : false;
-				_this.services = append ? _this.services.concat(services.data) : _this.services = services.data;
-				_this.fetched = true;
-				_this.loadingMore = false;
-			}).catch(function (error) {
-				console.log(error);
+			this.$store.dispatch('getServices', { appending: appending }).then(function (success) {
+				_this.processing = false;
 			});
 		},
-		removeService: function removeService(_ref2) {
-			var _this2 = this;
+		removeService: function removeService(_ref) {
+			var id = _ref.id;
 
-			var id = _ref2.id;
-
-			var sleep = function sleep(ms) {
-				return new Promise(function (resolve) {
-					return setTimeout(resolve, ms);
-				});
-			};
-			sleep(Math.random() * 10).then(function () {
-				_this2.services.splice(_this2.services.findIndex(function (e) {
-					return e.id == id;
-				}), 1);
-			});
+			this.$store.dispatch('removeService', { id: id });
 		}
 	},
 	created: function created() {
-		this.fetchServices(false);
+		if (!this.servicesLoaded) {
+			this.fetchServices();
+		}
 	}
 });
 
 /***/ }),
 
-/***/ 267:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(268),
+  __webpack_require__(270),
   /* template */
-  __webpack_require__(272),
+  __webpack_require__(274),
   /* styles */
   null,
   /* scopeId */
@@ -467,12 +448,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 268:
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
 //
 //
@@ -554,15 +535,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 269:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(270),
+  __webpack_require__(272),
   /* template */
-  __webpack_require__(271),
+  __webpack_require__(273),
   /* styles */
   null,
   /* scopeId */
@@ -595,7 +576,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 270:
+/***/ 272:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -666,7 +647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 271:
+/***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -758,7 +739,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 272:
+/***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -823,15 +804,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 273:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(274),
+  __webpack_require__(276),
   /* template */
-  __webpack_require__(275),
+  __webpack_require__(277),
   /* styles */
   null,
   /* scopeId */
@@ -864,12 +845,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 274:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
 //
 //
@@ -941,7 +922,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 275:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1008,7 +989,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 276:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1022,17 +1003,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
+    class: {
+      processing: _vm.processing
+    },
     attrs: {
-      "type": "button"
+      "type": "button",
+      "disabled": _vm.processing
     },
     on: {
       "click": function($event) {
-        _vm.fetchServices(false)
+        _vm.fetchServices(false, true)
       }
     }
-  }, [_vm._v("Hitta Tjänster")])])])], 1), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n\t\t\t\t\tHitta Tjänster\n\t\t\t\t")])])])], 1), _vm._v(" "), _c('div', {
     staticClass: "services mtb20"
-  }, [(_vm.fetched) ? [_c('div', {
+  }, [(_vm.servicesLoaded) ? [(_vm.services.length) ? [_c('div', {
     staticClass: "row"
   }, [_c('transition-group', {
     attrs: {
@@ -1061,7 +1046,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "bidStop": _vm.removeService
       }
     })], 1)], 1)
-  }))], 1), _vm._v(" "), (_vm.canLoadMore) ? _c('div', {
+  }))], 1), _vm._v(" "), (_vm.servicesCanLoadMore) ? _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12"
@@ -1070,7 +1055,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-default btn-transparent is-bold-italic",
     class: {
-      'processing': _vm.loadingMore
+      'processing': _vm.servicesLoadingMore
     },
     attrs: {
       "type": "button"
@@ -1081,7 +1066,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices(true)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('app-loading', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('div', {
+    staticClass: "alert alert-info mt20"
+  }, [_vm._v("\n\t\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t\t")])] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }
@@ -1097,7 +1084,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 277:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

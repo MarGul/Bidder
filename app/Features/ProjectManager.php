@@ -5,8 +5,9 @@ namespace App\Features;
 use App\Project;
 use App\Message;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\Features\InvoiceManager;
+use App\Events\NewMessage;
 
 class ProjectManager 
 {
@@ -101,6 +102,9 @@ class ProjectManager
 		if ( !$message->save() ) return false;
 
 		$message->user = $user;
+
+		// Broadcast the new message to the other user.
+		event(new NewMessage($message));
 
 		return $message;
 	}

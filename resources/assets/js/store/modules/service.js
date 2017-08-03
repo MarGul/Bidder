@@ -44,6 +44,16 @@ const service = {
 					commit('SET_BIDS', response.bids);
 					commit('SET_BIDS_LOADED', true);
 				}).catch(error => { });
+		},
+		addBid({commit, state}, payload) {
+			let service = state.service;
+			service.bid_count = {count: service.bid_count ? service.bid_count.count + 1 : 1};
+			commit('SET_SERVICE', service);
+			// If we have fetched bids we should just add this new one to the list.
+			if ( state.bids_loaded ) {
+				let bids = state.bids;
+				bids.unshift(payload.bid);
+			}
 		}
 	},
 	getters: {

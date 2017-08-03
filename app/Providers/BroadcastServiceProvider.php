@@ -16,11 +16,9 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        /*
-         * Authenticate the user's personal channel...
-         */
-        Broadcast::channel('App.User.*', function ($user, $userId) {
-            return (int) $user->id === (int) $userId;
+        // Authorize if the user can listen into the project message channel.
+        Broadcast::channel('project.{project}.messages', function ($user, \App\Project $project) {
+            return in_array($user->id, [$project->bid_user, $project->service_user]);
         });
     }
 }

@@ -50,7 +50,11 @@ class ServiceBidController extends Controller
      */
     public function store(StoreBid $request, Service $service)
     {
-        return $this->manager->create($request, $service);
+        if ( !$bid = $this->manager->add($request->only(['description', 'start', 'end', 'hours', 'price']) ,$service) ) {
+            return response()->json(['message' => 'Could not store the bid.'], 500);
+        }
+
+        return response()->json(['message' => 'Bid was successfully created.', 'bid' => $bid], 201);
     }
 
     /**

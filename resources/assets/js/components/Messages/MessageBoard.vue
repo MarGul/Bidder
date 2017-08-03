@@ -6,9 +6,9 @@
 				<i class="fa fa-envelope-o" aria-hidden="true"></i> Meddelanden
 			</div>
 
-			<template v-if="messages.length > 0">
+			<div class="messages-container" v-if="messages.length > 0">
 				<message :message="message" v-for="message in messages" :key="message.id"></message>
-			</template>
+			</div>
 			
 			<div class="alert alert-warning" v-else>
 				Det finns inga meddelanden än. Bli den första att säga hej genom att skicka ett meddelande nedan.
@@ -57,6 +57,11 @@
 				.then(response => {
 					this.messages = response.messages;
 					this.fetched = true;
+				});
+
+			Echo.private(`project.${this.$route.params.id}.messages`)
+				.listen('NewMessage', (e) => {
+					this.messages.push(e.message);
 				});
 		}
 	}

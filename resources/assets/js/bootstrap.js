@@ -40,3 +40,16 @@ window.axios.defaults.headers.common = {
  */
 import Breakpoints from './includes/classes/BootstrapBreakpoints';
 window.breakpoints = new Breakpoints;
+
+/**
+ * Instanciate Laravel Echo for realtime
+ */
+import Pusher from 'pusher-js';
+import Echo from "laravel-echo";
+window.Echo = new Echo({
+	broadcaster: 'pusher',
+	key: 'c747553af39377b20bf7',
+	cluster: 'eu',
+	ecrypted: true,
+	namespace: 'App.Events'
+});

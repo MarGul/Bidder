@@ -42,7 +42,11 @@ class ServiceCommentController extends Controller
      */
     public function store(StoreComment $request, Service $service)
     {
-        return $this->manager->create($request, $service);
+        if ( !$comment = $this->manager->add($request->only(['body', 'parent']), $service) ) {
+            return response()->json(['message' => 'Could not store the comment in the database.'], 500);
+        }
+        
+        return response()->json(['message' => 'Created was successfully created.', 'comment' => $comment], 201);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Features\CommentManager;
 use App\Features\MediaManager;
 use App\Features\SubscriptionManager;
 use App\Jobs\UploadServiceMedia;
+use App\Events\NewService;
 use Carbon\Carbon;
 
 class ServiceManager {
@@ -23,6 +24,7 @@ class ServiceManager {
 	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
 	{
 		$query = Service::query();
+		$query->with('bid_count', 'comment_count');
 
 		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
 		if ( $categories ) $query = $query->whereIn('category_id', explode(',', $categories));
@@ -83,9 +85,7 @@ class ServiceManager {
 			'active' => true
 		]);
 
-		if ( !$service->save() ) {
-			return false;
-		}
+		if ( !$service->save() ) { return false; }
 
 		if ( $request->media ) {
 			// Locally store the media that was uploaded.
@@ -93,6 +93,9 @@ class ServiceManager {
 			// Create a job for further processing of the files and upload to AWS S3.
 			dispatch(new UploadServiceMedia($files, $service));
 		}
+
+		// Broadcast the creation of the new service for everyone listening.
+		event(new NewService($service));
 
 		// Send out notifications to the people that has subscribed.
 		app(SubscriptionManager::class)->send($service);

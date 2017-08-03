@@ -48,6 +48,11 @@
 			// Implement the error color
 		}
 
+		&.info {
+			background-color: rgba(219, 237, 255, 0.95);
+			color: #032f62;
+		}
+
 		.notification-area {
 			display: flex;
 
