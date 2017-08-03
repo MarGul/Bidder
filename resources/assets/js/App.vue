@@ -61,7 +61,7 @@
                     this.$store.dispatch('addService', {service: e.service});
                 })
                 .listen('RemoveService', (e) => {
-
+                    this.$store.dispatch('removeService', {id: e.id});
                 });
 
             // Start the applications heartbeat

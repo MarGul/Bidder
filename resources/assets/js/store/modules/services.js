@@ -75,7 +75,10 @@ const services = {
 			commit('SET_SERVICES', services);
 		},
 		removeService({commit, state}, payload) {
-			state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
+			let serviceIndex = state.services.findIndex(e => e.id === payload.id);
+			if ( serviceIndex !== -1 ) {
+				state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
+			}
 		}
 	},
 	getters: {

@@ -5,6 +5,7 @@ namespace App\Features;
 use App\Bid;
 use App\Service;
 use App\Events\NewBid;
+use App\Events\RemoveService;
 use Auth;
 use Carbon\Carbon;
 
@@ -91,6 +92,9 @@ class BidManager {
 			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString(),
 			'price' => $bid->price
 		];
+
+		// Broadcast that this event has now stopped
+		event(new RemoveService($service->id));
 
 		return app(ProjectManager::class)->create($data) ? true : false;
 	}

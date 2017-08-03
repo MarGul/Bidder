@@ -357,6 +357,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1012,7 +1017,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n\t\t\t\t\tHitta Tjänster\n\t\t\t\t")])])])], 1), _vm._v(" "), _c('div', {
     staticClass: "services mtb20"
-  }, [(_vm.servicesLoaded) ? [_c('div', {
+  }, [(_vm.servicesLoaded) ? [(_vm.services.length) ? [_c('div', {
     staticClass: "row"
   }, [_c('transition-group', {
     attrs: {
@@ -1061,7 +1066,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices(true)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('app-loading', {
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('div', {
+    staticClass: "alert alert-info mt20"
+  }, [_vm._v("\n\t\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t\t")])] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }

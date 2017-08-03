@@ -9804,7 +9804,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // Listen to global broadcasts
         Echo.channel('services').listen('NewService', function (e) {
             _this.$store.dispatch('addService', { service: e.service });
-        }).listen('RemoveService', function (e) {});
+        }).listen('RemoveService', function (e) {
+            _this.$store.dispatch('removeService', { id: e.id });
+        });
 
         // Start the applications heartbeat
         setInterval(function () {
@@ -13494,9 +13496,14 @@ var services = {
 			var commit = _ref4.commit,
 			    state = _ref4.state;
 
-			state.services.splice(state.services.findIndex(function (e) {
-				return e.id == payload.id;
-			}), 1);
+			var serviceIndex = state.services.findIndex(function (e) {
+				return e.id === payload.id;
+			});
+			if (serviceIndex !== -1) {
+				state.services.splice(state.services.findIndex(function (e) {
+					return e.id == payload.id;
+				}), 1);
+			}
 		}
 	},
 	getters: {

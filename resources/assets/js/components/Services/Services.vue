@@ -14,33 +14,38 @@
 
 		<div class="services mtb20">
 			<template  v-if="servicesLoaded">
-				<div class="row">
-					<transition-group name="slide-out" mode="out-in">
-						<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
-							<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
-								<app-service-multi 
-									:service="service"
-									@bidStop="removeService"
-								></app-service-multi>
-							</router-link>
-						</div>
-					</transition-group>
-				</div>
+				<template v-if="services.length">
+					<div class="row">
+						<transition-group name="slide-out" mode="out-in">
+							<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
+								<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
+									<app-service-multi 
+										:service="service"
+										@bidStop="removeService"
+									></app-service-multi>
+								</router-link>
+							</div>
+						</transition-group>
+					</div>
 
-				<div class="row" v-if="servicesCanLoadMore">
-					<div class="col-xs-12">
-						<div class="load-more text-center mt10">
-							<button 
-								type="button" 
-								class="btn btn-default btn-transparent is-bold-italic" 
-								:class="{'processing': servicesLoadingMore}"
-								@click.prevent="fetchServices(true)">
-									Hämta fler
-								</button>
+					<div class="row" v-if="servicesCanLoadMore">
+						<div class="col-xs-12">
+							<div class="load-more text-center mt10">
+								<button 
+									type="button" 
+									class="btn btn-default btn-transparent is-bold-italic" 
+									:class="{'processing': servicesLoadingMore}"
+									@click.prevent="fetchServices(true)">
+										Hämta fler
+									</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				</template>
 
+				<div class="alert alert-info mt20" v-else>
+					Tyvärr finns det inga tjänster att visa just nu.
+				</div>
 			</template>
 			
 			<app-loading bg="gray" v-else></app-loading>
