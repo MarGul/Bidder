@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
+use App\User;
 use App\Events\NewService;
 
 class TestController extends Controller
@@ -11,8 +11,9 @@ class TestController extends Controller
     
 	public function index()
 	{
-		$service = Service::find(1);
-		event(new NewService($service));
+		$user = User::find(1);
+		$user->load('notification_settings');
+		dd($user);
 	}
 
 }
