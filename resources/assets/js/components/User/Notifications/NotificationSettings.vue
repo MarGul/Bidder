@@ -20,6 +20,7 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import appNotificationSettingsItem from "./NotificationSettingsItem";
+	import Model from "../../../includes/Model";
 
 	export default {
 		components: {
@@ -43,6 +44,14 @@
 			},
 			update() {
 				this.processing = true;
+				new Model(`users/${this.$store.getters.authUser.id}/notification-settings`).patch(this.settings)
+					.then(response => {
+						this.$store.commit('SET_NOTIFICATIONSETTINGS', {notificationSettings: this.settings});
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har uppdaterat dina inställningar för när du ska få notifikationer.'});
+						this.processing = false;
+					})
+					.catch(error => console.log(error));
+
 			}
 		},
 		created() {

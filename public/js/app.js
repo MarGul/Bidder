@@ -10075,7 +10075,7 @@ var user = {
 		clearUserState: function clearUserState(_ref) {
 			var commit = _ref.commit;
 
-			commit('SET_NOTIFICATIONSETTINGS', { notifications: [] });
+			commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: [] });
 			commit('SET_NOTIFICATIONSETTINGS_FETCHED', { fetched: false });
 			commit('SET_SERVICES', { services: [] });
 			commit('SET_SERVICES_FETCHED', { fetched: false });

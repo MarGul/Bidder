@@ -20,4 +20,13 @@ class NotificationSettingsManager
 		return $settings;
 	}
 
+	public function update($user, $data)
+	{
+		$settings = NotificationSettings::where('user_id', $user->id)->first();
+
+		if ( !$settings->update($data) ) return false;
+
+		return true;
+	}
+
 }

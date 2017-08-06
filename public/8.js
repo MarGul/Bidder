@@ -116,6 +116,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem__ = __webpack_require__(404);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -141,6 +142,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
 		appNotificationSettingsItem: __WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem___default.a
@@ -158,15 +160,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.settings[event.setting] = Boolean(!this.settings[event.setting]);
 		},
 		update: function update() {
+			var _this = this;
+
 			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]("users/" + this.$store.getters.authUser.id + "/notification-settings").patch(this.settings).then(function (response) {
+				_this.$store.commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: _this.settings });
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har uppdaterat dina inställningar för när du ska få notifikationer.' });
+				_this.processing = false;
+			}).catch(function (error) {
+				return console.log(error);
+			});
 		}
 	},
 	created: function created() {
-		var _this = this;
+		var _this2 = this;
 
 		if (!this.userNotificationSettingsFetched) {
 			this.$store.dispatch('fetchUserNotificationSettings').then(function (response) {
-				_this.settings = _this.userNotificationSettings;
+				_this2.settings = _this2.userNotificationSettings;
 			});
 		} else {
 			this.settings = this.userNotificationSettings;
