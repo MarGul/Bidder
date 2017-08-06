@@ -17,6 +17,13 @@ class NotificationSettings extends Model
     	'other_party_accepted', 'project_started', 'leave_review', 'competing_bid', 'comment_reply'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['user_id', 'created_at', 'updated_at', 'id'];
+
    	/**
    	 * A notification settings belongs to a user.
    	 * 

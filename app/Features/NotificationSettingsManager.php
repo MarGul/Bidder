@@ -15,7 +15,7 @@ class NotificationSettingsManager
 	 */
 	public function forUser($user)
 	{
-		$settings = NotificationSettings::where('user_id', $user->id)->get();
+		$settings = NotificationSettings::where('user_id', $user->id)->first();
 
 		return $settings;
 	}

@@ -1,0 +1,28 @@
+.notification_settings-component {
+
+	.notification_settings_item-component {
+		display: flex;
+		padding: 7.5px;
+		border-top: 1px solid lighten($border-color-gray, 10%);
+		align-items: center;
+
+		&:first-child {
+			border-top: none;
+		}
+
+		.setting-text {
+			flex: 3;
+		}
+
+		.setting-value {
+			flex: 1;
+			text-align: right;
+			align-self: flex-start;
+
+			i {
+				color: $brand-primary;
+				cursor: pointer;
+			}
+		}
+	}
+}
