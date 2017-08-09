@@ -80,7 +80,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -95,6 +94,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		show: function show(project) {
 			this.$store.commit('SET_PROJECT_FOCUS', { project: project });
 			this.$router.push('/user/project/' + project.id);
+		},
+		projectCreated: function projectCreated(project) {
+			return moment(project.created_at).format('LLL');
+		},
+		projectFinish: function projectFinish(project) {
+			return moment(project.finish).format('LL');
 		}
 	},
 	created: function created() {
@@ -118,28 +123,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "user-items-list"
   }, _vm._l((_vm.projects), function(project) {
     return _c('li', [_c('span', {
-      staticClass: "item-content",
+      staticClass: "item-content"
+    }, [_c('h5', {
       domProps: {
         "textContent": _vm._s(project.title || ("# " + (project.id)))
       }
-    }), _vm._v(" "), _c('span', {
+    }), _vm._v(" "), _c('div', {
+      staticClass: "item-content-details"
+    }, [_c('span', {
+      staticClass: "mr5"
+    }, [_vm._v("Skapades den " + _vm._s(_vm.projectCreated(project)))]), _vm._v("•\n\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5 mr5"
+    }, [_vm._v("Projektet " + _vm._s(project.completed ? 'är avslutad' : 'pågår'))]), _vm._v("•\n\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5"
+    }, [_vm._v(_vm._s(project.completed ? 'Avslutades' : 'Avslutas') + " den " + _vm._s(_vm.projectFinish(project)))])])]), _vm._v(" "), _c('span', {
       staticClass: "item-actions"
+    }, [_c('div', {
+      staticClass: "status"
     }, [_c('button', {
-      staticClass: "btn btn-default",
+      staticClass: "btn btn-primary",
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.show(project)
         }
       }
-    }, [_c('i', {
-      staticClass: "fa fa-briefcase",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Visa projekt\n\t\t\t\t\t")]), _vm._v(" "), _c('div', {
-      staticClass: "status"
-    }, [(project.completed) ? [_vm._v("\n\t\t\t\t\t\t\tAvslutad\n\t\t\t\t\t\t")] : [_vm._v("\n\t\t\t\t\t\t\tPågående\n\t\t\t\t\t\t")]], 2)])])
+    }, [_vm._v("Visa projekt")])])])])
   })) : _c('div', {
     staticClass: "alert alert-info"
   }, [_vm._v("\n\t\t\tDu har ännu inga skapade projekt.\n\t\t")])] : _c('app-loading')], 2)
