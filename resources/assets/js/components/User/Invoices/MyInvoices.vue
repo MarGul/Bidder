@@ -7,13 +7,14 @@
 			<ul class="user-items-list" v-if="invoices.length > 0">
 				<li v-for="invoice in invoices">
 					<span class="item-content">
-						Faktura #{{ 1000000 + invoice.id }}
+						<h5>Faktura #{{ 1000000 + invoice.id }}</h5>
+						<div class="item-content-details">
+							<span class="mr5">{{ paidText(invoice) }}</span>&bull;
+							<span class="ml5 mr5">Beloppet är {{ filters.currency(invoice.total) }}</span>&bull;
+							<span class="ml5">Förfaller den {{ dueDate(invoice) }}</span>
+						</div>
 					</span>
 					<span class="item-actions">
-						<span class="payment-status" :class="paidClass(invoice)">
-							<i class="fa" :class="paidIcon(invoice)" aria-hidden="true"></i>
-							{{ paidText(invoice) }}
-						</span>
 						<button type="button" class="btn btn-primary" @click.prevent="show(invoice)">Visa detaljer</button>
 					</span>
 				</li>
@@ -40,14 +41,11 @@
 			}
 		},
 		methods: {
-			paidClass(invoice) {
-				return invoice.payments.length ? ['paid'] : ['not-paid'];
-			},
 			paidText(invoice) {
 				return invoice.payments.length ? 'Betalad' : 'Ej betald';
 			},
-			paidIcon(invoice) {
-				return invoice.payments.length ? ['fa-check-circle'] : ['fa-info-circle'];
+			dueDate(invoice) {
+				return moment(invoice.due).format('LL');
 			},
 			show(invoice) {
 				this.$store.commit('SET_INVOICE_FOCUS', {invoice});

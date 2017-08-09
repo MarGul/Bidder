@@ -123,6 +123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -134,14 +135,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		paidClass: function paidClass(invoice) {
-			return invoice.payments.length ? ['paid'] : ['not-paid'];
-		},
 		paidText: function paidText(invoice) {
 			return invoice.payments.length ? 'Betalad' : 'Ej betald';
 		},
-		paidIcon: function paidIcon(invoice) {
-			return invoice.payments.length ? ['fa-check-circle'] : ['fa-info-circle'];
+		dueDate: function dueDate(invoice) {
+			return moment(invoice.due).format('LL');
 		},
 		show: function show(invoice) {
 			this.$store.commit('SET_INVOICE_FOCUS', { invoice: invoice });
@@ -170,18 +168,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.invoices), function(invoice) {
     return _c('li', [_c('span', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\tFaktura #" + _vm._s(1000000 + invoice.id) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
-      staticClass: "item-actions"
+    }, [_c('h5', [_vm._v("Faktura #" + _vm._s(1000000 + invoice.id))]), _vm._v(" "), _c('div', {
+      staticClass: "item-content-details"
     }, [_c('span', {
-      staticClass: "payment-status",
-      class: _vm.paidClass(invoice)
-    }, [_c('i', {
-      staticClass: "fa",
-      class: _vm.paidIcon(invoice),
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.paidText(invoice)) + "\n\t\t\t\t\t")]), _vm._v(" "), _c('button', {
+      staticClass: "mr5"
+    }, [_vm._v(_vm._s(_vm.paidText(invoice)))]), _vm._v("•\n\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5 mr5"
+    }, [_vm._v("Beloppet är " + _vm._s(_vm.filters.currency(invoice.total)))]), _vm._v("•\n\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5"
+    }, [_vm._v("Förfaller den " + _vm._s(_vm.dueDate(invoice)))])])]), _vm._v(" "), _c('span', {
+      staticClass: "item-actions"
+    }, [_c('button', {
       staticClass: "btn btn-primary",
       attrs: {
         "type": "button"
