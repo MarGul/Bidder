@@ -7,10 +7,15 @@
 			<ul class="user-items-list" v-if="bids.length > 0">
 				<li v-for="bid in bids">
 					<span class="item-content">
-						{{ bid.description }}
+						<h5>{{ bid.description.substring(0, 75) }}</h5>
+						<div class="item-content-details">
+							<span class="mr5">Bud lagt den {{ bidDate(bid) }}</span>&bull;
+							<span class="ml5 mr5">Budet är {{ bid.accepted ? 'accepterat' : 'ej accepterat' }}</span>&bull;
+							<router-link :to="`/services/${bid.service_id}`" class="ml5">Visa tjänsten</router-link>
+						</div>
 					</span>
 					<span class="item-actions">
-						
+						<router-link to="/test" class="btn btn-primary">Visa bud</router-link>
 					</span>
 				</li>
 			</ul>
@@ -33,6 +38,11 @@
 			},
 			bids() {
 				return this.$store.getters.userBids;
+			}
+		},
+		methods: {
+			bidDate(bid) {
+				return moment(bid.created_at).format('LLL');
 			}
 		},
 		created() {

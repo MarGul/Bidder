@@ -73,6 +73,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -81,6 +86,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		bids: function bids() {
 			return this.$store.getters.userBids;
+		}
+	},
+	methods: {
+		bidDate: function bidDate(bid) {
+			return moment(bid.created_at).format('LLL');
 		}
 	},
 	created: function created() {
@@ -105,9 +115,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', [_c('span', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
+    }, [_c('h5', [_vm._v(_vm._s(bid.description.substring(0, 75)))]), _vm._v(" "), _c('div', {
+      staticClass: "item-content-details"
+    }, [_c('span', {
+      staticClass: "mr5"
+    }, [_vm._v("Bud lagt den " + _vm._s(_vm.bidDate(bid)))]), _vm._v("•\n\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5 mr5"
+    }, [_vm._v("Budet är " + _vm._s(bid.accepted ? 'accepterat' : 'ej accepterat'))]), _vm._v("•\n\t\t\t\t\t\t"), _c('router-link', {
+      staticClass: "ml5",
+      attrs: {
+        "to": ("/services/" + (bid.service_id))
+      }
+    }, [_vm._v("Visa tjänsten")])], 1)]), _vm._v(" "), _c('span', {
       staticClass: "item-actions"
-    })])
+    }, [_c('router-link', {
+      staticClass: "btn btn-primary",
+      attrs: {
+        "to": "/test"
+      }
+    }, [_vm._v("Visa bud")])], 1)])
   })) : _c('div', {
     staticClass: "alert alert-info"
   }, [_vm._v("\n\t\t\tDu har ännu inte lagt några bud.\n\t\t")])] : _c('app-loading')], 2)
