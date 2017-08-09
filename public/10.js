@@ -75,12 +75,12 @@ if(false) {
 /***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "\n.payment-status {\n  margin-right: 10px;\n}\n.payment-status i {\n    margin-right: 3px;\n}\n.payment-status.paid {\n    color: #5cb85c;\n}\n.payment-status.not-paid {\n    color: #d9534f;\n}\n", ""]);
+exports.push([module.i, "\n.payment-status {\n  margin-right: 10px;\n  font-size: 12px;\n}\n.payment-status i {\n    margin-right: 3px;\n}\n.payment-status.paid {\n    color: #5cb85c;\n}\n.payment-status.not-paid {\n    color: #d9534f;\n}\n", ""]);
 
 // exports
 

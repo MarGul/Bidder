@@ -75,6 +75,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -83,6 +85,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		services: function services() {
 			return this.$store.getters.userServices;
+		}
+	},
+	methods: {
+		bidEnds: function bidEnds(service) {
+			return moment(service.bid_stop).format('LLL');
 		}
 	},
 	created: function created() {
@@ -107,37 +114,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.services), function(service) {
     return _c('li', [_c('div', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t" + _vm._s(service.title) + "\n\t\t\t\t"), (service.active) ? _c('span', {
+    }, [_c('h5', [_vm._v(_vm._s(service.title))]), _vm._v(" "), (service.active) ? _c('span', {
       staticClass: "item-link"
     }, [_vm._v("\n\t\t\t\t\t — "), _c('router-link', {
       attrs: {
         "to": ("/services/" + (service.id))
       }
-    }, [_vm._v("visa tjänst")])], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+    }, [_vm._v("visa tjänst")])], 1) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "item-content-details"
+    }, [_c('span', {
+      staticClass: "mr5"
+    }, [_vm._v(_vm._s(service.active ? 'Budgivning aktiv' : 'Budgivning avslutad'))]), _vm._v("•\n\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5"
+    }, [_vm._v("\n\t\t\t\t\t\tBudgivning " + _vm._s(service.bid_accepted ? 'avslutades' : 'avslutas') + " den " + _vm._s(_vm.bidEnds(service)) + "\n\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
       staticClass: "item-actions"
     }, [_c('router-link', {
-      staticClass: "btn-flat btn-default show-bids",
-      attrs: {
-        "to": ("/user/service/" + (service.id) + "/bids")
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-gavel",
-      attrs: {
-        "aria-hidden": "true",
-        "title": "Visa bud"
-      }
-    }), _vm._v(" Visa bud\n\t\t\t\t")]), _vm._v(" "), _c('router-link', {
-      staticClass: "btn-flat btn-default edit",
+      staticClass: "is-link is-weight-500 mr10",
       attrs: {
         "to": ("/user/service/" + (service.id) + "/edit")
       }
-    }, [_c('i', {
-      staticClass: "fa fa-pencil",
+    }, [_vm._v("Redigera")]), _vm._v(" "), _c('router-link', {
+      staticClass: "btn btn-primary",
       attrs: {
-        "aria-hidden": "true",
-        "title": "Redigera"
+        "to": ("/user/service/" + (service.id) + "/bids")
       }
-    }), _vm._v(" Redigera\n\t\t\t\t")])], 1)])
+    }, [_vm._v("Visa bud")])], 1)])
   })) : _c('app-loading')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true

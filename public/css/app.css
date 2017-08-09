@@ -8003,8 +8003,24 @@ a {
   margin: 20px 0;
 }
 
+.mr3 {
+  margin-right: 3px;
+}
+
 .mr5 {
   margin-right: 5px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.ml3 {
+  margin-left: 3px;
+}
+
+.ml5 {
+  margin-left: 5px;
 }
 
 .margin-25 {
@@ -9783,16 +9799,17 @@ body.mobile-nav-open .overlay {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e3e3e3;
   border-radius: 6px;
+  background-color: #fafafa;
 }
 
 .user-component .user-ui-container .user-ui-content .user-items-list li {
   padding: 15px;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e3e3e3;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .user-component .user-ui-container .user-ui-content .user-items-list li {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -9807,12 +9824,21 @@ body.mobile-nav-open .overlay {
   border-bottom-color: transparent;
 }
 
-@media screen and (min-width: 992px) {
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-content h5 {
+  margin: 0;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@media screen and (min-width: 768px) {
   .user-component .user-ui-container .user-ui-content .user-items-list li .item-content {
     -webkit-box-flex: 2;
         -ms-flex: 2;
             flex: 2;
     padding-right: 10px;
+  }
+  .user-component .user-ui-container .user-ui-content .user-items-list li .item-content h5 {
+    font-size: 16px;
   }
 }
 
@@ -9824,56 +9850,33 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.user-component .user-ui-container .user-ui-content .user-items-list li .item-content .item-content-details {
+  padding-top: 7px;
+  font-size: 12px;
+  color: #adb0b5;
+}
+
 .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-top: 10px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions {
+    margin-top: 0;
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    margin-top: 0;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-}
-
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a {
-  text-align: center;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-@media screen and (min-width: 992px) {
-  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a {
-    padding: 3px 5px;
-  }
-}
-
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a i {
-  margin-right: 5px;
-}
-
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a.show-bids {
-  margin-right: 3px;
-}
-
-.user-component .user-ui-container .user-ui-content .user-items-list li .item-actions a.edit {
-  margin-left: 3px;
-}
-
-@media screen and (min-width: 992px) {
-  .user-component .user-ui-container .user-ui-content .user-items-list li .item-actions .btn {
-    padding: 3px 5px;
   }
 }
 

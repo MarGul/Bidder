@@ -65,6 +65,7 @@
 <style lang="scss">
 	.payment-status {
 		margin-right: 10px;
+		font-size: 12px;
 
 		i {
 			margin-right: 3px;
