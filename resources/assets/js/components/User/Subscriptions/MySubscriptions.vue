@@ -12,9 +12,7 @@
 						{{ title(subscription) }}
 					</div>
 					<div class="item-actions">
-						<button type="button" class="btn btn-default" @click.prevent="remove(subscription.id)">
-							<i class="fa fa-times" aria-hidden="true"></i> Ta bort
-						</button>
+						<button type="button" class="btn btn-danger" @click.prevent="remove(subscription.id)">Ta bort</button>
 					</div>
 				</li>
 			</ul>

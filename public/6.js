@@ -121,8 +121,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -505,7 +503,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.title(subscription)) + "\n\t\t\t\t")]), _vm._v(" "), _c('div', {
       staticClass: "item-actions"
     }, [_c('button', {
-      staticClass: "btn btn-default",
+      staticClass: "btn btn-danger",
       attrs: {
         "type": "button"
       },
@@ -515,12 +513,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.remove(subscription.id)
         }
       }
-    }, [_c('i', {
-      staticClass: "fa fa-times",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Ta bort\n\t\t\t\t\t")])])])
+    }, [_vm._v("Ta bort")])])])
   })) : _c('div', {
     staticClass: "alert alert-info"
   }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)
