@@ -6,9 +6,9 @@ webpackJsonp([18],{
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(334),
-  /* template */
   __webpack_require__(335),
+  /* template */
+  __webpack_require__(336),
   /* styles */
   null,
   /* scopeId */
@@ -41,11 +41,16 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -92,26 +97,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "my_bids-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Mina Bud")]), _vm._v(" "), (_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [(_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', [_c('span', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(bid.description) + "\n\t\t\t\t\t\t")]), _vm._v(" "), _c('span', {
       staticClass: "item-actions"
     })])
   })) : _c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v("\n\t\t\tDu har ännu inte lagt några bud.\n\t\t")])] : _c('app-loading')], 2)
-},staticRenderFns: []}
+  }, [_vm._v("\n\t\t\t\t\tDu har ännu inte lagt några bud.\n\t\t\t\t")])] : _c('app-loading')], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Mina bud")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

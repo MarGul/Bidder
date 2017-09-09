@@ -6,13 +6,13 @@ webpackJsonp([7],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(386)
+  __webpack_require__(387)
 }
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(388),
+  __webpack_require__(389),
   /* template */
-  __webpack_require__(392),
+  __webpack_require__(393),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -45,13 +45,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 386:
+/***/ 387:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(387);
+var content = __webpack_require__(388);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -72,7 +72,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 387:
+/***/ 388:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(undefined);
@@ -87,14 +87,21 @@ exports.push([module.i, "\n.item-actions[data-v-5f7c3375] {\n  justify-content: 
 
 /***/ }),
 
-/***/ 388:
+/***/ 389:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__(390);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddSubscription__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -174,15 +181,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 389:
+/***/ 390:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(390),
-  /* template */
   __webpack_require__(391),
+  /* template */
+  __webpack_require__(392),
   /* styles */
   null,
   /* scopeId */
@@ -215,7 +222,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 390:
+/***/ 391:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -325,12 +332,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 391:
+/***/ 392:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "add_subscription-component mb40"
+    staticClass: "add_subscription-component"
   }, [_c('form', {
     on: {
       "keydown": function($event) {
@@ -489,20 +496,24 @@ if (false) {
 
 /***/ }),
 
-/***/ 392:
+/***/ 393:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "my_subscriptions-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Prenumerationer")]), _vm._v(" "), _c('app-add-subscription'), _vm._v(" "), (_vm.fetched) ? [(_vm.subscriptions.length > 0) ? _c('ul', {
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('app-add-subscription')], 1), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [(_vm.fetched) ? [(_vm.subscriptions.length > 0) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.subscriptions), function(subscription) {
     return _c('li', [_c('div', {
       staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.title(subscription)) + "\n\t\t\t\t")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.title(subscription)) + "\n\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
       staticClass: "item-actions"
     }, [_c('button', {
       staticClass: "btn btn-default",
@@ -520,11 +531,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "aria-hidden": "true"
       }
-    }), _vm._v(" Ta bort\n\t\t\t\t\t")])])])
+    }), _vm._v(" Ta bort\n\t\t\t\t\t\t\t")])])])
   })) : _c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)
-},staticRenderFns: []}
+  }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Prenumerationer")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

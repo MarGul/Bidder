@@ -1,8 +1,13 @@
 <template>
 	<div class="notifications-component">
-		<h1 class="user-component-title">Notifikationer</h1>
-
-		<app-notification-settings></app-notification-settings>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Notifikationer</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<app-notification-settings></app-notification-settings>
+			</div>
+		</section>
 	</div>
 </template>
 

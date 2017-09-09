@@ -1,26 +1,31 @@
 <template>
 	<div class="my_bids-component">
 		
-		<h1 class="user-component-title">Mina Bud</h1>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Mina bud</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<template v-if="fetched">
+					<ul class="user-items-list" v-if="bids.length > 0">
+						<li v-for="bid in bids">
+							<span class="item-content">
+								{{ bid.description }}
+							</span>
+							<span class="item-actions">
+								
+							</span>
+						</li>
+					</ul>
 
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="bids.length > 0">
-				<li v-for="bid in bids">
-					<span class="item-content">
-						{{ bid.description }}
-					</span>
-					<span class="item-actions">
-						
-					</span>
-				</li>
-			</ul>
+					<div class="alert alert-info" v-else>
+						Du har ännu inte lagt några bud.
+					</div>
+				</template>
 
-			<div class="alert alert-info" v-else>
-				Du har ännu inte lagt några bud.
+				<app-loading v-else></app-loading>
 			</div>
-		</template>
-
-		<app-loading v-else></app-loading>
+		</section>
 
 	</div>
 </template>

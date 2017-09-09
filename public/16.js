@@ -6,9 +6,9 @@ webpackJsonp([16],{
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(336),
-  /* template */
   __webpack_require__(337),
+  /* template */
+  __webpack_require__(338),
   /* styles */
   null,
   /* scopeId */
@@ -41,11 +41,16 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -106,15 +111,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 337:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "my_projects-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Mina projekt")]), _vm._v(" "), (_vm.fetched) ? [(_vm.projects.length > 0) ? _c('ul', {
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [(_vm.fetched) ? [(_vm.projects.length > 0) ? _c('ul', {
     staticClass: "user-items-list"
   }, _vm._l((_vm.projects), function(project) {
     return _c('li', [_c('span', {
@@ -137,13 +144,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "aria-hidden": "true"
       }
-    }), _vm._v(" Visa projekt\n\t\t\t\t\t")]), _vm._v(" "), _c('div', {
+    }), _vm._v(" Visa projekt\n\t\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
       staticClass: "status"
-    }, [(project.completed) ? [_vm._v("\n\t\t\t\t\t\t\tAvslutad\n\t\t\t\t\t\t")] : [_vm._v("\n\t\t\t\t\t\t\tPågående\n\t\t\t\t\t\t")]], 2)])])
+    }, [(project.completed) ? [_vm._v("\n\t\t\t\t\t\t\t\t\tAvslutad\n\t\t\t\t\t\t\t\t")] : [_vm._v("\n\t\t\t\t\t\t\t\t\tPågående\n\t\t\t\t\t\t\t\t")]], 2)])])
   })) : _c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v("\n\t\t\tDu har ännu inga skapade projekt.\n\t\t")])] : _c('app-loading')], 2)
-},staticRenderFns: []}
+  }, [_vm._v("\n\t\t\t\t\tDu har ännu inga skapade projekt.\n\t\t\t\t")])] : _c('app-loading')], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Mina projekt")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
