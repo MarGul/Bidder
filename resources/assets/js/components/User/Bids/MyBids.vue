@@ -7,40 +7,27 @@
 			</header>
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
-					<ul class="user-items-list" v-if="bids.length > 0">
-						<li v-for="bid in bids">
-							<span class="item-content">
-								{{ bid.description }}
-							</span>
-							<span class="item-actions">
-								
-							</span>
+					<ul class="items-list">
+						<li class="gray-item clickable" v-for="bid in bids">
+							<div class="item-content">
+								<div class="item-header" v-text="description(bid.description)"></div>
+								<div class="item-sub-data">
+									<span class="mr5">Bud lagt den {{ bidDate(bid) }}</span>&bull;
+									<span class="ml5">Budet är {{ bid.accepted ? 'accepterat' : 'ej accepterat' }}</span>
+								</div>
+							</div>
+							<div class="item-go-to">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									 width="12px" height="12px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
+									<g id="chevron-right">
+										<polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" fill="#97A9B5" />
+									</g>
+								</svg>
+							</div>
 						</li>
 					</ul>
-
-<<<<<<< HEAD
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="bids.length > 0">
-				<li v-for="bid in bids">
-					<span class="item-content">
-						<h5>{{ bid.description.substring(0, 75) }}</h5>
-						<div class="item-content-details">
-							<span class="mr5">Bud lagt den {{ bidDate(bid) }}</span>&bull;
-							<span class="ml5 mr5">Budet är {{ bid.accepted ? 'accepterat' : 'ej accepterat' }}</span>&bull;
-							<router-link :to="`/services/${bid.service_id}`" class="ml5">Visa tjänsten</router-link>
-						</div>
-					</span>
-					<span class="item-actions">
-						<router-link to="/test" class="btn btn-primary">Visa bud</router-link>
-					</span>
-				</li>
-			</ul>
-=======
-					<div class="alert alert-info" v-else>
-						Du har ännu inte lagt några bud.
-					</div>
 				</template>
->>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
+
 
 				<app-loading v-else></app-loading>
 			</div>
@@ -60,6 +47,9 @@
 			}
 		},
 		methods: {
+			description(desc) {
+				return desc.length > 75 ? `${desc.substr(0, 75)}...` : desc;
+			},
 			bidDate(bid) {
 				return moment(bid.created_at).format('LLL');
 			}

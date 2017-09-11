@@ -4,6 +4,16 @@
 			
 			<div class="user-view">
 				<nav class="user-navigation">
+					<div class="small-device-actions clearfix">
+						<button class="btn btn-primary-bordered user-nav-button mb10" @click.prevent="toggleMenu" v-if="breakpoints.isSmallDevices()">
+							Andra inställningar
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="15px" height="15px" viewBox="0 0 444.819 444.819" style="enable-background:new 0 0 444.819 444.819;" xml:space="preserve" class="ml10">
+								<g>
+									<path d="M434.252,114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095,0-18.657,3.521-25.7,10.561   L222.41,231.549L83.653,92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896,0-18.559,3.521-25.979,10.561l-21.128,21.416   C3.615,121.436,0,130.099,0,140.188c0,10.277,3.619,18.842,10.848,25.693l185.864,185.865c6.855,7.23,15.416,10.848,25.697,10.848   c10.088,0,18.75-3.617,25.977-10.848l185.865-185.865c7.043-7.044,10.567-15.608,10.567-25.693   C444.819,130.287,441.295,121.629,434.252,114.203z" fill="#009999"/>
+								</g>
+							</svg>
+						</button>
+					</div>
 					<ul class="user-nav">
 						<li>
 							<router-link to="/user/profile">
@@ -95,65 +105,23 @@
 	</div>
 </template>
 
-<style lang="scss">
-	.user-view {
-		display: flex;
+<script>
+	export default {
+		data() {
+            return {
+                breakpoints: window.breakpoints,
+            }
+        },
+        methods: {
+        	toggleMenu() {
+        		let userNav = document.querySelector('.user-nav');
 
-		.user-navigation {
-			flex: 1;
-			
-			.user-nav {
-				list-style-type: none;
-
-				li {
-					margin-bottom: 15px;
-
-					a {
-						color: #6D717A;
-						font-size: 15px;
-						display: flex;
-						align-items: center;
-
-						svg {
-							margin-right: 15px;
-
-							path, circle, polygon {
-								fill: #97A9B5;
-							}
-						}
-
-						&.active {
-							color: #009999;
-							font-weight: bold;
-
-							svg {
-								path, circle, polygon {
-									fill: #009999 !important;
-								}
-							}
-						}
-
-						&:hover {
-							text-decoration: none;
-							font-weight: bold;
-
-							svg {
-								path, circle, polygon {
-									fill: #6D717A;
-								}
-							}
-						}
-
-						&:focus {
-							text-decoration: none;
-						}
-					}
-				}
-			}
-		}
-
-		.user-content {
-			flex: 3;
-		}
+        		if ( userNav.classList.contains('must-show') ) {
+        			document.querySelector('.user-nav').classList.remove('must-show');
+        		} else {
+        			document.querySelector('.user-nav').classList.add('must-show');
+        		}
+        	}
+        }
 	}
-</style>
+</script>

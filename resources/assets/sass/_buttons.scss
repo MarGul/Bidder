@@ -50,6 +50,13 @@
 	}
 }
 
+.btn-primary-bordered {
+	border: 2px solid $brand-primary;
+	border-radius: 0;
+	padding: 4px 14px;
+	background-color: transparent;
+}
+
 .btn-default {
 	background-color: #eaeaea;
 	border-color: #cfcfcf;

@@ -26,23 +26,9 @@
 					<div class="alert alert-info" v-else>Du har ännu inga prenumerationer. Skapa din första ovan.</div>
 				</template>
 
-<<<<<<< HEAD
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="subscriptions.length > 0">
-				<li v-for="subscription in subscriptions">
-					<div class="item-content">
-						{{ title(subscription) }}
-					</div>
-					<div class="item-actions">
-						<button type="button" class="btn btn-danger" @click.prevent="remove(subscription.id)">Ta bort</button>
-					</div>
-				</li>
-			</ul>
-=======
 				<app-loading v-else></app-loading>		
 			</div>
 		</section>
->>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
 	</div>
 </template>

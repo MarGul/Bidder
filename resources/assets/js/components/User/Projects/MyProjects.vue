@@ -7,50 +7,31 @@
 			</header>
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
-					<ul class="user-items-list" v-if="projects.length > 0">
-						<li v-for="project in projects">
-							<span class="item-content" v-text="project.title || `# ${project.id}`"></span>
-							<span class="item-actions">
-								<button @click.prevent="show(project)" class="btn btn-default">
-									<i class="fa fa-briefcase" aria-hidden="true"></i> Visa projekt
-								</button>
-								<div class="status">
-									<template v-if="project.completed">
-										Avslutad
-									</template>
-									<template v-else>
-										Pågående
-									</template>
+					<ul class="items-list" v-if="projects.length > 0">
+						<li class="gray-item clickable" v-for="project in projects" @click="show(project)">
+							<div class="item-content">
+								<div class="item-header" v-text="project.title || `#${project.id}`"></div>
+								<div class="item-sub-data">
+									<span class="mr5">Projektet skapades den {{ projectCreated(project) }}</span>&bull;
+									<span class="ml5 is-weight-500">{{ project.completed ? 'Avslutat' : 'Pågår' }}</span>
 								</div>
-							</span>
+							</div>
+							<div class="item-go-to">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									 width="12px" height="12px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
+									<g id="chevron-right">
+										<polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" fill="#97A9B5" />
+									</g>
+								</svg>
+							</div>
 						</li>
 					</ul>
 
-<<<<<<< HEAD
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="projects.length > 0">
-				<li v-for="project in projects">
-					<span class="item-content">
-						<h5 v-text="project.title || `# ${project.id}`"></h5>
-						<div class="item-content-details">
-							<span class="mr5">Skapades den {{ projectCreated(project) }}</span>&bull;
-							<span class="ml5 mr5">Projektet {{ project.completed ? 'är avslutad' : 'pågår' }}</span>&bull;
-							<span class="ml5">{{ project.completed ? 'Avslutades' : 'Avslutas' }} den {{ projectFinish(project) }}</span>
-						</div>
-					</span>
-					<span class="item-actions">
-						<div class="status">
-							<button @click.prevent="show(project)" class="btn btn-primary">Visa projekt</button>
-						</div>
-					</span>
-				</li>
-			</ul>
-=======
 					<div class="alert alert-info" v-else>
 						Du har ännu inga skapade projekt.
 					</div>
+					
 				</template>
->>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
 				<app-loading v-else></app-loading>
 			</div>

@@ -6,53 +6,29 @@
 				<h3>Mina tjänster</h3>
 			</header>
 			<div class="white-contentSection-content">
-				<ul class="user-items-list" v-if="fetched">
-					<li v-for="service in services">
+				<ul class="items-list" v-if="fetched">
+					<li class="gray-item clickable" v-for="service in services">
 						<div class="item-content">
-							{{ service.title }}
-							<span class="item-link" v-if="service.active">
-								&nbsp;&mdash;&nbsp;<router-link :to="`/services/${service.id}`">visa tjänst</router-link>
-							</span>
+							<div class="item-header" v-text="service.title"></div>
+							<div class="item-sub-data">
+								<span class="mr5">{{ $store.getters.getCategoryById(service.category_id).name }}</span>&bull;
+								<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
+							</div>
 						</div>
-						<div class="item-actions">
-							<router-link :to="`/user/service/${service.id}/bids`" class="btn-flat btn-default show-bids">
-								<i class="fa fa-gavel" aria-hidden="true" title="Visa bud"></i> Visa bud
-							</router-link>
-							<router-link :to="`/user/service/${service.id}/edit`" class="btn-flat btn-default edit">
-								<i class="fa fa-pencil" aria-hidden="true" title="Redigera"></i> Redigera
-							</router-link>
+						<div class="item-go-to">
+							<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 width="12px" height="12px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
+								<g id="chevron-right">
+									<polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" fill="#97A9B5" />
+								</g>
+							</svg>
 						</div>
 					</li>
 				</ul>
 
-<<<<<<< HEAD
-		<ul class="user-items-list" v-if="fetched">
-			<li v-for="service in services">
-				<div class="item-content">
-					<h5>{{ service.title }}</h5>
-					<span class="item-link" v-if="service.active">
-						&nbsp;&mdash;&nbsp;<router-link :to="`/services/${service.id}`">visa tjänst</router-link>
-					</span>
-					<div class="item-content-details">
-						<span class="mr5">{{ service.active ? 'Budgivning aktiv' : 'Budgivning avslutad' }}</span>&bull;
-						<span class="ml5">
-							Budgivning {{ service.bid_accepted ? 'avslutades' : 'avslutas' }} den {{ bidEnds(service) }}
-						</span>
-					</div>
-				</div>
-				<div class="item-actions">
-					<router-link :to="`/user/service/${service.id}/edit`" class="is-link is-weight-500 mr10">Redigera</router-link>
-					<router-link :to="`/user/service/${service.id}/bids`" class="btn btn-primary">Visa bud</router-link>
-				</div>
-			</li>
-		</ul>
-
-		<app-loading v-else></app-loading>
-=======
 				<app-loading v-else></app-loading>
 			</div>
 		</section>
->>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
 	</div>
 </template>

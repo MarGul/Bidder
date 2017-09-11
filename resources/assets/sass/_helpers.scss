@@ -33,3 +33,12 @@
 .img-responsive {
 	max-width: 100%;
 }
+
+.must-show {
+	display: block !important;
+}
+
+.vertical-centered {
+	display: flex;
+	align-items: center;
+}

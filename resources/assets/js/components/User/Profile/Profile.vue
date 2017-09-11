@@ -7,11 +7,11 @@
 			</header>
 			<div class="white-contentSection-content">
 				<div class="row">
-					<div class="col-xs-12 col-md-7">
+					<div class="col-xs-12 col-md-8">
 						<app-account></app-account>
 					</div>
 
-					<div class="col-xs-12 col-md-5">
+					<div class="col-xs-12 col-md-4">
 						<app-profile-picture></app-profile-picture>
 					</div>
 				</div>

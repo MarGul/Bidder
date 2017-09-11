@@ -21,30 +21,10 @@
 							</span>
 						</li>
 					</ul>
-
-<<<<<<< HEAD
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="invoices.length > 0">
-				<li v-for="invoice in invoices">
-					<span class="item-content">
-						<h5>Faktura #{{ 1000000 + invoice.id }}</h5>
-						<div class="item-content-details">
-							<span class="mr5">{{ paidText(invoice) }}</span>&bull;
-							<span class="ml5 mr5">Beloppet är {{ filters.currency(invoice.total) }}</span>&bull;
-							<span class="ml5">Förfaller den {{ dueDate(invoice) }}</span>
-						</div>
-					</span>
-					<span class="item-actions">
-						<button type="button" class="btn btn-primary" @click.prevent="show(invoice)">Visa detaljer</button>
-					</span>
-				</li>
-			</ul>
-=======
 					<div class="alert alert-info" v-else>
 						Där finns inga betalningar registrerade på dig.
 					</div>
 				</template>
->>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
 				<app-loading v-else></app-loading>
 			</div>
