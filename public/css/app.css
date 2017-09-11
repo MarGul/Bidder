@@ -10105,6 +10105,41 @@ body.mobile-nav-open .overlay {
   margin-top: 3px;
 }
 
+.notification_settings-component .notification_settings_item-component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 7.5px;
+  border-top: 1px solid #e1e0e0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notification_settings-component .notification_settings_item-component:first-child {
+  border-top: none;
+}
+
+.notification_settings-component .notification_settings_item-component .setting-text {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.notification_settings-component .notification_settings_item-component .setting-value {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.notification_settings-component .notification_settings_item-component .setting-value i {
+  color: #009999;
+  cursor: pointer;
+}
+
 .project-title {
   display: -webkit-box;
   display: -ms-flexbox;
