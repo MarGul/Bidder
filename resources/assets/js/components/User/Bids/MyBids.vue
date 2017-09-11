@@ -17,12 +17,7 @@
 								</div>
 							</div>
 							<div class="item-go-to">
-								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 width="12px" height="12px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
-									<g id="chevron-right">
-										<polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" fill="#97A9B5" />
-									</g>
-								</svg>
+								<svg-icon icon="arrowRight" width="12" height="12" fill="#97A9B5"></svg-icon>
 							</div>
 						</li>
 					</ul>
@@ -37,7 +32,12 @@
 </template>
 
 <script>
+	import svgIcon from "../../Includes/Icons";
+
 	export default {
+		components: {
+			svgIcon
+		},
 		computed: {
 			fetched() {
 				return this.$store.getters.userBidsFetched;
