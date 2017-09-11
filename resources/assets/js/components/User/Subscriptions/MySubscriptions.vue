@@ -1,10 +1,32 @@
 <template>
 	<div class="my_subscriptions-component">
 		
-		<h1 class="user-component-title">Prenumerationer</h1>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Prenumerationer</h3>
+			</header>
+			<div class="gray-contentSection-content">
+				<app-add-subscription></app-add-subscription>
+			</div>
+			<div class="white-contentSection-content">
+				<template v-if="fetched">
+					<ul class="user-items-list" v-if="subscriptions.length > 0">
+						<li v-for="subscription in subscriptions">
+							<div class="item-content">
+								{{ title(subscription) }}
+							</div>
+							<div class="item-actions">
+								<button type="button" class="btn btn-default" @click.prevent="remove(subscription.id)">
+									<i class="fa fa-times" aria-hidden="true"></i> Ta bort
+								</button>
+							</div>
+						</li>
+					</ul>
 
-		<app-add-subscription></app-add-subscription>
+					<div class="alert alert-info" v-else>Du har ännu inga prenumerationer. Skapa din första ovan.</div>
+				</template>
 
+<<<<<<< HEAD
 		<template v-if="fetched">
 			<ul class="user-items-list" v-if="subscriptions.length > 0">
 				<li v-for="subscription in subscriptions">
@@ -16,11 +38,12 @@
 					</div>
 				</li>
 			</ul>
+=======
+				<app-loading v-else></app-loading>		
+			</div>
+		</section>
+>>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
-			<div class="alert alert-info" v-else>Du har ännu inga prenumerationer. Skapa din första ovan.</div>
-		</template>
-
-		<app-loading v-else></app-loading>
 	</div>
 </template>
 

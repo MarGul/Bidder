@@ -1,26 +1,31 @@
 <template>
 	<div class="profile-component">
 		
-		<h1 class="user-component-title">Min Profil</h1>
-		
-			<div class="row">
-				<div class="col-xs-12 col-md-7">
-					<app-account></app-account>
-				</div>
+		<section class="white-contentSection mb30">
+			<header class="white-contentSection-header">
+				<h3>Min profil</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<div class="row">
+					<div class="col-xs-12 col-md-7">
+						<app-account></app-account>
+					</div>
 
-				<div class="col-xs-12 col-md-5">
-					<app-profile-picture></app-profile-picture>
+					<div class="col-xs-12 col-md-5">
+						<app-profile-picture></app-profile-picture>
+					</div>
 				</div>
 			</div>
-		</form>
+		</section>
 
-		<h2 class="user-component-title subsection">Uppdatera ditt lösenord</h2>
-
-		<div class="row">
-			<div class="col-xs-12 col-md-7">
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Uppdatera ditt lösenord</h3>
+			</header>
+			<div class="white-contentSection-content">
 				<app-change-password></app-change-password>
 			</div>
-		</div>
+		</section>
 
 	</div>
 </template>

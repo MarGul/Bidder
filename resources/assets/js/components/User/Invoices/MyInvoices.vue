@@ -1,8 +1,28 @@
 <template>
 	<div class="my_invoices-component">
 		
-		<h1 class="user-component-title">Betalningar</h1>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Betalningar</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<template v-if="fetched">
+					<ul class="user-items-list" v-if="invoices.length > 0">
+						<li v-for="invoice in invoices">
+							<span class="item-content">
+								Faktura #{{ 1000000 + invoice.id }}
+							</span>
+							<span class="item-actions">
+								<span class="payment-status" :class="paidClass(invoice)">
+									<i class="fa" :class="paidIcon(invoice)" aria-hidden="true"></i>
+									{{ paidText(invoice) }}
+								</span>
+								<button type="button" class="btn btn-primary" @click.prevent="show(invoice)">Visa detaljer</button>
+							</span>
+						</li>
+					</ul>
 
+<<<<<<< HEAD
 		<template v-if="fetched">
 			<ul class="user-items-list" v-if="invoices.length > 0">
 				<li v-for="invoice in invoices">
@@ -19,13 +39,16 @@
 					</span>
 				</li>
 			</ul>
+=======
+					<div class="alert alert-info" v-else>
+						Där finns inga betalningar registrerade på dig.
+					</div>
+				</template>
+>>>>>>> 8b2cc19206f3fdbcf59a5937844bffd1a5af489f
 
-			<div class="alert alert-info" v-else>
-				Där finns inga betalningar registrerade på dig.
+				<app-loading v-else></app-loading>
 			</div>
-		</template>
-
-		<app-loading v-else></app-loading>
+		</section>
 
 	</div>
 </template>
