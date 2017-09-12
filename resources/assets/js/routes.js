@@ -3,6 +3,9 @@ import VueRouter from 'vue-router';
 /**
  * All of the applications routes
  */
+
+/*
+ Later on in production for code splitting
 let routes = [
 	{ path: "/", name: 'home', component: resolve => require(['./views/Home'], resolve) },
 	{ path: "/categories", name: 'categories', component: resolve => require(['./views/Categories'], resolve) },
@@ -30,8 +33,40 @@ let routes = [
 		meta: { requiresAuth: true }
 	},
 	
-	/* 404 is handled by the vue application */
+	// 404 is handled by the vue application
 	{ path: "*", component: resolve => require(['./views/404.vue'], resolve) }
+];
+*/
+
+let routes = [
+	{ path: "/", name: 'home', component: require('./views/Home') },
+	{ path: "/categories", name: 'categories', component: require('./views/Categories') },
+	{ path: "/locations", name: 'locations', component: require('./views/Locations') },
+	{ path: "/services", name: 'services', component: require('./views/Services') },
+	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails') },
+	{ path: "/information", name: 'information', component: require('./views/Information') },
+	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
+	{ path: "/user", name: 'user', component: require('./views/User'),
+		children: [
+			{ path: '', component: require('./components/User/Profile/Profile'), meta: { requiresAuth: true } },
+			{ path: 'profile', component: require('./components/User/Profile/Profile'), meta: { requiresAuth: true } },
+			{ path: 'notifications', component: require('./components/User/Notifications/Notifications'), meta: { requiresAuth: true } },
+			{ path: 'create-service', component: require('./components/User/Services/CreateService'), meta: { requiresAuth: true } },
+			{ path: 'services', component: require('./components/User/Services/MyServices'), meta: { requiresAuth: true } },
+			{ path: 'services/:id', component: require('./components/User/Services/EditService'), meta: { requiresAuth: true } },
+			{ path: 'bids', component: require('./components/User/Bids/MyBids'), meta: { requiresAuth: true } },
+			{ path: 'projects', component: require('./components/User/Projects/MyProjects'), meta: { requiresAuth: true } },
+			{ path: 'project/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true } },
+			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices'), meta: { requiresAuth: true } },
+			{ path: 'invoices/:id', component: require('./components/User/Invoices/InvoiceDetails'), meta: { requiresAuth: true } },
+			{ path: 'service/:id/bids', component: require('./components/User/Bids/BidHistory'), meta: { requiresAuth: true } },
+			{ path: 'subscriptions', component: require('./components/User/Subscriptions/MySubscriptions'), meta: { requiresAuth: true } },
+		],
+		meta: { requiresAuth: true }
+	},
+	
+	// 404 is handled by the vue application
+	{ path: "*", component: require('./views/404.vue') }
 ];
 
 const router = new VueRouter({
@@ -71,8 +106,6 @@ router.afterEach((to, from) => {
 	router.app.$store.commit('SET_DROPDOWN', {dropdown: false});
 	// Close the mobile user navigation dropdown.
 	router.app.$store.commit('SET_MOBILE_DROPDOWN', {mobileDropdown: false});
-	// Close notifications
-	//router.app.$store.dispatch('closeNotification');
 });
 
 export default router;

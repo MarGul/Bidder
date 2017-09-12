@@ -13,7 +13,7 @@
 					<ul class="user-nav">
 						<li>
 							<router-link to="/user/profile">
-								<svg-icon icon="user" fill="#009999"></svg-icon>
+								<i class="icon"></i>
 								<span class="link-text">Profil</span>
 							</router-link>
 						</li>
