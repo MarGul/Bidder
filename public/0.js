@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 136:
+/***/ 135:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(308),
+  __webpack_require__(309),
   /* template */
-  __webpack_require__(318),
+  __webpack_require__(319),
   /* styles */
   null,
   /* scopeId */
@@ -41,17 +41,22 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Account__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Account__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Account___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Account__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ChangePassword__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ChangePassword__ = __webpack_require__(313);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ChangePassword___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ChangePassword__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProfilePicture__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProfilePicture__ = __webpack_require__(316);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProfilePicture___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProfilePicture__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -94,15 +99,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(310),
-  /* template */
   __webpack_require__(311),
+  /* template */
+  __webpack_require__(312),
   /* styles */
   null,
   /* scopeId */
@@ -135,7 +140,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 310:
+/***/ 311:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -214,7 +219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 311:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -351,15 +356,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 312:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(313),
-  /* template */
   __webpack_require__(314),
+  /* template */
+  __webpack_require__(315),
   /* styles */
   null,
   /* scopeId */
@@ -392,7 +397,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 313:
+/***/ 314:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -468,7 +473,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 314:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -605,15 +610,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 315:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(316),
-  /* template */
   __webpack_require__(317),
+  /* template */
+  __webpack_require__(318),
   /* styles */
   null,
   /* scopeId */
@@ -646,7 +651,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 316:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -708,7 +713,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 317:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -772,28 +777,36 @@ if (false) {
 
 /***/ }),
 
-/***/ 318:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Min Profil")]), _vm._v(" "), _c('div', {
+  }, [_c('section', {
+    staticClass: "white-contentSection mb30"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-7"
+    staticClass: "col-xs-12 col-md-8"
   }, [_c('app-account')], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-5"
-  }, [_c('app-profile-picture')], 1)]), _vm._v(" "), _c('h2', {
-    staticClass: "user-component-title subsection"
-  }, [_vm._v("Uppdatera ditt lösenord")]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-7"
+    staticClass: "col-xs-12 col-md-4"
+  }, [_c('app-profile-picture')], 1)])])]), _vm._v(" "), _c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
   }, [_c('app-change-password')], 1)])])
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Min profil")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Uppdatera ditt lösenord")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

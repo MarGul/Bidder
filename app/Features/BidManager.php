@@ -6,6 +6,7 @@ use App\Bid;
 use App\Service;
 use App\Events\NewBid;
 use App\Events\RemoveService;
+use App\Jobs\NotificationsForNewBid;
 use Auth;
 use Carbon\Carbon;
 
@@ -63,6 +64,9 @@ class BidManager {
 
 		// Broadcast that a new bid has been created
 		event(new NewBid($bid));
+
+		// Dispatch a job for this new bid that will send out the appropriate notifications.
+		dispatch(new NotificationsForNewBid($bid));
 
 		return $bid;
 	}

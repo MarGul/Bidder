@@ -1,219 +1,85 @@
-.user-component {
-
-	.mobile-user-nav {
-		background-color: #fff;
-		border: 1px solid $border-color-gray;
-		border-bottom: none;
-		box-shadow: 1px 1px 1px rgba(0,0,0,0.15);
-		border-top-left-radius: 6px;
-		border-top-right-radius: 6px;
-
-		.mobile-user-buttons {
-			float: right;
-		}
-
-		.logout-btn,
-		.nav-btn {
-			
-			i {
-				margin-left: 5px;
-			}
-
-		}
-
-		.nav-btn {
-
-			i {
-				-webkit-transition: 0.4s ease-in-out;
-				-moz-transition: 0.4s ease-in-out;
-				-o-transition: 0.4s ease-in-out;
-				transition: 0.4s ease-in-out;
-			}
-
-			&.open {
-
-				i {
-					-webkit-transform: rotate(-180deg);
-					-moz-transform: rotate(-180deg);
-					-o-transform: rotate(-180deg);
-					-ms-transform: rotate(-180deg);
-					transform: rotate(-180deg);
-				}
-			}
-		}
+.user-view {
+	
+	@media screen and (min-width: $screen-md-min) {
+		display: flex;
 	}
 
-	.user-ui-container {
+	.user-navigation {
 		
 		@media screen and (min-width: $screen-md-min) {
+			flex: 1;
+		}
+
+		.user-nav-button {
+			width: 100%;
 			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
-
-		.user-ui-nav {
-			@media screen and (min-width: $screen-md-min) {
-				flex: 1;
-			}
-		}
-
-		.user-ui-content {
-			background: #fff;
-			border: 1px solid $border-color-gray;
-			border-top: none;
-			box-shadow: 0px 2px 4px rgba(0,0,0,0.18);
-			padding: 10px 25px 25px 25px;
-			border-bottom-left-radius: 6px;
-			border-bottom-right-radius: 6px;
-			
+		
+		.user-nav {
+			display: none;
+			list-style-type: none;
 
 			@media screen and (min-width: $screen-md-min) {
-				flex: 3;
-				margin-top: 0px;
-				border-left: none;
-				padding: 25px;
-				border-top: 1px solid $border-color-gray;
-				border-radius: 6px;
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
+				display: block;
 			}
 
-			.user-component-title {
-				margin: 10px 0 35px 0;
-				padding-bottom: 15px;
-				font-size: 26px;
-				border-bottom: 1px solid $brand-primary;
+			li {
+				margin-bottom: 15px;
 
-				@media screen and (min-width: $screen-md-min) {
-					font-size: 34px;
-				}
+				a {
+					color: #6D717A;
+					font-size: 15px;
+					display: flex;
+					align-items: center;
 
-				&.subsection {
-					margin: 20px 0 35px 0;
-					font-size: 20px;
-				}
-			}
-
-			.user-items-list {
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-				border: 1px solid #e3e3e3;
-				border-radius: 6px;
-				background-color: #fafafa;
-
-				li {
-					padding: 15px;
-					border-bottom: 1px solid #e3e3e3;
-
-					@media screen and (min-width: $screen-sm-min) {
+					.svg-icon {
 						display: flex;
-						align-items: center;
-					} 
+						align-self: center;
+						
+						svg {
+							margin-right: 15px;
 
-					&:last-child {
-						border-bottom-color: transparent;
-					}
-
-					.item-content {
-
-						h5 {
-							margin: 0;
-							font-weight: 400;
-							font-style: normal;
-						}
-
-						@media screen and (min-width: $screen-sm-min) {
-							flex: 2;
-							padding-right: 10px;
-
-							h5 {
-								font-size: 16px;
+							path, circle, polygon {
+								fill: #97A9B5;
 							}
-						}
-
-						@media screen and (min-width: $screen-lg-min) {
-							flex: 3;
-						}
-
-						.item-content-details {
-							padding-top: 7px;
-							font-size: 12px;
-							color: $navbar-icon-color;
 						}
 					}
 
-					.item-actions {
-						display: flex;
-						margin-top: 10px;
-						justify-content: flex-end;
-						align-items: center;
-						align-self: flex-start;
+					&.active {
+						color: $brand-primary;
+						font-weight: 500;
 
-						@media screen and (min-width: $screen-sm-min) {
-							margin-top: 0;
-							flex: 1;
-						}
-
-						.status {
-							margin-left: 10px;
-							line-height: 36px;
-
-							@media screen and (min-width: $screen-md-min) {
-								margin-left: 5px;
-								line-height: 30px;
+						svg {
+							path, circle, polygon {
+								fill: $brand-primary !important;
 							}
 						}
+					}
+
+					&:hover {
+						text-decoration: none;
+						font-weight: 500;
+
+						svg {
+							path, circle, polygon {
+								fill: #6D717A;
+							}
+						}
+					}
+
+					&:focus {
+						text-decoration: none;
 					}
 				}
 			}
 		}
 	}
 
-	.user-nav {
-		margin: 0;
-		padding: 0;
-		list-style-type: none;
-		border-top: 1px solid $border-color-gray;
-		box-shadow: 1px 1px 1px rgba(0,0,0,0.15);
-
-		li {
-
-			a {
-				display: block;
-				padding: 10px 15px;
-				font-weight: 500;
-				background-color: #f1f1f1;
-				color: $gray-text;
-				border: 1px solid $border-color-gray;
-				border-top: none;
-
-				&:focus {
-					text-decoration: none;
-					outline: none;
-				}
-
-				@media screen and (min-width: $screen-md-min) {
-					font-size: 1.2em;
-					padding: 15px 20px;
-				}
-
-				&.active {
-					cursor: default;
-					background-color: #fff;
-					color: $brand-primary;
-					border-left: 3px solid $border-color-gray;
-
-					@media screen and (min-width: $screen-md-min) {
-						box-shadow: -1px 3px 3px rgba(0,0,0,0.1);
-						position: relative;
-						border-right: none;
-					}
-				}
-
-				&:hover {
-					text-decoration: none;
-					color: $brand-primary;
-				}
-			}
+	.user-content {
+		@media screen and (min-width: $screen-md-min) {
+			flex: 3;
 		}
 	}
 }

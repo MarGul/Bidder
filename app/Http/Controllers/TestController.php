@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
-use App\Events\NewService;
+use App\Bid;
+use App\Features\NotificationSettingsManager;
 
 class TestController extends Controller
 {
     
 	public function index()
 	{
-		$service = Service::find(1);
-		event(new NewService($service));
+		$bid = Bid::find(1);
+
+		app(NotificationSettingsManager::class)->forCompetingBid($bid);
+
 	}
 
 }

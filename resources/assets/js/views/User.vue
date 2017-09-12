@@ -1,67 +1,97 @@
 <template>
-	<div class="user-component">
-
-		<div class="container">
-			<div class="content">
-				<div class="mobile-user-nav clearfix" v-if="breakpoints.isSmallDevices()">
-					<div class="mobile-user-buttons">
-						<button class="btn btn-transparent logout-btn" @click.prevent="logout">
-							Logga Ut <i class="fa fa-power-off" aria-hidden="true"></i>
-						</button>
-
-						<button class="btn btn-primary nav-btn" 
-								:class="{open: $store.getters.mobileAuthDropdown}"
-								@click="toggleDropdown" 
-								v-if="breakpoints.isSmallDevices()">
-							Meny <i class="fa fa-chevron-down" aria-hidden="true"></i>
+	<div class="container">
+		<div class="content">
+			
+			<div class="user-view">
+				<nav class="user-navigation">
+					<div class="small-device-actions clearfix">
+						<button class="btn btn-primary-bordered user-nav-button mb10" @click.prevent="toggleMenu" v-if="breakpoints.isSmallDevices()">
+							Andra inställningar
+							<svg-icon icon="arrowDown" fill="#009999" classes="vertical-centered"></svg-icon>
 						</button>
 					</div>
-				</div>
-
-				<div class="user-ui-container">
-					<div class="user-ui-nav">
-						<ul class="user-nav" v-if="$store.getters.mobileAuthDropdown || !breakpoints.isSmallDevices()">
-							<li><router-link to="/user/profile">Profil</router-link></li>
-							<li><router-link to="/user/notifications">Notifikationer</router-link></li>
-							<li><router-link to="/user/create-service">Skapa tjänst</router-link></li>
-							<li><router-link to="/user/services">Mina tjänster</router-link></li>
-							<li><router-link to="/user/bids">Mina bud</router-link></li>
-							<li><router-link to="/user/projects">Mina projekt</router-link></li>
-							<li><router-link to="/user/subscriptions">Prenumerationer</router-link></li>
-							<li><router-link to="/user/invoices">Betalningar</router-link></li>
-						</ul>
-					</div>
-					<div class="user-ui-content">
-						<router-view></router-view>
-					</div>
-				</div>
+					<ul class="user-nav">
+						<li>
+							<router-link to="/user/profile">
+								<svg-icon icon="user" fill="#009999"></svg-icon>
+								<span class="link-text">Profil</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/notifications">
+								<svg-icon icon="notifications" fill="#009999"></svg-icon>
+								<span class="link-text">Notifikationer</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/create-service">
+								<svg-icon icon="fileCheckmark" fill="#009999"></svg-icon>
+								<span class="link-text">Skapa tjänst</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/services">
+								<svg-icon icon="monitor" fill="#009999"></svg-icon>
+								<span class="link-text">Mina tjänster</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/bids">
+								<svg-icon icon="gavel" fill="#009999"></svg-icon>
+								<span class="link-text">Mina bud</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/projects">
+								<svg-icon icon="twoUsers" fill="#009999"></svg-icon>
+								<span class="link-text">Mina projekt</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/subscriptions">
+								<svg-icon icon="retweet" fill="#009999"></svg-icon>	
+								<span class="link-text">Prenumerationer</span>
+							</router-link>
+						</li>
+						<li>
+							<router-link to="/user/invoices">
+								<svg-icon icon="creditCard" fill="#009999"></svg-icon>
+								Betalningar
+							</router-link>
+						</li>
+					</ul>
+				</nav>
+				<section class="user-content">
+					<router-view></router-view>
+				</section>
 			</div>
+
 		</div>
 	</div>
 </template>
 
 <script>
-	import appNotifications from '../components/Includes/Notifications';
+	import svgIcon from '../components/Includes/Icons';
 
 	export default {
 		components: {
-			appNotifications
+			svgIcon
 		},
 		data() {
-			return {
-				breakpoints: window.breakpoints
-			}
-		},
-		methods: {
-			toggleDropdown() {
-				this.$store.commit('SET_MOBILE_DROPDOWN', {
-					mobileDropdown: !this.$store.getters.mobileAuthDropdown
-				});
-			},
-			logout() {
-				this.$store.dispatch('logout');
-				this.$router.push('/');
-			}
-		}
+            return {
+                breakpoints: window.breakpoints,
+            }
+        },
+        methods: {
+        	toggleMenu() {
+        		let userNav = document.querySelector('.user-nav');
+
+        		if ( userNav.classList.contains('must-show') ) {
+        			document.querySelector('.user-nav').classList.remove('must-show');
+        		} else {
+        			document.querySelector('.user-nav').classList.add('must-show');
+        		}
+        	}
+        }
 	}
 </script>

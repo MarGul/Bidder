@@ -1,36 +1,40 @@
 <template>
 	<div class="my_services-component">
 		
-		<h1 class="user-component-title">Mina Tjänster</h1>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Mina tjänster</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<ul class="items-list" v-if="fetched">
+					<li class="gray-item clickable" v-for="service in services">
+						<div class="item-content">
+							<div class="item-header" v-text="service.title"></div>
+							<div class="item-sub-data">
+								<span class="mr5">{{ $store.getters.getCategoryById(service.category_id).name }}</span>&bull;
+								<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
+							</div>
+						</div>
+						<div class="item-go-to">
+							<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
+						</div>
+					</li>
+				</ul>
 
-		<ul class="user-items-list" v-if="fetched">
-			<li v-for="service in services">
-				<div class="item-content">
-					<h5>{{ service.title }}</h5>
-					<span class="item-link" v-if="service.active">
-						&nbsp;&mdash;&nbsp;<router-link :to="`/services/${service.id}`">visa tjänst</router-link>
-					</span>
-					<div class="item-content-details">
-						<span class="mr5">{{ service.active ? 'Budgivning aktiv' : 'Budgivning avslutad' }}</span>&bull;
-						<span class="ml5">
-							Budgivning {{ service.bid_accepted ? 'avslutades' : 'avslutas' }} den {{ bidEnds(service) }}
-						</span>
-					</div>
-				</div>
-				<div class="item-actions">
-					<router-link :to="`/user/service/${service.id}/edit`" class="is-link is-weight-500 mr10">Redigera</router-link>
-					<router-link :to="`/user/service/${service.id}/bids`" class="btn btn-primary">Visa bud</router-link>
-				</div>
-			</li>
-		</ul>
-
-		<app-loading v-else></app-loading>
+				<app-loading v-else></app-loading>
+			</div>
+		</section>
 
 	</div>
 </template>
 
 <script>
+	import svgIcon from "../../Includes/Icons";
+
 	export default {
+		components: {
+			svgIcon
+		},
 		computed: {
 			fetched() {
 				return this.$store.getters.userServicesFetched;

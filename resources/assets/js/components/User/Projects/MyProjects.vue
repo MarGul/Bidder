@@ -1,39 +1,47 @@
 <template>
 	<div class="my_projects-component">
 		
-		<h1 class="user-component-title">Mina projekt</h1>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Mina projekt</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<template v-if="fetched">
+					<ul class="items-list" v-if="projects.length > 0">
+						<li class="gray-item clickable" v-for="project in projects" @click="show(project)">
+							<div class="item-content">
+								<div class="item-header" v-text="project.title || `#${project.id}`"></div>
+								<div class="item-sub-data">
+									<span class="mr5">Projektet skapades den {{ projectCreated(project) }}</span>&bull;
+									<span class="ml5 is-weight-500">{{ project.completed ? 'Avslutat' : 'Pågår' }}</span>
+								</div>
+							</div>
+							<div class="item-go-to">
+								<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
+							</div>
+						</li>
+					</ul>
 
-		<template v-if="fetched">
-			<ul class="user-items-list" v-if="projects.length > 0">
-				<li v-for="project in projects">
-					<span class="item-content">
-						<h5 v-text="project.title || `# ${project.id}`"></h5>
-						<div class="item-content-details">
-							<span class="mr5">Skapades den {{ projectCreated(project) }}</span>&bull;
-							<span class="ml5 mr5">Projektet {{ project.completed ? 'är avslutad' : 'pågår' }}</span>&bull;
-							<span class="ml5">{{ project.completed ? 'Avslutades' : 'Avslutas' }} den {{ projectFinish(project) }}</span>
-						</div>
-					</span>
-					<span class="item-actions">
-						<div class="status">
-							<button @click.prevent="show(project)" class="btn btn-primary">Visa projekt</button>
-						</div>
-					</span>
-				</li>
-			</ul>
+					<div class="alert alert-info" v-else>
+						Du har ännu inga skapade projekt.
+					</div>
+					
+				</template>
 
-			<div class="alert alert-info" v-else>
-				Du har ännu inga skapade projekt.
+				<app-loading v-else></app-loading>
 			</div>
-		</template>
-
-		<app-loading v-else></app-loading>
+		</section>
 
 	</div>
 </template>
 
 <script>
+	import svgIcon from "../../Includes/Icons";
+
 	export default {
+		components: {
+			svgIcon
+		},
 		computed: {
 			fetched() {
 				return this.$store.getters.userProjectsFetched;

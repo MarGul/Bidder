@@ -104,4 +104,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Invoice');
     }
 
+    /**
+     * A user has one notification settings.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function notification_settings()
+    {
+        return $this->hasOne('App\NotificationSettings');
+    }
+
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="add_subscription-component mb40">
+	<div class="add_subscription-component">
 		<form @keydown="form.errors.clear()">
 			<div class="row">
 				<div class="col-xs-12 col-md-4">

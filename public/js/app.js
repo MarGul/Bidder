@@ -165,51 +165,6 @@ return r},ee=function(e){for(var t,n=e===z,r=j(n?V:D(e)),a=[],o=0;r.length>o;)!i
 /***/ }),
 
 /***/ 134:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(179)
-}
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(182),
-  /* template */
-  __webpack_require__(183),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-05633b28",
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/Notifications.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Notifications.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-05633b28", Component.options)
-  } else {
-    hotAPI.reload("data-v-05633b28", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 135:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1023,21 +978,21 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 137:
+/***/ 136:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(138);
+__webpack_require__(137);
 module.exports = __webpack_require__(225);
 
 
 /***/ }),
 
-/***/ 138:
+/***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App_vue__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App_vue__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__App_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_store__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(224);
@@ -1045,7 +1000,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /**
  * Bootstrap the application
  */
-__webpack_require__(139);
+__webpack_require__(138);
 /**
  * Import the Application. This is the starting point for the App.
  */
@@ -1071,17 +1026,17 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 139:
+/***/ 138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_filters__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_pusher_js__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_filters__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_BootstrapBreakpoints__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_pusher_js__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_pusher_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_pusher_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_laravel_echo__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_laravel_echo__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_laravel_echo__);
 /**
  * Load in vue
@@ -1097,8 +1052,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 /**
  * Global Vue components and Prototypes
  */
-Vue.component('app-hero', __webpack_require__(141));
-Vue.component('app-loading', __webpack_require__(144));
+Vue.component('app-hero', __webpack_require__(140));
+Vue.component('app-loading', __webpack_require__(143));
 
 
 Vue.prototype.filters = __WEBPACK_IMPORTED_MODULE_1__includes_filters__["a" /* default */];
@@ -1141,15 +1096,15 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_4_laravel_echo___default.a({
 
 /***/ }),
 
-/***/ 141:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(142),
+  __webpack_require__(141),
   /* template */
-  __webpack_require__(143),
+  __webpack_require__(142),
   /* styles */
   null,
   /* scopeId */
@@ -1182,7 +1137,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 142:
+/***/ 141:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1217,7 +1172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 143:
+/***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1261,15 +1216,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 144:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(145),
+  __webpack_require__(144),
   /* template */
-  __webpack_require__(146),
+  __webpack_require__(145),
   /* styles */
   null,
   /* scopeId */
@@ -1302,7 +1257,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 145:
+/***/ 144:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1330,7 +1285,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 146:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1546,7 +1501,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 147:
+/***/ 146:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1563,7 +1518,7 @@ var filters = {
 
 /***/ }),
 
-/***/ 168:
+/***/ 167:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1623,7 +1578,7 @@ var BootstrapBreakpoints = function () {
 
 /***/ }),
 
-/***/ 169:
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -5762,7 +5717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
-/***/ 170:
+/***/ 169:
 /***/ (function(module, exports) {
 
 var asyncGenerator = function () {
@@ -6549,13 +6504,13 @@ module.exports = Echo;
 
 /***/ }),
 
-/***/ 171:
+/***/ 170:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(172),
+  __webpack_require__(171),
   /* template */
   __webpack_require__(213),
   /* styles */
@@ -6590,16 +6545,16 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 172:
+/***/ 171:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Layout_MobileHeader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__);
@@ -6684,15 +6639,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 173:
+/***/ 172:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(174),
+  __webpack_require__(173),
   /* template */
-  __webpack_require__(175),
+  __webpack_require__(174),
   /* styles */
   null,
   /* scopeId */
@@ -6725,7 +6680,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 174:
+/***/ 173:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6798,7 +6753,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 175:
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6932,15 +6887,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 176:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(177),
+  __webpack_require__(176),
   /* template */
-  __webpack_require__(178),
+  __webpack_require__(177),
   /* styles */
   null,
   /* scopeId */
@@ -6973,7 +6928,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 177:
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7060,7 +7015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 178:
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7230,6 +7185,51 @@ if (false) {
 
 /***/ }),
 
+/***/ 178:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(179)
+}
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(182),
+  /* template */
+  __webpack_require__(183),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-05633b28",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/Notifications.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Notifications.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-05633b28", Component.options)
+  } else {
+    hotAPI.reload("data-v-05633b28", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7260,7 +7260,7 @@ if(false) {
 /***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(402)(undefined);
+exports = module.exports = __webpack_require__(424)(undefined);
 // imports
 
 
@@ -9154,7 +9154,7 @@ if(false) {
 /***/ 202:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(402)(undefined);
+exports = module.exports = __webpack_require__(424)(undefined);
 // imports
 
 
@@ -9636,7 +9636,7 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_categories__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_regions__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_modal__ = __webpack_require__(217);
@@ -10012,6 +10012,8 @@ var auth = {
 
 var user = {
 	state: {
+		notificationSettings: [],
+		notificationSettingsFetched: false,
 		services: [],
 		servicesFetched: false,
 		bids: [],
@@ -10026,6 +10028,12 @@ var user = {
 		invoiceFocus: null
 	},
 	mutations: {
+		'SET_NOTIFICATIONSETTINGS': function SET_NOTIFICATIONSETTINGS(state, payload) {
+			state.notificationSettings = payload.notificationSettings;
+		},
+		'SET_NOTIFICATIONSETTINGS_FETCHED': function SET_NOTIFICATIONSETTINGS_FETCHED(state, payload) {
+			state.notificationSettingsFetched = payload.fetched;
+		},
 		'SET_SERVICES': function SET_SERVICES(state, payload) {
 			state.services = payload.services;
 		},
@@ -10067,6 +10075,8 @@ var user = {
 		clearUserState: function clearUserState(_ref) {
 			var commit = _ref.commit;
 
+			commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: [] });
+			commit('SET_NOTIFICATIONSETTINGS_FETCHED', { fetched: false });
 			commit('SET_SERVICES', { services: [] });
 			commit('SET_SERVICES_FETCHED', { fetched: false });
 			commit('SET_BIDS', { bids: [] });
@@ -10080,25 +10090,37 @@ var user = {
 			commit('SET_INVOICES_FETCHED', { fetched: false });
 			commit('SET_INVOICE_FOCUS', { invoice: null });
 		},
-		fetchUserServices: function fetchUserServices(_ref2) {
-			var commit = _ref2.commit;
+		fetchUserNotificationSettings: function fetchUserNotificationSettings(_ref2) {
+			var commit = _ref2.commit,
+			    rootState = _ref2.rootState;
+
+			return new Promise(function (resolve, reject) {
+				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + rootState.auth.user.id + '/notification-settings').get().then(function (response) {
+					commit('SET_NOTIFICATIONSETTINGS_FETCHED', { fetched: true });
+					commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: response.notificationSettings });
+					resolve(true);
+				});
+			});
+		},
+		fetchUserServices: function fetchUserServices(_ref3) {
+			var commit = _ref3.commit;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/services').get().then(function (response) {
 				commit('SET_SERVICES', { services: response.services });
 				commit('SET_SERVICES_FETCHED', { fetched: true });
 			});
 		},
-		fetchUserBids: function fetchUserBids(_ref3) {
-			var commit = _ref3.commit;
+		fetchUserBids: function fetchUserBids(_ref4) {
+			var commit = _ref4.commit;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
 				commit('SET_BIDS', { bids: response.bids });
 				commit('SET_BIDS_FETCHED', { fetched: true });
 			});
 		},
-		fetchUserProjects: function fetchUserProjects(_ref4) {
-			var commit = _ref4.commit,
-			    rootState = _ref4.rootState;
+		fetchUserProjects: function fetchUserProjects(_ref5) {
+			var commit = _ref5.commit,
+			    rootState = _ref5.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/{id}/projects').setId(rootState.auth.user.id).get().then(function (response) {
@@ -10113,17 +10135,17 @@ var user = {
 				}
 			});
 		},
-		fetchUserSubscriptions: function fetchUserSubscriptions(_ref5) {
-			var commit = _ref5.commit;
+		fetchUserSubscriptions: function fetchUserSubscriptions(_ref6) {
+			var commit = _ref6.commit;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('subscriptions').get().then(function (response) {
 				commit('SET_SUBSCRIPTIONS', { subscriptions: response.subscriptions });
 				commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: true });
 			});
 		},
-		fetchUserInvoices: function fetchUserInvoices(_ref6) {
-			var commit = _ref6.commit,
-			    rootState = _ref6.rootState;
+		fetchUserInvoices: function fetchUserInvoices(_ref7) {
+			var commit = _ref7.commit,
+			    rootState = _ref7.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
@@ -10141,6 +10163,12 @@ var user = {
 		}
 	},
 	getters: {
+		userNotificationSettings: function userNotificationSettings(state) {
+			return state.notificationSettings;
+		},
+		userNotificationSettingsFetched: function userNotificationSettingsFetched(state) {
+			return state.notificationSettingsFetched;
+		},
 		userServices: function userServices(state) {
 			return state.services;
 		},
@@ -10614,53 +10642,53 @@ var notifications = {
  * All of the applications routes
  */
 var routes = [{ path: "/", name: 'home', component: function component(resolve) {
-		return __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(227)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(227)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/categories", name: 'categories', component: function component(resolve) {
-		return __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(228)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(228)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/locations", name: 'locations', component: function component(resolve) {
-		return __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(229)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(229)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/services", name: 'services', component: function component(resolve) {
 		return __webpack_require__.e/* require */(3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(230)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/services/:id", name: 'serviceDetails', component: function component(resolve) {
 		return __webpack_require__.e/* require */(2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(231)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/information", name: 'information', component: function component(resolve) {
-		return __webpack_require__.e/* require */(12).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(232)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(13).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(232)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/profile/:username", name: 'profile', component: function component(resolve) {
-		return __webpack_require__.e/* require */(4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(233)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(233)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }, { path: "/user", name: 'user', component: function component(resolve) {
-		return __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(234)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(12).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(234)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	},
 	children: [{ path: '', component: function component(resolve) {
-			return __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(136)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(135)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'profile', component: function component(resolve) {
-			return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(136)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(135)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'notifications', component: function component(resolve) {
-			return __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(235)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(235)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'create-service', component: function component(resolve) {
-			return __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(236)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(236)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'services', component: function component(resolve) {
-			return __webpack_require__.e/* require */(14).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(237)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(237)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'bids', component: function component(resolve) {
-			return __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(238)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(238)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'projects', component: function component(resolve) {
-			return __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(239)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(239)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'project/:id', component: function component(resolve) {
 			return __webpack_require__.e/* require */(1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(240)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'invoices', component: function component(resolve) {
-			return __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(241)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(241)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'invoices/:id', component: function component(resolve) {
-			return __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(242)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(242)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: function component(resolve) {
-			return __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(243)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(243)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }, { path: 'subscriptions', component: function component(resolve) {
-			return __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(244)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+			return __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(244)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 		}, meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
 /* 404 is handled by the vue application */
 { path: "*", component: function component(resolve) {
-		return __webpack_require__.e/* require */(13).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(245)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+		return __webpack_require__.e/* require */(14).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(245)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
 	} }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
@@ -10909,7 +10937,7 @@ var Form = function () {
 
 /***/ }),
 
-/***/ 402:
+/***/ 424:
 /***/ (function(module, exports) {
 
 /*
@@ -13727,4 +13755,4 @@ if (inBrowser && window.Vue) {
 
 /***/ })
 
-},[137]);
+},[136]);

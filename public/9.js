@@ -1,14 +1,14 @@
 webpackJsonp([9],{
 
-/***/ 228:
+/***/ 229:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(262),
+  __webpack_require__(264),
   /* template */
-  __webpack_require__(263),
+  __webpack_require__(265),
   /* styles */
   null,
   /* scopeId */
@@ -16,9 +16,9 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/Categories.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/Locations.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Categories.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Locations.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -27,9 +27,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1b7c81c4", Component.options)
+    hotAPI.createRecord("data-v-436a7d68", Component.options)
   } else {
-    hotAPI.reload("data-v-1b7c81c4", Component.options)
+    hotAPI.reload("data-v-436a7d68", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -219,7 +219,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 262:
+/***/ 264:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -257,23 +257,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		appItemsBlock: __WEBPACK_IMPORTED_MODULE_0__components_Includes_ItemsBlock___default.a
 	},
 	computed: {
-		categories: function categories() {
-			return this.$store.getters.getCategories;
+		regions: function regions() {
+			return this.$store.getters.getRegions;
 		}
 	}
 });
 
 /***/ }),
 
-/***/ 263:
+/***/ 265:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "categories-view"
+    staticClass: "regions-view"
   }, [_c('app-hero', [_c('h1', {
     slot: "title"
-  }, [_vm._v("Kategorier")]), _vm._v(" "), _c('p', {
+  }, [_vm._v("Platser")]), _vm._v(" "), _c('p', {
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
@@ -287,9 +287,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "content"
   }, [_c('app-items-block', {
     attrs: {
-      "items": _vm.categories,
-      "subItemsKey": "sub_categories",
-      "link": "category/{slug}"
+      "items": _vm.regions,
+      "subItemsKey": "cities",
+      "link": "city/{slug}",
+      "allLink": "region/{slug}"
     }
   })], 1)])], 1)
 },staticRenderFns: []}
@@ -297,7 +298,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1b7c81c4", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-436a7d68", module.exports)
   }
 }
 
