@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Service;
 use App\Features\ServiceManager;
 
 class UserServicesController extends Controller
@@ -27,8 +28,22 @@ class UserServicesController extends Controller
 	 * @param  Request 	$request 
 	 * @return Illuminate\Http\Response
 	 */
-	public function index(Request $request) {
+	public function index(Request $request) 
+	{
 		return $this->manager->byUser($request->user());
+	}
+
+	/**
+	 * Display a single resource
+	 * 
+	 * @param  Request $request
+	 * @return Illuminate\Http\Response
+	 */
+	public function show(Request $request, Service $service) 
+	{
+		$this->authorize('my-resource', $service);
+
+		return response()->json(['Listing a single service.', 'service' => $service]);
 	}
 
 }

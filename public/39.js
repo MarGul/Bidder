@@ -1,14 +1,14 @@
-webpackJsonp([17],{
+webpackJsonp([39],{
 
-/***/ 246:
+/***/ 232:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(399),
+  __webpack_require__(299),
   /* template */
-  __webpack_require__(400),
+  __webpack_require__(300),
   /* styles */
   null,
   /* scopeId */
@@ -16,9 +16,9 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/404.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/Information.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] 404.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Information.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -27,9 +27,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d489d274", Component.options)
+    hotAPI.createRecord("data-v-16b10a9a", Component.options)
   } else {
-    hotAPI.reload("data-v-d489d274", Component.options)
+    hotAPI.reload("data-v-16b10a9a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41,11 +41,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 399:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -59,25 +61,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 400:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _vm._m(0)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "404-view"
+    staticClass: "information-view"
   }, [_c('div', {
     staticClass: "container"
-  }, [_c('h2', {
-    staticClass: "text-center"
-  }, [_vm._v("The page does not exists")])])])
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('h2', [_vm._v("Information Page")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-d489d274", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-16b10a9a", module.exports)
   }
 }
 

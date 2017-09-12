@@ -18,6 +18,7 @@ let routes = [
 			{ path: 'notifications', component: resolve => require(['./components/User/Notifications/Notifications'], resolve), meta: { requiresAuth: true } },
 			{ path: 'create-service', component: resolve => require(['./components/User/Services/CreateService'], resolve), meta: { requiresAuth: true } },
 			{ path: 'services', component: resolve => require(['./components/User/Services/MyServices'], resolve), meta: { requiresAuth: true } },
+			{ path: 'services/:id', component: resolve => require(['./components/User/Services/EditService'], resolve), meta: { requiresAuth: true } },
 			{ path: 'bids', component: resolve => require(['./components/User/Bids/MyBids'], resolve), meta: { requiresAuth: true } },
 			{ path: 'projects', component: resolve => require(['./components/User/Projects/MyProjects'], resolve), meta: { requiresAuth: true } },
 			{ path: 'project/:id', component: resolve => require(['./components/User/Projects/Project'], resolve), meta: { requiresAuth: true } },

@@ -1,14 +1,14 @@
 webpackJsonp([12],{
 
-/***/ 234:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(413),
+  __webpack_require__(336),
   /* template */
-  __webpack_require__(308),
+  __webpack_require__(337),
   /* styles */
   null,
   /* scopeId */
@@ -16,9 +16,9 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/views/User.vue"
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Services/MyServices.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] User.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] MyServices.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -27,9 +27,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-95a9e666", Component.options)
+    hotAPI.createRecord("data-v-57e11a9f", Component.options)
   } else {
-    hotAPI.reload("data-v-95a9e666", Component.options)
+    hotAPI.reload("data-v-57e11a9f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41,252 +41,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 308:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('div', {
-    staticClass: "user-view"
-  }, [_c('nav', {
-    staticClass: "user-navigation"
-  }, [_c('div', {
-    staticClass: "small-device-actions clearfix"
-  }, [(_vm.breakpoints.isSmallDevices()) ? _c('button', {
-    staticClass: "btn btn-primary-bordered user-nav-button mb10",
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.toggleMenu($event)
-      }
-    }
-  }, [_vm._v("\n\t\t\t\t\t\tAndra inställningar\n\t\t\t\t\t\t"), _c('svg-icon', {
-    attrs: {
-      "icon": "arrowDown",
-      "fill": "#009999",
-      "classes": "vertical-centered"
-    }
-  })], 1) : _vm._e()]), _vm._v(" "), _c('ul', {
-    staticClass: "user-nav"
-  }, [_c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/profile"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "user",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Profil")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/notifications"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "notifications",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Notifikationer")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/create-service"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "fileCheckmark",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Skapa tjänst")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/services"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "monitor",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Mina tjänster")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/bids"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "gavel",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Mina bud")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/projects"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "twoUsers",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Mina projekt")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/subscriptions"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "retweet",
-      "fill": "#009999"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "link-text"
-  }, [_vm._v("Prenumerationer")])], 1)], 1), _vm._v(" "), _c('li', [_c('router-link', {
-    attrs: {
-      "to": "/user/invoices"
-    }
-  }, [_c('svg-icon', {
-    attrs: {
-      "icon": "creditCard",
-      "fill": "#009999"
-    }
-  }), _vm._v("\n\t\t\t\t\t\t\tBetalningar\n\t\t\t\t\t\t")], 1)], 1)])]), _vm._v(" "), _c('section', {
-    staticClass: "user-content"
-  }, [_c('router-view')], 1)])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-95a9e666", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 413:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Icons__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Includes_Icons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Includes_Icons__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    svgIcon: __WEBPACK_IMPORTED_MODULE_0__components_Includes_Icons___default.a
-  },
-  data: function data() {
-    return {
-      breakpoints: window.breakpoints
-    };
-  },
-
-  methods: {
-    toggleMenu: function toggleMenu() {
-      var userNav = document.querySelector('.user-nav');
-
-      if (userNav.classList.contains('must-show')) {
-        document.querySelector('.user-nav').classList.remove('must-show');
-      } else {
-        document.querySelector('.user-nav').classList.add('must-show');
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ 421:
+/***/ 247:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(422),
+  __webpack_require__(248),
   /* template */
-  __webpack_require__(423),
+  __webpack_require__(249),
   /* styles */
   null,
   /* scopeId */
@@ -319,7 +82,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 422:
+/***/ 248:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -463,7 +226,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 423:
+/***/ 249:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -743,6 +506,131 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-55b938c4", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 336:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Icons__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		svgIcon: __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default.a
+	},
+	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userServicesFetched;
+		},
+		services: function services() {
+			return this.$store.getters.userServices;
+		}
+	},
+	methods: {
+		goTo: function goTo(service) {
+			this.$router.push("services/" + service.id);
+		}
+	},
+	created: function created() {
+		if (!this.fetched) {
+			this.$store.dispatch('fetchUserServices');
+		}
+	}
+});
+
+/***/ }),
+
+/***/ 337:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_services-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [(_vm.fetched) ? _c('ul', {
+    staticClass: "items-list"
+  }, _vm._l((_vm.services), function(service) {
+    return _c('li', {
+      staticClass: "gray-item clickable",
+      on: {
+        "click": function($event) {
+          _vm.goTo(service)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "item-content"
+    }, [_c('div', {
+      staticClass: "item-header",
+      domProps: {
+        "textContent": _vm._s(service.title)
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "item-sub-data"
+    }, [_c('span', {
+      staticClass: "mr5"
+    }, [_vm._v(_vm._s(_vm.$store.getters.getCategoryById(service.category_id).name))]), _vm._v("•\n\t\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5"
+    }, [_vm._v(_vm._s(service.active ? 'Budgivning pågår' : 'Avslutad'))])])]), _vm._v(" "), _c('div', {
+      staticClass: "item-go-to"
+    }, [_c('svg-icon', {
+      attrs: {
+        "icon": "arrowRight",
+        "width": 12,
+        "height": 12,
+        "fill": "#97A9B5"
+      }
+    })], 1)])
+  })) : _c('app-loading')], 1)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Mina tjänster")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-57e11a9f", module.exports)
   }
 }
 
