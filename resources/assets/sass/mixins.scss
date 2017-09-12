@@ -1,0 +1,11 @@
+@mixin icon($url) {
+    background-image: url($url);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@mixin mask-icon($url) {
+    mask-image: url($url);
+    mask-position: center;
+    mask-repeat: no-repeat;
+}

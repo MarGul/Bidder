@@ -8236,6 +8236,7 @@ form.loading:after {
 
 .form-group label {
   margin-bottom: 2px;
+  font-weight: 500;
 }
 
 .form-group small {

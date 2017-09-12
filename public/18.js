@@ -452,7 +452,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e()])])])])])
+  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    class: {
+      'processing': _vm.processing
+    },
+    attrs: {
+      "disabled": _vm.processing || this.form.errors.any()
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.update($event)
+      }
+    }
+  }, [_vm._v("Uppdatera tjänsten")])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -473,6 +489,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -591,7 +616,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				end: '',
 				description: ''
 			}),
-			fetched: false
+			fetched: false,
+			processing: false
 		};
 	},
 
@@ -606,18 +632,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.getRegionById(this.form.region_id).cities;
 		}
 	},
+	methods: {
+		update: function update() {
+			var _this = this;
+
+			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services/' + this.$route.params.id).patch(this.form.data()).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				_this.form.errors.record(error);
+				_this.processing = false;
+			});
+		}
+	},
 	created: function created() {
-		var _this = this;
+		var _this2 = this;
 
 		new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services/' + this.$route.params.id).get().then(function (response) {
-			_this.form.title = response.service.title;
-			_this.form.category_id = response.service.category_id;
-			_this.form.region_id = response.service.region_id;
-			_this.form.city_id = response.service.city_id;
-			_this.form.start = response.service.start;
-			_this.form.end = response.service.end;
-			_this.form.description = response.service.description;
-			_this.fetched = true;
+			_this2.form.title = response.service.title;
+			_this2.form.category_id = response.service.category_id;
+			_this2.form.region_id = response.service.region_id;
+			_this2.form.city_id = response.service.city_id;
+			_this2.form.start = response.service.start;
+			_this2.form.end = response.service.end;
+			_this2.form.description = response.service.description;
+			_this2.fetched = true;
 		}).catch(function (error) {
 			console.log(error);
 		});

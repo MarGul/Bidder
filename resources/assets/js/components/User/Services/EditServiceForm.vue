@@ -90,6 +90,15 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<button 
+					class="btn btn-primary full-width"
+					:class="{'processing': processing}" 
+					@click.prevent="update"
+					:disabled="processing || this.form.errors.any()"
+				>Uppdatera tjänsten</button> 
+			</div>
 		</form>
 
 	</div>
@@ -116,7 +125,8 @@
 					end: '',
 					description: ''
 				}),
-				fetched: false
+				fetched: false,
+				processing: false
 			}
 		},
 		computed: {
@@ -128,6 +138,19 @@
 			},
 			cities() {
 				return this.$store.getters.getRegionById(this.form.region_id).cities;
+			}
+		},
+		methods: {
+			update() {
+				this.processing = true;
+				new Model(`user/services/${this.$route.params.id}`).patch(this.form.data())
+					.then(response => {
+						console.log(response);
+					})
+					.catch(error => {
+						this.form.errors.record(error);
+						this.processing = false;
+					});
 			}
 		},
 		created() {

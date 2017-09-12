@@ -15,7 +15,16 @@ const { mix } = require('laravel-mix');
 mix.webpackConfig({
 	output: {
 		publicPath: '/'
-	}
+	},
+	module: {
+        rules: [
+            {
+                test: /\.svg$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'svg-url-loader'
+            }
+        ]
+    }
 })
 
 mix.js('resources/assets/js/app.js', 'public/js')
