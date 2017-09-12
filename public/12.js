@@ -132,7 +132,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('svg-icon', {
     attrs: {
-      "icon": "twoUsers"
+      "icon": "twoUsers",
+      "fill": "#009999"
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
@@ -142,7 +143,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('svg-icon', {
     attrs: {
-      "icon": "retweet"
+      "icon": "retweet",
+      "fill": "#009999"
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
@@ -152,7 +154,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('svg-icon', {
     attrs: {
-      "icon": "creditCard"
+      "icon": "creditCard",
+      "fill": "#009999"
     }
   }), _vm._v("\n\t\t\t\t\t\t\tBetalningar\n\t\t\t\t\t\t")], 1)], 1)])]), _vm._v(" "), _c('section', {
     staticClass: "user-content"
@@ -453,7 +456,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		classes: {
 			type: String,
-			default: []
+			default: ''
 		}
 	}
 });

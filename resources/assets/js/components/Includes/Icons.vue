@@ -130,7 +130,7 @@
 			},
 			classes: {
 				type: String,
-				default: []
+				default: ''
 			}
 		}
 	}

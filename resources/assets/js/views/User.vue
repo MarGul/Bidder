@@ -43,19 +43,19 @@
 						</li>
 						<li>
 							<router-link to="/user/projects">
-								<svg-icon icon="twoUsers"></svg-icon>
+								<svg-icon icon="twoUsers" fill="#009999"></svg-icon>
 								<span class="link-text">Mina projekt</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/subscriptions">
-								<svg-icon icon="retweet"></svg-icon>	
+								<svg-icon icon="retweet" fill="#009999"></svg-icon>	
 								<span class="link-text">Prenumerationer</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/invoices">
-								<svg-icon icon="creditCard"></svg-icon>
+								<svg-icon icon="creditCard" fill="#009999"></svg-icon>
 								Betalningar
 							</router-link>
 						</li>

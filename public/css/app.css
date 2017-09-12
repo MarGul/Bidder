@@ -9860,11 +9860,19 @@ body.mobile-nav-open .overlay {
           align-items: center;
 }
 
-.user-view .user-navigation .user-nav li a svg {
+.user-view .user-navigation .user-nav li a .svg-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.user-view .user-navigation .user-nav li a .svg-icon svg {
   margin-right: 15px;
 }
 
-.user-view .user-navigation .user-nav li a svg path, .user-view .user-navigation .user-nav li a svg circle, .user-view .user-navigation .user-nav li a svg polygon {
+.user-view .user-navigation .user-nav li a .svg-icon svg path, .user-view .user-navigation .user-nav li a .svg-icon svg circle, .user-view .user-navigation .user-nav li a .svg-icon svg polygon {
   fill: #97A9B5;
 }
 

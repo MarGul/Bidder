@@ -34,11 +34,16 @@
 					display: flex;
 					align-items: center;
 
-					svg {
-						margin-right: 15px;
+					.svg-icon {
+						display: flex;
+						align-self: center;
+						
+						svg {
+							margin-right: 15px;
 
-						path, circle, polygon {
-							fill: #97A9B5;
+							path, circle, polygon {
+								fill: #97A9B5;
+							}
 						}
 					}
 

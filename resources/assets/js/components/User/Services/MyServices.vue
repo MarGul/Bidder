@@ -16,7 +16,7 @@
 							</div>
 						</div>
 						<div class="item-go-to">
-							<svg-icon icon="arrowRight" width="12" height="12" fill="#97A9B5"></svg-icon>
+							<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
 						</div>
 					</li>
 				</ul>

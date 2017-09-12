@@ -146,8 +146,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('svg-icon', {
       attrs: {
         "icon": "arrowRight",
-        "width": "12",
-        "height": "12",
+        "width": 12,
+        "height": 12,
         "fill": "#97A9B5"
       }
     })], 1)])
@@ -345,7 +345,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		classes: {
 			type: String,
-			default: []
+			default: ''
 		}
 	}
 });
