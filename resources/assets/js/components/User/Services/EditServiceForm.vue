@@ -137,6 +137,8 @@
 					this.form.category_id = response.service.category_id;
 					this.form.region_id = response.service.region_id;
 					this.form.city_id = response.service.city_id;
+					this.form.start = response.service.start;
+					this.form.end = response.service.end;
 					this.form.description = response.service.description;
 					this.fetched = true;
 				})

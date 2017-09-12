@@ -614,6 +614,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			_this.form.category_id = response.service.category_id;
 			_this.form.region_id = response.service.region_id;
 			_this.form.city_id = response.service.city_id;
+			_this.form.start = response.service.start;
+			_this.form.end = response.service.end;
 			_this.form.description = response.service.description;
 			_this.fetched = true;
 		}).catch(function (error) {
