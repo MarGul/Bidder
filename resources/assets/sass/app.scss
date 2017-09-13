@@ -7,7 +7,7 @@
 @import "mixins";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "vendors/bootstrap.min.css";
 
 // Bootstrap overrides
 @import "_bootstrap_overrides.scss";

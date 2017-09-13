@@ -13,11 +13,11 @@ const { mix } = require('laravel-mix');
 
 
 mix.webpackConfig({
-	module: {
+    module: {
         rules: [
             {
                 test: /\.svg$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules|bower_components|fonts)/,
                 loader: 'svg-url-loader'
             }
         ]

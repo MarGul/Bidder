@@ -1,0 +1,6 @@
+.icon_right_arrow {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	@include icon('../svg/right_arrow.svg');
+}

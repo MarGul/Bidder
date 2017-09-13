@@ -14,11 +14,15 @@ $brand-warning: #cbb956;
 $brand-danger: #cc0000;
 
 // Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: 'Ubuntu', sans-serif;;
+$font-family-sans-serif: 'Ubuntu', sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;
+
+// Responsive
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
 
 // Navbar
 $navbar-color: #fdfdfe;

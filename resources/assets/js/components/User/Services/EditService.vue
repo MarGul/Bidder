@@ -13,7 +13,11 @@
 				</section>
 			</div>
 			<div class="col-xs-12 col-md-4 col-lg-3">
-				Sidebar
+				<div class="row">
+					<div class="col-xs-12">
+						<app-service-bids></app-service-bids>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -22,10 +26,12 @@
 
 <script>
 	import appEditServiceForm from "./EditServiceForm";
+	import appServiceBids from "./ServiceBids";
 
 	export default {
 		components: {
-			appEditServiceForm
+			appEditServiceForm,
+			appServiceBids
 		}
 	}
 </script>
