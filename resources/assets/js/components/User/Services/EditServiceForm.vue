@@ -117,7 +117,6 @@
 			return {
 				form: new Form({
 					title: '',
-					rootCategory: '',
 					category_id: '',
 					region_id: '',
 					city_id: '',
@@ -143,9 +142,12 @@
 		methods: {
 			update() {
 				this.processing = true;
-				new Model(`user/services/${this.$route.params.id}`).patch(this.form.data())
+				new Model(`user/services/${this.$route.params.id}`).patch(this.form.asDate(['start', 'end']).data())
 					.then(response => {
-						console.log(response);
+						// Break the services cache so it reloads with the updated info.
+						this.$store.commit('SET_SERVICES_FETCHED', false);
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
+						this.processing = false;
 					})
 					.catch(error => {
 						this.form.errors.record(error);
