@@ -3,7 +3,7 @@
 		<section class="transparent-contentSection">
 			<header class="transparent-contentSection-header">
 				<h3>Budhistorik</h3>
-				<a class="link">Visa alla</a>
+				<a class="is-link" @click.prevent="showAll">Visa alla</a>
 			</header>
 			<div class="transparent-contentSection-content">
 				<ul class="items-list-icon">
@@ -28,18 +28,25 @@
 	export default {
 		data() {
 			return {
+				fetched: false,
 				bids: []
 			}
 		},
 		methods: {
 			time(date) {
 				return moment(date).format('D MMM YYYY HH:mm');
+			},
+			showAll() {
+				if ( this.fetched ) {
+					this.$emit('showAllBids', {bids: this.bids});
+				}
 			}
 		},
 		created() {
 			new Model(`services/${this.$route.params.id}/bids`).get()
 				.then(response => {
 					this.bids = response.bids;
+					this.fetched = true;
 				})
 				.catch(error => {
 					console.log(error);
@@ -82,6 +89,7 @@
 
 	.bid-created-at {
 		color: #97A9B5;
+		font-size: 13px;
 	}
 
 </style>

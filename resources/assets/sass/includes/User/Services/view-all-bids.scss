@@ -1,0 +1,20 @@
+.bid-details-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+
+	li {
+		flex: 1;
+		text-align: center;
+
+		.detail-item {
+			font-weight: 500;
+			margin-bottom: 5px;
+		}
+
+		.detail-value {
+			color: #97A9B5;
+		}
+	}
+}

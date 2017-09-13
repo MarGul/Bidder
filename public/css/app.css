@@ -237,6 +237,11 @@ body {
   font-weight: 500 !important;
 }
 
+.gray-sub-text {
+  font-size: 13px;
+  color: #97A9B5;
+}
+
 .btn {
   border-radius: 3px;
   padding: 5px 14px;
@@ -377,6 +382,10 @@ a {
 
 .clickable {
   cursor: pointer;
+}
+
+.is-inline-block {
+  display: inline-block !important;
 }
 
 .no-pre-style {
@@ -2524,6 +2533,31 @@ body.mobile-nav-open .overlay {
 .notification_settings-component .notification_settings_item-component .setting-value i {
   color: #009999;
   cursor: pointer;
+}
+
+.bid-details-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bid-details-list li {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.bid-details-list li .detail-item {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.bid-details-list li .detail-value {
+  color: #97A9B5;
 }
 
 .project-title {
