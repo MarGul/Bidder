@@ -1,0 +1,15 @@
+.bid_accept_status-component {
+
+	.accepted-bid-container {
+		display: flex;
+		align-items: center;
+	}
+
+	.confirm-icon {
+		@include icon('../svg/confirm.svg');
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		display: inline-block;
+	}
+}

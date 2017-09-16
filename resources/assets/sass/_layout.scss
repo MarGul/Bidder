@@ -60,6 +60,25 @@ a {
 	.white-contentSection-header {
 		padding: 15px 20px;
 
+		&.has-actions {
+			display: flex;
+
+			.header-content {
+				flex: 2;
+
+				@media screen and (min-width: $screen-sm-min) {
+					flex: 3;
+				}
+			}
+
+			.header-actions {
+				display: flex;
+				flex: 1;
+				align-self: flex-start;
+				justify-content: flex-end;
+			}
+		}
+
 		h3 {
 			font-size: 16px;
 			font-weight: 500;

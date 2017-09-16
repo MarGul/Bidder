@@ -39,6 +39,7 @@
 		top: 10px;
 		z-index: 500;
 		padding: 5px;
+		cursor: pointer;
 	}
 
 	.modal-header {
@@ -67,6 +68,19 @@
 
 	.modal-body {
 		padding: 30px 30px 10px 30px;
+
+		.confirm-icon {
+			@include icon('../svg/confirm.svg');
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+		}
+
+		.confirm-text {
+			margin: 15px 0;
+			font-size: 15px;
+			text-align: center;
+		}
 	}
 
 	.modal-footer {

@@ -29,7 +29,8 @@
 		data() {
 			return {
 				fetched: false,
-				bids: []
+				bids: [],
+				bidAccepted: null
 			}
 		},
 		methods: {
@@ -38,7 +39,7 @@
 			},
 			showAll() {
 				if ( this.fetched ) {
-					this.$emit('showAllBids', {bids: this.bids});
+					this.$emit('showAllBids', {bids: this.bids, bidAccepted: this.bidAccepted});
 				}
 			}
 		},
@@ -46,6 +47,7 @@
 			new Model(`services/${this.$route.params.id}/bids`).get()
 				.then(response => {
 					this.bids = response.bids;
+					this.bidAccepted = response.meta.bid_accepted;
 					this.fetched = true;
 				})
 				.catch(error => {
