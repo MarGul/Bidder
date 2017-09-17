@@ -21,8 +21,8 @@ class CreateServicesTable extends Migration
             $table->integer('city_id')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->date('start');
+            $table->date('end');
             $table->dateTime('bid_start');
             $table->dateTime('bid_stop');
             $table->boolean('bid_accepted')->default(false);

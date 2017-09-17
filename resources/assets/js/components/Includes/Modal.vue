@@ -17,6 +17,8 @@
     import passwordReset from '../Auth/PasswordReset';
     import createBid from '../Bids/CreateBid';
     import showBids from '../Bids/ShowBids';
+    import showUserBid from '../User/Services/ShowBidModal';
+    import confirm from './ConfirmModal';
 
 	export default {
 		components: {
@@ -24,7 +26,9 @@
 			login,
 			passwordReset,
 			createBid,
-			showBids
+			showBids,
+			confirm,
+			showUserBid
 		}
 	}
 </script>

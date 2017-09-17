@@ -13,6 +13,7 @@ import servicesFilter from './modules/servicesFilter';
 import services from './modules/services';
 import service from './modules/service';
 import notifications from './modules/notifications';
+import userServiceDetails from './modules/userServiceDetails';
 
 export default new Vuex.Store({
 	modules: {
@@ -24,6 +25,7 @@ export default new Vuex.Store({
 		servicesFilter,
 		services,
 		service,
-		notifications
+		notifications,
+		userServiceDetails
 	}
 });

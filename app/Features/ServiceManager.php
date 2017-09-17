@@ -103,4 +103,18 @@ class ServiceManager {
 		return true;
 	}
 
+	/**
+	 * Update a service
+	 *
+	 * @param  App\Service 	$service
+	 * @param  array 		$data
+	 * @return boolean
+	 */
+	public function update($service, $data)
+	{
+		if ( !$service->update($data) ) return false;
+
+		return $service;
+	}
+
 }

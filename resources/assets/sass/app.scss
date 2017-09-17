@@ -3,9 +3,13 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700);
 // Variables
 @import "variables";
+// Mixins
+@import "mixins";
+// Icons
+@import "icons";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "vendors/bootstrap.min.css";
 
 // Bootstrap overrides
 @import "_bootstrap_overrides.scss";
@@ -88,6 +92,11 @@
 
 // Notification settings
 @import "includes/User/Notifications/notification-settings.scss";
+
+// User Services
+@import "includes/User/Services/one-bid.scss";
+@import "includes/User/Services/bid-accepted-status.scss";
+@import "includes/User/Services/service-bids.scss";
 
 // Project Title
 @import "includes/User/Projects/project-title.scss";

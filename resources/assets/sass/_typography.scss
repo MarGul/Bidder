@@ -1,3 +1,10 @@
+body {
+	font-family: $font-family-sans-serif;
+	color: $text-color;
+	line-height: $line-height-base;
+	font-size: $font-size-base;
+}
+
 .is-italic {
 	font-style: italic !important;
 }
@@ -13,4 +20,9 @@
 .is-bold-italic {
 	@extend .is-italic;
 	@extend .is-bold;
+}
+
+.gray-sub-text {
+	font-size: 13px;
+	color: #97A9B5;
 }

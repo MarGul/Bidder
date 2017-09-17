@@ -30,6 +30,10 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::post('services/{service}/bids/{bid}/accept')->uses('ServiceBidAcceptController@create');
 	/* Get a users services */
 	Route::get('user/services')->uses('UserServicesController@index');
+	/* Get one service for a user */
+	Route::get('user/services/{service}')->uses('UserServicesController@show');
+	/* Update a service */
+	Route::patch('user/services/{service}')->uses('UserServicesController@update');
 	/* Get a users bids */
 	Route::get('user/bids')->uses('UserBidsController@index');
 	/* Get a users projects */

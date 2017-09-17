@@ -19,7 +19,7 @@ const regions = {
 	getters: {
 		getRegions: state => state.regions,
 		getRegionById: state => id => {
-			return state.regions.filter(r => r.id === id)[0];
+			return id ? state.regions.filter(r => r.id === id)[0] : [];
 		},
 		getRegionsFlatten(state) {
 			let flattenedRegions = [];

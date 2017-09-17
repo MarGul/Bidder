@@ -9,7 +9,7 @@ const services = {
 		services: []
 	},
 	mutations: {
-		'SET_LOADED'(state, loaded) {
+		'SET_SERVICES_FETCHED'(state, loaded) {
 			state.loaded = loaded;
 		},
 		'SET_PAGE'(state, page) {
@@ -45,7 +45,7 @@ const services = {
 						commit('SET_CAN_LOAD_MORE', services.next_page_url ? true : false);
 						commit('SET_IS_LOADING_MORE', false);
 						commit('SET_SERVICES', payload.appending ? state.services.concat(services.data) : services.data);
-						commit('SET_LOADED', true);
+						commit('SET_SERVICES_FETCHED', true);
 
 						resolve(true);
 					})
