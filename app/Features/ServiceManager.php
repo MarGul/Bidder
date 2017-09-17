@@ -114,7 +114,7 @@ class ServiceManager {
 	{
 		if ( !$service->update($data) ) return false;
 
-		return true;
+		return $service;
 	}
 
 }

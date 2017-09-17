@@ -5,6 +5,8 @@
 @import "variables";
 // Mixins
 @import "mixins";
+// Icons
+@import "icons";
 
 // Bootstrap
 @import "vendors/bootstrap.min.css";
@@ -92,8 +94,9 @@
 @import "includes/User/Notifications/notification-settings.scss";
 
 // User Services
-@import "includes/User/Services/view-all-bids.scss";
+@import "includes/User/Services/one-bid.scss";
 @import "includes/User/Services/bid-accepted-status.scss";
+@import "includes/User/Services/service-bids.scss";
 
 // Project Title
 @import "includes/User/Projects/project-title.scss";

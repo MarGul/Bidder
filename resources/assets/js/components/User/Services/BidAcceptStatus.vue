@@ -1,11 +1,11 @@
 <template>
 	<div class="bid_accept_status-component">
-		<template v-if="!hasAcceptedBid">
+		<template v-if="!bidAccepted">
 			<button class="btn btn-primary" @click="openAcceptBidModal">
 				Acceptera budet
 			</button>
 		</template>
-		<div class="accepted-bid-container" v-if="hasAcceptedBid && bid.accepted">
+		<div class="accepted-bid-container" v-if="bidAccepted && bid.accepted">
 			<i class="confirm-icon"></i><span class="bid-accepted">Accepterat bud</span>
 		</div>
 	</div>
@@ -15,7 +15,12 @@
 	import Model from '../../../includes/Model';
 
 	export default {
-		props: ['hasAcceptedBid', 'bid'],
+		props: ['bid'],
+		computed: {
+			bidAccepted() {
+				return this.$store.getters.serviceDetailsBidAccepted;
+			}
+		},
 		methods: {
 			openAcceptBidModal() {
 				this.$store.dispatch('openModal', {
@@ -25,14 +30,14 @@
 						onConfirm: () => {
 							new Model(`services/${this.bid.service_id}/bids/${this.bid.id}/accept`).post()
 								.then(response => {
-									this.$store.dispatch('closeModal');
 									this.$store.dispatch('showNotification', {
 										type: 'success', 
 										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 									});
 									// Set the projects fetched to false so we break the cache.
 									this.$store.commit('SET_PROJECTS_FETCHED', {fetched: false});
-									this.$emit('accepted', {bid: this.bid});
+									this.$store.dispatch('bidAccepted', {id: this.bid.id});
+									this.$store.dispatch('closeModal');
 								})
 								.catch(error => {
 									console.log(error);

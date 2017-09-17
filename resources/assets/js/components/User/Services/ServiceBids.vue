@@ -7,12 +7,15 @@
 			</header>
 			<div class="transparent-contentSection-content">
 				<ul class="items-list-icon">
-					<li class="clickable has-go-to" v-for="bid in bids">
+					<li class="clickable has-go-to" v-for="bid in bids" @click="showBid(bid)">
 						<div class="item-list-icon">
 							<div class="bid-user-avatar" :style="{backgroundImage: `url(${bid.user.avatar})`}"></div>
 						</div>
 						<div class="item-list-icon-content">
-							<div class="bid-user" v-text="bid.user.username"></div>
+							<div class="bid-user">
+								 {{ bid.user.username }}
+								 <span class="bid-accepted" v-if="bid.accepted"></span>
+							</div>
 							<div class="bid-created-at" v-text="time(bid.created_at)"></div>
 						</div>
 					</li>
@@ -24,14 +27,14 @@
 
 <script>
 	import Model from "../../../includes/Model";
+	import { mapGetters } from 'vuex';
 
 	export default {
-		data() {
-			return {
-				fetched: false,
-				bids: [],
-				bidAccepted: null
-			}
+		computed: {
+			...mapGetters({
+				fetched: 'serviceDetailsBidsFetched',
+				bids: 'serviceDetailsBids',
+			})
 		},
 		methods: {
 			time(date) {
@@ -39,16 +42,23 @@
 			},
 			showAll() {
 				if ( this.fetched ) {
-					this.$emit('showAllBids', {bids: this.bids, bidAccepted: this.bidAccepted});
+					this.$emit('changeView', {view: 'appViewAllBids'});
 				}
+			},
+			showBid(bid) {
+				this.$store.dispatch('openModal', {
+					component: 'showUserBid',
+					size: 'size-large',
+					data: { bid }
+				});
 			}
 		},
 		created() {
 			new Model(`services/${this.$route.params.id}/bids`).get()
 				.then(response => {
-					this.bids = response.bids;
-					this.bidAccepted = response.meta.bid_accepted;
-					this.fetched = true;
+					this.$store.commit('SET_SERVICE_DETAILS_BIDS_FETCHED', true);
+					this.$store.commit('SET_SERVICE_DETAILS_BIDS', response.bids);
+					this.$store.commit('SET_SERVICE_DETAILS_BID_ACCEPTED', response.meta.bid_accepted);
 				})
 				.catch(error => {
 					console.log(error);
@@ -56,42 +66,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-
-	.transparent-contentSection-header {
-		display: flex;
-		align-items: center;
-
-		h3 {
-			flex: 2;
-		}
-
-		a {
-			flex: 1;
-			text-align: right;
-			font-size: 13px;
-		}
-	}
-	
-	.bid-user-avatar {
-		width: 27px;
-		height: 27px;
-		background-position: center center;
-		background-size: cover;
-		background-repeat: no-repeat;
-		border-radius: 50%;
-		opacity: 0.9;
-		box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
-	}
-
-	.bid-user {
-		font-weight: 500;
-	}
-
-	.bid-created-at {
-		color: #97A9B5;
-		font-size: 13px;
-	}
-
-</style>

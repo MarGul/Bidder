@@ -71,11 +71,11 @@ class UserServicesController extends Controller
 
 		$data = $request->only(['title', 'category_id', 'region_id', 'city_id', 'start', 'end', 'description']);
 
-		if ( !$this->manager->update($service, $data) ) {
+		if ( !$updatedService = $this->manager->update($service, $data) ) {
 			return response()->json(['message' => 'Could not update the service.'], 400);
 		}
 
-		return response()->json(['message' => 'Successfully updated your service'], 200);
+		return response()->json(['message' => 'Successfully updated your service', 'service' => $updatedService], 200);
 	}
 
 }

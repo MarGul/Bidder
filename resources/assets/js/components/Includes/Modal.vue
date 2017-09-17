@@ -17,6 +17,7 @@
     import passwordReset from '../Auth/PasswordReset';
     import createBid from '../Bids/CreateBid';
     import showBids from '../Bids/ShowBids';
+    import showUserBid from '../User/Services/ShowBidModal';
     import confirm from './ConfirmModal';
 
 	export default {
@@ -26,7 +27,8 @@
 			passwordReset,
 			createBid,
 			showBids,
-			confirm
+			confirm,
+			showUserBid
 		}
 	}
 </script>

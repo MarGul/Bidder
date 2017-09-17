@@ -115,6 +115,7 @@
 	import Form from '../../../includes/classes/Form';
 	import Model from "../../../includes/Model";
 	import datepicker from 'vuejs-datepicker';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
@@ -131,11 +132,14 @@
 					end: '',
 					description: ''
 				}),
-				fetched: false,
 				processing: false
 			}
 		},
 		computed: {
+			...mapGetters({
+				fetched: 'serviceDetailsFetched',
+				service: 'serviceDetailsService'
+			}),
 			categories() {
 				return this.$store.getters.getCategories;
 			},
@@ -143,7 +147,8 @@
 				return this.$store.getters.getRegions;
 			},
 			cities() {
-				return this.$store.getters.getRegionById(this.form.region_id).cities;
+				let region = this.$store.getters.getRegionById(this.form.region_id);
+				return region ? region.cities : [];
 			}
 		},
 		methods: {
@@ -153,6 +158,7 @@
 					.then(response => {
 						// Break the services cache so it reloads with the updated info.
 						this.$store.commit('SET_SERVICES_FETCHED', false);
+						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
 						this.processing = false;
 					})
@@ -163,20 +169,31 @@
 			}
 		},
 		created() {
-			new Model(`user/services/${this.$route.params.id}`).get()
-				.then(response => {
-					this.form.title = response.service.title;
-					this.form.category_id = response.service.category_id;
-					this.form.region_id = response.service.region_id;
-					this.form.city_id = response.service.city_id;
-					this.form.start = response.service.start;
-					this.form.end = response.service.end;
-					this.form.description = response.service.description;
-					this.fetched = true;
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			if ( !this.fetched ) {
+				new Model(`user/services/${this.$route.params.id}`).get()
+					.then(response => {
+						this.form.title = response.service.title;
+						this.form.category_id = response.service.category_id;
+						this.form.region_id = response.service.region_id;
+						this.form.city_id = response.service.city_id;
+						this.form.start = response.service.start;
+						this.form.end = response.service.end;
+						this.form.description = response.service.description;
+						this.$store.commit('SET_SERVICE_DETAILS_FETCHED', true);
+						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
+					})
+					.catch(error => {
+						console.log(error);
+					});
+			} else {
+				this.form.title = this.service.title;
+				this.form.category_id = this.service.category_id;
+				this.form.region_id = this.service.region_id;
+				this.form.city_id = this.service.city_id;
+				this.form.start = this.service.start;
+				this.form.end = this.service.end;
+				this.form.description = this.service.description;
+			}
 		}
 	}
 </script>

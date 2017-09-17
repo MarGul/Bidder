@@ -3,12 +3,12 @@
 		
 		<div class="row">
 			<div class="col-xs-12 col-md-8 col-lg-9">
-				<component :is="currentView" :bids="bids" :bidAccepted="bidAccepted" @bidWasAccepted="bidWasAccepted"></component>
+				<component :is="currentView" @changeView="changeView"></component>
 			</div>
 			<div class="col-xs-12 col-md-4 col-lg-3">
 				<div class="row">
 					<div class="col-xs-12">
-						<app-service-bids @showAllBids="showAllBids"></app-service-bids>
+						<app-service-bids @changeView="changeView"></app-service-bids>
 					</div>
 				</div>
 			</div>
@@ -30,25 +30,16 @@
 		},
 		data() {
 			return {
-				currentView: 'appEditServiceForm',
-				bids: [],
-				bidAccepted: null
+				currentView: 'appEditServiceForm'
 			}
 		},
 		methods: {
-			showAllBids({bids, bidAccepted}) {
-				this.currentView = 'appViewAllBids';
-				this.bids = bids;
-				this.bidAccepted = bidAccepted;
-			},
-			bidWasAccepted({bid}) {
-				this.bidAccepted = true;
-				for(let i = 0; i < this.bids.length; i++) {
-					if ( this.bids[i].id === bid.id ) {
-						this.bids[i].accepted = true;
-					}
-				}
+			changeView({view}) {
+				this.currentView = view;
 			}
+		},
+		destroyed() {
+			this.$store.dispatch('clearServiceDetailsState');
 		}
 	}
 </script>
