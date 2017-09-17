@@ -17,6 +17,11 @@
 	display: inline-block;
 	cursor: pointer;
 
+	&.wh12 {
+		width: 12px;
+		height: 12px;
+	}
+
 	&.wh15 {
 		width: 15px;
 		height: 15px;
@@ -32,3 +37,7 @@
 	}
 }
 
+.icon_arrow_right {
+	@include mask-icon('../svg/right_arrow.svg');
+	background-color: #97A9B5;
+}

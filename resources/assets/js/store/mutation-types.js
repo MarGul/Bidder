@@ -1,3 +1,7 @@
+// User services
+export const SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
+export const SET_USER_SERVICES = 'SET_USER_SERVICES';
+
 // State in the user area when he is looking at a service's details
 export const SET_SERVICE_DETAILS_FETCHED = 'SET_SERVICE_DETAILS_FETCHED';
 export const SET_SERVICE_DETAILS_SERVICE = 'SET_SERVICE_DETAILS_SERVICE';

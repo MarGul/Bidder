@@ -4,8 +4,6 @@ const user = {
 	state: {
 		notificationSettings: [],
 		notificationSettingsFetched: false,
-		services: [],
-		servicesFetched: false,
 		bids: [],
 		bidsFetched: false,
 		projects: [],
@@ -21,12 +19,6 @@ const user = {
 		},
 		'SET_NOTIFICATIONSETTINGS_FETCHED'(state, payload) {
 			state.notificationSettingsFetched = payload.fetched;
-		},
-		'SET_SERVICES'(state, payload) {
-			state.services = payload.services;
-		},
-		'SET_SERVICES_FETCHED'(state, payload) {
-			state.servicesFetched = payload.fetched;
 		},
 		'SET_BIDS'(state, payload) {
 			state.bids = payload.bids;
@@ -57,8 +49,6 @@ const user = {
 		clearUserState({commit}) {
 			commit('SET_NOTIFICATIONSETTINGS', {notificationSettings: []});
 			commit('SET_NOTIFICATIONSETTINGS_FETCHED', {fetched: false});
-			commit('SET_SERVICES', {services: []});
-			commit('SET_SERVICES_FETCHED', {fetched: false});
 			commit('SET_BIDS', {bids: []});
 			commit('SET_BIDS_FETCHED', {fetched: false});
 			commit('SET_PROJECTS', {projects: []});
@@ -77,13 +67,6 @@ const user = {
 						resolve(true);
 					});
 			});
-		},
-		fetchUserServices({commit}) {
-			new Model('user/services').get()
-				.then(response => {
-					commit('SET_SERVICES', {services: response.services});
-					commit('SET_SERVICES_FETCHED', {fetched: true});
-				});
 		},
 		fetchUserBids({commit}) {
 			new Model('user/bids').get()
@@ -121,8 +104,6 @@ const user = {
 	getters: {
 		userNotificationSettings: state => state.notificationSettings,
 		userNotificationSettingsFetched: state => state.notificationSettingsFetched,
-		userServices: state => state.services,
-		userServicesFetched: state => state.servicesFetched,
 		userBids: state => state.bids,
 		userBidsFetched: state => state.bidsFetched,
 		userProjects: state => state.projects,

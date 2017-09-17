@@ -16,7 +16,7 @@
 							</div>
 						</div>
 						<div class="item-go-to">
-							<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
+							<i class="icon icon_arrow_right wh12"></i>
 						</div>
 					</li>
 				</ul>
@@ -29,19 +29,18 @@
 </template>
 
 <script>
-	import svgIcon from "../../Includes/Icons";
+	import Model from '../../../includes/Model';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
 			svgIcon
 		},
 		computed: {
-			fetched() {
-				return this.$store.getters.userServicesFetched;
-			},
-			services() {
-				return this.$store.getters.userServices;
-			}
+			...mapGetters({
+				fetched: 'userServicesFetched',
+				services: 'userServices'
+			})
 		},
 		methods: {
 			goTo(service) {
@@ -50,7 +49,12 @@
 		},
 		created() {
 			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserServices');
+				new Model('user/services').get()
+					.then(response => {
+						this.$store.commit('SET_USER_SERVICES_FETCHED', true);
+						this.$store.commit('SET_USER_SERVICES', response.services);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}

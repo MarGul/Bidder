@@ -13414,14 +13414,16 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_services__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_service__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_notifications__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userSubscriptions__ = __webpack_require__(431);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userServiceDetails__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userServices__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userSubscriptions__ = __webpack_require__(431);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userServiceDetails__ = __webpack_require__(239);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 // Import modules
+
 
 
 
@@ -13445,8 +13447,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		services: __WEBPACK_IMPORTED_MODULE_8__modules_services__["a" /* default */],
 		service: __WEBPACK_IMPORTED_MODULE_9__modules_service__["a" /* default */],
 		notifications: __WEBPACK_IMPORTED_MODULE_10__modules_notifications__["a" /* default */],
-		userServiceDetails: __WEBPACK_IMPORTED_MODULE_12__modules_userServiceDetails__["a" /* default */],
-		userSubscriptions: __WEBPACK_IMPORTED_MODULE_11__modules_userSubscriptions__["a" /* default */]
+		userServices: __WEBPACK_IMPORTED_MODULE_11__modules_userServices__["a" /* default */],
+		userServiceDetails: __WEBPACK_IMPORTED_MODULE_13__modules_userServiceDetails__["a" /* default */],
+		userSubscriptions: __WEBPACK_IMPORTED_MODULE_12__modules_userSubscriptions__["a" /* default */]
 	}
 }));
 
@@ -13783,8 +13786,6 @@ var user = {
 	state: {
 		notificationSettings: [],
 		notificationSettingsFetched: false,
-		services: [],
-		servicesFetched: false,
 		bids: [],
 		bidsFetched: false,
 		projects: [],
@@ -13800,12 +13801,6 @@ var user = {
 		},
 		'SET_NOTIFICATIONSETTINGS_FETCHED': function SET_NOTIFICATIONSETTINGS_FETCHED(state, payload) {
 			state.notificationSettingsFetched = payload.fetched;
-		},
-		'SET_SERVICES': function SET_SERVICES(state, payload) {
-			state.services = payload.services;
-		},
-		'SET_SERVICES_FETCHED': function SET_SERVICES_FETCHED(state, payload) {
-			state.servicesFetched = payload.fetched;
 		},
 		'SET_BIDS': function SET_BIDS(state, payload) {
 			state.bids = payload.bids;
@@ -13838,8 +13833,6 @@ var user = {
 
 			commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: [] });
 			commit('SET_NOTIFICATIONSETTINGS_FETCHED', { fetched: false });
-			commit('SET_SERVICES', { services: [] });
-			commit('SET_SERVICES_FETCHED', { fetched: false });
 			commit('SET_BIDS', { bids: [] });
 			commit('SET_BIDS_FETCHED', { fetched: false });
 			commit('SET_PROJECTS', { projects: [] });
@@ -13861,25 +13854,17 @@ var user = {
 				});
 			});
 		},
-		fetchUserServices: function fetchUserServices(_ref3) {
+		fetchUserBids: function fetchUserBids(_ref3) {
 			var commit = _ref3.commit;
-
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/services').get().then(function (response) {
-				commit('SET_SERVICES', { services: response.services });
-				commit('SET_SERVICES_FETCHED', { fetched: true });
-			});
-		},
-		fetchUserBids: function fetchUserBids(_ref4) {
-			var commit = _ref4.commit;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
 				commit('SET_BIDS', { bids: response.bids });
 				commit('SET_BIDS_FETCHED', { fetched: true });
 			});
 		},
-		fetchUserProjects: function fetchUserProjects(_ref5) {
-			var commit = _ref5.commit,
-			    rootState = _ref5.rootState;
+		fetchUserProjects: function fetchUserProjects(_ref4) {
+			var commit = _ref4.commit,
+			    rootState = _ref4.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/{id}/projects').setId(rootState.auth.user.id).get().then(function (response) {
@@ -13894,9 +13879,9 @@ var user = {
 				}
 			});
 		},
-		fetchUserInvoices: function fetchUserInvoices(_ref6) {
-			var commit = _ref6.commit,
-			    rootState = _ref6.rootState;
+		fetchUserInvoices: function fetchUserInvoices(_ref5) {
+			var commit = _ref5.commit,
+			    rootState = _ref5.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
@@ -13919,12 +13904,6 @@ var user = {
 		},
 		userNotificationSettingsFetched: function userNotificationSettingsFetched(state) {
 			return state.notificationSettingsFetched;
-		},
-		userServices: function userServices(state) {
-			return state.services;
-		},
-		userServicesFetched: function userServicesFetched(state) {
-			return state.servicesFetched;
 		},
 		userBids: function userBids(state) {
 			return state.bids;
@@ -14457,6 +14436,8 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USER_SERVICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SERVICE_DETAILS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SERVICE_DETAILS_SERVICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
@@ -14464,6 +14445,10 @@ var getters = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SUBSCRIPTIONS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SUBSCRIPTIONS; });
+// User services
+var SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
+var SET_USER_SERVICES = 'SET_USER_SERVICES';
+
 // State in the user area when he is looking at a service's details
 var SET_SERVICE_DETAILS_FETCHED = 'SET_SERVICE_DETAILS_FETCHED';
 var SET_SERVICE_DETAILS_SERVICE = 'SET_SERVICE_DETAILS_SERVICE';
@@ -21026,8 +21011,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Icons__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -21058,29 +21045,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		svgIcon: __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default.a
+		svgIcon: svgIcon
 	},
-	computed: {
-		fetched: function fetched() {
-			return this.$store.getters.userServicesFetched;
-		},
-		services: function services() {
-			return this.$store.getters.userServices;
-		}
-	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+		fetched: 'userServicesFetched',
+		services: 'userServices'
+	})),
 	methods: {
 		goTo: function goTo(service) {
-			this.$router.push("services/" + service.id);
+			this.$router.push('services/' + service.id);
 		}
 	},
 	created: function created() {
+		var _this = this;
+
 		if (!this.fetched) {
-			this.$store.dispatch('fetchUserServices');
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/services').get().then(function (response) {
+				_this.$store.commit('SET_USER_SERVICES_FETCHED', true);
+				_this.$store.commit('SET_USER_SERVICES', response.services);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
@@ -21119,21 +21110,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "mr5"
     }, [_vm._v(_vm._s(_vm.$store.getters.getCategoryById(service.category_id).name))]), _vm._v("•\n\t\t\t\t\t\t\t"), _c('span', {
       staticClass: "ml5"
-    }, [_vm._v(_vm._s(service.active ? 'Budgivning pågår' : 'Avslutad'))])])]), _vm._v(" "), _c('div', {
-      staticClass: "item-go-to"
-    }, [_c('svg-icon', {
-      attrs: {
-        "icon": "arrowRight",
-        "width": 12,
-        "height": 12,
-        "fill": "#97A9B5"
-      }
-    })], 1)])
+    }, [_vm._v(_vm._s(service.active ? 'Budgivning pågår' : 'Avslutad'))])])]), _vm._v(" "), _vm._m(1, true)])
   })) : _c('app-loading')], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "white-contentSection-header"
   }, [_c('h3', [_vm._v("Mina tjänster")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-go-to"
+  }, [_c('i', {
+    staticClass: "icon icon_arrow_right wh12"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -26165,6 +26153,47 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-5f7c3375", module.exports)
   }
 }
+
+/***/ }),
+/* 433 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(240);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var state = {
+	fetched: false,
+	services: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_USER_SERVICES */], function (state, services) {
+	state.services = services;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	userServicesFetched: function userServicesFetched(state) {
+		return state.fetched;
+	},
+	userServices: function userServices(state) {
+		return state.services;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ })
 ],[140]);
