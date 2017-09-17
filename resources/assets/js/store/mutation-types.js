@@ -1,3 +1,7 @@
+// User bids
+export const SET_USER_BIDS_FETCHED = 'SET_USER_BIDS_FETCHED';
+export const SET_USER_BIDS = 'SET_USER_BIDS'; 
+
 // User services
 export const SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
 export const SET_USER_SERVICES = 'SET_USER_SERVICES';

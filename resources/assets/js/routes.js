@@ -59,7 +59,6 @@ let routes = [
 			{ path: 'project/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true } },
 			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices'), meta: { requiresAuth: true } },
 			{ path: 'invoices/:id', component: require('./components/User/Invoices/InvoiceDetails'), meta: { requiresAuth: true } },
-			{ path: 'service/:id/bids', component: require('./components/User/Bids/BidHistory'), meta: { requiresAuth: true } },
 			{ path: 'subscriptions', component: require('./components/User/Subscriptions/MySubscriptions'), meta: { requiresAuth: true } },
 		],
 		meta: { requiresAuth: true }

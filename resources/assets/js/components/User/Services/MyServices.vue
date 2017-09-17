@@ -33,9 +33,6 @@
 	import { mapGetters } from 'vuex';
 
 	export default {
-		components: {
-			svgIcon
-		},
 		computed: {
 			...mapGetters({
 				fetched: 'userServicesFetched',

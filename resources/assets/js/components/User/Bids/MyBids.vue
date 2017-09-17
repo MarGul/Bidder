@@ -7,7 +7,7 @@
 			</header>
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
-					<ul class="items-list">
+					<ul class="items-list" v-if="bids.length > 0">
 						<li class="gray-item clickable" v-for="bid in bids">
 							<div class="item-content">
 								<div class="item-header" v-text="description(bid.description)"></div>
@@ -17,10 +17,12 @@
 								</div>
 							</div>
 							<div class="item-go-to">
-								<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
+								<i class="icon icon_arrow_right wh12"></i>
 							</div>
 						</li>
 					</ul>
+
+					<div class="alert alert-info" v-else>Du inte lagt några bud än. Lägg ditt första bud på en tjänst som passar dig.</div>
 				</template>
 
 
@@ -32,19 +34,15 @@
 </template>
 
 <script>
-	import svgIcon from "../../Includes/Icons";
+	import Model from '../../../includes/Model';
+	import { mapGetters } from 'vuex';
 
 	export default {
-		components: {
-			svgIcon
-		},
 		computed: {
-			fetched() {
-				return this.$store.getters.userBidsFetched;
-			},
-			bids() {
-				return this.$store.getters.userBids;
-			}
+			...mapGetters({
+				fetched: 'userBidsFetched',
+				bids: 'userBids'
+			})
 		},
 		methods: {
 			description(desc) {
@@ -56,7 +54,12 @@
 		},
 		created() {
 			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserBids');
+				new Model('user/bids').get()
+					.then(response => {
+						this.$store.commit('SET_USER_BIDS_FETCHED', true);
+						this.$store.commit('SET_USER_BIDS', response.bids);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}

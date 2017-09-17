@@ -13414,15 +13414,17 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_services__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_service__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_notifications__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userServices__ = __webpack_require__(433);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userSubscriptions__ = __webpack_require__(431);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userServiceDetails__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userBids__ = __webpack_require__(434);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userServices__ = __webpack_require__(433);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userSubscriptions__ = __webpack_require__(431);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_userServiceDetails__ = __webpack_require__(239);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 // Import modules
+
 
 
 
@@ -13447,9 +13449,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		services: __WEBPACK_IMPORTED_MODULE_8__modules_services__["a" /* default */],
 		service: __WEBPACK_IMPORTED_MODULE_9__modules_service__["a" /* default */],
 		notifications: __WEBPACK_IMPORTED_MODULE_10__modules_notifications__["a" /* default */],
-		userServices: __WEBPACK_IMPORTED_MODULE_11__modules_userServices__["a" /* default */],
-		userServiceDetails: __WEBPACK_IMPORTED_MODULE_13__modules_userServiceDetails__["a" /* default */],
-		userSubscriptions: __WEBPACK_IMPORTED_MODULE_12__modules_userSubscriptions__["a" /* default */]
+		userBids: __WEBPACK_IMPORTED_MODULE_11__modules_userBids__["a" /* default */],
+		userServices: __WEBPACK_IMPORTED_MODULE_12__modules_userServices__["a" /* default */],
+		userServiceDetails: __WEBPACK_IMPORTED_MODULE_14__modules_userServiceDetails__["a" /* default */],
+		userSubscriptions: __WEBPACK_IMPORTED_MODULE_13__modules_userSubscriptions__["a" /* default */]
 	}
 }));
 
@@ -13786,8 +13789,6 @@ var user = {
 	state: {
 		notificationSettings: [],
 		notificationSettingsFetched: false,
-		bids: [],
-		bidsFetched: false,
 		projects: [],
 		projectsFetched: false,
 		projectFocus: null,
@@ -13801,12 +13802,6 @@ var user = {
 		},
 		'SET_NOTIFICATIONSETTINGS_FETCHED': function SET_NOTIFICATIONSETTINGS_FETCHED(state, payload) {
 			state.notificationSettingsFetched = payload.fetched;
-		},
-		'SET_BIDS': function SET_BIDS(state, payload) {
-			state.bids = payload.bids;
-		},
-		'SET_BIDS_FETCHED': function SET_BIDS_FETCHED(state, payload) {
-			state.bidsFetched = payload.fetched;
 		},
 		'SET_PROJECTS': function SET_PROJECTS(state, payload) {
 			state.projects = payload.projects;
@@ -13854,17 +13849,9 @@ var user = {
 				});
 			});
 		},
-		fetchUserBids: function fetchUserBids(_ref3) {
-			var commit = _ref3.commit;
-
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
-				commit('SET_BIDS', { bids: response.bids });
-				commit('SET_BIDS_FETCHED', { fetched: true });
-			});
-		},
-		fetchUserProjects: function fetchUserProjects(_ref4) {
-			var commit = _ref4.commit,
-			    rootState = _ref4.rootState;
+		fetchUserProjects: function fetchUserProjects(_ref3) {
+			var commit = _ref3.commit,
+			    rootState = _ref3.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/{id}/projects').setId(rootState.auth.user.id).get().then(function (response) {
@@ -13879,9 +13866,9 @@ var user = {
 				}
 			});
 		},
-		fetchUserInvoices: function fetchUserInvoices(_ref5) {
-			var commit = _ref5.commit,
-			    rootState = _ref5.rootState;
+		fetchUserInvoices: function fetchUserInvoices(_ref4) {
+			var commit = _ref4.commit,
+			    rootState = _ref4.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
@@ -13904,12 +13891,6 @@ var user = {
 		},
 		userNotificationSettingsFetched: function userNotificationSettingsFetched(state) {
 			return state.notificationSettingsFetched;
-		},
-		userBids: function userBids(state) {
-			return state.bids;
-		},
-		userBidsFetched: function userBidsFetched(state) {
-			return state.bidsFetched;
 		},
 		userProjects: function userProjects(state) {
 			return state.projects;
@@ -14436,8 +14417,10 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_USER_SERVICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SERVICE_DETAILS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SERVICE_DETAILS_SERVICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
@@ -14445,6 +14428,10 @@ var getters = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SUBSCRIPTIONS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SUBSCRIPTIONS; });
+// User bids
+var SET_USER_BIDS_FETCHED = 'SET_USER_BIDS_FETCHED';
+var SET_USER_BIDS = 'SET_USER_BIDS';
+
 // User services
 var SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
 var SET_USER_SERVICES = 'SET_USER_SERVICES';
@@ -14507,7 +14494,7 @@ let routes = [
 */
 
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(242) }, { path: "/categories", name: 'categories', component: __webpack_require__(251) }, { path: "/locations", name: 'locations', component: __webpack_require__(256) }, { path: "/services", name: 'services', component: __webpack_require__(259) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(278) }, { path: "/information", name: 'information', component: __webpack_require__(295) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(298) }, { path: "/user", name: 'user', component: __webpack_require__(307),
-	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(323), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(332), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(338), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(353), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__(400), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(405), meta: { requiresAuth: true } }, { path: 'service/:id/bids', component: __webpack_require__(408), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(411), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(323), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(332), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(338), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(353), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__(400), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(405), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(411), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -21050,9 +21037,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	components: {
-		svgIcon: svgIcon
-	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
 		fetched: 'userServicesFetched',
 		services: 'userServices'
@@ -22183,8 +22167,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Icons__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -22218,21 +22204,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	components: {
-		svgIcon: __WEBPACK_IMPORTED_MODULE_0__Includes_Icons___default.a
-	},
-	computed: {
-		fetched: function fetched() {
-			return this.$store.getters.userBidsFetched;
-		},
-		bids: function bids() {
-			return this.$store.getters.userBids;
-		}
-	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+		fetched: 'userBidsFetched',
+		bids: 'userBids'
+	})),
 	methods: {
 		description: function description(desc) {
 			return desc.length > 75 ? desc.substr(0, 75) + '...' : desc;
@@ -22242,8 +22224,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
+		var _this = this;
+
 		if (!this.fetched) {
-			this.$store.dispatch('fetchUserBids');
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
+				_this.$store.commit('SET_USER_BIDS_FETCHED', true);
+				_this.$store.commit('SET_USER_BIDS', response.bids);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
@@ -22259,7 +22248,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "white-contentSection"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "white-contentSection-content"
-  }, [(_vm.fetched) ? [_c('ul', {
+  }, [(_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
     staticClass: "items-list"
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', {
@@ -22277,21 +22266,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "mr5"
     }, [_vm._v("Bud lagt den " + _vm._s(_vm.bidDate(bid)))]), _vm._v("•\n\t\t\t\t\t\t\t\t"), _c('span', {
       staticClass: "ml5"
-    }, [_vm._v("Budet är " + _vm._s(bid.accepted ? 'accepterat' : 'ej accepterat'))])])]), _vm._v(" "), _c('div', {
-      staticClass: "item-go-to"
-    }, [_c('svg-icon', {
-      attrs: {
-        "icon": "arrowRight",
-        "width": 12,
-        "height": 12,
-        "fill": "#97A9B5"
-      }
-    })], 1)])
-  }))] : _c('app-loading')], 2)])])
+    }, [_vm._v("Budet är " + _vm._s(bid.accepted ? 'accepterat' : 'ej accepterat'))])])]), _vm._v(" "), _vm._m(1, true)])
+  })) : _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("Du inte lagt några bud än. Lägg ditt första bud på en tjänst som passar dig.")])] : _c('app-loading')], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "white-contentSection-header"
   }, [_c('h3', [_vm._v("Mina bud")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-go-to"
+  }, [_c('i', {
+    staticClass: "icon icon_arrow_right wh12"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -25076,321 +25064,9 @@ if (false) {
 }
 
 /***/ }),
-/* 408 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(409),
-  /* template */
-  __webpack_require__(410),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Bids/BidHistory.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] BidHistory.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-180989d8", Component.options)
-  } else {
-    hotAPI.reload("data-v-180989d8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 409 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(430);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Ratings__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	components: {
-		appRatings: __WEBPACK_IMPORTED_MODULE_1__Includes_Ratings___default.a
-	},
-	data: function data() {
-		return {
-			bids: [],
-			fetched: false,
-			accepted: false,
-			focus: '',
-			processing: false
-		};
-	},
-
-	methods: {
-		time: function time(t) {
-			return moment(t).format("LLL");
-		},
-		accept: function accept(bid) {
-			var _this = this;
-
-			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]("services/" + bid.service_id + "/bids/" + bid.id + "/accept").post().then(function (response) {
-				_this.accepted = true;
-				_this.$store.dispatch('showNotification', {
-					type: 'success',
-					msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
-				});
-				bid.accepted = true;
-				// Set the projects fetched to false so we break the cache.
-				_this.$store.commit('SET_PROJECTS_FETCHED', { fetched: false });
-				_this.processing = false;
-			}).catch(function (error) {
-				console.log(error);
-			});
-		}
-	},
-	created: function created() {
-		var _this2 = this;
-
-		// Fetch bids for the service.
-		new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.$route.params.id).get().then(function (response) {
-			_this2.bids = response.bids;
-			_this2.accepted = !!response.meta.bid_accepted;
-			_this2.fetched = true;
-		}).catch(function (error) {});
-	}
-});
-
-/***/ }),
-/* 410 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "bid_history-component"
-  }, [_c('h1', {
-    staticClass: "user-component-title"
-  }, [_vm._v("Budhistorik")]), _vm._v(" "), (_vm.fetched) ? [(_vm.bids.length > 0) ? _c('ul', {
-    staticClass: "list-unstyled list-bids"
-  }, _vm._l((_vm.bids), function(bid) {
-    return _c('li', [_c('div', {
-      staticClass: "bid-header"
-    }, [_c('div', {
-      staticClass: "row"
-    }, [_c('div', {
-      staticClass: "col-xs-12 col-sm-6 col-md-7"
-    }, [_c('div', {
-      staticClass: "bid-user history-padding"
-    }, [_c('a', {
-      staticClass: "link"
-    }, [_vm._v(_vm._s(bid.user.username))]), _vm._v(" "), _c('span', {
-      staticClass: "user-reviews"
-    }, [_c('app-ratings', {
-      attrs: {
-        "rating": 4.5,
-        "total": 8
-      }
-    })], 1)])]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-12 col-sm-6 col-md-5 bid-head-right"
-    }, [(!_vm.accepted) ? _c('button', {
-      staticClass: "btn btn-info",
-      attrs: {
-        "disabled": _vm.processing
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.focus = bid.id
-        }
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\tAcceptera budet\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), (_vm.accepted && bid.accepted) ? _c('div', {
-      staticClass: "accepted-bid"
-    }, [_c('i', {
-      staticClass: "fa fa-check",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Accepterat bud\n\t\t\t\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('div', {
-      staticClass: "bid-time",
-      domProps: {
-        "textContent": _vm._s(_vm.time(bid.created_at))
-      }
-    })]), _vm._v(" "), (!_vm.accepted && _vm.focus == bid.id) ? _c('div', {
-      staticClass: "col-xs-12"
-    }, [_c('div', {
-      staticClass: "alert alert-warning bid-accept-confirm"
-    }, [_vm._v("\n\t\t\t\t\t\t\t\tNär du accepterar ett bud kommer budgivningen för tjänsten att stoppas.\n\t\t\t\t\t\t\t\t"), _c('div', {
-      staticClass: "confirm-buttons text-center"
-    }, [_c('button', {
-      staticClass: "btn btn-success",
-      class: {
-        'processing': _vm.processing
-      },
-      attrs: {
-        "disabled": _vm.processing
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.accept(bid)
-        }
-      }
-    }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\tAcceptera\n\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('button', {
-      staticClass: "btn btn-danger",
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.focus = ''
-        }
-      }
-    }, [_vm._v("Avbryt")])])])]) : _vm._e()])]), _vm._v(" "), _c('div', {
-      staticClass: "bid-info"
-    }, [_c('div', {
-      staticClass: "row"
-    }, [_c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(bid.start)
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(bid.end)
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(_vm.filters.commaSeparator(bid.hours))
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "col-xs-6 col-md-3 text-center info-section"
-    }, [_c('div', {
-      staticClass: "info-head"
-    }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
-      staticClass: "info-value",
-      domProps: {
-        "textContent": _vm._s(_vm.filters.currency(bid.price))
-      }
-    })])])]), _vm._v(" "), _c('div', {
-      staticClass: "bid-description",
-      domProps: {
-        "textContent": _vm._s(bid.description)
-      }
-    })])
-  })) : _c('div', {
-    staticClass: "alert alert-info text-center"
-  }, [_vm._v("\n\t\t\tDär finns inga bud för denna tjänsten.\n\t\t")])] : _c('app-loading')], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-180989d8", module.exports)
-  }
-}
-
-/***/ }),
+/* 408 */,
+/* 409 */,
+/* 410 */,
 /* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26171,9 +25847,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -26185,6 +25861,47 @@ var getters = {
 	},
 	userServices: function userServices(state) {
 		return state.services;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
+
+/***/ }),
+/* 434 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(240);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var state = {
+	fetched: false,
+	bids: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_USER_BIDS */], function (state, bids) {
+	state.bids = bids;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	userBidsFetched: function userBidsFetched(state) {
+		return state.fetched;
+	},
+	userBids: function userBids(state) {
+		return state.bids;
 	}
 };
 
