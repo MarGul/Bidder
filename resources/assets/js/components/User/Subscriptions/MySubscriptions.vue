@@ -10,15 +10,13 @@
 			</div>
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
-					<ul class="user-items-list" v-if="subscriptions.length > 0">
-						<li v-for="subscription in subscriptions">
+					<ul class="items-list mtb20" v-if="subscriptions.length > 0">
+						<li class="white-item ptb10lr15" v-for="subscription in subscriptions">
 							<div class="item-content">
-								{{ title(subscription) }}
+								<div class="item-header" v-text="title(subscription)"></div>
 							</div>
-							<div class="item-actions">
-								<button type="button" class="btn btn-default" @click.prevent="remove(subscription.id)">
-									<i class="fa fa-times" aria-hidden="true"></i> Ta bort
-								</button>
+							<div class="item-go-to">
+								<i class="icon icon_delete wh15" @click="remove(subscription.id)"></i>
 							</div>
 						</li>
 					</ul>
@@ -36,18 +34,17 @@
 <script>
 	import appAddSubscription from "./AddSubscription";
 	import Model from "../../../includes/Model";
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
 			appAddSubscription
 		},
 		computed: {
-			fetched() {
-				return this.$store.getters.userSubscriptionsFetched;
-			},
-			subscriptions() {
-				return this.$store.getters.userSubscriptions;
-			}
+			...mapGetters({
+				fetched: 'subscriptionsFetched',
+				subscriptions: 'subscriptions'
+			})
 		},
 		methods: {
 			remove(id) {
@@ -57,9 +54,10 @@
 						subscriptions.forEach(function(sub, key) {
 							if (id == sub.id) {
 								subscriptions.splice(key, 1);
+								return;
 							}
 						});
-						this.$store.commit('SET_SUBSCRIPTIONS', {subscriptions});
+						this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Prenumerationen är borttagen.'});
 					})
 					.catch(error => { console.log(error); });
@@ -75,14 +73,13 @@
 		},
 		created() {
 			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserSubscriptions');
+				new Model('subscriptions').get()
+					.then(response => {
+						this.$store.commit('SET_SUBSCRIPTIONS_FETCHED', true);
+						this.$store.commit('SET_SUBSCRIPTIONS', response.subscriptions);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}
 </script>
-
-<style lang="scss" scoped>
-	.item-actions {
-		justify-content: flex-end;
-	}
-</style>

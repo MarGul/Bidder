@@ -11,8 +11,6 @@ const user = {
 		projects: [],
 		projectsFetched: false,
 		projectFocus: null,
-		subscriptions: [],
-		subscriptionsFetched: false,
 		invoices: [],
 		invoicesFetched: false,
 		invoiceFocus: null
@@ -45,12 +43,6 @@ const user = {
 		'SET_PROJECT_FOCUS'(state, payload) {
 			state.projectFocus = payload.project;
 		},
-		'SET_SUBSCRIPTIONS'(state, payload) {
-			state.subscriptions = payload.subscriptions;
-		},
-		'SET_SUBSCRIPTIONS_FETCHED'(state, payload) {
-			state.subscriptionsFetched = payload.fetched;
-		},
 		'SET_INVOICES'(state, payload) {
 			state.invoices = payload.invoices;
 		},
@@ -72,8 +64,6 @@ const user = {
 			commit('SET_PROJECTS', {projects: []});
 			commit('SET_PROJECTS_FETCHED', {fetched: false});
 			commit('SET_PROJECT_FOCUS', {project: null});
-			commit('SET_SUBSCRIPTIONS', {subscriptions: []});
-			commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: false});
 			commit('SET_INVOICES', {invoices: []});
 			commit('SET_INVOICES_FETCHED', {fetched: false});
 			commit('SET_INVOICE_FOCUS', {invoice: null});
@@ -114,13 +104,6 @@ const user = {
 					}
 				});
 		},
-		fetchUserSubscriptions({commit}) {
-			new Model('subscriptions').get()
-				.then(response => {
-					commit('SET_SUBSCRIPTIONS', {subscriptions: response.subscriptions});
-					commit('SET_SUBSCRIPTIONS_FETCHED', {fetched: true});
-				});
-		},
 		fetchUserInvoices({commit, rootState}, payload = {}) {
 			new Model('users/{id}/invoices').setId(rootState.auth.user.id).get()
 				.then(response => {
@@ -145,8 +128,6 @@ const user = {
 		userProjects: state => state.projects,
 		userProjectsFetched: state => state.projectsFetched,
 		userProjectFocus: state => state.projectFocus,
-		userSubscriptions: state => state.subscriptions,
-		userSubscriptionsFetched: state => state.subscriptionsFetched,
 		userInvoices: state => state.invoices,
 		userInvoicesFetched: state => state.invoicesFetched,
 		userInvoiceFocus: state => state.invoiceFocus

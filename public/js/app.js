@@ -13414,13 +13414,15 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_services__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_service__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_notifications__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userServiceDetails__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userSubscriptions__ = __webpack_require__(431);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userServiceDetails__ = __webpack_require__(239);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 // Import modules
+
 
 
 
@@ -13443,7 +13445,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		services: __WEBPACK_IMPORTED_MODULE_8__modules_services__["a" /* default */],
 		service: __WEBPACK_IMPORTED_MODULE_9__modules_service__["a" /* default */],
 		notifications: __WEBPACK_IMPORTED_MODULE_10__modules_notifications__["a" /* default */],
-		userServiceDetails: __WEBPACK_IMPORTED_MODULE_11__modules_userServiceDetails__["a" /* default */]
+		userServiceDetails: __WEBPACK_IMPORTED_MODULE_12__modules_userServiceDetails__["a" /* default */],
+		userSubscriptions: __WEBPACK_IMPORTED_MODULE_11__modules_userSubscriptions__["a" /* default */]
 	}
 }));
 
@@ -13787,8 +13790,6 @@ var user = {
 		projects: [],
 		projectsFetched: false,
 		projectFocus: null,
-		subscriptions: [],
-		subscriptionsFetched: false,
 		invoices: [],
 		invoicesFetched: false,
 		invoiceFocus: null
@@ -13821,12 +13822,6 @@ var user = {
 		'SET_PROJECT_FOCUS': function SET_PROJECT_FOCUS(state, payload) {
 			state.projectFocus = payload.project;
 		},
-		'SET_SUBSCRIPTIONS': function SET_SUBSCRIPTIONS(state, payload) {
-			state.subscriptions = payload.subscriptions;
-		},
-		'SET_SUBSCRIPTIONS_FETCHED': function SET_SUBSCRIPTIONS_FETCHED(state, payload) {
-			state.subscriptionsFetched = payload.fetched;
-		},
 		'SET_INVOICES': function SET_INVOICES(state, payload) {
 			state.invoices = payload.invoices;
 		},
@@ -13850,8 +13845,6 @@ var user = {
 			commit('SET_PROJECTS', { projects: [] });
 			commit('SET_PROJECTS_FETCHED', { fetched: false });
 			commit('SET_PROJECT_FOCUS', { project: null });
-			commit('SET_SUBSCRIPTIONS', { subscriptions: [] });
-			commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: false });
 			commit('SET_INVOICES', { invoices: [] });
 			commit('SET_INVOICES_FETCHED', { fetched: false });
 			commit('SET_INVOICE_FOCUS', { invoice: null });
@@ -13901,17 +13894,9 @@ var user = {
 				}
 			});
 		},
-		fetchUserSubscriptions: function fetchUserSubscriptions(_ref6) {
-			var commit = _ref6.commit;
-
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('subscriptions').get().then(function (response) {
-				commit('SET_SUBSCRIPTIONS', { subscriptions: response.subscriptions });
-				commit('SET_SUBSCRIPTIONS_FETCHED', { fetched: true });
-			});
-		},
-		fetchUserInvoices: function fetchUserInvoices(_ref7) {
-			var commit = _ref7.commit,
-			    rootState = _ref7.rootState;
+		fetchUserInvoices: function fetchUserInvoices(_ref6) {
+			var commit = _ref6.commit,
+			    rootState = _ref6.rootState;
 			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
@@ -13955,12 +13940,6 @@ var user = {
 		},
 		userProjectFocus: function userProjectFocus(state) {
 			return state.projectFocus;
-		},
-		userSubscriptions: function userSubscriptions(state) {
-			return state.subscriptions;
-		},
-		userSubscriptionsFetched: function userSubscriptionsFetched(state) {
-			return state.subscriptionsFetched;
 		},
 		userInvoices: function userInvoices(state) {
 			return state.invoices;
@@ -14483,13 +14462,18 @@ var getters = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SET_SERVICE_DETAILS_BIDS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SUBSCRIPTIONS; });
 // State in the user area when he is looking at a service's details
 var SET_SERVICE_DETAILS_FETCHED = 'SET_SERVICE_DETAILS_FETCHED';
 var SET_SERVICE_DETAILS_SERVICE = 'SET_SERVICE_DETAILS_SERVICE';
 var SET_SERVICE_DETAILS_BIDS_FETCHED = 'SET_SERVICE_DETAILS_BIDS_FETCHED';
 var SET_SERVICE_DETAILS_BIDS = 'SET_SERVICE_DETAILS_BIDS';
 var SET_SERVICE_DETAILS_BID_ACCEPTED = 'SET_SERVICE_DETAILS_BID_ACCEPTED';
+
+// User subscriptions
+var SET_SUBSCRIPTIONS_FETCHED = 'SET_SUBSCRIPTIONS_FETCHED';
+var SET_SUBSCRIPTIONS = 'SET_SUBSCRIPTIONS';
 
 /***/ }),
 /* 241 */
@@ -25423,19 +25407,15 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(412)
-}
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(414),
   /* template */
-  __webpack_require__(418),
+  __webpack_require__(432),
   /* styles */
-  injectStyle,
+  null,
   /* scopeId */
-  "data-v-5f7c3375",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -25463,46 +25443,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 412 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(413);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("ad4ea94e", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MySubscriptions.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f7c3375\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MySubscriptions.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 413 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.item-actions[data-v-5f7c3375] {\n  justify-content: flex-end;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 412 */,
+/* 413 */,
 /* 414 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -25511,6 +25453,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddSubscription__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(9);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -25544,8 +25489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
+
 
 
 
@@ -25554,14 +25498,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		appAddSubscription: __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default.a
 	},
-	computed: {
-		fetched: function fetched() {
-			return this.$store.getters.userSubscriptionsFetched;
-		},
-		subscriptions: function subscriptions() {
-			return this.$store.getters.userSubscriptions;
-		}
-	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
+		fetched: 'subscriptionsFetched',
+		subscriptions: 'subscriptions'
+	})),
 	methods: {
 		remove: function remove(id) {
 			var _this = this;
@@ -25571,9 +25511,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				subscriptions.forEach(function (sub, key) {
 					if (id == sub.id) {
 						subscriptions.splice(key, 1);
+						return;
 					}
 				});
-				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
+				_this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Prenumerationen är borttagen.' });
 			}).catch(function (error) {
 				console.log(error);
@@ -25589,8 +25530,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	created: function created() {
+		var _this2 = this;
+
 		if (!this.fetched) {
-			this.$store.dispatch('fetchUserSubscriptions');
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').get().then(function (response) {
+				_this2.$store.commit('SET_SUBSCRIPTIONS_FETCHED', true);
+				_this2.$store.commit('SET_SUBSCRIPTIONS', response.subscriptions);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
@@ -25727,9 +25675,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').post(this.form.data()).then(function (response) {
-				var subscriptions = _this.$store.getters.userSubscriptions;
+				var subscriptions = _this.$store.getters.subscriptions;
 				subscriptions.push(response.subscription);
-				_this.$store.commit('SET_SUBSCRIPTIONS', { subscriptions: subscriptions });
+				_this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 				_this.$store.dispatch('showNotification', {
 					type: 'success',
 					msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.'
@@ -25908,59 +25856,7 @@ if (false) {
 }
 
 /***/ }),
-/* 418 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "my_subscriptions-component"
-  }, [_c('section', {
-    staticClass: "white-contentSection"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "gray-contentSection-content"
-  }, [_c('app-add-subscription')], 1), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content"
-  }, [(_vm.fetched) ? [(_vm.subscriptions.length > 0) ? _c('ul', {
-    staticClass: "user-items-list"
-  }, _vm._l((_vm.subscriptions), function(subscription) {
-    return _c('li', [_c('div', {
-      staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.title(subscription)) + "\n\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
-      staticClass: "item-actions"
-    }, [_c('button', {
-      staticClass: "btn btn-default",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": function($event) {
-          $event.preventDefault();
-          _vm.remove(subscription.id)
-        }
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-times",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Ta bort\n\t\t\t\t\t\t\t")])])])
-  })) : _c('div', {
-    staticClass: "alert alert-info"
-  }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "white-contentSection-header"
-  }, [_c('h3', [_vm._v("Prenumerationer")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5f7c3375", module.exports)
-  }
-}
-
-/***/ }),
+/* 418 */,
 /* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26177,6 +26073,98 @@ var Model = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+/* 431 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(240);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var state = {
+	fetched: false,
+	subscriptions: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+	state.subscriptions = subscriptions;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	subscriptionsFetched: function subscriptionsFetched(state) {
+		return state.fetched;
+	},
+	subscriptions: function subscriptions(state) {
+		return state.subscriptions;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
+
+/***/ }),
+/* 432 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "my_subscriptions-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('app-add-subscription')], 1), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [(_vm.fetched) ? [(_vm.subscriptions.length > 0) ? _c('ul', {
+    staticClass: "items-list mtb20"
+  }, _vm._l((_vm.subscriptions), function(subscription) {
+    return _c('li', {
+      staticClass: "white-item ptb10lr15"
+    }, [_c('div', {
+      staticClass: "item-content"
+    }, [_c('div', {
+      staticClass: "item-header",
+      domProps: {
+        "textContent": _vm._s(_vm.title(subscription))
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "item-go-to"
+    }, [_c('i', {
+      staticClass: "icon icon_delete wh15",
+      on: {
+        "click": function($event) {
+          _vm.remove(subscription.id)
+        }
+      }
+    })])])
+  })) : _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("Du har ännu inga prenumerationer. Skapa din första ovan.")])] : _c('app-loading')], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Prenumerationer")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5f7c3375", module.exports)
+  }
+}
 
 /***/ })
 ],[140]);

@@ -12,3 +12,23 @@
 	@include mask-icon('../svg/go_back_arrow.svg');
 	background-color: $brand-primary;
 }
+
+.icon {
+	display: inline-block;
+	cursor: pointer;
+
+	&.wh15 {
+		width: 15px;
+		height: 15px;
+	}
+}
+
+.icon_delete {
+	@include mask-icon('../svg/delete.svg');
+	background-color: $text-color;
+
+	&:hover {
+		background-color: $brand-danger;
+	}
+}
+

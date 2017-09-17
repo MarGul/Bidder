@@ -80,9 +80,9 @@
 				this.processing = true;
 				new Model('subscriptions').post(this.form.data())
 					.then(response => {
-						let subscriptions = this.$store.getters.userSubscriptions;
+						let subscriptions = this.$store.getters.subscriptions;
 						subscriptions.push(response.subscription);
-						this.$store.commit('SET_SUBSCRIPTIONS', {subscriptions});
+						this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 						this.$store.dispatch('showNotification', {
 							type: 'success', 
 							msg: 'Vi har lagt till din prenumeration. När en ny tjänst skapas som du prenumererar på kommer du att få ett email om tjänsten.'
