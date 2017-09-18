@@ -1,11 +1,11 @@
 .upload_media-component {
-	background: $body-bg;
-	border: 2px dashed $border-color-gray;
+	background: #f6f9fc;
+	border: 2px dashed #e6ebf1;
 	padding: 25px 15px;
 	margin: 15px 0 30px 0;
-	border-radius: 6px;
+	border-radius: 4px;
 	text-align: center;
-	color: $navbar-icon-color;
+	color: #97A9B5;
 
 	i {
 		margin-right: 5px;
@@ -24,14 +24,14 @@
 		li {
 			padding: 10px 0;
 			color: $text-color;
-			border-bottom: 1px solid $border-color-gray;
+			border-bottom: 1px solid #e6ebf1;
 
 			&:last-child {
 				border-bottom: none;
 			}
 
 			i.icon {
-				color: $navbar-icon-color;
+				color: #97A9B5;
 				margin-right: 7px;
 				font-size: 18px;
 				position: relative;

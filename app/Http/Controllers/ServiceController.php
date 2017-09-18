@@ -48,12 +48,28 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\StoreService  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreService $request)
+    public function store(Request $request)
     {
-        if ( !$this->manager->create($request->user(), $request) ) {
+        $this->validate($request, [
+            'title' => 'required',
+            'category_id' => 'required|numeric|exists:categories,id',
+            'region_id' => 'required|numeric|exists:regions,id',
+            'city_id' => 'required|numeric|exists:cities,id',
+            'start' => 'required|date_format:Y-m-d|after_or_equal:today',
+            'end' => 'required|date_format:Y-m-d|after_or_equal:today',
+            'bidding' => 'required|numeric|in:7,14,30,60',
+            'description' => 'required',
+            'media' => 'array',
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
+        ]);
+
+        // In laravel 5.5 we get this from the validate method.
+        $data = $request->only(['title', 'description', 'category_id', 'region_id', 'city_id', 'start', 'end', 'bidding'])
+
+        if ( !$this->manager->create($request->user(), $data) ) {
             return response()->json(['message' => 'Could not store the service in the database.'], 500);
         }
         

@@ -47,8 +47,77 @@ form.loading {
 	}
 }
 
+form.form-with-sections {
+
+	
+	.form-section {
+		border-bottom: 1px solid #e6ebf1;
+		padding: 15px 0;
+		
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+			align-items: flex-start;
+		}
+
+		.form-section-description {
+			margin-bottom: 20px;
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+				margin-bottom: 0;
+				padding-right: 15px;
+			}
+			
+
+			.description-header {
+				margin-bottom: 5px;
+				font-size: 15px;
+				font-weight: 500;
+				color: $text-color;
+			}
+
+			.description-details {
+				font-size: 13px;
+				color: #97A9B5;
+			}
+
+		}
+
+		.form-section-controls {
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 2;
+				padding-left: 15px;
+			}
+
+			.control-container {
+				margin-bottom: 15px;
+
+				&.half-width {
+					@media screen and (min-width: $screen-sm-min) {
+						width: 50%;
+					}
+				}
+
+				.control-label {
+					font-weight: 500;
+					font-size: 12px;
+					color: lighten($text-color, 10%);
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+					margin-bottom: 2px;
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
 .form-control {
-	border: 1px solid rgba(34,36,38,.15);
+	border: 1px solid #e2e2e2;
 	padding: 10px;
 	border-radius: 3px;
 	height: 40px;

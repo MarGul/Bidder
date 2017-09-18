@@ -67,27 +67,27 @@ class ServiceManager {
 	/**
 	 * Create a service
 	 * 
-	 * @param  \App\Http\Requests\StoreService 	$request 
+	 * @param  array  	$data 
 	 * @return boolean
 	 */
-	public function create($user, $request) {
+	public function create($user, $data) {
 		$service = new Service([
 			'user_id' => $user->id,
-			'category_id' => $request->category,
-			'region_id' => $request->region,
-			'city_id' => $request->city,
-			'title' => $request->title,
-			'description' => $request->description,
-			'start' => Carbon::createFromFormat('Y-m-d', $request->start, 'Europe/Stockholm')->toDateString(),
-			'end' => Carbon::createFromFormat('Y-m-d', $request->end, 'Europe/Stockholm')->toDateString(),
+			'category_id' => $data['category_id'],
+			'region_id' => $data['region_id'],
+			'city_id' => $data['city_id'],
+			'title' => $data['title'],
+			'description' => $data['description'],
+			'start' => Carbon::createFromFormat('Y-m-d', $data['start'], 'Europe/Stockholm')->toDateString(),
+			'end' => Carbon::createFromFormat('Y-m-d', $data['end'], 'Europe/Stockholm')->toDateString(),
 			'bid_start' => Carbon::now('Europe/Stockholm'),
-			'bid_stop' => Carbon::now('Europe/Stockholm')->addDays($request->bidding),
+			'bid_stop' => Carbon::now('Europe/Stockholm')->addDays($data['bidding']),
 			'active' => true
 		]);
 
 		if ( !$service->save() ) { return false; }
 
-		if ( $request->media ) {
+		if ( $data['media'] ) {
 			// Locally store the media that was uploaded.
 			$files = app(MediaManager::class)->tempStore($request->media);
 			// Create a job for further processing of the files and upload to AWS S3.
