@@ -20434,7 +20434,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('services').create(this.finalData).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services').create(this.finalData).then(function (response) {
 				_this.form.reset();
 				_this.media = [];
 				_this.mediaErrors = [];
@@ -21010,7 +21010,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Tjänstens innehåll")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -21018,7 +21018,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Tjänstens detaljer")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -21026,7 +21026,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Tjänstens datum")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -21034,7 +21034,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Tjänstens media")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -21473,6 +21473,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -21494,6 +21508,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				end: '',
 				description: ''
 			}),
+			media: [],
+			mediaErrors: [],
 			processing: false
 		};
 	},
@@ -21511,6 +21527,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		cities: function cities() {
 			var region = this.$store.getters.getRegionById(this.form.region_id);
 			return region ? region.cities : [];
+		},
+		finalData: function finalData() {
+			var formData = new FormData();
+			var data = this.form.asDate(['start', 'end']).data();
+
+			formData.append('_method', 'patch');
+			for (var key in data) {
+				formData.append(key, data[key]);
+			}
+
+			// Append the media if there is any.
+			for (var i = 0; i < this.media.length; i++) {
+				formData.append('media[]', this.media[i]);
+			}
+
+			return formData;
 		}
 	}),
 	methods: {
@@ -21518,14 +21550,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services/' + this.$route.params.id).patch(this.form.asDate(['start', 'end']).data()).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services/' + this.$route.params.id).post(this.finalData).then(function (response) {
+				_this.form.errors.clear();
 				// Break the services cache so it reloads with the updated info.
-				_this.$store.commit('SET_SERVICES_FETCHED', false);
+				_this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 				_this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi uppdaterade din tjänst!' });
+				window.scrollTo(0, 0);
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);
+				window.scrollTo(0, 0);
 				_this.processing = false;
 			});
 		}
@@ -21566,27 +21601,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "edit_service_form-component"
-  }, [_c('section', {
-    staticClass: "white-contentSection"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content"
   }, [_c('form', {
+    staticClass: "form-with-sections",
     class: {
       loading: !_vm.fetched
     },
     on: {
-      "keydown": function($event) {
-        _vm.form.errors.clear()
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.update($event)
       }
     }
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
   }, [_c('div', {
-    staticClass: "row"
+    staticClass: "form-section"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
   }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('title')
+      'has-errors': _vm.form.errors.has('title')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -21615,14 +21652,46 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('title'))
     }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-sm-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('category_id')
+      'has-errors': _vm.form.errors.has('description')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.description),
+      expression: "form.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "10"
+    },
+    domProps: {
+      "value": (_vm.form.description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.description = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.form.errors.has('description')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('description'))
+    }
+  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('category_id')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -21667,14 +21736,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('category_id'))
     }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-sm-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
     class: {
-      'has-error': _vm.form.errors.has('region_id')
+      'has-errors': _vm.form.errors.has('region_id')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -21713,12 +21778,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('region_id'))
     }
-  }) : _vm._e()])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-sm-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
     class: {
-      'has-error': _vm.form.errors.has('city')
+      'has-errors': _vm.form.errors.has('city_id')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -21755,23 +21818,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(city.name)
       }
     })
-  })], 2), _vm._v(" "), (_vm.form.errors.has('city')) ? _c('span', {
+  })], 2), _vm._v(" "), (_vm.form.errors.has('city_id')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
-      "textContent": _vm._s(_vm.form.errors.get('city'))
+      "textContent": _vm._s(_vm.form.errors.get('city_id'))
     }
   }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
+    staticClass: "form-section"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-sm-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "control-container",
     class: {
-      'has-error': _vm.form.errors.has('start')
+      'has-errors': _vm.form.errors.has('start')
     }
   }, [_c('label', {
     staticClass: "control-label"
-  }, [_vm._v("Påbörja utförandet")]), _vm._v(" "), _c('datepicker', {
+  }, [_vm._v("Påbörja tjänsten")]), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
       "language": "sv",
@@ -21792,16 +21855,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('start'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("När vill du att tjänsten ska påbörjas?")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-sm-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
     class: {
-      'has-error': _vm.form.errors.has('end')
+      'has-errors': _vm.form.errors.has('end')
     }
   }, [_c('label', {
     staticClass: "control-label"
-  }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('datepicker', {
+  }, [_vm._v("Avsluta tjänsten")]), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
       "language": "sv",
@@ -21822,63 +21883,57 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('end'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("När vill du att tjänsten ska avslutas?")])], 1)])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('div', {
-    staticClass: "form-group",
-    class: {
-      'has-error': _vm.form.errors.has('description')
-    }
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.description),
-      expression: "form.description"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "rows": "10"
-    },
-    domProps: {
-      "value": (_vm.form.description)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.description = $event.target.value
-      }
-    }
-  }), _vm._v(" "), (_vm.form.errors.has('description')) ? _c('span', {
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.form.errors.get('description'))
-    }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }) : _vm._e()], 1)])]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
   }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
+    staticClass: "btn btn-primary",
     class: {
-      'processing': _vm.processing
+      processing: _vm.processing
     },
     attrs: {
-      "disabled": _vm.processing || this.form.errors.any()
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.update($event)
-      }
+      "type": "submit"
     }
-  }, [_vm._v("Uppdatera tjänsten")])])])])])])
+  }, [_vm._v("\n\t\t\t\t\tUppdatera tjänsten\n\t\t\t\t")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "white-contentSection-header"
   }, [_c('h3', [_vm._v("Redigera tjänst")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tjänstens innehåll")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tjänstens detaljer")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tjänstens datum")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section no-border"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tjänstens media")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

@@ -1,25 +1,43 @@
 <template>
 	<div class="edit_service_form-component">
 
-		<section class="white-contentSection">
-			<header class="white-contentSection-header">
-				<h3>Redigera tjänst</h3>
-			</header>
-			<div class="white-contentSection-content">
-				<form :class="{loading: !fetched}" @keydown="form.errors.clear()">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="form-group" :class="{'has-error': form.errors.has('title')}">
+		<form class="form-with-sections" :class="{loading: !fetched}" @submit.prevent="update">
+			<section class="white-contentSection">
+				<header class="white-contentSection-header">
+					<h3>Redigera tjänst</h3>
+				</header>
+				<div class="white-contentSection-content">
+					<div class="form-section">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens innehåll</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+							</div>
+						</div>
+						<div class="form-section-controls">
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
 								<label class="control-label">Titel</label>
 								<input type="text" class="form-control" v-model="form.title">
 								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
 							</div>
+
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
+								<label class="control-label">Beskrivning</label>
+								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
+								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
+							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group" :class="{'has-error': form.errors.has('category_id')}">
+					<div class="form-section">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens detaljer</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+							</div>
+						</div>
+						<div class="form-section-controls">
+							<div class="control-container" :class="{'has-errors': form.errors.has('category_id')}">
 								<label class="control-label">Kategori</label>
 								<select class="form-control" v-model="form.category_id">
 									<option value="">Välj kategori</option>
@@ -29,12 +47,8 @@
 								</select>
 								<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
 							</div>
-						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group" :class="{'has-error': form.errors.has('region_id')}">
+							<div class="control-container" :class="{'has-errors': form.errors.has('region_id')}">
 								<label class="control-label">Region</label>
 								<select class="form-control" v-model="form.region_id">
 									<option value="">Välj region</option>
@@ -42,23 +56,28 @@
 								</select>
 								<span class="help-block" v-if="form.errors.has('region_id')" v-text="form.errors.get('region_id')"></span>
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group" :class="{'has-error': form.errors.has('city')}">
+
+							<div class="control-container" :class="{'has-errors': form.errors.has('city_id')}">
 								<label class="control-label">Stad</label>
 								<select class="form-control" :disabled="!form.region_id" v-model="form.city_id">
 									<option value="">Välj stad</option>
 									<option :value="city.id" v-text="city.name" v-for="city in cities"></option>
 								</select>
-								<span class="help-block" v-if="form.errors.has('city')" v-text="form.errors.get('city')"></span>
+								<span class="help-block" v-if="form.errors.has('city_id')" v-text="form.errors.get('city_id')"></span>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group" :class="{'has-error': form.errors.has('start')}">
-								<label class="control-label">Påbörja utförandet</label>
+					<div class="form-section">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens datum</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+							</div>
+						</div>
+						<div class="form-section-controls">
+							<div class="control-container" :class="{'has-errors': form.errors.has('start')}">
+								<label class="control-label">Påbörja tjänsten</label>
 								<datepicker
 									input-class="form-control"  
 									language="sv"
@@ -67,12 +86,10 @@
 									v-model="form.start"
 								></datepicker>
 								<span class="help-block" v-if="form.errors.has('start')" v-text="form.errors.get('start')"></span>
-								<small>När vill du att tjänsten ska påbörjas?</small>
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group" :class="{'has-error': form.errors.has('end')}">
-								<label class="control-label">Avsluta utförandet</label>
+
+							<div class="control-container" :class="{'has-errors': form.errors.has('end')}">
+								<label class="control-label">Avsluta tjänsten</label>
 								<datepicker
 									input-class="form-control" 
 									language="sv"
@@ -81,32 +98,29 @@
 									v-model="form.end"
 								></datepicker>
 								<span class="help-block" v-if="form.errors.has('end')" v-text="form.errors.get('end')"></span>
-								<small>När vill du att tjänsten ska avslutas?</small>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="form-group" :class="{'has-error': form.errors.has('description')}">
-								<label class="control-label">Beskrivning</label>
-								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
-								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
+					<div class="form-section no-border">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens media</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
 							</div>
 						</div>
-					</div>
+						<div class="form-section-controls">
 
-					<div class="form-group">
-						<button 
-							class="btn btn-primary full-width"
-							:class="{'processing': processing}" 
-							@click.prevent="update"
-							:disabled="processing || this.form.errors.any()"
-						>Uppdatera tjänsten</button> 
+						</div>
 					</div>
-				</form>
-			</div>
-		</section>
+				</div>
+				<footer class="white-contentSection-footer">
+					<button type="submit" class="btn btn-primary" :class="{processing}">
+						Uppdatera tjänsten
+					</button>
+				</footer>
+			</section>
+		</form>
 
 	</div>
 </template>
@@ -132,6 +146,8 @@
 					end: '',
 					description: ''
 				}),
+				media: [],
+				mediaErrors: [],
 				processing: false
 			}
 		},
@@ -149,21 +165,40 @@
 			cities() {
 				let region = this.$store.getters.getRegionById(this.form.region_id);
 				return region ? region.cities : [];
+			},
+			finalData() {
+				const formData = new FormData();
+				let data = this.form.asDate(['start', 'end']).data();
+				
+				formData.append('_method', 'patch');
+				for ( let key in data ) {
+					formData.append(key, data[key]);
+				}
+				
+				// Append the media if there is any.
+				for (var i = 0; i < this.media.length; i++) {
+					formData.append('media[]', this.media[i]);
+				}
+
+				return formData;
 			}
 		},
 		methods: {
 			update() {
 				this.processing = true;
-				new Model(`user/services/${this.$route.params.id}`).patch(this.form.asDate(['start', 'end']).data())
+				new Model(`user/services/${this.$route.params.id}`).post(this.finalData)
 					.then(response => {
+						this.form.errors.clear();
 						// Break the services cache so it reloads with the updated info.
-						this.$store.commit('SET_SERVICES_FETCHED', false);
+						this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
+						window.scrollTo(0,0);
 						this.processing = false;
 					})
 					.catch(error => {
 						this.form.errors.record(error);
+						window.scrollTo(0,0);
 						this.processing = false;
 					});
 			}
