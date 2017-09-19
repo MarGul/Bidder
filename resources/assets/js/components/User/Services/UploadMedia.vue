@@ -16,7 +16,7 @@
 				</ul>
 			</div>
 		</div>
-		<label class="btn btn-primary">
+		<label class="btn btn-default">
 			<i class="fa fa-picture-o" aria-hidden="true"></i> Välj media
 			<input type="file" class="hidden" multiple @change="add($event.target.files)" :disabled="disabled">
 		</label>

@@ -93,6 +93,19 @@ form.form-with-sections {
 			.control-container {
 				margin-bottom: 15px;
 
+				&.has-errors {
+
+					.help-block,
+					.control-label {
+						color: $brand-danger;
+					}
+
+					.form-control {
+						border-color: $brand-danger;
+					}
+				}
+
+
 				&.half-width {
 					@media screen and (min-width: $screen-sm-min) {
 						width: 50%;

@@ -67,7 +67,7 @@ class ServiceController extends Controller
         ]);
 
         // In laravel 5.5 we get this from the validate method.
-        $data = $request->only(['title', 'description', 'category_id', 'region_id', 'city_id', 'start', 'end', 'bidding'])
+        $data = $request->only(['title', 'description', 'category_id', 'region_id', 'city_id', 'start', 'end', 'bidding', 'media']);
 
         if ( !$this->manager->create($request->user(), $data) ) {
             return response()->json(['message' => 'Could not store the service in the database.'], 500);

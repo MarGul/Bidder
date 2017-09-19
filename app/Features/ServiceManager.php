@@ -89,7 +89,7 @@ class ServiceManager {
 
 		if ( $data['media'] ) {
 			// Locally store the media that was uploaded.
-			$files = app(MediaManager::class)->tempStore($request->media);
+			$files = app(MediaManager::class)->tempStore($data['media']);
 			// Create a job for further processing of the files and upload to AWS S3.
 			dispatch(new UploadServiceMedia($files, $service));
 		}

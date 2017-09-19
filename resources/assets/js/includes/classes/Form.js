@@ -35,7 +35,7 @@ class Form {
         let data = {};
 
         for (let property in this.originalData) {
-            data[property] = this.dateFields.includes(property) ? this.parseAsDate(property) : this[property];
+            data[property] = this.dateFields.includes(property) && this[property] ? this.parseAsDate(property) : this[property];
         }
 
         return data;
