@@ -1,12 +1,16 @@
 // User bids
 export const SET_USER_BIDS_FETCHED = 'SET_USER_BIDS_FETCHED';
-export const SET_USER_BIDS = 'SET_USER_BIDS'; 
+export const SET_USER_BIDS = 'SET_USER_BIDS';
+
+// State for when user is viewing a bid's details
+export const SET_USER_BID_DETAILS_FETCHED = 'SET_USER_BID_DETAILS_FETCHED';
+export const SET_USER_BID_DETAILS = 'SET_USER_BID_DETAILS';
 
 // User services
 export const SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
 export const SET_USER_SERVICES = 'SET_USER_SERVICES';
 
-// State in the user area when he is looking at a service's details
+// State for when user is viewing a service's details.
 export const SET_SERVICE_DETAILS_FETCHED = 'SET_SERVICE_DETAILS_FETCHED';
 export const SET_SERVICE_DETAILS_SERVICE = 'SET_SERVICE_DETAILS_SERVICE';
 export const SET_SERVICE_DETAILS_BIDS_FETCHED = 'SET_SERVICE_DETAILS_BIDS_FETCHED';

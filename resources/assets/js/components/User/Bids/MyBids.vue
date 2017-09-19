@@ -8,7 +8,7 @@
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
 					<ul class="items-list" v-if="bids.length > 0">
-						<li class="gray-item clickable" v-for="bid in bids">
+						<li class="gray-item clickable" v-for="bid in bids" @click="goTo(bid)">
 							<div class="item-content">
 								<div class="item-header" v-text="description(bid.description)"></div>
 								<div class="item-sub-data">
@@ -50,6 +50,9 @@
 			},
 			bidDate(bid) {
 				return moment(bid.created_at).format('LLL');
+			},
+			goTo(bid) {
+				
 			}
 		},
 		created() {

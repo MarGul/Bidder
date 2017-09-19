@@ -1463,8 +1463,10 @@ return r},ee=function(e){for(var t,n=e===z,r=j(n?V:D(e)),a=[],o=0;r.length>o;)!i
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_USER_BIDS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_USER_SERVICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SERVICE_DETAILS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SERVICE_DETAILS_SERVICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
@@ -1476,11 +1478,15 @@ return r},ee=function(e){for(var t,n=e===z,r=j(n?V:D(e)),a=[],o=0;r.length>o;)!i
 var SET_USER_BIDS_FETCHED = 'SET_USER_BIDS_FETCHED';
 var SET_USER_BIDS = 'SET_USER_BIDS';
 
+// State for when user is viewing a bid's details
+var SET_USER_BID_DETAILS_FETCHED = 'SET_USER_BID_DETAILS_FETCHED';
+var SET_USER_BID_DETAILS = 'SET_USER_BID_DETAILS';
+
 // User services
 var SET_USER_SERVICES_FETCHED = 'SET_USER_SERVICES_FETCHED';
 var SET_USER_SERVICES = 'SET_USER_SERVICES';
 
-// State in the user area when he is looking at a service's details
+// State for when user is viewing a service's details.
 var SET_SERVICE_DETAILS_FETCHED = 'SET_SERVICE_DETAILS_FETCHED';
 var SET_SERVICE_DETAILS_SERVICE = 'SET_SERVICE_DETAILS_SERVICE';
 var SET_SERVICE_DETAILS_BIDS_FETCHED = 'SET_SERVICE_DETAILS_BIDS_FETCHED';
@@ -13450,15 +13456,17 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_service__ = __webpack_require__(238);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_notifications__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modules_userBids__ = __webpack_require__(240);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userServices__ = __webpack_require__(241);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userSubscriptions__ = __webpack_require__(242);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_userServiceDetails__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modules_userBidDetails__ = __webpack_require__(431);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userServices__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_userSubscriptions__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_userServiceDetails__ = __webpack_require__(243);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 // Import modules
+
 
 
 
@@ -13485,9 +13493,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		service: __WEBPACK_IMPORTED_MODULE_9__modules_service__["a" /* default */],
 		notifications: __WEBPACK_IMPORTED_MODULE_10__modules_notifications__["a" /* default */],
 		userBids: __WEBPACK_IMPORTED_MODULE_11__modules_userBids__["a" /* default */],
-		userServices: __WEBPACK_IMPORTED_MODULE_12__modules_userServices__["a" /* default */],
-		userServiceDetails: __WEBPACK_IMPORTED_MODULE_14__modules_userServiceDetails__["a" /* default */],
-		userSubscriptions: __WEBPACK_IMPORTED_MODULE_13__modules_userSubscriptions__["a" /* default */]
+		userBidDetails: __WEBPACK_IMPORTED_MODULE_12__modules_userBidDetails__["a" /* default */],
+		userServices: __WEBPACK_IMPORTED_MODULE_13__modules_userServices__["a" /* default */],
+		userServiceDetails: __WEBPACK_IMPORTED_MODULE_15__modules_userServiceDetails__["a" /* default */],
+		userSubscriptions: __WEBPACK_IMPORTED_MODULE_14__modules_userSubscriptions__["a" /* default */]
 	}
 }));
 
@@ -14423,9 +14432,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -22368,7 +22377,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		},
 		bidDate: function bidDate(bid) {
 			return moment(bid.created_at).format('LLL');
-		}
+		},
+		goTo: function goTo(bid) {}
 	},
 	created: function created() {
 		var _this = this;
@@ -22399,7 +22409,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "items-list"
   }, _vm._l((_vm.bids), function(bid) {
     return _c('li', {
-      staticClass: "gray-item clickable"
+      staticClass: "gray-item clickable",
+      on: {
+        "click": function($event) {
+          _vm.goTo(bid)
+        }
+      }
     }, [_c('div', {
       staticClass: "item-content"
     }, [_c('div', {
@@ -25931,6 +25946,47 @@ var Model = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+/* 431 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(12);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var state = {
+	fetched: false,
+	bid: {}
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_USER_BID_DETAILS */], function (state, bid) {
+	state.bid = bid;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	userBidDetailsFetched: function userBidDetailsFetched(state) {
+		return state.fetched;
+	},
+	userBidDetails: function userBidDetails(state) {
+		return state.bid;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ })
 ],[141]);
