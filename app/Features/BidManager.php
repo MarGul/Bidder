@@ -33,12 +33,24 @@ class BidManager {
 	 * @param  App\User 	$user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function byUser($user) {
+	public function byUser($user) 
+	{
 		$bids = Bid::where('user_id', $user->id)
 					->orderBy('created_at', 'desc')
 					->get();
 
-		return response()->json(['message' => 'Displaying bids for a user', 'bids' => $bids], 200);
+		return $bids;
+	}
+
+	/**
+	 * Display one bid.
+	 * 
+	 * @param  App\Bid 	$bid
+	 * @return App\Bid;
+	 */
+	public function show($bid)
+	{
+		return $bid;
 	}
 
 	/**
@@ -48,7 +60,8 @@ class BidManager {
 	 * @param  App\Service      $service
 	 * @return boolean|App\Bid
 	 */
-	public function add($data, $service) {
+	public function add($data, $service) 
+	{
 		$bid = new Bid([
 			'service_id' => $service->id,
 			'user_id' => Auth::user()->id,
@@ -77,7 +90,8 @@ class BidManager {
 	 * @param  App\Bid $bid
 	 * @return boolean
 	 */
-	public function accept($bid) {
+	public function accept($bid) 
+	{
 		// Flag the bid as accepted.
 		if ( !$bid->update(['accepted' => true]) ) {
 			return false;
@@ -97,7 +111,7 @@ class BidManager {
 			'price' => $bid->price
 		];
 
-		// Broadcast that this event has now stopped
+		// Broadcast that thr bidding for this service has now stopped
 		event(new RemoveService($service->id));
 
 		return app(ProjectManager::class)->create($data) ? true : false;

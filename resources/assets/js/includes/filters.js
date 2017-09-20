@@ -4,6 +4,9 @@ const filters = {
 	},
 	commaSeparator(value) {
 		return value.toString().replace('.', ',');
+	},
+	date(value) {
+		return moment(value).format('D MMM YYYY');
 	}
 }
 

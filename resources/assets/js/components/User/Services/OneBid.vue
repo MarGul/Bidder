@@ -15,11 +15,11 @@
 				<ul class="bid-details-list">
 					<li>
 						<div class="detail-item">Kan börja</div>
-						<div class="detail-value" v-text="date(bid.start)"></div>
+						<div class="detail-value" v-text="filters.date(bid.start)"></div>
 					</li>
 					<li>
 						<div class="detail-item">Är klart</div>
-						<div class="detail-value" v-text="date(bid.end)"></div>
+						<div class="detail-value" v-text="filters.date(bid.end)"></div>
 					</li>
 					<li>
 						<div class="detail-item">Antal timmar</div>
@@ -49,9 +49,6 @@
 		methods: {
 			time(date) {
 				return moment(date).format('D MMM YYYY HH:mm');
-			},
-			date(date) {
-				return moment(date).format('D MMM YYYY');
 			}
 		}
 	}

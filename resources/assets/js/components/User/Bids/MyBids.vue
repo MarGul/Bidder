@@ -52,7 +52,9 @@
 				return moment(bid.created_at).format('LLL');
 			},
 			goTo(bid) {
-				
+				this.$store.commit('SET_USER_BID_DETAILS_FETCHED', true);
+				this.$store.commit('SET_USER_BID_DETAILS', bid);
+				this.$router.push(`/user/bids/${bid.id}`);
 			}
 		},
 		created() {

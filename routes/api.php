@@ -32,6 +32,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::resource('user/services', 'UserServicesController', ['except' => ['create']]);
 	/* Get a users bids */
 	Route::get('user/bids')->uses('UserBidsController@index');
+	/* Get a user bid */
+	Route::get('user/bids/{bid}')->uses('UserBidsController@show');
 	/* Get a users projects */
 	Route::resource('user.projects', 'UserProjectsController', ['only' => ['index']]);
 	/* Create and show messages for a project */

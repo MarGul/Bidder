@@ -52,6 +52,34 @@ a {
 	}
 }
 
+.main-area-with-sidebar {
+
+	@media screen and (min-width: $screen-md-min) {
+		display: flex;
+	}
+
+	.main-area {
+		margin-bottom: 25px;
+
+		@media screen and (min-width: $screen-md-min) {
+			flex: 2;
+			margin-bottom: 0;
+		}
+
+		@media screen and (min-width: $screen-lg-min) {
+			flex: 3;
+		}
+	}
+
+	.main-area-sidebar {
+
+		@media screen and (min-width: $screen-md-min) {
+			flex: 1;
+			margin-left: 30px;
+		}
+	}
+}
+
 .white-contentSection {
 	box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
 	background: #fff;
@@ -114,7 +142,7 @@ a {
 		border-bottom: 1px solid #cfd2d7;
 
 		h3 {
-			font-size: 18px;
+			font-size: 16px;
 			font-weight: 500;
 			margin: 0;
 		}

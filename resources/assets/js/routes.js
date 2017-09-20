@@ -55,6 +55,7 @@ let routes = [
 			{ path: 'services', component: require('./components/User/Services/MyServices'), meta: { requiresAuth: true } },
 			{ path: 'services/:id', component: require('./components/User/Services/EditService'), meta: { requiresAuth: true } },
 			{ path: 'bids', component: require('./components/User/Bids/MyBids'), meta: { requiresAuth: true } },
+			{ path: 'bids/:id', component: require('./components/User/Bids/BidDetails'), meta: { requiresAuth: true } },
 			{ path: 'projects', component: require('./components/User/Projects/MyProjects'), meta: { requiresAuth: true } },
 			{ path: 'project/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true } },
 			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices'), meta: { requiresAuth: true } },
