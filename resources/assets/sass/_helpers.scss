@@ -50,3 +50,12 @@
 	display: flex;
 	align-items: center;
 }
+
+.is-flex {
+	display: flex;
+
+	&.c_c {
+		align-items: center;
+		justify-content: center;
+	}
+}

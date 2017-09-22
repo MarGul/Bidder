@@ -26,6 +26,11 @@
 		width: 15px;
 		height: 15px;
 	}
+
+	&.wh20 {
+		width: 20px;
+		height: 20px;
+	}
 }
 
 .icon_delete {
@@ -35,6 +40,10 @@
 	&:hover {
 		background-color: $brand-danger;
 	}
+}
+
+.icon_danger {
+	@include icon('../svg/danger.svg');
 }
 
 .icon_arrow_right {

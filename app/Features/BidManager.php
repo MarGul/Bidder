@@ -50,6 +50,8 @@ class BidManager {
 	 */
 	public function show($bid)
 	{
+		$bid->load('service');
+
 		return $bid;
 	}
 
@@ -82,6 +84,17 @@ class BidManager {
 		dispatch(new NotificationsForNewBid($bid));
 
 		return $bid;
+	}
+
+	/**
+	 * Remove a bid.
+	 * 
+	 * @param  App\Bid 	$bid
+	 * @return boolean
+	 */
+	public function destroy($bid)
+	{
+		return $bid->delete();
 	}
 
 	/**

@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         // Is the resource the authenticated users?
-        Gate::define('my-resource', function($user, $u) { return $user->id === $u->id; });
+        Gate::define('my-resource', function($user, $resource) { return $user->id === $resource->user_id; });
         // Can a user accept bids for a service?
         Gate::define('accept-bid', function($user, $service) { return $user->id === $service->user_id; });
         // Is a user part of a project?

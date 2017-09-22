@@ -43,12 +43,30 @@ class UserBidsController extends Controller
 	 */
 	public function show(Request $request, Bid $bid)
 	{
-		$this->authorize('my-resource', $request->user());
+		$this->authorize('my-resource', $bid);
 
 		return response()->json([
 			'message' => 'Displaying a bid.', 
 			'bid' => $this->manager->show($bid)
 		], 200);
+	}
+
+	/**
+	 * Destroy a resource
+	 * 
+	 * @param  Request $request
+	 * @param  Bid     $bid
+	 * @return Illuminate\Http\Response
+	 */
+	public function destroy(Request $request, Bid $bid)
+	{
+		$this->authorize('my-resource', $bid);
+
+		if ( !$this->manager->destroy($bid) ) {
+			return response()->json(['message' => 'Could not delete your bid at the moment.'], 400);
+		}
+
+		return response()->json(['message' => 'Successfully deleted the bid.'], 200);
 	}
 
 }
