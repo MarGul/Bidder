@@ -1,0 +1,36 @@
+.bid_details-component {
+
+	.white-contentSection .white-contentSection-header {
+		
+		&.has-actions {
+			display: block;
+
+			.header-actions {
+				display: flex;
+				align-self: center;
+				margin-top: 5px;
+				justify-content: flex-start;
+			}
+			
+
+			@media screen and (min-width: $screen-sm-min) {
+				display: flex;
+
+				.header-content {
+					flex: 2;
+
+					@media screen and (min-width: $screen-sm-min) {
+						flex: 3;
+					}
+				}
+
+				.header-actions {
+					flex: 1;
+					align-self: flex-start;
+					justify-content: flex-end;
+				}
+			}
+		}
+
+	}
+}
