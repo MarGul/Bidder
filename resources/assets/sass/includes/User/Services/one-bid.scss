@@ -14,10 +14,25 @@
 	margin: 0;
 	padding: 0;
 	display: flex;
+	flex-wrap: wrap;
 
 	li {
-		flex: 1;
+		flex: 1 50%;
 		text-align: center;
+
+		&:nth-child(1),
+		&:nth-child(2) {
+			margin-bottom: 25px;
+		}
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+
+			&:nth-child(1),
+			&:nth-child(2) {
+				margin-bottom: 0;
+			}				
+		}
 
 		.detail-item {
 			font-weight: 500;

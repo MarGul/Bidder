@@ -1,0 +1,21 @@
+.bid_service-component {
+
+	.transparent-contentSection-header {
+		display: flex;
+		align-items: center;
+
+		h3 {
+			flex: 1;
+		}
+
+		a {
+			flex: 1;
+			font-size: 13px;
+			text-align: right;
+		}
+	}
+
+	.items-list-icon li .item-list-icon-content {
+		flex: 6;
+	}
+}

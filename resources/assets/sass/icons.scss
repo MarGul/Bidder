@@ -42,11 +42,26 @@
 	}
 }
 
+.icon_confirmed {
+	@include mask-icon('../svg/confirm.svg');
+	background-color: $brand-success;
+}
+
 .icon_danger {
 	@include icon('../svg/danger.svg');
 }
 
 .icon_arrow_right {
 	@include mask-icon('../svg/right_arrow.svg');
+	background-color: #97A9B5;
+}
+
+.icon_document_check {
+	@include mask-icon('../svg/document_check.svg');
+	background-color: #97A9B5;
+}
+
+.icon_bid {
+	@include mask-icon('../svg/bid.svg');
 	background-color: #97A9B5;
 }

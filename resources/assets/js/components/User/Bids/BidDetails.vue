@@ -5,8 +5,11 @@
 			<div class="main-area">
 				<section class="white-contentSection">
 					<template v-if="fetched">
-						<header class="white-contentSection-header">
-							<h3>fasfa</h3>
+						<header class="white-contentSection-header has-actions">
+							<div class="gray-text">Budet skapades den {{ filters.time(bid.created_at) }}</div>
+							<div class="header-actions" v-if="bid.accepted">
+								<i class="icon icon_confirmed wh20 mr5"></i><span class="bid-accepted">Accepterat bud</span>
+							</div>
 						</header>
 						<div class="gray-contentSection-content">
 							<ul class="bid-details-list">
@@ -34,7 +37,7 @@
 				</section>
 			</div>
 			<div class="main-area-sidebar">
-				<app-bid-service></app-bid-service>
+				<app-bid-service :service="bid.service"></app-bid-service>
 			</div>
 		</div>
 

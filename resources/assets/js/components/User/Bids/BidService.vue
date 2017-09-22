@@ -3,15 +3,37 @@
 		<section class="transparent-contentSection">
 			<header class="transparent-contentSection-header">
 				<h3>Tjänsten</h3>
+				<router-link :to="`/services/${service.id}`" class="is-link" v-if="fetched && service.active">
+					Visa tjänsten
+				</router-link>
 			</header>
-			<div class="transparent-contentSection-content">
-				Yeah
-			</div>
-			<div class="transparent-contentSection-content">
-				<button class="btn btn-danger full-width is-flex c_c" @click.prevent="remove">
-					<i class="icon icon_danger wh20 mr10"></i> Ta bort budet
-				</button>
-			</div>
+			<template v-if="fetched">
+				<div class="transparent-contentSection-content">
+					<ul class="items-list-icon">
+						<li class="">
+							<div class="item-list-icon pt3">
+								<i class="icon icon_document_check wh15 cursor-default"></i>
+							</div>
+							<div class="item-list-icon-content">
+								<div>Titel</div>
+								<div class="gray-sub-text" v-text="service.title"></div>
+							</div>
+						</li>
+						<li class="">
+							<div class="item-list-icon">
+								<i class="icon icon_bid wh20 cursor-default"></i>
+							</div>
+							<div class="item-list-icon-content">
+								<div>Budgivningen {{ statusText }}</div>
+								<div class="gray-sub-text">{{ finishText }} {{ filters.time(service.bid_stop) }}</div>
+							</div>
+						</li>
+					</ul>
+					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="remove">
+						<i class="icon icon_danger wh20 mr10"></i> Ta bort budet
+					</button>
+				</div>
+			</template>
 		</section>
 	</div>
 </template>
@@ -21,6 +43,17 @@
 
 	export default {
 		props: ['service'],
+		computed: {
+			fetched() {
+				return this.$store.getters.userBidDetailsFetched;
+			},
+			statusText() {
+				return this.service.bid_accepted ? ' är avslutad' : 'pågår';
+			},
+			finishText() {
+				return this.service.bid_accepted ? 'Avslutades' : 'Avslutas';
+			}
+		},
 		methods: {
 			remove() {
 				this.$store.dispatch('openModal', {

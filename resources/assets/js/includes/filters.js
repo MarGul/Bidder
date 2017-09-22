@@ -7,6 +7,9 @@ const filters = {
 	},
 	date(value) {
 		return moment(value).format('D MMM YYYY');
+	},
+	time(value) {
+		return moment(value).format('D MMM YYYY HH:mm');
 	}
 }
 

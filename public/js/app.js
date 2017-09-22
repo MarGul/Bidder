@@ -4864,6 +4864,9 @@ var filters = {
 	},
 	date: function date(value) {
 		return moment(value).format('D MMM YYYY');
+	},
+	time: function time(value) {
+		return moment(value).format('D MMM YYYY HH:mm');
 	}
 };
 
@@ -22591,6 +22594,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -22683,11 +22689,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['service'],
+	computed: {
+		fetched: function fetched() {
+			return this.$store.getters.userBidDetailsFetched;
+		},
+		statusText: function statusText() {
+			return this.service.bid_accepted ? ' är avslutad' : 'pågår';
+		},
+		finishText: function finishText() {
+			return this.service.bid_accepted ? 'Avslutades' : 'Avslutas';
+		}
+	},
 	methods: {
 		remove: function remove() {
 			var _this = this;
@@ -22725,11 +22764,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "bid_service-component"
   }, [_c('section', {
     staticClass: "transparent-contentSection"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('header', {
+    staticClass: "transparent-contentSection-header"
+  }, [_c('h3', [_vm._v("Tjänsten")]), _vm._v(" "), (_vm.fetched && _vm.service.active) ? _c('router-link', {
+    staticClass: "is-link",
+    attrs: {
+      "to": ("/services/" + (_vm.service.id))
+    }
+  }, [_vm._v("\n\t\t\t\tVisa tjänsten\n\t\t\t")]) : _vm._e()], 1), _vm._v(" "), (_vm.fetched) ? [_c('div', {
     staticClass: "transparent-contentSection-content"
-  }, [_vm._v("\n\t\t\tYeah\n\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "transparent-contentSection-content"
-  }, [_c('button', {
+  }, [_c('ul', {
+    staticClass: "items-list-icon"
+  }, [_c('li', {}, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_c('div', [_vm._v("Titel")]), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text",
+    domProps: {
+      "textContent": _vm._s(_vm.service.title)
+    }
+  })])]), _vm._v(" "), _c('li', {}, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_c('div', [_vm._v("Budgivningen " + _vm._s(_vm.statusText))]), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text"
+  }, [_vm._v(_vm._s(_vm.finishText) + " " + _vm._s(_vm.filters.time(_vm.service.bid_stop)))])])])]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-danger full-width is-flex c_c",
     on: {
       "click": function($event) {
@@ -22739,11 +22796,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon icon_danger wh20 mr10"
-  }), _vm._v(" Ta bort budet\n\t\t\t")])])])])
+  }), _vm._v(" Ta bort budet\n\t\t\t\t")])])] : _vm._e()], 2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "transparent-contentSection-header"
-  }, [_c('h3', [_vm._v("Tjänsten")])])
+  return _c('div', {
+    staticClass: "item-list-icon pt3"
+  }, [_c('i', {
+    staticClass: "icon icon_document_check wh15 cursor-default"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-list-icon"
+  }, [_c('i', {
+    staticClass: "icon icon_bid wh20 cursor-default"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -22766,7 +22831,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main-area"
   }, [_c('section', {
     staticClass: "white-contentSection"
-  }, [(_vm.fetched) ? [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [(_vm.fetched) ? [_c('header', {
+    staticClass: "white-contentSection-header has-actions"
+  }, [_c('div', {
+    staticClass: "gray-text"
+  }, [_vm._v("Budet skapades den " + _vm._s(_vm.filters.time(_vm.bid.created_at)))]), _vm._v(" "), (_vm.bid.accepted) ? _c('div', {
+    staticClass: "header-actions"
+  }, [_c('i', {
+    staticClass: "icon icon_confirmed wh20 mr5"
+  }), _c('span', {
+    staticClass: "bid-accepted"
+  }, [_vm._v("Accepterat bud")])]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "gray-contentSection-content"
   }, [_c('ul', {
     staticClass: "bid-details-list"
@@ -22805,12 +22880,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })] : _c('app-loading')], 2)]), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
-  }, [_c('app-bid-service')], 1)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "white-contentSection-header"
-  }, [_c('h3', [_vm._v("fasfa")])])
-}]}
+  }, [_c('app-bid-service', {
+    attrs: {
+      "service": _vm.bid.service
+    }
+  })], 1)])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
