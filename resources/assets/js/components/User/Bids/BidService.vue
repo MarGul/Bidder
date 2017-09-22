@@ -3,9 +3,11 @@
 		<section class="transparent-contentSection">
 			<header class="transparent-contentSection-header">
 				<h3>Tjänsten</h3>
-				<router-link :to="`/services/${service.id}`" class="is-link" v-if="fetched && service.active">
-					Visa tjänsten
-				</router-link>
+				<template v-if="fetched">
+					<router-link :to="`/services/${service.id}`" class="is-link" v-if="service.active">
+						Visa tjänsten
+					</router-link>
+				</template>
 			</header>
 			<template v-if="fetched">
 				<div class="transparent-contentSection-content">

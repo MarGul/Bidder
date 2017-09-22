@@ -21327,10 +21327,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -22293,25 +22289,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "edit_service-component"
   }, [_c('div', {
-    staticClass: "row"
+    staticClass: "main-area-with-sidebar"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-8 col-lg-9"
+    staticClass: "main-area"
   }, [_c(_vm.currentView, {
     tag: "component",
     on: {
       "changeView": _vm.changeView
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 col-lg-3"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12"
+    staticClass: "main-area-sidebar"
   }, [_c('app-service-bids', {
     on: {
       "changeView": _vm.changeView
     }
-  })], 1)])])])])
+  })], 1)])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -22711,6 +22703,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -22766,12 +22760,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "transparent-contentSection"
   }, [_c('header', {
     staticClass: "transparent-contentSection-header"
-  }, [_c('h3', [_vm._v("Tjänsten")]), _vm._v(" "), (_vm.fetched && _vm.service.active) ? _c('router-link', {
+  }, [_c('h3', [_vm._v("Tjänsten")]), _vm._v(" "), (_vm.fetched) ? [(_vm.service.active) ? _c('router-link', {
     staticClass: "is-link",
     attrs: {
       "to": ("/services/" + (_vm.service.id))
     }
-  }, [_vm._v("\n\t\t\t\tVisa tjänsten\n\t\t\t")]) : _vm._e()], 1), _vm._v(" "), (_vm.fetched) ? [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\tVisa tjänsten\n\t\t\t\t")]) : _vm._e()] : _vm._e()], 2), _vm._v(" "), (_vm.fetched) ? [_c('div', {
     staticClass: "transparent-contentSection-content"
   }, [_c('ul', {
     staticClass: "items-list-icon"

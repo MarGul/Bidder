@@ -1,16 +1,12 @@
 <template>
 	<div class="edit_service-component">
 		
-		<div class="row">
-			<div class="col-xs-12 col-md-8 col-lg-9">
+		<div class="main-area-with-sidebar">
+			<div class="main-area">
 				<component :is="currentView" @changeView="changeView"></component>
 			</div>
-			<div class="col-xs-12 col-md-4 col-lg-3">
-				<div class="row">
-					<div class="col-xs-12">
-						<app-service-bids @changeView="changeView"></app-service-bids>
-					</div>
-				</div>
+			<div class="main-area-sidebar">
+				<app-service-bids @changeView="changeView"></app-service-bids>
 			</div>
 		</div>
 

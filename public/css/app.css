@@ -2946,6 +2946,10 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.one_bid-component .header-actions {
+  text-align: right;
+}
+
 .bid-details-list {
   list-style-type: none;
   margin: 0;
