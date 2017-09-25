@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateInvoicesTable extends Migration
 {
@@ -14,9 +15,10 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->integer('user_id');
             $table->integer('project_id');
+            $table->integer('payment_id');
             $table->string('hash');
             $table->float('total');
             $table->float('vat');
@@ -24,6 +26,8 @@ class CreateInvoicesTable extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
         });
+
+        DB::update('ALTER TABLE invoices AUTO_INCREMENT = 1000000');
     }
 
     /**

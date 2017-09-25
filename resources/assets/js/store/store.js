@@ -18,6 +18,7 @@ import userBidDetails from './modules/userBidDetails';
 import userServices from './modules/userServices';
 import userSubscriptions from './modules/userSubscriptions';
 import userServiceDetails from './modules/userServiceDetails';
+import userInvoices from './modules/userInvoices';
 
 export default new Vuex.Store({
 	modules: {
@@ -34,6 +35,7 @@ export default new Vuex.Store({
 		userBidDetails,
 		userServices,
 		userServiceDetails,
-		userSubscriptions
+		userSubscriptions,
+		userInvoices
 	}
 });

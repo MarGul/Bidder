@@ -7,23 +7,22 @@
 			</header>
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
-					<ul class="user-items-list" v-if="invoices.length > 0">
-						<li v-for="invoice in invoices">
-							<span class="item-content">
-								Faktura #{{ 1000000 + invoice.id }}
-							</span>
-							<span class="item-actions">
-								<span class="payment-status" :class="paidClass(invoice)">
-									<i class="fa" :class="paidIcon(invoice)" aria-hidden="true"></i>
-									{{ paidText(invoice) }}
-								</span>
-								<button type="button" class="btn btn-primary" @click.prevent="show(invoice)">Visa detaljer</button>
-							</span>
+					<ul class="items-list" v-if="invoices.length > 0">
+						<li class="gray-item clickable" v-for="invoice in invoices" @click="goTo(invoice)">
+							<div class="item-content">
+								<div class="item-header">Faktura #{{ invoice.id }}</div>
+								<div class="item-sub-data">
+									<span class="mr5"></span>&bull;
+									<span class="ml5"></span>
+								</div>
+							</div>
+							<div class="item-go-to">
+								<i class="icon icon_arrow_right wh12"></i>
+							</div>
 						</li>
 					</ul>
-					<div class="alert alert-info" v-else>
-						Där finns inga betalningar registrerade på dig.
-					</div>
+
+					<div class="alert alert-info" v-else>Där finns inga betalningar registrerade på dig ännu.</div>
 				</template>
 
 				<app-loading v-else></app-loading>
@@ -34,50 +33,31 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+	import Model from '../../../includes/Model';
+
 	export default {
 		computed: {
-			fetched() {
-				return this.$store.getters.userInvoicesFetched;
-			},
-			invoices() {
-				return this.$store.getters.userInvoices;
-			}
+			...mapGetters({
+				fetched: 'userInvoicesFetched',
+			 	invoices: 'userInvoices'
+			})
 		},
 		methods: {
-			paidText(invoice) {
-				return invoice.payments.length ? 'Betalad' : 'Ej betald';
-			},
-			dueDate(invoice) {
-				return moment(invoice.due).format('LL');
-			},
-			show(invoice) {
-				this.$store.commit('SET_INVOICE_FOCUS', {invoice});
-				this.$router.push(`/user/invoices/${1000000 + invoice.id}`);
+			goTo(invoice) {
+				this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
+				this.$router.push(`/user/invoices/${invoice.id}`);
 			}
 		},
 		created() {
 			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserInvoices');
+				new Model('invoices').get()
+					.then(response => {
+						this.$store.commit('SET_USER_INVOICES', response.invoices);
+						this.$store.commit('SET_USER_INVOICES_FETCHED', true);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}
 </script>
-
-<style lang="scss">
-	.payment-status {
-		margin-right: 10px;
-		font-size: 12px;
-
-		i {
-			margin-right: 3px;
-		}
-		
-		&.paid {
-			color: #5cb85c;
-		}
-
-		&.not-paid {
-			color: #d9534f;
-		}
-	}
-</style>

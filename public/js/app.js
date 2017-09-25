@@ -1580,8 +1580,8 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_USER_BIDS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_USER_BID_DETAILS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_USER_SERVICES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_SERVICE_DETAILS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SERVICE_DETAILS_SERVICE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
@@ -1589,6 +1589,9 @@ var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SUBSCRIPTIONS_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_USER_INVOICES_FOCUS; });
 // User bids
 var SET_USER_BIDS_FETCHED = 'SET_USER_BIDS_FETCHED';
 var SET_USER_BIDS = 'SET_USER_BIDS';
@@ -1611,6 +1614,11 @@ var SET_SERVICE_DETAILS_BID_ACCEPTED = 'SET_SERVICE_DETAILS_BID_ACCEPTED';
 // User subscriptions
 var SET_SUBSCRIPTIONS_FETCHED = 'SET_SUBSCRIPTIONS_FETCHED';
 var SET_SUBSCRIPTIONS = 'SET_SUBSCRIPTIONS';
+
+// User invoices
+var SET_USER_INVOICES_FETCHED = 'SET_USER_INVOICES_FETCHED';
+var SET_USER_INVOICES = 'SET_USER_INVOICES';
+var SET_USER_INVOICES_FOCUS = 'SET_USER_INVOICES_FOCUS';
 
 /***/ }),
 /* 11 */,
@@ -13548,12 +13556,14 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__modules_userServices__ = __webpack_require__(242);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__modules_userSubscriptions__ = __webpack_require__(243);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__modules_userServiceDetails__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modules_userInvoices__ = __webpack_require__(440);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 // Import modules
+
 
 
 
@@ -13584,7 +13594,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		userBidDetails: __WEBPACK_IMPORTED_MODULE_12__modules_userBidDetails__["a" /* default */],
 		userServices: __WEBPACK_IMPORTED_MODULE_13__modules_userServices__["a" /* default */],
 		userServiceDetails: __WEBPACK_IMPORTED_MODULE_15__modules_userServiceDetails__["a" /* default */],
-		userSubscriptions: __WEBPACK_IMPORTED_MODULE_14__modules_userSubscriptions__["a" /* default */]
+		userSubscriptions: __WEBPACK_IMPORTED_MODULE_14__modules_userSubscriptions__["a" /* default */],
+		userInvoices: __WEBPACK_IMPORTED_MODULE_16__modules_userInvoices__["a" /* default */]
 	}
 }));
 
@@ -13923,10 +13934,7 @@ var user = {
 		notificationSettingsFetched: false,
 		projects: [],
 		projectsFetched: false,
-		projectFocus: null,
-		invoices: [],
-		invoicesFetched: false,
-		invoiceFocus: null
+		projectFocus: null
 	},
 	mutations: {
 		'SET_NOTIFICATIONSETTINGS': function SET_NOTIFICATIONSETTINGS(state, payload) {
@@ -13943,15 +13951,6 @@ var user = {
 		},
 		'SET_PROJECT_FOCUS': function SET_PROJECT_FOCUS(state, payload) {
 			state.projectFocus = payload.project;
-		},
-		'SET_INVOICES': function SET_INVOICES(state, payload) {
-			state.invoices = payload.invoices;
-		},
-		'SET_INVOICES_FETCHED': function SET_INVOICES_FETCHED(state, payload) {
-			state.invoicesFetched = payload.fetched;
-		},
-		'SET_INVOICE_FOCUS': function SET_INVOICE_FOCUS(state, payload) {
-			state.invoiceFocus = payload.invoice;
 		}
 	},
 	actions: {
@@ -13965,9 +13964,6 @@ var user = {
 			commit('SET_PROJECTS', { projects: [] });
 			commit('SET_PROJECTS_FETCHED', { fetched: false });
 			commit('SET_PROJECT_FOCUS', { project: null });
-			commit('SET_INVOICES', { invoices: [] });
-			commit('SET_INVOICES_FETCHED', { fetched: false });
-			commit('SET_INVOICE_FOCUS', { invoice: null });
 		},
 		fetchUserNotificationSettings: function fetchUserNotificationSettings(_ref2) {
 			var commit = _ref2.commit,
@@ -13997,24 +13993,6 @@ var user = {
 					commit('SET_PROJECT_FOCUS', { project: focus });
 				}
 			});
-		},
-		fetchUserInvoices: function fetchUserInvoices(_ref4) {
-			var commit = _ref4.commit,
-			    rootState = _ref4.rootState;
-			var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/{id}/invoices').setId(rootState.auth.user.id).get().then(function (response) {
-				commit('SET_INVOICES', { invoices: response.invoices });
-				commit('SET_INVOICES_FETCHED', { fetched: true });
-
-				// If we have passed in a focusId then set the invoice with that Id as focus.
-				if (payload.focusId) {
-					var focus = response.invoices.find(function (invoice) {
-						return invoice.id == payload.focusId;
-					});
-					commit('SET_INVOICE_FOCUS', { invoice: focus });
-				}
-			});
 		}
 	},
 	getters: {
@@ -14032,15 +14010,6 @@ var user = {
 		},
 		userProjectFocus: function userProjectFocus(state) {
 			return state.projectFocus;
-		},
-		userInvoices: function userInvoices(state) {
-			return state.invoices;
-		},
-		userInvoicesFetched: function userInvoicesFetched(state) {
-			return state.invoicesFetched;
-		},
-		userInvoiceFocus: function userInvoiceFocus(state) {
-			return state.invoiceFocus;
 		}
 	}
 };
@@ -14561,9 +14530,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -24942,17 +24911,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(411)
-}
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(413),
   /* template */
   __webpack_require__(414),
   /* styles */
-  injectStyle,
+  null,
   /* scopeId */
   null,
   /* moduleIdentifier (server only) */
@@ -24982,52 +24947,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 411 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(412);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("e559c668", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyInvoices.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-880794c2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MyInvoices.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 412 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.payment-status {\n  margin-right: 10px;\n  font-size: 12px;\n}\n.payment-status i {\n    margin-right: 3px;\n}\n.payment-status.paid {\n    color: #5cb85c;\n}\n.payment-status.not-paid {\n    color: #d9534f;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 411 */,
+/* 412 */,
 /* 413 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -25063,30 +24993,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: {
-		fetched: function fetched() {
-			return this.$store.getters.userInvoicesFetched;
-		},
-		invoices: function invoices() {
-			return this.$store.getters.userInvoices;
-		}
-	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		fetched: 'userInvoicesFetched',
+		invoices: 'userInvoices'
+	})),
 	methods: {
-		paidText: function paidText(invoice) {
-			return invoice.payments.length ? 'Betalad' : 'Ej betald';
-		},
-		dueDate: function dueDate(invoice) {
-			return moment(invoice.due).format('LL');
-		},
-		show: function show(invoice) {
-			this.$store.commit('SET_INVOICE_FOCUS', { invoice: invoice });
-			this.$router.push('/user/invoices/' + (1000000 + invoice.id));
+		goTo: function goTo(invoice) {
+			this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
+			this.$router.push('/user/invoices/' + invoice.id);
 		}
 	},
 	created: function created() {
+		var _this = this;
+
 		if (!this.fetched) {
-			this.$store.dispatch('fetchUserInvoices');
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
+				_this.$store.commit('SET_USER_INVOICES', response.invoices);
+				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
@@ -25103,40 +25033,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "white-contentSection-content"
   }, [(_vm.fetched) ? [(_vm.invoices.length > 0) ? _c('ul', {
-    staticClass: "user-items-list"
+    staticClass: "items-list"
   }, _vm._l((_vm.invoices), function(invoice) {
-    return _c('li', [_c('span', {
-      staticClass: "item-content"
-    }, [_vm._v("\n\t\t\t\t\t\t\tFaktura #" + _vm._s(1000000 + invoice.id) + "\n\t\t\t\t\t\t")]), _vm._v(" "), _c('span', {
-      staticClass: "item-actions"
-    }, [_c('span', {
-      staticClass: "payment-status",
-      class: _vm.paidClass(invoice)
-    }, [_c('i', {
-      staticClass: "fa",
-      class: _vm.paidIcon(invoice),
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v("\n\t\t\t\t\t\t\t\t" + _vm._s(_vm.paidText(invoice)) + "\n\t\t\t\t\t\t\t")]), _vm._v(" "), _c('button', {
-      staticClass: "btn btn-primary",
-      attrs: {
-        "type": "button"
-      },
+    return _c('li', {
+      staticClass: "gray-item clickable",
       on: {
         "click": function($event) {
-          $event.preventDefault();
-          _vm.show(invoice)
+          _vm.goTo(invoice)
         }
       }
-    }, [_vm._v("Visa detaljer")])])])
+    }, [_c('div', {
+      staticClass: "item-content"
+    }, [_c('div', {
+      staticClass: "item-header"
+    }, [_vm._v("Faktura #" + _vm._s(invoice.id))]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _vm._m(2, true)])
   })) : _c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v("\n\t\t\t\t\tDär finns inga betalningar registrerade på dig.\n\t\t\t\t")])] : _c('app-loading')], 2)])])
+  }, [_vm._v("Där finns inga betalningar registrerade på dig ännu.")])] : _c('app-loading')], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "white-contentSection-header"
   }, [_c('h3', [_vm._v("Betalningar")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-sub-data"
+  }, [_c('span', {
+    staticClass: "mr5"
+  }), _vm._v("•\n\t\t\t\t\t\t\t\t"), _c('span', {
+    staticClass: "ml5"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-go-to"
+  }, [_c('i', {
+    staticClass: "icon icon_arrow_right wh12"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -25192,25 +25123,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -25228,28 +25144,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: {
-		fetched: function fetched() {
-			return this.$store.getters.userInvoicesFetched;
-		},
-		invoice: function invoice() {
-			return this.$store.getters.userInvoiceFocus;
-		},
-		paid: function paid() {
-			return this.invoice.payments.length > 0;
-		},
-		invoiceCreated: function invoiceCreated() {
-			return moment(this.invoice.created_at).format('LLL');
-		},
-		invoiceDue: function invoiceDue() {
-			return moment(this.invoice.due).format('D MMMM YYYY');
-		}
-	},
-	methods: {},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		fetched: 'userInvoicesFetched',
+		invoice: 'userInvoicesFocus'
+	})),
 	created: function created() {
+		var _this = this;
+
 		if (!this.fetched) {
-			this.$store.dispatch('fetchUserInvoices', { focusId: this.$route.params.id - 1000000 });
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
+				_this.$store.commit('SET_USER_INVOICES', response.invoices);
+				_this.$store.commit('SET_USER_INVOICES_FOCUS', _this.$route.params.id);
+				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
@@ -25262,33 +25175,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "invoice_details-component"
   }, [(_vm.fetched) ? [_c('div', {
-    staticClass: "panel panel-success"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('i', {
-    staticClass: "fa fa-balance-scale",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Faktura #" + _vm._s(1000000 + _vm.invoice.id) + "\n\t\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('div', {
-    staticClass: "invoice-text"
-  }, [_vm._v("Bla")]), _vm._v(" "), _c('div', {
-    staticClass: "invoice-details"
-  }, [_c('ul', {
-    staticClass: "list-unstyled"
-  }, [_c('li', [_c('strong', [_vm._v("Betald:")]), _vm._v(" " + _vm._s(_vm.paid ? 'Ja' : 'Nej'))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Skapad:")]), _vm._v(" " + _vm._s(_vm.invoiceCreated))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Förfallodag:")]), _vm._v(" " + _vm._s(_vm.invoiceDue))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Totalpris:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.total)))]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Varav moms:")]), _vm._v(" " + _vm._s(_vm.filters.currency(_vm.invoice.vat)))]), _vm._v(" "), _c('li', {
-    staticClass: "invoice-download"
-  }, [_c('a', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "href": ("/download-invoice/" + (_vm.invoice.hash)),
-      "target": "_blank"
-    }
-  }, [_vm._v("Ladda ner faktura")])])])])])]), _vm._v(" "), (!_vm.paid) ? _c('div', {
     staticClass: "alert alert-warning"
-  }, [_vm._v("\n\t\t\tHär ska payment iFrame finnas\n\t\t")]) : _vm._e()] : _c('app-loading')], 2)
+  }, [_vm._v("\n\t\t\tHär ska payment iFrame finnas\n\t\t")])] : _c('app-loading')], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25885,6 +25773,67 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(10);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var state = {
+	fetched: false,
+	invoices: [],
+	focusId: null
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_USER_INVOICES */], function (state, invoices) {
+	state.invoices = invoices;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+	state.focusId = focusId;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	userInvoicesFetched: function userInvoicesFetched(state) {
+		return state.fetched;
+	},
+	userInvoices: function userInvoices(state) {
+		return state.invoices;
+	},
+	userInvoicesFocus: function userInvoicesFocus(state) {
+		return state.invoices.find(function (invoice) {
+			return invoice.id === state.focusId;
+		});
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ })
 ],[141]);

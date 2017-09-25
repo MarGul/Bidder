@@ -57,7 +57,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */
-	Route::get('users/{user}/invoices')->uses('UserInvoiceController@index');
+	Route::get('invoices')->uses('UserInvoiceController@index');
 	/* Handle the users notification settings. */
 	Route::get('users/{user}/notification-settings')->uses('UserNotificationSettingsController@index');
 	Route::patch('users/{user}/notification-settings')->uses('UserNotificationSettingsController@update');

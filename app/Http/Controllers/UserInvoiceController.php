@@ -21,6 +21,12 @@ class UserInvoiceController extends Controller
 		$this->manager = $manager;
 	}
 
+	/**
+	 * Display a listing of the resources
+	 * 
+	 * @param  Request $request
+	 * @return Illuminate\Http\Response
+	 */
 	public function index(Request $request)
 	{
 		return response()->json([
