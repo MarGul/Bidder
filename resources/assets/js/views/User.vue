@@ -7,55 +7,54 @@
 					<div class="small-device-actions clearfix">
 						<button class="btn btn-primary-bordered user-nav-button mb10" @click.prevent="toggleMenu" v-if="breakpoints.isSmallDevices()">
 							Andra inställningar
-							<svg-icon icon="arrowDown" fill="#009999" classes="vertical-centered"></svg-icon>
 						</button>
 					</div>
 					<ul class="user-nav">
 						<li>
 							<router-link to="/user/profile">
-								<i class="icon"></i>
+								<i class="icon icon_user wh15 mr15"></i>
 								<span class="link-text">Profil</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/notifications">
-								<svg-icon icon="notifications" fill="#009999"></svg-icon>
+								<i class="icon icon_bell wh15 mr15"></i>
 								<span class="link-text">Notifikationer</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/create-service">
-								<svg-icon icon="fileCheckmark" fill="#009999"></svg-icon>
+								<i class="icon icon_document_check wh15 mr15"></i>
 								<span class="link-text">Skapa tjänst</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/services">
-								<svg-icon icon="monitor" fill="#009999"></svg-icon>
+								<i class="icon icon_monitor wh15 mr15"></i>
 								<span class="link-text">Mina tjänster</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/bids">
-								<svg-icon icon="gavel" fill="#009999"></svg-icon>
+								<i class="icon icon_bid wh15 mr15"></i>
 								<span class="link-text">Mina bud</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/projects">
-								<svg-icon icon="twoUsers" fill="#009999"></svg-icon>
+								<i class="icon icon_two_users wh15 mr15"></i>
 								<span class="link-text">Mina projekt</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/subscriptions">
-								<svg-icon icon="retweet" fill="#009999"></svg-icon>	
+								<i class="icon icon_retweet wh15 mr15"></i>	
 								<span class="link-text">Prenumerationer</span>
 							</router-link>
 						</li>
 						<li>
 							<router-link to="/user/invoices">
-								<svg-icon icon="creditCard" fill="#009999"></svg-icon>
+								<i class="icon icon_credit_card wh15 mr15"></i>
 								Betalningar
 							</router-link>
 						</li>
@@ -71,12 +70,7 @@
 </template>
 
 <script>
-	import svgIcon from '../components/Includes/Icons';
-
 	export default {
-		components: {
-			svgIcon
-		},
 		data() {
             return {
                 breakpoints: window.breakpoints,

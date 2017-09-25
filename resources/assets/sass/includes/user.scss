@@ -34,27 +34,12 @@
 					display: flex;
 					align-items: center;
 
-					.svg-icon {
-						display: flex;
-						align-self: center;
-						
-						svg {
-							margin-right: 15px;
-
-							path, circle, polygon {
-								fill: #97A9B5;
-							}
-						}
-					}
-
 					&.active {
 						color: $brand-primary;
 						font-weight: 500;
 
-						svg {
-							path, circle, polygon {
-								fill: $brand-primary !important;
-							}
+						i {
+							background-color: $brand-primary !important;
 						}
 					}
 
@@ -62,10 +47,8 @@
 						text-decoration: none;
 						font-weight: 500;
 
-						svg {
-							path, circle, polygon {
-								fill: #6D717A;
-							}
+						i {
+							background-color: lighten($text-color, 15%);
 						}
 					}
 

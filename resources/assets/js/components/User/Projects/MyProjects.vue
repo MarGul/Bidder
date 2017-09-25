@@ -17,7 +17,7 @@
 								</div>
 							</div>
 							<div class="item-go-to">
-								<svg-icon icon="arrowRight" :width="12" :height="12" fill="#97A9B5"></svg-icon>
+								<i class="icon icon_arrow_right wh12"></i>
 							</div>
 						</li>
 					</ul>
@@ -36,12 +36,7 @@
 </template>
 
 <script>
-	import svgIcon from "../../Includes/Icons";
-
 	export default {
-		components: {
-			svgIcon
-		},
 		computed: {
 			fetched() {
 				return this.$store.getters.userProjectsFetched;

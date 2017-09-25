@@ -17,7 +17,7 @@ mix.webpackConfig({
         rules: [
             {
                 test: /\.svg$/,
-                exclude: /(node_modules|bower_components|fonts)/,
+                exclude: /(node_modules|bower_components)/,
                 loader: 'svg-url-loader'
             }
         ]
