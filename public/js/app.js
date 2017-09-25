@@ -25254,7 +25254,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "item-list-icon-content"
   }, [_c('div', [_vm._v(_vm._s(_vm.paymentTitle))]), _vm._v(" "), _c('div', {
     staticClass: "gray-sub-text"
-  }, [_vm._v(_vm._s(_vm.paymentDate))])])])]), _vm._v(" "), _vm._m(3)])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.paymentDate))])])])]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-success full-width is-flex c_c",
+    attrs: {
+      "href": ("/download-invoice/" + (_vm.invoice.hash)),
+      "target": "_blank"
+    }
+  }, [_c('i', {
+    staticClass: "icon icon_download wh20 mr10"
+  }), _vm._v(" Ladda ner fakturan\n\t\t\t\t\t\t")])])])])]), _vm._v(" "), _c('div', {
     staticClass: "alert alert-warning mt30"
   }, [_vm._v("\n\t\t\tHär ska payment iFrame finnas\n\t\t")])] : _c('app-loading')], 2)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -25273,12 +25281,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "icon icon_credit_card wh15 cursor-default"
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "btn btn-success full-width is-flex c_c"
-  }, [_c('i', {
-    staticClass: "icon icon_download wh20 mr10"
-  }), _vm._v(" Ladda ner fakturan\n\t\t\t\t\t\t")])
 }]}
 module.exports.render._withStripped = true
 if (false) {

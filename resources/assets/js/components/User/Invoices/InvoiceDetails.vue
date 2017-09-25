@@ -40,9 +40,9 @@
 									</div>
 								</li>
 							</ul>
-							<button class="btn btn-success full-width is-flex c_c">
+							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank">
 								<i class="icon icon_download wh20 mr10"></i> Ladda ner fakturan
-							</button>
+							</a>
 						</div>
 					</section>
 				</div>
