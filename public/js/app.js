@@ -25143,6 +25143,50 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -25151,7 +25195,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
 		invoice: 'userInvoicesFocus'
-	})),
+	}), {
+		paymentTitle: function paymentTitle() {
+			return this.invoice.payment ? 'Betalad' : 'Förfallodag';
+		},
+		paymentDate: function paymentDate() {
+			return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+		}
+	}),
 	created: function created() {
 		var _this = this;
 
@@ -25175,9 +25226,60 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "invoice_details-component"
   }, [(_vm.fetched) ? [_c('div', {
-    staticClass: "alert alert-warning"
+    staticClass: "main-area-with-sidebar"
+  }, [_c('div', {
+    staticClass: "main-area"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Faktura #" + _vm._s(_vm.invoice.id))])]), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_vm._v("\n\t\t\t\t\t\tbla\n\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
+    staticClass: "main-area-sidebar"
+  }, [_c('section', {
+    staticClass: "transparent-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "transparent-contentSection-content"
+  }, [_c('ul', {
+    staticClass: "items-list-icon"
+  }, [_c('li', {}, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_c('div', [_vm._v("För projektet")]), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text",
+    domProps: {
+      "textContent": _vm._s(_vm.invoice.project.title)
+    }
+  })])]), _vm._v(" "), _c('li', {}, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_c('div', [_vm._v(_vm._s(_vm.paymentTitle))]), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text"
+  }, [_vm._v(_vm._s(_vm.paymentDate))])])])]), _vm._v(" "), _vm._m(3)])])])]), _vm._v(" "), _c('div', {
+    staticClass: "alert alert-warning mt30"
   }, [_vm._v("\n\t\t\tHär ska payment iFrame finnas\n\t\t")])] : _c('app-loading')], 2)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "transparent-contentSection-header"
+  }, [_c('h3', [_vm._v("Detaljer")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-list-icon pt3"
+  }, [_c('i', {
+    staticClass: "icon icon_two_users wh15 cursor-default"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-list-icon"
+  }, [_c('i', {
+    staticClass: "icon icon_credit_card wh15 cursor-default"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "btn btn-success full-width is-flex c_c"
+  }, [_c('i', {
+    staticClass: "icon icon_download wh20 mr10"
+  }), _vm._v(" Ladda ner fakturan\n\t\t\t\t\t\t")])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -25809,7 +25911,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
-	state.focusId = focusId;
+	state.focusId = parseInt(focusId);
 }), _mutations);
 
 var actions = {};

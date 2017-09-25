@@ -207,7 +207,7 @@ class InvoiceManager
 	 */
 	public function byUser($user)
 	{
-		$invoices = Invoice::with('payments')
+		$invoices = Invoice::with('payment', 'project')
 							->where('user_id', $user->id)
 							->orderBy('created_at', 'desc')
 							->get();

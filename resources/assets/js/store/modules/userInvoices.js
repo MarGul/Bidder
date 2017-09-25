@@ -14,7 +14,7 @@ const mutations = {
 		state.invoices = invoices;
 	},
 	[SET_USER_INVOICES_FOCUS](state, focusId) {
-		state.focusId = focusId;
+		state.focusId = parseInt(focusId);
 	}
 }
 

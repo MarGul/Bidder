@@ -42,6 +42,11 @@
 	}
 }
 
+.icon_download {
+	@include mask-icon('../svg/download.svg');
+	background-color: #fff;
+}
+
 .icon_bell {
 	@include mask-icon('../svg/bell.svg');
 	background-color: #97A9B5;

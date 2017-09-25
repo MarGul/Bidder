@@ -3,8 +3,52 @@
 		
 		<template v-if="fetched">
 			
+			<div class="main-area-with-sidebar">
+				<div class="main-area">
+					<section class="white-contentSection">
+						<header class="white-contentSection-header">
+							<h3>Faktura #{{ invoice.id }}</h3>
+						</header>
+						<div class="white-contentSection-content">
+							bla
+						</div>
+					</section>
+				</div>
+				<div class="main-area-sidebar">
+					<section class="transparent-contentSection">
+						<header class="transparent-contentSection-header">
+							<h3>Detaljer</h3>
+						</header>
+						<div class="transparent-contentSection-content">
+							<ul class="items-list-icon">
+								<li class="">
+									<div class="item-list-icon pt3">
+										<i class="icon icon_two_users wh15 cursor-default"></i>
+									</div>
+									<div class="item-list-icon-content">
+										<div>För projektet</div>
+										<div class="gray-sub-text" v-text="invoice.project.title"></div>
+									</div>
+								</li>
+								<li class="">
+									<div class="item-list-icon">
+										<i class="icon icon_credit_card wh15 cursor-default"></i>
+									</div>
+									<div class="item-list-icon-content">
+										<div>{{ paymentTitle }}</div>
+										<div class="gray-sub-text">{{ paymentDate }}</div>
+									</div>
+								</li>
+							</ul>
+							<button class="btn btn-success full-width is-flex c_c">
+								<i class="icon icon_download wh20 mr10"></i> Ladda ner fakturan
+							</button>
+						</div>
+					</section>
+				</div>
+			</div>
 
-			<div class="alert alert-warning">
+			<div class="alert alert-warning mt30">
 				Här ska payment iFrame finnas
 			</div>
 		</template>
@@ -23,7 +67,13 @@
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
 				invoice: 'userInvoicesFocus'
-			})
+			}),
+			paymentTitle() {
+				return this.invoice.payment ? 'Betalad' : 'Förfallodag';
+			},
+			paymentDate() {
+				return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+			}
 		},
 		created() {
 			if ( !this.fetched ) {

@@ -37,13 +37,13 @@ class Invoice extends Model
     }
 
     /**
-     * An invoice may have many payments (mostly one)
+     * An invoice has one payment
      * 
      * @return Eloquent Relationship
      */
-    public function payments()
+    public function payment()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasOne('App\Payment');
     }
 
 }
