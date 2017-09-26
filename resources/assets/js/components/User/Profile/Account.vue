@@ -1,37 +1,50 @@
 <template>
 	<div class="account-component">			
-		<form @keydown="form.errors.clear()">
-			<div class="form-group" :class="{'has-error': form.errors.has('name')}">
-				<label class="control-label">Namn</label>
-				<input type="text" class="form-control" v-model="form.name">
-				<span class="help-block" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
-				<small>Namnet som visas på din publika profil.</small>
-			</div>
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Min profil</h3>
+			</header>
+			<form @keydown="form.errors.clear()">
+				<div class="white-contentSection-content">
+					<div class="form-section-controls">
+						<div class="control-container full-width" :class="{'has-errors': form.errors.has('name')}">
+							<label class="control-label">Namn</label>
+							<input type="text" class="form-control" v-model="form.name">
+							<span class="help-block" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
+						</div>
+					</div>
 
-			<div class="form-group" :class="{'has-error': form.errors.has('username')}">
-				<label class="control-label">Användarnamn</label>
-				<input type="text" class="form-control" v-model="form.username">
-				<span class="help-block" v-if="form.errors.has('username')" v-text="form.errors.get('username')"></span>
-				<small>Ditt unika namn</small>
-			</div>
+					<div class="form-section-controls">
+						<div class="control-container full-width" :class="{'has-errors': form.errors.has('username')}">
+							<label class="control-label">Användarnamn</label>
+							<input type="text" class="form-control" v-model="form.username">
+							<span class="help-block" v-if="form.errors.has('username')" v-text="form.errors.get('username')"></span>
+						</div>
+					</div>
 
-			<div class="form-group" :class="{'has-error': form.errors.has('bio')}">
-				<label class="control-label">Profiltext</label>
-				<textarea class="form-control" rows="4" v-model="form.bio"></textarea>
-				<span class="help-block" v-if="form.errors.has('bio')" v-text="form.errors.get('bio')"></span>
-				<small>En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.</small>
-			</div>
+					<div class="form-section-controls">
+						<div class="control-container full-width" :class="{'has-errors': form.errors.has('bio')}">
+							<label class="control-label">Profiltext</label>
+							<textarea rows="4" class="form-control" v-model="form.bio"></textarea>
+							<span class="help-block" v-if="form.errors.has('bio')" v-text="form.errors.get('bio')"></span>
+							<small>En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.</small>
+						</div>
+					</div>
+				</div>
 
-			<div class="form-group">
-				<button 
-					type="submit" 
-					class="btn btn-primary full-width"
-					:class="{'processing': processing}" 
-					@click.prevent="update"
-					:disabled="processing || this.form.errors.any()"
-				>Uppdatera din profil</button> 
-			</div>
-		</form>
+				<footer class="white-contentSection-footer">
+					<button 
+						type="submit" 
+						class="btn btn-primary" 
+						:class="{processing}" 
+						@click.prevent="update" 
+						:disabled="processing || this.form.errors.any()">
+						Uppdatera
+					</button>
+				</footer>
+
+			</form>
+		</section>
 	</div>
 </template>
 

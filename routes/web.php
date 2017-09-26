@@ -9,7 +9,6 @@
 | handle all of the routing.
 */
 
-Route::get('test', 'TestController@index');
 
 /**
  * Auth Routes
@@ -27,7 +26,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
  * ===============
  */
 Route::get('download-invoice/{hash}', 'InvoiceController@index')->name('download.invoice');
-
 
 Route::any('{all}', function () {
     return view('index');

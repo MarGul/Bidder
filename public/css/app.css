@@ -163,6 +163,16 @@
   background-color: #97A9B5;
 }
 
+.icon_image {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 550.801 550.8' style='enable-background:new 0 0 550.801 550.8;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M515.828,61.201H34.972C15.659,61.201,0,76.859,0,96.172v358.458C0,473.942,15.659,489.6,34.972,489.6h480.856 c19.314,0,34.973-15.658,34.973-34.971V96.172C550.801,76.859,535.143,61.201,515.828,61.201z M515.828,96.172V350.51l-68.92-62.66 c-10.359-9.416-26.289-9.04-36.186,0.866l-69.752,69.741L203.438,194.179c-10.396-12.415-29.438-12.537-39.99-0.271L34.972,343.219 V96.172H515.828z M367.201,187.972c0-26.561,21.523-48.086,48.084-48.086c26.562,0,48.086,21.525,48.086,48.086 c0,26.561-21.523,48.085-48.086,48.085C388.725,236.058,367.201,214.533,367.201,187.972z'/%3E %3C/g%3E %3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 550.801 550.8' style='enable-background:new 0 0 550.801 550.8;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M515.828,61.201H34.972C15.659,61.201,0,76.859,0,96.172v358.458C0,473.942,15.659,489.6,34.972,489.6h480.856 c19.314,0,34.973-15.658,34.973-34.971V96.172C550.801,76.859,535.143,61.201,515.828,61.201z M515.828,96.172V350.51l-68.92-62.66 c-10.359-9.416-26.289-9.04-36.186,0.866l-69.752,69.741L203.438,194.179c-10.396-12.415-29.438-12.537-39.99-0.271L34.972,343.219 V96.172H515.828z M367.201,187.972c0-26.561,21.523-48.086,48.084-48.086c26.562,0,48.086,21.525,48.086,48.086 c0,26.561-21.523,48.085-48.086,48.085C388.725,236.058,367.201,214.533,367.201,187.972z'/%3E %3C/g%3E %3C/svg%3E");
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  background-color: #97A9B5;
+}
+
 .icon_monitor {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Capa_1' x='0px' y='0px' viewBox='0 0 548.172 548.172' style='enable-background:new 0 0 548.172 548.172;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M534.75,49.965c-8.945-8.945-19.694-13.422-32.261-13.422H45.681c-12.562,0-23.313,4.477-32.264,13.422 C4.471,58.913,0,69.663,0,82.226v310.633c0,12.566,4.471,23.315,13.417,32.265c8.951,8.945,19.702,13.414,32.264,13.414h155.318 c0,7.231-1.524,14.661-4.57,22.269c-3.044,7.614-6.09,14.273-9.136,19.981c-3.042,5.715-4.565,9.897-4.565,12.56 c0,4.948,1.807,9.24,5.424,12.847c3.615,3.621,7.898,5.435,12.847,5.435h146.179c4.949,0,9.233-1.813,12.848-5.435 c3.62-3.606,5.427-7.898,5.427-12.847c0-2.468-1.526-6.611-4.571-12.415c-3.046-5.801-6.092-12.566-9.134-20.267 c-3.046-7.71-4.569-15.085-4.569-22.128h155.318c12.56,0,23.309-4.469,32.254-13.414c8.949-8.949,13.422-19.698,13.422-32.265 V82.226C548.176,69.663,543.699,58.913,534.75,49.965z M511.627,319.768c0,2.475-0.903,4.613-2.711,6.424 c-1.81,1.804-3.952,2.707-6.427,2.707H45.681c-2.473,0-4.615-0.903-6.423-2.707c-1.807-1.817-2.712-3.949-2.712-6.424V82.226 c0-2.475,0.902-4.615,2.712-6.423c1.809-1.805,3.951-2.712,6.423-2.712h456.815c2.471,0,4.617,0.904,6.42,2.712 c1.808,1.809,2.711,3.949,2.711,6.423V319.768L511.627,319.768z'/%3E %3C/g%3E %3C/svg%3E");
           mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Capa_1' x='0px' y='0px' viewBox='0 0 548.172 548.172' style='enable-background:new 0 0 548.172 548.172;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M534.75,49.965c-8.945-8.945-19.694-13.422-32.261-13.422H45.681c-12.562,0-23.313,4.477-32.264,13.422 C4.471,58.913,0,69.663,0,82.226v310.633c0,12.566,4.471,23.315,13.417,32.265c8.951,8.945,19.702,13.414,32.264,13.414h155.318 c0,7.231-1.524,14.661-4.57,22.269c-3.044,7.614-6.09,14.273-9.136,19.981c-3.042,5.715-4.565,9.897-4.565,12.56 c0,4.948,1.807,9.24,5.424,12.847c3.615,3.621,7.898,5.435,12.847,5.435h146.179c4.949,0,9.233-1.813,12.848-5.435 c3.62-3.606,5.427-7.898,5.427-12.847c0-2.468-1.526-6.611-4.571-12.415c-3.046-5.801-6.092-12.566-9.134-20.267 c-3.046-7.71-4.569-15.085-4.569-22.128h155.318c12.56,0,23.309-4.469,32.254-13.414c8.949-8.949,13.422-19.698,13.422-32.265 V82.226C548.176,69.663,543.699,58.913,534.75,49.965z M511.627,319.768c0,2.475-0.903,4.613-2.711,6.424 c-1.81,1.804-3.952,2.707-6.427,2.707H45.681c-2.473,0-4.615-0.903-6.423-2.707c-1.807-1.817-2.712-3.949-2.712-6.424V82.226 c0-2.475,0.902-4.615,2.712-6.423c1.809-1.805,3.951-2.712,6.423-2.712h456.815c2.471,0,4.617,0.904,6.42,2.712 c1.808,1.809,2.711,3.949,2.711,6.423V319.768L511.627,319.768z'/%3E %3C/g%3E %3C/svg%3E");
@@ -906,13 +916,13 @@ form.loading:after {
   }
 }
 
-form.form-with-sections .form-section {
+.form-section {
   border-bottom: 1px solid #e6ebf1;
   padding: 15px 0;
 }
 
 @media screen and (min-width: 768px) {
-  form.form-with-sections .form-section {
+  .form-section {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -922,12 +932,18 @@ form.form-with-sections .form-section {
   }
 }
 
-form.form-with-sections .form-section .form-section-description {
+@media screen and (min-width: 768px) {
+  .form-section .form-section-controls {
+    padding-left: 15px;
+  }
+}
+
+.form-section-description {
   margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
-  form.form-with-sections .form-section .form-section-description {
+  .form-section-description {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
@@ -936,47 +952,46 @@ form.form-with-sections .form-section .form-section-description {
   }
 }
 
-form.form-with-sections .form-section .form-section-description .description-header {
+.form-section-description .description-header {
   margin-bottom: 5px;
   font-size: 15px;
   font-weight: 500;
   color: #636b6f;
 }
 
-form.form-with-sections .form-section .form-section-description .description-details {
+.form-section-description .description-details {
   font-size: 13px;
   color: #97A9B5;
 }
 
 @media screen and (min-width: 768px) {
-  form.form-with-sections .form-section .form-section-controls {
+  .form-section-controls {
     -webkit-box-flex: 2;
         -ms-flex: 2;
             flex: 2;
-    padding-left: 15px;
   }
 }
 
-form.form-with-sections .form-section .form-section-controls .control-container {
+.form-section-controls .control-container {
   margin-bottom: 15px;
 }
 
-form.form-with-sections .form-section .form-section-controls .control-container.has-errors .help-block,
-form.form-with-sections .form-section .form-section-controls .control-container.has-errors .control-label {
+.form-section-controls .control-container.has-errors .help-block,
+.form-section-controls .control-container.has-errors .control-label {
   color: #cc0000;
 }
 
-form.form-with-sections .form-section .form-section-controls .control-container.has-errors .form-control {
+.form-section-controls .control-container.has-errors .form-control {
   border-color: #cc0000;
 }
 
 @media screen and (min-width: 768px) {
-  form.form-with-sections .form-section .form-section-controls .control-container.half-width {
+  .form-section-controls .control-container.half-width {
     width: 50%;
   }
 }
 
-form.form-with-sections .form-section .form-section-controls .control-container .control-label {
+.form-section-controls .control-container .control-label {
   font-weight: 500;
   font-size: 12px;
   color: #7b858a;
@@ -2798,6 +2813,8 @@ body.mobile-nav-open .overlay {
 
 .profile_picture-component .profile-picture-label {
   position: relative;
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
 }
 
 .profile_picture-component .profile-picture-label span {
@@ -2820,7 +2837,7 @@ body.mobile-nav-open .overlay {
 }
 
 .profile_picture-component .profile-picture-label img {
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .profile_picture-component .profile-picture-label img.opacity {

@@ -18767,16 +18767,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -18875,6 +18865,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -18915,16 +18918,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "account-component"
-  }, [_c('form', {
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('form', {
     on: {
       "keydown": function($event) {
         _vm.form.errors.clear()
       }
     }
   }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('name')
+      'has-errors': _vm.form.errors.has('name')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -18953,10 +18962,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('name'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("Namnet som visas på din publika profil.")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('username')
+      'has-errors': _vm.form.errors.has('username')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -18985,10 +18996,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('username'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("Ditt unika namn")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('bio')
+      'has-errors': _vm.form.errors.has('bio')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -19017,12 +19030,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('bio'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }) : _vm._e(), _vm._v(" "), _c('small', [_vm._v("En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.")])])])]), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
   }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
+    staticClass: "btn btn-primary",
     class: {
-      'processing': _vm.processing
+      processing: _vm.processing
     },
     attrs: {
       "type": "submit",
@@ -19034,8 +19047,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.update($event)
       }
     }
-  }, [_vm._v("Uppdatera din profil")])])])])
-},staticRenderFns: []}
+  }, [_vm._v("\n\t\t\t\t\tUppdatera\n\t\t\t\t")])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Min profil")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -19126,6 +19143,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19166,16 +19197,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "change_password-component"
-  }, [_c('form', {
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('form', {
     on: {
       "keydown": function($event) {
         _vm.form.errors.clear()
       }
     }
   }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('old')
+      'has-errors': _vm.form.errors.has('old')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -19204,10 +19241,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('old'))
     }
-  }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('new')
+      'has-errors': _vm.form.errors.has('new')
     }
   }, [_c('label', {
     staticClass: "control-label"
@@ -19236,14 +19275,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('new'))
     }
-  }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
     class: {
-      'has-error': _vm.form.errors.has('again')
+      'has-errors': _vm.form.errors.has('again')
     }
   }, [_c('label', {
     staticClass: "control-label"
-  }, [_vm._v("Repetera nytt lösenord")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Ditt gamla lösenord")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -19268,10 +19309,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('again'))
     }
-  }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }) : _vm._e()])])]), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
   }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
+    staticClass: "btn btn-primary",
     class: {
       'processing': _vm.processing
     },
@@ -19285,8 +19326,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.update($event)
       }
     }
-  }, [_vm._v("Uppdatera ditt lösenord")])])])])
-},staticRenderFns: []}
+  }, [_vm._v("Ändra")])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Ändra ditt lösenord")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -19357,6 +19402,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -19403,9 +19452,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile_picture-component"
-  }, [(_vm.breakpoints.isSmallDevices()) ? _c('h2', {
-    staticClass: "user-component-title subsection text-left"
-  }, [_vm._v("Uppdatera din avatar")]) : _vm._e(), _vm._v(" "), _c('form', {
+  }, [_c('section', {
+    staticClass: "transparent-contentSection"
+  }, [(_vm.breakpoints.isSmallDevices()) ? _c('header', {
+    staticClass: "transparent-contentSection-header mb15"
+  }, [_c('h3', {
+    staticClass: "text-left"
+  }, [_vm._v("Profilbild")])]) : _vm._e(), _vm._v(" "), _c('form', {
     attrs: {
       "enctype": "multipart/form-data"
     }
@@ -19428,16 +19481,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.image
     }
   }), _vm._v(" "), (_vm.hover || _vm.processing || _vm.breakpoints.isSmallDevices()) ? _c('span', {
-    staticClass: "btn btn-default",
+    staticClass: "btn btn-default is-flex c_c",
     class: {
       processing: _vm.processing
     }
   }, [_c('i', {
-    staticClass: "fa fa-picture-o mr5",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Ladda upp ny bild\n\t\t\t")]) : _vm._e(), _vm._v(" "), _c('input', {
+    staticClass: "icon icon_image wh15 cursor-default mr10"
+  }), _vm._v(" Ladda upp ny bild\n\t\t\t\t")]) : _vm._e(), _vm._v(" "), _c('input', {
     staticClass: "hidden",
     attrs: {
       "type": "file",
@@ -19449,7 +19499,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.upload($event.target.files)
       }
     }
-  })])])])
+  })])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -19466,30 +19516,20 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "profile-component"
-  }, [_c('section', {
-    staticClass: "white-contentSection mb30"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content"
   }, [_c('div', {
-    staticClass: "row"
+    staticClass: "main-area-with-sidebar"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-8"
+    staticClass: "main-area"
   }, [_c('app-account')], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4"
-  }, [_c('app-profile-picture')], 1)])])]), _vm._v(" "), _c('section', {
-    staticClass: "white-contentSection"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content"
-  }, [_c('app-change-password')], 1)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "white-contentSection-header"
-  }, [_c('h3', [_vm._v("Min profil")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "white-contentSection-header"
-  }, [_c('h3', [_vm._v("Uppdatera ditt lösenord")])])
-}]}
+    staticClass: "main-area-sidebar"
+  }, [_c('app-profile-picture')], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "main-area-with-sidebar"
+  }, [_c('div', {
+    staticClass: "main-area"
+  }, [_c('app-change-password')], 1), _vm._v(" "), _c('div', {
+    staticClass: "main-area-sidebar"
+  })])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -20253,6 +20293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (files.length) {
 				this.$emit('added', { files: files });
 			}
+			this.$refs.input.value = '';
 		},
 		remove: function remove(index) {
 			this.$emit('removed', { index: index });
@@ -20304,10 +20345,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v(_vm._s(file.name))]), _vm._v(" "), _c('span', {
       staticClass: "file-size"
     }, [_vm._v(_vm._s(_vm.size(file.size)))]), _vm._v(" "), _c('i', {
-      staticClass: "fa fa-times clickable remove",
-      attrs: {
-        "aria-hidden": "true"
-      },
+      staticClass: "icon icon_delete wh12 ml10",
       on: {
         "click": function($event) {
           _vm.remove(index)
@@ -20322,11 +20360,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }))])]), _vm._v(" "), _c('label', {
     staticClass: "btn btn-default"
   }, [_c('i', {
-    staticClass: "fa fa-picture-o",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_image wh15 mr10"
   }), _vm._v(" Välj media\n\t\t"), _c('input', {
+    ref: "input",
     staticClass: "hidden",
     attrs: {
       "type": "file",

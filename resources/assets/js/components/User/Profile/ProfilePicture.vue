@@ -1,15 +1,19 @@
 <template>
 	<div class="profile_picture-component">
-		<h2 class="user-component-title subsection text-left" v-if="breakpoints.isSmallDevices()">Uppdatera din avatar</h2>
-		<form enctype="multipart/form-data">
-			<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
-				<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
-				<span class="btn btn-default" v-if="hover || processing || breakpoints.isSmallDevices()" :class="{processing}">
-					<i class="fa fa-picture-o mr5" aria-hidden="true"></i> Ladda upp ny bild
-				</span>
-				<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">
-			</label>
-		</form>
+		<section class="transparent-contentSection">
+			<header class="transparent-contentSection-header mb15" v-if="breakpoints.isSmallDevices()">
+				<h3 class="text-left">Profilbild</h3>
+			</header>
+			<form enctype="multipart/form-data">
+				<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
+					<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
+					<span class="btn btn-default is-flex c_c" v-if="hover || processing || breakpoints.isSmallDevices()" :class="{processing}">
+						<i class="icon icon_image wh15 cursor-default mr10"></i> Ladda upp ny bild
+					</span>
+					<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">
+				</label>
+			</form>
+		</section>
 	</div>
 </template>
 

@@ -10,15 +10,15 @@
 						<i class="fa icon" :class="[type(file.type)]" aria-hidden="true"></i> 
 						<span class="file-name" :class="{'has-error': errors[index]}">{{ file.name }}</span>
 						<span class="file-size">{{ size(file.size) }}</span>
-						<i class="fa fa-times clickable remove" aria-hidden="true" @click="remove(index)"></i>
+						<i class="icon icon_delete wh12 ml10" @click="remove(index)"></i>
 						<div class="error-block" v-if="errors[index]" v-text="errors[index][0]"></div>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<label class="btn btn-default">
-			<i class="fa fa-picture-o" aria-hidden="true"></i> Välj media
-			<input type="file" class="hidden" multiple @change="add($event.target.files)" :disabled="disabled">
+			<i class="icon icon_image wh15 mr10"></i> Välj media
+			<input type="file" class="hidden" ref="input" multiple @change="add($event.target.files)" :disabled="disabled">
 		</label>
 	</div>
 </template>
@@ -31,6 +31,7 @@
 				if ( files.length ) {
 					this.$emit('added', {files});
 				}
+				this.$refs.input.value = '';
 			},
 			remove(index) {
 				this.$emit('removed', {index});

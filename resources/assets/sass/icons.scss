@@ -91,6 +91,11 @@
 	background-color: #97A9B5;
 }
 
+.icon_image {
+	@include mask-icon('../svg/image.svg');
+	background-color: #97A9B5;
+}
+
 .icon_monitor {
 	@include mask-icon('../svg/monitor.svg');
 	background-color: #97A9B5;
