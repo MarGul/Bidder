@@ -12,6 +12,20 @@
 						<div class="white-contentSection-content">
 							bla
 						</div>
+						<footer class="white-contentSection-footer">
+							<div class="invoice-totals-container">
+								<div class="totals-section">
+									<div class="totals-header">Totalsumma</div>
+									<div class="totals-value" v-text="filters.currency(invoice.total)"></div>
+								</div>
+							</div>
+							<div class="invoice-totals-container">
+								<div class="totals-section">
+									<div class="totals-header">Varav moms</div>
+									<div class="totals-value" v-text="filters.currency(invoice.vat)"></div>
+								</div>
+							</div>
+						</footer>
 					</section>
 				</div>
 				<div class="main-area-sidebar">
@@ -28,6 +42,15 @@
 									<div class="item-list-icon-content">
 										<div>För projektet</div>
 										<div class="gray-sub-text" v-text="invoice.project.title"></div>
+									</div>
+								</li>
+								<li class="">
+									<div class="item-list-icon pt3">
+										<i class="icon icon_clock wh15 cursor-default"></i>
+									</div>
+									<div class="item-list-icon-content">
+										<div>Skapad</div>
+										<div class="gray-sub-text" v-text="filters.time(invoice.created_at)"></div>
 									</div>
 								</li>
 								<li class="">

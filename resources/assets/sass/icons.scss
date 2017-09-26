@@ -52,6 +52,11 @@
 	background-color: #97A9B5;
 }
 
+.icon_clock {
+	@include mask-icon('../svg/clock.svg');
+	background-color: #97A9B5;
+}
+
 .icon_confirmed {
 	@include mask-icon('../svg/confirm.svg');
 	background-color: $brand-success;
