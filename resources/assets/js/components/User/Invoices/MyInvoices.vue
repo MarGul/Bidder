@@ -12,8 +12,8 @@
 							<div class="item-content">
 								<div class="item-header">Faktura #{{ invoice.id }}</div>
 								<div class="item-sub-data">
-									<span class="mr5"></span>&bull;
-									<span class="ml5"></span>
+									<span class="mr5">Totalsumma: {{ filters.currency(invoice.total) }}</span>&bull;
+									<span class="ml5" v-text="paymentStatus"></span>
 								</div>
 							</div>
 							<div class="item-go-to">
@@ -41,7 +41,12 @@
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
 			 	invoices: 'userInvoices'
-			})
+			}),
+			paymentStatus(invoice) {
+				let paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
+				let paymentDate =  invoice.payment ? '' : moment(invoice.due).format('LL');
+				return `${paymentText} den ${paymentDate}`
+			}
 		},
 		methods: {
 			goTo(invoice) {

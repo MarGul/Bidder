@@ -25044,7 +25044,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
 		invoices: 'userInvoices'
-	})),
+	}), {
+		paymentStatus: function paymentStatus(invoice) {
+			var paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
+			var paymentDate = invoice.payment ? '' : moment(invoice.due).format('LL');
+			return paymentText + ' den ' + paymentDate;
+		}
+	}),
 	methods: {
 		goTo: function goTo(invoice) {
 			this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
@@ -25090,7 +25096,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "item-content"
     }, [_c('div', {
       staticClass: "item-header"
-    }, [_vm._v("Faktura #" + _vm._s(invoice.id))]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _vm._m(2, true)])
+    }, [_vm._v("Faktura #" + _vm._s(invoice.id))]), _vm._v(" "), _c('div', {
+      staticClass: "item-sub-data"
+    }, [_c('span', {
+      staticClass: "mr5"
+    }, [_vm._v("Totalsumma: " + _vm._s(_vm.filters.currency(invoice.total)))]), _vm._v("•\n\t\t\t\t\t\t\t\t"), _c('span', {
+      staticClass: "ml5",
+      domProps: {
+        "textContent": _vm._s(_vm.paymentStatus)
+      }
+    })])]), _vm._v(" "), _vm._m(1, true)])
   })) : _c('div', {
     staticClass: "alert alert-info"
   }, [_vm._v("Där finns inga betalningar registrerade på dig ännu.")])] : _c('app-loading')], 2)])])
@@ -25098,14 +25113,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('header', {
     staticClass: "white-contentSection-header"
   }, [_c('h3', [_vm._v("Betalningar")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "item-sub-data"
-  }, [_c('span', {
-    staticClass: "mr5"
-  }), _vm._v("•\n\t\t\t\t\t\t\t\t"), _c('span', {
-    staticClass: "ml5"
-  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "item-go-to"
