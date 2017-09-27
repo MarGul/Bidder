@@ -9,7 +9,6 @@
 | handle all of the routing.
 */
 
-
 /**
  * Auth Routes
  * ===========

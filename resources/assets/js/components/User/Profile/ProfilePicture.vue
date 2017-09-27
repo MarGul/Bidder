@@ -7,7 +7,7 @@
 			<form enctype="multipart/form-data">
 				<label class="profile-picture-label clickable" @mouseenter="hover = true" @mouseleave="hover = false">
 					<img :src="image" class="img-responsive" :class="{opacity: hover || processing}">
-					<span class="btn btn-default is-flex c_c" v-if="hover || processing || breakpoints.isSmallDevices()" :class="{processing}">
+					<span class="btn btn-primary is-flex c_c" v-if="hover || processing || breakpoints.isSmallDevices()" :class="{processing}">
 						<i class="icon icon_image wh15 cursor-default mr10"></i> Ladda upp ny bild
 					</span>
 					<input type="file" accept="image/*" class="hidden" @change="upload($event.target.files)" :disabled="processing">

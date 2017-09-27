@@ -10,7 +10,7 @@
 			</div>
 		</div>
 
-		<div class="main-area-with-sidebar">
+		<div class="main-area-with-sidebar mt30">
 			<div class="main-area">
 				<app-change-password></app-change-password>
 			</div>

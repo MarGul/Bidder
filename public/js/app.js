@@ -19481,7 +19481,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.image
     }
   }), _vm._v(" "), (_vm.hover || _vm.processing || _vm.breakpoints.isSmallDevices()) ? _c('span', {
-    staticClass: "btn btn-default is-flex c_c",
+    staticClass: "btn btn-primary is-flex c_c",
     class: {
       processing: _vm.processing
     }
@@ -19523,7 +19523,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('app-account')], 1), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
   }, [_c('app-profile-picture')], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "main-area-with-sidebar"
+    staticClass: "main-area-with-sidebar mt30"
   }, [_c('div', {
     staticClass: "main-area"
   }, [_c('app-change-password')], 1), _vm._v(" "), _c('div', {
