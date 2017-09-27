@@ -31,6 +31,11 @@
 		width: 20px;
 		height: 20px;
 	}
+
+	&.wh40 {
+		width: 40px;
+		height: 40px;
+	}
 }
 
 .icon_delete {
@@ -99,6 +104,16 @@
 .icon_monitor {
 	@include mask-icon('../svg/monitor.svg');
 	background-color: #97A9B5;
+}
+
+.icon_on {
+	@include mask-icon('../svg/on.svg');
+	background-color: $brand-primary;
+}
+
+.icon_off {
+	@include mask-icon('../svg/off.svg');
+	background-color: $brand-primary;
 }
 
 .icon_user {

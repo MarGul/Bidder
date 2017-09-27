@@ -1,19 +1,28 @@
 <template>
 	<div class="notification_settings-component">
-		<template v-if="userNotificationSettingsFetched">
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>Inställningar för notifikationer</h3>
+			</header>
+			<div class="white-contentSection-content">
+				<template v-if="fetched">
 
-			<app-notification-settings-item v-for="(value, setting) in settings" :key="setting"
-				:setting="setting"
-				:value="value"
-				@updated="settingChanged">		
-			</app-notification-settings-item>
+					<app-notification-settings-item v-for="(value, setting) in settings" :key="setting"
+						:setting="setting"
+						:value="value"
+						@updated="settingChanged">		
+					</app-notification-settings-item>
+					
+				</template>
 
-			<button type="button" class="btn btn-primary full-width mt15" :class="{processing}" :disabled="processing" @click.prevent="update">
-				Uppdatera inställningarna
-			</button>
-		</template>
-
-		<app-loading v-else></app-loading>
+				<app-loading v-else></app-loading>
+			</div>
+			<footer class="white-contentSection-footer">
+				<button type="button" class="btn btn-primary" :class="{processing}" :disabled="processing" @click.prevent="update">
+					Uppdatera
+				</button>
+			</footer>
+		</section>
 	</div>
 </template>
 
@@ -28,15 +37,14 @@
 		},
 		data() {
 			return {
-				settings: {},
 				processing: false
 			}
 		},
 		computed: {
-			...mapGetters([
-				'userNotificationSettings',
-				'userNotificationSettingsFetched'
-			])
+			...mapGetters({
+				fetched: 'userNotificationSettingsFetched',
+				settings: 'userNotificationSettings'
+			})
 		},
 		methods: {
 			settingChanged(event) {
@@ -51,17 +59,16 @@
 						this.processing = false;
 					})
 					.catch(error => console.log(error));
-
 			}
 		},
 		created() {
-			if ( !this.userNotificationSettingsFetched ) {
-				this.$store.dispatch('fetchUserNotificationSettings')
+			if ( !this.fetched ) {
+				new Model('user/notification-settings').get()
 					.then(response => {
-						this.settings = this.userNotificationSettings;
-					});
-			} else {
-				this.settings = this.userNotificationSettings;
+						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.settings);
+						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS_FETCHED', true);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}

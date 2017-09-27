@@ -4,7 +4,7 @@
 			{{ settingText }}
 		</div>
 		<div class="setting-value">
-			<i class="fa fa-2x" :class="toggle" aria-hidden="true" @click="$emit('updated', {setting})"></i>
+			<i class="icon wh40" :class="toggle" aria-hidden="true" @click="$emit('updated', {setting})"></i>
 		</div>
 	</div>
 </template>
@@ -32,7 +32,7 @@
 				return this.settingTexts[this.setting];
 			},
 			toggle() {
-				return this.value ? ['fa-toggle-on'] : ['fa-toggle-off'];
+				return this.value ? ['icon_on'] : ['icon_off'];
 			}
 		}
 	}

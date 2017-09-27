@@ -30,7 +30,7 @@ class UserNotificationSettingsController extends Controller
 	{
 		return response()->json([
 			'message' => 'Listing the users notification settings.', 
-			'notificationSettings' => $this->manager->forUser($request->user())
+			'settings' => $this->manager->forUser($request->user())
 		], 200);
 	}
 

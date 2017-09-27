@@ -59,7 +59,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Show the users invoices */
 	Route::get('invoices')->uses('UserInvoiceController@index');
 	/* Handle the users notification settings. */
-	Route::get('users/{user}/notification-settings')->uses('UserNotificationSettingsController@index');
-	Route::patch('users/{user}/notification-settings')->uses('UserNotificationSettingsController@update');
+	Route::get('user/notification-settings')->uses('UserNotificationSettingsController@index');
+	Route::patch('users/notification-settings')->uses('UserNotificationSettingsController@update');
 
 });
