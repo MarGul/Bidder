@@ -37,7 +37,7 @@
 						</div>
 					</div>
 
-					<ul class="auth-dropdown" v-if="dropdown">
+					<ul class="auth-dropdown" v-if="dropdown && false">
 						<li>
 							<router-link to="/profile/margul"><i class="fa fa-user-circle" aria-hidden="true"></i>Min profil</router-link>
 						</li>
@@ -69,7 +69,7 @@
 		},
 		methods: {
 			toggleDropdown() {
-				this.$store.commit('SET_DROPDOWN', {dropdown: !this.$store.getters.authDropdown});
+				this.$store.commit('SET_DROPDOWN', !this.$store.getters.authDropdown);
 			},
 			logout() {
 				this.$store.dispatch('logout');

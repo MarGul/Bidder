@@ -7,9 +7,6 @@
 		</div>
 
 		<div class="modal-body">
-
-			<div class="alert" :class="[alertType]" v-if="alertMessage" v-text="alertMessage"></div>
-
 			<form @keydown="form.errors.clear()">
 				
 				<div 
@@ -72,26 +69,18 @@
 				})
 			}
 		},
-		computed: {
-			alertType() {
-				return `alert-${this.$store.getters.modalAlert}`;
-			},
-			alertMessage() {
-				return this.$store.getters.modalMessage;
-			}
-		},
 		methods: {
 			authenticate() {
 				this.processing = true;
 
 				new Model().new().setUrl('login').post(this.form.data())
 					.then((response) => {
-						this.$store.commit('SET_AUTHENTICATED', {authenticated: response.authenticated});
-						this.$store.commit('SET_USER', {user: response.user});
+						this.$store.commit('SET_AUTHENTICATED', response.authenticated);
+						this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 						
 						if ( this.$store.getters.authIntended ) {
 							this.$router.push(this.$store.getters.authIntended);
-							this.$store.commit('SET_INTENDED', {intended: null});
+							this.$store.commit('SET_AUTHENTICATED_INTENDED', null);
 						}
 
 						this.processing = false;

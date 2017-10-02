@@ -4,32 +4,38 @@
 		<div class="container">
 			<div class="content">
 				<template v-if="fetched">
-					<div class="row">
-						<div class="col-sm-3" v-if="!breakpoints.isMobile()">
-							<img class="profile-picture-desktop" :src="user.avatar" :alt="`Profilbild för ${user.name}`">
-							<div class="profile-info">
-								<h3 class="profile-username" v-text="user.username"></h3>
-								<ul class="list-unstyled">
-									<li><i class="fa fa-user"></i>Medlem sedan {{ member_since }}</li>
-								</ul>
+					<div class="main-area-with-sidebar">
+						<div class="main-area-sidebar left">
+							<div class="profile-info-container">
+								<div class="profile-picture-container">
+									<img class="profile-picture" :src="user.avatar" :alt="`Profilbild för ${user.name}`">
+								</div>
+								<div class="profile-info">
+									<h3 class="profile-username" v-text="user.username"></h3>
+									<ul class="list-unstyled">
+										<li>
+											<i class="icon icon_user wh15 mr5"></i> Medlem sedan {{ member_since }}
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
-						<div class="col-sm-9">
-							<div class="white-container mb30">
-								<div class="user-header">
-									<div class="profile-picture" :style="avatar" v-if="breakpoints.isMobile()"></div>
-									<h4 class="user-name" v-text="user.name"></h4>
+						<div class="main-area">
+							<section class="white-contentSection mb30">
+								<header class="white-contentSection-header">
+									<h3 v-text="user.name"></h3>
+								</header>
+								<div class="white-contentSection-content">
+									<div class="user-bio" v-if="user.bio">
+										<pre class="no-pre-style" v-text="user.bio"></pre>
+									</div>
+									<div class="alert alert-warning text-center" v-else>
+										{{ user.name }} har ingen beskrivning än.
+									</div>
 								</div>
-								<div class="user-bio" v-if="user.bio">
-									<pre class="no-pre-style" v-text="user.bio"></pre>
-								</div>
-								<div class="alert alert-warning text-center" v-else>
-									{{ user.name }} har ingen beskrivning än.
-								</div>
-							</div>
-							<div class="white-container">
-								<app-show-reviews :username="user.username" :rating="user.rating" :reviews="user.reviews"></app-show-reviews>
-							</div>
+							</section>
+
+							<app-show-reviews :username="user.username" :rating="user.rating" :reviews="user.reviews"></app-show-reviews>
 						</div>
 					</div>
 				</template>

@@ -116,6 +116,21 @@
 	background-color: $brand-primary;
 }
 
+.icon_star_empty {
+	@include mask-icon('../svg/star_empty.svg');
+	background-color: #FFC100;
+}
+
+.icon_star_full {
+	@include mask-icon('../svg/star_full.svg');
+	background-color: #FFC100;
+}
+
+.icon_star_half {
+	@include mask-icon('../svg/star_half.svg');
+	background-color: #FFC100;
+}
+
 .icon_user {
 	@include mask-icon('../svg/user.svg');
 	background-color: #97A9B5;

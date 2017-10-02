@@ -1,4 +1,22 @@
 .show_reviews-component {
+
+	.white-contentSection-header {
+
+		.review-ratings {
+			margin-top: 3px;
+		}
+
+		@media screen and (min-width: $screen-sm-min) {
+			h3 {
+				display: inline-block;
+			}
+
+			.review-ratings {
+				display: inline-block;
+				margin: 0 0 0 10px;
+			}
+		}
+	}
 	
 	.rating-container {
 		text-align: center;
@@ -36,11 +54,6 @@
 	}
 
 	.ratings-details-container {
-		background: #fafafa;
-		border-top: 1px solid $border-color-gray;
-		border-bottom: 1px solid $border-color-gray;
-		margin: 15px -15px;
-		padding: 15px;
 
 		@media screen and (min-width: $screen-sm-min) {
 			display: flex;

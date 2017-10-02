@@ -1,5 +1,52 @@
-import Model from '../../includes/Model';
+import { SET_AUTHENTICATED, SET_AUTHENTICATED_USER, SET_AUTHENTICATED_INTENDED, SET_DROPDOWN } from '../mutation-types';
 
+const state = {
+	authenticated: false,
+	user: {},
+	intended: null,
+	dropdown: false
+}
+
+const mutations = {
+	[SET_AUTHENTICATED](state, authenticated) {
+		state.authenticated = authenticated;
+	},
+	[SET_AUTHENTICATED_USER](state, user) {
+		state.user = user;
+	},
+	[SET_AUTHENTICATED_INTENDED](state, intended) {
+		state.intended = intended;
+	},
+	[SET_DROPDOWN](state, dropdown) {
+		state.dropdown = dropdown;
+	}
+}
+
+const actions = {
+	clearState({commit}) {
+		commit('SET_AUTHENTICATED', false);
+		commit('SET_AUTHENTICATED_USER', {});
+		commit('SET_AUTHENTICATED_INTENDED', null);
+		commit('SET_DROPDOWN', false);
+	}
+}
+
+const getters = {
+	isAuthenticated: state => state.authenticated,
+	authUser: state => state.user,
+	authIntended: state => state.intended,
+	authDropdown: state => state.dropdown
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}
+
+
+/*
 const auth = {
 	state: {
 		authenticated: window.Laravel.authenticated,
@@ -52,3 +99,4 @@ const auth = {
 }
 
 export default auth;
+*/

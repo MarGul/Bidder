@@ -1,8 +1,8 @@
 <template>
-	<div class="ratings-component" :class="[size]">
-		<i class="fa fa-star" aria-hidden="true" v-for="n in fullStars"></i><!--
-	 --><i class="fa fa-star-half-o" aria-hidden="true" v-if="halfStar"></i><!--
-	 --><i class="fa fa-star-o" aria-hidden="true" v-for="n in emptyStars"></i>
+	<div class="ratings-component">
+		<i class="icon icon_star_full wh15 cursor-default" v-for="n in fullStars"></i><!--
+	 --><i class="icon icon_star_half wh15 cursor-default" v-if="halfStar"></i><!--
+	 --><i class="icon icon_star_empty wh15 cursor-default" v-for="n in emptyStars"></i>
 	 <span class="rating-avg" v-if="showAvg">{{ rating.toFixed(1) }} </span><span class="rating-count" v-if="showCount">({{ total }})</span>
 	</div>
 </template>
@@ -21,10 +21,6 @@
 			total: {
 				type: Number,
 				default: 0
-			},
-			size: {
-				type: String,
-				default: ''
 			},
 			showAvg: {
 				type: Boolean,
@@ -52,13 +48,7 @@
 
 <style lang="scss" scoped>
 	.ratings-component {
-
-		&.large {
-			font-size: 18px;
-		}
-
 		i {
-			color: #FFC100;
 			margin: 0 1.5px;
 		}
 	}

@@ -1,29 +1,33 @@
 <template>
 	<div class="show_reviews-component">
-		
-		<div class="rating-container">
-			<h4 class="review-username">{{ username }}'s omdömmen</h4>
-			<div class="review-ratings">
-				<app-ratings :rating="avg" :total="count" :showAvg="true" size="large" ></app-ratings>
+
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3>{{ username }}'s omdömmen</h3>
+				<div class="review-ratings">
+					<app-ratings :rating="avg" :total="count" :showAvg="true"></app-ratings>
+				</div>
+			</header>
+			<div class="gray-contentSection-content">
+				<div class="ratings-details-container">
+					<div class="detail-container text-center">
+						<div class="detail-heading">Kommunikation</div>
+						<app-ratings :rating="communication" :showCount="false"></app-ratings>
+					</div>
+					<div class="detail-container text-center">
+						<div class="detail-heading">Som avtalat</div>
+						<app-ratings :rating="as_described" :showCount="false"></app-ratings>
+					</div>
+					<div class="detail-container text-center">
+						<div class="detail-heading">Skulle rekommendera</div>
+						<app-ratings :rating="avg" :showCount="false"></app-ratings>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="ratings-details-container">
-			<div class="detail-container text-center">
-				<div class="detail-heading">Kommunikation</div>
-				<app-ratings :rating="communication" :showCount="false"></app-ratings>
+			<div class="white-contentSection-content">
+				<app-review :review="review" v-for="review in reviews" :key="review.id"></app-review>
 			</div>
-			<div class="detail-container text-center">
-				<div class="detail-heading">Som avtalat</div>
-				<app-ratings :rating="as_described" :showCount="false"></app-ratings>
-			</div>
-			<div class="detail-container text-center">
-				<div class="detail-heading">Skulle rekommendera</div>
-				<app-ratings :rating="avg" :showCount="false"></app-ratings>
-			</div>
-		</div>
-		<div class="reviewes-container">
-			<app-review :review="review" v-for="review in reviews" :key="review.id"></app-review>
-		</div>
+		</section>
 	
 	</div>
 </template>
