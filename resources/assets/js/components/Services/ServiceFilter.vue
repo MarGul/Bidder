@@ -27,6 +27,7 @@
 
 <script>
 	import appTagsInput from '../Includes/TagsInput';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
@@ -35,33 +36,35 @@
 		computed: {
 			filterText: {
 				get() { return this.$store.getters.getFilterText; },
-				set(value) { this.$store.commit('SET_FILTER_TEXT', {text: value}); }
+				set(value) { this.$store.commit('SET_FILTER_TEXT', value); }
 			},
-			categories() {
-				return this.$store.getters.getFilterCategories;
-			},
-			allCategories() {
-				return this.$store.getters.getCategoriesFlatten;
-			},
-			locations() {
-				return this.$store.getters.getFilterLocations;
-			},
-			allLocations() {
-				return this.$store.getters.getRegionsFlatten;
-			}
+			...mapGetters({
+				categories: 'filterCategories',
+				allCategories: 'getCategoriesFlatten',
+				locations: 'filterLocations',
+				allLocations: 'getRegionsFlatten'
+			})
 		},
 		methods: {
 			addCategory(item) {
-				this.$store.dispatch('addFilterCategory', {category: item});
+				let categories = this.categories;
+				categories.push(item);
+				this.$store.commit('SET_FILTER_CATEGORIES', categories);
 			},
 			removeCategory({index}) {
-				this.$store.dispatch('removeFilterCategory', {index});
+				let categories = this.categories;
+				categories.splice(index, 1);
+				this.$store.commit('SET_FILTER_CATEGORIES', categories);
 			},
 			addLocation(item) {
-				this.$store.dispatch('addFilterLocation', {location: item})
+				let locations = this.locations;
+				locations.push(item);
+				this.$store.commit('SET_FILTER_LOCATIONS', locations);
 			},
-			removeLocation({item}) {
-				this.$store.dispatch('removeFilterLocation', {location: item});
+			removeLocation({index}) {
+				let locations = this.locations;
+				locations.splice(index, 1);
+				this.$store.commit('SET_FILTER_LOCATIONS', locations);
 			}
 		}
 	}

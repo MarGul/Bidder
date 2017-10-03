@@ -1525,29 +1525,37 @@ function applyToTag (styleElement, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_AUTHENTICATED_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_AUTHENTICATED_INTENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_DROPDOWN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_USER_NOTIFICATION_SETTINGS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_USER_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_USER_BID_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_SERVICE_DETAILS_SERVICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_SERVICE_DETAILS_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SUBSCRIPTIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SUBSCRIPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_USER_INVOICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_USER_INVOICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_USER_INVOICES_FOCUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_FILTER_TEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_FILTER_CATEGORIES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_FILTER_LOCATIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_NOTIFICATION_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICE_DETAILS_SERVICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_SERVICE_DETAILS_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_INVOICES_FOCUS; });
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
 var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDER';
 var SET_DROPDOWN = 'SET_DROPDOWN'; // Should be removed.
+
+// Services Filter
+var SET_FILTER_TEXT = "SET_FILTER_TEXT";
+var SET_FILTER_CATEGORIES = "SET_FILTER_CATEGORIES";
+var SET_FILTER_LOCATIONS = "SET_FILTER_LOCATIONS";
 
 // User notification settings
 var SET_USER_NOTIFICATION_SETTINGS_FETCHED = 'SET_USER_NOTIFICATION_SETTINGS_FETCHED';
@@ -14026,122 +14034,47 @@ var user = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(8);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var servicesFilter = {
-	state: {
-		text: '',
-		categories: [],
-		regions: [],
-		cities: [],
-		locations: []
+
+var state = {
+	text: '',
+	categories: [],
+	locations: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SET_FILTER_TEXT */], function (state, text) {
+	state.text = text;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SET_FILTER_CATEGORIES */], function (state, categories) {
+	state.categories = categories;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SET_FILTER_LOCATIONS */], function (state, locations) {
+	state.locations = locations;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	filterText: function filterText(state) {
+		return state.text;
 	},
-	mutations: {
-		'SET_FILTER_TEXT': function SET_FILTER_TEXT(state, payload) {
-			state.text = payload.text;
-		},
-		'SET_FILTER_CATEGORIES': function SET_FILTER_CATEGORIES(state, payload) {
-			state.categories = payload.categories;
-		},
-		'SET_FILTER_REGIONS': function SET_FILTER_REGIONS(state, payload) {
-			state.regions = payload.regions;
-		},
-		'SET_FILTER_CITIES': function SET_FILTER_CITIES(state, payload) {
-			state.cities = payload.cities;
-		},
-		'SET_FILTER_LOCATIONS': function SET_FILTER_LOCATIONS(state, payload) {
-			state.locations = payload.locations;
-		}
+	filterCategories: function filterCategories(state) {
+		return state.categories;
 	},
-	actions: {
-		addFilterCategory: function addFilterCategory(_ref, payload) {
-			var commit = _ref.commit,
-			    state = _ref.state;
-
-			var categories = state.categories;
-			categories.push(payload.category);
-			commit('SET_FILTER_CATEGORIES', { categories: categories });
-		},
-		removeFilterCategory: function removeFilterCategory(_ref2, payload) {
-			var commit = _ref2.commit,
-			    state = _ref2.state;
-
-			var categories = state.categories;
-			categories.splice(payload.index, 1);
-			commit('SET_FILTER_CATEGORIES', { categories: categories });
-		},
-		addFilterLocation: function addFilterLocation(_ref3, payload) {
-			var commit = _ref3.commit,
-			    state = _ref3.state;
-
-			var locations = state.locations;
-			locations.push(payload.location);
-			commit('SET_FILTER_LOCATIONS', { locations: locations });
-			// Also add the location to either region or city.
-			if (payload.location.type === 'region') {
-				var regions = state.regions;
-				regions.push(payload.location);
-				commit('SET_FILTER_REGIONS', { regions: regions });
-			} else {
-				var cities = state.cities;
-				cities.push(payload.location);
-				commit('SET_FILTER_CITIES', { cities: cities });
-			}
-		},
-		removeFilterLocation: function removeFilterLocation(_ref4, payload) {
-			var commit = _ref4.commit,
-			    state = _ref4.state;
-
-			// Remove it from locations array.
-			var locations = state.locations;
-			locations.forEach(function (location, index) {
-				if (location.value === payload.location.value && location.type == payload.location.type) {
-					locations.splice(index, 1);
-					return;
-				}
-			});
-			commit('SET_FILTER_LOCATIONS', { locations: locations });
-			// Remove it from either regions or cities
-			if (payload.location.type === 'region') {
-				var regions = state.regions;
-				regions.forEach(function (region, index) {
-					if (region.value === payload.location.value) {
-						regions.splice(index, 1);
-					}
-				});
-				commit('SET_FILTER_REGIONS', { regions: regions });
-			} else {
-				var cities = state.cities;
-				cities.forEach(function (city, index) {
-					if (city.value === payload.location.value) {
-						cities.splice(index, 1);
-					}
-				});
-				commit('SET_FILTER_CITIES', { cities: cities });
-			}
-		}
-	},
-	getters: {
-		getFilterText: function getFilterText(state) {
-			return state.text;
-		},
-		getFilterCategories: function getFilterCategories(state) {
-			return state.categories;
-		},
-		getFilterRegions: function getFilterRegions(state) {
-			return state.regions;
-		},
-		getFilterCities: function getFilterCities(state) {
-			return state.cities;
-		},
-		getFilterLocations: function getFilterLocations(state) {
-			return state.locations;
-		}
+	filterLocations: function filterLocations(state) {
+		return state.locations;
 	}
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (servicesFilter);
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ }),
 /* 236 */
@@ -14453,9 +14386,9 @@ var state = {
 	bids: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_USER_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_USER_BIDS */], function (state, bids) {
 	state.bids = bids;
 }), _mutations);
 
@@ -14494,9 +14427,9 @@ var state = {
 	bid: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_USER_BID_DETAILS */], function (state, bid) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_USER_BID_DETAILS */], function (state, bid) {
 	state.bid = bid;
 }), _mutations);
 
@@ -14535,9 +14468,9 @@ var state = {
 	settings: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
 	state.settingsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
 	state.settings = settings;
 }), _mutations);
 
@@ -14576,9 +14509,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -14617,9 +14550,9 @@ var state = {
 	subscriptions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
 	state.subscriptions = subscriptions;
 }), _mutations);
 
@@ -14661,15 +14594,15 @@ var state = {
 	bidAccepted: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.serviceFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
 	state.service = service;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["f" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
 	state.bidsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
 	state.bids = bids;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
 	state.bidAccepted = accepted;
 }), _mutations);
 
@@ -14741,11 +14674,11 @@ var state = {
 	focusId: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_USER_INVOICES */], function (state, invoices) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
 	state.focusId = parseInt(focusId);
 }), _mutations);
 
@@ -16158,6 +16091,9 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -16185,6 +16121,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -16192,44 +16129,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		appTagsInput: __WEBPACK_IMPORTED_MODULE_0__Includes_TagsInput___default.a
 	},
-	computed: {
+	computed: _extends({
 		filterText: {
 			get: function get() {
 				return this.$store.getters.getFilterText;
 			},
 			set: function set(value) {
-				this.$store.commit('SET_FILTER_TEXT', { text: value });
+				this.$store.commit('SET_FILTER_TEXT', value);
 			}
-		},
-		categories: function categories() {
-			return this.$store.getters.getFilterCategories;
-		},
-		allCategories: function allCategories() {
-			return this.$store.getters.getCategoriesFlatten;
-		},
-		locations: function locations() {
-			return this.$store.getters.getFilterLocations;
-		},
-		allLocations: function allLocations() {
-			return this.$store.getters.getRegionsFlatten;
 		}
-	},
+	}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+		categories: 'filterCategories',
+		allCategories: 'getCategoriesFlatten',
+		locations: 'filterLocations',
+		allLocations: 'getRegionsFlatten'
+	})),
 	methods: {
 		addCategory: function addCategory(item) {
-			this.$store.dispatch('addFilterCategory', { category: item });
+			var categories = this.categories;
+			categories.push(item);
+			this.$store.commit('SET_FILTER_CATEGORIES', categories);
 		},
 		removeCategory: function removeCategory(_ref) {
 			var index = _ref.index;
 
-			this.$store.dispatch('removeFilterCategory', { index: index });
+			var categories = this.categories;
+			categories.splice(index, 1);
+			this.$store.commit('SET_FILTER_CATEGORIES', categories);
 		},
 		addLocation: function addLocation(item) {
-			this.$store.dispatch('addFilterLocation', { location: item });
+			var locations = this.locations;
+			locations.push(item);
+			this.$store.commit('SET_FILTER_LOCATIONS', locations);
 		},
 		removeLocation: function removeLocation(_ref2) {
-			var item = _ref2.item;
+			var index = _ref2.index;
 
-			this.$store.dispatch('removeFilterLocation', { location: item });
+			var locations = this.locations;
+			locations.splice(index, 1);
+			this.$store.commit('SET_FILTER_LOCATIONS', locations);
 		}
 	}
 });
