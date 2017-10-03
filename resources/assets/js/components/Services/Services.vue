@@ -6,14 +6,14 @@
 				<app-service-filter></app-service-filter>
 			</div>
 			<footer class="white-contentSection-footer">
-				<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices(false, true)">
+				<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices()">
 					Hitta Tjänster
 				</button>
 			</footer>
 		</section>
 
 		<div class="services mtb20">
-			<template  v-if="servicesLoaded">
+			<template  v-if="fetched">
 				<template v-if="services.length">
 					<div class="row">
 						<transition-group name="slide-out" mode="out-in">
@@ -28,17 +28,15 @@
 						</transition-group>
 					</div>
 
-					<div class="row" v-if="servicesCanLoadMore">
-						<div class="col-xs-12">
-							<div class="load-more text-center mt10">
-								<button 
-									type="button" 
-									class="btn btn-default btn-transparent is-bold-italic" 
-									:class="{'processing': servicesLoadingMore}"
-									@click.prevent="fetchServices(true)">
-										Hämta fler
-									</button>
-							</div>
+					<div class="is-relative" v-if="canLoadMore">
+						<div class="load-more text-center mt15">
+							<button 
+								type="button" 
+								class="btn btn-default btn-transparent is-bold-italic" 
+								:class="{'processing': loadingMore}"
+								@click.prevent="fetchServices(false, true)">
+								Hämta fler
+							</button>
 						</div>
 					</div>
 				</template>
@@ -57,6 +55,7 @@
 	import appServiceFilter from './ServiceFilter';
 	import appServiceMulti from './ServiceMulti.vue';
 	import { mapGetters } from 'vuex';
+	import Model from '../../includes/Model';
 
 	export default {
 		components: {
@@ -65,31 +64,60 @@
 		},
 		data() {
 			return {
-				processing: false
+				processing: false,
+				loadingMore: false
 			}
 		},
 		computed: {
-			...mapGetters([
-				'servicesLoaded',
-				'servicesLoadingMore',
-				'servicesCanLoadMore',
-				'services'
-			])
+			...mapGetters({
+				fetched: 'servicesFetched',
+				page: 'servicesPage',
+				canLoadMore: 'servicesCanLoadMore',
+				services: 'services',
+				filterText: 'filterText',
+				filterCategories: 'filterCategories',
+				filterLocations: 'filterLocations'
+			})
 		},
 		methods: {
-			fetchServices(appending = false, processing = false) {
+			fetchServices(processing = true, appending = false) {
 				this.processing = processing ? true : false;
+				// Are we appending to the list?
+				if ( appending ) {
+					this.$store.commit('SET_SERVICES_PAGE', this.page + 1);
+					this.loadingMore = true;
+				}
+
+				// The filtering of services
+				let data = {};
+				data.page = this.page
+				data.text = this.filterText;
+				data.categories = this.filterCategories.map(cat => cat.value);
+				data.regions = this.filterLocations.filter(loc => loc.type === 'region').map(region => region.value);
+				data.cities = this.filterLocations.filter(loc => loc.type === 'city').map(city => city.value);
 				
-				this.$store.dispatch('getServices', {appending})
-					.then(success => { this.processing = false; })
+				new Model('services').get(data)
+					.then(response => {
+						this.$store.commit('SET_SERVICES', appending ? this.services.concat(response.services.data) : response.services.data);
+						this.$store.commit('SET_SERVICES_CAN_LOAD_MORE', response.services.next_page_url ? true : false);
+						this.$store.commit('SET_SERVICES_FETCHED', true);
+						this.loadingMore = false;
+						this.processing = false;
+					})
+					.catch(error => { console.log(error); });
 			},
 			removeService({id}) {
-				this.$store.dispatch('removeService', {id});
+				let services = this.services;
+				let serviceIndex = services.findIndex(e => e.id === id);
+				if ( serviceIndex !== -1 ) {
+					services.splice(serviceIndex, 1);
+				}
+				this.$store.commit('SET_SERVICES', services);
 			}
 		},
 		created() {
-			if ( !this.servicesLoaded ) {
-				this.fetchServices();
+			if ( !this.fetched ) {
+				this.fetchServices(false);
 			}
 		}
 	}

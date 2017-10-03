@@ -1528,24 +1528,28 @@ function applyToTag (styleElement, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_FILTER_TEXT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_FILTER_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_FILTER_LOCATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_NOTIFICATION_SETTINGS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_USER_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_USER_BID_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICE_DETAILS_SERVICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_SERVICE_DETAILS_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SUBSCRIPTIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SUBSCRIPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_INVOICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_USER_INVOICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_INVOICES_FOCUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICES_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_SERVICES_CAN_LOAD_MORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_NOTIFICATION_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICE_DETAILS_SERVICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICE_DETAILS_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_INVOICES_FOCUS; });
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
@@ -1553,9 +1557,15 @@ var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDER';
 var SET_DROPDOWN = 'SET_DROPDOWN'; // Should be removed.
 
 // Services Filter
-var SET_FILTER_TEXT = "SET_FILTER_TEXT";
-var SET_FILTER_CATEGORIES = "SET_FILTER_CATEGORIES";
-var SET_FILTER_LOCATIONS = "SET_FILTER_LOCATIONS";
+var SET_FILTER_TEXT = 'SET_FILTER_TEXT';
+var SET_FILTER_CATEGORIES = 'SET_FILTER_CATEGORIES';
+var SET_FILTER_LOCATIONS = 'SET_FILTER_LOCATIONS';
+
+// Services
+var SET_SERVICES_FETCHED = 'SET_SERVICES_FETCHED';
+var SET_SERVICES_PAGE = 'SET_SERVICES_PAGE';
+var SET_SERVICES_CAN_LOAD_MORE = 'SET_SERVICES_CAN_LOAD_MORE';
+var SET_SERVICES = 'SET_SERVICES';
 
 // User notification settings
 var SET_USER_NOTIFICATION_SETTINGS_FETCHED = 'SET_USER_NOTIFICATION_SETTINGS_FETCHED';
@@ -14081,134 +14091,148 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(8);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var services = {
-	state: {
-		loaded: false,
-		page: 1,
-		isLoadingMore: false,
-		canLoadMore: false,
-		services: []
+
+var state = {
+	fetched: false,
+	page: 1,
+	canLoadMore: false,
+	services: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_SERVICES_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICES_PAGE */], function (state, page) {
+	state.page = page;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
+	state.canLoadMore = canLoadMore;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_SERVICES */], function (state, services) {
+	state.services = services;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	servicesFetched: function servicesFetched(state) {
+		return state.fetched;
 	},
-	mutations: {
-		'SET_SERVICES_FETCHED': function SET_SERVICES_FETCHED(state, loaded) {
-			state.loaded = loaded;
-		},
-		'SET_PAGE': function SET_PAGE(state, page) {
-			state.page = page;
-		},
-		'SET_IS_LOADING_MORE': function SET_IS_LOADING_MORE(state, loading) {
-			state.loading = loading;
-		},
-		'SET_CAN_LOAD_MORE': function SET_CAN_LOAD_MORE(state, canLoadMore) {
-			state.canLoadMore = canLoadMore;
-		},
-		'SET_SERVICES': function SET_SERVICES(state, services) {
-			state.services = services;
-		}
+	servicesPage: function servicesPage(state) {
+		return state.page;
 	},
-	actions: {
-		getServices: function getServices(_ref, payload) {
-			var commit = _ref.commit,
-			    state = _ref.state,
-			    rootState = _ref.rootState;
-
-			return new Promise(function (resolve, reject) {
-				if (payload.appending) {
-					commit('SET_PAGE', state.page + 1);
-					commit('SET_IS_LOADING_MORE', true);
-				}
-
-				var data = { page: rootState.services.page };
-				if (rootState.servicesFilter.text) data.text = rootState.servicesFilter.text;
-				if (rootState.servicesFilter.categories.length > 0) data.categories = rootState.servicesFilter.categories.map(function (cat) {
-					return cat.value;
-				}).join();
-				if (rootState.servicesFilter.regions.length > 0) data.regions = rootState.servicesFilter.regions.map(function (reg) {
-					return reg.value;
-				}).join();
-				if (rootState.servicesFilter.cities.length > 0) data.cities = rootState.servicesFilter.cities.map(function (cit) {
-					return cit.value;
-				}).join();
-
-				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services').get(data).then(function (_ref2) {
-					var services = _ref2.services;
-
-					commit('SET_CAN_LOAD_MORE', services.next_page_url ? true : false);
-					commit('SET_IS_LOADING_MORE', false);
-					commit('SET_SERVICES', payload.appending ? state.services.concat(services.data) : services.data);
-					commit('SET_SERVICES_FETCHED', true);
-
-					resolve(true);
-				}).catch(function (error) {
-					console.log(error);
-				});
-			});
-		},
-		addService: function addService(_ref3, payload) {
-			var commit = _ref3.commit,
-			    state = _ref3.state,
-			    rootState = _ref3.rootState;
-
-			if (rootState.servicesFilter.text && !payload.service.title.includes(rootState.servicesFilter.text)) {
-				return;
-			}
-			if (rootState.servicesFilter.categories.length && !rootState.servicesFilter.categories.find(function (e) {
-				return e.value === payload.service.category_id;
-			})) {
-				return;
-			}
-			if (rootState.servicesFilter.regions.length && !rootState.servicesFilter.regions.find(function (e) {
-				return e.value === payload.service.region_id;
-			})) {
-				return;
-			}
-			if (rootState.servicesFilter.cities.length && !rootState.servicesFilter.cities.find(function (e) {
-				return e.value === payload.service.city_id;
-			})) {
-				return;
-			}
-
-			var services = state.services;
-			services.push(payload.service);
-			services = services.sort(function (a, b) {
-				return a.bid_stop.localeCompare(b.bid_stop);
-			});
-			commit('SET_SERVICES', services);
-		},
-		removeService: function removeService(_ref4, payload) {
-			var commit = _ref4.commit,
-			    state = _ref4.state;
-
-			var serviceIndex = state.services.findIndex(function (e) {
-				return e.id === payload.id;
-			});
-			if (serviceIndex !== -1) {
-				state.services.splice(state.services.findIndex(function (e) {
-					return e.id == payload.id;
-				}), 1);
-			}
-		}
+	servicesCanLoadMore: function servicesCanLoadMore(state) {
+		return state.canLoadMore;
 	},
-	getters: {
-		servicesLoaded: function servicesLoaded(state) {
-			return state.loaded;
-		},
-		servicesLoadingMore: function servicesLoadingMore(state) {
-			return state.isLoadingMore;
-		},
-		servicesCanLoadMore: function servicesCanLoadMore(state) {
-			return state.canLoadMore;
-		},
-		services: function services(state) {
-			return state.services;
-		}
+	services: function services(state) {
+		return state.services;
 	}
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (services);
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+
+	/*
+ import Model from "../../includes/Model"; 
+ 
+ const services = {
+ 	state: {
+ 		loaded: false,
+ 		page: 1,
+ 		isLoadingMore: false,
+ 		canLoadMore: false,
+ 		services: []
+ 	},
+ 	mutations: {
+ 		'SET_SERVICES_FETCHED'(state, loaded) {
+ 			state.loaded = loaded;
+ 		},
+ 		'SET_PAGE'(state, page) {
+ 			state.page = page;
+ 		},
+ 		'SET_IS_LOADING_MORE'(state, loading) {
+ 			state.loading = loading;
+ 		},
+ 		'SET_CAN_LOAD_MORE'(state, canLoadMore) {
+ 			state.canLoadMore = canLoadMore;
+ 		},
+ 		'SET_SERVICES'(state, services) {
+ 			state.services = services;
+ 		}
+ 	},
+ 	actions: {
+ 		getServices({commit, state, rootState}, payload) {
+ 			return new Promise((resolve, reject) => {
+ 				if ( payload.appending ) {
+ 					commit('SET_PAGE', state.page + 1);
+ 					commit('SET_IS_LOADING_MORE', true);
+ 				}
+ 
+ 				let data = {page: rootState.services.page}
+ 				if ( rootState.servicesFilter.text ) data.text = rootState.servicesFilter.text;
+ 				if ( rootState.servicesFilter.categories.length > 0 ) data.categories = rootState.servicesFilter.categories.map(cat => cat.value).join();
+ 				if ( rootState.servicesFilter.regions.length > 0 ) data.regions = rootState.servicesFilter.regions.map(reg => reg.value).join();
+ 				if ( rootState.servicesFilter.cities.length > 0 ) data.cities = rootState.servicesFilter.cities.map(cit => cit.value).join();
+ 				
+ 				new Model('services')
+ 					.get(data)
+ 					.then(({services}) => {
+ 						commit('SET_CAN_LOAD_MORE', services.next_page_url ? true : false);
+ 						commit('SET_IS_LOADING_MORE', false);
+ 						commit('SET_SERVICES', payload.appending ? state.services.concat(services.data) : services.data);
+ 						commit('SET_SERVICES_FETCHED', true);
+ 
+ 						resolve(true);
+ 					})
+ 					.catch(error => { console.log(error); });
+ 			});
+ 		},
+ 		addService({commit, state, rootState}, payload) {
+ 			if ( rootState.servicesFilter.text && !payload.service.title.includes(rootState.servicesFilter.text) ) {
+ 				return;
+ 			} 
+ 			if ( rootState.servicesFilter.categories.length && 
+ 				!rootState.servicesFilter.categories.find(e => e.value === payload.service.category_id) ) {
+ 				return;
+ 			}
+ 			if ( rootState.servicesFilter.regions.length && 
+ 				!rootState.servicesFilter.regions.find(e => e.value === payload.service.region_id) ) {
+ 				return;
+ 			}
+ 			if ( rootState.servicesFilter.cities.length && 
+ 				!rootState.servicesFilter.cities.find(e => e.value === payload.service.city_id) ) {
+ 				return;
+ 			}
+ 
+ 			let services = state.services;
+ 			services.push(payload.service);
+ 			services = services.sort((a,b) => a.bid_stop.localeCompare(b.bid_stop));
+ 			commit('SET_SERVICES', services);
+ 		},
+ 		removeService({commit, state}, payload) {
+ 			let serviceIndex = state.services.findIndex(e => e.id === payload.id);
+ 			if ( serviceIndex !== -1 ) {
+ 				state.services.splice(state.services.findIndex(e => e.id == payload.id), 1);
+ 			}
+ 		}
+ 	},
+ 	getters: {
+ 		servicesLoaded: state => state.loaded,
+ 		servicesLoadingMore: state => state.isLoadingMore,
+ 		servicesCanLoadMore: state => state.canLoadMore,
+ 		services: state => state.services
+ 	}
+ }
+ 
+ export default services;*/
+
+});
 
 /***/ }),
 /* 237 */
@@ -14386,9 +14410,9 @@ var state = {
 	bids: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_USER_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_USER_BIDS */], function (state, bids) {
 	state.bids = bids;
 }), _mutations);
 
@@ -14427,9 +14451,9 @@ var state = {
 	bid: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_USER_BID_DETAILS */], function (state, bid) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_BID_DETAILS */], function (state, bid) {
 	state.bid = bid;
 }), _mutations);
 
@@ -14468,9 +14492,9 @@ var state = {
 	settings: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
 	state.settingsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
 	state.settings = settings;
 }), _mutations);
 
@@ -14509,9 +14533,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -14550,9 +14574,9 @@ var state = {
 	subscriptions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
 	state.subscriptions = subscriptions;
 }), _mutations);
 
@@ -14594,15 +14618,15 @@ var state = {
 	bidAccepted: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.serviceFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
 	state.service = service;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
 	state.bidsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
 	state.bids = bids;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
 	state.bidAccepted = accepted;
 }), _mutations);
 
@@ -14674,11 +14698,11 @@ var state = {
 	focusId: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_USER_INVOICES */], function (state, invoices) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
 	state.focusId = parseInt(focusId);
 }), _mutations);
 
@@ -15943,6 +15967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -15998,8 +16023,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
+
 
 
 
@@ -16012,33 +16036,78 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	},
 	data: function data() {
 		return {
-			processing: false
+			processing: false,
+			loadingMore: false
 		};
 	},
 
-	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])(['servicesLoaded', 'servicesLoadingMore', 'servicesCanLoadMore', 'services'])),
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
+		fetched: 'servicesFetched',
+		page: 'servicesPage',
+		canLoadMore: 'servicesCanLoadMore',
+		services: 'services',
+		filterText: 'filterText',
+		filterCategories: 'filterCategories',
+		filterLocations: 'filterLocations'
+	})),
 	methods: {
 		fetchServices: function fetchServices() {
 			var _this = this;
 
-			var appending = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-			var processing = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+			var processing = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+			var appending = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 			this.processing = processing ? true : false;
+			// Are we appending to the list?
+			if (appending) {
+				this.$store.commit('SET_SERVICES_PAGE', this.page + 1);
+				this.loadingMore = true;
+			}
 
-			this.$store.dispatch('getServices', { appending: appending }).then(function (success) {
+			// The filtering of services
+			var data = {};
+			data.page = this.page;
+			data.text = this.filterText;
+			data.categories = this.filterCategories.map(function (cat) {
+				return cat.value;
+			});
+			data.regions = this.filterLocations.filter(function (loc) {
+				return loc.type === 'region';
+			}).map(function (region) {
+				return region.value;
+			});
+			data.cities = this.filterLocations.filter(function (loc) {
+				return loc.type === 'city';
+			}).map(function (city) {
+				return city.value;
+			});
+
+			new __WEBPACK_IMPORTED_MODULE_3__includes_Model__["a" /* default */]('services').get(data).then(function (response) {
+				_this.$store.commit('SET_SERVICES', appending ? _this.services.concat(response.services.data) : response.services.data);
+				_this.$store.commit('SET_SERVICES_CAN_LOAD_MORE', response.services.next_page_url ? true : false);
+				_this.$store.commit('SET_SERVICES_FETCHED', true);
+				_this.loadingMore = false;
 				_this.processing = false;
+			}).catch(function (error) {
+				console.log(error);
 			});
 		},
 		removeService: function removeService(_ref) {
 			var id = _ref.id;
 
-			this.$store.dispatch('removeService', { id: id });
+			var services = this.services;
+			var serviceIndex = services.findIndex(function (e) {
+				return e.id === id;
+			});
+			if (serviceIndex !== -1) {
+				services.splice(serviceIndex, 1);
+			}
+			this.$store.commit('SET_SERVICES', services);
 		}
 	},
 	created: function created() {
-		if (!this.servicesLoaded) {
-			this.fetchServices();
+		if (!this.fetched) {
+			this.fetchServices(false);
 		}
 	}
 });
@@ -16526,12 +16595,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	computed: {
 		category: function category() {
-			return this.$store.getters.getCategoryById(this.service.category_id).name;
+			var category = this.$store.getters.getCategoryById(this.service.category_id);
+			return category ? category.name : '';
 		},
 		location: function location() {
-			var city = this.$store.getters.getCityById(this.service.city_id).name;
-			var region = this.$store.getters.getRegionById(this.service.region_id).name;
-			return city + ', ' + region;
+			var city = this.$store.getters.getCityById(this.service.city_id);
+			var region = this.$store.getters.getRegionById(this.service.region_id);
+			return city && region ? city + ', ' + region : '';
 		},
 		commentCount: function commentCount() {
 			return this.service.comment_count ? this.service.comment_count.count : 0;
@@ -16766,12 +16836,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "click": function($event) {
-        _vm.fetchServices(false, true)
+        _vm.fetchServices()
       }
     }
   }, [_vm._v("\n\t\t\t\tHitta Tjänster\n\t\t\t")])])]), _vm._v(" "), _c('div', {
     staticClass: "services mtb20"
-  }, [(_vm.servicesLoaded) ? [(_vm.services.length) ? [_c('div', {
+  }, [(_vm.fetched) ? [(_vm.services.length) ? [_c('div', {
     staticClass: "row"
   }, [_c('transition-group', {
     attrs: {
@@ -16800,16 +16870,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "bidStop": _vm.removeService
       }
     })], 1)], 1)
-  }))], 1), _vm._v(" "), (_vm.servicesCanLoadMore) ? _c('div', {
-    staticClass: "row"
+  }))], 1), _vm._v(" "), (_vm.canLoadMore) ? _c('div', {
+    staticClass: "is-relative"
   }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('div', {
-    staticClass: "load-more text-center mt10"
+    staticClass: "load-more text-center mt15"
   }, [_c('button', {
     staticClass: "btn btn-default btn-transparent is-bold-italic",
     class: {
-      'processing': _vm.servicesLoadingMore
+      'processing': _vm.loadingMore
     },
     attrs: {
       "type": "button"
@@ -16817,10 +16885,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.fetchServices(true)
+        _vm.fetchServices(false, true)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t\t\t")])])])]) : _vm._e()] : _c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t")])])]) : _vm._e()] : _c('div', {
     staticClass: "alert alert-info mt20"
   }, [_vm._v("\n\t\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t\t")])] : _c('app-loading', {
     attrs: {

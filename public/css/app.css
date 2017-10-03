@@ -769,6 +769,10 @@ a {
   display: inline-block !important;
 }
 
+.is-relative {
+  position: relative;
+}
+
 .no-border {
   border: none !important;
 }
@@ -2289,7 +2293,7 @@ body.mobile-nav-open .overlay {
   background-color: #c7c7c7;
   position: absolute;
   left: 15px;
-  top: 26px;
+  top: 15px;
   right: calc(50% + 60px);
 }
 
@@ -2300,7 +2304,7 @@ body.mobile-nav-open .overlay {
   background-color: #c7c7c7;
   position: absolute;
   right: 15px;
-  top: 26px;
+  top: 15px;
   left: calc(50% + 60px);
 }
 

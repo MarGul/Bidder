@@ -21,19 +21,20 @@ class ServiceManager {
 	 * @param  string $cities
 	 * @return Illuminate\Contracts\Pagination\LengthAwarePaginator
 	 */
-	public function filter($page, $text = '', $categories = '', $regions = '', $cities = '')
+	public function filter($page, $text = '', $categories = [], $regions = [], $cities = [])
 	{
 		$query = Service::query();
 		$query->with('bid_count', 'comment_count');
 
 		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
-		if ( $categories ) $query = $query->whereIn('category_id', explode(',', $categories));
-		if ( $regions ) $query = $query->whereIn('region_id', explode(',', $regions));
-		if ( $cities ) $query = $query->whereIn('city_id', explode(',', $cities));
+		if ( !empty($categories) ) $query = $query->whereIn('category_id', $categories);
+		if ( !empty($regions) ) $query = $query->whereIn('region_id', $regions);
+		if ( !empty($cities) ) $query = $query->whereIn('city_id', $cities);
 
 		$services = $query->where('active', true)
 						  ->where('bid_stop', '>', Carbon::now())
-						  ->orderBy('bid_stop', 'asc')->simplePaginate(20, ['*'], 'page', $page);
+						  ->orderBy('bid_stop', 'asc')
+						  ->simplePaginate(20, ['*'], 'page', $page);
 
 		return $services;
 	}

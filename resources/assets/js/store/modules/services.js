@@ -1,3 +1,46 @@
+import { SET_SERVICES_FETCHED, SET_SERVICES_PAGE, SET_SERVICES_CAN_LOAD_MORE, SET_SERVICES } from "../mutation-types";
+
+const state = {
+	fetched: false,
+	page: 1,
+	canLoadMore: false,
+	services: []
+}
+
+const mutations = {
+	[SET_SERVICES_FETCHED](state, fetched) {
+		state.fetched = fetched;
+	},
+	[SET_SERVICES_PAGE](state, page) {
+		state.page = page;
+	},
+	[SET_SERVICES_CAN_LOAD_MORE](state, canLoadMore) {
+		state.canLoadMore = canLoadMore;
+	},
+	[SET_SERVICES](state, services) {
+		state.services = services;
+	}
+}
+
+const actions = {
+	
+}
+
+const getters = {
+	servicesFetched: state => state.fetched,
+	servicesPage: state => state.page,
+	servicesCanLoadMore: state => state.canLoadMore,
+	services: state => state.services
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}
+
+/*
 import Model from "../../includes/Model"; 
 
 const services = {
@@ -89,4 +132,4 @@ const services = {
 	}
 }
 
-export default services;
+export default services;*/

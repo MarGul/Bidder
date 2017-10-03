@@ -44,12 +44,13 @@
 		},
 		computed: {
 			category() {
-				return this.$store.getters.getCategoryById(this.service.category_id).name;
+				let category = this.$store.getters.getCategoryById(this.service.category_id)
+				return category ? category.name : '';
 			},
 			location() {
-				let city = this.$store.getters.getCityById(this.service.city_id).name;
-				let region = this.$store.getters.getRegionById(this.service.region_id).name;
-				return `${city}, ${region}`
+				let city = this.$store.getters.getCityById(this.service.city_id);
+				let region = this.$store.getters.getRegionById(this.service.region_id);
+				return city && region ? `${city}, ${region}` : '';
 			},
 			commentCount() {
 				return this.service.comment_count ? this.service.comment_count.count : 0;
