@@ -67,11 +67,13 @@
 											<img :src="service.user.avatar" :alt="avatarAlt">
 										</div>
 										<div class="user-details-container">
-											<div class="user-username" v-text="service.user.username"></div>
+											<div class="user-username">
+												<router-link class="is-link" :to="`/profile/${service.user.username}`">{{ service.user.username }}</router-link>
+											</div>
 											<div class="user-ratings">
 												<app-ratings :rating="ratingAvg" :total="ratingCount"></app-ratings>
-												<a class="link">Visa omdömmen</a>
 											</div>
+											<div class="gray-sub-text mt3">Skapades den {{ filters.time(service.created_at) }}</div>
 										</div>
 									</div>
 								</div>

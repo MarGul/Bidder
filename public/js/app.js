@@ -17099,6 +17099,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -25976,20 +25978,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })]), _vm._v(" "), _c('div', {
     staticClass: "user-details-container"
   }, [_c('div', {
-    staticClass: "user-username",
-    domProps: {
-      "textContent": _vm._s(_vm.service.user.username)
+    staticClass: "user-username"
+  }, [_c('router-link', {
+    staticClass: "is-link",
+    attrs: {
+      "to": ("/profile/" + (_vm.service.user.username))
     }
-  }), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.service.user.username))])], 1), _vm._v(" "), _c('div', {
     staticClass: "user-ratings"
   }, [_c('app-ratings', {
     attrs: {
       "rating": _vm.ratingAvg,
       "total": _vm.ratingCount
     }
-  }), _vm._v(" "), _c('a', {
-    staticClass: "link"
-  }, [_vm._v("Visa omdömmen")])], 1)])])])])]), _vm._v(" "), (_vm.breakpoints.isSmallDevices()) ? _c('section', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text mt3"
+  }, [_vm._v("Skapades den " + _vm._s(_vm.filters.time(_vm.service.created_at)))])])])])])]), _vm._v(" "), (_vm.breakpoints.isSmallDevices()) ? _c('section', {
     staticClass: "transparent-contentSection service-comments mt50"
   }, [_c('app-add-comment'), _vm._v(" "), _c('ul', {
     staticClass: "top-comments"
