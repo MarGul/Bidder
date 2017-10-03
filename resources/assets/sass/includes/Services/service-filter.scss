@@ -1,0 +1,22 @@
+.service_filter-component {
+	
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.filter-container {
+		margin-bottom: 10px;
+
+		@media screen and (min-width: $screen-sm-min) {
+			margin-bottom: 0;
+			flex: 1;
+
+			&.filter-text,
+			&.filter-category {
+				margin-right: 20px;
+			}
+		}
+	}
+}

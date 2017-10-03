@@ -1,16 +1,16 @@
 <template>
 	<div class="services-component">
 		
-		<div class="service-filter-container">
-			<app-service-filter></app-service-filter>
-			<div class="row">
-				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices(false, true)">
-						Hitta Tjänster
-					</button>
-				</div>
+		<section class="white-contentSection service-filter">
+			<div class="white-contentSection-content">
+				<app-service-filter></app-service-filter>
 			</div>
-		</div>
+			<footer class="white-contentSection-footer">
+				<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices(false, true)">
+					Hitta Tjänster
+				</button>
+			</footer>
+		</section>
 
 		<div class="services mtb20">
 			<template  v-if="servicesLoaded">

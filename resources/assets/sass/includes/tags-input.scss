@@ -15,12 +15,12 @@
 	.tags-input {
 		position: relative;
 		width: 100%;
-		min-height: 40px;
+		height: 40px;
 		overflow: hidden;
-		display: inline-block;
+		display: block;
 		box-sizing: border-box;
 		z-index: 1;
-		border: 1px solid $border-color-gray;
+		border: 1px solid #e2e2e2;
 		cursor: text;
 		padding: 0 8px 4px 8px;
 		border-radius: 3px;

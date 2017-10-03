@@ -42,6 +42,11 @@
   background-color: #009999;
 }
 
+.icon.wh10 {
+  width: 10px;
+  height: 10px;
+}
+
 .icon.wh12 {
   width: 12px;
   height: 12px;
@@ -2030,13 +2035,13 @@ body.mobile-nav-open .overlay {
 .tags-input-container .tags-input {
   position: relative;
   width: 100%;
-  min-height: 40px;
+  height: 40px;
   overflow: hidden;
-  display: inline-block;
+  display: block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   z-index: 1;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e2e2e2;
   cursor: text;
   padding: 0 8px 4px 8px;
   border-radius: 3px;
@@ -2101,38 +2106,34 @@ body.mobile-nav-open .overlay {
   color: #009999;
 }
 
-.service-filter-container {
-  background: #fff;
-  border: 1px solid #ededed;
-  padding: 15px;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-  border-radius: 6px;
-}
-
-.service-filter-container .column {
-  margin-top: 10px;
-}
-
-@media screen and (min-width: 992px) {
-  .service-filter-container .column {
-    margin-top: 0;
+@media screen and (min-width: 768px) {
+  .service_filter-component {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 
-.service-filter-container .column:first-child {
-  margin-top: 0;
+.service_filter-component .filter-container {
+  margin-bottom: 10px;
 }
 
-.service-filter-container .btn {
-  margin-top: 15px;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.service-filter-container label {
-  font-weight: bold;
-  font-size: 1.1em;
+@media screen and (min-width: 768px) {
+  .service_filter-component .filter-container {
+    margin-bottom: 0;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  .service_filter-component .filter-container.filter-text, .service_filter-component .filter-container.filter-category {
+    margin-right: 20px;
+  }
 }
 
 .service-container {

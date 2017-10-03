@@ -1,28 +1,26 @@
 <template>
 	<div class="service_filter-component">
-		<div class="row">
-			<div class="col-xs-12 col-md-4 column">
-				<label>Fritext</label>
-				<input type="text" id="filter_text" class="form-control" v-model="filterText">
-			</div>
-			<div class="col-xs-12 col-md-4 column">
-				<label>Kategorier</label>
-				<app-tags-input 
-					:items="categories"
-					:options="allCategories"
-					@add="addCategory" 
-					@remove="removeCategory"
-				></app-tags-input>
-			</div>
-			<div class="col-xs-12 col-md-4 column">
-				<label>Platser</label>
-				<app-tags-input 
-					:items="locations"
-					:options="allLocations"
-					@add="addLocation"
-					@remove="removeLocation"
-				></app-tags-input>
-			</div>
+		<div class="filter-container filter-text">
+			<label>Fritext</label>
+			<input type="text" id="filter_text" class="form-control" v-model="filterText">
+		</div>
+		<div class="filter-container filter-category">
+			<label>Kategorier</label>
+			<app-tags-input 
+				:items="categories"
+				:options="allCategories"
+				@add="addCategory" 
+				@remove="removeCategory"
+			></app-tags-input>
+		</div>
+		<div class="filter-container filter-locations">
+			<label>Platser</label>
+			<app-tags-input 
+				:items="locations"
+				:options="allLocations"
+				@add="addLocation"
+				@remove="removeLocation"
+			></app-tags-input>
 		</div>
 	</div>
 </template>

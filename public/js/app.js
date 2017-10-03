@@ -16185,8 +16185,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -16369,10 +16367,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', {
       staticClass: "tag"
     }, [_vm._v("\n\t\t\t" + _vm._s(item.text)), _c('i', {
-      staticClass: "fa fa-times",
-      attrs: {
-        "aria-hidden": "true"
-      },
+      staticClass: "icon icon_delete wh10",
       on: {
         "click": function($event) {
           _vm.$emit('remove', {
@@ -16445,9 +16440,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "service_filter-component"
   }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
+    staticClass: "filter-container filter-text"
   }, [_c('label', [_vm._v("Fritext")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
@@ -16470,7 +16463,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
+    staticClass: "filter-container filter-category"
   }, [_c('label', [_vm._v("Kategorier")]), _vm._v(" "), _c('app-tags-input', {
     attrs: {
       "items": _vm.categories,
@@ -16481,7 +16474,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "remove": _vm.removeCategory
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4 column"
+    staticClass: "filter-container filter-locations"
   }, [_c('label', [_vm._v("Platser")]), _vm._v(" "), _c('app-tags-input', {
     attrs: {
       "items": _vm.locations,
@@ -16491,7 +16484,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "add": _vm.addLocation,
       "remove": _vm.removeLocation
     }
-  })], 1)])])
+  })], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -16818,12 +16811,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "services-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection service-filter"
   }, [_c('div', {
-    staticClass: "service-filter-container"
-  }, [_c('app-service-filter'), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12"
+    staticClass: "white-contentSection-content"
+  }, [_c('app-service-filter')], 1), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
     class: {
@@ -16838,7 +16831,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices(false, true)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\tHitta Tjänster\n\t\t\t\t")])])])], 1), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n\t\t\t\tHitta Tjänster\n\t\t\t")])])]), _vm._v(" "), _c('div', {
     staticClass: "services mtb20"
   }, [(_vm.servicesLoaded) ? [(_vm.services.length) ? [_c('div', {
     staticClass: "row"
