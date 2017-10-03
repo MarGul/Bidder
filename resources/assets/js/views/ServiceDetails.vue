@@ -27,6 +27,16 @@
 								</div>
 								<div class="white-contentSection-content service-description" v-text="service.description"></div>
 							</section>
+							<section class="transparent-contentSection service-comments mt50" v-if="!breakpoints.isSmallDevices()">
+								<app-add-comment></app-add-comment>
+								<ul class="top-comments">
+									<transition-group name="slide-in-left">
+										<li v-for="comment in service.comments" :key="comment.id">
+											<app-comment :comment="comment"></app-comment>
+										</li>
+									</transition-group>
+								</ul>
+							</section>
 						</div>
 						<div class="main-area-sidebar">
 							<section class="white-contentSection">
@@ -47,7 +57,7 @@
 									</button>
 								</footer>
 							</section>
-							<section class="transparent-contentSection mt30">
+							<section class="transparent-contentSection">
 								<header class="transparent-contentSection-header">
 									<h3>Upplagd av</h3>
 								</header>
@@ -67,21 +77,16 @@
 								</div>
 							</section>
 						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-xs-12 col-md-8">
+						<section class="transparent-contentSection service-comments mt50" v-if="breakpoints.isSmallDevices()">
 							<app-add-comment></app-add-comment>
-							<div class="margin-50">
-								<ul class="top-comments">
-									<transition-group name="slide-in-left">
-										<li v-for="comment in service.comments" :key="comment.id">
-											<app-comment :comment="comment"></app-comment>
-										</li>
-									</transition-group>
-								</ul>
-							</div>
-						</div>
+							<ul class="top-comments">
+								<transition-group name="slide-in-left">
+									<li v-for="comment in service.comments" :key="comment.id">
+										<app-comment :comment="comment"></app-comment>
+									</li>
+								</transition-group>
+							</ul>
+						</section>
 					</div>
 				</template>
 
@@ -115,9 +120,6 @@
 			},
 			breakpoints() {
 				return window.breakpoints;
-			},
-			ends() {
-				return moment(this.service.bid_stop).format("LLL");
 			},
 			avatarAlt() {
 				return `Avatar bild för användare ${this.service.user.username}`;

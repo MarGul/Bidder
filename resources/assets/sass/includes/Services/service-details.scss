@@ -1,5 +1,46 @@
 .service-details-view {
 
+	.main-area-sidebar {
+
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+		}
+
+		@media screen and (min-width: $screen-md-min) {
+			display: block;
+		}
+
+		section {
+
+			&.transparent-contentSection {
+				margin: 30px 0 0 0;
+			}
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+
+				&.white-contentSection {
+					margin-right: 15px;
+				}
+
+				&.transparent-contentSection {
+					margin: 0 0 0 15px;
+				}
+			}
+
+			@media screen and (min-width: $screen-md-min) {
+
+				&.white-contentSection {
+					margin: 0;
+				}
+
+				&.transparent-contentSection {
+					margin: 30px 0 0 0;
+				}
+			}
+		}
+	}
+
 	.service-bids {
 
 		.time-left {
@@ -64,6 +105,7 @@
 	.service-user {
 		display: flex;
 		align-items: flex-start;
+		padding-left: 10px;
 
 		.user-avatar-container {
 			flex: 1;

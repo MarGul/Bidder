@@ -17094,6 +17094,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -17118,9 +17123,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		breakpoints: function breakpoints() {
 			return window.breakpoints;
-		},
-		ends: function ends() {
-			return moment(this.service.bid_stop).format("LLL");
 		},
 		avatarAlt: function avatarAlt() {
 			return 'Avatar bild f\xF6r anv\xE4ndare ' + this.service.user.username;
@@ -17210,6 +17212,9 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -17232,6 +17237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -17239,34 +17245,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			comment: '',
-			parent: null,
 			processing: false
 		};
 	},
 
-	computed: {
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+		authenticated: 'isAuthenticated',
+		user: 'authUser'
+	}), {
 		serviceId: function serviceId() {
 			return this.$store.getters.getService.id;
-		},
-		disabled: function disabled() {
-			return !this.comment;
 		}
-	},
+	}),
 	methods: {
 		add: function add() {
 			var _this = this;
 
 			this.processing = true;
 
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/comments').setId(this.serviceId).create({
-				body: this.comment,
-				parent: this.parent
-			}).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.serviceId + '/comments').post({ body: this.comment }).then(function (response) {
 				_this.$store.commit('ADD_COMMENT', { comment: response.comment });
 
 				// Clear input and stop processing
 				_this.comment = '';
-				_this.parent = null;
 				_this.processing = false;
 			}).catch(function (error) {
 				console.log(error);
@@ -17282,8 +17283,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "add-comment-component"
-  }, [_c('h4', [_vm._v("Lägg till en kommentar")]), _vm._v(" "), _c('div', {
-    staticClass: "form-group mb7"
+  }, [_c('h3', [_vm._v("Lägg till en kommentar")]), _vm._v(" "), _c('div', {
+    staticClass: "form-group mb10"
   }, [_c('textarea', {
     directives: [{
       name: "model",
@@ -17303,14 +17304,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group text-right"
-  }, [(_vm.$store.getters.isAuthenticated) ? _c('span', {
+  }, [(_vm.authenticated) ? _c('span', {
     staticClass: "comments-as"
   }, [_vm._v("\n\t\t\tDu kommenterar som "), _c('a', {
-    staticClass: "link"
-  }, [_vm._v("@" + _vm._s(_vm.$store.getters.authUser.username))])]) : _c('span', {
+    staticClass: "is-link cursor-default"
+  }, [_vm._v("@" + _vm._s(_vm.user.username))])]) : _c('span', {
     staticClass: "comments-as"
   }, [_vm._v("Du måste "), _c('a', {
-    staticClass: "link",
+    staticClass: "is-link",
     on: {
       "click": function($event) {
         _vm.$store.dispatch('openModal', {
@@ -17324,7 +17325,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'processing': _vm.processing
     },
     attrs: {
-      "disabled": _vm.disabled || !_vm.$store.getters.isAuthenticated || _vm.processing
+      "disabled": !_vm.comment || !_vm.authenticated || _vm.processing
     },
     on: {
       "click": _vm.add
@@ -25902,7 +25903,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.service.description)
     }
-  })])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), (!_vm.breakpoints.isSmallDevices()) ? _c('section', {
+    staticClass: "transparent-contentSection service-comments mt50"
+  }, [_c('app-add-comment'), _vm._v(" "), _c('ul', {
+    staticClass: "top-comments"
+  }, [_c('transition-group', {
+    attrs: {
+      "name": "slide-in-left"
+    }
+  }, _vm._l((_vm.service.comments), function(comment) {
+    return _c('li', {
+      key: comment.id
+    }, [_c('app-comment', {
+      attrs: {
+        "comment": comment
+      }
+    })], 1)
+  }))], 1)], 1) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
   }, [_c('section', {
     staticClass: "white-contentSection"
@@ -25944,7 +25961,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("\n\t\t\t\t\t\t\t\t\tLägg ett bud\n\t\t\t\t\t\t\t\t")])])]), _vm._v(" "), _c('section', {
-    staticClass: "transparent-contentSection mt30"
+    staticClass: "transparent-contentSection"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "transparent-contentSection-content"
   }, [_c('div', {
@@ -25972,13 +25989,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('a', {
     staticClass: "link"
-  }, [_vm._v("Visa omdömmen")])], 1)])])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-8"
-  }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
-    staticClass: "margin-50"
-  }, [_c('ul', {
+  }, [_vm._v("Visa omdömmen")])], 1)])])])])]), _vm._v(" "), (_vm.breakpoints.isSmallDevices()) ? _c('section', {
+    staticClass: "transparent-contentSection service-comments mt50"
+  }, [_c('app-add-comment'), _vm._v(" "), _c('ul', {
     staticClass: "top-comments"
   }, [_c('transition-group', {
     attrs: {
@@ -25992,7 +26005,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "comment": comment
       }
     })], 1)
-  }))], 1)])], 1)])] : _c('app-loading', {
+  }))], 1)], 1) : _vm._e()])] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }

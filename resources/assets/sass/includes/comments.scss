@@ -1,7 +1,7 @@
 .add-comment-component {
-	margin-top: 30px;
 
-	h4 {
+	h3 {
+		font-size: 16px;
 		font-weight: 500;
 	}
 
@@ -12,7 +12,8 @@
 
 	textarea {
 		resize: none;
-		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+		box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+		border: none;
 	}
 }
 	

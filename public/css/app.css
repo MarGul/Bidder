@@ -356,7 +356,7 @@ a {
 }
 
 .main-area-with-sidebar .main-area {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 @media screen and (min-width: 992px) {
@@ -2303,6 +2303,47 @@ body.mobile-nav-open .overlay {
   left: calc(50% + 60px);
 }
 
+@media screen and (min-width: 768px) {
+  .service-details-view .main-area-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .service-details-view .main-area-sidebar {
+    display: block;
+  }
+}
+
+.service-details-view .main-area-sidebar section.transparent-contentSection {
+  margin: 30px 0 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .service-details-view .main-area-sidebar section {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  .service-details-view .main-area-sidebar section.white-contentSection {
+    margin-right: 15px;
+  }
+  .service-details-view .main-area-sidebar section.transparent-contentSection {
+    margin: 0 0 0 15px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .service-details-view .main-area-sidebar section.white-contentSection {
+    margin: 0;
+  }
+  .service-details-view .main-area-sidebar section.transparent-contentSection {
+    margin: 30px 0 0 0;
+  }
+}
+
 .service-details-view .service-bids .time-left {
   border-bottom: 1px solid #e6ebf1;
   margin-bottom: 10px;
@@ -2380,6 +2421,7 @@ body.mobile-nav-open .overlay {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  padding-left: 10px;
 }
 
 .service-details-view .service-user .user-avatar-container {
@@ -2626,11 +2668,8 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.add-comment-component {
-  margin-top: 30px;
-}
-
-.add-comment-component h4 {
+.add-comment-component h3 {
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -2641,8 +2680,9 @@ body.mobile-nav-open .overlay {
 
 .add-comment-component textarea {
   resize: none;
-  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  border: none;
 }
 
 .top-comments {
