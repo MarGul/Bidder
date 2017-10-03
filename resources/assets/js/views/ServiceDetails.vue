@@ -3,44 +3,72 @@
 		<div class="container">
 			<div class="content">
 				<template v-if="$store.getters.getServiceLoaded">
-					<div class="row">
-						<div class="col-xs-12 col-md-8">
-							<div class="service-description white-container mb20" v-if="!breakpoints.small">
-								<app-service-description></app-service-description>
-								<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
-							</div>
-						</div>
-						<div class="col-xs-12 col-md-4">
-							<div class="service-bids white-container">
-								<div class="time-left text-center">
-									<app-timer :ends="service.bid_stop"></app-timer>
-									<div class="ends">{{ ends }}</div>
-								</div>
-								<div class="active-bids text-center">
-									<i class="fa fa-gavel" aria-hidden="true"></i>
-									<span>{{ bids }}</span> bud. <a @click.prevent="showBids">Visa alla bud</a>
-								</div>
-								<button 
-									class="btn btn-primary full-width"
-									@click.prevent="createBid"
-								>Lägg ett bud</button>
-							</div>
-							<div class="service-description white-container" v-if="breakpoints.small">
-								<app-service-description></app-service-description>
-								<app-service-media :media="service.media" v-if="service.media.length > 0"></app-service-media>
-							</div>
-							<div class="service-user white-container">
-								<template v-if="$store.getters.getServiceLoaded">	
-									<div class="user-avatar"><img :src="service.user.avatar" :alt="avatarAlt"></div>
-									<div class="user-displayname" v-text="service.user.username"></div>
-									<div class="user-ratings">
-										<app-ratings :rating="ratingAvg" :total="ratingCount" size="large"></app-ratings>
-										<a class="link">Visa omdömmen</a>
+					<div class="main-area-with-sidebar">
+						<div class="main-area large-sidebar">
+							<section class="white-contentSection">
+								<header class="white-contentSection-header">
+									<h3 class="service-title" v-text="service.title"></h3>
+								</header>
+								<div class="gray-contentSection-content">
+									<div class="service-details">
+										<div class="detail-item">
+											<div class="detail-header">
+												<i class="icon icon_list wh15 cursor-default primary mr10"></i><span>Kategori</span>
+											</div>
+											<div class="detail-value" v-text="category"></div>
+										</div>
+										<div class="detail-item">
+											<div class="detail-header">
+												<i class="icon icon_map_pin wh15 cursor-default primary mr10"></i><span>Plats</span>
+											</div>
+											<div class="detail-value" v-text="location"></div>
+										</div>
 									</div>
-								</template>
-							</div>
+								</div>
+								<div class="white-contentSection-content service-description" v-text="service.description"></div>
+							</section>
+						</div>
+						<div class="main-area-sidebar">
+							<section class="white-contentSection">
+								<div class="white-contentSection-content service-bids pb10">
+									<div class="time-left text-center">
+										<div class="gray-sub-text">Avslutas om</div>
+										<app-timer :ends="service.bid_stop"></app-timer>
+										<div class="ends" v-text="`den ${filters.time(service.bid_stop)}`"></div>
+									</div>
+									<div class="active-bids text-center">
+										<i class="icon icon_bid wh15 cursor-default mr5"></i>
+										<span>{{ bids }}</span> bud. <a class="is-link" @click.prevent="showBids">Visa alla bud</a>
+									</div>
+								</div>
+								<footer class="white-contentSection-footer">
+									<button class="btn btn-primary full-width" @click.prevent="createBid">
+										Lägg ett bud
+									</button>
+								</footer>
+							</section>
+							<section class="transparent-contentSection mt30">
+								<header class="transparent-contentSection-header">
+									<h3>Upplagd av</h3>
+								</header>
+								<div class="transparent-contentSection-content">
+									<div class="service-user">
+										<div class="user-avatar-container">
+											<img :src="service.user.avatar" :alt="avatarAlt">
+										</div>
+										<div class="user-details-container">
+											<div class="user-username" v-text="service.user.username"></div>
+											<div class="user-ratings">
+												<app-ratings :rating="ratingAvg" :total="ratingCount"></app-ratings>
+												<a class="link">Visa omdömmen</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-xs-12 col-md-8">
 							<app-add-comment></app-add-comment>
@@ -66,7 +94,6 @@
 <script>
 	import appAddComment from '../components/Comments/AddComment';
 	import appComment from '../components/Comments/Comment';
-	import appServiceDescription from '../components/Services/ServiceDescription';
 	import appServiceMedia from '../components/Services/ServiceMedia';
 	import appRatings from '../components/Includes/Ratings';
 	import appTimer from '../components/Includes/Timer';
@@ -75,7 +102,6 @@
 		components: {
 			appComment,
 			appAddComment,
-			appServiceDescription,
 			appServiceMedia,
 			appRatings,
 			appTimer
@@ -101,6 +127,15 @@
 			},
 			ratingAvg() {
 				return this.service.user.rating ? this.service.user.rating.avg : 0;
+			},
+			category() {
+				let category = this.$store.getters.getCategoryById(this.service.category_id);
+				return category ? category.name : '';
+			},
+			location() {
+				let city = this.$store.getters.getCityById(this.service.city_id);
+				let region = this.$store.getters.getRegionById(this.service.region_id);
+				return region && city ? `${city.name}, ${region.name}` : '';
 			}
 		},
 		methods: {
@@ -125,10 +160,3 @@
 		}
 	}
 </script>
-
-<style lang="scss" scoped>
-	.waiting {
-		text-align: center;
-		margin: 40px 0;
-	}
-</style>

@@ -68,6 +68,10 @@ a {
 
 		@media screen and (min-width: $screen-lg-min) {
 			flex: 3;
+
+			&.large-sidebar {
+				flex: 2 !important;
+			}
 		}
 	}
 

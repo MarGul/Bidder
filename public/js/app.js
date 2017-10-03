@@ -16948,19 +16948,15 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(284)
-}
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(286),
   /* template */
-  __webpack_require__(299),
+  __webpack_require__(448),
   /* styles */
-  injectStyle,
+  null,
   /* scopeId */
-  "data-v-6398b14f",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -16988,46 +16984,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 284 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(285);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("5b223502", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6398b14f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ServiceDetails.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6398b14f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ServiceDetails.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 285 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.waiting[data-v-6398b14f] {\n  text-align: center;\n  margin: 40px 0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 284 */,
+/* 285 */,
 /* 286 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17037,14 +16995,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceMedia__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceMedia__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceMedia__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceMedia__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer__);
 //
 //
 //
@@ -17110,7 +17066,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17122,10 +17105,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		appComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment___default.a,
 		appAddComment: __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment___default.a,
-		appServiceDescription: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDescription___default.a,
-		appServiceMedia: __WEBPACK_IMPORTED_MODULE_3__components_Services_ServiceMedia___default.a,
-		appRatings: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Ratings___default.a,
-		appTimer: __WEBPACK_IMPORTED_MODULE_5__components_Includes_Timer___default.a
+		appServiceMedia: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceMedia___default.a,
+		appRatings: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings___default.a,
+		appTimer: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer___default.a
 	},
 	computed: {
 		service: function service() {
@@ -17148,6 +17130,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		ratingAvg: function ratingAvg() {
 			return this.service.user.rating ? this.service.user.rating.avg : 0;
+		},
+		category: function category() {
+			var category = this.$store.getters.getCategoryById(this.service.category_id);
+			return category ? category.name : '';
+		},
+		location: function location() {
+			var city = this.$store.getters.getCityById(this.service.city_id);
+			var region = this.$store.getters.getRegionById(this.service.region_id);
+			return region && city ? city.name + ', ' + region.name : '';
 		}
 	},
 	methods: {
@@ -17481,140 +17472,9 @@ if (false) {
 }
 
 /***/ }),
-/* 293 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(294),
-  /* template */
-  __webpack_require__(295),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServiceDescription.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ServiceDescription.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4fb8e8c0", Component.options)
-  } else {
-    hotAPI.reload("data-v-4fb8e8c0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 294 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	computed: {
-		service: function service() {
-			return this.$store.getters.getService;
-		},
-		category: function category() {
-			var category = this.$store.getters.getCategoryById(this.service.category_id);
-			return category.name;
-		},
-		location: function location() {
-			var city = this.$store.getters.getCityById(this.service.city_id);
-			var region = this.$store.getters.getRegionById(this.service.region_id);
-			return city.name + ", " + region.name;
-		}
-	}
-});
-
-/***/ }),
-/* 295 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "service_description-component"
-  }, [_c('h4', {
-    staticClass: "title",
-    domProps: {
-      "textContent": _vm._s(_vm.service.title)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "info"
-  }, [_c('div', {
-    staticClass: "info-item info-category"
-  }, [_c('i', {
-    staticClass: "fa fa-list-ul",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" \n\t\t\tKategori: "), _c('span', {
-    staticClass: "info-item-value",
-    domProps: {
-      "textContent": _vm._s(_vm.category)
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "info-item info-location"
-  }, [_c('i', {
-    staticClass: "fa fa-map-marker",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" \n\t\t\tPlats: "), _c('span', {
-    staticClass: "info-item-value",
-    domProps: {
-      "textContent": _vm._s(_vm.location)
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "description",
-    domProps: {
-      "textContent": _vm._s(_vm.service.description)
-    }
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4fb8e8c0", module.exports)
-  }
-}
-
-/***/ }),
+/* 293 */,
+/* 294 */,
+/* 295 */,
 /* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17803,125 +17663,7 @@ if (false) {
 }
 
 /***/ }),
-/* 299 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "service-details-view"
-  }, [_c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-8"
-  }, [(!_vm.breakpoints.small) ? _c('div', {
-    staticClass: "service-description white-container mb20"
-  }, [_c('app-service-description'), _vm._v(" "), (_vm.service.media.length > 0) ? _c('app-service-media', {
-    attrs: {
-      "media": _vm.service.media
-    }
-  }) : _vm._e()], 1) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-4"
-  }, [_c('div', {
-    staticClass: "service-bids white-container"
-  }, [_c('div', {
-    staticClass: "time-left text-center"
-  }, [_c('app-timer', {
-    attrs: {
-      "ends": _vm.service.bid_stop
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "ends"
-  }, [_vm._v(_vm._s(_vm.ends))])], 1), _vm._v(" "), _c('div', {
-    staticClass: "active-bids text-center"
-  }, [_c('i', {
-    staticClass: "fa fa-gavel",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.bids))]), _vm._v(" bud. "), _c('a', {
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.showBids($event)
-      }
-    }
-  }, [_vm._v("Visa alla bud")])]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary full-width",
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.createBid($event)
-      }
-    }
-  }, [_vm._v("Lägg ett bud")])]), _vm._v(" "), (_vm.breakpoints.small) ? _c('div', {
-    staticClass: "service-description white-container"
-  }, [_c('app-service-description'), _vm._v(" "), (_vm.service.media.length > 0) ? _c('app-service-media', {
-    attrs: {
-      "media": _vm.service.media
-    }
-  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "service-user white-container"
-  }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
-    staticClass: "user-avatar"
-  }, [_c('img', {
-    attrs: {
-      "src": _vm.service.user.avatar,
-      "alt": _vm.avatarAlt
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "user-displayname",
-    domProps: {
-      "textContent": _vm._s(_vm.service.user.username)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "user-ratings"
-  }, [_c('app-ratings', {
-    attrs: {
-      "rating": _vm.ratingAvg,
-      "total": _vm.ratingCount,
-      "size": "large"
-    }
-  }), _vm._v(" "), _c('a', {
-    staticClass: "link"
-  }, [_vm._v("Visa omdömmen")])], 1)] : _vm._e()], 2)])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 col-md-8"
-  }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
-    staticClass: "margin-50"
-  }, [_c('ul', {
-    staticClass: "top-comments"
-  }, [_c('transition-group', {
-    attrs: {
-      "name": "slide-in-left"
-    }
-  }, _vm._l((_vm.service.comments), function(comment) {
-    return _c('li', {
-      key: comment.id
-    }, [_c('app-comment', {
-      attrs: {
-        "comment": comment
-      }
-    })], 1)
-  }))], 1)])], 1)])] : _c('app-loading', {
-    attrs: {
-      "bg": "gray"
-    }
-  })], 2)])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
-  }
-}
-
-/***/ }),
+/* 299 */,
 /* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26089,6 +25831,196 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "service-details-view"
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [(_vm.$store.getters.getServiceLoaded) ? [_c('div', {
+    staticClass: "main-area-with-sidebar"
+  }, [_c('div', {
+    staticClass: "main-area large-sidebar"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', {
+    staticClass: "service-title",
+    domProps: {
+      "textContent": _vm._s(_vm.service.title)
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('div', {
+    staticClass: "service-details"
+  }, [_c('div', {
+    staticClass: "detail-item"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.category)
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "detail-item"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.location)
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content service-description",
+    domProps: {
+      "textContent": _vm._s(_vm.service.description)
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "main-area-sidebar"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_c('div', {
+    staticClass: "white-contentSection-content service-bids pb10"
+  }, [_c('div', {
+    staticClass: "time-left text-center"
+  }, [_c('div', {
+    staticClass: "gray-sub-text"
+  }, [_vm._v("Avslutas om")]), _vm._v(" "), _c('app-timer', {
+    attrs: {
+      "ends": _vm.service.bid_stop
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "ends",
+    domProps: {
+      "textContent": _vm._s(("den " + (_vm.filters.time(_vm.service.bid_stop))))
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "active-bids text-center"
+  }, [_c('i', {
+    staticClass: "icon icon_bid wh15 cursor-default mr5"
+  }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.bids))]), _vm._v(" bud. "), _c('a', {
+    staticClass: "is-link",
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showBids($event)
+      }
+    }
+  }, [_vm._v("Visa alla bud")])])]), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary full-width",
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.createBid($event)
+      }
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\tLägg ett bud\n\t\t\t\t\t\t\t\t")])])]), _vm._v(" "), _c('section', {
+    staticClass: "transparent-contentSection mt30"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "transparent-contentSection-content"
+  }, [_c('div', {
+    staticClass: "service-user"
+  }, [_c('div', {
+    staticClass: "user-avatar-container"
+  }, [_c('img', {
+    attrs: {
+      "src": _vm.service.user.avatar,
+      "alt": _vm.avatarAlt
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "user-details-container"
+  }, [_c('div', {
+    staticClass: "user-username",
+    domProps: {
+      "textContent": _vm._s(_vm.service.user.username)
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "user-ratings"
+  }, [_c('app-ratings', {
+    attrs: {
+      "rating": _vm.ratingAvg,
+      "total": _vm.ratingCount
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "link"
+  }, [_vm._v("Visa omdömmen")])], 1)])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 col-md-8"
+  }, [_c('app-add-comment'), _vm._v(" "), _c('div', {
+    staticClass: "margin-50"
+  }, [_c('ul', {
+    staticClass: "top-comments"
+  }, [_c('transition-group', {
+    attrs: {
+      "name": "slide-in-left"
+    }
+  }, _vm._l((_vm.service.comments), function(comment) {
+    return _c('li', {
+      key: comment.id
+    }, [_c('app-comment', {
+      attrs: {
+        "comment": comment
+      }
+    })], 1)
+  }))], 1)])], 1)])] : _c('app-loading', {
+    attrs: {
+      "bg": "gray"
+    }
+  })], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "detail-header"
+  }, [_c('i', {
+    staticClass: "icon icon_list wh15 cursor-default primary mr10"
+  }), _c('span', [_vm._v("Kategori")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "detail-header"
+  }, [_c('i', {
+    staticClass: "icon icon_map_pin wh15 cursor-default primary mr10"
+  }), _c('span', [_vm._v("Plats")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "transparent-contentSection-header"
+  }, [_c('h3', [_vm._v("Upplagd av")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
+  }
+}
 
 /***/ })
 ],[140]);

@@ -17,6 +17,10 @@
 	display: inline-block;
 	cursor: pointer;
 
+	&.primary {
+		background-color: $brand-primary;
+	}
+
 	&.wh12 {
 		width: 12px;
 		height: 12px;
@@ -38,22 +42,18 @@
 	}
 }
 
-.icon_delete {
-	@include mask-icon('../svg/delete.svg');
-	background-color: $text-color;
-
-	&:hover {
-		background-color: $brand-danger;
-	}
-}
-
-.icon_download {
-	@include mask-icon('../svg/download.svg');
-	background-color: #fff;
+.icon_arrow_right {
+	@include mask-icon('../svg/right_arrow.svg');
+	background-color: #97A9B5;
 }
 
 .icon_bell {
 	@include mask-icon('../svg/bell.svg');
+	background-color: #97A9B5;
+}
+
+.icon_bid {
+	@include mask-icon('../svg/bid.svg');
 	background-color: #97A9B5;
 }
 
@@ -76,23 +76,22 @@
 	@include icon('../svg/danger.svg');
 }
 
-.icon_arrow_right {
-	@include mask-icon('../svg/right_arrow.svg');
-	background-color: #97A9B5;
+.icon_delete {
+	@include mask-icon('../svg/delete.svg');
+	background-color: $text-color;
+
+	&:hover {
+		background-color: $brand-danger;
+	}
+}
+
+.icon_download {
+	@include mask-icon('../svg/download.svg');
+	background-color: #fff;
 }
 
 .icon_document_check {
 	@include mask-icon('../svg/document_check.svg');
-	background-color: #97A9B5;
-}
-
-.icon_bid {
-	@include mask-icon('../svg/bid.svg');
-	background-color: #97A9B5;
-}
-
-.icon_retweet {
-	@include mask-icon('../svg/retweet.svg');
 	background-color: #97A9B5;
 }
 
@@ -101,9 +100,22 @@
 	background-color: #97A9B5;
 }
 
+.icon_list {
+	@include mask-icon('../svg/list.svg');
+}
+
+.icon_retweet {
+	@include mask-icon('../svg/retweet.svg');
+	background-color: #97A9B5;
+}
+
 .icon_monitor {
 	@include mask-icon('../svg/monitor.svg');
 	background-color: #97A9B5;
+}
+
+.icon_map_pin {
+	@include mask-icon('../svg/map_pin.svg');
 }
 
 .icon_on {

@@ -1,128 +1,91 @@
-.service-bids {
+.service-details-view {
 
-	@media screen and (min-width: $screen-md-min) {
-		margin-bottom: 20px;
-	}
+	.service-bids {
 
-	.time-left {
-		border-bottom: 1px solid $border-color-gray;
-		margin-bottom: 10px;
-		padding-bottom: 15px;
+		.time-left {
+			border-bottom: 1px solid #e6ebf1;
+			margin-bottom: 10px;
+			padding-bottom: 15px;
 
-		.timer-component {
-			font-size: 24px;
-			font-weight: 500;
+			.timer-component {
+				font-size: 24px;
+				font-weight: 500;
+			}
+
+			.ends {
+				font-size: 13px;
+			}
+		}
+
+		.active-bids {
+			margin-bottom: 5px;
+			font-size: 16px;
+
+			span {
+				font-weight: 500;
+				font-size: 20px;
+			}
+
+			a {
+				font-weight: 500;
+				margin-left: 5px;
+			}
 		}
 	}
 
-	.active-bids {
-		margin-bottom: 5px;
-		font-size: 16px;
-
-		i {
-			margin-right: 5px;
-		}
-
-		span {
-			font-weight: 500;
-			font-size: 20px;
-		}
-
-		a {
-			font-weight: 500;
-			margin-left: 5px;
-		}
-	}
-}
-
-.service_description-component {
-	.waiting {
+	.service-title {
+		font-size: 18px;
 		text-align: center;
-		padding: 20px 0;
+		padding: 10px 0;
 	}
 
-	.title {
-		font-weight: 500;
-		margin: 10px 0 20px 0;
-
-		@media screen and (min-width: $screen-sm-min) {
-			text-align: center;
-		}
-	}
-
-	.info {
-		border-bottom: 1px solid #ededed;
-		border-top: 1px solid #ededed;
-		margin: 0 -15px;
-		padding: 12.5px 15px;
-
-		@media screen and (min-width: $screen-sm-min) {
-			display: flex;
-		}
-
-		.info-item {
-			font-weight: 500;
-			margin: 3px 0;
-
-			@media screen and (min-width: $screen-sm-min) {
-				flex: 1;
-				text-align: center;
-			}
-
-			.info-item-value {
-				font-weight: normal;
-				margin-left: 3px;
-			}
-
-			i {
-				color: $brand-primary;
-				width: 30px;
-				text-align: center;
-			}
-		}
-	}
-
-	.description {
-		margin: 30px 0 0 0;
+	.service-description {
 		white-space: pre-wrap;
-	}
-}
-
-.service-user {
-
-	.user-avatar {
-		text-align: center;
-		margin: 0 0 5px 0;
-
-		img {
-			width: 145px;
-			height: 145px;
-			border-radius: 50%;
-			border: 3px solid $brand-primary;
-		}
+		padding-top: 30px !important;
 	}
 
-	.user-displayname {
-		text-align: center;
-		font-size: 24px;
-		font-weight: 500;
-	}
+	.service-details {
+		display: flex;
+		align-items: center;
 
-	.user-ratings {
-		text-align: center;
-		padding: 8px 0;
-		margin: 0 -15px 0 -15px;
-		background: #fafafa;
-		border-top: 1px solid $border-color-gray;
-		border-bottom: 1px solid $border-color-gray;
+		.detail-item {
+			flex: 1;
+			text-align: center;
 
-		.link {
-			color: #636b6f;
-			font-size: 13px;
-
-			&:hover {
-				color: $brand-primary;
+			.detail-header {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 10px;
 			}
 		}
+	}
+
+	.service-user {
+		display: flex;
+		align-items: flex-start;
+
+		.user-avatar-container {
+			flex: 1;
+			padding-right: 20px;
+
+			img {
+				width: 100px;
+				height: 100px;
+				box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+				border-radius: 50%;
+			}
+		}
+
+		.user-details-container {
+			flex: 3;
+
+			.user-username {
+				font-weight: 500;
+				font-size: 16px;
+				margin-bottom: 5px;
+			}
+		}
+		
 	}
 }
