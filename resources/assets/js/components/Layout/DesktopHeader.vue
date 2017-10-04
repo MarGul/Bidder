@@ -29,7 +29,7 @@
 						<a class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 					</div>
 
-					<div class="auth-user" @click.prevent="toggleDropdown" v-else>
+					<div class="auth-user" @click="toggleDropdown" v-else v-click-outside="close">
 						<div class="auth-avatar" :style="avatar"></div>
 						<div class="auth-name">
 							{{ user.username }}
@@ -61,9 +61,13 @@
 	import { mapGetters } from 'vuex';
 
 	export default {
+		data() {
+			return {
+				dropdown: false
+			}
+		},
 		computed: {
 			...mapGetters({
-				dropdown: 'authDropdown',
 				authenticated: 'isAuthenticated',
 				user: 'authUser'
 			}),
@@ -76,11 +80,14 @@
 		},
 		methods: {
 			toggleDropdown() {
-				this.$store.commit('SET_DROPDOWN', !this.dropdown);
+				this.dropdown = !this.dropdown;
 			},
 			logout() {
 				this.$store.dispatch('logout');
 				this.$router.push('/');
+			},
+			close() {
+				this.dropdown = false;
 			}
 		}
 	}

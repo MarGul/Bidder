@@ -98,12 +98,4 @@ router.beforeEach((to, from, next) => {
 	}
 });
 
-/*
-	Run to reset state after each new route.
- */
-router.afterEach((to, from) => {
-	// Close the userNav dropdown.
-	router.app.$store.commit('SET_DROPDOWN', false);
-});
-
 export default router;

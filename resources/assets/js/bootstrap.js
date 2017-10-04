@@ -10,13 +10,21 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 /**
- * Global Vue components and Prototypes
+ * Global Vue components
  */
 Vue.component('app-hero', require('./components/Includes/Hero'));
 Vue.component('app-loading', require('./components/Includes/Loading'));
 
+/**
+ * Filters
+ */
 import filters from "./includes/filters";
 Vue.prototype.filters = filters;
+
+/**
+ * Directives
+ */
+require('./directives/clickoutside');
 
 /**
  *  Load in Moment.js
@@ -29,6 +37,7 @@ window.moment.locale('sv');
  */
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = '/api/v1/';
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if ( token ) {

@@ -1,10 +1,9 @@
-import { SET_AUTHENTICATED, SET_AUTHENTICATED_USER, SET_AUTHENTICATED_INTENDED, SET_DROPDOWN } from '../mutation-types';
+import { SET_AUTHENTICATED, SET_AUTHENTICATED_USER, SET_AUTHENTICATED_INTENDED } from '../mutation-types';
 
 const state = {
 	authenticated: window.auth.authenticated || false,
 	user: window.auth.user || {},
-	intended: null,
-	dropdown: false
+	intended: null
 }
 
 const mutations = {
@@ -16,9 +15,6 @@ const mutations = {
 	},
 	[SET_AUTHENTICATED_INTENDED](state, intended) {
 		state.intended = intended;
-	},
-	[SET_DROPDOWN](state, dropdown) {
-		state.dropdown = dropdown;
 	}
 }
 
@@ -27,15 +23,13 @@ const actions = {
 		commit('SET_AUTHENTICATED', false);
 		commit('SET_AUTHENTICATED_USER', {});
 		commit('SET_AUTHENTICATED_INTENDED', null);
-		commit('SET_DROPDOWN', false);
 	}
 }
 
 const getters = {
 	isAuthenticated: state => state.authenticated,
 	authUser: state => state.user,
-	authIntended: state => state.intended,
-	authDropdown: state => state.dropdown
+	authIntended: state => state.intended
 }
 
 export default {
