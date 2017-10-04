@@ -10220,6 +10220,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -10251,7 +10253,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('nav', {
     staticClass: "mobile-navigation"
   }, [_c('ul', {
-    staticClass: "mobile-nav",
+    staticClass: "mobile-nav"
+  }, [_c('div', {
     on: {
       "click": _vm.hideMenu
     }
@@ -10262,7 +10265,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/categories"
     }
   }, [_c('i', {
-    staticClass: "icon icon_list wh15 light-gray mr10"
+    staticClass: "icon icon_list wh15 light-gray mr15"
   }), _vm._v(" Kategorier")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
@@ -10270,7 +10273,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/services"
     }
   }, [_c('i', {
-    staticClass: "icon icon_two_users wh15 light-gray mr10"
+    staticClass: "icon icon_two_users wh15 light-gray mr15"
   }), _vm._v(" Sök tjänster")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
@@ -10278,15 +10281,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/information"
     }
   }, [_c('i', {
-    staticClass: "icon icon_question_mark wh15 light-gray mr10"
+    staticClass: "icon icon_question_mark wh15 light-gray mr15"
   }), _vm._v(" Information")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
-      "to": "/information"
+      "to": "/contact"
     }
   }, [_c('i', {
-    staticClass: "icon icon_paper_plane wh15 light-gray mr10"
+    staticClass: "icon icon_paper_plane wh15 light-gray mr15"
   }), _vm._v(" Kontakt")])], 1), _vm._v(" "), _c('li', {
     staticClass: "spacer"
   }), _vm._v(" "), (_vm.$store.getters.isAuthenticated) ? _c('li', {
@@ -10326,7 +10329,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         })
       }
     }
-  }, [_vm._v("Logga In")])])]], 2)]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Logga In")])])]], 2)])]), _vm._v(" "), _c('div', {
     staticClass: "mobile-nav-header"
   }, [_c('a', {
     attrs: {
@@ -10538,7 +10541,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
-      "to": "/information"
+      "to": "/contact"
     }
   }, [_c('i', {
     staticClass: "icon icon_paper_plane wh15 light-gray mr10"
@@ -10589,28 +10592,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/profile/margul"
     }
   }, [_c('i', {
-    staticClass: "fa fa-user-circle",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_user wh15 light-gray mr10"
   }), _vm._v("Min profil")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": "/user/create-service"
     }
   }, [_c('i', {
-    staticClass: "fa fa-users",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_two_users wh15 light-gray mr10"
   }), _vm._v("Skapa tjänst")])], 1), _vm._v(" "), _c('li', [_c('router-link', {
     attrs: {
       "to": "/user/profile"
     }
   }, [_c('i', {
-    staticClass: "fa fa-cogs",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_gears wh15 light-gray mr10"
   }), _vm._v("Inställningar")])], 1), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": "/logout"
@@ -10622,10 +10616,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('i', {
-    staticClass: "fa fa-power-off",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_exit wh15 light-gray mr10"
   }), _vm._v("Logga Ut")])])]) : _vm._e()])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -18240,7 +18231,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/profile"
     }
   }, [_c('i', {
-    staticClass: "icon icon_user wh15 mr15"
+    staticClass: "icon icon_user wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Profil")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18248,7 +18239,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/notifications"
     }
   }, [_c('i', {
-    staticClass: "icon icon_bell wh15 mr15"
+    staticClass: "icon icon_bell wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Notifikationer")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18256,7 +18247,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/create-service"
     }
   }, [_c('i', {
-    staticClass: "icon icon_document_check wh15 mr15"
+    staticClass: "icon icon_document_check wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Skapa tjänst")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18264,7 +18255,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/services"
     }
   }, [_c('i', {
-    staticClass: "icon icon_monitor wh15 mr15"
+    staticClass: "icon icon_monitor wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Mina tjänster")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18272,7 +18263,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/bids"
     }
   }, [_c('i', {
-    staticClass: "icon icon_bid wh15 mr15"
+    staticClass: "icon icon_bid wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Mina bud")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18280,7 +18271,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/projects"
     }
   }, [_c('i', {
-    staticClass: "icon icon_two_users wh15 mr15"
+    staticClass: "icon icon_two_users wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Mina projekt")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18288,7 +18279,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/subscriptions"
     }
   }, [_c('i', {
-    staticClass: "icon icon_retweet wh15 mr15"
+    staticClass: "icon icon_retweet wh15 light-gray mr15"
   }), _vm._v(" "), _c('span', {
     staticClass: "link-text"
   }, [_vm._v("Prenumerationer")])])], 1), _vm._v(" "), _c('li', [_c('router-link', {
@@ -18296,7 +18287,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/user/invoices"
     }
   }, [_c('i', {
-    staticClass: "icon icon_credit_card wh15 mr15"
+    staticClass: "icon icon_credit_card wh15 light-gray mr15"
   }), _vm._v("\n\t\t\t\t\t\t\tBetalningar\n\t\t\t\t\t\t")])], 1)])]), _vm._v(" "), _c('section', {
     staticClass: "user-content"
   }, [_c('router-view')], 1)])])])

@@ -58,7 +58,6 @@
 
 .icon_bell {
 	@include mask-icon('../svg/bell.svg');
-	background-color: #97A9B5;
 }
 
 .icon_bid {
@@ -78,7 +77,6 @@
 
 .icon_credit_card {
 	@include mask-icon('../svg/credit_card.svg');
-	background-color: #97A9B5;
 }
 
 .icon_down_chevron {
@@ -109,7 +107,14 @@
 
 .icon_document_check {
 	@include mask-icon('../svg/document_check.svg');
-	background-color: #97A9B5;
+}
+
+.icon_exit {
+	@include mask-icon('../svg/exit.svg');
+}
+
+.icon_gears {
+	@include mask-icon('../svg/settings_gears.svg');
 }
 
 .icon_image {
@@ -123,12 +128,10 @@
 
 .icon_retweet {
 	@include mask-icon('../svg/retweet.svg');
-	background-color: #97A9B5;
 }
 
 .icon_monitor {
 	@include mask-icon('../svg/monitor.svg');
-	background-color: #97A9B5;
 }
 
 .icon_map_pin {
@@ -166,9 +169,12 @@
 
 .icon_two_users {
 	@include mask-icon('../svg/two_users.svg');
-	background-color: #97A9B5;
 }
 
 .icon_up_chevron {
 	@include mask-icon('../svg/up_chevron.svg');
+}
+
+.icon_user {
+	@include mask-icon('../svg/user.svg');
 }

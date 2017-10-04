@@ -19,7 +19,7 @@
 							<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr10"></i> Information</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link to="/information"><i class="icon icon_paper_plane wh15 light-gray mr10"></i> Kontakt</router-link>
+							<router-link to="/contact"><i class="icon icon_paper_plane wh15 light-gray mr10"></i> Kontakt</router-link>
 						</li>
 					</ul>
 				</nav>
@@ -39,16 +39,16 @@
 
 					<ul class="auth-dropdown" v-if="dropdown">
 						<li>
-							<router-link to="/profile/margul"><i class="fa fa-user-circle" aria-hidden="true"></i>Min profil</router-link>
+							<router-link to="/profile/margul"><i class="icon icon_user wh15 light-gray mr10"></i>Min profil</router-link>
 						</li>
 						<li>
-							<router-link to="/user/create-service"><i class="fa fa-users" aria-hidden="true"></i>Skapa tjänst</router-link>
+							<router-link to="/user/create-service"><i class="icon icon_two_users wh15 light-gray mr10"></i>Skapa tjänst</router-link>
 						</li>
 						<li>
-							<router-link to="/user/profile"><i class="fa fa-cogs" aria-hidden="true"></i>Inställningar</router-link>
+							<router-link to="/user/profile"><i class="icon icon_gears wh15 light-gray mr10"></i>Inställningar</router-link>
 						</li>
 						<li>
-							<a href="/logout" @click.prevent="logout"><i class="fa fa-power-off" aria-hidden="true"></i>Logga Ut</a>
+							<a href="/logout" @click.prevent="logout"><i class="icon icon_exit wh15 light-gray mr10"></i>Logga Ut</a>
 						</li>
 					</ul>
 				</div>

@@ -181,7 +181,8 @@
 					}
 
 					a {
-						display: block;
+						display: flex;
+						align-items: center;
 						padding: 6px 15px;
 						color: $gray-text;
 						font-weight: 500;
@@ -193,15 +194,8 @@
 							text-decoration: none;
 
 							i {
-								color: #fff;
+								background-color: #FFF;
 							}
-						}
-
-						i {
-							width: 27px;
-							margin-left: 5px;
-							text-align: left;
-							color: $navbar-icon-color
 						}
 					}
 				}

@@ -27,18 +27,13 @@
 	background: $navbar-bg;
 
 	.nav-item a {
-		display: block;
+		display: flex;
+		align-items: center;
 		padding: 1em;
 		color: #fff;
 		font-size: 1.2em;
 		text-decoration: none;
 		font-weight: 500;
-
-		i {
-			width: 10%;
-			text-align: center;
-			margin-right: 5px;
-		}
 
 		&:hover {
 			background: $brand-primary;
@@ -48,6 +43,10 @@
 	.active {
 		background: $brand-primary;
 		cursor: default;
+
+		i {
+			background-color: #FFF;
+		}
 	}
 
 	.spacer {

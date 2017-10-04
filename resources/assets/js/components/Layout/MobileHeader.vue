@@ -1,36 +1,38 @@
 <template>
 	<div class="site-head">
 		<nav class="mobile-navigation">
-			<ul class="mobile-nav" @click="hideMenu">
-				<li class="nav-item">
-					<router-link to="/categories"><i class="icon icon_list wh15 light-gray mr10"></i> Kategorier</router-link>
-				</li>
-				<li class="nav-item">
-					<router-link to="/services"><i class="icon icon_two_users wh15 light-gray mr10"></i> Sök tjänster</router-link>
-				</li>
-				<li class="nav-item">
-					<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr10"></i> Information</router-link>
-				</li>
-				<li class="nav-item">
-					<router-link to="/information"><i class="icon icon_paper_plane wh15 light-gray mr10"></i> Kontakt</router-link>
-				</li>
-				<li class="spacer"></li>
-				<li v-if="$store.getters.isAuthenticated" class="nav-item">
-					<router-link to="/user/profile">
-						<div class="auth-user">
-							<div class="auth-avatar" :style="avatar"></div>
-							<div class="auth-name">{{ $store.getters.authUser.username }}</div>
-						</div>
-					</router-link>
-				</li>
-				<template v-else>
+			<ul class="mobile-nav">
+				<div @click="hideMenu">
 					<li class="nav-item">
-						<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
+						<router-link to="/categories"><i class="icon icon_list wh15 light-gray mr15"></i> Kategorier</router-link>
 					</li>
 					<li class="nav-item">
-						<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
+						<router-link to="/services"><i class="icon icon_two_users wh15 light-gray mr15"></i> Sök tjänster</router-link>
 					</li>
-				</template>
+					<li class="nav-item">
+						<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr15"></i> Information</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/contact"><i class="icon icon_paper_plane wh15 light-gray mr15"></i> Kontakt</router-link>
+					</li>
+					<li class="spacer"></li>
+					<li v-if="$store.getters.isAuthenticated" class="nav-item">
+						<router-link to="/user/profile">
+							<div class="auth-user">
+								<div class="auth-avatar" :style="avatar"></div>
+								<div class="auth-name">{{ $store.getters.authUser.username }}</div>
+							</div>
+						</router-link>
+					</li>
+					<template v-else>
+						<li class="nav-item">
+							<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
+						</li>
+						<li class="nav-item">
+							<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
+						</li>
+					</template>
+				</div>
 			</ul>
 		</nav>
 
