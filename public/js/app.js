@@ -1526,31 +1526,33 @@ function applyToTag (styleElement, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_AUTHENTICATED_INTENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_CATEGORIES_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_CATEGORIES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_REGIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_REGIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_FILTER_TEXT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_FILTER_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_FILTER_LOCATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICES_PAGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SERVICES_CAN_LOAD_MORE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_NOTIFICATION_SETTINGS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_BID_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SERVICE_DETAILS_SERVICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SERVICE_DETAILS_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_SUBSCRIPTIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SUBSCRIPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_INVOICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_INVOICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_INVOICES_FOCUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SERVICES_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICES_CAN_LOAD_MORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_NOTIFICATION_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_SERVICE_DETAILS_SERVICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICE_DETAILS_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICE_DETAILS_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SERVICE_DETAILS_BID_ACCEPTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_INVOICES_FOCUS; });
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
@@ -1559,6 +1561,10 @@ var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDER';
 // Categories
 var SET_CATEGORIES_FETCHED = 'SET_CATEGORIES_FETCHED';
 var SET_CATEGORIES = 'SET_CATEGORIES';
+
+// Regions
+var SET_REGIONS_FETCHED = 'SET_REGIONS_FETCHED';
+var SET_REGIONS = 'SET_REGIONS';
 
 // Services Filter
 var SET_FILTER_TEXT = 'SET_FILTER_TEXT';
@@ -10136,6 +10142,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.$store.commit('SET_CATEGORIES', response.categories);
             _this.$store.commit('SET_CATEGORIES_FETCHED', true);
         });
+        new __WEBPACK_IMPORTED_MODULE_6__includes_Model__["a" /* default */]('regions').get().then(function (response) {
+            _this.$store.commit('SET_REGIONS', response.regions);
+            _this.$store.commit('SET_REGIONS_FETCHED', true);
+        });
 
         // Listen to global broadcasts
         Echo.channel('services').listen('NewService', function (e) {
@@ -13555,87 +13565,87 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(8);
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var regions = {
-	state: {
-		regions: []
+
+var state = {
+	fetched: false,
+	regions: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_REGIONS_FETCHED */], function (state, fetched) {
+	state.fetched = fetched;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_REGIONS */], function (state, regions) {
+	state.regions = regions;
+}), _mutations);
+
+var actions = {};
+
+var getters = {
+	regionsFetched: function regionsFetched(state) {
+		return state.fetched;
 	},
-	mutations: {
-		'SET_REGIONS': function SET_REGIONS(state, regions) {
-			state.regions = regions;
-		}
+	regions: function regions(state) {
+		return state.regions;
 	},
-	actions: {
-		fetchRegions: function fetchRegions(_ref) {
-			var commit = _ref.commit;
-
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('regions').get().then(function (_ref2) {
-				var regions = _ref2.regions;
-
-				commit('SET_REGIONS', regions);
+	regionById: function regionById(state) {
+		return function (id) {
+			return state.regions.find(function (r) {
+				return r.id === id;
 			});
-		}
+		};
 	},
-	getters: {
-		getRegions: function getRegions(state) {
-			return state.regions;
-		},
-		getRegionById: function getRegionById(state) {
-			return function (id) {
-				return id ? state.regions.filter(function (r) {
-					return r.id === id;
-				})[0] : [];
-			};
-		},
-		getRegionsFlatten: function getRegionsFlatten(state) {
-			var flattenedRegions = [];
-			var flatten = function flatten(regions) {
-				regions.forEach(function (region, index) {
-					if (region.cities) {
-						region.type = 'region';
-						flatten(region.cities);
-					} else {
-						region.type = 'city';
-					}
-
-					return flattenedRegions.push(region);
-				});
-			};
-			flatten(state.regions);
-
-			return flattenedRegions;
-		},
-
-		getCityById: function getCityById(state) {
-			return function (id) {
-				var c = null;
-				state.regions.forEach(function (region, index) {
-					region.cities.forEach(function (city, index) {
-						if (city.id === id) {
-							c = city;
-							return;
-						}
-					});
-					if (c) return;
-				});
-				return c;
-			};
-		},
-		getCities: function getCities(state) {
-			var cities = [];
-			state.regions.forEach(function (region, index) {
-				cities = cities.concat(region.cities);
+	regionsFlattened: function regionsFlattened(state) {
+		return state.regions.reduce(function (a, b) {
+			return a.concat([b].concat(b.sub_categories));
+		}, []);
+	},
+	cities: function cities(state) {
+		return state.regions.reduce(function (a, b) {
+			return a.concat(b.cities);
+		}, []);
+	},
+	cityById: function cityById(state, getters) {
+		return function (id) {
+			return getters.cities.find(function (c) {
+				return c.id === id;
 			});
-			return cities.sort(function (a, b) {
-				return a.name < b.name ? -1 : 1;
-			});
-		}
+		};
 	}
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (regions);
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+
+	/*
+ getRegionsFlatten(state) {
+ 			let flattenedRegions = [];
+ 			let flatten = function(regions) {
+ 				regions.forEach(function(region, index) {
+ 					if ( region.cities ) {
+ 						region.type = 'region';
+ 						flatten(region.cities);
+ 					} else {
+ 						region.type = 'city';
+ 					}
+ 
+ 					return flattenedRegions.push(region);
+ 				});
+ 			}
+ 			flatten(state.regions);
+ 
+ 			return flattenedRegions;
+ 		},
+  */
+
+});
 
 /***/ }),
 /* 232 */
@@ -13972,13 +13982,13 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICES_PAGE */], function (state, page) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SERVICES_PAGE */], function (state, page) {
 	state.page = page;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
 	state.canLoadMore = canLoadMore;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -14277,9 +14287,9 @@ var state = {
 	bids: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_BIDS */], function (state, bids) {
 	state.bids = bids;
 }), _mutations);
 
@@ -14318,9 +14328,9 @@ var state = {
 	bid: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_BID_DETAILS */], function (state, bid) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_BID_DETAILS */], function (state, bid) {
 	state.bid = bid;
 }), _mutations);
 
@@ -14359,9 +14369,9 @@ var state = {
 	settings: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
 	state.settingsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
 	state.settings = settings;
 }), _mutations);
 
@@ -14400,9 +14410,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -14441,9 +14451,9 @@ var state = {
 	subscriptions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
 	state.subscriptions = subscriptions;
 }), _mutations);
 
@@ -14485,15 +14495,15 @@ var state = {
 	bidAccepted: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.serviceFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_SERVICE_DETAILS_SERVICE */], function (state, service) {
 	state.service = service;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
 	state.bidsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICE_DETAILS_BIDS */], function (state, bids) {
 	state.bids = bids;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
 	state.bidAccepted = accepted;
 }), _mutations);
 
@@ -14565,11 +14575,11 @@ var state = {
 	focusId: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_INVOICES */], function (state, invoices) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
 	state.focusId = parseInt(focusId);
 }), _mutations);
 
@@ -15300,7 +15310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	computed: {
 		categories: function categories() {
-			return this.$store.getters.getCategories;
+			return this.$store.getters.categories;
 		}
 	}
 });
@@ -15564,7 +15574,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	computed: {
 		regions: function regions() {
-			return this.$store.getters.getRegions;
+			return this.$store.getters.regions;
 		}
 	}
 });
@@ -16370,9 +16380,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return category ? category.name : '';
 		},
 		location: function location() {
-			var city = this.$store.getters.getCityById(this.service.city_id);
-			var region = this.$store.getters.getRegionById(this.service.region_id);
-			return city && region ? city + ', ' + region : '';
+			var city = this.$store.getters.cityById(this.service.city_id);
+			var region = this.$store.getters.regionById(this.service.region_id);
+			return city && region ? city.name + ', ' + region.name : '';
 		},
 		commentCount: function commentCount() {
 			return this.service.comment_count ? this.service.comment_count.count : 0;
@@ -16908,8 +16918,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return category ? category.name : '';
 		},
 		location: function location() {
-			var city = this.$store.getters.getCityById(this.service.city_id);
-			var region = this.$store.getters.getRegionById(this.service.region_id);
+			var city = this.$store.getters.cityById(this.service.city_id);
+			var region = this.$store.getters.regionById(this.service.region_id);
 			return region && city ? city.name + ', ' + region.name : '';
 		}
 	},
@@ -19721,13 +19731,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		categories: function categories() {
-			return this.$store.getters.getCategories;
+			return this.$store.getters.categories;
 		},
 		regions: function regions() {
-			return this.$store.getters.getRegions;
+			return this.$store.getters.regions;
 		},
 		cities: function cities() {
-			var region = this.$store.getters.getRegionById(this.form.region_id);
+			var region = this.$store.getters.regionById(this.form.region_id);
 			return region ? region.cities : [];
 		},
 		finalData: function finalData() {
@@ -20843,13 +20853,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		service: 'serviceDetailsService'
 	}), {
 		categories: function categories() {
-			return this.$store.getters.getCategories;
+			return this.$store.getters.categories;
 		},
 		regions: function regions() {
-			return this.$store.getters.getRegions;
+			return this.$store.getters.regions;
 		},
 		cities: function cities() {
-			var region = this.$store.getters.getRegionById(this.form.region_id);
+			var region = this.$store.getters.regionById(this.form.region_id);
 			return region ? region.cities : [];
 		},
 		finalData: function finalData() {
@@ -25134,7 +25144,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		title: function title(sub) {
 			var isRegion = sub.region_id ? true : false;
 			var locationId = isRegion ? sub.region_id : sub.city_id;
-			var location = isRegion ? this.$store.getters.getRegionById(locationId) : this.$store.getters.getCityById(locationId);
+			var location = isRegion ? this.$store.getters.regionById(locationId) : this.$store.getters.cityById(locationId);
 			var category = this.$store.getters.categoryById(sub.category_id);
 
 			return category.name + " i " + location.name;
@@ -25268,13 +25278,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.categoriesFlattened;
 		},
 		regions: function regions() {
-			return this.$store.getters.getRegions;
+			return this.$store.getters.regions;
 		},
 		regionDisabled: function regionDisabled() {
 			return this.form.city_id ? true : false;
 		},
 		cities: function cities() {
-			return this.$store.getters.getCities;
+			return this.$store.getters.cities;
 		},
 		citiesDisabled: function citiesDisabled() {
 			return this.form.region_id ? true : false;

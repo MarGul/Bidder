@@ -57,6 +57,10 @@
                 this.$store.commit('SET_CATEGORIES', response.categories);
                 this.$store.commit('SET_CATEGORIES_FETCHED', true);
             });
+            new Model('regions').get().then(response => {
+                this.$store.commit('SET_REGIONS', response.regions);
+                this.$store.commit('SET_REGIONS_FETCHED', true);
+            });
 
             // Listen to global broadcasts
             Echo.channel('services')

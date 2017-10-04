@@ -63,13 +63,13 @@
 				return this.$store.getters.categoriesFlattened;
 			},
 			regions() {
-				return this.$store.getters.getRegions;
+				return this.$store.getters.regions;
 			},
 			regionDisabled() {
 				return this.form.city_id ? true : false;
 			},
 			cities() {
-				return this.$store.getters.getCities;
+				return this.$store.getters.cities;
 			},
 			citiesDisabled() {
 				return this.form.region_id ? true : false;

@@ -30,7 +30,7 @@
 		},
 		computed: {
 			regions() {
-				return this.$store.getters.getRegions;
+				return this.$store.getters.regions;
 			}
 		}
 	}

@@ -30,7 +30,7 @@
 		},
 		computed: {
 			categories() {
-				return this.$store.getters.getCategories;
+				return this.$store.getters.categories;
 			}
 		}
 	}

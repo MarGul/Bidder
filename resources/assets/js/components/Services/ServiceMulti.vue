@@ -48,9 +48,9 @@
 				return category ? category.name : '';
 			},
 			location() {
-				let city = this.$store.getters.getCityById(this.service.city_id);
-				let region = this.$store.getters.getRegionById(this.service.region_id);
-				return city && region ? `${city}, ${region}` : '';
+				let city = this.$store.getters.cityById(this.service.city_id);
+				let region = this.$store.getters.regionById(this.service.region_id);
+				return city && region ? `${city.name}, ${region.name}` : '';
 			},
 			commentCount() {
 				return this.service.comment_count ? this.service.comment_count.count : 0;

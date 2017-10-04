@@ -65,7 +65,7 @@
 			title(sub) {
 				let isRegion = sub.region_id ? true : false;
 				let locationId = isRegion ? sub.region_id : sub.city_id;
-				let location = isRegion ? this.$store.getters.getRegionById(locationId) : this.$store.getters.getCityById(locationId);
+				let location = isRegion ? this.$store.getters.regionById(locationId) : this.$store.getters.cityById(locationId);
 				let category = this.$store.getters.categoryById(sub.category_id);
 
 				return `${category.name} i ${location.name}`;

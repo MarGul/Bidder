@@ -137,8 +137,8 @@
 				return category ? category.name : '';
 			},
 			location() {
-				let city = this.$store.getters.getCityById(this.service.city_id);
-				let region = this.$store.getters.getRegionById(this.service.region_id);
+				let city = this.$store.getters.cityById(this.service.city_id);
+				let region = this.$store.getters.regionById(this.service.region_id);
 				return region && city ? `${city.name}, ${region.name}` : '';
 			}
 		},

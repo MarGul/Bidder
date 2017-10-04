@@ -157,13 +157,13 @@
 				service: 'serviceDetailsService'
 			}),
 			categories() {
-				return this.$store.getters.getCategories;
+				return this.$store.getters.categories;
 			},
 			regions() {
-				return this.$store.getters.getRegions;
+				return this.$store.getters.regions;
 			},
 			cities() {
-				let region = this.$store.getters.getRegionById(this.form.region_id);
+				let region = this.$store.getters.regionById(this.form.region_id);
 				return region ? region.cities : [];
 			},
 			finalData() {

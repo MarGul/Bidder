@@ -1,27 +1,41 @@
-import Model from '../../includes/Model';
+import { SET_REGIONS_FETCHED, SET_REGIONS } from '../mutation-types';
 
-const regions = {
-	state: {
-		regions: []
+const state = {
+	fetched: false,
+	regions: []
+}
+
+const mutations = {
+	[SET_REGIONS_FETCHED](state, fetched) {
+		state.fetched = fetched;
 	},
-	mutations: {
-		'SET_REGIONS'(state, regions) {
-			state.regions = regions;
-		}
-	},
-	actions: {
-		fetchRegions({commit}) {
-			new Model('regions').get().then(({regions}) => {
-				commit('SET_REGIONS', regions);
-			});
-		}
-	},
-	getters: {
-		getRegions: state => state.regions,
-		getRegionById: state => id => {
-			return id ? state.regions.filter(r => r.id === id)[0] : [];
-		},
-		getRegionsFlatten(state) {
+	[SET_REGIONS](state, regions) {
+		state.regions = regions;
+	}
+}
+
+const actions = {
+	
+}
+
+const getters = {
+	regionsFetched: state => state.fetched,
+	regions: state => state.regions,
+	regionById: state => id => state.regions.find(r => r.id === id),
+	regionsFlattened: state => state.regions.reduce( (a,b) => a.concat([b].concat(b.sub_categories)), []),
+	cities: state => state.regions.reduce( (a,b) => a.concat(b.cities), []),
+	cityById: (state, getters) => id => getters.cities.find(c => c.id === id)
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}
+
+/*
+getRegionsFlatten(state) {
 			let flattenedRegions = [];
 			let flatten = function(regions) {
 				regions.forEach(function(region, index) {
@@ -39,27 +53,4 @@ const regions = {
 
 			return flattenedRegions;
 		},
-		getCityById: state => id => {
-			let c = null;
-			state.regions.forEach(function(region, index) {
-				region.cities.forEach(function(city, index) {
-					if ( city.id === id) {
-						c = city;
-						return;
-					}
-				});
-				if ( c ) return;
-			});
-			return c;
-		},
-		getCities(state) {
-			let cities = [];
-			state.regions.forEach(function(region, index) {
-				cities = cities.concat(region.cities);
-			});
-			return cities.sort((a,b) => a.name < b.name ? -1 : 1);
-		}
-	}
-}
-
-export default regions;
+ */
