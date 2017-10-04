@@ -1,57 +1,33 @@
-import Model from '../../includes/Model';
+import { SET_CATEGORIES_FETCHED, SET_CATEGORIES } from '../mutation-types';
 
-const categories = {
-	state: {
-		categories: []
-	},
-	mutations: {
-		'SET_CATEGORIES'(state, categories) {
-			state.categories = categories;
-		}
-	},
-	actions: {
-		fetchCategories({commit}) {
-			new Model('categories').get().then(({categories}) => {
-				commit('SET_CATEGORIES', categories);
-			});
-		}
-	},
-	getters: {
-		getCategoryById: state => id => {
-			let c = null;
-			state.categories.forEach(function(category, index) {
-				if ( category.id === id) {
-					c = category;
-					return;
-				}
+const state = {
+	fetched: false,
+	categories: []
+}
 
-				category.sub_categories.forEach(function(sub, index) {
-					if ( sub.id === id) {
-						c = sub;
-						return;
-					}
-				});
-			});
-			return c;
-		},
-		getCategories: state => state.categories,
-		getCategoriesFlatten(state) {
-			let flattenCategories = [];
-			let flatten = function(categories) {
-				categories.forEach(function(category, index) {
-					if ( category.sub_categories ) {
-						flatten(category.sub_categories);
-					}
-					// The TagsInput needs a type.
-					category.type = 'category';
-					return flattenCategories.push(category);
-				});
-			}
-			flatten(state.categories);
-
-			return flattenCategories;
-		}
+const mutations = {
+	[SET_CATEGORIES_FETCHED](state, fetched) {
+		state.fetched = fetched;
+	},
+	[SET_CATEGORIES](state, categories) {
+		state.categories = categories;
 	}
 }
 
-export default categories;
+const actions = {
+	
+}
+
+const getters = {
+	categoriesFetched: state => state.fetched,
+	categories: state => state.categories,
+	categoryById: (state, getters) => id => getters.categoriesFlattened.find(cat => cat.id === id),
+	categoriesFlattened: state => state.categories.reduce( (a,b) => a.concat([b].concat(b.sub_categories)), [])
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}

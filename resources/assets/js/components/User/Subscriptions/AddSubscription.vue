@@ -60,7 +60,7 @@
 		},
 		computed: {
 			categories() {
-				return this.$store.getters.getCategoriesFlatten;
+				return this.$store.getters.categoriesFlattened;
 			},
 			regions() {
 				return this.$store.getters.getRegions;

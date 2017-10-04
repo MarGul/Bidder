@@ -11,7 +11,7 @@
 						<div class="item-content">
 							<div class="item-header" v-text="service.title"></div>
 							<div class="item-sub-data">
-								<span class="mr5">{{ $store.getters.getCategoryById(service.category_id).name }}</span>&bull;
+								<span class="mr5">{{ $store.getters.categoryById(service.category_id).name }}</span>&bull;
 								<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
 							</div>
 						</div>

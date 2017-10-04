@@ -40,7 +40,7 @@
 			},
 			...mapGetters({
 				categories: 'filterCategories',
-				allCategories: 'getCategoriesFlatten',
+				allCategories: 'categoriesFlattened',
 				locations: 'filterLocations',
 				allLocations: 'getRegionsFlatten'
 			})

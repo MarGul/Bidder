@@ -31,6 +31,8 @@
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
 
+    import Model from './includes/Model';
+
     export default {
         components: {
             appMobileHeader,
@@ -51,8 +53,11 @@
         },
         created() {
             // Initialize Data
-            //this.$store.dispatch('fetchCategories');
-            //this.$store.dispatch('fetchRegions');
+            new Model('categories').get().then(response => {
+                this.$store.commit('SET_CATEGORIES', response.categories);
+                this.$store.commit('SET_CATEGORIES_FETCHED', true);
+            });
+
             // Listen to global broadcasts
             Echo.channel('services')
                 .listen('NewService', (e) => {

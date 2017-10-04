@@ -44,7 +44,7 @@
 		},
 		computed: {
 			category() {
-				let category = this.$store.getters.getCategoryById(this.service.category_id)
+				let category = this.$store.getters.categoryById(this.service.category_id)
 				return category ? category.name : '';
 			},
 			location() {
