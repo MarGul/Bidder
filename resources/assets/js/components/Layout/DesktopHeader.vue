@@ -10,16 +10,16 @@
 				<nav class="desktop-navigation-container">
 					<ul class="desktop-navigation">
 						<li class="nav-item">
-							<router-link to="/categories"><i class="fa fa-list-ul" aria-hidden="true"></i> Kategorier</router-link>
+							<router-link to="/categories"><i class="icon icon_list wh15 light-gray mr10"></i> Kategorier</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link to="/locations"><i class="fa fa-map-marker" aria-hidden="true"></i> Platser</router-link>
+							<router-link to="/services"><i class="icon icon_two_users wh15 light-gray mr10"></i> Sök tjänster</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link to="/services"><i class="fa fa-users" aria-hidden="true"></i> Tjänster</router-link>
+							<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr10"></i> Information</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link to="/information"><i class="fa fa-question" aria-hidden="true"></i> Information</router-link>
+							<router-link to="/information"><i class="icon icon_paper_plane wh15 light-gray mr10"></i> Kontakt</router-link>
 						</li>
 					</ul>
 				</nav>

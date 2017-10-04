@@ -10222,9 +10222,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: {
@@ -10267,44 +10264,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/categories"
     }
   }, [_c('i', {
-    staticClass: "fa fa-list-ul",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_list wh15 light-gray mr10"
   }), _vm._v(" Kategorier")])], 1), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('router-link', {
-    attrs: {
-      "to": "/locations"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-map-marker",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Platser")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/services"
     }
   }, [_c('i', {
-    staticClass: "fa fa-users",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('li', {
+    staticClass: "icon icon_two_users wh15 light-gray mr10"
+  }), _vm._v(" Sök tjänster")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/information"
     }
   }, [_c('i', {
-    staticClass: "fa fa-question",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_question_mark wh15 light-gray mr10"
   }), _vm._v(" Information")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/information"
+    }
+  }, [_c('i', {
+    staticClass: "icon icon_paper_plane wh15 light-gray mr10"
+  }), _vm._v(" Kontakt")])], 1), _vm._v(" "), _c('li', {
     staticClass: "spacer"
   }), _vm._v(" "), (_vm.$store.getters.isAuthenticated) ? _c('li', {
     staticClass: "nav-item"
@@ -10357,20 +10342,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('span')])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-globe",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Link")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -10538,44 +10510,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": "/categories"
     }
   }, [_c('i', {
-    staticClass: "fa fa-list-ul",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_list wh15 light-gray mr10"
   }), _vm._v(" Kategorier")])], 1), _vm._v(" "), _c('li', {
-    staticClass: "nav-item"
-  }, [_c('router-link', {
-    attrs: {
-      "to": "/locations"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-map-marker",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Platser")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/services"
     }
   }, [_c('i', {
-    staticClass: "fa fa-users",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" Tjänster")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "icon icon_two_users wh15 light-gray mr10"
+  }), _vm._v(" Sök tjänster")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/information"
     }
   }, [_c('i', {
-    staticClass: "fa fa-question",
+    staticClass: "icon icon_question_mark wh15 light-gray mr10"
+  }), _vm._v(" Information")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('router-link', {
     attrs: {
-      "aria-hidden": "true"
+      "to": "/information"
     }
-  }), _vm._v(" Information")])], 1)])]), _vm._v(" "), _c('div', {
+  }, [_c('i', {
+    staticClass: "icon icon_paper_plane wh15 light-gray mr10"
+  }), _vm._v(" Kontakt")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "desktop-user-container"
   }, [(!_vm.$store.getters.isAuthenticated) ? _c('div', {
     staticClass: "guest-actions"
@@ -16021,8 +15981,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
 
 
 
@@ -16839,10 +16797,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices()
       }
     }
-  }, [_vm._v("\n\t\t\t\tHitta Tjänster\n\t\t\t")])])]), _vm._v(" "), _c('div', {
-    staticClass: "services mtb20"
-  }, [(_vm.fetched) ? [(_vm.services.length) ? [_c('div', {
-    staticClass: "row"
+  }, [_vm._v("\n\t\t\t\tHitta Tjänster\n\t\t\t")])])]), _vm._v(" "), (_vm.fetched) ? [(_vm.services.length) ? [_c('div', {
+    staticClass: "services-list mtb20"
   }, [_c('transition-group', {
     attrs: {
       "name": "slide-out",
@@ -16851,7 +16807,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.services), function(service) {
     return _c('div', {
       key: service.id,
-      staticClass: "col-xs-12 col-sm-6"
+      staticClass: "service-multi-container"
     }, [_c('router-link', {
       staticClass: "no-underline",
       attrs: {
@@ -16888,13 +16844,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices(false, true)
       }
     }
-  }, [_vm._v("\n\t\t\t\t\t\t\tHämta fler\n\t\t\t\t\t\t")])])]) : _vm._e()] : _c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\tHämta fler\n\t\t\t\t\t")])])]) : _vm._e()] : _c('div', {
     staticClass: "alert alert-info mt20"
-  }, [_vm._v("\n\t\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t\t")])] : _c('app-loading', {
+  }, [_vm._v("\n\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t")])] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }
-  })], 2)])
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

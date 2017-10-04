@@ -21,6 +21,10 @@
 		background-color: $brand-primary;
 	}
 
+	&.light-gray {
+		background-color: $light-icon-color;
+	}
+
 	&.wh10 {
 		width: 10px;
 		height: 10px;
@@ -90,6 +94,10 @@
 	}
 }
 
+.icon_question_mark {
+	@include mask-icon('../svg/question_mark.svg');
+}
+
 .icon_download {
 	@include mask-icon('../svg/download.svg');
 	background-color: #fff;
@@ -131,6 +139,10 @@
 .icon_off {
 	@include mask-icon('../svg/off.svg');
 	background-color: $brand-primary;
+}
+
+.icon_paper_plane {
+	@include mask-icon('../svg/paper_plane.svg');
 }
 
 .icon_star_empty {

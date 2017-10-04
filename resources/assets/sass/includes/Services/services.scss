@@ -115,6 +115,21 @@
 	}
 }
 
+.services-list {
+
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.service-multi-container {
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 0 0 50%;
+		}
+	}
+}
+
 .services-component {
 
 	.load-more {
@@ -141,5 +156,4 @@
 			left: calc(50% + 60px);
 		}
 	}
-
 }

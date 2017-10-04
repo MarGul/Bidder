@@ -11,43 +11,41 @@
 				</button>
 			</footer>
 		</section>
-
-		<div class="services mtb20">
-			<template  v-if="fetched">
-				<template v-if="services.length">
-					<div class="row">
-						<transition-group name="slide-out" mode="out-in">
-							<div class="col-xs-12 col-sm-6" v-for="service in services" :key="service.id">
-								<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
-									<app-service-multi 
-										:service="service"
-										@bidStop="removeService"
-									></app-service-multi>
-								</router-link>
-							</div>
-						</transition-group>
-					</div>
-
-					<div class="is-relative" v-if="canLoadMore">
-						<div class="load-more text-center mt15">
-							<button 
-								type="button" 
-								class="btn btn-default btn-transparent is-bold-italic" 
-								:class="{'processing': loadingMore}"
-								@click.prevent="fetchServices(false, true)">
-								Hämta fler
-							</button>
+		
+		<template  v-if="fetched">
+			<template v-if="services.length">
+				<div class="services-list mtb20">
+					<transition-group name="slide-out" mode="out-in">
+						<div class="service-multi-container" v-for="service in services" :key="service.id">
+							<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
+								<app-service-multi 
+									:service="service"
+									@bidStop="removeService"
+								></app-service-multi>
+							</router-link>
 						</div>
-					</div>
-				</template>
+					</transition-group>
+				</div>
 
-				<div class="alert alert-info mt20" v-else>
-					Tyvärr finns det inga tjänster att visa just nu.
+				<div class="is-relative" v-if="canLoadMore">
+					<div class="load-more text-center mt15">
+						<button 
+							type="button" 
+							class="btn btn-default btn-transparent is-bold-italic" 
+							:class="{'processing': loadingMore}"
+							@click.prevent="fetchServices(false, true)">
+							Hämta fler
+						</button>
+					</div>
 				</div>
 			</template>
-			
-			<app-loading bg="gray" v-else></app-loading>
-		</div>
+
+			<div class="alert alert-info mt20" v-else>
+				Tyvärr finns det inga tjänster att visa just nu.
+			</div>
+		</template>
+		
+		<app-loading bg="gray" v-else></app-loading>
 	</div>
 </template>
 
