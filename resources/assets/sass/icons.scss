@@ -81,6 +81,10 @@
 	background-color: #97A9B5;
 }
 
+.icon_down_chevron {
+	@include mask-icon('../svg/down_chevron.svg');
+}
+
 .icon_danger {
 	@include icon('../svg/danger.svg');
 }
@@ -160,12 +164,11 @@
 	background-color: #FFC100;
 }
 
-.icon_user {
-	@include mask-icon('../svg/user.svg');
-	background-color: #97A9B5;
-}
-
 .icon_two_users {
 	@include mask-icon('../svg/two_users.svg');
 	background-color: #97A9B5;
+}
+
+.icon_up_chevron {
+	@include mask-icon('../svg/up_chevron.svg');
 }

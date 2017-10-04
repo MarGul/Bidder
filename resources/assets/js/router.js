@@ -82,7 +82,7 @@ router.beforeEach((to, from, next) => {
 	if ( to.meta.requiresAuth ) {
 		if ( !router.app.$store.getters.isAuthenticated ) {
 			next('/');
-			router.app.$store.commit('SET_INTENDED', {intended: to.path});
+			router.app.$store.commit('SET_AUTHENTICATED_INTENDED', to.path);
 			router.app.$store.dispatch('openModal', {
 				component: 'login',
 				alert: {
@@ -103,9 +103,7 @@ router.beforeEach((to, from, next) => {
  */
 router.afterEach((to, from) => {
 	// Close the userNav dropdown.
-	router.app.$store.commit('SET_DROPDOWN', {dropdown: false});
-	// Close the mobile user navigation dropdown.
-	router.app.$store.commit('SET_MOBILE_DROPDOWN', {mobileDropdown: false});
+	router.app.$store.commit('SET_DROPDOWN', false);
 });
 
 export default router;

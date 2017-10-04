@@ -28,7 +28,6 @@
     import appDesktopHeader from './components/Layout/DesktopHeader';
     import appNotifications from './components/Includes/Notifications';
     import appModal from './components/Includes/Modal';
-    import appSearch from './components/Includes/Search';
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
 
@@ -38,7 +37,6 @@
             appDesktopHeader,
             appNotifications,
             appModal,
-            appSearch,
             appFooter
         },
         data() {
@@ -53,8 +51,8 @@
         },
         created() {
             // Initialize Data
-            this.$store.dispatch('fetchCategories');
-            this.$store.dispatch('fetchRegions');
+            //this.$store.dispatch('fetchCategories');
+            //this.$store.dispatch('fetchRegions');
             // Listen to global broadcasts
             Echo.channel('services')
                 .listen('NewService', (e) => {

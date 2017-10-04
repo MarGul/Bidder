@@ -1,8 +1,8 @@
 import { SET_AUTHENTICATED, SET_AUTHENTICATED_USER, SET_AUTHENTICATED_INTENDED, SET_DROPDOWN } from '../mutation-types';
 
 const state = {
-	authenticated: false,
-	user: {},
+	authenticated: window.auth.authenticated || false,
+	user: window.auth.user || {},
 	intended: null,
 	dropdown: false
 }

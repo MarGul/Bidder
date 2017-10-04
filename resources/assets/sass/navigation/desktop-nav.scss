@@ -132,17 +132,8 @@
 					color: $navbar-color;
 					font-weight: 500;
 					flex: 1;
-				}
-
-				.auth-arrow {
-					margin-left: 5px;
-
-					&.up {
-						-webkit-transform: rotate(180deg);
-						-moz-transform: rotate(180deg);
-						-ms-transform: rotate(180deg);
-						transform: rotate(180deg);
-					}
+					display: flex;
+					align-items: center;
 				}
 			}
 

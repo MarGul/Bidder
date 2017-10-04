@@ -4478,10 +4478,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App_vue__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__App_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_store__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(246);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(449);
 /**
- * Bootstrap the application
+ * Bootstrap the application.
  */
 __webpack_require__(142);
 /**
@@ -4492,16 +4491,17 @@ __webpack_require__(142);
  * Import the Vuex store.
  */
 
-
 /**
  * All of the applications routes. Great starting point for overview of app.
  */
 
-
+/**
+ * Create the Vue instance.
+ */
 var app = new Vue({
   el: '#app',
   store: __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */],
-  router: __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */],
+  router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */],
   render: function render(h) {
     return h(__WEBPACK_IMPORTED_MODULE_0__App_vue___default.a);
   }
@@ -4550,12 +4550,14 @@ window.moment.locale('sv');
  * Load in Axios HTTP framework.
  */
 window.axios = __webpack_require__(131);
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var token = document.head.querySelector('meta[name="csrf-token"]');
 
-window.axios.defaults.baseURL = 'http://bidder.dev/api/v1/';
-window.axios.defaults.headers.common = {
-  'X-CSRF-TOKEN': window.Laravel.csrfToken,
-  'X-Requested-With': 'XMLHttpRequest'
-};
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found.');
+}
 
 /**
  * Object to handle Twitter bootstrap breakpoints
@@ -10055,11 +10057,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Includes_Search__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__ = __webpack_require__(10);
 //
 //
 //
@@ -10085,7 +10085,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -10100,8 +10099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appDesktopHeader: __WEBPACK_IMPORTED_MODULE_1__components_Layout_DesktopHeader___default.a,
         appNotifications: __WEBPACK_IMPORTED_MODULE_2__components_Includes_Notifications___default.a,
         appModal: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Modal___default.a,
-        appSearch: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Search___default.a,
-        appFooter: __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default.a
+        appFooter: __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default.a
     },
     data: function data() {
         return {
@@ -10118,8 +10116,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         // Initialize Data
-        this.$store.dispatch('fetchCategories');
-        this.$store.dispatch('fetchRegions');
+        //this.$store.dispatch('fetchCategories');
+        //this.$store.dispatch('fetchRegions');
         // Listen to global broadcasts
         Echo.channel('services').listen('NewService', function (e) {
             _this.$store.dispatch('addService', { service: e.service });
@@ -10129,7 +10127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // Start the applications heartbeat
         setInterval(function () {
-            __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
+            __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__["a" /* HeartBeat */].$emit('beat');
         }, 1000);
     }
 });
@@ -10397,6 +10395,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -10457,18 +10458,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: {
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		dropdown: 'authDropdown',
+		authenticated: 'isAuthenticated',
+		user: 'authUser'
+	}), {
 		avatar: function avatar() {
-			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar + ')' };
+			return { backgroundImage: 'url(' + this.user.avatar + ')' };
 		},
-		dropdown: function dropdown() {
-			return this.$store.getters.authDropdown;
+		chevron: function chevron() {
+			return this.dropdown ? 'icon_up_chevron' : 'icon_down_chevron';
 		}
-	},
+	}),
 	methods: {
 		toggleDropdown: function toggleDropdown() {
-			this.$store.commit('SET_DROPDOWN', !this.$store.getters.authDropdown);
+			this.$store.commit('SET_DROPDOWN', !this.dropdown);
 		},
 		logout: function logout() {
 			this.$store.dispatch('logout');
@@ -10537,7 +10544,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "icon icon_paper_plane wh15 light-gray mr10"
   }), _vm._v(" Kontakt")])], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "desktop-user-container"
-  }, [(!_vm.$store.getters.isAuthenticated) ? _c('div', {
+  }, [(!_vm.authenticated) ? _c('div', {
     staticClass: "guest-actions"
   }, [_c('a', {
     staticClass: "btn btn-transparent",
@@ -10572,15 +10579,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.avatar)
   }), _vm._v(" "), _c('div', {
     staticClass: "auth-name"
-  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.$store.getters.authUser.username) + "\n\t\t\t\t\t\t"), _c('i', {
-    staticClass: "fa fa-angle-down auth-arrow",
-    class: {
-      up: _vm.dropdown
-    },
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])]), _vm._v(" "), (_vm.dropdown && false) ? _c('ul', {
+  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.user.username) + "\n\t\t\t\t\t\t"), _c('i', {
+    staticClass: "icon wh12 light-gray ml10",
+    class: [_vm.chevron]
+  })])]), _vm._v(" "), (_vm.dropdown) ? _c('ul', {
     staticClass: "auth-dropdown"
   }, [_c('li', [_c('router-link', {
     attrs: {
@@ -13300,99 +13302,9 @@ if (false) {
 }
 
 /***/ }),
-/* 222 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(223),
-  /* template */
-  __webpack_require__(224),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/Search.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Search.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e0883258", Component.options)
-  } else {
-    hotAPI.reload("data-v-e0883258", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 223 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-/* 224 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "nav-search-form"
-  }, [_c('span', {
-    staticClass: "glyphicon glyphicon-search"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "search-input"
-  }, [_c('input', {
-    attrs: {
-      "type": "text",
-      "name": "",
-      "placeholder": "VAD LETAR DU EFTER?"
-    }
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-search",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Sök")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-e0883258", module.exports)
-  }
-}
-
-/***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
 /* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13826,8 +13738,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var state = {
-	authenticated: false,
-	user: {},
+	authenticated: window.auth.authenticated || false,
+	user: window.auth.user || {},
 	intended: null,
 	dropdown: false
 };
@@ -14690,101 +14602,7 @@ var getters = {
 });
 
 /***/ }),
-/* 246 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(15);
-
-
-/**
- * All of the applications routes
- */
-
-/*
- Later on in production for code splitting
-let routes = [
-	{ path: "/", name: 'home', component: resolve => require(['./views/Home'], resolve) },
-	{ path: "/categories", name: 'categories', component: resolve => require(['./views/Categories'], resolve) },
-	{ path: "/locations", name: 'locations', component: resolve => require(['./views/Locations'], resolve) },
-	{ path: "/services", name: 'services', component: resolve => require(['./views/Services'], resolve) },
-	{ path: "/services/:id", name: 'serviceDetails', component: resolve => require(['./views/ServiceDetails'], resolve) },
-	{ path: "/information", name: 'information', component: resolve => require(['./views/Information'], resolve) },
-	{ path: "/profile/:username", name: 'profile', component: resolve => require(['./views/Profile'], resolve)},
-	{ path: "/user", name: 'user', component: resolve => require(['./views/User'], resolve),
-		children: [
-			{ path: '', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
-			{ path: 'profile', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
-			{ path: 'notifications', component: resolve => require(['./components/User/Notifications/Notifications'], resolve), meta: { requiresAuth: true } },
-			{ path: 'create-service', component: resolve => require(['./components/User/Services/CreateService'], resolve), meta: { requiresAuth: true } },
-			{ path: 'services', component: resolve => require(['./components/User/Services/MyServices'], resolve), meta: { requiresAuth: true } },
-			{ path: 'services/:id', component: resolve => require(['./components/User/Services/EditService'], resolve), meta: { requiresAuth: true } },
-			{ path: 'bids', component: resolve => require(['./components/User/Bids/MyBids'], resolve), meta: { requiresAuth: true } },
-			{ path: 'projects', component: resolve => require(['./components/User/Projects/MyProjects'], resolve), meta: { requiresAuth: true } },
-			{ path: 'project/:id', component: resolve => require(['./components/User/Projects/Project'], resolve), meta: { requiresAuth: true } },
-			{ path: 'invoices', component: resolve => require(['./components/User/Invoices/MyInvoices'], resolve), meta: { requiresAuth: true } },
-			{ path: 'invoices/:id', component: resolve => require(['./components/User/Invoices/InvoiceDetails'], resolve), meta: { requiresAuth: true } },
-			{ path: 'service/:id/bids', component: resolve => require(['./components/User/Bids/BidHistory'], resolve), meta: { requiresAuth: true } },
-			{ path: 'subscriptions', component: resolve => require(['./components/User/Subscriptions/MySubscriptions'], resolve), meta: { requiresAuth: true } },
-		],
-		meta: { requiresAuth: true }
-	},
-	
-	// 404 is handled by the vue application
-	{ path: "*", component: resolve => require(['./views/404.vue'], resolve) }
-];
-*/
-
-var routes = [{ path: "/", name: 'home', component: __webpack_require__(247) }, { path: "/categories", name: 'categories', component: __webpack_require__(256) }, { path: "/locations", name: 'locations', component: __webpack_require__(261) }, { path: "/services", name: 'services', component: __webpack_require__(264) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(283) }, { path: "/information", name: 'information', component: __webpack_require__(300) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(303) }, { path: "/user", name: 'user', component: __webpack_require__(312),
-	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(326), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(335), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__(368), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__(409), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(415), meta: { requiresAuth: true } }],
-	meta: { requiresAuth: true }
-},
-
-// 404 is handled by the vue application
-{ path: "*", component: __webpack_require__(421) }];
-
-var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
-	routes: routes,
-	linkActiveClass: 'active',
-	mode: 'history'
-});
-
-/*
-	The router authentication guard.
- */
-router.beforeEach(function (to, from, next) {
-	if (to.meta.requiresAuth) {
-		if (!router.app.$store.getters.isAuthenticated) {
-			next('/');
-			router.app.$store.commit('SET_INTENDED', { intended: to.path });
-			router.app.$store.dispatch('openModal', {
-				component: 'login',
-				alert: {
-					type: 'warning',
-					message: 'Oops! Du måste vara inloggad för att komma in där.'
-				}
-			});
-		} else {
-			next();
-		}
-	} else {
-		next();
-	}
-});
-
-/*
-	Run to reset state after each new route.
- */
-router.afterEach(function (to, from) {
-	// Close the userNav dropdown.
-	router.app.$store.commit('SET_DROPDOWN', { dropdown: false });
-	// Close the mobile user navigation dropdown.
-	router.app.$store.commit('SET_MOBILE_DROPDOWN', { mobileDropdown: false });
-});
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
+/* 246 */,
 /* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25993,6 +25811,99 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-6398b14f", module.exports)
   }
 }
+
+/***/ }),
+/* 449 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(15);
+
+
+/**
+ * All of the applications routes
+ */
+
+/*
+ Later on in production for code splitting
+let routes = [
+	{ path: "/", name: 'home', component: resolve => require(['./views/Home'], resolve) },
+	{ path: "/categories", name: 'categories', component: resolve => require(['./views/Categories'], resolve) },
+	{ path: "/locations", name: 'locations', component: resolve => require(['./views/Locations'], resolve) },
+	{ path: "/services", name: 'services', component: resolve => require(['./views/Services'], resolve) },
+	{ path: "/services/:id", name: 'serviceDetails', component: resolve => require(['./views/ServiceDetails'], resolve) },
+	{ path: "/information", name: 'information', component: resolve => require(['./views/Information'], resolve) },
+	{ path: "/profile/:username", name: 'profile', component: resolve => require(['./views/Profile'], resolve)},
+	{ path: "/user", name: 'user', component: resolve => require(['./views/User'], resolve),
+		children: [
+			{ path: '', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
+			{ path: 'profile', component: resolve => require(['./components/User/Profile/Profile'], resolve), meta: { requiresAuth: true } },
+			{ path: 'notifications', component: resolve => require(['./components/User/Notifications/Notifications'], resolve), meta: { requiresAuth: true } },
+			{ path: 'create-service', component: resolve => require(['./components/User/Services/CreateService'], resolve), meta: { requiresAuth: true } },
+			{ path: 'services', component: resolve => require(['./components/User/Services/MyServices'], resolve), meta: { requiresAuth: true } },
+			{ path: 'services/:id', component: resolve => require(['./components/User/Services/EditService'], resolve), meta: { requiresAuth: true } },
+			{ path: 'bids', component: resolve => require(['./components/User/Bids/MyBids'], resolve), meta: { requiresAuth: true } },
+			{ path: 'projects', component: resolve => require(['./components/User/Projects/MyProjects'], resolve), meta: { requiresAuth: true } },
+			{ path: 'project/:id', component: resolve => require(['./components/User/Projects/Project'], resolve), meta: { requiresAuth: true } },
+			{ path: 'invoices', component: resolve => require(['./components/User/Invoices/MyInvoices'], resolve), meta: { requiresAuth: true } },
+			{ path: 'invoices/:id', component: resolve => require(['./components/User/Invoices/InvoiceDetails'], resolve), meta: { requiresAuth: true } },
+			{ path: 'service/:id/bids', component: resolve => require(['./components/User/Bids/BidHistory'], resolve), meta: { requiresAuth: true } },
+			{ path: 'subscriptions', component: resolve => require(['./components/User/Subscriptions/MySubscriptions'], resolve), meta: { requiresAuth: true } },
+		],
+		meta: { requiresAuth: true }
+	},
+	
+	// 404 is handled by the vue application
+	{ path: "*", component: resolve => require(['./views/404.vue'], resolve) }
+];
+*/
+
+var routes = [{ path: "/", name: 'home', component: __webpack_require__(247) }, { path: "/categories", name: 'categories', component: __webpack_require__(256) }, { path: "/locations", name: 'locations', component: __webpack_require__(261) }, { path: "/services", name: 'services', component: __webpack_require__(264) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(283) }, { path: "/information", name: 'information', component: __webpack_require__(300) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(303) }, { path: "/user", name: 'user', component: __webpack_require__(312),
+	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(326), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(335), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'project/:id', component: __webpack_require__(368), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__(409), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(415), meta: { requiresAuth: true } }],
+	meta: { requiresAuth: true }
+},
+
+// 404 is handled by the vue application
+{ path: "*", component: __webpack_require__(421) }];
+
+var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
+	routes: routes,
+	linkActiveClass: 'active',
+	mode: 'history'
+});
+
+/*
+	The router authentication guard.
+ */
+router.beforeEach(function (to, from, next) {
+	if (to.meta.requiresAuth) {
+		if (!router.app.$store.getters.isAuthenticated) {
+			next('/');
+			router.app.$store.commit('SET_AUTHENTICATED_INTENDED', to.path);
+			router.app.$store.dispatch('openModal', {
+				component: 'login',
+				alert: {
+					type: 'warning',
+					message: 'Oops! Du måste vara inloggad för att komma in där.'
+				}
+			});
+		} else {
+			next();
+		}
+	} else {
+		next();
+	}
+});
+
+/*
+	Run to reset state after each new route.
+ */
+router.afterEach(function (to, from) {
+	// Close the userNav dropdown.
+	router.app.$store.commit('SET_DROPDOWN', false);
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ })
 ],[140]);

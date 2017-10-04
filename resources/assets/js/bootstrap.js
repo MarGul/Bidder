@@ -28,12 +28,14 @@ window.moment.locale('sv');
  * Load in Axios HTTP framework.
  */
 window.axios = require('axios');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
-window.axios.defaults.baseURL = 'http://bidder.dev/api/v1/';
-window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
-};
+if ( token ) {
+	window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+	console.error('CSRF token not found.');
+}
 
 /**
  * Object to handle Twitter bootstrap breakpoints

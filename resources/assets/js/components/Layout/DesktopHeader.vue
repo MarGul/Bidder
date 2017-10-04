@@ -24,7 +24,7 @@
 					</ul>
 				</nav>
 				<div class="desktop-user-container">
-					<div class="guest-actions" v-if="!$store.getters.isAuthenticated">
+					<div class="guest-actions" v-if="!authenticated">
 						<a class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
 						<a class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 					</div>
@@ -32,12 +32,12 @@
 					<div class="auth-user" @click.prevent="toggleDropdown" v-else>
 						<div class="auth-avatar" :style="avatar"></div>
 						<div class="auth-name">
-							{{ $store.getters.authUser.username }}
-							<i class="fa fa-angle-down auth-arrow" :class="{up: dropdown}" aria-hidden="true"></i>
+							{{ user.username }}
+							<i class="icon wh12 light-gray ml10" :class="[chevron]"></i>
 						</div>
 					</div>
 
-					<ul class="auth-dropdown" v-if="dropdown && false">
+					<ul class="auth-dropdown" v-if="dropdown">
 						<li>
 							<router-link to="/profile/margul"><i class="fa fa-user-circle" aria-hidden="true"></i>Min profil</router-link>
 						</li>
@@ -58,18 +58,25 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+
 	export default {
 		computed: {
+			...mapGetters({
+				dropdown: 'authDropdown',
+				authenticated: 'isAuthenticated',
+				user: 'authUser'
+			}),
 			avatar() {
-				return { backgroundImage: `url(${this.$store.getters.authUser.avatar})` };
+				return { backgroundImage: `url(${this.user.avatar})` };
 			},
-			dropdown() {
-				return this.$store.getters.authDropdown;
+			chevron() {
+				return this.dropdown ? 'icon_up_chevron' : 'icon_down_chevron';
 			}
 		},
 		methods: {
 			toggleDropdown() {
-				this.$store.commit('SET_DROPDOWN', !this.$store.getters.authDropdown);
+				this.$store.commit('SET_DROPDOWN', !this.dropdown);
 			},
 			logout() {
 				this.$store.dispatch('logout');
