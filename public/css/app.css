@@ -1513,7 +1513,7 @@ body.mobile-nav-open .overlay {
 }
 
 .desktop-header .desktop-nav .desktop-navigation-container .desktop-navigation li a.active i {
-  color: #009999;
+  background-color: #009999;
 }
 
 .desktop-header .desktop-nav .desktop-navigation-container .desktop-navigation li a:hover {
