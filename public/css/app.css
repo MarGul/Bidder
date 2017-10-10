@@ -1780,6 +1780,11 @@ body.mobile-nav-open .overlay {
   margin-bottom: 30px;
 }
 
+.checklist-item .checklist-header .checklist-read-more-container {
+  float: right;
+  display: inline-block;
+}
+
 .modal-mask {
   position: fixed;
   z-index: 9999;

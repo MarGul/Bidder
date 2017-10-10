@@ -13650,28 +13650,6 @@ var getters = {
 	mutations: mutations,
 	actions: actions,
 	getters: getters
-
-	/*
- getRegionsFlatten(state) {
- 			let flattenedRegions = [];
- 			let flatten = function(regions) {
- 				regions.forEach(function(region, index) {
- 					if ( region.cities ) {
- 						region.type = 'region';
- 						flatten(region.cities);
- 					} else {
- 						region.type = 'city';
- 					}
- 
- 					return flattenedRegions.push(region);
- 				});
- 			}
- 			flatten(state.regions);
- 
- 			return flattenedRegions;
- 		},
-  */
-
 });
 
 /***/ }),
@@ -19840,8 +19818,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UploadMedia__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist__ = __webpack_require__(452);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Includes_Checklist__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Includes_Checklist__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Includes_Checklist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Includes_Checklist__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -19991,6 +19972,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -20002,7 +20002,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a,
 		appUploadMedia: __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default.a,
-		MgChecklist: __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist___default.a
+		MgChecklist: __WEBPACK_IMPORTED_MODULE_5__Includes_Checklist___default.a
 	},
 	data: function data() {
 		return {
@@ -20023,19 +20023,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
-	computed: {
-		categories: function categories() {
-			return this.$store.getters.categories;
-		},
-		regions: function regions() {
-			return this.$store.getters.regions;
-		},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
+		categories: 'categories',
+		categoryById: 'categoryById',
+		regions: 'regions',
+		regionById: 'regionById'
+	}), {
 		cities: function cities() {
-			var region = this.$store.getters.regionById(this.form.region_id);
+			var region = this.regionById(this.form.region_id);
 			return region ? region.cities : [];
 		},
 		checklistItemsActive: function checklistItemsActive() {
 			return this.checklistItems[this.form.category_id] || [];
+		},
+		checklistItemsActiveDescription: function checklistItemsActiveDescription() {
+			var category = this.categoryById(this.form.category_id);
+			return category ? category.checklist_description : '';
 		},
 		finalData: function finalData() {
 			var formData = new FormData();
@@ -20052,7 +20055,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			return formData;
 		}
-	},
+	}),
 	methods: {
 		mediaAdded: function mediaAdded(_ref) {
 			var files = _ref.files;
@@ -20333,11 +20336,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Välj kategori")]), _vm._v(" "), _vm._l((_vm.categories), function(rootCat) {
     return _c('optgroup', {
+      key: rootCat.slug,
       attrs: {
         "label": rootCat.name
       }
     }, _vm._l((rootCat.sub_categories), function(category) {
       return _c('option', {
+        key: category.slug,
         domProps: {
           "value": category.id,
           "textContent": _vm._s(category.name)
@@ -20381,6 +20386,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Välj region")]), _vm._v(" "), _vm._l((_vm.regions), function(region) {
     return _c('option', {
+      key: region.slug,
       domProps: {
         "value": region.id,
         "textContent": _vm._s(region.name)
@@ -20426,6 +20432,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Välj stad")]), _vm._v(" "), _vm._l((_vm.cities), function(city) {
     return _c('option', {
+      key: city.slug,
       domProps: {
         "value": city.id,
         "textContent": _vm._s(city.name)
@@ -20504,11 +20511,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('mg-checklist', {
+  }) : _vm._e(), _vm._v(" "), (_vm.checklistItemsActive.length > 0) ? _c('mg-checklist', {
+    staticClass: "mt15",
     attrs: {
+      "description": _vm.checklistItemsActiveDescription,
       "items": _vm.checklistItemsActive
     }
-  })], 1)])]), _vm._v(" "), _c('div', {
+  }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "form-section"
   }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "form-section-controls"
@@ -26104,8 +26113,38 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "checklist-item"
-  }, [_vm._v("\n\t" + _vm._s(_vm.item.title) + "\n")])
-},staticRenderFns: []}
+  }, [_c('div', {
+    staticClass: "checklist-header"
+  }, [_vm._m(0), _vm._v(" "), _c('span', {
+    staticClass: "checklist-title",
+    domProps: {
+      "textContent": _vm._s(_vm.item.title)
+    }
+  }), _vm._v(" "), (_vm.item.description) ? _c('span', {
+    staticClass: "checklist-read-more-container",
+    on: {
+      "click": function($event) {
+        _vm.descriptionOpen = !_vm.descriptionOpen
+      }
+    }
+  }, [_c('i', {
+    staticClass: "icon wh15 light-gray",
+    class: [_vm.icon]
+  })]) : _vm._e()]), _vm._v(" "), (_vm.descriptionOpen) ? _c('div', {
+    staticClass: "checklist-description",
+    domProps: {
+      "textContent": _vm._s(_vm.item.description)
+    }
+  }) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "checklist-checkbox"
+  }, [_c('input', {
+    attrs: {
+      "type": "checkbox"
+    }
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -26126,14 +26165,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: {
 		item: {
 			type: Object,
 			validator: function validator(value) {
-				return value.hasOwnProperty('title');
+				return value.hasOwnProperty('id') && value.hasOwnProperty('title');
 			}
+		}
+	},
+	data: function data() {
+		return {
+			descriptionOpen: false
+		};
+	},
+
+	computed: {
+		icon: function icon() {
+			return this.descriptionOpen ? 'icon_up_chevron' : 'icon_down_chevron';
 		}
 	}
 });

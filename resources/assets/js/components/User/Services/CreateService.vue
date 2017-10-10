@@ -20,8 +20,13 @@
 								<label class="control-label">Kategori</label>
 								<select class="form-control" v-model="form.category_id">
 									<option value="">Välj kategori</option>
-									<optgroup :label="rootCat.name" v-for="rootCat in categories">
-										<option :value="category.id" v-text="category.name" v-for="category in rootCat.sub_categories"></option>
+									<optgroup v-for="rootCat in categories" :key="rootCat.slug" :label="rootCat.name">
+										<option 
+											v-for="category in rootCat.sub_categories" 
+											:key="category.slug" 
+											:value="category.id" 
+											v-text="category.name"
+										></option>
 									</optgroup>
 								</select>
 								<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
@@ -31,7 +36,12 @@
 								<label class="control-label">Region</label>
 								<select class="form-control" v-model="form.region_id">
 									<option value="">Välj region</option>
-									<option :value="region.id" v-text="region.name" v-for="region in regions"></option>
+									<option 
+										v-for="region in regions"
+										:key="region.slug"
+										:value="region.id" 
+										v-text="region.name"
+									></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('region_id')" v-text="form.errors.get('region_id')"></span>
 							</div>
@@ -40,7 +50,12 @@
 								<label class="control-label">Stad</label>
 								<select class="form-control" :disabled="!form.region_id" v-model="form.city_id">
 									<option value="">Välj stad</option>
-									<option :value="city.id" v-text="city.name" v-for="city in cities"></option>
+									<option 
+										:key="city.slug"
+										v-for="city in cities"
+										:value="city.id" 
+										v-text="city.name"
+									></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('city_id')" v-text="form.errors.get('city_id')"></span>
 							</div>
@@ -66,7 +81,10 @@
 								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
 								<mg-checklist
+									:description="checklistItemsActiveDescription"
 									:items="checklistItemsActive"
+									class="mt15"
+									v-if="checklistItemsActive.length > 0"
 								/>
 							</div>
 						</div>
@@ -152,6 +170,7 @@
 	import Model from "../../../includes/Model";
 	import datepicker from 'vuejs-datepicker';
 	import appUploadMedia from './UploadMedia';
+	import { mapGetters } from 'vuex';
 	import MgChecklist from '../../Includes/Checklist';
 
 	export default {
@@ -179,18 +198,22 @@
 			}
 		},
 		computed: {
-			categories() {
-				return this.$store.getters.categories;
-			},
-			regions() {
-				return this.$store.getters.regions;
-			},
+			...mapGetters({
+				categories: 'categories',
+				categoryById: 'categoryById',
+				regions: 'regions',
+				regionById: 'regionById'
+			}),
 			cities() {
-				let region = this.$store.getters.regionById(this.form.region_id);
+				let region = this.regionById(this.form.region_id);
 				return region ? region.cities : [];
 			},
 			checklistItemsActive() {
 				return this.checklistItems[this.form.category_id] || [];
+			},
+			checklistItemsActiveDescription() {
+				let category = this.categoryById(this.form.category_id);
+				return category ? category.checklist_description : '';
 			},
 			finalData() {
 				const formData = new FormData();
