@@ -20,6 +20,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
 	/* Handle categories */
 	Route::resource('categories', 'CategoryController', ['only' => ['index', 'show']]);
+	/* Handle checklist Items */
+	Route::resource('checklist-items', 'ChecklistItemsController', ['only' => ['index']]);
 	/* Handle services */
 	Route::resource('services', 'ServiceController', ['only' => ['index', 'show']]);
 	/* Handle a services comments */

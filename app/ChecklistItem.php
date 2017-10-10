@@ -14,6 +14,13 @@ class ChecklistItem extends Model
     protected $fillable = ['category_id', 'checklist_item_id'];
 
     /**
+     * Attributes that should be hidden on toArray response
+     * 
+     * @var array
+     */
+    protected $hidden = ['pivot'];
+
+    /**
      * Disable timestamps on the model.
      * 
      * @var boolean
