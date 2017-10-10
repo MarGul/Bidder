@@ -8,6 +8,34 @@ class CategoryManager
 {
 
 	/**
+	 * Database column key for active.
+	 * @var string
+	 */
+	protected $activeKey = 'active';
+	/**
+	 * Database column key for parent.
+	 * @var string
+	 */
+	protected $parentKey = 'parent';
+
+	/**
+	 * Get all active categories with their active subCategories.
+	 * 
+	 * @return collection
+	 */
+	public function getActive()
+	{
+		$categories = Category::with(['subCategories' => function($query) {
+									$query->where($this->activeKey, true);
+								}])
+								->where($this->activeKey, true)
+								->whereNull($this->parentKey)
+								->get();
+
+		return $categories;
+	}
+
+	/**
 	 * Get the checklist items for each category.
 	 * 
 	 * @return array
@@ -15,8 +43,8 @@ class CategoryManager
 	public function checklistItems()
 	{
 		$checklistItems = Category::with('checklistItems')
-									->whereNotNull('parent')
-									->where('active', true)
+									->whereNotNull($this->parentKey)
+									->where($this->activeKey, true)
 									->get();
 
 		return $this->parseChecklistItems($checklistItems);

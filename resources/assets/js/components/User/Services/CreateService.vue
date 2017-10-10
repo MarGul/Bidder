@@ -7,28 +7,6 @@
 					<h3>Skapa en ny tjänst</h3>
 				</header>
 				<div class="white-contentSection-content">
-						
-					<div class="form-section">
-						<div class="form-section-description">
-							<div class="description-header">Tjänstens innehåll</div>
-							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
-							</div>
-						</div>
-						<div class="form-section-controls">
-							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
-								<label class="control-label">Titel</label>
-								<input type="text" class="form-control" v-model="form.title">
-								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
-							</div>
-
-							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
-								<label class="control-label">Beskrivning</label>
-								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
-								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
-							</div>
-						</div>
-					</div>
 
 					<div class="form-section">
 						<div class="form-section-description">
@@ -65,6 +43,31 @@
 									<option :value="city.id" v-text="city.name" v-for="city in cities"></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('city_id')" v-text="form.errors.get('city_id')"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-section">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens innehåll</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+							</div>
+						</div>
+						<div class="form-section-controls">
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
+								<label class="control-label">Titel</label>
+								<input type="text" class="form-control" v-model="form.title">
+								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
+							</div>
+
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
+								<label class="control-label">Beskrivning</label>
+								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
+								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
+								<mg-checklist
+									:items="checklistItemsActive"
+								/>
 							</div>
 						</div>
 					</div>
@@ -149,11 +152,13 @@
 	import Model from "../../../includes/Model";
 	import datepicker from 'vuejs-datepicker';
 	import appUploadMedia from './UploadMedia';
+	import MgChecklist from '../../Includes/Checklist';
 
 	export default {
 		components: {
 			datepicker,
-			appUploadMedia
+			appUploadMedia,
+			MgChecklist
 		},
 		data() {
 			return {
@@ -169,6 +174,7 @@
 				}),
 				media: [],
 				mediaErrors: [],
+				checklistItems: {},
 				processing: false
 			}
 		},
@@ -182,6 +188,9 @@
 			cities() {
 				let region = this.$store.getters.regionById(this.form.region_id);
 				return region ? region.cities : [];
+			},
+			checklistItemsActive() {
+				return this.checklistItems[this.form.category_id] || [];
 			},
 			finalData() {
 				const formData = new FormData();
@@ -238,6 +247,13 @@
 						this.processing = false;
 					});
 			}
+		},
+		created() {
+			new Model('checklist-items').get()
+				.then(response => {
+					this.checklistItems = response.checklistItems;
+				})
+				.catch(error => { console.log(error); })
 		}
 	}
 </script>

@@ -19840,6 +19840,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UploadMedia__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Includes_Checklist__);
 //
 //
 //
@@ -19986,6 +19988,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -19995,7 +20001,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
 		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a,
-		appUploadMedia: __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default.a
+		appUploadMedia: __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default.a,
+		MgChecklist: __WEBPACK_IMPORTED_MODULE_4__Includes_Checklist___default.a
 	},
 	data: function data() {
 		return {
@@ -20011,6 +20018,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}),
 			media: [],
 			mediaErrors: [],
+			checklistItems: {},
 			processing: false
 		};
 	},
@@ -20025,6 +20033,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		cities: function cities() {
 			var region = this.$store.getters.regionById(this.form.region_id);
 			return region ? region.cities : [];
+		},
+		checklistItemsActive: function checklistItemsActive() {
+			return this.checklistItems[this.form.category_id] || [];
 		},
 		finalData: function finalData() {
 			var formData = new FormData();
@@ -20085,6 +20096,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.processing = false;
 			});
 		}
+	},
+	created: function created() {
+		var _this2 = this;
+
+		new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('checklist-items').get().then(function (response) {
+			_this2.checklistItems = response.checklistItems;
+		}).catch(function (error) {
+			console.log(error);
+		});
 	}
 });
 
@@ -20282,74 +20302,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "form-section-controls"
   }, [_c('div', {
-    staticClass: "control-container full-width",
-    class: {
-      'has-errors': _vm.form.errors.has('title')
-    }
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.title),
-      expression: "form.title"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.title)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.title = $event.target.value
-      }
-    }
-  }), _vm._v(" "), (_vm.form.errors.has('title')) ? _c('span', {
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.form.errors.get('title'))
-    }
-  }) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "control-container full-width",
-    class: {
-      'has-errors': _vm.form.errors.has('description')
-    }
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.description),
-      expression: "form.description"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "rows": "10"
-    },
-    domProps: {
-      "value": (_vm.form.description)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.description = $event.target.value
-      }
-    }
-  }), _vm._v(" "), (_vm.form.errors.has('description')) ? _c('span', {
-    staticClass: "help-block",
-    domProps: {
-      "textContent": _vm._s(_vm.form.errors.get('description'))
-    }
-  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
     staticClass: "control-container half-width",
     class: {
       'has-errors': _vm.form.errors.has('category_id')
@@ -20485,6 +20437,78 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.form.errors.get('city_id'))
     }
   }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container full-width",
+    class: {
+      'has-errors': _vm.form.errors.has('title')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.title),
+      expression: "form.title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.title)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.title = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.form.errors.has('title')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('title'))
+    }
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container full-width",
+    class: {
+      'has-errors': _vm.form.errors.has('description')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.description),
+      expression: "form.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "10"
+    },
+    domProps: {
+      "value": (_vm.form.description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.description = $event.target.value
+      }
+    }
+  }), _vm._v(" "), (_vm.form.errors.has('description')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('description'))
+    }
+  }) : _vm._e(), _vm._v(" "), _c('mg-checklist', {
+    attrs: {
+      "items": _vm.checklistItemsActive
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "form-section"
   }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "form-section-controls"
@@ -20632,7 +20656,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
-  }, [_vm._v("Tjänstens innehåll")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Tjänstens detaljer")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
   }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -20640,7 +20664,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
-  }, [_vm._v("Tjänstens detaljer")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Tjänstens innehåll")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
   }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -25898,6 +25922,221 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(453),
+  /* template */
+  __webpack_require__(455),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/Checklist.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Checklist.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1af0662a", Component.options)
+  } else {
+    hotAPI.reload("data-v-1af0662a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 453 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChecklistItem__ = __webpack_require__(454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChecklistItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChecklistItem__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		ChecklistItem: __WEBPACK_IMPORTED_MODULE_0__ChecklistItem___default.a
+	},
+	props: {
+		description: {
+			type: String
+		},
+		items: {
+			type: Array,
+			required: true
+		}
+	}
+});
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(457),
+  /* template */
+  __webpack_require__(456),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Includes/ChecklistItem.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ChecklistItem.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-32ca6add", Component.options)
+  } else {
+    hotAPI.reload("data-v-32ca6add", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 455 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "checklist-component"
+  }, _vm._l((_vm.items), function(item) {
+    return _c('checklist-item', {
+      key: item.id,
+      attrs: {
+        "item": item
+      }
+    })
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1af0662a", module.exports)
+  }
+}
+
+/***/ }),
+/* 456 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "checklist-item"
+  }, [_vm._v("\n\t" + _vm._s(_vm.item.title) + "\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-32ca6add", module.exports)
+  }
+}
+
+/***/ }),
+/* 457 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		item: {
+			type: Object,
+			validator: function validator(value) {
+				return value.hasOwnProperty('title');
+			}
+		}
+	}
+});
 
 /***/ })
 ],[140]);

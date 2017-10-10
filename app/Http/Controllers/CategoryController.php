@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\Features\CategoryManager;
 
 class CategoryController extends Controller
 {
+    
+    /**
+     * Manager
+     * 
+     * @var App\Features\CategoryManager
+     */
+    private $manager;
+
+    public function __construct(CategoryManager $manager) {
+        $this->manager = $manager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,18 +26,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // Eager load with sub_categories relationship
-        $categories = Category::with('sub_categories')->get();
-        // Reject all categories that's not a root category
-        $categories = $categories->reject(function($category) {
-            return $category->sub_categories->isEmpty();
-        })->flatten();
-
-        Category::parseCategories($categories);
-
         return response()->json([
             'message' => 'Listing all categories.',
-            'categories' => $categories
+            'categories' => $this->manager->getActive()
         ], 200);
     }
 
