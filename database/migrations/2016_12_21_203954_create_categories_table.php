@@ -15,11 +15,12 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent')->nullable();
             $table->string('slug')->unique();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('parent')->nullable();
-            $table->string('icon')->nullable();
+            $table->text('checklist_description')->nullable();
+            $table->boolean('active')->default(false);
         });
     }
 

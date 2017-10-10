@@ -16,156 +16,138 @@ class CategoriesTableSeeder extends Seeder
             'Städning' => [
                 'slug' => 'stadning',
                 'description' => '',
-                'icon' => '',
+                'active' => true,
                 'subcats' => [
                     'Flyttstädning' => [
                         'slug' => 'flyttstadning',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Grovstädning' => [
                         'slug' => 'grovstadning',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Fönsterputsning' => [
                         'slug' => 'fonsterputsning',
                         'description' => '',
-                        'icon' => ''
                     ],
                     'Hemstädning' => [
                         'slug' => 'hemstadning',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Tvättning & Strykning' => [
                         'slug' => 'tvattning-strykning',
                         'description' => '',
-                        'icon' => ''
                     ],
                     'Övrig städning' => [
                         'slug' => 'ovrig-stadning',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Flytt & Transport' => [
                 'slug' => 'flytt-transport',
                 'description' => '',
-                'icon' => '',
+                'active' => true,
                 'subcats' => [
                     'Flytthjälp' => [
                         'slug' => 'flytthjalp',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Gods- & Palltransport' => [
                         'slug' => 'gods-palltransport',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Kontorsflytt' => [
                         'slug' => 'kontorsflytt',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Magasinering & Förråd' => [
                         'slug' => 'magasinering-forrad',
                         'description' => '',
-                        'icon' => ''
                     ],
                     'Tyngre lyft' => [
                         'slug' => 'tyngre-lyft',
                         'description' => '',
-                        'icon' => ''
+                        'active' => true
                     ],
                     'Utlandsflytt' => [
                         'slug' => 'utlandsflytt',
                         'description' => '',
-                        'icon' => ''
                     ],
                     'Övrig flytt' => [
                         'slug' => 'ovrig-flytt',
                         'description' => '',
-                        'icon' => ''
                     ],
                     'Övrig transport' => [
                         'slug' => 'ovrig-transport',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Bygg & Renovering' => [
                 'slug' => 'bygg-renovering',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Elinstallation' => [
                         'slug' => 'elinstallation',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Tomt & Markarbeten' => [
                 'slug' => 'tomt-markarbeten',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Stensättning' => [
                         'slug' => 'stensattning',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Arkitekt & Inredning' => [
                 'slug' => 'arkitekt-inredning',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Heminredning' => [
                         'slug' => 'heminredning',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Ekonomi & Juridik' => [
                 'slug' => 'ekonomi-juridik',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Bokslut' => [
                         'slug' => 'bokslut',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Webb/IT & Design' => [
                 'slug' => 'webb-it-design',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Programmering' => [
                         'slug' => 'programmering',
                         'description' => '',
-                        'icon' => ''
                     ]
                 ]
             ],
             'Övriga Tjänster' => [
                 'slug' => 'ovriga-tjanster',
                 'description' => '',
-                'icon' => '',
                 'subcats' => [
                     'Barnpassning' => [
                         'slug' => 'barnpassning',
                         'description' => '',
-                        'icon' => ''
+                        
                     ]
                 ]
             ]
@@ -175,17 +157,19 @@ class CategoriesTableSeeder extends Seeder
             $cat = Category::create([
                 'slug' => $category['slug'],
                 'name' => $name, 
-                'description' => $category['description'], 
-                'icon' => $category['icon']
+                'description' => $category['description'],
+                'checklist_description' => $category['checklist_description'] ?? '',
+                'active' => isset($category['active']) && $category['active'] ? true : false
             ]);
 
             foreach ($category['subcats'] as $subcatname => $subcat) {
                 $subcat = Category::create([
+                    'parent' => $cat->id,
                     'slug' => $subcat['slug'],
                     'name' => $subcatname, 
                     'description' => $subcat['description'], 
-                    'parent' => $cat->id, 
-                    'icon' => $subcat['icon']
+                    'checklist_description' => $subcat['checklist_description'] ?? '',
+                    'active' => isset($subcat['active']) && $subcat['active'] ? true : false
                 ]);
             }
         }
