@@ -26060,6 +26060,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -26149,7 +26151,9 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "checklist-component"
-  }, [_vm._l((_vm.items), function(item) {
+  }, [_c('div', {
+    staticClass: "checklist-items"
+  }, _vm._l((_vm.items), function(item) {
     return _c('checklist-item', {
       key: item.id,
       attrs: {
@@ -26159,9 +26163,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "checkChange": _vm.itemCheckChange
       }
     })
-  }), _vm._v(" "), (_vm.error) ? _c('div', {
+  })), _vm._v(" "), (_vm.error) ? _c('div', {
     staticClass: "checklist-error mtb10"
-  }, [_vm._v("\n\t\tVar vänlig och klicka i alla kryssrutorna för att visa att du tagit del av informationen.\n\t")]) : _vm._e()], 2)
+  }, [_vm._v("\n\t\tVar vänlig och kryssa i alla rutorna för att visa att du tagit del av informationen.\n\t")]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -26180,7 +26184,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "checklist-item"
   }, [_c('div', {
     staticClass: "checklist-header"
-  }, [_c('span', {
+  }, [_c('div', {
     staticClass: "checklist-checkbox"
   }, [_c('span', {
     staticClass: "checkbox-icon",
@@ -26188,12 +26192,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.checkChange
     }
-  })]), _vm._v(" "), _c('span', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "checklist-title",
     domProps: {
       "textContent": _vm._s(_vm.item.title)
     }
-  }), _vm._v(" "), (_vm.item.description) ? _c('span', {
+  }), _vm._v(" "), (_vm.item.description) ? _c('div', {
     staticClass: "checklist-read-more-container",
     on: {
       "click": function($event) {

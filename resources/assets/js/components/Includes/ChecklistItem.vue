@@ -1,13 +1,13 @@
 <template>
 	<div class="checklist-item">
 		<div class="checklist-header">
-			<span class="checklist-checkbox">
+			<div class="checklist-checkbox">
 				<span class="checkbox-icon" :class="[checkboxIcon]" @click="checkChange"></span>
-			</span>
-			<span class="checklist-title" v-text="item.title"></span>
-			<span class="checklist-read-more-container" v-if="item.description" @click="descriptionOpen = !descriptionOpen">
+			</div>
+			<div class="checklist-title" v-text="item.title"></div>
+			<div class="checklist-read-more-container" v-if="item.description" @click="descriptionOpen = !descriptionOpen">
 				<i class="icon wh15 light-gray" :class="[descriptionIcon]"></i>
-			</span>
+			</div>
 		</div>
 		<div class="checklist-description" v-text="item.description" v-if="descriptionOpen"></div>
 	</div>
