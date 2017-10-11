@@ -2,7 +2,7 @@
 	<div class="checklist-item">
 		<div class="checklist-header">
 			<span class="checklist-checkbox">
-				<input type="checkbox">
+				<input type="checkbox" @change="$emit('checkChange', checked)" v-model="checked">
 			</span>
 			<span class="checklist-title" v-text="item.title"></span>
 			<span class="checklist-read-more-container" v-if="item.description" @click="descriptionOpen = !descriptionOpen">
@@ -24,6 +24,7 @@
 		data() {
 			return {
 				descriptionOpen: false,
+				checked: false
 			}
 		},
 		computed: {

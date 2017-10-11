@@ -19992,6 +19992,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -20027,6 +20028,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		};
 	},
 
+
 	watch: {
 		checklistItemsActive: function checklistItemsActive() {
 			if (this.checklistItemsActive.length > 0) {
@@ -20034,6 +20036,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			}
 		}
 	},
+
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
 		categories: 'categories',
 		categoryById: 'categoryById',
@@ -20067,6 +20070,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			return formData;
 		}
 	}),
+
 	methods: {
 		mediaAdded: function mediaAdded(_ref) {
 			var files = _ref.files;
@@ -20082,6 +20086,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			if (this.mediaErrors[index]) {
 				this.mediaErrors.splice(index, 1);
 			}
+		},
+		isChecklistAccepted: function isChecklistAccepted(accepted) {
+			this.checklistAccepted = accepted;
 		},
 		create: function create() {
 			var _this = this;
@@ -20119,6 +20126,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			});
 		}
 	},
+
 	created: function created() {
 		var _this2 = this;
 
@@ -20537,6 +20545,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "description": _vm.checklistItemsActiveDescription,
       "items": _vm.checklistItemsActive,
       "error": _vm.checklistError
+    },
+    on: {
+      "accepted": _vm.isChecklistAccepted
     }
   }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "form-section"
@@ -26048,6 +26059,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -26066,6 +26078,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		error: {
 			type: Boolean,
 			required: true
+		}
+	},
+	data: function data() {
+		return {
+			checkCount: 0
+		};
+	},
+
+	methods: {
+		itemCheckChange: function itemCheckChange(value) {
+			if (value) {
+				this.checkCount++;
+			} else {
+				this.checkCount--;
+			}
+
+			// If the number of checkboxes checked is the same as the amount of checkboxes (have checked them all) then it's accepted.
+			var accepted = this.checkCount === this.items.length ? true : false;
+
+			this.$emit('accepted', accepted);
 		}
 	}
 });
@@ -26122,6 +26154,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: item.id,
       attrs: {
         "item": item
+      },
+      on: {
+        "checkChange": _vm.itemCheckChange
       }
     })
   }), _vm._v(" "), (_vm.error) ? _c('div', {
@@ -26145,7 +26180,43 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "checklist-item"
   }, [_c('div', {
     staticClass: "checklist-header"
-  }, [_vm._m(0), _vm._v(" "), _c('span', {
+  }, [_c('span', {
+    staticClass: "checklist-checkbox"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.checked),
+      expression: "checked"
+    }],
+    attrs: {
+      "type": "checkbox"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, null) > -1 : (_vm.checked)
+    },
+    on: {
+      "change": function($event) {
+        _vm.$emit('checkChange', _vm.checked)
+      },
+      "__c": function($event) {
+        var $$a = _vm.checked,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.checked = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.checked = $$c
+        }
+      }
+    }
+  })]), _vm._v(" "), _c('span', {
     staticClass: "checklist-title",
     domProps: {
       "textContent": _vm._s(_vm.item.title)
@@ -26166,15 +26237,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.item.description)
     }
   }) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "checklist-checkbox"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  })])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -26216,7 +26279,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	data: function data() {
 		return {
-			descriptionOpen: false
+			descriptionOpen: false,
+			checked: false
 		};
 	},
 

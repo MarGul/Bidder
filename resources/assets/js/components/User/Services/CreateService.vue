@@ -86,6 +86,7 @@
 									:error="checklistError"
 									ref="checklist"
 									class="mt15"
+									@accepted="isChecklistAccepted"
 									v-if="checklistItemsActive.length > 0"
 								/>
 							</div>
@@ -201,6 +202,7 @@
 				processing: false
 			}
 		},
+
 		watch: {
 			checklistItemsActive() {
 				if ( this.checklistItemsActive.length > 0 ) {
@@ -208,24 +210,30 @@
 				}
 			}
 		},
+
 		computed: {
+
 			...mapGetters({
 				categories: 'categories',
 				categoryById: 'categoryById',
 				regions: 'regions',
 				regionById: 'regionById'
 			}),
+
 			cities() {
 				let region = this.regionById(this.form.region_id);
 				return region ? region.cities : [];
 			},
+
 			checklistItemsActive() {
 				return this.checklistItems[this.form.category_id] || [];
 			},
+
 			checklistItemsActiveDescription() {
 				let category = this.categoryById(this.form.category_id);
 				return category ? category.checklist_description : '';
 			},
+
 			finalData() {
 				const formData = new FormData();
 				let data = this.form.asDate(['start', 'end']).data();
@@ -242,18 +250,25 @@
 				return formData;
 			}
 		},
+
 		methods: {
 			mediaAdded({files}) {
 				for (let i = 0; i < files.length; i++) {
 					this.media.push(files[i]);
 				}
 			},
+
 			mediaRemoved({index}) {
 				this.media.splice(index, 1);
 				if ( this.mediaErrors[index] ) {
 					this.mediaErrors.splice(index, 1);
 				}
 			},
+
+			isChecklistAccepted(accepted) {
+				this.checklistAccepted = accepted;
+			},
+
 			create() {
 				// If the checklist isn't accepted don't proceed.
 				if ( !this.checklistAccepted ) {
@@ -290,6 +305,7 @@
 					});
 			}
 		},
+
 		created() {
 			new Model('checklist-items').get()
 				.then(response => {
