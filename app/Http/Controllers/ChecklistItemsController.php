@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Features\CategoryManager;
 
-class CategoryController extends Controller
+class ChecklistItemsController extends Controller
 {
     
     /**
@@ -16,6 +16,7 @@ class CategoryController extends Controller
     private $manager;
 
     public function __construct(CategoryManager $manager) {
+        //$this->middleware('auth:api');
         $this->manager = $manager;
     }
 
@@ -27,22 +28,19 @@ class CategoryController extends Controller
     public function index()
     {
         return response()->json([
-            'message' => 'Listing all categories.',
-            'categories' => $this->manager->getActive()
+            'message' => 'Displaying checklist items for categories.',
+            'checklistItems' => $this->manager->checklistItems()
         ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Integer|String  $identifier  [Slug or Id to identify a category]
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($identifier)
+    public function show($id)
     {
-        return response()->json([
-            'message' => 'Not implemented at the time.'
-        ], 200);
+        //
     }
-
 }

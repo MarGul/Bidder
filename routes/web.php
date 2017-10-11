@@ -9,6 +9,10 @@
 | handle all of the routing.
 */
 
+Route::get('/test', function() {
+	dd( app(\App\Features\CategoryManager::class)->checklistItems() );
+});
+
 /**
  * Auth Routes
  * ===========
