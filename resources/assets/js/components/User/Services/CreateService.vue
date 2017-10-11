@@ -80,16 +80,23 @@
 								<label class="control-label">Beskrivning</label>
 								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
-								<mg-checklist
-									:description="checklistItemsActiveDescription"
-									:items="checklistItemsActive"
-									:error="checklistError"
-									ref="checklist"
-									class="mt15"
-									@accepted="isChecklistAccepted"
-									v-if="checklistItemsActive.length > 0"
-								/>
 							</div>
+						</div>
+					</div>
+
+					<div class="form-section" v-if="checklistItemsActive.length > 0">
+						<div class="form-section-description">
+							<div class="description-header">Har du tänkt på?</div>
+							<div class="description-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo.</div>
+						</div>
+						<div class="form-section-controls">
+							<mg-checklist
+								:items="checklistItemsActive"
+								:error="checklistError"
+								ref="checklist"
+								class="mtb15"
+								@accepted="updateChecklistAccepted"
+							/>
 						</div>
 					</div>
 
@@ -215,7 +222,6 @@
 
 			...mapGetters({
 				categories: 'categories',
-				categoryById: 'categoryById',
 				regions: 'regions',
 				regionById: 'regionById'
 			}),
@@ -227,11 +233,6 @@
 
 			checklistItemsActive() {
 				return this.checklistItems[this.form.category_id] || [];
-			},
-
-			checklistItemsActiveDescription() {
-				let category = this.categoryById(this.form.category_id);
-				return category ? category.checklist_description : '';
 			},
 
 			finalData() {
@@ -265,7 +266,7 @@
 				}
 			},
 
-			isChecklistAccepted(accepted) {
+			updateChecklistAccepted(accepted) {
 				this.checklistAccepted = accepted;
 			},
 

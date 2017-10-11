@@ -22,9 +22,6 @@
 			ChecklistItem
 		},
 		props: {
-			description: {
-				type: String
-			},
 			items: {
 				type: Array,
 				required: true

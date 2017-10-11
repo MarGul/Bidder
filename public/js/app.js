@@ -19993,6 +19993,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20039,7 +20046,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
 		categories: 'categories',
-		categoryById: 'categoryById',
 		regions: 'regions',
 		regionById: 'regionById'
 	}), {
@@ -20049,10 +20055,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		},
 		checklistItemsActive: function checklistItemsActive() {
 			return this.checklistItems[this.form.category_id] || [];
-		},
-		checklistItemsActiveDescription: function checklistItemsActiveDescription() {
-			var category = this.categoryById(this.form.category_id);
-			return category ? category.checklist_description : '';
 		},
 		finalData: function finalData() {
 			var formData = new FormData();
@@ -20087,7 +20089,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				this.mediaErrors.splice(index, 1);
 			}
 		},
-		isChecklistAccepted: function isChecklistAccepted(accepted) {
+		updateChecklistAccepted: function updateChecklistAccepted(accepted) {
 			this.checklistAccepted = accepted;
 		},
 		create: function create() {
@@ -20538,20 +20540,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e(), _vm._v(" "), (_vm.checklistItemsActive.length > 0) ? _c('mg-checklist', {
+  }) : _vm._e()])])]), _vm._v(" "), (_vm.checklistItemsActive.length > 0) ? _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('mg-checklist', {
     ref: "checklist",
-    staticClass: "mt15",
+    staticClass: "mtb15",
     attrs: {
-      "description": _vm.checklistItemsActiveDescription,
       "items": _vm.checklistItemsActive,
       "error": _vm.checklistError
     },
     on: {
-      "accepted": _vm.isChecklistAccepted
+      "accepted": _vm.updateChecklistAccepted
     }
-  }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
+  })], 1)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "form-section"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "form-section-controls"
   }, [_c('div', {
     staticClass: "control-container half-width",
@@ -20665,7 +20670,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _vm._e()])])]), _vm._v(" "), _c('div', {
     staticClass: "form-section no-border"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "form-section-controls"
   }, [_c('app-upload-media', {
     attrs: {
@@ -20708,6 +20713,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Tjänstens innehåll")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
   }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Har du tänkt på?")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo.")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -26070,9 +26083,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		ChecklistItem: __WEBPACK_IMPORTED_MODULE_0__ChecklistItem___default.a
 	},
 	props: {
-		description: {
-			type: String
-		},
 		items: {
 			type: Array,
 			required: true
