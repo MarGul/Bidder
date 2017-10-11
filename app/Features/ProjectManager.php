@@ -14,26 +14,30 @@ class ProjectManager
 
 	/**
 	 * The amount of days after a project is created that users have to accept the project.
-	 * With 8 it will technically be 7 because it ends on midnight between 7-8
 	 * 
 	 * @var integer
 	 */
-	protected $acceptDays = 8;
+	protected $acceptDays = 14;
 
 	/**
-	 * Create a project.
+	 * Create a project between a service and a bid.
 	 * 
-	 * @param  array $data 	[The data for the project]
-	 * @return boolean
+	 * @param  	App\Service 	$service
+	 * @param 	App\Bid 		$bid
+	 * @return 	boolean
 	 */
-	public function create($data) 
+	public function create($service, $bid) 
 	{
-		// The end time for acccepting the project is at midnight $this->acceptDays from now.
-		$data['accept_end'] = Carbon::now('Europe/Stockholm')->addDays($this->acceptDays)->setTime(00,00,00);
+		$project = Project::create([
+			'service_id' => $service->id,
+			'bid_id' => $bid->id,
+			'service_price' => $bid->price,
+			'service_start' => $bid->start,
+			'service_end' => $bid->end,
+			'service_hours' => $bid->hours
+		]);
 
-		$project = new Project($data);
-
-		return ($project->save()) ? true : false;
+		return true;
 	}
 
 	/**

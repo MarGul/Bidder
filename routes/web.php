@@ -10,7 +10,7 @@
 */
 
 Route::get('/test', function() {
-	dd( app(\App\Features\CategoryManager::class)->checklistItems() );
+	dd( \App\Project::with(['service', 'bid'])->find(1) );
 });
 
 /**

@@ -29,7 +29,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle a services bids */
 	Route::resource('services.bids', 'ServiceBidController', ['except' => ['create', 'edit']]);
 	/* Accept a bid */
-	Route::post('services/{service}/bids/{bid}/accept')->uses('ServiceBidAcceptController@create');
+	Route::post('bids/{bid}/accept')->uses('BidAcceptController@create');
 	/* A users services */
 	Route::resource('user/services', 'UserServicesController', ['except' => ['create']]);
 	/* Get a users bids */

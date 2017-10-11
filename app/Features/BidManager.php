@@ -106,28 +106,16 @@ class BidManager {
 	public function accept($bid) 
 	{
 		// Flag the bid as accepted.
-		if ( !$bid->update(['accepted' => true]) ) {
-			return false;
-		}
+		if ( !$bid->update(['accepted' => true]) ) return false;
 
-		// Update the status of the service. When a bid is accepted a flag is set and the service is not longer active.
+		// Set the service as not active anymore.
 		$service = Service::find($bid->service_id);
-		if ( !$service->update(['bid_accepted' => true, 'active' => false]) ) {
-			return false;
-		}
+		if ( !$service->update(['active' => false]) ) return false;
 
-		// Create a project between the two parties.
-		$data = [
-			'service_user' => $service->user_id,
-			'bid_user' => $bid->user_id,
-			'finish' => Carbon::createFromFormat('Y-m-d', $bid->end, 'Europe/Stockholm')->toDateString(),
-			'price' => $bid->price
-		];
-
-		// Broadcast that thr bidding for this service has now stopped
+		// Broadcast that the bidding for this service has now stopped
 		event(new RemoveService($service->id));
 
-		return app(ProjectManager::class)->create($data) ? true : false;
+		return app(ProjectManager::class)->create($service, $bid) ? true : false;
 	}
 
 }

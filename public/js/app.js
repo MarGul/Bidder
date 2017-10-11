@@ -13066,7 +13066,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				data: {
 					confirmText: 'Är du säker på att du vill acceptera budet?',
 					onConfirm: function onConfirm() {
-						new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + _this.bid.service_id + '/bids/' + _this.bid.id + '/accept').post().then(function (response) {
+						new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('bids/' + _this.bid.id + '/accept').post().then(function (response) {
 							_this.$store.dispatch('showNotification', {
 								type: 'success',
 								msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
@@ -22623,10 +22623,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return this.$store.getters.userBidDetailsFetched;
 		},
 		statusText: function statusText() {
-			return this.service.bid_accepted ? ' är avslutad' : 'pågår';
+			return this.service.active ? 'pågår' : ' är avslutad';
 		},
 		finishText: function finishText() {
-			return this.service.bid_accepted ? 'Avslutades' : 'Avslutas';
+			return this.service.active ? 'Avslutas' : 'Avslutades';
 		}
 	},
 	methods: {

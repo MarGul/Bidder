@@ -28,7 +28,7 @@
 					data: {
 						confirmText: 'Är du säker på att du vill acceptera budet?',
 						onConfirm: () => {
-							new Model(`services/${this.bid.service_id}/bids/${this.bid.id}/accept`).post()
+							new Model(`bids/${this.bid.id}/accept`).post()
 								.then(response => {
 									this.$store.dispatch('showNotification', {
 										type: 'success', 

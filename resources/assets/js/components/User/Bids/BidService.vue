@@ -50,10 +50,10 @@
 				return this.$store.getters.userBidDetailsFetched;
 			},
 			statusText() {
-				return this.service.bid_accepted ? ' är avslutad' : 'pågår';
+				return this.service.active ? 'pågår' : ' är avslutad';
 			},
 			finishText() {
-				return this.service.bid_accepted ? 'Avslutades' : 'Avslutas';
+				return this.service.active ? 'Avslutas' : 'Avslutades';
 			}
 		},
 		methods: {
