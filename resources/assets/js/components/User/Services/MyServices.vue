@@ -11,7 +11,7 @@
 						<div class="item-content">
 							<div class="item-header" v-text="service.title"></div>
 							<div class="item-sub-data">
-								<span class="mr5">{{ $store.getters.categoryById(service.category_id).name }}</span>&bull;
+								<span class="mr5">{{ categoryName(service.category_id) }}</span>&bull;
 								<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
 							</div>
 						</div>
@@ -36,10 +36,15 @@
 		computed: {
 			...mapGetters({
 				fetched: 'userServicesFetched',
-				services: 'userServices'
+				services: 'userServices',
+				categoryById: 'categoryById'
 			})
 		},
 		methods: {
+			categoryName(category_id) {
+				let category = this.categoryById(category_id);
+				return category ? category.name : '';
+			},
 			goTo(service) {
 				this.$router.push(`services/${service.id}`);
 			}
