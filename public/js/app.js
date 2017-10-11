@@ -19990,6 +19990,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -20019,10 +20021,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			media: [],
 			mediaErrors: [],
 			checklistItems: {},
+			checklistAccepted: true,
+			checklistError: false,
 			processing: false
 		};
 	},
 
+	watch: {
+		checklistItemsActive: function checklistItemsActive() {
+			if (this.checklistItemsActive.length > 0) {
+				this.checklistAccepted = false;
+			}
+		}
+	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
 		categories: 'categories',
 		categoryById: 'categoryById',
@@ -20075,7 +20086,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		create: function create() {
 			var _this = this;
 
+			// If the checklist isn't accepted don't proceed.
+			if (!this.checklistAccepted) {
+				this.$refs.checklist.$el.scrollIntoView();
+				this.checklistError = true;
+				return;
+			}
+
 			this.processing = true;
+			this.checklistError = false;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services').create(this.finalData).then(function (response) {
 				_this.form.reset();
 				_this.media = [];
@@ -20512,10 +20531,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
   }) : _vm._e(), _vm._v(" "), (_vm.checklistItemsActive.length > 0) ? _c('mg-checklist', {
+    ref: "checklist",
     staticClass: "mt15",
     attrs: {
       "description": _vm.checklistItemsActiveDescription,
-      "items": _vm.checklistItemsActive
+      "items": _vm.checklistItemsActive,
+      "error": _vm.checklistError
     }
   }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "form-section"
@@ -26024,6 +26045,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -26037,6 +26061,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		items: {
 			type: Array,
+			required: true
+		},
+		error: {
+			type: Boolean,
 			required: true
 		}
 	}
@@ -26089,14 +26117,16 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "checklist-component"
-  }, _vm._l((_vm.items), function(item) {
+  }, [_vm._l((_vm.items), function(item) {
     return _c('checklist-item', {
       key: item.id,
       attrs: {
         "item": item
       }
     })
-  }))
+  }), _vm._v(" "), (_vm.error) ? _c('div', {
+    staticClass: "checklist-error mtb10"
+  }, [_vm._v("\n\t\tVar vänlig och klicka i alla kryssrutorna för att visa att du tagit del av informationen.\n\t")]) : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

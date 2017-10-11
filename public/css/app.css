@@ -920,6 +920,10 @@ a {
   margin-bottom: 40px;
 }
 
+.mtb10 {
+  margin: 10px 0;
+}
+
 .mtb20 {
   margin: 20px 0;
 }
@@ -1778,6 +1782,11 @@ body.mobile-nav-open .overlay {
 
 .home_features-component .features-container .feature h3 {
   margin-bottom: 30px;
+}
+
+.checklist-component .checklist-error {
+  color: #cc0000;
+  font-size: 12px;
 }
 
 .checklist-item .checklist-header .checklist-read-more-container {

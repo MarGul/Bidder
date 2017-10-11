@@ -5,6 +5,9 @@
 			:item="item" 
 			:key="item.id"
 		/>
+		<div class="checklist-error mtb10" v-if="error">
+			Var vänlig och klicka i alla kryssrutorna för att visa att du tagit del av informationen.
+		</div>
 	</div>
 </template>
 
@@ -21,6 +24,10 @@
 			},
 			items: {
 				type: Array,
+				required: true
+			},
+			error: {
+				type: Boolean,
 				required: true
 			}
 		}

@@ -1,3 +1,11 @@
+.checklist-component {
+
+	.checklist-error {
+		color: $brand-danger;
+		font-size: 12px;
+	}
+}
+
 .checklist-item {
 
 	.checklist-header {
@@ -9,7 +17,7 @@
 		.checklist-read-more-container {
 			float: right;
 			display: inline-block;
-			
+
 		}
 	}
 

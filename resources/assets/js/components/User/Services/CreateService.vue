@@ -83,6 +83,8 @@
 								<mg-checklist
 									:description="checklistItemsActiveDescription"
 									:items="checklistItemsActive"
+									:error="checklistError"
+									ref="checklist"
 									class="mt15"
 									v-if="checklistItemsActive.length > 0"
 								/>
@@ -194,7 +196,16 @@
 				media: [],
 				mediaErrors: [],
 				checklistItems: {},
+				checklistAccepted: true,
+				checklistError: false,
 				processing: false
+			}
+		},
+		watch: {
+			checklistItemsActive() {
+				if ( this.checklistItemsActive.length > 0 ) {
+					this.checklistAccepted = false;
+				}
 			}
 		},
 		computed: {
@@ -244,7 +255,15 @@
 				}
 			},
 			create() {
+				// If the checklist isn't accepted don't proceed.
+				if ( !this.checklistAccepted ) {
+					this.$refs.checklist.$el.scrollIntoView();
+					this.checklistError = true;
+					return;
+				}
+
 				this.processing = true;
+				this.checklistError = false;
 				new Model('user/services').create(this.finalData)
 					.then(response => {
 						this.form.reset();
