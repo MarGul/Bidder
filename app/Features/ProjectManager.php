@@ -14,10 +14,19 @@ class ProjectManager
 
 	/**
 	 * The amount of days after a project is created that users have to accept the project.
-	 * 
 	 * @var integer
 	 */
 	protected $acceptDays = 14;
+	/**
+	 * The role for a project user that created the service.
+	 * @var string
+	 */
+	protected $userRoleService = 'service';
+	/**
+	 * The role for a project user that created the bid.
+	 * @var string
+	 */
+	protected $userRoleBid = 'bid';
 
 	/**
 	 * Create a project between a service and a bid.
@@ -36,6 +45,11 @@ class ProjectManager
 			'service_end' => $bid->end,
 			'service_hours' => $bid->hours
 		]);
+
+		// Attach the service user to the project.
+		$project->users()->attach($service->user_id, ['role' => $this->userRoleService, 'title' => "Projekt #{$project->id}"]);
+		// Attach the bid user to the project.
+		$project->users()->attach($bid->user_id, ['role' => $this->userRoleBid, 'title' => "Project #{$project->id}"]);
 
 		return true;
 	}

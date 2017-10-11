@@ -10,7 +10,7 @@
 */
 
 Route::get('/test', function() {
-	dd( \App\Project::with(['service', 'bid'])->find(1) );
+	dd( \App\User::with(['projects'])->find(1) );
 });
 
 /**

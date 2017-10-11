@@ -38,6 +38,16 @@ class Project extends Model
     }
 
     /**
+     * A project has many users.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withPivot('role', 'title');
+    }
+
+    /**
      * A project has one invoice.
      * 
      * @return Eloquent Relationship
