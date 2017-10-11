@@ -9,15 +9,36 @@
 .checklist-item {
 
 	.checklist-header {
+		display: flex;
+		align-items: flex-start;
 
 		.checklist-checkbox {
+			width: 30px;
 
+			.checkbox-icon {
+				display: inline-block;
+				width: 18px;
+				height: 18px;
+				background-color: $brand-primary;
+				cursor: pointer;
+
+				&.unchecked {
+					@include mask-icon('../svg/blank_square.svg');
+				}
+
+				&.checked {
+					@include mask-icon('../svg/check_box.svg');
+				}
+			}
+		}
+
+		.checklist-title {
+			flex: 1;
 		}
 
 		.checklist-read-more-container {
-			float: right;
-			display: inline-block;
-
+			width: 30px;
+			text-align: right;
 		}
 	}
 

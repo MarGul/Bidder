@@ -26182,39 +26182,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "checklist-header"
   }, [_c('span', {
     staticClass: "checklist-checkbox"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.checked),
-      expression: "checked"
-    }],
-    attrs: {
-      "type": "checkbox"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.checked) ? _vm._i(_vm.checked, null) > -1 : (_vm.checked)
-    },
+  }, [_c('span', {
+    staticClass: "checkbox-icon",
+    class: [_vm.checkboxIcon],
     on: {
-      "change": function($event) {
-        _vm.$emit('checkChange', _vm.checked)
-      },
-      "__c": function($event) {
-        var $$a = _vm.checked,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = null,
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.checked = $$a.concat([$$v]))
-          } else {
-            $$i > -1 && (_vm.checked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.checked = $$c
-        }
-      }
+      "click": _vm.checkChange
     }
   })]), _vm._v(" "), _c('span', {
     staticClass: "checklist-title",
@@ -26230,7 +26202,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "icon wh15 light-gray",
-    class: [_vm.icon]
+    class: [_vm.descriptionIcon]
   })]) : _vm._e()]), _vm._v(" "), (_vm.descriptionOpen) ? _c('div', {
     staticClass: "checklist-description",
     domProps: {
@@ -26285,8 +26257,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	computed: {
-		icon: function icon() {
+		checkboxIcon: function checkboxIcon() {
+			return this.checked ? 'checked' : 'unchecked';
+		},
+		descriptionIcon: function descriptionIcon() {
 			return this.descriptionOpen ? 'icon_up_chevron' : 'icon_down_chevron';
+		}
+	},
+	methods: {
+		checkChange: function checkChange() {
+			this.checked = !this.checked;
+			this.$emit('checkChange', this.checked);
 		}
 	}
 });
