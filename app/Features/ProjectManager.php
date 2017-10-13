@@ -7,6 +7,7 @@ use App\Message;
 use Carbon\Carbon;
 use Auth;
 use App\Features\InvoiceManager;
+use App\Features\ProjectHistoryManager;
 use App\Events\NewMessage;
 
 class ProjectManager 
@@ -27,6 +28,17 @@ class ProjectManager
 	 * @var string
 	 */
 	protected $userRoleBid = 'bid';
+	/**
+	 * ProjectHistoryManager instance.
+	 * @var App\Features\ProjectHistoryManager
+	 */
+	protected $projectHistoryManager;
+
+	
+	public function __construct(ProjectHistoryManager $projectHistoryManager)
+	{
+		$this->projectHistoryManager = $projectHistoryManager;
+	}
 
 	/**
 	 * Create a project between a service and a bid.
@@ -50,7 +62,9 @@ class ProjectManager
 		$project->users()->attach($service->user_id, ['role' => $this->userRoleService, 'title' => "Projekt #{$project->id}"]);
 		// Attach the bid user to the project.
 		$project->users()->attach($bid->user_id, ['role' => $this->userRoleBid, 'title' => "Project #{$project->id}"]);
-
+		// Insert a history record that the project was created.
+		$this->projectHistoryManager->add($project->id, 'created');
+		
 		return true;
 	}
 
