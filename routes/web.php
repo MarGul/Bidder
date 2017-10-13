@@ -10,7 +10,7 @@
 */
 
 Route::get('/test', function() {
-	dd( \App\User::with(['projects'])->find(1) );
+	dd( \App\Project::with('history')->find(1) );
 });
 
 /**

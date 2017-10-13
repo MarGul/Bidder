@@ -48,6 +48,16 @@ class Project extends Model
     }
 
     /**
+     * A project may have many project history entries.
+     * 
+     * @return Eloquent Relationhip
+     */
+    public function history()
+    {
+        return $this->hasMany('App\ProjectHistory');
+    }
+
+    /**
      * A project has one invoice.
      * 
      * @return Eloquent Relationship
