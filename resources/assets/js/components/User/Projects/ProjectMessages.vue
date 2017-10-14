@@ -5,7 +5,10 @@
 				<h3>Skicka meddelande</h3>
 			</header>
 			<div class="gray-contentSection-content">
-				<message-add :resource="project.id" />
+				<message-add 
+					:resource="project.id" 
+					@added="addMessage"
+				/>
 			</div>
 			<message 
 				v-for="message in messages" 
@@ -37,9 +40,26 @@
 			}
 		},
 		methods: {
+			addMessage(message) {
+				if ( !message.hasOwnProperty('user') ) {
+					message.project_id = this.project.id;
+					message.user = this.auth;
+					created_at: moment().format('YYYY-MM-DD HH:mm:ss');
+				}
+
+				let project = this.project;
+				project.messages.unshift(message);
+				this.$store.commit('SET_USER_PROJECT_DETAILS', project);
+			},
 			isMe(message) {
 				return message.user.id == this.auth.id;
 			}
+		},
+		created() {
+			Echo.private(`project.${this.project.id}.messages`)
+				.listen('NewMessage', (e) => {
+					this.addMessage(e.message);
+				});
 		}
 	}
 </script>

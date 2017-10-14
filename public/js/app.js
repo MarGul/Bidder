@@ -24914,6 +24914,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -24933,9 +24936,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		}
 	}),
 	methods: {
+		addMessage: function addMessage(message) {
+			if (!message.hasOwnProperty('user')) {
+				message.project_id = this.project.id;
+				message.user = this.auth;
+				created_at: moment().format('YYYY-MM-DD HH:mm:ss');
+			}
+
+			var project = this.project;
+			project.messages.unshift(message);
+			this.$store.commit('SET_USER_PROJECT_DETAILS', project);
+		},
 		isMe: function isMe(message) {
 			return message.user.id == this.auth.id;
 		}
+	},
+	created: function created() {
+		var _this = this;
+
+		Echo.private('project.' + this.project.id + '.messages').listen('NewMessage', function (e) {
+			_this.addMessage(e.message);
+		});
 	}
 });
 
@@ -24953,6 +24974,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('message-add', {
     attrs: {
       "resource": _vm.project.id
+    },
+    on: {
+      "added": _vm.addMessage
     }
   })], 1), _vm._v(" "), _vm._l((_vm.messages), function(message) {
     return _c('message', {
