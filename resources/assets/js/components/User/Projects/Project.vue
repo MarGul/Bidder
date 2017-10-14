@@ -7,7 +7,7 @@
 					<router-view></router-view>
 				</div>
 				<div class="main-area-sidebar">
-					<project-service-and-bid />
+					<project-details />
 					<project-history :history="project.history" />
 				</div>
 			</div>
@@ -19,26 +19,14 @@
 </template>
 
 <script>
-	import projectTitle from './ProjectTitle';
-	import messageBoard from '../../Messages/MessageBoard';
-	import projectAccept from './ProjectAccept';
-	import projectStarted from './ProjectStarted';
-	import projectCompleted from './ProjectCompleted';
-	
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
-	import projectServiceAndBid from './ProjectServiceAndBid'; 
+	import projectDetails from './ProjectDetails'; 
 	import projectHistory from './ProjectHistory';
 
 	export default {
 		components: {
-			messageBoard,
-			projectTitle,
-			projectAccept,
-			projectStarted,
-			projectCompleted,
-
-			projectServiceAndBid,
+			projectDetails,
 			projectHistory
 		},
 		computed: {
@@ -56,7 +44,8 @@
 				.catch(error => { console.log(error); });
 		},
 		destroyed() {
-			//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+			this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);
+			this.$store.commit('SET_USER_PROJECT_DETAILS', {});
 		}
 	}
 </script>

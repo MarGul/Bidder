@@ -133,6 +133,10 @@
 	@include mask-icon('../svg/retweet.svg');
 }
 
+.icon_messages {
+	@include mask-icon('../svg/messages.svg');
+}
+
 .icon_monitor {
 	@include mask-icon('../svg/monitor.svg');
 }
