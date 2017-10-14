@@ -43,7 +43,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Get a user project */
 	Route::get('user/projects/{project}')->uses('UserProjectsController@show');
 	/* Create and show messages for a project */
-	Route::resource('projects.messages', 'ProjectMessagesController', ['only' => ['index', 'store']]);
+	Route::post('projects/{project}/messages')->uses('ProjectMessagesController@store');
 	/* Update a projects details */
 	Route::patch('projects/{project}')->uses('ProjectController@update');
 	/* Update a projects title */

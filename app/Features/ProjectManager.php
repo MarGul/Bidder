@@ -7,7 +7,6 @@ use App\Message;
 use Carbon\Carbon;
 use App\Features\InvoiceManager;
 use App\Features\ProjectHistoryManager;
-use App\Events\NewMessage;
 
 class ProjectManager 
 {
@@ -105,52 +104,9 @@ class ProjectManager
 	 */
 	public function show($project)
 	{
-		$project->load('service', 'bid.user', 'users', 'history');
+		$project->load('service', 'bid.user', 'users', 'history', 'messages.user');
 
 		return $project;
-	}
-
-
-	/**
-	 * Get the messages for a project.
-	 * 
-	 * @param  App\Project 	$project
-	 * @return collection
-	 */
-	/*
-	public function messages($project) 
-	{
-		$messages = Message::where('project_id', $project->id)->get();
-		$messages->load('user');
-
-		return $messages;
-	}
-
-	/**
-	 * Create a message for a project.
-	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user
-	 * @param  string 		$message
-	 * @return boolean
-	 */
-	/*
-	public function createMessage($project, $user, $message) 
-	{
-		$message = new Message([
-			'project_id' => $project->id,
-			'user_id' => $user->id,
-			'message' => $message
-		]);
-
-		if ( !$message->save() ) return false;
-
-		$message->user = $user;
-
-		// Broadcast the new message to the other user.
-		event(new NewMessage($message));
-
-		return $message;
 	}
 
 	/**

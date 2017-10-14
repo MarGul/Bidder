@@ -2118,7 +2118,7 @@ body.mobile-nav-open .overlay {
 }
 
 .items-block {
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
   background: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2148,7 +2148,7 @@ body.mobile-nav-open .overlay {
   color: #7d8793;
   font-weight: bold;
   font-size: 1.2em;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
   cursor: pointer;
 }
 
@@ -2158,7 +2158,7 @@ body.mobile-nav-open .overlay {
 
 @media screen and (min-width: 768px) {
   .items-block .root-container .root-nav .nav-head {
-    border-right: 1px solid #c7c7c7;
+    border-right: 1px solid #e6ebf1;
   }
 }
 
@@ -2172,8 +2172,8 @@ body.mobile-nav-open .overlay {
   position: relative;
   background: #fff;
   color: #009999;
-  border-bottom: 1px solid #c7c7c7;
-  border-left: 3px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
+  border-left: 3px solid #e6ebf1;
   border-right: none;
   cursor: default;
   -webkit-box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.1);
@@ -2185,7 +2185,7 @@ body.mobile-nav-open .overlay {
       -ms-flex: 1;
           flex: 1;
   padding: 15px 20px;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
 }
 
 @media screen and (min-width: 768px) {
@@ -2300,7 +2300,7 @@ body.mobile-nav-open .overlay {
 .tags-input-container .tags-input .tag {
   display: inline-block;
   background: #edf0f5;
-  border: 1px solid #aeadad;
+  border: 1px solid #c5d1df;
   padding: 1px 4px;
   margin: 4px 4px 0 0;
   cursor: default;
@@ -2335,7 +2335,7 @@ body.mobile-nav-open .overlay {
   overflow-y: scroll;
   z-index: 5;
   background: #fff;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
   -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -2550,7 +2550,7 @@ body.mobile-nav-open .overlay {
   content: "";
   display: block;
   height: 1px;
-  background-color: #c7c7c7;
+  background-color: #e6ebf1;
   position: absolute;
   left: 15px;
   top: 15px;
@@ -2561,7 +2561,7 @@ body.mobile-nav-open .overlay {
   content: "";
   display: block;
   height: 1px;
-  background-color: #c7c7c7;
+  background-color: #e6ebf1;
   position: absolute;
   right: 15px;
   top: 15px;
@@ -2800,7 +2800,7 @@ body.mobile-nav-open .overlay {
 }
 
 .list-bids li {
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.18);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.18);
   margin-bottom: 10px;
@@ -2810,7 +2810,7 @@ body.mobile-nav-open .overlay {
 .list-bids li .bid-header {
   padding: 5px 15px;
   background-color: #f1f1f1;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
 }
@@ -2993,7 +2993,7 @@ body.mobile-nav-open .overlay {
           flex: 1;
   margin: 0 0 20px 20px;
   background: #fff;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
   -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
   border-radius: 6px;
@@ -3008,12 +3008,12 @@ body.mobile-nav-open .overlay {
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid #c7c7c7;
+  border-right: 10px solid #e6ebf1;
 }
 
 .comment-component .comment-content .comment-head {
   padding: 7.5px 15px;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
   background: #fafafa;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
@@ -3310,7 +3310,7 @@ body.mobile-nav-open .overlay {
   display: -ms-flexbox;
   display: flex;
   padding: 7.5px;
-  border-top: 1px solid #e1e0e0;
+  border-top: 1px solid white;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -3552,7 +3552,7 @@ body.mobile-nav-open .overlay {
 }
 
 .project-title .left .input-container {
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3652,7 +3652,7 @@ body.mobile-nav-open .overlay {
 .project_accept-component .project-users .details .btn-default {
   color: #222;
   font-weight: 500;
-  border: 1px solid #c7c7c7;
+  border: 1px solid #e6ebf1;
 }
 
 .project_accept-component .project-users .details {
@@ -3662,7 +3662,7 @@ body.mobile-nav-open .overlay {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
   margin: 0 15px 15px 15px;
 }
 
@@ -3686,7 +3686,7 @@ body.mobile-nav-open .overlay {
 
 @media screen and (min-width: 768px) {
   .project_accept-component .project-users .details .timer {
-    border-bottom: 1px solid #c7c7c7;
+    border-bottom: 1px solid #e6ebf1;
     padding-bottom: 15px;
   }
 }
@@ -3782,7 +3782,7 @@ body.mobile-nav-open .overlay {
 
 .project_accept-component .project-users .action-text {
   font-weight: 500;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
 }
 
 .invoice_details-component .invoice-totals-container {
@@ -3814,47 +3814,18 @@ body.mobile-nav-open .overlay {
   font-weight: 500;
 }
 
-.message-board-top {
-  border-radius: 6px 6px 0 0;
-  background: #fafafa;
-  border: 1px solid #c7c7c7;
-  border-bottom: none;
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
-.message-board-top i {
-  margin-left: 5px;
-}
-
-.send_message-component {
-  background: #fafafa;
-  padding: 20px;
-  border-radius: 0 0 6px 6px;
-  border: 1px solid #c7c7c7;
-}
-
-.send_message-component textarea {
+.add_message-component textarea {
   resize: none;
-  border-color: #ddddd;
 }
 
-.send_message-component button {
+.add_message-component button {
   font-weight: bold;
-  margin: 10px 0 0 0;
-  width: 100%;
-}
-
-@media screen and (min-width: 992px) {
-  .send_message-component button {
-    width: auto;
-    float: right;
-  }
+  margin: 5px 0 0 0;
+  float: right;
 }
 
 .message-component {
-  border: 1px solid #c7c7c7;
-  border-bottom: none;
+  border-top: 1px solid #e6ebf1;
   padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3862,7 +3833,7 @@ body.mobile-nav-open .overlay {
 }
 
 .message-component.me {
-  background-color: #fafafa;
+  background-color: #f6f9fc;
 }
 
 .message-component .left {
@@ -3923,6 +3894,7 @@ body.mobile-nav-open .overlay {
 
 .message-component .right .user-name a {
   font-weight: 500;
+  color: #009999;
 }
 
 .message-component .right .message-time {
@@ -4061,7 +4033,7 @@ body.mobile-nav-open .overlay {
   display: flex;
   margin: 0 -15px;
   padding: 10px 15px;
-  border-bottom: 1px solid #c7c7c7;
+  border-bottom: 1px solid #e6ebf1;
 }
 
 .show_reviews-component .reviewes-container .review:last-child {

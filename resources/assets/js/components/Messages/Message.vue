@@ -1,5 +1,5 @@
 <template>
-	<div class="message-component" :class="{me, theirs: !me}">
+	<div class="message-component" :class="[containerClass]">
 		<div class="left">
 			<div class="user-image" :style="image"></div>
 		</div>
@@ -18,19 +18,27 @@
 	import { HeartBeat } from "../../includes/heartbeat";
 
 	export default {
-		props: ['message'],
+		props: {
+			message: {
+				type: Object,
+				required: true
+			},
+			me: {
+				type: Boolean,
+				required: true
+			}
+		},
 		data() {
 			return {
 				time: null
 			}
 		},
 		computed: {
-			me() {
-				return this.message.user.id === this.$store.getters.authUser.id ? true : false;
-			},
 			image() {
-				let image = this.me ? this.$store.getters.authUser.avatar : this.message.user.avatar;
-				return { backgroundImage: `url(${image})` };
+				return { backgroundImage: `url(${this.message.user.avatar})` };
+			},
+			containerClass() {
+				return this.me ? 'me' : '';
 			}
 		},
 		created() {

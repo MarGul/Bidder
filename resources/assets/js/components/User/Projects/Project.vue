@@ -38,8 +38,8 @@
 		created() {
 			new Model(`user/projects/${this.$route.params.id}`).get()
 				.then(response => {
-					this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 					this.$store.commit('SET_USER_PROJECT_DETAILS', response.project);
+					this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 				})
 				.catch(error => { console.log(error); });
 		},

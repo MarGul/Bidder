@@ -1,11 +1,10 @@
 .message-component {
-	border: 1px solid $border-color-gray;
-	border-bottom: none;
+	border-top: 1px solid $border-color-gray;
 	padding: 20px;
 	display: flex;
 
 	&.me {
-		background-color: #fafafa;
+		background-color: #f6f9fc;
 	}
 
 	.left {
@@ -48,6 +47,7 @@
 
 			a {
 				font-weight: 500;
+				color: $brand-primary;
 			}
 		}
 

@@ -14376,7 +14376,7 @@ let routes = [
 
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(246) }, { path: "/categories", name: 'categories', component: __webpack_require__(255) }, { path: "/locations", name: 'locations', component: __webpack_require__(260) }, { path: "/services", name: 'services', component: __webpack_require__(263) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(282) }, { path: "/information", name: 'information', component: __webpack_require__(294) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(297) }, { path: "/user", name: 'user', component: __webpack_require__(306),
 	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(320), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(329), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(368), meta: { requiresAuth: true },
-		children: [{ path: 'service', component: __webpack_require__(468), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(471), meta: { requiresAuth: true } }]
+		children: [{ path: 'service', component: __webpack_require__(468), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(471), meta: { requiresAuth: true } }, { path: 'messages', component: __webpack_require__(480), meta: { requiresAuth: true } }]
 	}, { path: 'invoices', component: __webpack_require__(409), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(415), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
@@ -22720,8 +22720,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		var _this = this;
 
 		new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/projects/' + this.$route.params.id).get().then(function (response) {
-			_this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 			_this.$store.commit('SET_USER_PROJECT_DETAILS', response.project);
+			_this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 		}).catch(function (error) {
 			console.log(error);
 		});
@@ -22743,9 +22743,153 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* 377 */,
 /* 378 */,
 /* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
+/* 380 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(381),
+  /* template */
+  __webpack_require__(382),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Messages/Message.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Message.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b41663e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-b41663e8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 381 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		message: {
+			type: Object,
+			required: true
+		},
+		me: {
+			type: Boolean,
+			required: true
+		}
+	},
+	data: function data() {
+		return {
+			time: null
+		};
+	},
+
+	computed: {
+		image: function image() {
+			return { backgroundImage: 'url(' + this.message.user.avatar + ')' };
+		},
+		containerClass: function containerClass() {
+			return this.me ? 'me' : '';
+		}
+	},
+	created: function created() {
+		var _this = this;
+
+		this.time = moment(this.message.created_at).fromNow();
+		__WEBPACK_IMPORTED_MODULE_0__includes_heartbeat__["a" /* HeartBeat */].$on('beat', function () {
+			_this.time = moment(_this.message.created_at).fromNow();
+		});
+	}
+});
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "message-component",
+    class: [_vm.containerClass]
+  }, [_c('div', {
+    staticClass: "left"
+  }, [_c('div', {
+    staticClass: "user-image",
+    style: (_vm.image)
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "right"
+  }, [_c('div', {
+    staticClass: "user-name"
+  }, [(_vm.me) ? _c('div', {
+    staticClass: "name"
+  }, [_vm._v("Jag")]) : _c('router-link', {
+    attrs: {
+      "to": ("/profile/" + (_vm.message.user.username))
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.message.user.username)
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "user-message",
+    domProps: {
+      "textContent": _vm._s(_vm.message.message)
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "message-time",
+    domProps: {
+      "textContent": _vm._s(_vm.time)
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-b41663e8", module.exports)
+  }
+}
+
+/***/ }),
 /* 383 */,
 /* 384 */,
 /* 385 */,
@@ -24695,6 +24839,280 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-6d4efc7c", module.exports)
+  }
+}
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(481),
+  /* template */
+  __webpack_require__(482),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectMessages.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectMessages.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7887c608", Component.options)
+  } else {
+    hotAPI.reload("data-v-7887c608", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 481 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Messages_MessageAdd__ = __webpack_require__(483);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Messages_MessageAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Messages_MessageAdd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Messages_Message__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Messages_Message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Messages_Message__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		messageAdd: __WEBPACK_IMPORTED_MODULE_0__Messages_MessageAdd___default.a,
+		message: __WEBPACK_IMPORTED_MODULE_1__Messages_Message___default.a
+	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails',
+		auth: 'authUser'
+	}), {
+		messages: function messages() {
+			return this.project.messages;
+		}
+	}),
+	methods: {
+		isMe: function isMe(message) {
+			return message.user.id == this.auth.id;
+		}
+	}
+});
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_messages-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('message-add', {
+    attrs: {
+      "resource": _vm.project.id
+    }
+  })], 1), _vm._v(" "), _vm._l((_vm.messages), function(message) {
+    return _c('message', {
+      key: message.id,
+      attrs: {
+        "message": message,
+        "me": _vm.isMe(message)
+      }
+    })
+  })], 2)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Skicka meddelande")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7887c608", module.exports)
+  }
+}
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(484),
+  /* template */
+  __webpack_require__(485),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Messages/MessageAdd.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] MessageAdd.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-508e4aa5", Component.options)
+  } else {
+    hotAPI.reload("data-v-508e4aa5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 484 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(464);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		resource: {
+			type: Number,
+			required: true
+		}
+	},
+	data: function data() {
+		return {
+			message: ''
+		};
+	},
+
+	methods: {
+		send: function send() {
+			// Instantly add the new message to the messages array
+			var message = this.message;
+			this.$emit('added', { message: message });
+			this.message = '';
+
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/' + this.resource + '/messages').post({ message: message }).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "add_message-component clearfix"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.message),
+      expression: "message"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "3",
+      "placeholder": "Skriv ditt meddelande här..."
+    },
+    domProps: {
+      "value": (_vm.message)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.message = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary mt5",
+    attrs: {
+      "disabled": !_vm.message
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.send($event)
+      }
+    }
+  }, [_vm._v("\n\t\tSkicka\n\t")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-508e4aa5", module.exports)
   }
 }
 

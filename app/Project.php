@@ -58,6 +58,16 @@ class Project extends Model
     }
 
     /**
+     * A project may have many messages.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function messages()
+    {
+        return $this->hasMany('App\Message')->orderBy('created_at', 'desc');
+    }
+
+    /**
      * A project has one invoice.
      * 
      * @return Eloquent Relationship
