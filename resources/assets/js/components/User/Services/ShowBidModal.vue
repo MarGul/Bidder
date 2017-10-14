@@ -1,17 +1,17 @@
 <template>
 	<div class="show_user_bid-component pt30">
 		
-		<app-one-bid :bid="bid"></app-one-bid> 
+		<one-bid :bid="bid" :hasAccept="true" />
 
 	</div>
 </template>
 
 <script>
-	import appOneBid from './OneBid';
+	import oneBid from '../Bids/OneBid';
 
 	export default {
 		components: {
-			appOneBid
+			oneBid
 		},
 		computed: {
 			bid() {

@@ -3,11 +3,19 @@
 		<section class="white-contentSection mb30">
 			<header class="white-contentSection-header has-actions">
 				<div class="header-content">
-					<router-link :to="`/profile/${bid.user.username}`" class="is-link" v-text="bid.user.username"></router-link>
-					<app-ratings :rating="bid.user.rating || 0" :showAvg="true"></app-ratings>
-					<div class="gray-sub-text" v-text="time(bid.created_at)"></div>
+					<template v-if="mine">
+						<div class="gray-text">Budet skapades den {{ filters.time(bid.created_at) }}</div>
+						<div class="header-actions" v-if="bid.accepted">
+							<i class="icon icon_confirmed wh20 mr5"></i><span class="bid-accepted">Accepterat bud</span>
+						</div>
+					</template>
+					<template v-else>
+						<router-link :to="`/profile/${bid.user.username}`" class="is-link" v-text="bid.user.username"></router-link>
+						<app-ratings :rating="bid.user.rating || 0" :showAvg="true"></app-ratings>
+						<div class="gray-sub-text" v-text="filters.time(bid.created_at)"></div>
+					</template>
 				</div> 
-				<div class="header-actions"> 
+				<div class="header-actions" v-if="hasAccept && !mine"> 
 					<app-bid-accept-status :bid="bid"></app-bid-accept-status>
 				</div>
 			</header>
@@ -38,18 +46,26 @@
 
 <script>
 	import appRatings from '../../Includes/Ratings';
-	import appBidAcceptStatus from './BidAcceptStatus';
+	import appBidAcceptStatus from '../Services/BidAcceptStatus';
 
 	export default {
-		props: ['bid'],
+		props: {
+			bid: {
+				type: Object,
+				required: true
+			},
+			mine: {
+				type: Boolean,
+				default: false
+			},
+			hasAccept: {
+				type: Boolean,
+				default: false
+			}
+		},
 		components: {
 			appRatings,
 			appBidAcceptStatus
-		},
-		methods: {
-			time(date) {
-				return moment(date).format('D MMM YYYY HH:mm');
-			}
 		}
 	}
 </script>

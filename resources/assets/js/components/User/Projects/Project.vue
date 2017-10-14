@@ -4,9 +4,10 @@
 		<template v-if="fetched">
 			<div class="main-area-with-sidebar">
 				<div class="main-area">
-					main
+					<router-view></router-view>
 				</div>
 				<div class="main-area-sidebar">
+					<project-service-and-bid />
 					<project-history :history="project.history" />
 				</div>
 			</div>
@@ -26,6 +27,7 @@
 	
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
+	import projectServiceAndBid from './ProjectServiceAndBid'; 
 	import projectHistory from './ProjectHistory';
 
 	export default {
@@ -36,6 +38,7 @@
 			projectStarted,
 			projectCompleted,
 
+			projectServiceAndBid,
 			projectHistory
 		},
 		computed: {

@@ -105,7 +105,7 @@ class ProjectManager
 	 */
 	public function show($project)
 	{
-		$project->load('users', 'history');
+		$project->load('service', 'bid.user', 'users', 'history');
 
 		return $project;
 	}

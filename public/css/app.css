@@ -42,6 +42,14 @@
   background-color: #009999;
 }
 
+.icon.danger {
+  background-color: #636b6f;
+}
+
+.icon.danger:hover {
+  background-color: #cc0000;
+}
+
 .icon.light-gray {
   background-color: #97A9B5;
 }
@@ -151,11 +159,6 @@
           mask-position: center;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  background-color: #636b6f;
-}
-
-.icon_delete:hover {
-  background-color: #cc0000;
 }
 
 .icon_question_mark {

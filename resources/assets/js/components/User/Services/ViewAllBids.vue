@@ -5,17 +5,22 @@
 				<i class="icon_go_back mr5"></i>Redigera
 			</a>
 		</div>
-		<app-one-bid :bid="bid" v-for="bid in bids" :key="bid.id"></app-one-bid>
+		<one-bid 
+			v-for="bid in bids" 
+			:bid="bid" 
+			:hasAccept="true"
+			:key="bid.id" 
+		/>
 	</div>
 </template>
 
 <script>
 	import { mapGetters } from 'vuex';
-	import appOneBid from './OneBid';
+	import oneBid from '../Bids/OneBid';
 
 	export default {
 		components: {
-			appOneBid
+			oneBid
 		},
 		computed: {
 			...mapGetters({

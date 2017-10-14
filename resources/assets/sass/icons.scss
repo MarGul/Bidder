@@ -21,6 +21,14 @@
 		background-color: $brand-primary;
 	}
 
+	&.danger {
+		background-color: $text-color;
+
+		&:hover {
+			background-color: $brand-danger;
+		}
+	}
+
 	&.light-gray {
 		background-color: $light-icon-color;
 	}
@@ -89,11 +97,6 @@
 
 .icon_delete {
 	@include mask-icon('../svg/delete.svg');
-	background-color: $text-color;
-
-	&:hover {
-		background-color: $brand-danger;
-	}
 }
 
 .icon_question_mark {

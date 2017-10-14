@@ -4240,46 +4240,7 @@ if (inBrowser && window.Vue) {
 /* 134 */,
 /* 135 */,
 /* 136 */,
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(213),
-  /* template */
-  __webpack_require__(217),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Services/OneBid.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] OneBid.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-185ee12c", Component.options)
-  } else {
-    hotAPI.reload("data-v-185ee12c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 137 */,
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12786,8 +12747,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OneBid__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__OneBid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Bids_OneBid__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Bids_OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Bids_OneBid__);
 //
 //
 //
@@ -12801,7 +12762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appOneBid: __WEBPACK_IMPORTED_MODULE_0__OneBid___default.a
+		oneBid: __WEBPACK_IMPORTED_MODULE_0__Bids_OneBid___default.a
 	},
 	computed: {
 		bid: function bid() {
@@ -12811,71 +12772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 213 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BidAcceptStatus__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BidAcceptStatus___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__BidAcceptStatus__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['bid'],
-	components: {
-		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a,
-		appBidAcceptStatus: __WEBPACK_IMPORTED_MODULE_1__BidAcceptStatus___default.a
-	},
-	methods: {
-		time: function time(date) {
-			return moment(date).format('D MMM YYYY HH:mm');
-		}
-	}
-});
-
-/***/ }),
+/* 213 */,
 /* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13002,99 +12899,17 @@ if (false) {
 }
 
 /***/ }),
-/* 217 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "one_bid-component"
-  }, [_c('section', {
-    staticClass: "white-contentSection mb30"
-  }, [_c('header', {
-    staticClass: "white-contentSection-header has-actions"
-  }, [_c('div', {
-    staticClass: "header-content"
-  }, [_c('router-link', {
-    staticClass: "is-link",
-    attrs: {
-      "to": ("/profile/" + (_vm.bid.user.username))
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.bid.user.username)
-    }
-  }), _vm._v(" "), _c('app-ratings', {
-    attrs: {
-      "rating": _vm.bid.user.rating || 0,
-      "showAvg": true
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "gray-sub-text",
-    domProps: {
-      "textContent": _vm._s(_vm.time(_vm.bid.created_at))
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "header-actions"
-  }, [_c('app-bid-accept-status', {
-    attrs: {
-      "bid": _vm.bid
-    }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "gray-contentSection-content"
-  }, [_c('ul', {
-    staticClass: "bid-details-list"
-  }, [_c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Kan börja")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.date(_vm.bid.start))
-    }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Är klart")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.date(_vm.bid.end))
-    }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.commaSeparator(_vm.bid.hours))
-    }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.currency(_vm.bid.price))
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content",
-    domProps: {
-      "textContent": _vm._s(_vm.bid.description)
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-185ee12c", module.exports)
-  }
-}
-
-/***/ }),
+/* 217 */,
 /* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "show_user_bid-component pt30"
-  }, [_c('app-one-bid', {
+  }, [_c('one-bid', {
     attrs: {
-      "bid": _vm.bid
+      "bid": _vm.bid,
+      "hasAccept": true
     }
   })], 1)
 },staticRenderFns: []}
@@ -13234,10 +13049,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('i', {
-    staticClass: "fa fa-times fa-lg",
-    attrs: {
-      "aria-hidden": "true"
-    }
+    staticClass: "icon icon_delete wh15 light-gray"
   })]), _vm._v(" "), _c(_vm.$store.getters.modalComponent, {
     tag: "component"
   })], 1)])
@@ -14563,7 +14375,9 @@ let routes = [
 */
 
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(246) }, { path: "/categories", name: 'categories', component: __webpack_require__(255) }, { path: "/locations", name: 'locations', component: __webpack_require__(260) }, { path: "/services", name: 'services', component: __webpack_require__(263) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(282) }, { path: "/information", name: 'information', component: __webpack_require__(294) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(297) }, { path: "/user", name: 'user', component: __webpack_require__(306),
-	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(320), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(329), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(368), meta: { requiresAuth: true } }, { path: 'invoices', component: __webpack_require__(409), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(415), meta: { requiresAuth: true } }],
+	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(320), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(329), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(368), meta: { requiresAuth: true },
+		children: [{ path: 'service', component: __webpack_require__(468), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(471), meta: { requiresAuth: true } }]
+	}, { path: 'invoices', component: __webpack_require__(409), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(415), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
 
@@ -21852,10 +21666,15 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OneBid__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__OneBid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Bids_OneBid__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -21873,7 +21692,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appOneBid: __WEBPACK_IMPORTED_MODULE_1__OneBid___default.a
+		oneBid: __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid___default.a
 	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		bids: 'serviceDetailsBids',
@@ -21902,10 +21721,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "icon_go_back mr5"
   }), _vm._v("Redigera\n\t\t")])]), _vm._v(" "), _vm._l((_vm.bids), function(bid) {
-    return _c('app-one-bid', {
+    return _c('one-bid', {
       key: bid.id,
       attrs: {
-        "bid": bid
+        "bid": bid,
+        "hasAccept": true
       }
     })
   })], 2)
@@ -22352,8 +22172,10 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__BidService__ = __webpack_require__(361);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__BidService___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__BidService__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__OneBid__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__OneBid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__BidService__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__BidService___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__BidService__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -22374,34 +22196,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -22409,7 +22204,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appBidService: __WEBPACK_IMPORTED_MODULE_2__BidService___default.a
+		oneBid: __WEBPACK_IMPORTED_MODULE_2__OneBid___default.a,
+		appBidService: __WEBPACK_IMPORTED_MODULE_3__BidService___default.a
 	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userBidDetailsFetched',
@@ -22636,62 +22432,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main-area-with-sidebar"
   }, [_c('div', {
     staticClass: "main-area"
-  }, [_c('section', {
-    staticClass: "white-contentSection"
-  }, [(_vm.fetched) ? [_c('header', {
-    staticClass: "white-contentSection-header has-actions"
-  }, [_c('div', {
-    staticClass: "gray-text"
-  }, [_vm._v("Budet skapades den " + _vm._s(_vm.filters.time(_vm.bid.created_at)))]), _vm._v(" "), (_vm.bid.accepted) ? _c('div', {
-    staticClass: "header-actions"
-  }, [_c('i', {
-    staticClass: "icon icon_confirmed wh20 mr5"
-  }), _c('span', {
-    staticClass: "bid-accepted"
-  }, [_vm._v("Accepterat bud")])]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "gray-contentSection-content"
-  }, [_c('ul', {
-    staticClass: "bid-details-list"
-  }, [_c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Kan börja")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.date(_vm.bid.start))
+  }, [(_vm.fetched) ? [_c('one-bid', {
+    attrs: {
+      "bid": _vm.bid,
+      "mine": true
     }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Är klart")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.date(_vm.bid.end))
-    }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.commaSeparator(_vm.bid.hours))
-    }
-  })]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "detail-item"
-  }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
-    staticClass: "detail-value",
-    domProps: {
-      "textContent": _vm._s(_vm.filters.currency(_vm.bid.price))
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "white-contentSection-content",
-    domProps: {
-      "textContent": _vm._s(_vm.bid.description)
-    }
-  })] : _c('app-loading')], 2)]), _vm._v(" "), _c('div', {
+  })] : _c('app-loading')], 2), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
-  }, [_c('app-bid-service', {
+  }, [(_vm.fetched) ? _c('app-bid-service', {
     attrs: {
       "service": _vm.bid.service
     }
-  })], 1)])])
+  }) : _vm._e()], 1)])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -22932,8 +22684,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ProjectCompleted___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__ProjectCompleted__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_Model__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProjectHistory__ = __webpack_require__(461);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProjectHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__ProjectHistory__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProjectServiceAndBid__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProjectServiceAndBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__ProjectServiceAndBid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ProjectHistory__ = __webpack_require__(461);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ProjectHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__ProjectHistory__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -22955,6 +22709,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+
 
 
 
@@ -22974,7 +22730,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		projectStarted: __WEBPACK_IMPORTED_MODULE_3__ProjectStarted___default.a,
 		projectCompleted: __WEBPACK_IMPORTED_MODULE_4__ProjectCompleted___default.a,
 
-		projectHistory: __WEBPACK_IMPORTED_MODULE_7__ProjectHistory___default.a
+		projectServiceAndBid: __WEBPACK_IMPORTED_MODULE_7__ProjectServiceAndBid___default.a,
+		projectHistory: __WEBPACK_IMPORTED_MODULE_8__ProjectHistory___default.a
 	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_5_vuex__["b" /* mapGetters */])({
 		fetched: 'userProjectDetailsFetched',
@@ -25101,9 +24858,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main-area-with-sidebar"
   }, [_c('div', {
     staticClass: "main-area"
-  }, [_vm._v("\n\t\t\t\tmain\n\t\t\t")]), _vm._v(" "), _c('div', {
+  }, [_c('router-view')], 1), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
-  }, [_c('project-history', {
+  }, [_c('project-service-and-bid'), _vm._v(" "), _c('project-history', {
     attrs: {
       "history": _vm.project.history
     }
@@ -26438,6 +26195,548 @@ var Model = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+/* 465 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(466),
+  /* template */
+  __webpack_require__(467),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectServiceAndBid.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectServiceAndBid.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-87fd488a", Component.options)
+  } else {
+    hotAPI.reload("data-v-87fd488a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 466 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	})),
+	methods: {
+		goToService: function goToService() {
+			this.$router.push('/user/projects/' + this.project.id + '/service');
+		},
+		goToBid: function goToBid() {
+			this.$router.push('/user/projects/' + this.project.id + '/bid');
+		}
+	}
+});
+
+/***/ }),
+/* 467 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_service_and_bid-component"
+  }, [_c('section', {
+    staticClass: "transparent-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "transparent-contentSection-content"
+  }, [_c('ul', {
+    staticClass: "items-list-icon"
+  }, [_c('li', {
+    staticClass: "has-go-to clickable",
+    on: {
+      "click": _vm.goToService
+    }
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_vm._v("\n\t\t\t\t\t\tVisa tjänsten\n\t\t\t\t\t")])]), _vm._v(" "), _c('li', {
+    staticClass: "has-go-to clickable",
+    on: {
+      "click": _vm.goToBid
+    }
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "item-list-icon-content"
+  }, [_vm._v("\n\t\t\t\t\t\tVisa budet\n\t\t\t\t\t")])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "transparent-contentSection-header"
+  }, [_c('h3', [_vm._v("Visa tjänst & bud")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-list-icon"
+  }, [_c('i', {
+    staticClass: "icon icon_two_users wh15 light-gray"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "item-list-icon"
+  }, [_c('i', {
+    staticClass: "icon icon_bid wh15 light-gray"
+  })])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-87fd488a", module.exports)
+  }
+}
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(469),
+  /* template */
+  __webpack_require__(470),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectService.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectService.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-60e43696", Component.options)
+  } else {
+    hotAPI.reload("data-v-60e43696", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 469 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	}), {
+		service: function service() {
+			return this.project.service;
+		}
+	})
+});
+
+/***/ }),
+/* 470 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_service-component"
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-60e43696", module.exports)
+  }
+}
+
+/***/ }),
+/* 471 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(472),
+  /* template */
+  __webpack_require__(473),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectBid.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectBid.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1bcb2a06", Component.options)
+  } else {
+    hotAPI.reload("data-v-1bcb2a06", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 472 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Bids_OneBid__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		oneBid: __WEBPACK_IMPORTED_MODULE_1__Bids_OneBid___default.a
+	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	}), {
+		bid: function bid() {
+			return this.project.bid;
+		}
+	})
+});
+
+/***/ }),
+/* 473 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_bid-component"
+  }, [_c('one-bid', {
+    attrs: {
+      "bid": _vm.bid
+    }
+  })], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1bcb2a06", module.exports)
+  }
+}
+
+/***/ }),
+/* 474 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(475),
+  /* template */
+  __webpack_require__(476),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Bids/OneBid.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] OneBid.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-362dc174", Component.options)
+  } else {
+    hotAPI.reload("data-v-362dc174", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 475 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_BidAcceptStatus__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_BidAcceptStatus___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Services_BidAcceptStatus__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		bid: {
+			type: Object,
+			required: true
+		},
+		mine: {
+			type: Boolean,
+			default: false
+		},
+		hasAccept: {
+			type: Boolean,
+			default: false
+		}
+	},
+	components: {
+		appRatings: __WEBPACK_IMPORTED_MODULE_0__Includes_Ratings___default.a,
+		appBidAcceptStatus: __WEBPACK_IMPORTED_MODULE_1__Services_BidAcceptStatus___default.a
+	}
+});
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "one_bid-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection mb30"
+  }, [_c('header', {
+    staticClass: "white-contentSection-header has-actions"
+  }, [_c('div', {
+    staticClass: "header-content"
+  }, [(_vm.mine) ? [_c('div', {
+    staticClass: "gray-text"
+  }, [_vm._v("Budet skapades den " + _vm._s(_vm.filters.time(_vm.bid.created_at)))]), _vm._v(" "), (_vm.bid.accepted) ? _c('div', {
+    staticClass: "header-actions"
+  }, [_c('i', {
+    staticClass: "icon icon_confirmed wh20 mr5"
+  }), _c('span', {
+    staticClass: "bid-accepted"
+  }, [_vm._v("Accepterat bud")])]) : _vm._e()] : [_c('router-link', {
+    staticClass: "is-link",
+    attrs: {
+      "to": ("/profile/" + (_vm.bid.user.username))
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.bid.user.username)
+    }
+  }), _vm._v(" "), _c('app-ratings', {
+    attrs: {
+      "rating": _vm.bid.user.rating || 0,
+      "showAvg": true
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "gray-sub-text",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.time(_vm.bid.created_at))
+    }
+  })]], 2), _vm._v(" "), (_vm.hasAccept && !_vm.mine) ? _c('div', {
+    staticClass: "header-actions"
+  }, [_c('app-bid-accept-status', {
+    attrs: {
+      "bid": _vm.bid
+    }
+  })], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('ul', {
+    staticClass: "bid-details-list"
+  }, [_c('li', [_c('div', {
+    staticClass: "detail-item"
+  }, [_vm._v("Kan börja")]), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.date(_vm.bid.start))
+    }
+  })]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "detail-item"
+  }, [_vm._v("Är klart")]), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.date(_vm.bid.end))
+    }
+  })]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "detail-item"
+  }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.commaSeparator(_vm.bid.hours))
+    }
+  })]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "detail-item"
+  }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
+    staticClass: "detail-value",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.currency(_vm.bid.price))
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content",
+    domProps: {
+      "textContent": _vm._s(_vm.bid.description)
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-362dc174", module.exports)
+  }
+}
 
 /***/ })
 ],[140]);
