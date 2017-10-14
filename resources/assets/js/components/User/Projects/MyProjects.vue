@@ -10,10 +10,12 @@
 					<ul class="items-list" v-if="projects.length > 0">
 						<li class="gray-item clickable" v-for="project in projects" @click="show(project)">
 							<div class="item-content">
-								<div class="item-header" v-text="project.title || `#${project.id}`"></div>
+								<div class="item-header">
+									{{ project.users[0].pivot.title }}
+								</div>
 								<div class="item-sub-data">
-									<span class="mr5">Projektet skapades den {{ projectCreated(project) }}</span>&bull;
-									<span class="ml5 is-weight-500">{{ project.completed ? 'Avslutat' : 'Pågår' }}</span>
+									<span class="mr5"></span>&bull;
+									<span class="ml5"></span>
 								</div>
 							</div>
 							<div class="item-go-to">
@@ -36,30 +38,29 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+	import Model from '../../../includes/Model';
+
 	export default {
 		computed: {
-			fetched() {
-				return this.$store.getters.userProjectsFetched;
-			},
-			projects() {
-				return this.$store.getters.userProjects;
-			}
+			...mapGetters({
+				fetched: 'userProjectsFetched',
+				projects: 'userProjects'
+			}),
 		},
 		methods: {
 			show(project) {
-				this.$store.commit('SET_PROJECT_FOCUS', {project});
-				this.$router.push(`/user/project/${project.id}`);
-			},
-			projectCreated(project) {
-				return moment(project.created_at).format('LLL');
-			},
-			projectFinish(project) {
-				return moment(project.finish).format('LL');
+				this.$router.push(`/user/projects/${project.id}`);
 			}
 		},
 		created() {
 			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserProjects');
+				new Model('user/projects').get()
+					.then(response => {
+						this.$store.commit('SET_USER_PROJECTS_FETCHED', true);
+						this.$store.commit('SET_USER_PROJECTS', response.projects);
+					})
+					.catch(error => { console.log(error); });
 			}
 		}
 	}

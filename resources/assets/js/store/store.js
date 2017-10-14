@@ -8,13 +8,14 @@ import categories from './modules/categories';
 import regions from './modules/regions';
 import modal from './modules/modal';
 import auth from './modules/auth';
-import user from './modules/user';
 import servicesFilter from './modules/servicesFilter';
 import services from './modules/services';
 import service from './modules/service';
 import notifications from './modules/notifications';
 import userBids from './modules/userBids';
 import userBidDetails from './modules/userBidDetails';
+import userProjects from './modules/userProjects';
+import userProjectDetails from './modules/userProjectDetails';
 import userNotifications from './modules/userNotifications';
 import userServices from './modules/userServices';
 import userSubscriptions from './modules/userSubscriptions';
@@ -27,13 +28,14 @@ export default new Vuex.Store({
 		regions,
 		modal,
 		auth,
-		user,
 		servicesFilter,
 		services,
 		service,
 		notifications,
 		userBids,
 		userBidDetails,
+		userProjects,
+		userProjectDetails,
 		userNotifications,
 		userServices,
 		userServiceDetails,

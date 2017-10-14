@@ -39,7 +39,9 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Delete a user bid */
 	Route::delete('user/bids/{bid}')->uses('UserBidsController@destroy');
 	/* Get a users projects */
-	Route::resource('user.projects', 'UserProjectsController', ['only' => ['index']]);
+	Route::get('user/projects')->uses('UserProjectsController@index');
+	/* Get a user project */
+	Route::get('user/projects/{project}')->uses('UserProjectsController@show');
 	/* Create and show messages for a project */
 	Route::resource('projects.messages', 'ProjectMessagesController', ['only' => ['index', 'store']]);
 	/* Update a projects details */

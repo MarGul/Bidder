@@ -2,14 +2,17 @@
 	<div class="project-component">
 		
 		<template v-if="fetched">
-			<project-title :title="project.title" :default="`# ${project.id}`"></project-title>
-			
-			<component :is="panel" :project="project"></component>
-
-			<message-board></message-board>
+			<div class="main-area-with-sidebar">
+				<div class="main-area">
+					main
+				</div>
+				<div class="main-area-sidebar">
+					<project-history :history="project.history" />
+				</div>
+			</div>
 		</template>
 
-		<app-loading v-else></app-loading>
+		<app-loading v-else />
 
 	</div>
 </template>
@@ -20,6 +23,10 @@
 	import projectAccept from './ProjectAccept';
 	import projectStarted from './ProjectStarted';
 	import projectCompleted from './ProjectCompleted';
+	
+	import { mapGetters } from 'vuex';
+	import Model from '../../../includes/Model';
+	import projectHistory from './ProjectHistory';
 
 	export default {
 		components: {
@@ -27,30 +34,26 @@
 			projectTitle,
 			projectAccept,
 			projectStarted,
-			projectCompleted
+			projectCompleted,
+
+			projectHistory
 		},
 		computed: {
-			fetched() {
-				return this.$store.getters.userProjectsFetched;
-			},
-			project() {
-				return this.$store.getters.userProjectFocus;
-			},
-			panel() {
-				if ( this.project.completed ) {
-					return 'projectCompleted';
-				}
-
-				return this.project.started ? 'projectStarted' : 'projectAccept';
-			}
+			...mapGetters({
+				fetched: 'userProjectDetailsFetched',
+				project: 'userProjectDetails'
+			})
 		},
 		created() {
-			if ( !this.fetched ) {
-				this.$store.dispatch('fetchUserProjects', {focusId: this.$route.params.id});
-			}
+			new Model(`user/projects/${this.$route.params.id}`).get()
+				.then(response => {
+					this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
+					this.$store.commit('SET_USER_PROJECT_DETAILS', response.project);
+				})
+				.catch(error => { console.log(error); });
 		},
 		destroyed() {
-			this.$store.commit('SET_PROJECT_FOCUS', {project: null});
+			//this.$store.commit('SET_PROJECT_FOCUS', {project: null});
 		}
 	}
 </script>

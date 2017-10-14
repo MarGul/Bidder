@@ -54,7 +54,7 @@ class Project extends Model
      */
     public function history()
     {
-        return $this->hasMany('App\ProjectHistory');
+        return $this->hasMany('App\ProjectHistory')->orderBy('created_at', 'desc');
     }
 
     /**

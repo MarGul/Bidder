@@ -1,7 +1,7 @@
 <template>
 	<div class="service_bids-component">
 		<section class="transparent-contentSection">
-			<header class="transparent-contentSection-header">
+			<header class="transparent-contentSection-header has-link">
 				<h3>Budhistorik</h3>
 				<a class="is-link" @click.prevent="showAll">Visa alla</a>
 			</header>

@@ -155,6 +155,21 @@ a {
 			font-weight: 500;
 			margin: 0;
 		}
+
+		&.has-link {
+			display: flex;
+			align-items: center;
+
+			h3 {
+				flex: 2;
+			}
+
+			a {
+				flex: 1;
+				text-align: right;
+				font-size: 13px;
+			}
+		}
 	}
 
 	.transparent-contentSection-content {
@@ -199,6 +214,33 @@ a {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
+		}
+	}
+}
+
+.items-list-default {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin-bottom: 25px;
+
+		&.has-left-border {
+			padding-left: 15px;
+			border-left: 2px solid;
+
+			&.info {
+				border-color: $brand-info;
+			}
+
+			&.warning {
+				border-color: $brand-warning;
+			}
+
+			&.critical {
+				border-color: $brand-danger;
+			}
 		}
 	}
 }
