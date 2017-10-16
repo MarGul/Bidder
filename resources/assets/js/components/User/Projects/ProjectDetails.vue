@@ -31,7 +31,7 @@
 						</div>
 					</router-link>
 					<router-link :to="`/user/projects/${project.id}/messages`" tag="li" class="has-go-to" exact>
-						<div class="item-list-icon">
+						<div class="item-list-icon vertical-centered">
 							<i class="icon icon_messages wh15 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">

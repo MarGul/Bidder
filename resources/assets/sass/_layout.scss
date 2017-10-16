@@ -265,7 +265,7 @@ a {
 				width: 15px;
 				height: 15px;
 				position: absolute;
-				top: calc(50% - 10px);
+				top: calc(50% - 7.5px);
 				right: 0;
 				@include mask-icon('../svg/right_arrow.svg');
 				background-color: $light-icon-color;
