@@ -14710,7 +14710,7 @@ let routes = [
 
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(246) }, { path: "/categories", name: 'categories', component: __webpack_require__(255) }, { path: "/locations", name: 'locations', component: __webpack_require__(260) }, { path: "/services", name: 'services', component: __webpack_require__(263) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(282) }, { path: "/information", name: 'information', component: __webpack_require__(294) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(297) }, { path: "/user", name: 'user', component: __webpack_require__(306),
 	children: [{ path: '', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(139), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(320), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(329), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(341), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(356), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(365), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(368), meta: { requiresAuth: true },
-		children: [{ path: 'service', component: __webpack_require__(377), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(380), meta: { requiresAuth: true } }, { path: 'messages', component: __webpack_require__(383), meta: { requiresAuth: true } }]
+		children: [{ path: 'service', component: __webpack_require__(377), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(380), meta: { requiresAuth: true } }, { path: 'messages', component: __webpack_require__(383), meta: { requiresAuth: true } }, { path: 'history', component: __webpack_require__(373), meta: { requiresAuth: true } }]
 	}, { path: 'invoices', component: __webpack_require__(392), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(395), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(398), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
@@ -22962,8 +22962,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectDetails__ = __webpack_require__(370);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProjectDetails__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectHistory__ = __webpack_require__(373);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__ProjectHistory__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectHistorySidebar__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectHistorySidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__ProjectHistorySidebar__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -22995,7 +22995,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
 		projectDetails: __WEBPACK_IMPORTED_MODULE_2__ProjectDetails___default.a,
-		projectHistory: __WEBPACK_IMPORTED_MODULE_3__ProjectHistory___default.a
+		projectHistorySidebar: __WEBPACK_IMPORTED_MODULE_3__ProjectHistorySidebar___default.a
 	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userProjectDetailsFetched',
@@ -23264,18 +23264,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: {
-		history: {
-			type: Array,
-			required: true
-		}
-	},
 	computed: {
 		projectHistory: function projectHistory() {
-			return this.history.slice(0, 5);
+			return this.$store.getters.userProjectDetails.history;
 		}
 	}
 });
@@ -23288,9 +23281,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "project_history-component"
   }, [_c('section', {
-    staticClass: "transparent-contentSection"
+    staticClass: "white-contentSection"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "transparent-contentSection-content"
+    staticClass: "white-contentSection-content"
   }, [_c('ul', {
     staticClass: "items-list-default"
   }, _vm._l((_vm.projectHistory), function(history) {
@@ -23311,10 +23304,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }))])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
-    staticClass: "transparent-contentSection-header has-link"
-  }, [_c('h3', [_vm._v("Projekthistorik")]), _vm._v(" "), _c('a', {
-    staticClass: "is-link"
-  }, [_vm._v("Visa alla")])])
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Projekthistorik")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -23337,7 +23328,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main-area"
   }, [_c('router-view')], 1), _vm._v(" "), _c('div', {
     staticClass: "main-area-sidebar"
-  }, [_c('project-details'), _vm._v(" "), _c('project-history', {
+  }, [_c('project-details'), _vm._v(" "), _c('project-history-sidebar', {
     attrs: {
       "history": _vm.project.history
     }
@@ -25215,6 +25206,134 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-7bd6ba06", module.exports)
+  }
+}
+
+/***/ }),
+/* 448 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(449),
+  /* template */
+  __webpack_require__(450),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectHistorySidebar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectHistorySidebar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-13cacbd8", Component.options)
+  } else {
+    hotAPI.reload("data-v-13cacbd8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 449 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		history: {
+			type: Array,
+			required: true
+		}
+	},
+	computed: {
+		project: function project() {
+			return this.$store.getters.userProjectDetails;
+		},
+		projectHistory: function projectHistory() {
+			return this.history.slice(0, 5);
+		}
+	}
+});
+
+/***/ }),
+/* 450 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_history-component"
+  }, [_c('section', {
+    staticClass: "transparent-contentSection"
+  }, [_c('header', {
+    staticClass: "transparent-contentSection-header has-link"
+  }, [_c('h3', [_vm._v("Projekthistorik")]), _vm._v(" "), _c('router-link', {
+    staticClass: "is-link",
+    attrs: {
+      "to": ("/user/projects/" + (_vm.project.id) + "/history")
+    }
+  }, [_vm._v("Visa alla")])], 1), _vm._v(" "), _c('div', {
+    staticClass: "transparent-contentSection-content"
+  }, [_c('ul', {
+    staticClass: "items-list-default"
+  }, _vm._l((_vm.projectHistory), function(history) {
+    return _c('li', {
+      staticClass: "has-left-border",
+      class: [history.type]
+    }, [_c('div', {
+      staticClass: "gray-sub-text",
+      domProps: {
+        "textContent": _vm._s(_vm.filters.time(history.created_at))
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "item-content",
+      domProps: {
+        "textContent": _vm._s(history.action)
+      }
+    })])
+  }))])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-13cacbd8", module.exports)
   }
 }
 

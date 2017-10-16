@@ -1,10 +1,11 @@
 <template>
 	<div class="project_history-component">
-		<section class="white-contentSection">
-			<header class="white-contentSection-header">
+		<section class="transparent-contentSection">
+			<header class="transparent-contentSection-header has-link">
 				<h3>Projekthistorik</h3>
+				<router-link :to="`/user/projects/${project.id}/history`" class="is-link">Visa alla</router-link>
 			</header>
-			<div class="white-contentSection-content">
+			<div class="transparent-contentSection-content">
 				<ul class="items-list-default">
 					<li v-for="history in projectHistory" class="has-left-border" :class="[history.type]">
 						<div class="gray-sub-text" v-text="filters.time(history.created_at)"></div>
@@ -18,9 +19,18 @@
 
 <script>
 	export default {
+		props: {
+			history: {
+				type: Array,
+				required: true
+			}
+		},
 		computed: {
+			project() {
+				return this.$store.getters.userProjectDetails;
+			},
 			projectHistory() {
-				return this.$store.getters.userProjectDetails.history;
+				return this.history.slice(0, 5);
 			}
 		}
 	}
