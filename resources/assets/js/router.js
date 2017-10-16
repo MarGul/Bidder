@@ -57,7 +57,14 @@ let routes = [
 			{ path: 'bids', component: require('./components/User/Bids/MyBids'), meta: { requiresAuth: true } },
 			{ path: 'bids/:id', component: require('./components/User/Bids/BidDetails'), meta: { requiresAuth: true } },
 			{ path: 'projects', component: require('./components/User/Projects/MyProjects'), meta: { requiresAuth: true } },
-			{ path: 'project/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true } },
+			{ path: 'projects/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true },
+				children: [
+					{ path: 'service', component: require('./components/User/Projects/ProjectService'), meta: { requiresAuth: true } },
+					{ path: 'bid', component: require('./components/User/Projects/ProjectBid'), meta: { requiresAuth: true } },
+					{ path: 'messages', component: require('./components/User/Projects/ProjectMessages'), meta: { requiresAuth: true } },
+					{ path: 'history', component: require('./components/User/Projects/ProjectHistory'), meta: { requiresAuth: true } },
+				]
+			},
 			{ path: 'invoices', component: require('./components/User/Invoices/MyInvoices'), meta: { requiresAuth: true } },
 			{ path: 'invoices/:id', component: require('./components/User/Invoices/InvoiceDetails'), meta: { requiresAuth: true } },
 			{ path: 'subscriptions', component: require('./components/User/Subscriptions/MySubscriptions'), meta: { requiresAuth: true } },
@@ -72,6 +79,7 @@ let routes = [
 const router = new VueRouter({
 	routes,
 	linkActiveClass: 'active',
+	linkExactActiveClass: 'exact-active',
 	mode: 'history'
 });
 

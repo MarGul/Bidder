@@ -30,9 +30,11 @@ class AuthServiceProvider extends ServiceProvider
 
         // Is the resource the authenticated users?
         Gate::define('my-resource', function($user, $resource) { return $user->id === $resource->user_id; });
-        // Can a user accept bids for a service?
-        Gate::define('accept-bid', function($user, $service) { return $user->id === $service->user_id; });
         // Is a user part of a project?
-        Gate::define('in-project', function($user, $project) { return in_array($user->id, [$project->service_user, $project->bid_user]); });
+        Gate::define('in-project', function($user, $project) { 
+            return \App\Project::whereHas('users', function($query) use($user) {
+                        $query->where('user_id', $user->id);
+                    })->get()->isNotEmpty();
+        });
     }
 }

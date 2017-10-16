@@ -29,7 +29,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle a services bids */
 	Route::resource('services.bids', 'ServiceBidController', ['except' => ['create', 'edit']]);
 	/* Accept a bid */
-	Route::post('services/{service}/bids/{bid}/accept')->uses('ServiceBidAcceptController@create');
+	Route::post('bids/{bid}/accept')->uses('BidAcceptController@create');
 	/* A users services */
 	Route::resource('user/services', 'UserServicesController', ['except' => ['create']]);
 	/* Get a users bids */
@@ -39,9 +39,11 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Delete a user bid */
 	Route::delete('user/bids/{bid}')->uses('UserBidsController@destroy');
 	/* Get a users projects */
-	Route::resource('user.projects', 'UserProjectsController', ['only' => ['index']]);
+	Route::get('user/projects')->uses('UserProjectsController@index');
+	/* Get a user project */
+	Route::get('user/projects/{project}')->uses('UserProjectsController@show');
 	/* Create and show messages for a project */
-	Route::resource('projects.messages', 'ProjectMessagesController', ['only' => ['index', 'store']]);
+	Route::post('projects/{project}/messages')->uses('ProjectMessagesController@store');
 	/* Update a projects details */
 	Route::patch('projects/{project}')->uses('ProjectController@update');
 	/* Update a projects title */

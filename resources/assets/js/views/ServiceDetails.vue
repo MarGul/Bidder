@@ -5,28 +5,7 @@
 				<template v-if="$store.getters.getServiceLoaded">
 					<div class="main-area-with-sidebar">
 						<div class="main-area large-sidebar">
-							<section class="white-contentSection">
-								<header class="white-contentSection-header">
-									<h3 class="service-title" v-text="service.title"></h3>
-								</header>
-								<div class="gray-contentSection-content">
-									<div class="service-details">
-										<div class="detail-item">
-											<div class="detail-header">
-												<i class="icon icon_list wh15 cursor-default primary mr10"></i><span>Kategori</span>
-											</div>
-											<div class="detail-value" v-text="category"></div>
-										</div>
-										<div class="detail-item">
-											<div class="detail-header">
-												<i class="icon icon_map_pin wh15 cursor-default primary mr10"></i><span>Plats</span>
-											</div>
-											<div class="detail-value" v-text="location"></div>
-										</div>
-									</div>
-								</div>
-								<div class="white-contentSection-content service-description" v-text="service.description"></div>
-							</section>
+							<service-details :service="service" />
 							<section class="transparent-contentSection service-comments mt50" v-if="!breakpoints.isSmallDevices()">
 								<app-add-comment></app-add-comment>
 								<ul class="top-comments">
@@ -101,7 +80,7 @@
 <script>
 	import appAddComment from '../components/Comments/AddComment';
 	import appComment from '../components/Comments/Comment';
-	import appServiceMedia from '../components/Services/ServiceMedia';
+	import appServiceDetails from '../components/Services/ServiceDetails';
 	import appRatings from '../components/Includes/Ratings';
 	import appTimer from '../components/Includes/Timer';
 
@@ -109,7 +88,7 @@
 		components: {
 			appComment,
 			appAddComment,
-			appServiceMedia,
+			appServiceDetails,
 			appRatings,
 			appTimer
 		},
@@ -131,15 +110,6 @@
 			},
 			ratingAvg() {
 				return this.service.user.rating ? this.service.user.rating.avg : 0;
-			},
-			category() {
-				let category = this.$store.getters.categoryById(this.service.category_id);
-				return category ? category.name : '';
-			},
-			location() {
-				let city = this.$store.getters.cityById(this.service.city_id);
-				let region = this.$store.getters.regionById(this.service.region_id);
-				return region && city ? `${city.name}, ${region.name}` : '';
 			}
 		},
 		methods: {

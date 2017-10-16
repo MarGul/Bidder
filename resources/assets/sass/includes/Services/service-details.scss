@@ -74,34 +74,6 @@
 		}
 	}
 
-	.service-title {
-		font-size: 18px;
-		text-align: center;
-		padding: 10px 0;
-	}
-
-	.service-description {
-		white-space: pre-wrap;
-		padding-top: 30px !important;
-	}
-
-	.service-details {
-		display: flex;
-		align-items: center;
-
-		.detail-item {
-			flex: 1;
-			text-align: center;
-
-			.detail-header {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 10px;
-			}
-		}
-	}
-
 	.service-user {
 		display: flex;
 		align-items: center;
@@ -129,5 +101,33 @@
 			}
 		}
 		
+	}
+}
+
+.service-title {
+	font-size: 18px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.service-description {
+	white-space: pre-wrap;
+	padding-top: 30px !important;
+}
+
+.service-details {
+	display: flex;
+	align-items: center;
+
+	.detail-item {
+		flex: 1;
+		text-align: center;
+
+		.detail-header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 10px;
+		}
 	}
 }

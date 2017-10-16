@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
 use App\Features\ProjectManager;
 
 class UserProjectsController extends Controller
@@ -27,9 +28,27 @@ class UserProjectsController extends Controller
 	 * @return Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-		$projects = $this->manager->byUser($request->user());
+		return response()->json([
+			'message' => 'Displaying projects for a user.', 
+			'projects' => $this->manager->byUser($request->user())
+		], 200);
+	}
 
-		return response()->json(['message' => 'Displaying projects for a user', 'projects' => $projects], 200);
+	/**
+	 * Display a resource
+	 * 
+	 * @param  Request $request
+	 * @param  Project $project
+	 * @return Illuminate\Http\Response
+	 */
+	public function show(Request $request, Project $project)
+	{
+		$this->authorize('in-project', $project);
+
+		return response()->json([
+			'message' => 'Displaying a user project.',
+			'project' => $this->manager->show($project)
+		], 200);
 	}
 
 }

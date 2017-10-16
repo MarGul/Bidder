@@ -9,59 +9,62 @@ class Project extends Model
 {
     
 	/**
-	 * Append the custom attribute title when going toArray
-	 * 
-	 * @var array
-	 */
-	protected $appends = ['title'];
-
-	/**
      * The attributes that are mass assignable.
      * 
      * @var array
      */
     protected $fillable = [
-    	'service_user', 'bid_user', 'service_user_accept', 'bid_user_accept', 'accept_end',
-        'service_user_title', 'bid_user_title', 'started', 'finish', 'price', 'completed'
+    	'service_id', 'bid_id', 'service_price', 'service_start', 'service_end', 'service_hours'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'service_user_title', 'bid_user_title'
-    ];
-
-    /**
-     * Only show a title in the response. It will depend on what role the user has in the project.
+     * Each project has one service.
      * 
-     * @return string
+     * @return Eloquent Relationship
      */
-    public function getTitleAttribute()
+    public function service()
     {
-    	return Auth::user()->id === $this->service_user ? $this->service_user_title : $this->bid_user_title;
+        return $this->belongsTo('App\Service');
     }
 
     /**
-     * Each project has one bid user.
+     * Each project has one bid.
      * 
-     * @return Eloquent relationship
+     * @return Eloquent Relationship
      */
-    public function bidUser()
+    public function bid()
     {
-        return $this->hasOne('App\User', 'id', 'bid_user');
+        return $this->belongsTo('App\Bid');
     }
 
     /**
-     * Each project has one service user.
+     * A project has many users.
      * 
-     * @return Eloquent relationship
+     * @return Eloquent Relationship
      */
-    public function serviceUser()
+    public function users()
     {
-        return $this->hasOne('App\User', 'id', 'service_user');
+        return $this->belongsToMany('App\User')->withPivot('role', 'title');
+    }
+
+    /**
+     * A project may have many project history entries.
+     * 
+     * @return Eloquent Relationhip
+     */
+    public function history()
+    {
+        return $this->hasMany('App\ProjectHistory')->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * A project may have many messages.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function messages()
+    {
+        return $this->hasMany('App\Message')->orderBy('created_at', 'desc');
     }
 
     /**

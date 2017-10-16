@@ -58,7 +58,7 @@ class Form {
      */
     parseAsDate(property) {
         let date = new Date(this[property]);
-        return `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${date.getDate()}`;
+        return `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}`;
     }
 
     pad(number) {

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
 use App\Bid;
+use App\Service;
 use App\Features\BidManager;
 
-class ServiceBidAcceptController extends Controller
+class BidAcceptController extends Controller
 {
     
 	/**
@@ -25,14 +25,14 @@ class ServiceBidAcceptController extends Controller
 	/**
 	 * Create an acceptance for a bid
 	 * 
-	 * @param  App\Service 	$service
 	 * @param  App\Bid     	$bid
 	 * @param  Request 		$request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create(Service $service, Bid $bid, Request $request) {
+	public function create(Bid $bid, Request $request) {
+		$service = Service::findOrFail($bid->service_id);
 		// Policy to make sure user can accept bids for this service.
-		$this->authorize('accept-bid', $service);
+		$this->authorize('my-resource', $service);
 
 		if ( !$this->manager->accept($bid) ) {
 			return response()->json(['message' => 'Could not accept the bid'], 500);

@@ -3,41 +3,13 @@
 		
 		<div class="main-area-with-sidebar">
 			<div class="main-area">
-				<section class="white-contentSection">
-					<template v-if="fetched">
-						<header class="white-contentSection-header has-actions">
-							<div class="gray-text">Budet skapades den {{ filters.time(bid.created_at) }}</div>
-							<div class="header-actions" v-if="bid.accepted">
-								<i class="icon icon_confirmed wh20 mr5"></i><span class="bid-accepted">Accepterat bud</span>
-							</div>
-						</header>
-						<div class="gray-contentSection-content">
-							<ul class="bid-details-list">
-								<li>
-									<div class="detail-item">Kan börja</div>
-									<div class="detail-value" v-text="filters.date(bid.start)"></div>
-								</li>
-								<li>
-									<div class="detail-item">Är klart</div>
-									<div class="detail-value" v-text="filters.date(bid.end)"></div>
-								</li>
-								<li>
-									<div class="detail-item">Antal timmar</div>
-									<div class="detail-value" v-text="filters.commaSeparator(bid.hours)"></div>
-								</li> 
-								<li>
-									<div class="detail-item">Pris</div>
-									<div class="detail-value" v-text="filters.currency(bid.price)"></div>
-								</li>
-							</ul>
-						</div>
-						<div class="white-contentSection-content" v-text="bid.description"></div>
-					</template>
-					<app-loading v-else></app-loading>
-				</section>
+				<template v-if="fetched">
+					<one-bid :bid="bid" :mine="true" />
+				</template>
+				<app-loading v-else />
 			</div>
 			<div class="main-area-sidebar">
-				<app-bid-service :service="bid.service"></app-bid-service>
+				<app-bid-service :service="bid.service" v-if="fetched"></app-bid-service>
 			</div>
 		</div>
 
@@ -47,10 +19,12 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
+	import oneBid from './OneBid';
 	import appBidService from './BidService';
 
 	export default {
 		components: {
+			oneBid,
 			appBidService
 		},
 		computed: {

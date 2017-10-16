@@ -70,6 +70,16 @@ class User extends Authenticatable
     }
 
     /**
+     * A user may have many projects.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project')->withPivot('role', 'title');
+    }
+
+    /**
      * A user may have many reviews.
      * 
      * @return Eloquent Relationship

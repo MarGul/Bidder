@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Features\MessageManager;
 use App\Project;
 
 class ProjectMessagesController extends Controller
@@ -12,28 +12,14 @@ class ProjectMessagesController extends Controller
     /**
 	 * Manager
 	 * 
-	 * @var App\Features\ProjectManager
+	 * @var App\Features\MessageManager
 	 */
 	private $manager;
 
-	public function __construct(ProjectManager $manager) {
+	public function __construct(MessageManager $manager) {
 		$this->middleware('auth:api');
 		$this->manager = $manager;
 	}
-
-    /**
-     * Display a listing of the resource
-     * 
-     * @param  Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Project $project) {
-        $this->authorize('in-project', $project);
-
-        $messages = $this->manager->messages($project);
-
-        return response()->json(['message' => 'Displaying messages for project.', 'messages' => $messages], 200);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,7 +32,9 @@ class ProjectMessagesController extends Controller
     	$this->authorize('in-project', $project);
     	$this->validate($request, ['message' => 'required']);
 
-    	if ( !$message = $this->manager->createMessage($project, $request->user(), $request->message) ) {
+    	$data = ['projectId' => $project->id, 'message' => $request->message];
+
+        if ( !$message = $this->manager->create($request->user(), $data) ) {
     		return response()->json(['message' => 'Could not create the message.'], 500);
     	}
 

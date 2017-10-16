@@ -5,35 +5,65 @@ namespace App\Features;
 use App\Project;
 use App\Message;
 use Carbon\Carbon;
-use Auth;
 use App\Features\InvoiceManager;
-use App\Events\NewMessage;
+use App\Features\ProjectHistoryManager;
 
 class ProjectManager 
 {
 
 	/**
 	 * The amount of days after a project is created that users have to accept the project.
-	 * With 8 it will technically be 7 because it ends on midnight between 7-8
-	 * 
 	 * @var integer
 	 */
-	protected $acceptDays = 8;
+	protected $acceptDays = 14;
+	/**
+	 * The role for a project user that created the service.
+	 * @var string
+	 */
+	protected $userRoleService = 'service';
+	/**
+	 * The role for a project user that created the bid.
+	 * @var string
+	 */
+	protected $userRoleBid = 'bid';
+	/**
+	 * ProjectHistoryManager instance.
+	 * @var App\Features\ProjectHistoryManager
+	 */
+	protected $projectHistoryManager;
+
+	
+	public function __construct(ProjectHistoryManager $projectHistoryManager)
+	{
+		$this->projectHistoryManager = $projectHistoryManager;
+	}
 
 	/**
-	 * Create a project.
+	 * Create a project between a service and a bid.
 	 * 
-	 * @param  array $data 	[The data for the project]
-	 * @return boolean
+	 * @param  	App\Service 	$service
+	 * @param 	App\Bid 		$bid
+	 * @return 	boolean
 	 */
-	public function create($data) 
+	public function create($service, $bid) 
 	{
-		// The end time for acccepting the project is at midnight $this->acceptDays from now.
-		$data['accept_end'] = Carbon::now('Europe/Stockholm')->addDays($this->acceptDays)->setTime(00,00,00);
+		$project = Project::create([
+			'service_id' => $service->id,
+			'bid_id' => $bid->id,
+			'service_price' => $bid->price,
+			'service_start' => $bid->start,
+			'service_end' => $bid->end,
+			'service_hours' => $bid->hours
+		]);
 
-		$project = new Project($data);
-
-		return ($project->save()) ? true : false;
+		// Attach the service user to the project.
+		$project->users()->attach($service->user_id, ['role' => $this->userRoleService, 'title' => "Projekt #{$project->id}"]);
+		// Attach the bid user to the project.
+		$project->users()->attach($bid->user_id, ['role' => $this->userRoleBid, 'title' => "Project #{$project->id}"]);
+		// Insert a history record that the project was created.
+		$this->projectHistoryManager->add($project->id, 'created');
+		
+		return true;
 	}
 
 	/**
@@ -59,54 +89,24 @@ class ProjectManager
 	 */
 	public function byUser($user) 
 	{
-		$projects = Project::with('serviceUser', 'bidUser')
-							->where('canceled', '<>', true)
-							->where('service_user', $user->id)
-							->orWhere('bid_user', $user->id)
-							->orderBy('created_at', 'desc')
-							->get();
+		$projects = Project::with(['users' => function($query) use ($user) {
+						$query->where('user_id', $user->id);
+					}])->get();
 
-		return $this->parseProjects($projects);
+		return $projects;
 	}
 
 	/**
-	 * Get the messages for a project.
+	 * Show a single project with relations.
 	 * 
 	 * @param  App\Project 	$project
-	 * @return collection
+	 * @return App\Project
 	 */
-	public function messages($project) 
+	public function show($project)
 	{
-		$messages = Message::where('project_id', $project->id)->get();
-		$messages->load('user');
+		$project->load('service', 'bid.user', 'users', 'history', 'messages.user');
 
-		return $messages;
-	}
-
-	/**
-	 * Create a message for a project.
-	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user
-	 * @param  string 		$message
-	 * @return boolean
-	 */
-	public function createMessage($project, $user, $message) 
-	{
-		$message = new Message([
-			'project_id' => $project->id,
-			'user_id' => $user->id,
-			'message' => $message
-		]);
-
-		if ( !$message->save() ) return false;
-
-		$message->user = $user;
-
-		// Broadcast the new message to the other user.
-		event(new NewMessage($message));
-
-		return $message;
+		return $project;
 	}
 
 	/**
@@ -117,6 +117,7 @@ class ProjectManager
 	 * @param  string 		$title
 	 * @return boolean
 	 */
+	/*
 	public function updateTitle($user, $project, $title)
 	{
 		if ( $user->id === $project->service_user ) {
@@ -135,6 +136,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
+	/*
 	public function accept($user, $project)
 	{
 		if ( $user->id === $project->service_user ) {
@@ -156,6 +158,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
+	/*
 	public function cancel($project)
 	{
 		$project->canceled = true;
@@ -169,6 +172,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
+	/*
 	public function start($project)
 	{
 		$project->started = true;
@@ -184,6 +188,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
+	/*
 	public function complete($project)
 	{
 		// Attach reviews for both users.
@@ -198,76 +203,15 @@ class ProjectManager
 	}
 
 	/**
-	 * Mark a user that he has left a review for a project.
-	 * 
-	 * @param  integer  	$user
-	 * @param  integer  	$project_id
-	 * @return boolean
-	 */
-	public function hasReviewed($user, $project_id)
-	{
-		$project = Project::find($project_id);
-
-		if ( !$project ) return false;
-
-		if ( $this->isServiceUser($user, $project) ) {
-			$project->service_user_review = true;
-		} else {
-			$project->bid_user_review = true;
-		}
-
-		return $project->save() ? true : false;
-	}
-
-	/**
 	 * Have both parties accepted so we should start the project?
 	 * 
 	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
+	/*
 	public function shouldStart($project)
 	{
 		return $project->service_user_accept && $project->bid_user_accept;
-	}
-
-	/**
-	 * Is the user the service user of the project?
-	 * 
-	 * @param  integer  	$user_id
-	 * @param  App\Project  $project
-	 * @return boolean
-	 */
-	protected function isServiceUser($user_id, $project)
-	{
-		return $user_id === $project->service_user;
-	}
-
-	/**
-	 * Need to parse the projects in order to set the users correctly.
-	 * 
-	 * @param  collection 	$projects
-	 * @return collection
-	 */
-	protected function parseProjects($projects)
-	{
-		foreach ($projects as $project) {
-			$service_user = Auth::user()->id === $project->service_user ? true : false;
-
-			$project->me = $service_user ? $project->serviceUser : $project->bidUser;
-			$project->me->accepted =  $service_user ? $project->service_user_accept : $project->bid_user_accept;
-			$project->me->reviewed = $service_user ? $project->service_user_review : $project->bid_user_review;
-			$project->other = $service_user ? $project->bidUser : $project->serviceUser;
-			$project->other->accepted = $service_user ? $project->bid_user_accept : $project->service_user_accept;
-
-			unset($project->serviceUser);
-			unset($project->service_user_accept);
-			unset($project->service_user_review);
-			unset($project->bidUser);
-			unset($project->bid_user_accept);
-			unset($project->bid_user_review);
-		}
-
-		return $projects;
-	}
+	}*/
 
 }
