@@ -92,39 +92,39 @@ form.loading {
 	@media screen and (min-width: $screen-sm-min) {
 		flex: 2;
 	}
+}
 
-	.control-container {
-		margin-bottom: 15px;
+.control-container {
+	margin-bottom: 15px;
 
-		&.has-errors {
+	&.has-errors {
 
-			.help-block,
-			.control-label {
-				color: $brand-danger;
-			}
-
-			.form-control {
-				border-color: $brand-danger;
-			}
-		}
-
-
-		&.half-width {
-			@media screen and (min-width: $screen-sm-min) {
-				width: 50%;
-			}
-		}
-
+		.help-block,
 		.control-label {
-			font-weight: 500;
-			font-size: 12px;
-			color: lighten($text-color, 10%);
-			text-transform: uppercase;
-			letter-spacing: 0.5px;
-			margin-bottom: 2px;
+			color: $brand-danger;
 		}
 
+		.form-control {
+			border-color: $brand-danger;
+		}
 	}
+
+
+	&.half-width {
+		@media screen and (min-width: $screen-sm-min) {
+			width: 50%;
+		}
+	}
+
+	.control-label {
+		font-weight: 500;
+		font-size: 12px;
+		color: lighten($text-color, 10%);
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-bottom: 2px;
+	}
+
 }
 
 .form-control {

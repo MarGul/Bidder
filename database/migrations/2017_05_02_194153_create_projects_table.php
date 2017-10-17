@@ -21,6 +21,8 @@ class CreateProjectsTable extends Migration
             $table->date('service_start');
             $table->date('service_end');
             $table->integer('service_hours')->nullable();
+            $table->datetime('accept_ends');
+            $table->boolean('started')->default(false);
             $table->timestamps();
         });
     }

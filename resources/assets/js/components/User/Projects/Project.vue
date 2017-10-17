@@ -7,7 +7,7 @@
 					<router-view></router-view>
 				</div>
 				<div class="main-area-sidebar">
-					<project-details />
+					<project-handle />
 					<project-history-sidebar :history="project.history" />
 				</div>
 			</div>
@@ -21,12 +21,12 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
-	import projectDetails from './ProjectDetails'; 
+	import projectHandle from './ProjectHandle'; 
 	import projectHistorySidebar from './ProjectHistorySidebar';
 
 	export default {
 		components: {
-			projectDetails,
+			projectHandle,
 			projectHistorySidebar
 		},
 		computed: {
