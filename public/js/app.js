@@ -5026,6 +5026,14 @@ var filters = {
 	},
 	time: function time(value) {
 		return moment(value).format('D MMM YYYY HH:mm');
+	},
+	isNumber: function isNumber(event) {
+		var code = event.keyCode || event.which;
+		if (code >= 48 && code <= 57) {
+			return true;
+		} else {
+			event.preventDefault();
+		}
 	}
 };
 
@@ -13100,7 +13108,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 								msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 							});
 							// Set the projects fetched to false so we break the cache.
-							_this.$store.commit('SET_USER_PROJECTS_FETCHED', { fetched: false });
+							_this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 							_this.$store.dispatch('bidAccepted', { id: _this.bid.id });
 							_this.$store.dispatch('closeModal');
 						}).catch(function (error) {
@@ -25094,6 +25102,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: {
@@ -25132,8 +25142,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "transparent-contentSection-content"
   }, [_c('ul', {
     staticClass: "items-list-default"
+  }, [_c('transition-group', {
+    attrs: {
+      "name": "fade-in"
+    }
   }, _vm._l((_vm.projectHistory), function(history) {
     return _c('li', {
+      key: history.id,
       staticClass: "has-left-border",
       class: [history.type]
     }, [_c('div', {
@@ -25147,7 +25162,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(history.action)
       }
     })])
-  }))])])])
+  }))], 1)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25615,7 +25630,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_Form__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -25645,25 +25663,90 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		datepicker: __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker___default.a
+	},
 	data: function data() {
 		return {
-			form: new __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__["a" /* default */]({
+			form: new __WEBPACK_IMPORTED_MODULE_2__includes_classes_Form__["a" /* default */]({
 				service_start: '',
 				service_end: '',
 				service_hours: '',
 				service_price: ''
-			})
+			}),
+			processing: false
 		};
 	},
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		project: 'userProjectDetails'
 	})),
+	methods: {
+		update: function update() {
+			var _this = this;
+
+			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_3__includes_Model__["a" /* default */]('projects/' + this.project.id + '/details').patch(this.form.asDate(['service_start', 'service_end']).data()).then(function (response) {
+				window.scrollTo(0, 0);
+				_this.$store.dispatch('showNotification', {
+					type: 'success',
+					msg: 'Vi har uppdaterat projektets detailjer. Nu måste den andra parten acceptera uppdateringen innan vi kan starta.'
+				});
+				// Update the state.
+				var project = _this.project;
+				project.service_start = response.updates.service_start;
+				project.service_end = response.updates.service_end;
+				project.service_hours = response.updates.service_hours;
+				project.service_price = response.updates.service_price;
+				project.history.unshift(response.history);
+
+				_this.$store.commit('SET_USER_PROJECT_DETAILS', project);
+
+				_this.processing = false;
+			}).catch(function (error) {
+				_this.form.errors.record(error);
+				_this.processing = false;
+			});
+		}
+	},
 	created: function created() {
 		this.form.service_start = this.project.service_start;
 		this.form.service_end = this.project.service_end;
@@ -25684,57 +25767,76 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Ändra projektets detaljer")]), _vm._v(" "), _c('p', {
     staticClass: "gray-sub-text mb30"
   }, [_vm._v("\n\t\tVi har automatiskt lagt in detaljerna från det accepterade budet. Detta kan du själv ändra innan vi startar igång projektet men tänk på att den andra parten kommer behöva acceptera ändringarna.\n\t")]), _vm._v(" "), _c('form', {
+    staticClass: "clearfix",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.update($event)
+      }
+    }
+  }, [_c('div', {
     staticClass: "is-flex-sm wrap is-row"
   }, [_c('div', {
-    staticClass: "control-container is-half"
+    staticClass: "control-container is-half",
+    class: {
+      'has-errors': _vm.form.errors.has('service_start')
+    }
   }, [_c('label', {
     staticClass: "control-label"
-  }, [_vm._v("Kan påbörja")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }, [_vm._v("Kan påbörja")]), _vm._v(" "), _c('datepicker', {
+    attrs: {
+      "input-class": "form-control",
+      "language": "sv",
+      "monday-first": true,
+      "disabled": {
+        to: new Date()
+      }
+    },
+    model: {
       value: (_vm.form.service_start),
+      callback: function($$v) {
+        _vm.form.service_start = $$v
+      },
       expression: "form.service_start"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.service_start)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.service_start = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container is-half"
+  }), _vm._v(" "), (_vm.form.errors.has('service_start')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('service_start'))
+    }
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "control-container is-half",
+    class: {
+      'has-errors': _vm.form.errors.has('service_end')
+    }
   }, [_c('label', {
     staticClass: "control-label"
-  }, [_vm._v("Är klart")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.form.service_end),
-      expression: "form.service_end"
-    }],
-    staticClass: "form-control",
+  }, [_vm._v("Är klart")]), _vm._v(" "), _c('datepicker', {
     attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.form.service_end)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.form.service_end = $event.target.value
+      "input-class": "form-control",
+      "language": "sv",
+      "monday-first": true,
+      "disabled": {
+        to: new Date()
       }
+    },
+    model: {
+      value: (_vm.form.service_end),
+      callback: function($$v) {
+        _vm.form.service_end = $$v
+      },
+      expression: "form.service_end"
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container is-half"
+  }), _vm._v(" "), (_vm.form.errors.has('service_end')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('service_end'))
+    }
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "control-container is-half",
+    class: {
+      'has-errors': _vm.form.errors.has('service_hours')
+    }
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('input', {
@@ -25752,13 +25854,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": (_vm.form.service_hours)
     },
     on: {
+      "keypress": function($event) {
+        _vm.filters.isNumber($event)
+      },
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.form.service_hours = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container is-half"
+  }), _vm._v(" "), (_vm.form.errors.has('service_hours')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('service_hours'))
+    }
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container is-half",
+    class: {
+      'has-errors': _vm.form.errors.has('service_price')
+    }
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("Pris")]), _vm._v(" "), _c('input', {
@@ -25776,12 +25889,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": (_vm.form.service_price)
     },
     on: {
+      "keypress": function($event) {
+        _vm.filters.isNumber($event)
+      },
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.form.service_price = $event.target.value
       }
     }
-  })])])])
+  }), _vm._v(" "), (_vm.form.errors.has('service_price')) ? _c('span', {
+    staticClass: "help-block",
+    domProps: {
+      "textContent": _vm._s(_vm.form.errors.get('service_price'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary pull-right",
+    class: {
+      processing: _vm.processing
+    },
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("\n\t\t\tÄndra\n\t\t")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

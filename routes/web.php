@@ -10,7 +10,10 @@
 */
 
 Route::get('/test', function() {
-	dd( \App\Project::with('history')->find(1) );
+	$user = \App\User::find(1);
+	$project = \App\Project::find(1);
+
+	app(\App\Features\ProjectManager::class)->othersNotAccepted($project, $user);
 });
 
 /**

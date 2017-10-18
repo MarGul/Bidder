@@ -45,7 +45,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Create and show messages for a project */
 	Route::post('projects/{project}/messages')->uses('ProjectMessagesController@store');
 	/* Update a projects details */
-	Route::patch('projects/{project}')->uses('ProjectController@update');
+	Route::patch('projects/{project}/details')->uses('ProjectDetailsController@update');
 	/* Update a projects title */
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 	/* Accept the start of a project */

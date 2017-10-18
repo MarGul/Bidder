@@ -3,7 +3,6 @@
 namespace App\Features;
 
 use App\Project;
-use App\Message;
 use Carbon\Carbon;
 use App\Features\InvoiceManager;
 use App\Features\ProjectHistoryManager;
@@ -53,7 +52,8 @@ class ProjectManager
 			'service_price' => $bid->price,
 			'service_start' => $bid->start,
 			'service_end' => $bid->end,
-			'service_hours' => $bid->hours
+			'service_hours' => $bid->hours,
+			'accept_ends' => Carbon::now()->addDays($this->acceptDays)
 		]);
 
 		// Attach the service user to the project.
@@ -67,18 +67,26 @@ class ProjectManager
 	}
 
 	/**
-	 * Update a project.
+	 * Update a project's details.
 	 * 
 	 * @param  App\Project 	$project
+	 * @param  App\User 	$user
 	 * @param  array 		$data
 	 * @return boolean
 	 */
-	public function update($project, $data)
+	public function updateDetails($project, $user, $data)
 	{
-		// When the details are updated both of the users need to accept again if they already have accepted.
-		$update = array_merge(['service_user_accept' => false, 'bid_user_accept' => false], $data);
-		
-		return $project->update($update) ? true : false;
+		if ( !$project->update($data) ) {
+			return false;
+		}
+
+		// Mark the other user as not accepted.
+		$otherUserId = $this->othersNotAccepted($project, $user);
+
+		// Insert a history record that the project's details has been updated.
+		$history = $this->projectHistoryManager->add($project->id, 'updateDetails', ['user' => $user->username]);
+
+		return ['history' => $history, 'updates' => $data];
 	}
 
 	/**
@@ -107,6 +115,26 @@ class ProjectManager
 		$project->load('service', 'bid.user', 'users', 'history', 'messages.user');
 
 		return $project;
+	}
+
+	/**
+	 * Mark other user in the project as not accepted.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  App\User 	$user    [myself to get other ones for the project.]
+	 * @return 
+	 */
+	public function othersNotAccepted($project, $user)
+	{
+		$project->load(['users' => function($q) use ($user) {
+			$q->where('user_id', '<>', $user->id);
+		}]);
+
+		$userIds = [];
+		foreach ($project->users as $u) {
+			$test =  $project->users()->sync([$u->id, ['accepted' => false]]);
+			dd($test);
+		}
 	}
 
 	/**
