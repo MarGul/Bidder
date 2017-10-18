@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Features\ProjectManager;
 use App\Project;
 
-class ProjectController extends Controller
+class ProjectDetailsController extends Controller
 {
     /**
 	 * Manager
@@ -32,14 +32,22 @@ class ProjectController extends Controller
 	{
 		$this->authorize('in-project', $project);
 		$this->validate($request, [
-			'finish' => 'required|date_format:Y-m-d|after_or_equal:today',
-            'price' => 'required|numeric'
+			'service_start' => 'required|date_format:Y-m-d|after_or_equal:today',
+			'service_end' => 'required|date_format:Y-m-d|after_or_equal:today',
+			'service_hours' => 'required|numeric',
+            'service_price' => 'required|numeric'
 		]);
 
-		if ( !$this->manager->update($project, $request->only(['finish', 'price'])) ) {
+		$data = $request->only(['service_start', 'service_end', 'service_hours', 'service_price']);
+
+		if ( !$response = $this->manager->updateDetails($project, $request->user(), $data) ) {
 			return response()->json(['message' => 'Could not update the project details.'], 500);
 		}
 
-		return response()->json(['message' => 'Successfully updated the project details'], 200);
+		return response()->json([
+			'message' => 'Successfully updated the project details', 
+			'history' => $response['history'],
+			'updates' => $response['updates']
+		], 200);
 	}
 }

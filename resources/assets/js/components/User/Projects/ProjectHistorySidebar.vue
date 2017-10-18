@@ -7,10 +7,12 @@
 			</header>
 			<div class="transparent-contentSection-content">
 				<ul class="items-list-default">
-					<li v-for="history in projectHistory" class="has-left-border" :class="[history.type]">
-						<div class="gray-sub-text" v-text="filters.time(history.created_at)"></div>
-						<div class="item-content" v-text="history.action"></div>
-					</li>
+					<transition-group name="fade-in">
+						<li v-for="history in projectHistory" :key="history.id" class="has-left-border" :class="[history.type]">
+							<div class="gray-sub-text" v-text="filters.time(history.created_at)"></div>
+							<div class="item-content" v-text="history.action"></div>
+						</li>
+					</transition-group>
 				</ul>
 			</div>
 		</section>

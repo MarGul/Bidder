@@ -1,126 +1,75 @@
 .project_accept-component {
-
-	.project-users {
+	
+	.project-acceptance-container {
 		display: flex;
 		flex-wrap: wrap;
-		margin: 20px -20px -20px -20px;
-		padding: 20px 0;
-		background-color: #f1f1f1;
-		border: 1px solid #e9e9e9;
+	}
 
-		.me,
-		.other,
-		.details {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-			align-items: center;
+	.acceptance-box {
+		text-align: center;
 
-			.btn {
-				margin-top: 10px;
-			}
-
-			.btn-default {
-				color: #222;
-				font-weight: 500;
-				border: 1px solid $border-color-gray;
-			}
-
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1 !important;
 		}
+	}
 
-		.details {
-			flex: 0 1 100%;
-			order: 1;
-			border-bottom: 1px solid $border-color-gray;
-			margin: 0 15px 15px 15px;
+	.acceptance__time {
+		order: 1;
+		flex: 1 1 100%;
+		margin-bottom: 15px;
 
-			@media screen and (min-width: $screen-sm-min) {
-				order: 2;
-				flex: 1;
-				border: none;
-				margin-bottom: 0;
-				padding-bottom: 0;
-			}
-
-			.timer {
-				text-align: center;
-
-				@media screen and (min-width: $screen-sm-min) {
-					border-bottom: 1px solid $border-color-gray;
-					padding-bottom: 15px;
-				}
-				
-				.timer-component {
-					font-size: 24px;
-				}
-
-				.timer-text {
-					font-style: italic;
-				}
-			}
-
-			.project-details {
-				width: 100%;
-				text-align: center;
-				margin: 16px 0;
-
-				.heading {
-					font-weight: 500;
-					margin: 5px 0;
-
-					i {
-						margin-right: 2px;
-						color: $navbar-icon-color;
-					}
-				}
-			}
-		}
-
-		.me {
-			flex: 1 0 100%;
+		@media screen and (min-width: $screen-sm-min) {
 			order: 2;
-			margin: 0 0 15px 0;
-
-			@media screen and (min-width: $screen-sm-min) {
-				order: 1;
-				flex: 1;
-				margin: 0;
-			}
-		}
-
-		.other {
-			flex: 1 0 100%;
-			order: 3;
-
-			@media screen and (min-width: $screen-sm-min) {
-				flex: 1;
-			}
-		}
-
-		.user-name {
-			font-weight: 500;
-			margin-bottom: 5px;;
-		}
-
-		.avatar-container {
-			flex-basis: 100%;
-			display: flex;
+			margin-bottom: 0;
+			display: flex; 
+			align-items: center;
 			justify-content: center;
-
-			.avatar {
-				background-repeat: no-repeat;
-				background-size: cover;
-				background-position: center center;
-				border-radius: 50%;
-				border: 2px solid $brand-primary;
-				width: 80px;
-				height: 80px;
-			}
 		}
 
-		.action-text {
+		.timer-component {
+			font-size: 16px;
 			font-weight: 500;
-			border-bottom: 1px solid $border-color-gray;
+			margin-bottom: 10px;
+		}
+	}
+
+	.user__me {
+		order: 2;
+
+		@media screen and (min-width: $screen-sm-min) {
+			order: 1;
+		}
+	}
+
+	.user__other {
+		order: 3;
+	}
+
+	.project-user {
+		flex: 1 1 50%;
+		text-align: center;
+
+		.user-username {
+			font-weight: 500;
+			color: $brand-primary;
+		}
+
+		.user-avatar {
+			width: 75px;
+			height: 75px;
+			margin: 10px auto;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+			border-radius: 50%;
+			box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+		}
+
+		.acceptance-status-container {
+			
+			.acceptance-buttons-container {
+				margin-top: 5px;
+			}
 		}
 	}
 }

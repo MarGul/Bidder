@@ -71,3 +71,22 @@
 		justify-content: center;
 	}
 }
+
+.is-flex-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+
+		&.wrap {
+			flex-wrap: wrap;
+		}
+
+		&.is-row {
+			margin: 0 -15px;
+		}
+
+		.is-half {
+			flex: 1 1 50%;
+			padding: 0 15px;
+		}
+	}
+}

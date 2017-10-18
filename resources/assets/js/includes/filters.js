@@ -10,6 +10,14 @@ const filters = {
 	},
 	time(value) {
 		return moment(value).format('D MMM YYYY HH:mm');
+	},
+	isNumber(event) {
+		let code = event.keyCode || event.which;
+		if ( code >= 48 && code <= 57 ) {
+			return true;
+		} else {
+			event.preventDefault();
+		}
 	}
 }
 

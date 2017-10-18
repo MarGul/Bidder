@@ -19,6 +19,7 @@ class CreateProjectUserTable extends Migration
             $table->integer('user_id');
             $table->string('role');
             $table->string('title');
+            $table->boolean('accepted')->default(false);
         });
     }
 

@@ -59,6 +59,13 @@
 	}
 }
 
+.confirm_modal_icon {
+	@include icon('../svg/question_mark_bordered.svg');
+	width: 150px;
+	height: 150px;
+	margin: 0 auto;
+}
+
 .icon_arrow_right {
 	@include mask-icon('../svg/right_arrow.svg');
 	background-color: #97A9B5;

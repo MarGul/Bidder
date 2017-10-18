@@ -46,7 +46,7 @@ let routes = [
 	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails') },
 	{ path: "/information", name: 'information', component: require('./views/Information') },
 	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
-	{ path: "/user", name: 'user', component: require('./views/User'),
+	{ path: "/user", component: require('./views/User'),
 		children: [
 			{ path: '', component: require('./components/User/Profile/Profile'), meta: { requiresAuth: true } },
 			{ path: 'profile', component: require('./components/User/Profile/Profile'), meta: { requiresAuth: true } },
@@ -59,6 +59,7 @@ let routes = [
 			{ path: 'projects', component: require('./components/User/Projects/MyProjects'), meta: { requiresAuth: true } },
 			{ path: 'projects/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true },
 				children: [
+					{ path: '', component: require('./components/User/Projects/ProjectPhase'), meta: { requiresAuth: true } },
 					{ path: 'service', component: require('./components/User/Projects/ProjectService'), meta: { requiresAuth: true } },
 					{ path: 'bid', component: require('./components/User/Projects/ProjectBid'), meta: { requiresAuth: true } },
 					{ path: 'messages', component: require('./components/User/Projects/ProjectMessages'), meta: { requiresAuth: true } },
