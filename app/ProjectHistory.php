@@ -15,7 +15,7 @@ class ProjectHistory extends Model
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['project_id', 'type', 'action'];
+    protected $fillable = ['project_id', 'type', 'action', 'message'];
 
 
     /**

@@ -61,7 +61,7 @@ class ProjectManager
 		// Attach the bid user to the project.
 		$project->users()->attach($bid->user_id, ['role' => $this->userRoleBid, 'title' => "Project #{$project->id}"]);
 		// Insert a history record that the project was created.
-		$this->projectHistoryManager->add($project->id, 'created');
+		$this->projectHistoryManager->forProject($project->id)->add('created');
 		
 		return true;
 	}
@@ -84,7 +84,8 @@ class ProjectManager
 		$this->setOthersNotAccepted($project, $user);
 
 		// Insert a history record that the project's details has been updated.
-		$history = $this->projectHistoryManager->add($project->id, 'updateDetails', ['user' => $user->username]);
+		$history =  $this->projectHistoryManager->forProject($project->id)
+												->add('updateDetails', ['user' => $user->username]);
 
 		return ['history' => $history, 'updates' => $data];
 	}
@@ -133,7 +134,8 @@ class ProjectManager
 		// Mark the user that cancelled.
 		$project->users()->updateExistingPivot($user->id, ['cancelled' => true]);
 		// Insert a project history record that the project was cancelled.
-		$history = $this->projectHistoryManager->add($project->id, 'cancelled', ['user' => $user->username]);
+		$history =  $this->projectHistoryManager->forProject($project->id)
+												->add('cancelled', ['user' => $user->username]);
 
 		return ['history' => $history];
 	}

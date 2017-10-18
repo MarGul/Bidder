@@ -23481,7 +23481,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('div', {
       staticClass: "item-content",
       domProps: {
-        "textContent": _vm._s(history.action)
+        "textContent": _vm._s(history.message)
       }
     })])
   }))], 1)])])])
@@ -23567,26 +23567,38 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectPhaseAccept__ = __webpack_require__(382);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectPhaseAccept___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProjectPhaseAccept__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProjectPhaseAccept__ = __webpack_require__(382);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ProjectPhaseAccept___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ProjectPhaseAccept__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		projectPhaseAccept: __WEBPACK_IMPORTED_MODULE_0__ProjectPhaseAccept___default.a
+		projectPhaseAccept: __WEBPACK_IMPORTED_MODULE_1__ProjectPhaseAccept___default.a,
+		projectPhaseCancelled: __WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled___default.a
 	},
-	computed: {
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	}), {
 		phase: function phase() {
+			if (this.project.cancelled) return 'projectPhaseCancelled';
+
 			return 'projectPhaseAccept';
 		}
-	}
+	})
 });
 
 /***/ }),
@@ -25082,7 +25094,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('div', {
       staticClass: "item-content",
       domProps: {
-        "textContent": _vm._s(history.action)
+        "textContent": _vm._s(history.message)
       }
     })])
   }))])])])
@@ -26135,6 +26147,167 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(465),
+  /* template */
+  __webpack_require__(466),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectPhaseCancelled.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectPhaseCancelled.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4ddaa274", Component.options)
+  } else {
+    hotAPI.reload("data-v-4ddaa274", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 465 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	}), {
+		cancelHistory: function cancelHistory() {
+			return this.project.history.find(function (el) {
+				return el.action === 'cancelled';
+			});
+		}
+	})
+});
+
+/***/ }),
+/* 466 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_phase_cancelled-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi non dolores, facere deleniti, consequuntur sed quasi quae debitis? Officiis incidunt iusto, non quas voluptatem voluptatum! Vel, voluptate eaque. Sequi, modi.\n\t\t\t"), _c('ul', {
+    staticClass: "items-list-default mt30"
+  }, [_c('li', {
+    staticClass: "has-left-border",
+    class: [_vm.cancelHistory.type]
+  }, [_c('div', {
+    staticClass: "gray-sub-text",
+    domProps: {
+      "textContent": _vm._s(_vm.filters.time(_vm.cancelHistory.created_at))
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "item-content",
+    domProps: {
+      "textContent": _vm._s(_vm.cancelHistory.message)
+    }
+  })])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Projektet är avbrutit!")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4ddaa274", module.exports)
+  }
+}
 
 /***/ })
 ],[141]);

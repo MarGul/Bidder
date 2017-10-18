@@ -17,7 +17,8 @@ class CreateProjectHistoryTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('project_id');
             $table->string('type');
-            $table->text('action');
+            $table->string('action');
+            $table->text('message');
             $table->timestamps();
         });
     }
