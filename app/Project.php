@@ -14,7 +14,8 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-    	'service_id', 'bid_id', 'service_price', 'service_start', 'service_end', 'service_hours', 'accept_ends'
+    	'service_id', 'bid_id', 'service_price', 'service_start', 'service_end', 'service_hours', 
+        'accept_ends', 'started', 'cancelled'
     ];
 
     /**
@@ -44,7 +45,7 @@ class Project extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'accepted');
+        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'accepted', 'cancelled');
     }
 
     /**

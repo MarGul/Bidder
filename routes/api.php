@@ -51,7 +51,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Accept the start of a project */
 	Route::post('projects/{project}/accept')->uses('ProjectAcceptController@store');
 	/* Cancel a project */
-	Route::post('projects/{project}/cancel')->uses('ProjectCancelController@store');
+	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
 	/* Start a project */
 	Route::put('projects/{project}/start')->uses('ProjectStartController@update');
 	/* Complete a project */

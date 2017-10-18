@@ -13,7 +13,7 @@ Route::get('/test', function() {
 	$user = \App\User::find(1);
 	$project = \App\Project::find(1);
 
-	app(\App\Features\ProjectManager::class)->othersNotAccepted($project, $user);
+	dd(app(\App\Features\ProjectManager::class)->cancel($project, $user));
 });
 
 /**

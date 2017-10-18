@@ -118,13 +118,34 @@ class ProjectManager
 	}
 
 	/**
+	 * Cancel a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  App\User 	$user    [User that cancelled]
+	 * @return boolean
+	 */
+	public function cancel($project, $user)
+	{
+		if ( !$project->update(['cancelled' => true]) ) {
+			return false;
+		}
+
+		// Mark the user that cancelled.
+		$project->users()->updateExistingPivot($user->id, ['cancelled' => true]);
+		// Insert a project history record that the project was cancelled.
+		$history = $this->projectHistoryManager->add($project->id, 'cancelled', ['user' => $user->username]);
+
+		return ['history' => $history];
+	}
+
+	/**
 	 * Mark other user in the project as not accepted.
 	 * 
 	 * @param  App\Project 	$project
-	 * @param  App\User 	$user    [myself to get other ones for the project.]
+	 * @param  App\User 	$user    [myself, to get other ones for the project.]
 	 * @return 
 	 */
-	public function setOthersNotAccepted($project, $user)
+	protected function setOthersNotAccepted($project, $user)
 	{
 		$project->load(['users' => function($q) use ($user) {
 			$q->where('user_id', '<>', $user->id);

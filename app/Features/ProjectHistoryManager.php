@@ -13,7 +13,8 @@ class ProjectHistoryManager
 	 */
 	protected $entries = [
 		'created' => ['type' => 'info', 'action' => 'Projektet skapades.'],
-		'updateDetails' => ['type' => 'warning', 'action' => '{user} uppdaterade projektets detaljer.']
+		'cancelled' => ['type' => 'critical', 'action' => '{user} accepterade inte projektets start.'],
+		'updateDetails' => ['type' => 'warning', 'action' => '{user} uppdaterade projektets detaljer.'],
 	];
 
 	
