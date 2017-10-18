@@ -1,0 +1,75 @@
+.project_accept-component {
+	
+	.project-acceptance-container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.acceptance-box {
+		text-align: center;
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1 !important;
+		}
+	}
+
+	.acceptance__time {
+		order: 1;
+		flex: 1 1 100%;
+		margin-bottom: 15px;
+
+		@media screen and (min-width: $screen-sm-min) {
+			order: 2;
+			margin-bottom: 0;
+			display: flex; 
+			align-items: center;
+			justify-content: center;
+		}
+
+		.timer-component {
+			font-size: 16px;
+			font-weight: 500;
+			margin-bottom: 10px;
+		}
+	}
+
+	.user__me {
+		order: 2;
+
+		@media screen and (min-width: $screen-sm-min) {
+			order: 1;
+		}
+	}
+
+	.user__other {
+		order: 3;
+	}
+
+	.project-user {
+		flex: 1 1 50%;
+		text-align: center;
+
+		.user-username {
+			font-weight: 500;
+			color: $brand-primary;
+		}
+
+		.user-avatar {
+			width: 75px;
+			height: 75px;
+			margin: 10px auto;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+			border-radius: 50%;
+			box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+		}
+
+		.acceptance-status-container {
+			
+			.acceptance-buttons-container {
+				margin-top: 5px;
+			}
+		}
+	}
+}

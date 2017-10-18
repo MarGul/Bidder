@@ -2,7 +2,7 @@
 	<div class="project_change_details-component">
 		<h4 class="text-center">Ändra projektets detaljer</h4>
 		<p class="gray-sub-text mb30">
-			Vi har automatiskt lagt in detaljerna från det accepterade budet. Detta kan du själv ändra innan vi startar igång projektet men tänk på att den andra parten kommer behöva acceptera ändringarna.
+			Vi har automatiskt lagt in detaljerna från det accepterade budet. Detta kan du själv ändra innan vi startar projektet men tänk på att den andra parten kommer behöva acceptera ändringarna.
 		</p>
 		<form class="clearfix" @submit.prevent="update">
 			<div class="is-flex-sm wrap is-row">

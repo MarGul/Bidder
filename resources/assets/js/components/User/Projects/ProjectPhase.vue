@@ -5,15 +5,15 @@
 </template>
 
 <script>
-	import projectAccept from './ProjectAccept';
+	import projectPhaseAccept from './ProjectPhaseAccept';
 
 	export default {
 		components: {
-			projectAccept
+			projectPhaseAccept
 		},
 		computed: {
 			phase(){
-				return 'projectAccept';
+				return 'projectPhaseAccept';
 			}
 		}
 	}
