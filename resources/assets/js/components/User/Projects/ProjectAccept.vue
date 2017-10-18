@@ -9,8 +9,15 @@
 				<div class="acceptance-status-container">
 					<div class="gray-sub-text">Accepterar du projektet?</div>
 					<div class="acceptance-buttons-container">
-						<button type="button" class="btn btn-primary" @click.prevent="accept">Ja</button>
-						<button type="button" class="btn btn-danger" @click.prevent="cancel">Nej</button>
+						<template v-if="me.pivot.accepted">
+							<div class="is-flex c_c">
+								<i class="icon icon_confirmed wh15 mr5"></i> <span>Du har accepterat</span>
+							</div>
+						</template>
+						<template v-else>
+							<button type="button" class="btn btn-primary" @click.prevent="accept">Ja</button>
+							<button type="button" class="btn btn-danger" @click.prevent="cancel">Nej</button>
+						</template>
 					</div>
 				</div>
 			</div>

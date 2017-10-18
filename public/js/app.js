@@ -25276,6 +25276,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -25393,7 +25400,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "gray-sub-text"
   }, [_vm._v("Accepterar du projektet?")]), _vm._v(" "), _c('div', {
     staticClass: "acceptance-buttons-container"
-  }, [_c('button', {
+  }, [(_vm.me.pivot.accepted) ? [_vm._m(0)] : [_c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "button"
@@ -25415,7 +25422,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.cancel($event)
       }
     }
-  }, [_vm._v("Nej")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Nej")])]], 2)])]), _vm._v(" "), _c('div', {
     staticClass: "acceptance-box acceptance__time"
   }, [_c('div', {
     staticClass: "time-items-container"
@@ -25453,7 +25460,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "disabled": ""
     }
   }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.other.pivot.accepted ? 'Ja' : 'Nej') + "\n\t\t\t\t\t")])])])])])])
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "is-flex c_c"
+  }, [_c('i', {
+    staticClass: "icon icon_confirmed wh15 mr5"
+  }), _vm._v(" "), _c('span', [_vm._v("Du har accepterat")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
