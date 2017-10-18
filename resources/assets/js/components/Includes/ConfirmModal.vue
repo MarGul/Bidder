@@ -2,7 +2,7 @@
 	<div class="confirm_modal-component">
 		
 		<div class="modal-body mt15">
-			<div class="confirm-icon big-icon"></div>
+			<div class="confirm_modal_icon"></div>
 
 			<div class="confirm-text" v-text="$store.getters.modalData.confirmText"></div>
 		</div>

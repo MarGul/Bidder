@@ -58,10 +58,54 @@
 		},
 		methods: {
 			accept() {
-
+				this.$store.dispatch('openModal', {
+					component: 'confirm',
+					data: {
+						confirmText: 'Är du säker på att du vill acceptera? När båda två har accepterat så startar vi projektet!',
+						onConfirm: () => {
+							/*
+							new Model(`bids/${this.bid.id}/accept`).post()
+								.then(response => {
+									this.$store.dispatch('showNotification', {
+										type: 'success', 
+										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+									});
+									// Set the projects fetched to false so we break the cache.
+									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+									this.$store.dispatch('bidAccepted', {id: this.bid.id});
+									this.$store.dispatch('closeModal');
+								})
+								.catch(error => {
+									console.log(error);
+								});*/
+						}
+					}
+				});
 			},
 			cancel() {
-
+				this.$store.dispatch('openModal', {
+					component: 'confirm',
+					data: {
+						confirmText: 'Är du säker på att du inte vill acceptera? Detta kommer att avbryta projektet!',
+						onConfirm: () => {
+							/*
+							new Model(`bids/${this.bid.id}/accept`).post()
+								.then(response => {
+									this.$store.dispatch('showNotification', {
+										type: 'success', 
+										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+									});
+									// Set the projects fetched to false so we break the cache.
+									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+									this.$store.dispatch('bidAccepted', {id: this.bid.id});
+									this.$store.dispatch('closeModal');
+								})
+								.catch(error => {
+									console.log(error);
+								});*/
+						}
+					}
+				});
 			}
 		}
 	}

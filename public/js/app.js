@@ -13339,7 +13339,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "modal-body mt15"
   }, [_c('div', {
-    staticClass: "confirm-icon big-icon"
+    staticClass: "confirm_modal_icon"
   }), _vm._v(" "), _c('div', {
     staticClass: "confirm-text",
     domProps: {
@@ -25304,8 +25304,56 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		}
 	}),
 	methods: {
-		accept: function accept() {},
-		cancel: function cancel() {}
+		accept: function accept() {
+			this.$store.dispatch('openModal', {
+				component: 'confirm',
+				data: {
+					confirmText: 'Är du säker på att du vill acceptera? När båda två har accepterat så startar vi projektet!',
+					onConfirm: function onConfirm() {
+						/*
+      new Model(`bids/${this.bid.id}/accept`).post()
+      	.then(response => {
+      		this.$store.dispatch('showNotification', {
+      			type: 'success', 
+      			msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+      		});
+      		// Set the projects fetched to false so we break the cache.
+      		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+      		this.$store.dispatch('bidAccepted', {id: this.bid.id});
+      		this.$store.dispatch('closeModal');
+      	})
+      	.catch(error => {
+      		console.log(error);
+      	});*/
+					}
+				}
+			});
+		},
+		cancel: function cancel() {
+			this.$store.dispatch('openModal', {
+				component: 'confirm',
+				data: {
+					confirmText: 'Är du säker på att du inte vill acceptera? Detta kommer att avbryta projektet!',
+					onConfirm: function onConfirm() {
+						/*
+      new Model(`bids/${this.bid.id}/accept`).post()
+      	.then(response => {
+      		this.$store.dispatch('showNotification', {
+      			type: 'success', 
+      			msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+      		});
+      		// Set the projects fetched to false so we break the cache.
+      		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+      		this.$store.dispatch('bidAccepted', {id: this.bid.id});
+      		this.$store.dispatch('closeModal');
+      	})
+      	.catch(error => {
+      		console.log(error);
+      	});*/
+					}
+				}
+			});
+		}
 	}
 });
 
