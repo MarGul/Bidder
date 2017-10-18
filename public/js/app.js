@@ -25717,7 +25717,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	},
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-		project: 'userProjectDetails'
+		project: 'userProjectDetails',
+		auth: 'authUser'
 	})),
 	methods: {
 		update: function update() {
@@ -25736,10 +25737,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				project.service_end = response.updates.service_end;
 				project.service_hours = response.updates.service_hours;
 				project.service_price = response.updates.service_price;
+				// Set the user that is not me to not have accepted the project.
+				project.users.filter(function (u) {
+					return u.id !== _this.auth.id;
+				}).forEach(function (user) {
+					user.pivot.accepted = false;
+				});
+				// Add the history entry.
 				project.history.unshift(response.history);
 
 				_this.$store.commit('SET_USER_PROJECT_DETAILS', project);
-
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);

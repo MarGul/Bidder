@@ -79,7 +79,8 @@
 		},
 		computed: {
 			...mapGetters({
-				project: 'userProjectDetails'
+				project: 'userProjectDetails',
+				auth: 'authUser'
 			})
 		},
 		methods: {
@@ -98,10 +99,14 @@
 						project.service_end = response.updates.service_end;
 						project.service_hours = response.updates.service_hours;
 						project.service_price = response.updates.service_price;
+						// Set the user that is not me to not have accepted the project.
+						project.users.filter(u => u.id !== this.auth.id).forEach(user => {
+							user.pivot.accepted = false;
+						});
+						// Add the history entry.
 						project.history.unshift(response.history);
 
 						this.$store.commit('SET_USER_PROJECT_DETAILS', project);
-
 						this.processing = false;
 					})
 					.catch(error => {

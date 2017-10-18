@@ -81,7 +81,7 @@ class ProjectManager
 		}
 
 		// Mark the other user as not accepted.
-		$otherUserId = $this->othersNotAccepted($project, $user);
+		$this->setOthersNotAccepted($project, $user);
 
 		// Insert a history record that the project's details has been updated.
 		$history = $this->projectHistoryManager->add($project->id, 'updateDetails', ['user' => $user->username]);
@@ -124,16 +124,14 @@ class ProjectManager
 	 * @param  App\User 	$user    [myself to get other ones for the project.]
 	 * @return 
 	 */
-	public function othersNotAccepted($project, $user)
+	public function setOthersNotAccepted($project, $user)
 	{
 		$project->load(['users' => function($q) use ($user) {
 			$q->where('user_id', '<>', $user->id);
 		}]);
 
-		$userIds = [];
 		foreach ($project->users as $u) {
-			$test =  $project->users()->sync([$u->id, ['accepted' => false]]);
-			dd($test);
+			$project->users()->updateExistingPivot($u->id, ['accepted' => false]);
 		}
 	}
 
