@@ -12,8 +12,11 @@
 Route::get('/test', function() {
 	$user = \App\User::find(1);
 	$project = \App\Project::find(1);
+	$manager = app(\App\Features\ProjectHistoryManager::class);
 
-	dd(app(\App\Features\ProjectManager::class)->cancel($project, $user));
+	$manager->forProject($project->id)->add('accepted', ['user' => $user->username]);
+	$manager->forProject($project->id)->add('started');
+	dd($manager->addedRecords());
 });
 
 /**

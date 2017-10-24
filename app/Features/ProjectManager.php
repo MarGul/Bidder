@@ -119,6 +119,29 @@ class ProjectManager
 	}
 
 	/**
+	 * Accept a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  App\User 	$user    [User that accepted]
+	 * @return boolean
+	 */
+	public function accept($project, $user)
+	{
+		// Mark the user that accepted.
+		$project->users()->updateExistingPivot($user->id, ['accepted' => true]);
+		// Insert a project history record that the project was accepted by the user.
+		$this->projectHistoryManager->forProject($project->id)
+									->add('accepted', ['user' => $user->username]);
+		// If all users on the project has accepted we should start the project.
+		$started = $this->shouldStart($project) ? $this->start($project) : false;
+
+		return [
+			'started' => $started, 
+			'history' => $this->projectHistoryManager->addedRecords()
+		];
+	}
+
+	/**
 	 * Cancel a project.
 	 * 
 	 * @param  App\Project 	$project
@@ -134,10 +157,10 @@ class ProjectManager
 		// Mark the user that cancelled.
 		$project->users()->updateExistingPivot($user->id, ['cancelled' => true]);
 		// Insert a project history record that the project was cancelled.
-		$history =  $this->projectHistoryManager->forProject($project->id)
-												->add('cancelled', ['user' => $user->username]);
+		$this->projectHistoryManager->forProject($project->id)
+									->add('cancelled', ['user' => $user->username]);
 
-		return ['history' => $history];
+		return ['history' => $this->projectHistoryManager->addedRecords()];
 	}
 
 	/**
@@ -159,6 +182,45 @@ class ProjectManager
 	}
 
 	/**
+	 * Should we start the project? 
+	 * If all participants have accepted we can start.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	protected function shouldStart($project)
+	{
+		$project->load('users');
+		// Loop through each user for the project.
+		foreach ($project->users as $user) {
+			// If one of them still haven't accepted we shouldn't start.
+			if ( !$user->pivot->accepted ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Start a project.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return boolean
+	 */
+	protected function start($project)
+	{
+		if ( !$project->update(['started' => true]) ) {
+			return false;
+		}
+		// Add a history record that the project has been started.
+		$this->projectHistoryManager->forProject($project->id)
+									->add('started');
+
+		return true;
+	}
+
+	/**
 	 * Update the title for a project according to what role the user has on the project.
 	 * 
 	 * @param  App\User 	$user
@@ -176,43 +238,6 @@ class ProjectManager
 		}
 
 		return $project->update() ? true : false;
-	}
-
-	/**
-	 * Accepting to start a project
-	 * 
-	 * @param  App\User 	$user
-	 * @param  App\Project 	$project
-	 * @return boolean
-	 */
-	/*
-	public function accept($user, $project)
-	{
-		if ( $user->id === $project->service_user ) {
-			$project->service_user_accept = true;
-		} else {
-			$project->bid_user_accept = true;
-		}
-
-		if ( $this->shouldStart($project) ) {
-			return $this->start($project);
-		}
-
-		return $project->update() ? true : false;
-	}
-
-	/**
-	 * Cancel a project
-	 * 
-	 * @param  App\Project 	$project
-	 * @return boolean
-	 */
-	/*
-	public function cancel($project)
-	{
-		$project->canceled = true;
-
-		return $project->save() ? true : false;
 	}
 
 	/**
@@ -250,17 +275,6 @@ class ProjectManager
 
 		return $project->save() ? true : false;
 	}
-
-	/**
-	 * Have both parties accepted so we should start the project?
-	 * 
-	 * @param  App\Project 	$project
-	 * @return boolean
-	 */
-	/*
-	public function shouldStart($project)
-	{
-		return $project->service_user_accept && $project->bid_user_accept;
-	}*/
+*/
 
 }

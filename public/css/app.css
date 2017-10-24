@@ -658,6 +658,10 @@ a {
   border-color: #cbb956;
 }
 
+.items-list-default li.has-left-border.success {
+  border-color: #2ab27b;
+}
+
 .items-list-default li.has-left-border.critical {
   border-color: #cc0000;
 }

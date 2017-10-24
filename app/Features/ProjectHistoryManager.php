@@ -20,8 +20,15 @@ class ProjectHistoryManager
 	protected $entries = [
 		'created' => ['type' => 'info', 'message' => 'Projektet skapades.'],
 		'cancelled' => ['type' => 'critical', 'message' => '{user} accepterade inte projektets start.'],
+		'accepted' => ['type' => 'info', 'message' => '{user} accepterade projektets start.'],
+		'started' => ['type' => 'success', 'message' => 'Projektet startades.'],
 		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
 	];
+	/**
+	 * This holds the records that has been added.
+	 * @var array
+	 */
+	protected $addedRecords = [];
 
 	
 	/**
@@ -59,6 +66,16 @@ class ProjectHistoryManager
 	}
 
 	/**
+	 * All of the added records for this instance.
+	 * 
+	 * @return array
+	 */
+	public function addedRecords()
+	{
+		return $this->addedRecords;
+	}
+
+	/**
 	 * Insert an history entry.
 	 * 
 	 * @param  string 	$type
@@ -74,6 +91,8 @@ class ProjectHistoryManager
 							'action' => $action,
 							'message' => $message
 						]);
+
+		$this->addedRecords[] = $projectHistory;
 
 		return $projectHistory->id ? $projectHistory : false;
 	}

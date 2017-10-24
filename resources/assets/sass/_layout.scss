@@ -238,6 +238,10 @@ a {
 				border-color: $brand-warning;
 			}
 
+			&.success {
+				border-color: $brand-success;
+			}
+
 			&.critical {
 				border-color: $brand-danger;
 			}

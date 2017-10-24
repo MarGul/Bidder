@@ -16,28 +16,31 @@ class ProjectAcceptController extends Controller
 	 */
 	private $manager;
 
+
 	public function __construct(ProjectManager $manager) {
 		$this->middleware('auth:api');
 		$this->manager = $manager;
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Update a resource in storage.
 	 * 
 	 * @param  Request 	$request
+	 * @param  Project 	$project
 	 * @return Illuminate\Http\Response
 	 */
-	public function store(Request $request, Project $project)
+	public function update(Request $request, Project $project)
 	{
 		$this->authorize('in-project', $project);
 		
-		if ( !$this->manager->accept($request->user(), $project) ) {
+		if ( !$response = $this->manager->accept($project, $request->user()) ) {
 			return response()->json(['message' => 'Could not accept the project for you.'], 500);
 		}
 
 		return response()->json([
 			'message' => 'Successfully accepted the project.',
-			'start' => $this->manager->shouldStart($project)
+			'started' => $response['started'],
+			'history' => $response['history']
 		], 200);
 	}
 
