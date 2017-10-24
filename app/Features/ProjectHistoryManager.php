@@ -8,15 +8,42 @@ class ProjectHistoryManager
 {
 
 	/**
+	 * The Id of the project to insert a history record for.
+	 * @var null
+	 */
+	protected $projectId = null;
+
+	/**
 	 * The different history entries.
 	 * @var array
 	 */
 	protected $entries = [
-		'created' => ['type' => 'info', 'action' => 'Projektet skapades.'],
-		'updateDetails' => ['type' => 'warning', 'action' => '{user} uppdaterade projektets detaljer.']
+		'created' => ['type' => 'info', 'message' => 'Projektet skapades.'],
+		'cancelled' => ['type' => 'critical', 'message' => '{user} accepterade inte projektets start.'],
+		'accepted' => ['type' => 'info', 'message' => '{user} accepterade projektets start.'],
+		'started' => ['type' => 'success', 'message' => 'Projektet startades.'],
+		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
 	];
+	/**
+	 * This holds the records that has been added.
+	 * @var array
+	 */
+	protected $addedRecords = [];
 
 	
+	/**
+	 * Set the projectId
+	 * 
+	 * @param  integer 	$projectId
+	 * @return ProjectHistoryManager
+	 */
+	public function forProject($projectId)
+	{
+		$this->projectId = $projectId;
+
+		return $this;
+	}
+
 	/**
 	 * Add a project history entry.
 	 * 
@@ -25,30 +52,47 @@ class ProjectHistoryManager
 	 * @throws  Exception
 	 * @return  boolean
 	 */
-	public function add($projectId, $action, $data = [])
+	public function add($action, $data = [])
 	{
 		if ( !$this->entries[$action] ) {
 			throw new Exception('Not an allowed action.');
 		}
 
-		return $this->insert($projectId, $this->entries[$action]['type'], $this->action($action, $data));
+		if ( is_null($this->projectId) ) {
+			throw new Exception('You need to set a projectId');
+		}
+
+		return $this->insert($this->entries[$action]['type'], $action, $this->message($action, $data));
+	}
+
+	/**
+	 * All of the added records for this instance.
+	 * 
+	 * @return array
+	 */
+	public function addedRecords()
+	{
+		return $this->addedRecords;
 	}
 
 	/**
 	 * Insert an history entry.
 	 * 
-	 * @param  integer 	$projectId
 	 * @param  string 	$type
 	 * @param  string 	$action
+	 * @param  string 	$message
 	 * @return boolean
 	 */
-	protected function insert($projectId, $type, $action)
+	protected function insert($type, $action, $message)
 	{
 		$projectHistory = ProjectHistory::create([
-							'project_id' => $projectId,
+							'project_id' => $this->projectId,
 							'type' => $type,
-							'action' => $action
+							'action' => $action,
+							'message' => $message
 						]);
+
+		$this->addedRecords[] = $projectHistory;
 
 		return $projectHistory->id ? $projectHistory : false;
 	}
@@ -60,15 +104,15 @@ class ProjectHistoryManager
 	 * @param  array 	$data
 	 * @return string
 	 */
-	protected function action($action, $data)
+	protected function message($action, $data)
 	{
-		if ( empty($data) ) return $this->entries[$action]['action'];
+		if ( empty($data) ) return $this->entries[$action]['message'];
 
-		$parsedAction = $this->entries[$action]['action'];
+		$parsedMessage = $this->entries[$action]['message'];
 		foreach ($data as $key => $value) {
-			$parsedAction = str_replace('{'.$key.'}', $value, $parsedAction);
+			$parsedMessage = str_replace('{'.$key.'}', $value, $parsedMessage);
 		}
 
-		return $parsedAction;
+		return $parsedMessage;
 	}
 }

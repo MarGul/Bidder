@@ -10,7 +10,7 @@
 					<transition-group name="fade-in">
 						<li v-for="history in projectHistory" :key="history.id" class="has-left-border" :class="[history.type]">
 							<div class="gray-sub-text" v-text="filters.time(history.created_at)"></div>
-							<div class="item-content" v-text="history.action"></div>
+							<div class="item-content" v-text="history.message"></div>
 						</li>
 					</transition-group>
 				</ul>

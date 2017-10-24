@@ -46,6 +46,7 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import appTimer from '../../Includes/Timer';
+	import Model from '../../../includes/Model';
 
 	export default {
 		components: {
@@ -70,21 +71,25 @@
 					data: {
 						confirmText: 'Är du säker på att du vill acceptera? När båda två har accepterat så startar vi projektet!',
 						onConfirm: () => {
-							/*
-							new Model(`bids/${this.bid.id}/accept`).post()
+							new Model(`projects/${this.project.id}/accept`).put()
 								.then(response => {
 									this.$store.dispatch('showNotification', {
 										type: 'success', 
-										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+										msg: 'Du har nu accepterat projektet. Så fort den andra parten accepterat så startar vi projektet.'
 									});
 									// Set the projects fetched to false so we break the cache.
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-									this.$store.dispatch('bidAccepted', {id: this.bid.id});
+									// Update the state of the project
+									this.$store.dispatch('acceptProject', {
+										started: response.started,
+										history: response.history
+									});
+
 									this.$store.dispatch('closeModal');
 								})
 								.catch(error => {
 									console.log(error);
-								});*/
+								});
 						}
 					}
 				});
@@ -95,21 +100,24 @@
 					data: {
 						confirmText: 'Är du säker på att du inte vill acceptera? Detta kommer att avbryta projektet!',
 						onConfirm: () => {
-							/*
-							new Model(`bids/${this.bid.id}/accept`).post()
+							new Model(`projects/${this.project.id}/cancel`).put()
 								.then(response => {
 									this.$store.dispatch('showNotification', {
 										type: 'success', 
-										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
+										msg: 'Du har nu avbrutit projektet :(. Bättre lycka nästa gång!'
 									});
 									// Set the projects fetched to false so we break the cache.
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-									this.$store.dispatch('bidAccepted', {id: this.bid.id});
+									// Update the state of the project.
+									this.$store.dispatch('cancelProject', {
+										history: response.history
+									});
+
 									this.$store.dispatch('closeModal');
 								})
 								.catch(error => {
 									console.log(error);
-								});*/
+								});
 						}
 					}
 				});

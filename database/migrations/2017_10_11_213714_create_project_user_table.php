@@ -20,6 +20,7 @@ class CreateProjectUserTable extends Migration
             $table->string('role');
             $table->string('title');
             $table->boolean('accepted')->default(false);
+            $table->boolean('cancelled')->default(false);
         });
     }
 

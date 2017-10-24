@@ -5,14 +5,22 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
 	import projectPhaseAccept from './ProjectPhaseAccept';
+	import projectPhaseCancelled from './ProjectPhaseCancelled';
 
 	export default {
 		components: {
-			projectPhaseAccept
+			projectPhaseAccept,
+			projectPhaseCancelled
 		},
 		computed: {
+			...mapGetters({
+				project: 'userProjectDetails'
+			}),
 			phase(){
+				if ( this.project.cancelled ) return 'projectPhaseCancelled';
+
 				return 'projectPhaseAccept';
 			}
 		}

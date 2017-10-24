@@ -22,20 +22,23 @@ class ProjectCancelController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Update the resource in storage.
 	 * 
 	 * @param  Request 	$request
 	 * @return Illuminate\Http\Response
 	 */
-	public function store(Request $request, Project $project)
+	public function update(Request $request, Project $project)
 	{
 		$this->authorize('in-project', $project);
 		
-		if ( !$this->manager->cancel($project) ) {
+		if ( !$response = $this->manager->cancel($project, $request->user()) ) {
 			return response()->json(['message' => 'Could not cancel the project for you.'], 500);
 		}
 
-		return response()->json(['message' => 'Successfully cancelled the project.'], 200);
+		return response()->json([
+			'message' => 'Successfully cancelled the project.',
+			'history' => $response['history']
+		], 200);
 	}
 
 }

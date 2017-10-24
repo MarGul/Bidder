@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->integer('service_hours')->nullable();
             $table->datetime('accept_ends');
             $table->boolean('started')->default(false);
+            $table->boolean('cancelled')->default(false);
             $table->timestamps();
         });
     }
