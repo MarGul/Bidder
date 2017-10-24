@@ -8,11 +8,13 @@
 	import { mapGetters } from 'vuex';
 	import projectPhaseAccept from './ProjectPhaseAccept';
 	import projectPhaseCancelled from './ProjectPhaseCancelled';
+	import projectPhaseRunning from './ProjectPhaseRunning';
 
 	export default {
 		components: {
 			projectPhaseAccept,
-			projectPhaseCancelled
+			projectPhaseCancelled,
+			projectPhaseRunning
 		},
 		computed: {
 			...mapGetters({
@@ -20,6 +22,8 @@
 			}),
 			phase(){
 				if ( this.project.cancelled ) return 'projectPhaseCancelled';
+
+				if ( this.project.started ) return 'projectPhaseRunning';
 
 				return 'projectPhaseAccept';
 			}
