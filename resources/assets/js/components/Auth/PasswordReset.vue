@@ -3,6 +3,7 @@
 		
 		<div class="modal-header">
 			<h3>Återställ ditt lösenord</h3>
+			<div class="header-text">Glömt lösenordet? Ingen fara.</div>
 		</div>
 
 		<div class="modal-body">
@@ -23,7 +24,7 @@
 
 				<div class="form-group">
 					<button
-						class="btn btn-primary full-width"
+						class="btn-modern primary full-width"
 						:class="{'processing': processing}" 
 						@click.prevent="send"
 						:disabled="processing || this.form.errors.any()"
@@ -33,7 +34,8 @@
 		</div>
 
 		<div class="modal-footer">
-			<a @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a> eller <a @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			<a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+			 eller <a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 		</div>
 
 	</div>

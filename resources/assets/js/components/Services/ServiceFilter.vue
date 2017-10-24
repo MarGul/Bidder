@@ -1,11 +1,11 @@
 <template>
 	<div class="service_filter-component">
 		<div class="filter-container filter-text">
-			<label>Fritext</label>
+			<label class="control-label">Fritext</label>
 			<input type="text" id="filter_text" class="form-control" v-model="filterText">
 		</div>
 		<div class="filter-container filter-category">
-			<label>Kategorier</label>
+			<label class="control-label">Kategorier</label>
 			<app-tags-input 
 				:items="categories"
 				:options="allCategories"
@@ -14,7 +14,7 @@
 			></app-tags-input>
 		</div>
 		<div class="filter-container filter-locations">
-			<label>Platser</label>
+			<label class="control-label">Platser</label>
 			<app-tags-input 
 				:items="locations"
 				:options="allLocations"

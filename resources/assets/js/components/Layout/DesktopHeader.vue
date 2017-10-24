@@ -25,8 +25,8 @@
 				</nav>
 				<div class="desktop-user-container">
 					<div class="guest-actions" v-if="!authenticated">
-						<a class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
-						<a class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+						<a class="btn-modern btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+						<a class="btn-modern primary" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
 					</div>
 
 					<div class="auth-user" @click="toggleDropdown" v-else v-click-outside="close">

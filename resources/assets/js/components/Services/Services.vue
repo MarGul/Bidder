@@ -6,7 +6,7 @@
 				<app-service-filter></app-service-filter>
 			</div>
 			<footer class="white-contentSection-footer">
-				<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices()">
+				<button type="button" class="btn-modern primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices()">
 					Hitta Tjänster
 				</button>
 			</footer>

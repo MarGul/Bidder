@@ -115,16 +115,15 @@ form.loading {
 			width: 50%;
 		}
 	}
+}
 
-	.control-label {
-		font-weight: 500;
-		font-size: 12px;
-		color: lighten($text-color, 10%);
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		margin-bottom: 2px;
-	}
-
+.control-label {
+	font-weight: 500;
+	font-size: 12px;
+	color: lighten($text-color, 10%);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: 2px;
 }
 
 .form-control {

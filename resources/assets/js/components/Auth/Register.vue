@@ -33,7 +33,7 @@
 
 				<div class="form-group">
 					<button 
-						class="btn btn-primary full-width" 
+						class="btn-modern primary full-width" 
 						:class="{'processing': processing}"
 						@click.prevent="register"
 						:disabled="processing || this.form.errors.any()"
@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="modal-footer">
-			Är du redan registrad? <a @click="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+			Är du redan registrad? <a class="is-link" @click="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
 		</div>
 
 	</div>
