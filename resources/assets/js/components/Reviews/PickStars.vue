@@ -1,10 +1,10 @@
 <template>
 	<div class="pick_stars-component">
 		<template v-for="(type, n) in types">
-			<i class="fa fa-star plr3" aria-hidden="true" 
+			<i class="icon icon_star_full wh20" aria-hidden="true" 
 				@click="update(n + 1)" @mouseover="highlight(n + 1)" @mouseout="normal"
 				v-if="type === 1"></i><!--
-		 --><i class="fa fa-star-o plr3" aria-hidden="true" 
+		 --><i class="icon icon_star_empty wh20" aria-hidden="true" 
 				@click="update(n + 1)" @mouseover="highlight(n + 1)" @mouseout="normal"
 				v-if="type === 0"></i>
 		</template>

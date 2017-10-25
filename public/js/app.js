@@ -23620,6 +23620,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectPhaseRunning__ = __webpack_require__(467);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectPhaseRunning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__ProjectPhaseRunning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ProjectPhaseComplete__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ProjectPhaseComplete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__ProjectPhaseComplete__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -23634,17 +23636,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
 		projectPhaseAccept: __WEBPACK_IMPORTED_MODULE_1__ProjectPhaseAccept___default.a,
 		projectPhaseCancelled: __WEBPACK_IMPORTED_MODULE_2__ProjectPhaseCancelled___default.a,
-		projectPhaseRunning: __WEBPACK_IMPORTED_MODULE_3__ProjectPhaseRunning___default.a
+		projectPhaseRunning: __WEBPACK_IMPORTED_MODULE_3__ProjectPhaseRunning___default.a,
+		projectPhaseComplete: __WEBPACK_IMPORTED_MODULE_4__ProjectPhaseComplete___default.a
 	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		project: 'userProjectDetails'
 	}), {
 		phase: function phase() {
 			if (this.project.cancelled) return 'projectPhaseCancelled';
+
+			if (this.project.completed) return 'projectPhaseComplete';
 
 			if (this.project.started) return 'projectPhaseRunning';
 
@@ -26449,6 +26455,512 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-72fce774", module.exports)
+  }
+}
+
+/***/ }),
+/* 470 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(471),
+  /* template */
+  __webpack_require__(472),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectPhaseComplete.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectPhaseComplete.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b6894758", Component.options)
+  } else {
+    hotAPI.reload("data-v-b6894758", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 471 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		appLeaveReview: __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview___default.a
+	}
+});
+
+/***/ }),
+/* 472 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_phase_complete-component"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Eius cum excepturi animi tempora expedita, nemo saepe laudantium. Id harum, suscipit deserunt praesentium reiciendis recusandae officiis eaque, quaerat illo minima temporibus!\n\t\t")]), _vm._v(" "), _c('div', {
+    staticClass: "gray-contentSection-content"
+  }, [_c('app-leave-review')], 1)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Projektet är färdigt!")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-b6894758", module.exports)
+  }
+}
+
+/***/ }),
+/* 473 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(474),
+  /* template */
+  __webpack_require__(480),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Reviews/LeaveReview.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] LeaveReview.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2255fca3", Component.options)
+  } else {
+    hotAPI.reload("data-v-2255fca3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 474 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars__ = __webpack_require__(475);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PickStars__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['forUser', 'submitted'],
+	components: {
+		appPickStars: __WEBPACK_IMPORTED_MODULE_0__PickStars___default.a
+	},
+	data: function data() {
+		return {
+			communication: null,
+			as_described: null,
+			would_recommend: null,
+			review: '',
+			processing: false,
+			error: false
+		};
+	},
+
+	methods: {
+		send: function send() {
+			var _this = this;
+
+			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]("users/" + this.forUser + "/review").post({
+				project_id: this.$store.getters.userProjectFocus.id,
+				communication: this.communication,
+				as_described: this.as_described,
+				would_recommend: this.would_recommend,
+				review: this.review
+			}).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				_this.error = true;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(476)
+}
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(478),
+  /* template */
+  __webpack_require__(479),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Reviews/PickStars.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PickStars.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2da456f4", Component.options)
+  } else {
+    hotAPI.reload("data-v-2da456f4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(477);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(14)("a4de9b82", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2da456f4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PickStars.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2da456f4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PickStars.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 477 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(13)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.pick_stars-component {\n  font-size: 18px;\n}\n.pick_stars-component i {\n    color: #FFC100;\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 478 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			stars: 0,
+			hover: false,
+			hoverStars: 0
+		};
+	},
+
+	computed: {
+		full: function full() {
+			return this.hover ? this.hoverStars : this.stars;
+		},
+		blank: function blank() {
+			return this.hover ? 5 - this.hoverStars : 5 - this.full;
+		},
+		types: function types() {
+			var types = [];
+			for (var i = 0; i < this.full; i++) {
+				types.push(1);
+			}
+			for (var j = 0; j < this.blank; j++) {
+				types.push(0);
+			}
+
+			return types;
+		}
+	},
+	methods: {
+		update: function update(stars) {
+			this.stars = stars;
+			this.$emit('changed', { stars: stars });
+		},
+		highlight: function highlight(stars) {
+			this.hover = true;
+			this.hoverStars = stars;
+		},
+		normal: function normal() {
+			this.hover = false;
+			this.hoverStars = 0;
+		}
+	}
+});
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "pick_stars-component"
+  }, [_vm._l((_vm.types), function(type, n) {
+    return [(type === 1) ? _c('i', {
+      staticClass: "icon icon_star_full wh20",
+      attrs: {
+        "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.update(n + 1)
+        },
+        "mouseover": function($event) {
+          _vm.highlight(n + 1)
+        },
+        "mouseout": _vm.normal
+      }
+    }) : _vm._e(), (type === 0) ? _c('i', {
+      staticClass: "icon icon_star_empty wh20",
+      attrs: {
+        "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.update(n + 1)
+        },
+        "mouseover": function($event) {
+          _vm.highlight(n + 1)
+        },
+        "mouseout": _vm.normal
+      }
+    }) : _vm._e()]
+  })], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2da456f4", module.exports)
+  }
+}
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "leave_review-component"
+  }, [_c('div', {
+    staticClass: "stars-container"
+  }, [_c('div', {
+    staticClass: "communication"
+  }, [_c('div', {
+    staticClass: "review-heading"
+  }, [_vm._v("Kommunikation")]), _vm._v(" "), _c('app-pick-stars', {
+    on: {
+      "changed": function($event) {
+        _vm.communication = $event.stars
+      }
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "as-described"
+  }, [_c('div', {
+    staticClass: "review-heading"
+  }, [_vm._v("Som avtalat")]), _vm._v(" "), _c('app-pick-stars', {
+    on: {
+      "changed": function($event) {
+        _vm.as_described = $event.stars
+      }
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "would-recommend"
+  }, [_c('div', {
+    staticClass: "review-heading"
+  }, [_vm._v("Skulle rekommendera")]), _vm._v(" "), _c('app-pick-stars', {
+    on: {
+      "changed": function($event) {
+        _vm.would_recommend = $event.stars
+      }
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "comment-container"
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.review),
+      expression: "review"
+    }],
+    staticClass: "form-control mtb20",
+    attrs: {
+      "rows": "3"
+    },
+    domProps: {
+      "value": (_vm.review)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.review = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "action-container text-center"
+  }, [(_vm.submitted) ? _c('small', {
+    staticClass: "action-text mb10 alert alert-info"
+  }, [_vm._v("\n\t\t\tDu har redan lämnat omdömme för detta projektet.\n\t\t")]) : [_c('small', {
+    staticClass: "action-text mb10",
+    class: {
+      'alert alert-danger': _vm.error
+    }
+  }, [_vm._v("Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    class: {
+      'processing': _vm.processing
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.send($event)
+      }
+    }
+  }, [_vm._v("Lämna omdömme")])]], 2)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2255fca3", module.exports)
   }
 }
 

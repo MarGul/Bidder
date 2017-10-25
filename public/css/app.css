@@ -3904,8 +3904,9 @@ body.mobile-nav-open .overlay {
 .leave_review-component .stars-container .as-described .review-heading,
 .leave_review-component .stars-container .would-recommend .review-heading {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 0 5px 0;
+  color: #6f787c;
 }
 
 .leave_review-component .comment-container textarea {
