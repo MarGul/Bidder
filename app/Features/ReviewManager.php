@@ -7,61 +7,53 @@ use App\Review;
 class ReviewManager 
 {
 
-	/**
-	 * Attach reviews tickets in the database between two users. 
-	 * This will later on allow them to leave reviews of eachother.
-	 * 
-	 * @param  integer 	$user1
-	 * @param  integer 	$user2
-	 * @return boolean
-	 */
-	public function attach($user1, $user2, $project_id)
-	{
-		return $this->attachForUser($user1, $user2, $project_id) && $this->attachForUser($user2, $user1, $project_id) ? true : false;
-	}
-
-	/**
-	 * Attach review ticket for a user.
-	 * 
-	 * @param  integer 	$user 		[User that's doing the reviewing]
-	 * @param  integer 	$reviewed 	[User that is getting reviewed]
-	 * @return boolean
-	 */
-	protected function attachForUser($user, $reviewed, $project_id)
-	{
-		$review = new Review([
-			'reviewing' => $user,
-			'reviewed' => $reviewed,
-			'project_id' => $project_id
-		]);
-
-		return $review->save() ? true : false;
-	}
+	protected $user_id;
+	protected $project_id;
+	protected $user_reviewer;
+	protected $data;
 
 	/**
 	 * Submit a review
 	 * 
-	 * @param  integer 	$reviewing 		[The user making the review]
-	 * @param  integer 	$reviewed  		[The user that is getting reviewed]
+	 * @param  integer 	$user_id 			[The user getting reviewed]
 	 * @param  integer 	$project_id 
-	 * @param  array 	$data      		[Data to save in the review]
+	 * @param  integer 	$user_reviewer  	[The user that is submitting the review]
+	 * @param  array 	$data      			[Data to save in the review]
 	 * @return boolean
 	 */
-	public function submit($reviewing, $reviewed, $project_id, $data)
+	public function submit($user_id, $project_id, $user_reviewer, $data)
 	{
-		$review = Review::where([ 
-			['reviewing', $reviewing], 
-			['reviewed', $reviewed], 
-			['project_id', $project_id],
-			['submitted', false] 
-		])->first();
+		$this->user_id = $user_id;
+		$this->project_id = $project_id;
+		$this->user_reviewer = $user_reviewer;
+		$this->data = $data;		
 
-		if ( !$review ) return false;
+		if ( !$this->allowedToReview() ) return false;
 
-		// Mark, in the project, that the user ($reviewing) has left a review.
-		if ( !app(ProjectManager::class)->hasReviewed($reviewing, $project_id) ) return false;
+		if ( !$this->insertReview() ) return false;
+		// Mark the user that left the review tha he has.
+		if ( !app(ProjectManager::class)->submittedReview($this->user_reviewer, $this->project_id) ) return false;
 
-		return $review->update(array_merge($data, ['submitted' => true])) ? true : false;
+		return true;
+	}
+
+	protected function allowedToReview()
+	{
+		return true;
+	}
+
+	protected function insertReview()
+	{
+		$review = Review::create([
+			'user_id' => $this->user_id,
+			'project_id' => $this->project_id,
+			'communication' => $this->data['communication'],
+			'as_described' => $this->data['as_described'],
+			'would_recommend' => $this->data['would_recommend'],
+			'review' => $this->data['review']
+		]);
+
+		
 	}
 
 }

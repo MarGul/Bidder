@@ -26504,8 +26504,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview__ = __webpack_require__(473);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_LeaveReview__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_LeaveReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Reviews_LeaveReview__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -26522,13 +26525,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appLeaveReview: __WEBPACK_IMPORTED_MODULE_0__Reviews_LeaveReview___default.a
-	}
+		appLeaveReview: __WEBPACK_IMPORTED_MODULE_1__Reviews_LeaveReview___default.a
+	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails',
+		auth: 'authUser'
+	}), {
+		other: function other() {
+			var _this = this;
+
+			return this.project.users.find(function (u) {
+				return u.id !== _this.auth.id;
+			}).id;
+		}
+	})
 });
 
 /***/ }),
@@ -26544,7 +26563,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "white-contentSection-content"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Eius cum excepturi animi tempora expedita, nemo saepe laudantium. Id harum, suscipit deserunt praesentium reiciendis recusandae officiis eaque, quaerat illo minima temporibus!\n\t\t")]), _vm._v(" "), _c('div', {
     staticClass: "gray-contentSection-content"
-  }, [_c('app-leave-review')], 1)])])
+  }, [_c('app-leave-review', {
+    attrs: {
+      "forUser": _vm.other,
+      "forProject": _vm.project.id
+    }
+  })], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "white-contentSection-header"
@@ -26643,7 +26667,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['forUser', 'submitted'],
+	props: {
+		forUser: {
+			type: Number,
+			required: true
+		},
+		forProject: {
+			type: Number,
+			required: true
+		}
+	},
 	components: {
 		appPickStars: __WEBPACK_IMPORTED_MODULE_0__PickStars___default.a
 	},
@@ -26663,8 +26696,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]("users/" + this.forUser + "/review").post({
-				project_id: this.$store.getters.userProjectFocus.id,
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('reviews').post({
+				user_id: this.forUser,
+				project_id: this.forProject,
 				communication: this.communication,
 				as_described: this.as_described,
 				would_recommend: this.would_recommend,

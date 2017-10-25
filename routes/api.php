@@ -57,7 +57,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Complete a project */
 	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
 	/* Submit a review for a user */
-	Route::post('users/{id}/review')->uses('UserReviewsController@store');
+	Route::post('reviews')->uses('ReviewsController@store');
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreReview;
 use App\Features\ReviewManager;
 
 class UserReviewsController extends Controller
@@ -25,15 +24,23 @@ class UserReviewsController extends Controller
 	/**
 	 * Store a resource in the database
 	 * 
-	 * @param  StoreReview 	$request
-	 * @param  integer    	$reviewed
+	 * @param  Request 		$request
 	 * @return Illuminate\Http\Response
 	 */
-	public function store(StoreReview $request, $reviewed)
+	public function store(Request $request)
 	{
+		$this->validate($request, [
+			'user_id' => 'required|exists:users',
+			'project_id' => 'required|exists:project',
+			'communication' => 'required|numeric',
+			'as_described' => 'required|numeric',
+			'would_recommend' => 'required|numeric',
+			'review' => 'required'
+		]);
+		
 		$data = $request->only(['communication', 'as_described', 'would_recommend', 'review']);
 
-		if ( !$this->manager->submit($request->user()->id, $reviewed, $request->project_id, $data) ) {
+		if ( !$this->manager->submit($request->user_id, $request->project_id, $request->user(), $data) ) {
 			return response()->json(['message' => 'Could not store your review.'], 500);
 		}
 

@@ -34,7 +34,16 @@
 	import Model from "../../includes/Model";
 
 	export default {
-		props: ['forUser', 'submitted'],
+		props: {
+			forUser: {
+				type: Number,
+				required: true
+			},
+			forProject: {
+				type: Number,
+				required: true
+			}
+		},
 		components: {
 			appPickStars
 		},
@@ -51,8 +60,9 @@
 		methods: {
 			send() {
 				this.processing = true
-				new Model(`users/${this.forUser}/review`).post({
-					project_id: this.$store.getters.userProjectFocus.id,
+				new Model('reviews').post({
+					user_id: this.forUser,
+					project_id: this.forProject,
 					communication: this.communication,
 					as_described: this.as_described,
 					would_recommend: this.would_recommend,
