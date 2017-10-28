@@ -13,6 +13,12 @@
 
 <script>
 	export default {
+		props: {
+			enabled: {
+				type: Boolean,
+				required: true
+			}
+		},
 		data() {
 			return {
 				stars: 0,
@@ -41,14 +47,17 @@
 		},
 		methods: {
 			update(stars) {
+				if ( !this.enabled ) return;
 				this.stars = stars;
 				this.$emit('changed', {stars});
 			},
 			highlight(stars) {
+				if ( !this.enabled ) return;
 				this.hover = true;
 				this.hoverStars = stars;
 			},
 			normal() {
+				if ( !this.enabled ) return;
 				this.hover = false;
 				this.hoverStars = 0;
 			}

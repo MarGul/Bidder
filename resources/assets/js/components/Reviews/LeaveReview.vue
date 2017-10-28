@@ -3,19 +3,25 @@
 		<div class="stars-container">
 			<div class="communication">
 				<div class="review-heading">Kommunikation</div>
-				<app-pick-stars @changed="communication = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="communication = $event.stars" />
 			</div>
 			<div class="as-described">
 				<div class="review-heading">Som avtalat</div>
-				<app-pick-stars @changed="as_described = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="as_described = $event.stars" />
 			</div>
 			<div class="would-recommend">
 				<div class="review-heading">Skulle rekommendera</div>
-				<app-pick-stars @changed="would_recommend = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="would_recommend = $event.stars" />
 			</div>
 		</div>
 		<div class="comment-container">
-			<textarea rows="3" class="form-control mtb20" v-model="review"></textarea>
+			<textarea rows="3" class="form-control mtb20" :disabled="submitted" v-model="review"></textarea>
 		</div>
 		<div class="action-container text-center">
 			<template v-if="!submitted">
@@ -28,6 +34,9 @@
 					v-text="`Lämna omdömme`">
 				</button>
 			</template>
+			<div class="alert alert-info mb0" v-else>
+				Du har redan lämnat ett omdöme.
+			</div>
 		</div>
 	</div>
 </template>
@@ -75,7 +84,7 @@
 					would_recommend: this.would_recommend,
 					review: this.review
 				}).then(response => {
-					this.$emit('submitted', {review: response.review});
+					this.$emit('submitted', {review: response.review, history: response.history});
 					this.processing = false;
 				}).catch(error => {
 					this.error = true;

@@ -50,7 +50,7 @@
 				});
 				this.$store.dispatch('showNotification', {
 					type: 'success', 
-					msg: 'Du har nu lämnat ett omdömme för projektet. Tack så mycket!'
+					msg: 'Du har nu lämnat ett omdöme för projektet. Tack så mycket!'
 				});
 			}
 		}
