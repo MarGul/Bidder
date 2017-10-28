@@ -14361,6 +14361,10 @@ var actions = {
 		project.users.find(function (u) {
 			return u.id === payload.user.id;
 		}).pivot.review = payload.review.id;
+		// Add all of the project history.
+		payload.history.forEach(function (history) {
+			project.history.unshift(history);
+		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 };
@@ -23764,8 +23768,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				}).forEach(function (user) {
 					user.pivot.accepted = false;
 				});
-				// Add the history entry.
-				project.history.unshift(response.history);
+				// Add all of the project history.
+				payload.history.forEach(function (history) {
+					project.history.unshift(history);
+				});
 
 				_this.$store.commit('SET_USER_PROJECT_DETAILS', project);
 				_this.processing = false;
@@ -24583,11 +24589,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	}),
 	methods: {
 		reviewSubmitted: function reviewSubmitted(_ref) {
-			var review = _ref.review;
+			var review = _ref.review,
+			    history = _ref.history;
 
 			this.$store.dispatch('reviewSubmitted', {
 				user: this.me,
-				review: review
+				review: review,
+				history: history
 			});
 			this.$store.dispatch('showNotification', {
 				type: 'success',

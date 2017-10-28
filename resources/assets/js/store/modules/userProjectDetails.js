@@ -44,6 +44,10 @@ const actions = {
 	reviewSubmitted({commit, state}, payload) {
 		let project = state.project;
 		project.users.find(u => u.id === payload.user.id).pivot.review = payload.review.id;
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 }

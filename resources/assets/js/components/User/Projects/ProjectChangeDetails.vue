@@ -103,8 +103,10 @@
 						project.users.filter(u => u.id !== this.auth.id).forEach(user => {
 							user.pivot.accepted = false;
 						});
-						// Add the history entry.
-						project.history.unshift(response.history);
+						// Add all of the project history.
+						payload.history.forEach(function(history) {
+							project.history.unshift(history);
+						});
 
 						this.$store.commit('SET_USER_PROJECT_DETAILS', project);
 						this.processing = false;

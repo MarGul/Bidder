@@ -23,6 +23,7 @@ class ProjectHistoryManager
 		'accepted' => ['type' => 'info', 'message' => '{user} accepterade projektets start.'],
 		'started' => ['type' => 'success', 'message' => 'Projektet startades.'],
 		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
+		'leftReview' => ['type' => 'success', 'message' => '{user} lämnade ett ömdöme.']
 	];
 	/**
 	 * This holds the records that has been added.
@@ -94,7 +95,7 @@ class ProjectHistoryManager
 
 		$this->addedRecords[] = $projectHistory;
 
-		return $projectHistory->id ? $projectHistory : false;
+		return $projectHistory->id ? [$projectHistory] : false;
 	}
 
 	/**

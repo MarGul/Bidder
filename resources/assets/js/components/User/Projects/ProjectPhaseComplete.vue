@@ -43,10 +43,11 @@
 			}
 		},
 		methods: {
-			reviewSubmitted({review}) {
+			reviewSubmitted({review, history}) {
 				this.$store.dispatch('reviewSubmitted', {
 					user: this.me,
-					review: review
+					review,
+					history
 				});
 				this.$store.dispatch('showNotification', {
 					type: 'success', 

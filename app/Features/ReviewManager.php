@@ -37,7 +37,13 @@ class ReviewManager
 
 		if ( !$this->markUserReviewed() ) return false;
 
-		return ['review' => $this->review];
+		$history = app(ProjectHistoryManager::class)->forProject($this->project->id)
+										 			->add('leftReview', ['user' => $this->user_reviewer->username]);
+
+		return [
+			'review' => $this->review,
+			'history' => $history
+		];
 	}
 
 	/**

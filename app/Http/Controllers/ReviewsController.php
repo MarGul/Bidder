@@ -46,7 +46,8 @@ class ReviewsController extends Controller
 
 		return response()->json([
 			'message' => 'Successfully stored your review.',
-			'review' => $response['review']
+			'review' => $response['review'],
+			'history' => $response['history']
 		], 201);
 	}
 
