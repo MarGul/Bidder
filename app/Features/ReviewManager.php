@@ -10,9 +10,10 @@ class ReviewManager
 
 	protected $user_id;
 	protected $project_id;
+	protected $project;
 	protected $user_reviewer;
 	protected $data;
-	protected $insertedReview;
+	protected $review;
 
 	/**
 	 * Submit a review
@@ -33,10 +34,10 @@ class ReviewManager
 		if ( !$this->allowedToReview() ) return false;
 
 		if ( !$this->insertReview() ) return false;
-		// Mark the user that left the review tha he has.
-		//if ( !app(ProjectManager::class)->submittedReview($this->user_reviewer, $this->project_id) ) return false;
 
-		return true;
+		if ( !$this->markUserReviewed() ) return false;
+
+		return ['review' => $this->review];
 	}
 
 	/**
@@ -57,6 +58,8 @@ class ReviewManager
 							})
 							->where('completed', true)
 							->findOrFail($this->project_id);
+
+		$this->project = $project;
 
 		return true;
 	}
@@ -80,9 +83,19 @@ class ReviewManager
 
 		if ( !$review->id ) return false;
 
-		$this->insertedReview = $review;
+		$this->review = $review;
 
 		return true;
+	}
+
+	/**
+	 * Set the project user that he has left a review.
+	 * 
+	 * @return boolean
+	 */
+	protected function markUserReviewed()
+	{
+		return $this->project->users()->updateExistingPivot($this->user_reviewer->id, ['review' => $this->review->id]);
 	}
 
 }

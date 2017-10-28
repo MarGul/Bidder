@@ -18,8 +18,16 @@
 			<textarea rows="3" class="form-control mtb20" v-model="review"></textarea>
 		</div>
 		<div class="action-container text-center">
-			<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
-			<button class="btn btn-primary" :class="{'processing': processing}" @click.prevent="send">Lämna omdömme</button>
+			<template v-if="!submitted">
+				<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
+				<button 
+					class="btn btn-primary" 
+					:class="{'processing': processing}" 
+					:disabled="processing"
+					@click.prevent="send"
+					v-text="`Lämna omdömme`">
+				</button>
+			</template>
 		</div>
 	</div>
 </template>
@@ -36,6 +44,10 @@
 			},
 			forProject: {
 				type: Number,
+				required: true
+			},
+			submitted: {
+				type: Boolean,
 				required: true
 			}
 		},
@@ -63,7 +75,8 @@
 					would_recommend: this.would_recommend,
 					review: this.review
 				}).then(response => {
-					console.log(response);
+					this.$emit('submitted', {review: response.review});
+					this.processing = false;
 				}).catch(error => {
 					this.error = true;
 					this.processing = false;

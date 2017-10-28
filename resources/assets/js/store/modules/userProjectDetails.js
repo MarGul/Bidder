@@ -40,6 +40,11 @@ const actions = {
 		// Set the user that accepted that he has.
 		project.users.find(u => u.id === rootState.auth.user.id).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	reviewSubmitted({commit, state}, payload) {
+		let project = state.project;
+		project.users.find(u => u.id === payload.user.id).pivot.review = payload.review.id;
+		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 }
 

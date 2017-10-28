@@ -14476,6 +14476,16 @@ var actions = {
 			return u.id === rootState.auth.user.id;
 		}).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	reviewSubmitted: function reviewSubmitted(_ref3, payload) {
+		var commit = _ref3.commit,
+		    state = _ref3.state;
+
+		var project = state.project;
+		project.users.find(function (u) {
+			return u.id === payload.user.id;
+		}).pivot.review = payload.review.id;
+		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 };
 
@@ -24663,6 +24673,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -24675,14 +24687,38 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		project: 'userProjectDetails',
 		auth: 'authUser'
 	}), {
-		other: function other() {
+		me: function me() {
 			var _this = this;
 
 			return this.project.users.find(function (u) {
-				return u.id !== _this.auth.id;
-			}).id;
+				return u.id === _this.auth.id;
+			});
+		},
+		other: function other() {
+			var _this2 = this;
+
+			return this.project.users.find(function (u) {
+				return u.id !== _this2.auth.id;
+			});
+		},
+		submitted: function submitted() {
+			return !!this.me.pivot.review;
 		}
-	})
+	}),
+	methods: {
+		reviewSubmitted: function reviewSubmitted(_ref) {
+			var review = _ref.review;
+
+			this.$store.dispatch('reviewSubmitted', {
+				user: this.me,
+				review: review
+			});
+			this.$store.dispatch('showNotification', {
+				type: 'success',
+				msg: 'Du har nu lämnat ett omdömme för projektet. Tack så mycket!'
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -24760,6 +24796,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -24772,6 +24816,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		forProject: {
 			type: Number,
+			required: true
+		},
+		submitted: {
+			type: Boolean,
 			required: true
 		}
 	},
@@ -24802,7 +24850,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				would_recommend: this.would_recommend,
 				review: this.review
 			}).then(function (response) {
-				console.log(response);
+				_this.$emit('submitted', { review: response.review });
+				_this.processing = false;
 			}).catch(function (error) {
 				_this.error = true;
 				_this.processing = false;
@@ -25069,7 +25118,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "action-container text-center"
-  }, [_c('small', {
+  }, [(!_vm.submitted) ? [_c('small', {
     staticClass: "action-text mb10",
     class: {
       'alert alert-danger': _vm.error
@@ -25079,13 +25128,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'processing': _vm.processing
     },
+    attrs: {
+      "disabled": _vm.processing
+    },
+    domProps: {
+      "textContent": _vm._s("Lämna omdömme")
+    },
     on: {
       "click": function($event) {
         $event.preventDefault();
         _vm.send($event)
       }
     }
-  }, [_vm._v("Lämna omdömme")])])])
+  })] : _vm._e()], 2)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25110,8 +25165,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "gray-contentSection-content"
   }, [_c('app-leave-review', {
     attrs: {
-      "forUser": _vm.other,
-      "forProject": _vm.project.id
+      "forUser": _vm.other.id,
+      "forProject": _vm.project.id,
+      "submitted": _vm.submitted
+    },
+    on: {
+      "submitted": _vm.reviewSubmitted
     }
   })], 1)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

@@ -9,8 +9,10 @@
 			</div>
 			<div class="gray-contentSection-content">
 				<app-leave-review 
-					:forUser="other" 
+					:forUser="other.id" 
 					:forProject="project.id" 
+					:submitted="submitted"
+					@submitted="reviewSubmitted"
 				/>
 			</div>
 		</section>
@@ -30,8 +32,26 @@
 				project: 'userProjectDetails',
 				auth: 'authUser'
 			}),
+			me() {
+				return this.project.users.find(u => u.id === this.auth.id);
+			},	
 			other() {
-				return this.project.users.find(u => u.id !== this.auth.id).id;
+				return this.project.users.find(u => u.id !== this.auth.id);
+			},
+			submitted() {
+				return !!this.me.pivot.review;
+			}
+		},
+		methods: {
+			reviewSubmitted({review}) {
+				this.$store.dispatch('reviewSubmitted', {
+					user: this.me,
+					review: review
+				});
+				this.$store.dispatch('showNotification', {
+					type: 'success', 
+					msg: 'Du har nu lämnat ett omdömme för projektet. Tack så mycket!'
+				});
 			}
 		}
 	}
