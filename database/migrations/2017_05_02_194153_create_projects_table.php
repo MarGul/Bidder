@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->datetime('accept_ends');
             $table->boolean('started')->default(false);
             $table->boolean('cancelled')->default(false);
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

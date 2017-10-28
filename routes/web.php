@@ -12,11 +12,13 @@
 Route::get('/test', function() {
 	$user = \App\User::find(1);
 	$project = \App\Project::find(1);
-	$manager = app(\App\Features\ProjectHistoryManager::class);
-
-	$manager->forProject($project->id)->add('accepted', ['user' => $user->username]);
-	$manager->forProject($project->id)->add('started');
-	dd($manager->addedRecords());
+	
+	dd(app(\App\Features\ReviewManager::class)->submit(2,1,$user, [
+		'communication' => 3,
+		'as_described' => 4,
+		'would_recommend' => 4,
+		'review' => 'hello there'
+	]));
 });
 
 /**

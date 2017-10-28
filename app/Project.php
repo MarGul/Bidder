@@ -15,7 +15,7 @@ class Project extends Model
      */
     protected $fillable = [
     	'service_id', 'bid_id', 'service_price', 'service_start', 'service_end', 'service_hours', 
-        'accept_ends', 'started', 'cancelled'
+        'accept_ends', 'started', 'cancelled', 'completed'
     ];
 
     /**
@@ -45,7 +45,7 @@ class Project extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'accepted', 'cancelled');
+        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'review', 'accepted', 'cancelled');
     }
 
     /**
@@ -55,7 +55,7 @@ class Project extends Model
      */
     public function history()
     {
-        return $this->hasMany('App\ProjectHistory')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\ProjectHistory')->orderBy('id', 'desc');
     }
 
     /**

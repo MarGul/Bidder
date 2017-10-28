@@ -13,7 +13,7 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-    	'reviewing', 'reviewed', 'project_id', 'submitted', 'communication', 'as_described', 'would_recommend', 'review'
+    	'user_id', 'project_id', 'user_id_reviewer', 'communication', 'as_described', 'would_recommend', 'review'
     ];
 
     /**
@@ -23,7 +23,7 @@ class Review extends Model
      */
     public function reviewer()
     {
-    	return $this->hasOne('App\User', 'id', 'reviewing')->select(['username', 'avatar', 'id']);
+    	return $this->hasOne('App\User', 'user_id_reviewer')->select(['username', 'avatar', 'id']);
     }
 
 }

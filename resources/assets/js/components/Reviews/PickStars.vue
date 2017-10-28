@@ -1,10 +1,10 @@
 <template>
 	<div class="pick_stars-component">
 		<template v-for="(type, n) in types">
-			<i class="fa fa-star plr3" aria-hidden="true" 
+			<i class="icon icon_star_full wh20" aria-hidden="true" 
 				@click="update(n + 1)" @mouseover="highlight(n + 1)" @mouseout="normal"
 				v-if="type === 1"></i><!--
-		 --><i class="fa fa-star-o plr3" aria-hidden="true" 
+		 --><i class="icon icon_star_empty wh20" aria-hidden="true" 
 				@click="update(n + 1)" @mouseover="highlight(n + 1)" @mouseout="normal"
 				v-if="type === 0"></i>
 		</template>
@@ -13,6 +13,12 @@
 
 <script>
 	export default {
+		props: {
+			enabled: {
+				type: Boolean,
+				required: true
+			}
+		},
 		data() {
 			return {
 				stars: 0,
@@ -41,14 +47,17 @@
 		},
 		methods: {
 			update(stars) {
+				if ( !this.enabled ) return;
 				this.stars = stars;
 				this.$emit('changed', {stars});
 			},
 			highlight(stars) {
+				if ( !this.enabled ) return;
 				this.hover = true;
 				this.hoverStars = stars;
 			},
 			normal() {
+				if ( !this.enabled ) return;
 				this.hover = false;
 				this.hoverStars = 0;
 			}
