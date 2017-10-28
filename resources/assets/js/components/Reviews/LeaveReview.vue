@@ -18,13 +18,8 @@
 			<textarea rows="3" class="form-control mtb20" v-model="review"></textarea>
 		</div>
 		<div class="action-container text-center">
-			<small class="action-text mb10 alert alert-info" v-if="submitted">
-				Du har redan lämnat omdömme för detta projektet.
-			</small>
-			<template v-else>
-				<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
-				<button class="btn btn-primary" :class="{'processing': processing}" @click.prevent="send">Lämna omdömme</button>
-			</template>
+			<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
+			<button class="btn btn-primary" :class="{'processing': processing}" @click.prevent="send">Lämna omdömme</button>
 		</div>
 	</div>
 </template>
@@ -71,6 +66,7 @@
 					console.log(response);
 				}).catch(error => {
 					this.error = true;
+					this.processing = false;
 				});
 			}
 		}

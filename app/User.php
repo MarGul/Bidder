@@ -86,9 +86,7 @@ class User extends Authenticatable
      */
     public function reviews()
     {
-        return $this->hasMany('App\Review', 'reviewed')
-                    ->select(['reviewing', 'reviewed', 'communication', 'as_described', 'would_recommend', 'review', 'created_at'])
-                    ->where('submitted', true);
+        return $this->hasMany('App\Review');
     }
 
     /**
@@ -98,10 +96,9 @@ class User extends Authenticatable
      */
     public function rating()
     {
-        return $this->hasOne('App\Review', 'reviewed')
-                    ->selectRaw('reviewed, count(*) as count, avg(would_recommend) as avg, avg(communication) as communication, avg(as_described) as as_described')
-                    ->where('submitted', true)
-                    ->groupBy('reviewed');
+        return $this->hasOne('App\Review')
+                    ->selectRaw('user_id, count(*) as count, avg(would_recommend) as avg, avg(communication) as communication, avg(as_described) as as_described')
+                    ->groupBy('user_id');
     }
 
     /**

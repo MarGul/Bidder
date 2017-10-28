@@ -19,6 +19,7 @@ class CreateProjectUserTable extends Migration
             $table->integer('user_id');
             $table->string('role');
             $table->string('title');
+            $table->integer('review')->nullable();
             $table->boolean('accepted')->default(false);
             $table->boolean('cancelled')->default(false);
         });
