@@ -38,7 +38,8 @@ class ProjectUseContractController extends Controller
 
         return response()->json([
             'message' => 'Successfully updated the project to use a contract.',
-            'history' => $response['history']
+            'history' => $response['history'],
+            'usersNotAccepted' => $response['usersNotAccepted']
         ], 200);
     }
 }

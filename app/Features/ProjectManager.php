@@ -102,15 +102,18 @@ class ProjectManager
 		if ( !$project->update(['use_contract' => true]) ) {
 			return false;
 		}
-		
+
 		// Mark the other user as not accepted.
-		$this->setOthersNotAccepted($project, $user);
+		$usersNotAccepted = $this->setOthersNotAccepted($project, $user);
 
 		// Set a history that the user wanted to use a contract.
 		$this->projectHistoryManager->forProject($project->id)
 									->add('useContract', ['user' => $user->username]);
 
-		return ['history' => $this->projectHistoryManager->addedRecords()];
+		return [
+			'history' => $this->projectHistoryManager->addedRecords(),
+			'usersNotAccepted' => $usersNotAccepted
+		];
 	}
 
 	/**
@@ -191,7 +194,7 @@ class ProjectManager
 	 * 
 	 * @param  App\Project 	$project
 	 * @param  App\User 	$user    [myself, to get other ones for the project.]
-	 * @return 
+	 * @return array
 	 */
 	protected function setOthersNotAccepted($project, $user)
 	{
@@ -199,9 +202,14 @@ class ProjectManager
 			$q->where('user_id', '<>', $user->id);
 		}]);
 
+		// The users that has been marked as not accepted.
+		$users = [];
 		foreach ($project->users as $u) {
 			$project->users()->updateExistingPivot($u->id, ['accepted' => false]);
+			$users[] = $u->id;
 		}
+
+		return $users;
 	}
 
 	/**
