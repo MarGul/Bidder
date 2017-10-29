@@ -50,6 +50,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 	/* Accept the start of a project */
 	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
+	/* Use contract for a project */
+	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
 	/* Cancel a project */
 	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
 	/* Start a project */

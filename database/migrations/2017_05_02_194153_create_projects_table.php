@@ -22,6 +22,7 @@ class CreateProjectsTable extends Migration
             $table->date('service_end');
             $table->integer('service_hours')->nullable();
             $table->datetime('accept_ends');
+            $table->boolean('use_contract')->default(false);
             $table->boolean('started')->default(false);
             $table->boolean('cancelled')->default(false);
             $table->boolean('completed')->default(false);

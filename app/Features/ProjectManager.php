@@ -72,7 +72,7 @@ class ProjectManager
 	 * @param  App\Project 	$project
 	 * @param  App\User 	$user
 	 * @param  array 		$data
-	 * @return boolean
+	 * @return mixed
 	 */
 	public function updateDetails($project, $user, $data)
 	{
@@ -88,6 +88,29 @@ class ProjectManager
 												->add('updateDetails', ['user' => $user->username]);
 
 		return ['history' => $history, 'updates' => $data];
+	}
+
+	/**
+	 * Mark a project to use a contract.
+	 * 
+	 * @param  App\Project 	$project
+	 * @param  App\User 	$user
+	 * @return mixed
+	 */
+	public function useContract($project, $user)
+	{
+		if ( !$project->update(['use_contract' => true]) ) {
+			return false;
+		}
+		
+		// Mark the other user as not accepted.
+		$this->setOthersNotAccepted($project, $user);
+
+		// Set a history that the user wanted to use a contract.
+		$this->projectHistoryManager->forProject($project->id)
+									->add('useContract', ['user' => $user->username]);
+
+		return ['history' => $this->projectHistoryManager->addedRecords()];
 	}
 
 	/**
