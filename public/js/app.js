@@ -14706,7 +14706,7 @@ let routes = [
 
 var routes = [{ path: "/", name: 'home', component: __webpack_require__(247) }, { path: "/categories", name: 'categories', component: __webpack_require__(256) }, { path: "/locations", name: 'locations', component: __webpack_require__(261) }, { path: "/services", name: 'services', component: __webpack_require__(264) }, { path: "/services/:id", name: 'serviceDetails', component: __webpack_require__(283) }, { path: "/information", name: 'information', component: __webpack_require__(297) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(300) }, { path: "/user", component: __webpack_require__(309),
 	children: [{ path: '', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(140), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(323), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(332), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(347), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(359), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(362), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(368), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(371), meta: { requiresAuth: true },
-		children: [{ path: '', component: __webpack_require__(380), meta: { requiresAuth: true } }, { path: 'service', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(415), meta: { requiresAuth: true } }, { path: 'messages', component: __webpack_require__(418), meta: { requiresAuth: true } }, { path: 'history', component: __webpack_require__(427), meta: { requiresAuth: true } }]
+		children: [{ path: '', component: __webpack_require__(380), meta: { requiresAuth: true } }, { path: 'contract', component: __webpack_require__(485), meta: { requiresAuth: true } }, { path: 'service', component: __webpack_require__(412), meta: { requiresAuth: true } }, { path: 'bid', component: __webpack_require__(415), meta: { requiresAuth: true } }, { path: 'messages', component: __webpack_require__(418), meta: { requiresAuth: true } }, { path: 'history', component: __webpack_require__(427), meta: { requiresAuth: true } }]
 	}, { path: 'invoices', component: __webpack_require__(430), meta: { requiresAuth: true } }, { path: 'invoices/:id', component: __webpack_require__(433), meta: { requiresAuth: true } }, { path: 'subscriptions', component: __webpack_require__(436), meta: { requiresAuth: true } }],
 	meta: { requiresAuth: true }
 },
@@ -27272,6 +27272,488 @@ var Model = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(486),
+  /* template */
+  __webpack_require__(487),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/User/Projects/ProjectContract.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProjectContract.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-887a4c7c", Component.options)
+  } else {
+    hotAPI.reload("data-v-887a4c7c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 486 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({})
+		};
+	}
+});
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "project_contract-component"
+  }, [_c('form', {
+    staticClass: "form-with-sections"
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Projektets avtal")])]), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Beställare")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Telefonnummer")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("E-mail")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Utförare")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Telefonnummer")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("E-mail")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Projektets beskrivning")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "rows": "6"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Utförarens avårdande")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Avrådande")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tider")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska påbörjas")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska vara slutfört")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Totalsumma")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Specificerat")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Betalning")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Avrådande")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    }
+  })])])])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-887a4c7c", module.exports)
+  }
+}
 
 /***/ })
 ],[141]);
