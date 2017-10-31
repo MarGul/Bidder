@@ -69,6 +69,16 @@ class Project extends Model
     }
 
     /**
+     * Each project may have many contracts.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function contracts()
+    {
+        return $this->hasMany('App\Contract');
+    }
+
+    /**
      * A project has one invoice.
      * 
      * @return Eloquent Relationship

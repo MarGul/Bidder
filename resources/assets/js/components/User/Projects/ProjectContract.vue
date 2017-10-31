@@ -24,14 +24,6 @@
 								<label class="control-label">Organisations/-personnummer</label>
 								<input type="text" class="form-control">
 							</div>
-							<div class="control-container">
-								<label class="control-label">Telefonnummer</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="control-container">
-								<label class="control-label">E-mail</label>
-								<input type="text" class="form-control">
-							</div>
 						</div>
 					</div>
 
@@ -49,14 +41,6 @@
 							</div>
 							<div class="control-container">
 								<label class="control-label">Organisations/-personnummer</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="control-container">
-								<label class="control-label">Telefonnummer</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="control-container">
-								<label class="control-label">E-mail</label>
 								<input type="text" class="form-control">
 							</div>
 						</div>
@@ -141,9 +125,23 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container">
-								<label class="control-label">Avrådande</label>
-								<textarea rows="4" class="form-control"></textarea>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Hela beloppet betalas när arbetet är slutfört.
+									</label>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Beställaren vill ha en specificerad faktura.
+									</label>
+								</div>
 							</div>
+							<div>Om ni ej avtal om något annat så gäller följande:</div>
+							<ul>
+								<li>Arbeten som anges i fakturan ska vara slutförda när faktureringen sker.</li>
+								<li>Fakturan ska betalas inom 30 dagar efter beställaren mottagit fakturan.</li>
+								<li>Om betalningen ej sker inom rätt tid ska beställaren betala dröjsmålsränta enligt räntelagen.</li>
+							</ul>
 						</div>
 					</div>
 
@@ -176,7 +174,9 @@
 		data() {
 			return {
 				form: new Form({
+					form: new Form({
 
+					})
 				})
 			}
 		}
