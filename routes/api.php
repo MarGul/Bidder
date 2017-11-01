@@ -60,6 +60,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
 	/* Submit a review for a user */
 	Route::post('reviews')->uses('ReviewsController@store');
+	/* Create a contract */
+	Route::resource('contracts', 'ContractsController', ['only' => ['store', 'update']]);
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */

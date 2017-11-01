@@ -776,6 +776,14 @@ body {
   font-weight: 500 !important;
 }
 
+.is-small-text {
+  font-size: 13px;
+}
+
+.is-extra-small-text {
+  font-size: 12px;
+}
+
 .gray-text {
   color: #97A9B5;
 }
@@ -1016,6 +1024,10 @@ a {
   }
 }
 
+.m0 {
+  margin: 0;
+}
+
 .mt5 {
   margin-top: 5px;
 }
@@ -1061,7 +1073,7 @@ a {
 }
 
 .mb30 {
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
 }
 
 .mb40 {
@@ -1126,6 +1138,10 @@ a {
 
 .margin-bottom-10 {
   margin-bottom: 10px !important;
+}
+
+.pl15 {
+  padding-left: 15px;
 }
 
 .pb5 {

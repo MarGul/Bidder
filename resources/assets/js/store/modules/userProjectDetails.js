@@ -43,6 +43,18 @@ const actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	projectContractUpdated({commit, state}, payload) {
+		let project = state.project;
+		// Remove old contracts
+		project.contracts = [];
+		// Add the project.
+		project.contracts.push(payload.contract);
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	acceptProject({commit, state, rootState}, payload) {
 		let project = state.project;
 		// Start the project if we should
