@@ -13,7 +13,7 @@ class Contract extends Model
      * @var array
      */
     protected $fillable = [
-    	'client_name', 'client_identity', 'contractor_name', 'contractor_identity', 'project_description',
+    	'project_id', 'client_name', 'client_identity', 'contractor_name', 'contractor_identity', 'project_description',
         'contractor_dissuasion', 'project_start', 'project_end', 'project_price', 'project_price_specified',
         'payment_full', 'payment_specified', 'other'
     ];

@@ -189,6 +189,7 @@
 	import Form from '../../../includes/classes/Form';
 	import Model from '../../../includes/Model';
 	import datepicker from 'vuejs-datepicker';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
@@ -197,6 +198,7 @@
 		data() {
 			return {
 				form: new Form({
+					project_id: '',
 					client_name: '',
 					client_identity: '',
 					contractor_name: '', 
@@ -214,6 +216,11 @@
 				processing: false
 			}
 		},
+		computed: {
+			...mapGetters({
+				project: 'userProjectDetails'
+			})
+		},
 		methods: {
 			update() {
 				this.processing = true;
@@ -229,6 +236,9 @@
 					})
 
 			}
+		},
+		created() {
+			this.form.project_id = this.project.id;
 		}
 	}
 </script>

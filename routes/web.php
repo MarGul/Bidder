@@ -13,12 +13,29 @@ Route::get('/test', function() {
 	$user = \App\User::find(1);
 	$project = \App\Project::find(1);
 	
-	dd(app(\App\Features\ReviewManager::class)->submit(2,1,$user, [
-		'communication' => 3,
-		'as_described' => 4,
-		'would_recommend' => 4,
-		'review' => 'hello there'
-	]));
+	$manager = app(App\Features\ContractManager::class);
+
+	// Try and create the contract.
+    $manager->byUser( $user )
+			->forProject( $project )
+			->create( [
+	            'client_name' => 'Marcus',
+	            'client_identity' => '872615-4455',
+	            'contractor_name' => 'Bills Gun', 
+	            'contractor_identity' => '554499-6622', 
+	            'project_description' => 'This is suppose to be a test project.',
+	            'contractor_dissuasion' => 'I dont advise you to do this stuff.', 
+	            'project_start' => '2017-12-20', 
+	            'project_end' => '2007-12-29', 
+	            'project_price' => 1245,
+	            'project_price_specified' => 'Its tallied up like this:',
+	            'payment_full' => true, 
+	            'payment_specified' => true, 
+	            'other' => 'Other things we might agree on'
+			] );
+
+
+    dd($manager);
 });
 
 /**
