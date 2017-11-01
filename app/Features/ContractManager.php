@@ -70,10 +70,10 @@ class ContractManager
 	{
 		if ( !$user instanceof \App\User ) {
 			$this->setError('Did not pass in a user instance.', 500);
-			return $this;
+		} else {
+			$this->user = $user;
 		}
 
-		$this->user = $user;
 		return $this;
 	}
 
@@ -87,10 +87,21 @@ class ContractManager
 	{
 		if ( !$project instanceof \App\Project ) {
 			$this->setError('Did not pass in a project instance.', 500);
-			return $this;
+		} else {
+			$this->project = $project;
 		}
 
-		$this->project = $project;
+		return $this;
+	}
+
+	public function forContract($contract)
+	{
+		if ( !$contract instanceof \App\Contract ) {
+			$this->setError('Did not pass in a contract instance.', 500);
+		} else {
+			$this->contract = $contract;
+		}
+
 		return $this;
 	}
 
@@ -145,6 +156,24 @@ class ContractManager
 	}
 
 	/**
+	 * Update an existing contract.
+	 * 
+	 * @param  array 	$data
+	 * @return boolean
+	 */
+	public function update($data)
+	{
+		if ( $this->error ) return false;
+
+		if ( $this->setData($data)->edit() ) {
+			$this->projectHistoryManager->forProject($this->contract->project_id)
+										->add('updatedContract', ['user' => $this->user->username]);
+		}
+
+		return $this->error;
+	}
+
+	/**
 	 * Insert the contract into storage.
 	 * 
 	 * @return void
@@ -152,28 +181,34 @@ class ContractManager
 	protected function insert()
 	{
 		try {
-			$this->contract = Contract::create([
-				'project_id' => $this->project->id,
-				'client_name' => $this->originalData['client_name'],
-	            'client_identity' => $this->originalData['client_identity'],
-	            'contractor_name' => $this->originalData['contractor_name'], 
-	            'contractor_identity' => $this->originalData['contractor_identity'], 
-	            'project_description' => $this->originalData['project_description'],
-	            'contractor_dissuasion' => $this->originalData['contractor_dissuasion'], 
-	            'project_start' => $this->originalData['project_start'], 
-	            'project_end' => $this->originalData['project_end'], 
-	            'project_price' => (float)$this->originalData['project_price'],
-	            'project_price_specified' => $this->originalData['project_price_specified'],
-	            'payment_full' => (boolean)$this->originalData['payment_full'], 
-	            'payment_specified' => (boolean)$this->originalData['payment_specified'], 
-	            'other' => $this->originalData['other']
-			]);	
+			$this->contract = Contract::create(array_merge(
+				['project_id' => $this->project->id],
+				$this->dataToArray()
+			));	
 		} catch (\Exception $e) {
 			$this->setError('Could not insert the contract to storage.', 500);
 			return false;;
 		}
 
 		$this->setSuccess('Successfully inserted the contract into storage.', 201);
+		return true;
+	}
+
+	/**
+	 * Update the contract into storage.
+	 * 
+	 * @return void
+	 */
+	protected function edit()
+	{
+		try {
+			$this->contract->update($this->dataToArray());	
+		} catch (\Exception $e) {
+			$this->setError('Could not edit the contract to storage.', 500);
+			return false;;
+		}
+
+		$this->setSuccess('Successfully updated the contract into storage.', 200);
 		return true;
 	}
 
@@ -186,6 +221,30 @@ class ContractManager
 	{
 		$this->originalData = $data;
 		return $this;
+	}
+
+	/**
+	 * Return the original data as an array ready for database.
+	 * 
+	 * @return array
+	 */
+	protected function dataToArray()
+	{
+		return [
+			'client_name' => $this->originalData['client_name'],
+            'client_identity' => $this->originalData['client_identity'],
+            'contractor_name' => $this->originalData['contractor_name'], 
+            'contractor_identity' => $this->originalData['contractor_identity'], 
+            'project_description' => $this->originalData['project_description'],
+            'contractor_dissuasion' => $this->originalData['contractor_dissuasion'], 
+            'project_start' => $this->originalData['project_start'], 
+            'project_end' => $this->originalData['project_end'], 
+            'project_price' => (float)$this->originalData['project_price'],
+            'project_price_specified' => $this->originalData['project_price_specified'],
+            'payment_full' => (boolean)$this->originalData['payment_full'], 
+            'payment_specified' => (boolean)$this->originalData['payment_specified'], 
+            'other' => $this->originalData['other']
+		];
 	}
 
 	/**

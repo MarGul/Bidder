@@ -24,7 +24,8 @@ class ProjectCancelController extends Controller
 	/**
 	 * Update the resource in storage.
 	 * 
-	 * @param  Request 	$request
+	 * @param  Request 		$request
+	 * @param  App\Project 	$project
 	 * @return Illuminate\Http\Response
 	 */
 	public function update(Request $request, Project $project)

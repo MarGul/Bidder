@@ -1,7 +1,7 @@
 <template>
 	<div class="project_contract-component">
 		
-		<form class="form-with-sections">
+		<form class="form-with-sections" @submit.prevent="send">
 			<section class="white-contentSection">
 				<header class="white-contentSection-header">
 					<h3>Projektets avtal</h3>
@@ -175,7 +175,7 @@
 
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}" @click.prevent="create">
+					<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
 						Uppdatera avtalet
 					</button>
 				</footer>
@@ -213,18 +213,26 @@
 			        payment_specified: '', 
 			        other: ''
 				}),
-				processing: false
+				contract_id: null,
+				processing: false,
 			}
 		},
 		computed: {
 			...mapGetters({
 				project: 'userProjectDetails'
-			})
+			}),
+			updating() {
+				// Are we updating an existing contract?
+				return this.contract_id ? true : false;
+			}
 		},
 		methods: {
-			create() {
+			send() {
 				this.processing = true;
-				new Model('contracts').post(this.form.asDate(['project_start', 'project_end']).data())
+				let requestUrl = this.updating ? `contracts/${this.contract_id}` : 'contracts';
+				let requestMethod = this.updating ? 'patch' : 'post';
+
+				new Model(requestUrl)[requestMethod](this.form.asDate(['project_start', 'project_end']).data())
 					.then(response => {
 						this.$store.dispatch('projectContractUpdated', {contract: response.data.contract, history: response.data.history});
 						this.processing = false;
@@ -235,12 +243,41 @@
 						this.form.errors.record(error);
 						this.processing = false;
 						window.scrollTo(0,0);
-					})
+					});
+
+			},
+			initCreateContract() {
+				this.form.project_id = this.project.id;
+			},
+			initUpdateContract() {
+				// Get the contract from storage.
+				let contract = this.project.contracts[0];
+				// Save the contract id.
+				this.contract_id = contract.id;
+				// Set the form to the contracts details
+				this.form.project_id = contract.project_id;
+				this.form.client_name = contract.client_name;
+				this.form.client_identity = contract.client_identity;
+				this.form.contractor_name = contract.contractor_name;
+				this.form.contractor_identity = contract.contractor_identity;
+				this.form.project_description = contract.project_description;
+				this.form.contractor_dissuasion = contract.contractor_dissuasion;
+				this.form.project_start = contract.project_start;
+				this.form.project_end = contract.project_end;
+				this.form.project_price = contract.project_price;
+				this.form.project_price_specified = contract.project_price_specified;
+				this.form.payment_full = contract.payment_full;
+				this.form.payment_specified = contract.payment_specified;
+				this.form.other = contract.other;
 
 			}
 		},
 		created() {
-			this.form.project_id = this.project.id;
+			if ( this.project.contracts ) {
+				this.initUpdateContract();
+			} else {
+				this.initCreateContract();
+			}
 		}
 	}
 </script>

@@ -25751,19 +25751,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				payment_specified: '',
 				other: ''
 			}),
+			contract_id: null,
 			processing: false
 		};
 	},
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
 		project: 'userProjectDetails'
-	})),
+	}), {
+		updating: function updating() {
+			// Are we updating an existing contract?
+			return this.contract_id ? true : false;
+		}
+	}),
 	methods: {
-		create: function create() {
+		send: function send() {
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('contracts').post(this.form.asDate(['project_start', 'project_end']).data()).then(function (response) {
+			var requestUrl = this.updating ? 'contracts/' + this.contract_id : 'contracts';
+			var requestMethod = this.updating ? 'patch' : 'post';
+
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */](requestUrl)[requestMethod](this.form.asDate(['project_start', 'project_end']).data()).then(function (response) {
 				_this.$store.dispatch('projectContractUpdated', { contract: response.data.contract, history: response.data.history });
 				_this.processing = false;
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har uppdaterat avtalet!' });
@@ -25773,10 +25782,38 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				_this.processing = false;
 				window.scrollTo(0, 0);
 			});
+		},
+		initCreateContract: function initCreateContract() {
+			this.form.project_id = this.project.id;
+		},
+		initUpdateContract: function initUpdateContract() {
+			// Get the contract from storage.
+			var contract = this.project.contracts[0];
+			// Save the contract id.
+			this.contract_id = contract.id;
+			// Set the form to the contracts details
+			this.form.project_id = contract.project_id;
+			this.form.client_name = contract.client_name;
+			this.form.client_identity = contract.client_identity;
+			this.form.contractor_name = contract.contractor_name;
+			this.form.contractor_identity = contract.contractor_identity;
+			this.form.project_description = contract.project_description;
+			this.form.contractor_dissuasion = contract.contractor_dissuasion;
+			this.form.project_start = contract.project_start;
+			this.form.project_end = contract.project_end;
+			this.form.project_price = contract.project_price;
+			this.form.project_price_specified = contract.project_price_specified;
+			this.form.payment_full = contract.payment_full;
+			this.form.payment_specified = contract.payment_specified;
+			this.form.other = contract.other;
 		}
 	},
 	created: function created() {
-		this.form.project_id = this.project.id;
+		if (this.project.contracts) {
+			this.initUpdateContract();
+		} else {
+			this.initCreateContract();
+		}
 	}
 });
 
@@ -25788,7 +25825,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "project_contract-component"
   }, [_c('form', {
-    staticClass: "form-with-sections"
+    staticClass: "form-with-sections",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.send($event)
+      }
+    }
   }, [_c('section', {
     staticClass: "white-contentSection"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
@@ -26199,13 +26242,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       processing: _vm.processing
     },
     attrs: {
-      "type": "submit"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.create($event)
-      }
+      "type": "submit",
+      "disabled": _vm.processing
     }
   }, [_vm._v("\n\t\t\t\t\tUppdatera avtalet\n\t\t\t\t")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
