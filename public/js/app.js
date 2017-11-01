@@ -11719,7 +11719,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.remember = $$a.concat($$v))
+            $$i < 0 && (_vm.form.remember = $$a.concat([$$v]))
           } else {
             $$i > -1 && (_vm.form.remember = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
@@ -15721,11 +15721,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "categories-view"
   }, [_c('app-hero', [_c('h1', {
+    attrs: {
+      "slot": "title"
+    },
     slot: "title"
   }, [_vm._v("Kategorier")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
+      "slot": "right",
       "src": "mechanic.png",
       "alt": ""
     },
@@ -15843,11 +15850,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "regions-view"
   }, [_c('app-hero', [_c('h1', {
+    attrs: {
+      "slot": "title"
+    },
     slot: "title"
   }, [_vm._v("Platser")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
+      "slot": "right",
       "src": "mechanic.png",
       "alt": ""
     },
@@ -16940,11 +16954,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "services-view"
   }, [_c('app-hero', [_c('h1', {
+    attrs: {
+      "slot": "title"
+    },
     slot: "title"
   }, [_vm._v("Tjänster")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
+      "slot": "right",
       "src": "mechanic.png",
       "alt": ""
     },
@@ -25494,6 +25515,9 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 //
 //
 //
@@ -25663,16 +25687,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a
+	},
 	data: function data() {
 		return {
 			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
-				form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({})
-			})
+				client_name: '',
+				client_identity: '',
+				contractor_name: '',
+				contractor_identity: '',
+				project_description: '',
+				contractor_dissuasion: '',
+				project_start: '',
+				project_end: '',
+				project_price: '',
+				project_price_specified: '',
+				payment_full: '',
+				payment_specified: '',
+				other: ''
+			}),
+			processing: false
 		};
+	},
+
+	methods: {
+		update: function update() {
+			var _this = this;
+
+			this.processing = true;
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('contracts').post(this.form.asDate(['project_start', 'project_end']).data()).then(function (response) {
+				console.log(response);
+				_this.processing = false;
+			}).catch(function (error) {
+				_this.form.errors.record(error);
+				_this.processing = false;
+				window.scrollTo(0, 0);
+			});
+		}
 	}
 });
 
@@ -25681,214 +25757,501 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "project_contract-component"
   }, [_c('form', {
-    staticClass: "form-with-sections"
+    staticClass: "form-with-sections",
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.update($event)
+      }
+    }
   }, [_c('section', {
     staticClass: "white-contentSection"
-  }, [_c('header', {
-    staticClass: "white-contentSection-header"
-  }, [_c('h3', [_vm._v("Projektets avtal")])]), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "white-contentSection-content"
   }, [_c('div', {
     staticClass: "form-section"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
   }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('client_name')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.client_name),
+      expression: "form.client_name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.client_name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.client_name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('client_identity')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.client_identity),
+      expression: "form.client_identity"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.client_identity)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.client_identity = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('contractor_name')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.contractor_name),
+      expression: "form.contractor_name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.contractor_name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.contractor_name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('contractor_identity')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.contractor_identity),
+      expression: "form.contractor_identity"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.contractor_identity)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.contractor_identity = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('project_description')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.project_description),
+      expression: "form.project_description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "6"
+    },
+    domProps: {
+      "value": (_vm.form.project_description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.project_description = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('contractor_dissuasion')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Avrådande")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.contractor_dissuasion),
+      expression: "form.contractor_dissuasion"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    },
+    domProps: {
+      "value": (_vm.form.contractor_dissuasion)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.contractor_dissuasion = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('project_start')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska påbörjas")]), _vm._v(" "), _c('datepicker', {
+    attrs: {
+      "input-class": "form-control",
+      "language": "sv",
+      "monday-first": true,
+      "disabled": {
+        to: new Date()
+      }
+    },
+    model: {
+      value: (_vm.form.project_start),
+      callback: function($$v) {
+        _vm.form.project_start = $$v
+      },
+      expression: "form.project_start"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('project_end')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska vara slutfört")]), _vm._v(" "), _c('datepicker', {
+    attrs: {
+      "input-class": "form-control",
+      "language": "sv",
+      "monday-first": true,
+      "disabled": {
+        to: new Date()
+      }
+    },
+    model: {
+      value: (_vm.form.project_end),
+      callback: function($$v) {
+        _vm.form.project_end = $$v
+      },
+      expression: "form.project_end"
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('project_price')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Totalsumma")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.project_price),
+      expression: "form.project_price"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.form.project_price)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.project_price = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('project_price_specified')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Specificerat")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.project_price_specified),
+      expression: "form.project_price_specified"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    },
+    domProps: {
+      "value": (_vm.form.project_price_specified)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.project_price_specified = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(7), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container mb30",
+    class: {
+      'has-errors': _vm.form.errors.has('payment_full') || _vm.form.errors.has('payment_specified')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Betalningsalternativ")]), _vm._v(" "), _c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.payment_full),
+      expression: "form.payment_full"
+    }],
+    attrs: {
+      "type": "checkbox"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.form.payment_full) ? _vm._i(_vm.form.payment_full, null) > -1 : (_vm.form.payment_full)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.form.payment_full,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.form.payment_full = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.form.payment_full = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.form.payment_full = $$c
+        }
+      }
+    }
+  }), _vm._v(" Hela beloppet betalas när arbetet är slutfört.\n\t\t\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.payment_specified),
+      expression: "form.payment_specified"
+    }],
+    attrs: {
+      "type": "checkbox"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.form.payment_specified) ? _vm._i(_vm.form.payment_specified, null) > -1 : (_vm.form.payment_specified)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.form.payment_specified,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.form.payment_specified = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.form.payment_specified = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.form.payment_specified = $$c
+        }
+      }
+    }
+  }), _vm._v(" Beställaren vill ha en specificerad faktura.\n\t\t\t\t\t\t\t\t")])])]), _vm._v(" "), _c('div', {
+    staticClass: "is-weight-500 mb3 is-small-text"
+  }, [_vm._v("Om ni ej avtal om något annat så gäller följande:")]), _vm._v(" "), _vm._m(8)])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section no-border"
+  }, [_vm._m(9), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container",
+    class: {
+      'has-errors': _vm.form.errors.has('other')
+    }
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.form.other),
+      expression: "form.other"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "rows": "4"
+    },
+    domProps: {
+      "value": (_vm.form.other)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.form.other = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('footer', {
+    staticClass: "white-contentSection-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    class: {
+      processing: _vm.processing
+    },
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("\n\t\t\t\t\tUppdatera avtalet\n\t\t\t\t")])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "white-contentSection-header"
+  }, [_c('h3', [_vm._v("Projektets avtal")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Beställare")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Utförare")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Namn")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Projektets beskrivning")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('textarea', {
-    staticClass: "form-control",
-    attrs: {
-      "rows": "6"
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Utförarens avårdande")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Avrådande")]), _vm._v(" "), _c('textarea', {
-    staticClass: "form-control",
-    attrs: {
-      "rows": "4"
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Tider")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Arbetet ska påbörjas")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Arbetet ska vara slutfört")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Totalsumma")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Specificerat")]), _vm._v(" "), _c('textarea', {
-    staticClass: "form-control",
-    attrs: {
-      "rows": "4"
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Betalning")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v(" Hela beloppet betalas när arbetet är slutfört.\n\t\t\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v(" Beställaren vill ha en specificerad faktura.\n\t\t\t\t\t\t\t\t")])])]), _vm._v(" "), _c('div', [_vm._v("Om ni ej avtal om något annat så gäller följande:")]), _vm._v(" "), _c('ul', [_c('li', [_vm._v("Arbeten som anges i fakturan ska vara slutförda när faktureringen sker.")]), _vm._v(" "), _c('li', [_vm._v("Fakturan ska betalas inom 30 dagar efter beställaren mottagit fakturan.")]), _vm._v(" "), _c('li', [_vm._v("Om betalningen ej sker inom rätt tid ska beställaren betala dröjsmålsränta enligt räntelagen.")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section"
-  }, [_c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "m0 pl15 is-extra-small-text"
+  }, [_c('li', [_vm._v("Arbeten som anges i fakturan ska vara slutförda när faktureringen sker.")]), _vm._v(" "), _c('li', [_vm._v("Fakturan ska betalas inom 30 dagar efter beställaren mottagit fakturan.")]), _vm._v(" "), _c('li', [_vm._v("Om betalningen ej sker inom rätt tid ska beställaren betala dröjsmålsränta enligt räntelagen.")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-section-description"
   }, [_c('div', {
     staticClass: "description-header"
   }, [_vm._v("Övrigt")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('div', {
-    staticClass: "form-section-controls"
-  }, [_c('div', {
-    staticClass: "control-container"
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('textarea', {
-    staticClass: "form-control",
-    attrs: {
-      "rows": "4"
-    }
-  })])])])])])])])
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
