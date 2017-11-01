@@ -176,7 +176,7 @@ class ContractManager
 	/**
 	 * Insert the contract into storage.
 	 * 
-	 * @return void
+	 * @return boolean
 	 */
 	protected function insert()
 	{
@@ -197,7 +197,7 @@ class ContractManager
 	/**
 	 * Update the contract into storage.
 	 * 
-	 * @return void
+	 * @return boolean
 	 */
 	protected function edit()
 	{
