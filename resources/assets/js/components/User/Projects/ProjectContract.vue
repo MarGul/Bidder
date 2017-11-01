@@ -1,7 +1,7 @@
 <template>
 	<div class="project_contract-component">
 		
-		<form class="form-with-sections" @submit.prevent="update">
+		<form class="form-with-sections">
 			<section class="white-contentSection">
 				<header class="white-contentSection-header">
 					<h3>Projektets avtal</h3>
@@ -175,7 +175,7 @@
 
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}">
+					<button type="submit" class="btn btn-primary" :class="{processing}" @click.prevent="create">
 						Uppdatera avtalet
 					</button>
 				</footer>
@@ -222,12 +222,14 @@
 			})
 		},
 		methods: {
-			update() {
+			create() {
 				this.processing = true;
 				new Model('contracts').post(this.form.asDate(['project_start', 'project_end']).data())
 					.then(response => {
-						console.log(response);
+						this.$store.dispatch('projectContractUpdated', {contract: response.data.contract, history: response.data.history});
 						this.processing = false;
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har uppdaterat avtalet!'});
+						window.scrollTo(0,0);
 					})
 					.catch(error => {
 						this.form.errors.record(error);

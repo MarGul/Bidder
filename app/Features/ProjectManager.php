@@ -139,7 +139,7 @@ class ProjectManager
 	 */
 	public function show($project)
 	{
-		$project->load('service', 'bid.user', 'users', 'history', 'messages.user');
+		$project->load('service', 'bid.user', 'users', 'contracts', 'history', 'messages.user');
 
 		return $project;
 	}

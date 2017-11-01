@@ -14476,10 +14476,25 @@ var actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	acceptProject: function acceptProject(_ref3, payload) {
+	projectContractUpdated: function projectContractUpdated(_ref3, payload) {
 		var commit = _ref3.commit,
-		    state = _ref3.state,
-		    rootState = _ref3.rootState;
+		    state = _ref3.state;
+
+		var project = state.project;
+		// Remove old contracts
+		project.contracts = [];
+		// Add the project.
+		project.contracts.push(payload.contract);
+		// Add all of the project history.
+		payload.history.forEach(function (history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	acceptProject: function acceptProject(_ref4, payload) {
+		var commit = _ref4.commit,
+		    state = _ref4.state,
+		    rootState = _ref4.rootState;
 
 		var project = state.project;
 		// Start the project if we should
@@ -14496,9 +14511,9 @@ var actions = {
 		}).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	reviewSubmitted: function reviewSubmitted(_ref4, payload) {
-		var commit = _ref4.commit,
-		    state = _ref4.state;
+	reviewSubmitted: function reviewSubmitted(_ref5, payload) {
+		var commit = _ref5.commit,
+		    state = _ref5.state;
 
 		var project = state.project;
 		project.users.find(function (u) {
@@ -25744,13 +25759,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		project: 'userProjectDetails'
 	})),
 	methods: {
-		update: function update() {
+		create: function create() {
 			var _this = this;
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('contracts').post(this.form.asDate(['project_start', 'project_end']).data()).then(function (response) {
-				console.log(response);
+				_this.$store.dispatch('projectContractUpdated', { contract: response.data.contract, history: response.data.history });
 				_this.processing = false;
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har uppdaterat avtalet!' });
+				window.scrollTo(0, 0);
 			}).catch(function (error) {
 				_this.form.errors.record(error);
 				_this.processing = false;
@@ -25771,13 +25788,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "project_contract-component"
   }, [_c('form', {
-    staticClass: "form-with-sections",
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.update($event)
-      }
-    }
+    staticClass: "form-with-sections"
   }, [_c('section', {
     staticClass: "white-contentSection"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
@@ -26189,6 +26200,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "submit"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.create($event)
+      }
     }
   }, [_vm._v("\n\t\t\t\t\tUppdatera avtalet\n\t\t\t\t")])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

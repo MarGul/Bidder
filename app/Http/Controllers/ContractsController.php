@@ -50,13 +50,19 @@ class ContractsController extends Controller
         $project = Project::findOrFail($request->project_id);
         $this->authorize('in-project', $project);
 
+        // Fixed for 5.5
+        $data = $request->only([
+            'client_name','client_identity','contractor_name','contractor_identity','project_description','contractor_dissuasion', 
+            'project_start','project_end','project_price','project_price_specified','payment_full','payment_specified','other'
+        ]);
+
         // Try and create the contract.
         $this->manager->byUser( $request->user() )
                       ->forProject( $project )
                       ->create( $data );
 
         // The contract could not be created.
-        if ( $this->manager->error ) {
+        if ( $this->manager->hasError() ) {
             return response()->json(['message' => $this->manager->errorMessage], $this->manager->errorCode);
         }
 
