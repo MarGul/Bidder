@@ -57,8 +57,6 @@ class ContractManager extends BaseManager
 		return $this;
 	}
 
-	
-
 	/**
 	 * Get the added project history records.
 	 * 

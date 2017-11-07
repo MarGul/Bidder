@@ -4,7 +4,7 @@ namespace App\Managers;
 
 use App\Service;
 use App\Features\MediaManager;
-use App\Features\SubscriptionManager;
+use App\Managers\SubscriptionManager;
 use App\Jobs\UploadServiceMedia;
 use App\Events\NewService;
 use Carbon\Carbon;
@@ -12,7 +12,15 @@ use Carbon\Carbon;
 class ServiceManager extends BaseManager 
 {
 
+	/**
+	 * The service that the manager is working on.
+	 * @var App\Service
+	 */
 	protected $service;
+	/**
+	 * The services that the manager is working on.
+	 * @var Collection
+	 */
 	protected $services;
 
 	/**
@@ -25,9 +33,9 @@ class ServiceManager extends BaseManager
 	{
 		if ( !$service instanceof \App\Service ) {
 			$this->setError('Service must be an instance of service.', 500);
+		} else {
+			$this->service = $service;
 		}
-
-		$this->service = $service;
 
 		return $this;
 	}

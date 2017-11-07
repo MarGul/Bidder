@@ -26912,7 +26912,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').get().then(function (response) {
 				_this2.$store.commit('SET_SUBSCRIPTIONS_FETCHED', true);
-				_this2.$store.commit('SET_SUBSCRIPTIONS', response.subscriptions);
+				_this2.$store.commit('SET_SUBSCRIPTIONS', response.data.subscriptions);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -27013,6 +27013,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -27031,7 +27038,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		categories: function categories() {
-			return this.$store.getters.categoriesFlattened;
+			return this.$store.getters.categories;
 		},
 		regions: function regions() {
 			return this.$store.getters.regions;
@@ -27053,7 +27060,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('subscriptions').post(this.form.data()).then(function (response) {
 				var subscriptions = _this.$store.getters.subscriptions;
-				subscriptions.push(response.subscription);
+				subscriptions.push(response.data.subscription);
 				_this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 				_this.$store.dispatch('showNotification', {
 					type: 'success',
@@ -27113,13 +27120,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": ""
     }
-  }, [_vm._v("Välj kategori")]), _vm._v(" "), _vm._l((_vm.categories), function(category) {
-    return _c('option', {
-      domProps: {
-        "value": category.id,
-        "textContent": _vm._s(category.name)
+  }, [_vm._v("Välj kategori")]), _vm._v(" "), _vm._l((_vm.categories), function(rootCat) {
+    return _c('optgroup', {
+      key: rootCat.slug,
+      attrs: {
+        "label": rootCat.name
       }
-    })
+    }, _vm._l((rootCat.sub_categories), function(category) {
+      return _c('option', {
+        key: category.slug,
+        domProps: {
+          "value": category.id,
+          "textContent": _vm._s(category.name)
+        }
+      })
+    }))
   })], 2), _vm._v(" "), (_vm.form.errors.has('category_id')) ? _c('span', {
     staticClass: "help-block",
     domProps: {
@@ -27260,7 +27275,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })]), _vm._v(" "), _c('div', {
       staticClass: "item-go-to"
     }, [_c('i', {
-      staticClass: "icon icon_delete wh15",
+      staticClass: "icon icon_delete wh12 danger",
       on: {
         "click": function($event) {
           _vm.remove(subscription.id)

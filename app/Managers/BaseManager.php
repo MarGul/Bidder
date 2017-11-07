@@ -129,7 +129,7 @@ abstract class BaseManager
 	 */
 	protected function data($key = null) { 
 		if ( !is_null($key) ) {
-			return $this->originalData[$key];
+			return $this->dataExists($key) ? $this->originalData[$key] : null;
 		}
 
 		return $this->originalData; 
