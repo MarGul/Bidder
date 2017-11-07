@@ -46,7 +46,7 @@
 
 				new Model(`services/${this.serviceId}/comments`).post({body: this.comment})
 					.then(response => {
-						this.$store.commit('ADD_COMMENT', {comment: response.comment});
+						this.$store.commit('ADD_COMMENT', {comment: response.data.comment});
 
 						// Clear input and stop processing
 						this.comment = '';

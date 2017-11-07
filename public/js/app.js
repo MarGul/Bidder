@@ -17290,7 +17290,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.processing = true;
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.serviceId + '/comments').post({ body: this.comment }).then(function (response) {
-				_this.$store.commit('ADD_COMMENT', { comment: response.comment });
+				_this.$store.commit('ADD_COMMENT', { comment: response.data.comment });
 
 				// Clear input and stop processing
 				_this.comment = '';
