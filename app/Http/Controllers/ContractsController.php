@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ContractManager;
+use App\Managers\ContractManager;
 use App\Project;
 use App\Contract;
 
@@ -13,7 +13,7 @@ class ContractsController extends Controller
     /**
      * Manager
      * 
-     * @var App\Features\ContractManager
+     * @var App\Managers\ContractManager
      */
     private $manager;
 

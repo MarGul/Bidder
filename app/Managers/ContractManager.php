@@ -4,7 +4,7 @@ namespace App\Features;
 
 use App\Contract;
 
-class ContractManager
+class ContractManager extends BaseManager
 {
 	/**
 	 * Manager for handling the history records for a project.
@@ -12,69 +12,21 @@ class ContractManager
 	 */
 	protected 	$projectHistoryManager;
 	/**
-	 * Has the manager experienced any errors?
-	 * @var boolean
-	 */
-	protected 	$error;
-	/**
-	 * The error response message.
-	 * @var string
-	 */
-	public 		$errorMessage;
-	/**
-	 * The error status code.
-	 * @var integer
-	 */
-	public 		$errorCode;
-	/**
-	 * The success response message.
-	 * @var string
-	 */
-	public 		$successMessage;
-	/**
-	 * The success response code.
-	 * @var integer
-	 */
-	public 		$successCode;
-	/**
 	 * The project that the manger is working with.
 	 * @var App\Project
 	 */
 	protected 	$project;
 	/**
-	 * The user that the manager is working with.
-	 * @var App\User
-	 */
-	protected 	$user;
-	/**
 	 * The contract that the manager is working with.
 	 * @var App\Contract
 	 */
 	protected 	$contract;
-
 	
 
 	public function __construct(ProjectHistoryManager $projectHistoryManager)
 	{
 		$this->projectHistoryManager = $projectHistoryManager;
 		$this->error = false;
-	}
-
-	/**
-	 * Set the user that the manager should work with.
-	 * 
-	 * @param  App\User 	$user
-	 * @return ContractManager
-	 */
-	public function byUser($user)
-	{
-		if ( !$user instanceof \App\User ) {
-			$this->setError('Did not pass in a user instance.', 500);
-		} else {
-			$this->user = $user;
-		}
-
-		return $this;
 	}
 
 	/**
@@ -105,15 +57,7 @@ class ContractManager
 		return $this;
 	}
 
-	/**
-	 * Does the manager have any errors?
-	 * 
-	 * @return boolean
-	 */
-	public function hasError()
-	{
-		return $this->error;
-	}
+	
 
 	/**
 	 * Get the added project history records.
@@ -143,7 +87,7 @@ class ContractManager
 	 */
 	public function create($data)
 	{
-		if ( $this->error ) return false;
+		if ( $this->hasError() ) return false;
 
 		if ( $this->projectContractExists() ) return false;
 
@@ -152,7 +96,7 @@ class ContractManager
 										->add('updatedContract', ['user' => $this->user->username]);
 		}
 
-		return $this->error;
+		return $this->hasError();
 	}
 
 	/**
@@ -163,14 +107,14 @@ class ContractManager
 	 */
 	public function update($data)
 	{
-		if ( $this->error ) return false;
+		if ( $this->hasError() ) return false;
 
 		if ( $this->setData($data)->edit() ) {
 			$this->projectHistoryManager->forProject($this->contract->project_id)
 										->add('updatedContract', ['user' => $this->user->username]);
 		}
 
-		return $this->error;
+		return $this->hasError();
 	}
 
 	/**
@@ -213,17 +157,6 @@ class ContractManager
 	}
 
 	/**
-	 * Set the data that the manager is working with.
-	 * 
-	 * @param array 	$data
-	 */
-	protected function setData($data)
-	{
-		$this->originalData = $data;
-		return $this;
-	}
-
-	/**
 	 * Return the original data as an array ready for database.
 	 * 
 	 * @return array
@@ -245,31 +178,6 @@ class ContractManager
             'payment_specified' => (boolean)$this->originalData['payment_specified'], 
             'other' => $this->originalData['other']
 		];
-	}
-
-	/**
-	 * Set the manager error state.
-	 * 
-	 * @param string 	$message
-	 * @param integer 	$code
-	 */
-	protected function setError($message, $code)
-	{
-		$this->error = true;
-		$this->errorMessage = $message;
-		$this->errorCode = $code;
-	}
-
-	/**
-	 * Set the manager success state.
-	 * 
-	 * @param string 	$message
-	 * @param integer 	$code
-	 */
-	protected function setSuccess($message, $code)
-	{
-		$this->successMessage = $message;
-		$this->successCode = $code;
 	}
 
 	/**

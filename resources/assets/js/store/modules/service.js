@@ -31,7 +31,7 @@ const service = {
 			commit('SET_SERVICE', {comments: [], user: {}});
 			new Model('services').find(payload.id)
 			.then(response => {
-				commit('SET_SERVICE', response.service);
+				commit('SET_SERVICE', response.data.service);
 				commit('SET_LOADED', true);
 			}).catch(error => { });
 		},
