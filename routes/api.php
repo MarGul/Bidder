@@ -27,7 +27,7 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle a services comments */
 	Route::resource('services.comments', 'ServiceCommentController', ['except' => ['create', 'edit', 'show']]);
 	/* Handle a services bids */
-	Route::resource('services.bids', 'ServiceBidController', ['except' => ['create', 'edit']]);
+	Route::resource('services.bids', 'ServiceBidController', ['only' => ['index', 'store']]);
 	/* Accept a bid */
 	Route::post('bids/{bid}/accept')->uses('BidAcceptController@create');
 	/* A users services */

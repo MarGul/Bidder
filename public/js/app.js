@@ -12219,7 +12219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.id).create(this.finalData).then(function (response) {
 				// Add the new bid to the store.
-				_this.$store.dispatch('addBid', { bid: response.bid });
+				_this.$store.dispatch('addBid', { bid: response.data.bid });
 				_this.form.reset();
 				_this.processing = false;
 				// Show a success notification for bid created
@@ -14185,7 +14185,7 @@ var service = {
 			commit('SET_BIDS_LOADED', false);
 			commit('SET_BIDS', { bids: [] });
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(state.service.id).get().then(function (response) {
-				commit('SET_BIDS', response.bids);
+				commit('SET_BIDS', response.data.bids);
 				commit('SET_BIDS_LOADED', true);
 			}).catch(function (error) {});
 		},
@@ -22385,8 +22385,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.$route.params.id + '/bids').get().then(function (response) {
 			_this.$store.commit('SET_SERVICE_DETAILS_BIDS_FETCHED', true);
-			_this.$store.commit('SET_SERVICE_DETAILS_BIDS', response.bids);
-			_this.$store.commit('SET_SERVICE_DETAILS_BID_ACCEPTED', response.meta.bid_accepted);
+			_this.$store.commit('SET_SERVICE_DETAILS_BIDS', response.data.bids);
+			_this.$store.commit('SET_SERVICE_DETAILS_BID_ACCEPTED', response.data.bid_accepted);
 		}).catch(function (error) {
 			console.log(error);
 		});
@@ -22598,7 +22598,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('user/bids').get().then(function (response) {
 				_this.$store.commit('SET_USER_BIDS_FETCHED', true);
-				_this.$store.commit('SET_USER_BIDS', response.bids);
+				_this.$store.commit('SET_USER_BIDS', response.data.bids);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -22756,7 +22756,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/bids/' + this.$route.params.id).get().then(function (response) {
 				_this.$store.commit('SET_USER_BID_DETAILS_FETCHED', true);
-				_this.$store.commit('SET_USER_BID_DETAILS', response.bid);
+				_this.$store.commit('SET_USER_BID_DETAILS', response.data.bid);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -22857,7 +22857,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['service'],
+	props: {
+		service: {
+			type: Object,
+			required: true
+		}
+	},
 	computed: {
 		fetched: function fetched() {
 			return this.$store.getters.userBidDetailsFetched;
@@ -22943,13 +22948,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "item-list-icon pt3"
   }, [_c('i', {
-    staticClass: "icon icon_document_check wh15 cursor-default"
+    staticClass: "icon icon_document_check wh15 light-gray cursor-default"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "item-list-icon"
   }, [_c('i', {
-    staticClass: "icon icon_bid wh20 cursor-default"
+    staticClass: "icon icon_bid wh20 light-gray cursor-default"
   })])
 }]}
 module.exports.render._withStripped = true

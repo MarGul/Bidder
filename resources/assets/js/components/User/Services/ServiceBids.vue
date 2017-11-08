@@ -57,8 +57,8 @@
 			new Model(`services/${this.$route.params.id}/bids`).get()
 				.then(response => {
 					this.$store.commit('SET_SERVICE_DETAILS_BIDS_FETCHED', true);
-					this.$store.commit('SET_SERVICE_DETAILS_BIDS', response.bids);
-					this.$store.commit('SET_SERVICE_DETAILS_BID_ACCEPTED', response.meta.bid_accepted);
+					this.$store.commit('SET_SERVICE_DETAILS_BIDS', response.data.bids);
+					this.$store.commit('SET_SERVICE_DETAILS_BID_ACCEPTED', response.data.bid_accepted);
 				})
 				.catch(error => {
 					console.log(error);

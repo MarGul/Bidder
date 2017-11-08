@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\BidManager;
+use App\Managers\BidManager;
 use App\Bid;
 
 class UserBidsController extends Controller
@@ -11,7 +11,7 @@ class UserBidsController extends Controller
     /**
 	 * Manager
 	 * 
-	 * @var App\Features\BidManager
+	 * @var App\Managers\BidManager
 	 */
 	private $manager;
 
@@ -28,10 +28,20 @@ class UserBidsController extends Controller
 	 * @return Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-		return response()->json([
-			'message' => 'Displaying a listing of users bids',
-			'bids' => $this->manager->byUser($request->user())
-		], 200);
+		// Try to fetch the bids.
+		$this->manager->byUser($request->user())
+					  ->userBids();
+
+		if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'bids' => $this->manager->bids()
+            ]
+        ], $this->manager->successCode());
 	}
 
 	/**
@@ -45,10 +55,20 @@ class UserBidsController extends Controller
 	{
 		$this->authorize('my-resource', $bid);
 
-		return response()->json([
-			'message' => 'Displaying a bid.', 
-			'bid' => $this->manager->show($bid)
-		], 200);
+		// Try and find the bid.
+		$this->manager->forBid($bid)
+					  ->show();
+
+		if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'bid' => $this->manager->bid()
+            ]
+        ], $this->manager->successCode());
 	}
 
 	/**
@@ -62,11 +82,17 @@ class UserBidsController extends Controller
 	{
 		$this->authorize('my-resource', $bid);
 
-		if ( !$this->manager->destroy($bid) ) {
-			return response()->json(['message' => 'Could not delete your bid at the moment.'], 400);
-		}
+		// Try to delete the bid
+		$this->manager->forBid($bid)
+					  ->delete();
 
-		return response()->json(['message' => 'Successfully deleted the bid.'], 200);
+		if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage()
+        ], $this->manager->successCode());
 	}
 
 }

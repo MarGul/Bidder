@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Bid;
 use App\Service;
-use App\Features\BidManager;
+use App\Managers\BidManager;
 
 class BidAcceptController extends Controller
 {
@@ -13,7 +13,7 @@ class BidAcceptController extends Controller
 	/**
      * Class to manage bids
      * 
-     * @var App\Features\BidManager
+     * @var App\Managers\BidManager
      */
 	private $manager;
 
@@ -34,11 +34,18 @@ class BidAcceptController extends Controller
 		// Policy to make sure user can accept bids for this service.
 		$this->authorize('my-resource', $service);
 
-		if ( !$this->manager->accept($bid) ) {
-			return response()->json(['message' => 'Could not accept the bid'], 500);
+		// Try to accept the bid
+		$this->manager->forService($service)
+					  ->forBid($bid)
+					  ->accept();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
-		return response()->json(['message' => 'Bid was accepted and a project created.'], 201);
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+		], $this->manager->successCode());
 	}
 
 }

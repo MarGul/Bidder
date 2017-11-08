@@ -41,7 +41,7 @@ const service = {
 			commit('SET_BIDS', {bids: []});
 			new Model('services/{id}/bids').setId(state.service.id).get()
 				.then(response => {
-					commit('SET_BIDS', response.bids);
+					commit('SET_BIDS', response.data.bids);
 					commit('SET_BIDS_LOADED', true);
 				}).catch(error => { });
 		},
