@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\MessageManager;
+use App\Managers\MessageManager;
 use App\Project;
 
 class ProjectMessagesController extends Controller
@@ -12,7 +12,7 @@ class ProjectMessagesController extends Controller
     /**
 	 * Manager
 	 * 
-	 * @var App\Features\MessageManager
+	 * @var App\Managers\MessageManager
 	 */
 	private $manager;
 
@@ -32,13 +32,21 @@ class ProjectMessagesController extends Controller
     	$this->authorize('in-project', $project);
     	$this->validate($request, ['message' => 'required']);
 
-    	$data = ['projectId' => $project->id, 'message' => $request->message];
+    	// Try to insert the message.
+        $this->manager->byUser($request->user())
+                      ->forProject($project)
+                      ->create(['message' => $request->message]);
 
-        if ( !$message = $this->manager->create($request->user(), $data) ) {
-    		return response()->json(['message' => 'Could not create the message.'], 500);
-    	}
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
 
-    	return response()->json(['msg' => 'Created the message.', 'message' => $message], 201);
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'message' => $this->manager->message()
+            ]
+        ], $this->manager->successCode());
     }
 
 }
