@@ -84,7 +84,7 @@
 					would_recommend: this.would_recommend,
 					review: this.review
 				}).then(response => {
-					this.$emit('submitted', {review: response.review, history: response.history});
+					this.$emit('submitted', {review: response.data.review, history: response.data.history});
 					this.processing = false;
 				}).catch(error => {
 					this.error = true;

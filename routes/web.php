@@ -10,8 +10,9 @@
 */
 
 Route::get('/test', function() {
-	$service = \App\Service::find(1);
-	app(\App\Managers\BidManager::class)->forService($service)->bidAccepted();
+	$project = \App\Project::find(1);
+	$user = \App\User::find(1);
+	app(\App\Managers\ReviewManager::class)->byUser($user)->forProject($project)->allowedToReview();
 });
 
 /**

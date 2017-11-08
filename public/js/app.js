@@ -25113,7 +25113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				would_recommend: this.would_recommend,
 				review: this.review
 			}).then(function (response) {
-				_this.$emit('submitted', { review: response.review, history: response.history });
+				_this.$emit('submitted', { review: response.data.review, history: response.data.history });
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.error = true;

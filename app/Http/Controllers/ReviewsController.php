@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ReviewManager;
+use App\Managers\ReviewManager;
+use App\Project;
 
 class ReviewsController extends Controller
 {
@@ -11,7 +12,7 @@ class ReviewsController extends Controller
 	/**
 	 * Manager
 	 * 
-	 * @var App\Features\ReviewManager
+	 * @var App\Managers\ReviewManager
 	 */
 	private $manager;
 
@@ -38,17 +39,28 @@ class ReviewsController extends Controller
 			'review' => 'required'
 		]);
 
-		$data = $request->only(['communication', 'as_described', 'would_recommend', 'review']);
+		$project = Project::findOrFail($request->project_id);
 
-		if ( !$response = $this->manager->submit($request->user_id, $request->project_id, $request->user(), $data) ) {
-			return response()->json(['message' => 'Could not store your review.'], 500);
+		$this->authorize('in-project', $project);
+
+		$data = $request->only(['user_id', 'communication', 'as_described', 'would_recommend', 'review']);
+		
+		// Try to create the review.
+		$this->manager->byUser($request->user())
+					  ->forProject($project)
+					  ->create($data);
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
 		return response()->json([
-			'message' => 'Successfully stored your review.',
-			'review' => $response['review'],
-			'history' => $response['history']
-		], 201);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'review' => $this->manager->review(),
+				'history' => $this->manager->history()
+			]
+		], $this->manager->successCode());
 	}
 
 }

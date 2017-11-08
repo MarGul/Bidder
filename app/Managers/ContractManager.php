@@ -26,7 +26,6 @@ class ContractManager extends BaseManager
 	public function __construct(ProjectHistoryManager $projectHistoryManager)
 	{
 		$this->projectHistoryManager = $projectHistoryManager;
-		$this->error = false;
 	}
 
 	/**
