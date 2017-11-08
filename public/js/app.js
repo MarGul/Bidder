@@ -19790,8 +19790,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]("users/" + this.$store.getters.authUser.id + "/notification-settings").patch(this.settings).then(function (response) {
-				_this.$store.commit('SET_NOTIFICATIONSETTINGS', { notificationSettings: _this.settings });
+			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('users/notification-settings').patch(this.settings).then(function (response) {
+				_this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', { notificationSettings: _this.settings });
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi har uppdaterat dina inställningar för när du ska få notifikationer.' });
 				_this.processing = false;
 			}).catch(function (error) {
@@ -19804,7 +19804,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('user/notification-settings').get().then(function (response) {
-				_this2.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.settings);
+				_this2.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.data.settings);
 				_this2.$store.commit('SET_USER_NOTIFICATION_SETTINGS_FETCHED', true);
 			}).catch(function (error) {
 				console.log(error);
