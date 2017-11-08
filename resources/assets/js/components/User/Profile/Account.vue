@@ -66,10 +66,10 @@
 		methods: {
 			update() {
 				this.processing = true;
-				new Model('users/{id}/profile').update(this.$store.getters.authUser.id, this.form.data())
+				new Model(`users/${this.$store.getters.authUser.id}/profile`).patch(this.form.data())
 					.then(response => {
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din profil.'});
-						this.$store.commit('SET_USER', {user: response.user});
+						this.$store.commit('SET_USER', {user: response.data.user});
 						this.processing = false;
 					})
 					.catch(error => {

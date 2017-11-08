@@ -18160,7 +18160,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.fetched = false;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$route.params.username).get().then(function (response) {
-				_this.user = response.user;
+				_this.user = response.data.user;
 				_this.fetched = true;
 			}).catch(function (error) {
 				console.log(error);
@@ -18981,9 +18981,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('users/{id}/profile').update(this.$store.getters.authUser.id, this.form.data()).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('users/' + this.$store.getters.authUser.id + '/profile').patch(this.form.data()).then(function (response) {
 				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade din profil.' });
-				_this.$store.commit('SET_USER', { user: response.user });
+				_this.$store.commit('SET_USER', { user: response.data.user });
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error);
