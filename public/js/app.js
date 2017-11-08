@@ -10229,7 +10229,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // Initialize Data
         new __WEBPACK_IMPORTED_MODULE_6__includes_Model__["a" /* default */]('categories').get().then(function (response) {
-            _this.$store.commit('SET_CATEGORIES', response.categories);
+            _this.$store.commit('SET_CATEGORIES', response.data.categories);
             _this.$store.commit('SET_CATEGORIES_FETCHED', true);
         });
         new __WEBPACK_IMPORTED_MODULE_6__includes_Model__["a" /* default */]('regions').get().then(function (response) {
@@ -20370,7 +20370,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		var _this2 = this;
 
 		new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('checklist-items').get().then(function (response) {
-			_this2.checklistItems = response.checklistItems;
+			_this2.checklistItems = response.data.checklistItems;
 		}).catch(function (error) {
 			console.log(error);
 		});

@@ -18,10 +18,10 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('users/{user}/password')->uses('UserPasswordController@update');
 	/* Handle regions */
 	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
-	/* Handle categories */
-	Route::resource('categories', 'CategoryController', ['only' => ['index', 'show']]);
-	/* Handle checklist Items */
-	Route::resource('checklist-items', 'ChecklistItemsController', ['only' => ['index']]);
+	/* Get parent categories */
+	Route::get('categories')->uses('CategoryController@index');
+	/* Get the category checklist Items */
+	Route::get('checklist-items')->uses('ChecklistItemsController@index');
 	/* Handle services */
 	Route::resource('services', 'ServiceController', ['only' => ['index', 'show']]);
 	/* Handle a services comments */

@@ -310,7 +310,7 @@
 		created() {
 			new Model('checklist-items').get()
 				.then(response => {
-					this.checklistItems = response.checklistItems;
+					this.checklistItems = response.data.checklistItems;
 				})
 				.catch(error => { console.log(error); })
 		}

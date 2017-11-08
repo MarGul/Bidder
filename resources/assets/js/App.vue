@@ -54,7 +54,7 @@
         created() {
             // Initialize Data
             new Model('categories').get().then(response => {
-                this.$store.commit('SET_CATEGORIES', response.categories);
+                this.$store.commit('SET_CATEGORIES', response.data.categories);
                 this.$store.commit('SET_CATEGORIES_FETCHED', true);
             });
             new Model('regions').get().then(response => {
