@@ -31,7 +31,7 @@ class UserPasswordController extends Controller
 	public function update(User $user, Request $request) {
 		$this->validate($request,[
 			'old' => 'required',
-            'new' => 'required|min:6',
+            'new' => 'required|min:7|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',
             'again' => 'required|same:new'
 		]);
 

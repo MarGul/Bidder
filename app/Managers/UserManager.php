@@ -64,11 +64,13 @@ class UserManager extends BaseManager
 	 * @return App\User
 	 */
 	public function create($data)
-	{
-		$user = User::create([
-			'email' => $data['email'],
-			'username' => $data['username'],
-			'password' => bcrypt($data['password']),
+	{		
+		$this->setData($data);
+
+		$this->user = User::create([
+			'email' => $this->data('email'),
+			'username' => $this->data('username'),
+			'password' => bcrypt($this->data('password')),
 			'name' => '',
 			'bio' => '',
 			'avatar' => $this->defaultAvatarUrl,
@@ -78,7 +80,7 @@ class UserManager extends BaseManager
 		// Send out email for confirming the users email adress
 		Notification::send($user, new EmailVerification($user));
 
-		return $user;
+		return $this->user;
 	}
 
 	/**
@@ -165,19 +167,6 @@ class UserManager extends BaseManager
 		$this->setSuccess('Successfully updated the password in storage.', 200);
 
 		return true;
-		
-		// Make sure the old is the same as the users current password
-		if ( !Hash::check($old, $user->password) ) {
-			return response()->json(['old' => ['Det gamla lösenordet var fel.']], 403);
-		}
-
-		$user->password = bcrypt($new);
-
-		if ( !$user->update() ) {
-			return response()->json(['message' => 'Could not update your password'], 500);
-		}
-
-		return response()->json(['message' => 'Updated your password.'], 200);
 	}
 
 	/**
