@@ -151,10 +151,21 @@ class UserManager extends BaseManager
 	/**
 	 * Update the users password.
 	 * 
-	 * @param  App\Http\Requests\UpdatePassword 	$request
-	 * @return \Illuminate\Http\Response
+	 * @param  array 	$data
+	 * @return boolean
 	 */
-	public function updatePassword($user, $old, $new) {
+	public function updatePassword($data) 
+	{
+		if ( $this->hasError() ) return false;
+		
+		if ( !$this->setData($data)->oldPasswordMatch() ) return false;
+		
+		if ( !$this->editPassword() ) return false;
+
+		$this->setSuccess('Successfully updated the password in storage.', 200);
+
+		return true;
+		
 		// Make sure the old is the same as the users current password
 		if ( !Hash::check($old, $user->password) ) {
 			return response()->json(['old' => ['Det gamla lösenordet var fel.']], 403);
@@ -167,6 +178,40 @@ class UserManager extends BaseManager
 		}
 
 		return response()->json(['message' => 'Updated your password.'], 200);
+	}
+
+	/**
+	 * Update the resource in storage.
+	 *
+	 * @return boolean
+	 */
+	protected function editPassword()
+	{
+		try {
+			$this->user->update([
+				'password' => bcrypt($this->data('new'))
+			]);
+		} catch ( \Exception $e ) {
+			$this->setError(['message' => 'Could not update the password in storage.'], 500);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Is the old password entered correct?
+	 *
+	 * @return boolean
+	 */
+	protected function oldPasswordMatch()
+	{
+		if ( !Hash::check($this->data('old'), $this->user->password) ) {
+			$this->setError(['old' => ['Det gamla lösenordet var ej korrekt.']] ,403);
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
