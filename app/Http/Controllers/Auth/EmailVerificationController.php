@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Features\UserManager;
+use App\Managers\UserManager;
 
 class EmailVerificationController extends Controller
 {
@@ -12,7 +12,7 @@ class EmailVerificationController extends Controller
 	/**
      *  Class to manage users.
      * 
-     * @var App\Features\UserManager
+     * @var App\Managers\UserManager
      */
 	private $manager;
 
@@ -28,11 +28,14 @@ class EmailVerificationController extends Controller
 	 */
 	public function verify($code)
 	{
-		if ( $this->manager->verifyEmail($code) ) {
-			return redirect('email-verified');
+		// Try to verify the email.
+		$this->manager->verifyEmail($code);
+
+		if ( $this->manager->hasError() ) {
+			return $this->manager->errorMessage();
 		}
 
-		return "Your email could not be verified";
+		return redirect('email-verified');
 	}
 
 }

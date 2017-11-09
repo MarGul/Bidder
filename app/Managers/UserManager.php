@@ -84,6 +84,34 @@ class UserManager extends BaseManager
 	}
 
 	/**
+	 * Verify a users email address
+	 * 
+	 * @param  string 	$code
+	 * @return boolean
+	 */
+	public function verifyEmail($code)
+	{
+		$this->user = User::where('email_verification_code', $code)->first();
+
+		if ( !$this->user ) {
+			$this->setError('Not a correct email verification code.', 403);
+			return false;
+		}
+
+		try {
+			$this->user->update([
+				'email_verified' => true,
+				'email_verification_code' => null
+			]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not verify your email.', 500);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Update the users profile.
 	 * 
 	 * @param  array 	$data
@@ -202,23 +230,4 @@ class UserManager extends BaseManager
 
 		return true;
 	}
-
-	/**
-	 * Verify a users email address
-	 * 
-	 * @param  string 	$code
-	 * @return boolean
-	 */
-	public function verifyEmail($code)
-	{
-		$user = User::where('email_verification_code', $code)->first();
-
-		if ( !$user ) return false;
-
-		$user->email_verified = true;
-		$user->email_verification_code = null;
-
-		return $user->save();
-	}
-
 }
