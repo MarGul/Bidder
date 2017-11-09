@@ -152,13 +152,14 @@ class UserManager extends BaseManager
 	/**
 	 * Update a users avatar.
 	 * 
-	 * @param  App\User 						$user
 	 * @param  Illuminate\Http\UploadedFile 	$avatar
 	 * @return boolean
 	 */
-	public function updateProfilePicture($user, $avatar)
+	public function updateAvatar($avatar)
 	{
-		$img = Image::make($avatar)->resize(400, null, function($constraint) {
+		if ( $this->hasError() ) return false;
+
+		$img = Image::make($avatar)->resize(500, null, function($constraint) {
 			$constraint->aspectRatio();
 		});
 
@@ -167,15 +168,22 @@ class UserManager extends BaseManager
 		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
 
 		// Delete the old profile picture in a job
-		if ( $user->avatar && ($user->avatar !== $this->defaultAvatarUrl) ) {
-			dispatch(new DeleteOldProfilePicture($user->avatar));
+		if ( $this->user->avatar && ($this->user->avatar !== $this->defaultAvatarUrl) ) {
+			dispatch(new DeleteOldProfilePicture($this->user->avatar));
 		}
 
-		$user->avatar = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/' . $path;
-		
-		if ( !$user->save() ) return false;
+		try {
+			$this->user->update([
+				'avatar' => config('amazon.bucket_link') . '/' . config('amazon.bucket') . '/' . $path
+			]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not update the users avatar.', 500);
+			return false;
+		}
 
-		return $user;
+		$this->setSuccess('Successfully updated the users avatar.', 200);
+
+		return true;
 	}
 
 	/**

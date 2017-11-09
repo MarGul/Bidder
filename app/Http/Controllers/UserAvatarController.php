@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\UserManager;
+use App\Managers\UserManager;
 use App\User;
 
 class UserAvatarController extends Controller
@@ -12,7 +12,7 @@ class UserAvatarController extends Controller
 	/**
      *  Class to manage users.
      *  
-     * @var App\Features\UserManager;
+     * @var App\Managers\UserManager;
      */
 	private $manager;
 
@@ -31,14 +31,23 @@ class UserAvatarController extends Controller
 	 */
 	public function store(User $user, Request $request)
 	{
-		$this->authorize('my-resource', $user);
+		$this->authorize('my-user', $user);
 		$this->validate($request, ['avatar' => 'required|image']);
 
-		if ( !$request->file('avatar')->isValid() || !$user = $this->manager->updateProfilePicture($user, $request->file('avatar')) ) {
-			return response()->json(['message' => 'Could not upload the avatar.'], 500);
+		// Try to upload the new avatar
+		$this->manager->byUser($user)
+					  ->updateAvatar($request->file('avatar'));
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
-		return response()->json(['message' => 'Successfully uploaded the avatar.', 'user' => $user], 200);
+		return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'user' => $this->manager->user()
+            ]
+        ], $this->manager->successCode());
 	}
 
 }

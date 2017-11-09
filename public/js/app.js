@@ -19495,7 +19495,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				formData.append('avatar', files[0], files[0].name);
 
 				new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('users/' + this.$store.getters.authUser.id + '/avatar').post(formData).then(function (response) {
-					_this.$store.commit('SET_USER', { user: response.user });
+					_this.$store.commit('SET_AUTHENTICATED_USER', response.data.user);
 					_this.$store.dispatch('showNotification', { type: 'success', msg: 'Nice! Du uppdaterade din avatar.' });
 					_this.processing = false;
 				}).catch(function (error) {
