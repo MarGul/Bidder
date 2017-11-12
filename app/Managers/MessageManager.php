@@ -4,37 +4,17 @@ namespace App\Managers;
 
 use App\Message;
 use App\Events\NewMessage;
+use App\Managers\Traits\ProjectTrait;
 
 class MessageManager extends BaseManager
 {
-	/**
-	 * The project that the manager will be working with.
-	 * @var App\Project
-	 */
-	protected $project;
+	use ProjectTrait;
+
 	/**
 	 * The message that the manager is working with.
 	 * @var App\Message
 	 */
 	protected $message;
-
-
-	/**
-	 * Set the project that the manager is working on.
-	 * 
-	 * @param  App\Project 	$project
-	 * @return MessageManager
-	 */
-	public function forProject($project)
-	{
-		if ( !$project instanceof \App\Project ) {
-			$this->setError('Project must be an instance of project.', 500);
-		} else {
-			$this->project = $project;
-		}
-
-		return $this;
-	}
 
 	/**
 	 * Return the message that the manager has been working on.

@@ -8,61 +8,13 @@ use App\Events\NewBid;
 use App\Events\RemoveService;
 use App\Jobs\NotificationsForNewBid;
 use Carbon\Carbon;
+use App\Managers\Traits\ServiceTrait;
+use App\Managers\Traits\BidTrait;
 
 class BidManager extends BaseManager
 {
+	use ServiceTrait, BidTrait;
 
-	protected $service;
-	protected $bid;
-	protected $bids;
-
-	/**
-	 * Set the service that the manager is working with.
-	 * 
-	 * @param  App\Service 	$service
-	 * @return BidManager
-	 */
-	public function forService($service)
-	{
-		if ( !$service instanceof \App\Service ) {
-			$this->setError('Service must be an instance of service.', 500);
-		} else {
-			$this->service = $service;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Set the bid that the manager is working with.
-	 * 
-	 * @param  App\Bid 	$bid
-	 * @return BidManager
-	 */
-	public function forBid($bid)
-	{
-		if ( !$bid instanceof \App\Bid ) {
-			$this->setError('Bid must be an instance of bid.', 500);
-		} else {
-			$this->bid = $bid;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Return the bid that the manager has been working on.
-	 * 
-	 * @return App\Bid
-	 */
-	public function bid() { return $this->bid; }
-	
-	/**
-	 * Return the bids that the manager has been working on.
-	 * 
-	 * @return Collection
-	 */
-	public function bids() { return $this->bids; }
 	/**
 	 * Does the service have a bid already accepted?
 	 * 
@@ -74,7 +26,6 @@ class BidManager extends BaseManager
 							->where('accepted', true)
 							->count();
 	}
-
 
 	/**
 	 * Get the bids for a service.

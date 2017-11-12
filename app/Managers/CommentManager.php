@@ -4,15 +4,13 @@ namespace App\Managers;
 
 use App\Comment;
 use App\Events\CommentCreated;
+use App\Managers\Traits\ServiceTrait;
 
 
 class CommentManager extends BaseManager
 {
-	/**
-	 * The service that the manager is working with.
-	 * @var App\Service
-	 */
-	protected $service;
+	use ServiceTrait;
+
 	/**
 	 * The comment that the manager is working with.
 	 * @var App\Comment
@@ -23,24 +21,6 @@ class CommentManager extends BaseManager
 	 * @var Collection
 	 */
 	protected $comments;
-
-
-	/**
-	 * Set the service that the manager is working on.
-	 * 
-	 * @param  App\Service 	$service
-	 * @return CommentManager
-	 */
-	public function forService($service)
-	{
-		if ( !$service instanceof \App\Service ) {
-			$this->setError('Service must be an instance of service.', 500);
-		} else {
-			$this->service = $service;
-		}
-
-		return $this;
-	}
 
 	/**
 	 * Return the comment that the manager has gotten.

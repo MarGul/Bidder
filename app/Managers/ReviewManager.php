@@ -4,54 +4,18 @@ namespace App\Managers;
 
 use App\Review;
 use App\Project;
+use App\Managers\Traits\ProjectTrait;
 
 class ReviewManager extends BaseManager
 {
-	/**
-	 * The project that the manager is working with.
-	 * @var App\Project
-	 */
-	protected $project;
+	use ProjectTrait;
+	
 	/**
 	 * The review that the manager is working with.
 	 * @var App\Review
 	 */
 	protected $review;
-	/**
-	 * ProjectHistoryManager instance to insert project history records.
-	 * @var App\Managers\ProjectHistoryManager
-	 */
-	protected $projectHistoryManager;
 
-
-	public function __construct(ProjectHistoryManager $projectHistoryManager)
-	{
-		$this->projectHistoryManager = $projectHistoryManager;
-	}
-
-	/**
-	 * Set the project that the manager is working with
-	 * 
-	 * @param  App\Project 	$project
-	 * @return ReviewManager
-	 */
-	public function forProject($project)
-	{
-		if ( !$project instanceof \App\Project ) {
-			$this->setError('Project needs to be an instance of project.', 500);
-		} else {
-			$this->project = $project;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Get the added project history records.
-	 * 
-	 * @return array
-	 */
-	public function history() { return $this->projectHistoryManager->addedRecords(); }
 	/**
 	 * Return the review that the manager has been working on.
 	 * 

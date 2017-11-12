@@ -5,11 +5,14 @@ namespace App\Managers;
 use App\Project;
 use Carbon\Carbon;
 use App\Features\InvoiceManager;
-use App\Managers\ProjectHistoryManager;
+use App\Managers\Traits\ProjectTrait;
+use App\Managers\Traits\ServiceTrait;
+use App\Managers\Traits\BidTrait;
 
 class ProjectManager extends BaseManager 
 {
-
+	use ProjectTrait, ServiceTrait, BidTrait;
+	
 	/**
 	 * The amount of days after a project is created that users have to accept the project.
 	 * @var integer
@@ -26,99 +29,18 @@ class ProjectManager extends BaseManager
 	 */
 	protected $userRoleBid = 'bid';
 	/**
-	 * ProjectHistoryManager instance.
-	 * @var App\Managers\ProjectHistoryManager
+	 * The users that has been marked as not accepting the project anymore.
+	 *
+	 * @var array
 	 */
-    protected $projectHistoryManager;
-    
-	protected $project;
-	protected $projects;
-    protected $service;
-    protected $bid;
     protected $usersNotAccepted = [];
 
-	
-	public function __construct(ProjectHistoryManager $projectHistoryManager)
-	{
-        $this->projectHistoryManager = $projectHistoryManager;
-    }
-    
-    /**
-     * Set the service that the manager will be working on.
-     *
-     * @param   App\Service $service
-     * @return  ProjectManager
-     */
-    public function forService($service)
-    {
-        if ( !$service instanceof \App\Service ) {
-            $this->setError('Service needs to be an instance of service.', 500);
-        } else {
-            $this->service = $service;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the bid that the manager will be working with.
-     *
-     * @param   App\Bid $bid
-     * @return  ProjectManager
-     */
-    public function forBid($bid)
-    {
-        if ( !$bid instanceof \App\Bid ) {
-            $this->setError('Bid needs to be an instance of bid.', 500);
-        } else {
-            $this->bid = $bid;
-        }
-
-        return $this;
-    }
-
-    /**
-	 * Set the project that the manager is working on.
-	 * 
-	 * @param  App\Project 	$project
-	 * @return ProjectManager
-	 */
-	public function forProject($project)
-	{
-		if ( !$project instanceof \App\Project ) {
-			$this->setError('Project must be an instance of project.', 500);
-		} else {
-			$this->project = $project;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Return the project that the manager has been working on.
-	 *
-	 * @return App\Project
-	 */
-	public function project() { return $this->project; }
-	/**
-	 * Return the projects that the manager has been working on.
-	 *
-	 * @return Collection
-	 */
-	public function projects() { return $this->projects; }
 	/**
      * Return the users that has been marked as not accepted.
      *
      * @return array
      */
 	public function usersNotAccepted() { return $this->usersNotAccepted; }
-	/**
-	 * Return the added project history records.
-	 *
-	 * @return array
-	 */
-	public function history() { return $this->projectHistoryManager->addedRecords(); }
-
 	
 	/**
 	 * Fetch the users projects.

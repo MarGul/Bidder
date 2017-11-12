@@ -3,47 +3,18 @@ namespace App\Features;
 
 
 use App\Contract;
+use App\Managers\Traits\ProjectTrait;
 
 class ContractManager extends BaseManager
 {
-	/**
-	 * Manager for handling the history records for a project.
-	 * @var App\Managers\ProjectHistoryManager
-	 */
-	protected 	$projectHistoryManager;
-	/**
-	 * The project that the manger is working with.
-	 * @var App\Project
-	 */
-	protected 	$project;
+	use ProjectTrait;
+	
 	/**
 	 * The contract that the manager is working with.
 	 * @var App\Contract
 	 */
 	protected 	$contract;
-	
 
-	public function __construct(ProjectHistoryManager $projectHistoryManager)
-	{
-		$this->projectHistoryManager = $projectHistoryManager;
-	}
-
-	/**
-	 * Set the project that the manager should work with.
-	 * 
-	 * @param  App\Project 	$project
-	 * @return ContractManager
-	 */
-	public function forProject($project)
-	{
-		if ( !$project instanceof \App\Project ) {
-			$this->setError('Did not pass in a project instance.', 500);
-		} else {
-			$this->project = $project;
-		}
-
-		return $this;
-	}
 
 	public function forContract($contract)
 	{
@@ -57,24 +28,11 @@ class ContractManager extends BaseManager
 	}
 
 	/**
-	 * Get the added project history records.
-	 * 
-	 * @return array
-	 */
-	public function history()
-	{
-		return $this->projectHistoryManager->addedRecords();
-	}
-
-	/**
 	 * Return the added contract.
 	 * 
 	 * @return mixed
 	 */
-	public function contract()
-	{
-		return $this->contract;
-	}
+	public function contract() { return $this->contract; }
 
 	/**
 	 * Create a new contract.
