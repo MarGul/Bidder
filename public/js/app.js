@@ -23243,7 +23243,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		var _this = this;
 
 		new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/projects/' + this.$route.params.id).get().then(function (response) {
-			_this.$store.commit('SET_USER_PROJECT_DETAILS', response.project);
+			_this.$store.commit('SET_USER_PROJECT_DETAILS', response.data.project);
 			_this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 		}).catch(function (error) {
 			console.log(error);
@@ -24319,7 +24319,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							_this4.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 							// Update the state of the project.
 							_this4.$store.dispatch('cancelProject', {
-								history: response.history
+								history: response.data.history
 							});
 
 							_this4.$store.dispatch('closeModal');

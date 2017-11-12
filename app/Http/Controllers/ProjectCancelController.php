@@ -32,14 +32,21 @@ class ProjectCancelController extends Controller
 	{
 		$this->authorize('in-project', $project);
 		
-		if ( !$response = $this->manager->cancel($project, $request->user()) ) {
-			return response()->json(['message' => 'Could not cancel the project for you.'], 500);
+		// Try to cancel the project.
+		$this->manager->byUser($request->user())
+					  ->forProject($project)
+					  ->cancel();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
 		return response()->json([
-			'message' => 'Successfully cancelled the project.',
-			'history' => $response['history']
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'history' => $this->manager->history()
+			]
+		], $this->manager->successCode());
 	}
 
 }

@@ -95,6 +95,12 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
+	 * Return the project that the manager has been working on.
+	 *
+	 * @return App\Project
+	 */
+	public function project() { return $this->project; }
+	/**
 	 * Return the projects that the manager has been working on.
 	 *
 	 * @return Collection
@@ -276,14 +282,20 @@ class ProjectManager extends BaseManager
 	/**
 	 * Show a single project with relations.
 	 * 
-	 * @param  App\Project 	$project
-	 * @return App\Project
+	 * @return boolean
 	 */
-	public function show($project)
+	public function show()
 	{
-		$project->load('service', 'bid.user', 'users', 'contracts', 'history', 'messages.user');
+		try {
+			$this->project->load('service', 'users', 'bid.user', 'contracts', 'history', 'messages.user');
+		} catch ( \Exception $e ) {
+			$this->setError('Could not display the project.', 500);
+			return false;
+		}
+		
+		$this->setSuccess('Displaying a project.', 200);
 
-		return $project;
+		return true;
 	}
 
 	/**
@@ -312,23 +324,29 @@ class ProjectManager extends BaseManager
 	/**
 	 * Cancel a project.
 	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user    [User that cancelled]
 	 * @return boolean
 	 */
-	public function cancel($project, $user)
+	public function cancel()
 	{
-		if ( !$project->update(['cancelled' => true]) ) {
+		if ( $this->hasError() ) return false;
+
+		try {
+			// Mark the project as cancelled.
+			$this->project->update(['cancelled' => true]);
+			// Set the user that cancelled.
+			$this->project->users()->updateExistingPivot($this->user->id, ['cancelled' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as cancelled.', 500);
 			return false;
 		}
-
-		// Mark the user that cancelled.
-		$project->users()->updateExistingPivot($user->id, ['cancelled' => true]);
+		
 		// Insert a project history record that the project was cancelled.
-		$this->projectHistoryManager->forProject($project->id)
-									->add('cancelled', ['user' => $user->username]);
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('cancelled', ['user' => $this->user->username]);
 
-		return ['history' => $this->projectHistoryManager->addedRecords()];
+		$this->setSuccess('Successfully cancelled the project.', 200);
+
+		return true;
 	}
 
 	/**

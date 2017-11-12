@@ -110,7 +110,7 @@
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									// Update the state of the project.
 									this.$store.dispatch('cancelProject', {
-										history: response.history
+										history: response.data.history
 									});
 
 									this.$store.dispatch('closeModal');
