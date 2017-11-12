@@ -141,7 +141,15 @@ class BidManager extends BaseManager
 		// Broadcast that the bidding for this service has now stopped
 		event(new RemoveService($this->service->id));
 		// Create a project between the users.
-		app(\App\Features\ProjectManager::class)->create($this->service, $this->bid);
+		$projectManager = app(\App\Managers\ProjectManager::class);
+		$projectManager->forService($this->service)
+					   ->forBid($this->bid)
+					   ->create();
+
+		if ( $projectManager->hasError() ) {
+			$this->setError('Could not insert a project into storage.', 500);
+			return false;
+		}
 
 		$this->setSuccess('Bid was accepted and a project created.', 201);
 		
