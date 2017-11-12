@@ -43,8 +43,8 @@
 				new Model(`projects/${this.project.id}/use-contract`).put()
 					.then(response => {
 						this.$store.dispatch('useContract', {
-							history: response.history,
-							usersNotAccepted: response.usersNotAccepted
+							history: response.data.history,
+							usersNotAccepted: response.data.usersNotAccepted
 						});
 						this.$store.dispatch('showNotification', {
 							type: 'success', 

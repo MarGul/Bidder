@@ -12,7 +12,7 @@
 Route::get('/test', function() {
 	$project = \App\Project::find(2);
 	$user = \App\User::find(1);
-	dd(app(\App\Managers\ProjectManager::class)->forProject($project)->byUser($user));
+	app(\App\Managers\ProjectManager::class)->useContract();
 });
 
 /**

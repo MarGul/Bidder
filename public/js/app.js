@@ -24534,8 +24534,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/' + this.project.id + '/use-contract').put().then(function (response) {
 				_this.$store.dispatch('useContract', {
-					history: response.history,
-					usersNotAccepted: response.usersNotAccepted
+					history: response.data.history,
+					usersNotAccepted: response.data.usersNotAccepted
 				});
 				_this.$store.dispatch('showNotification', {
 					type: 'success',

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 use App\Project;
 
 class ProjectUseContractController extends Controller
@@ -12,7 +12,7 @@ class ProjectUseContractController extends Controller
     /**
      * Manager
      * 
-     * @var App\Features\ProjectManager
+     * @var App\Managers\ProjectManager
      */
     private $manager;
 
@@ -32,14 +32,21 @@ class ProjectUseContractController extends Controller
     {
         $this->authorize('in-project', $project);
 
-        if ( !$response = $this->manager->useContract($project, $request->user()) ) {
-            return response()->json(['message' => 'Could not set the project to use a contract.'], 500);
+        // Try the mark the project as using a contract.
+        $this->manager->byUser($request->user())
+                      ->forProject($project)
+                      ->useContract();
+        
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
         return response()->json([
-            'message' => 'Successfully updated the project to use a contract.',
-            'history' => $response['history'],
-            'usersNotAccepted' => $response['usersNotAccepted']
-        ], 200);
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'history' => $this->manager->history(),
+                'usersNotAccepted' => $this->manager->usersNotAccepted()
+            ]
+        ], $this->manager->successCode());
     }
 }

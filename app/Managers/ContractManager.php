@@ -8,7 +8,7 @@ class ContractManager extends BaseManager
 {
 	/**
 	 * Manager for handling the history records for a project.
-	 * @var App\Features\ProjectHistoryManager
+	 * @var App\Managers\ProjectHistoryManager
 	 */
 	protected 	$projectHistoryManager;
 	/**

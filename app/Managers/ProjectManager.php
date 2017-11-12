@@ -245,27 +245,32 @@ class ProjectManager extends BaseManager
 	/**
 	 * Mark a project to use a contract.
 	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user
 	 * @return mixed
 	 */
-	public function useContract($project, $user)
+	public function useContract()
 	{
-		if ( !$project->update(['use_contract' => true]) ) {
+		if ( $this->hasError() ) return false;
+
+		try {
+			// Mark that the project is use a contract.
+			$this->project->update(['use_contract' => true]);
+			// Mark the user that wants to use contract.
+			$this->project->users()->updateExistingPivot($this->user->id, ['use_contract' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as using a contract.', 500);
 			return false;
 		}
 
 		// Mark the other user as not accepted.
-		$usersNotAccepted = $this->setOthersNotAccepted($project, $user);
+		if ( !$this->setOthersNotAccepted() ) return false;
 
 		// Set a history that the user wanted to use a contract.
-		$this->projectHistoryManager->forProject($project->id)
-									->add('useContract', ['user' => $user->username]);
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('useContract', ['user' => $this->user->username]);
 
-		return [
-			'history' => $this->projectHistoryManager->addedRecords(),
-			'usersNotAccepted' => $usersNotAccepted
-		];
+		$this->setSuccess('Successfully marked the project as using a contract.', 200);
+
+		return true;
 	}
 
 	/**
@@ -390,62 +395,5 @@ class ProjectManager extends BaseManager
 
 		return true;
 	}
-
-	/**
-	 * Update the title for a project according to what role the user has on the project.
-	 * 
-	 * @param  App\User 	$user
-	 * @param  App\Project 	$project
-	 * @param  string 		$title
-	 * @return boolean
-	 */
-	/*
-	public function updateTitle($user, $project, $title)
-	{
-		if ( $user->id === $project->service_user ) {
-			$project->service_user_title = $title;
-		} else {
-			$project->bid_user_title = $title;
-		}
-
-		return $project->update() ? true : false;
-	}
-
-	/**
-	 * Start a project
-	 * 
-	 * @param  App\Project 	$project
-	 * @return boolean
-	 */
-	/*
-	public function start($project)
-	{
-		$project->started = true;
-
-		if ( !app(InvoiceManager::class)->create($project) ) return false;
-
-		return $project->save() ? true : false;
-	}
-
-	/**
-	 * Complete a project.
-	 * 
-	 * @param  App\Project 	$project
-	 * @return boolean
-	 */
-	/*
-	public function complete($project)
-	{
-		// Attach reviews for both users.
-		if ( !app(ReviewManager::class)->attach($project->bid_user, $project->service_user, $project->id) ) {
-			return false;
-		}
-
-		// Mark the project as complete
-		$project->completed = true;
-
-		return $project->save() ? true : false;
-	}
-*/
 
 }
