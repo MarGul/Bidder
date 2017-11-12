@@ -23085,7 +23085,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/projects').get().then(function (response) {
 				_this.$store.commit('SET_USER_PROJECTS_FETCHED', true);
-				_this.$store.commit('SET_USER_PROJECTS', response.projects);
+				_this.$store.commit('SET_USER_PROJECTS', response.data.projects);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -23942,7 +23942,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			var _this = this;
 
 			this.processing = true;
-			new __WEBPACK_IMPORTED_MODULE_3__includes_Model__["a" /* default */]('projects/' + this.project.id + '/details').patch(this.form.asDate(['service_start', 'service_end']).data()).then(function (response) {
+			var data = this.form.asDate(['service_start', 'service_end']).data();
+			new __WEBPACK_IMPORTED_MODULE_3__includes_Model__["a" /* default */]('projects/' + this.project.id + '/details').patch(data).then(function (response) {
 				window.scrollTo(0, 0);
 				_this.$store.dispatch('showNotification', {
 					type: 'success',
@@ -23950,18 +23951,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				});
 				// Update the state.
 				var project = _this.project;
-				project.service_start = response.updates.service_start;
-				project.service_end = response.updates.service_end;
-				project.service_hours = response.updates.service_hours;
-				project.service_price = response.updates.service_price;
-				// Set the user that is not me to not have accepted the project.
-				project.users.filter(function (u) {
-					return u.id !== _this.auth.id;
-				}).forEach(function (user) {
-					user.pivot.accepted = false;
+				project.service_start = data.service_start;
+				project.service_end = data.service_end;
+				project.service_hours = data.service_hours;
+				project.service_price = data.service_price;
+				// Set the user that should be marked with not accepted.
+				project.users.forEach(function (user) {
+					if (response.data.usersNotAccepted.includes(user.id)) {
+						user.pivot.accepted = false;
+					}
 				});
 				// Add all of the project history.
-				response.history.forEach(function (history) {
+				response.data.history.forEach(function (history) {
 					project.history.unshift(history);
 				});
 

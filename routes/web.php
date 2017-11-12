@@ -10,9 +10,9 @@
 */
 
 Route::get('/test', function() {
-	$project = \App\Project::find(1);
+	$project = \App\Project::find(2);
 	$user = \App\User::find(1);
-	app(\App\Managers\ReviewManager::class)->byUser($user)->forProject($project)->allowedToReview();
+	dd(app(\App\Managers\ProjectManager::class)->forProject($project)->byUser($user));
 });
 
 /**

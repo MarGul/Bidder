@@ -27,17 +27,20 @@ class ProjectManager extends BaseManager
 	protected $userRoleBid = 'bid';
 	/**
 	 * ProjectHistoryManager instance.
-	 * @var App\Features\ProjectHistoryManager
+	 * @var App\Managers\ProjectHistoryManager
 	 */
     protected $projectHistoryManager;
-    protected $project;
+    
+	protected $project;
+	protected $projects;
     protected $service;
     protected $bid;
+    protected $usersNotAccepted = [];
 
 	
 	public function __construct(ProjectHistoryManager $projectHistoryManager)
 	{
-		$this->projectHistoryManager = $projectHistoryManager;
+        $this->projectHistoryManager = $projectHistoryManager;
     }
     
     /**
@@ -66,13 +69,71 @@ class ProjectManager extends BaseManager
     public function forBid($bid)
     {
         if ( !$bid instanceof \App\Bid ) {
-            $this->setError('Service needs to be an instance of service.', 500);
+            $this->setError('Bid needs to be an instance of bid.', 500);
         } else {
             $this->bid = $bid;
         }
 
         return $this;
     }
+
+    /**
+	 * Set the project that the manager is working on.
+	 * 
+	 * @param  App\Project 	$project
+	 * @return ProjectManager
+	 */
+	public function forProject($project)
+	{
+		if ( !$project instanceof \App\Project ) {
+			$this->setError('Project must be an instance of project.', 500);
+		} else {
+			$this->project = $project;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Return the projects that the manager has been working on.
+	 *
+	 * @return Collection
+	 */
+	public function projects() { return $this->projects; }
+	/**
+     * Return the users that has been marked as not accepted.
+     *
+     * @return array
+     */
+	public function usersNotAccepted() { return $this->usersNotAccepted; }
+	/**
+	 * Return the added project history records.
+	 *
+	 * @return array
+	 */
+	public function history() { return $this->projectHistoryManager->addedRecords(); }
+
+	
+	/**
+	 * Fetch the users projects.
+	 *
+	 * @return boolean
+	 */
+	public function get()
+	{
+		try {
+			$this->projects = Project::with(['users' => function($query) {
+				$query->where('user_id', $this->user->id);
+			}])->get();
+		} catch ( \Exception $e ) {
+			$this->setError('Could not fetch the users projects from storage.', 500);
+			return false;
+		}
+
+		$this->setSuccess('Listing the users projects.', 200);
+
+		return true;
+	}
 
 	/**
 	 * Create a project between a service and a bid.
@@ -142,29 +203,44 @@ class ProjectManager extends BaseManager
         return true;
     }
 
-	/**
-	 * Update a project's details.
-	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user
-	 * @param  array 		$data
-	 * @return mixed
-	 */
-	public function updateDetails($project, $user, $data)
-	{
-		if ( !$project->update($data) ) {
-			return false;
-		}
+    /**
+     * Update the project.
+     *
+     * @param   array $data
+     * @return  boolean
+     */
+    public function update($data)
+    {
+        if ( $this->hasError() ) return false;
 
-		// Mark the other user as not accepted.
-		$this->setOthersNotAccepted($project, $user);
+        if ( !$this->setData($data)->edit() ) return false;
 
-		// Insert a history record that the project's details has been updated.
-		$history =  $this->projectHistoryManager->forProject($project->id)
-												->add('updateDetails', ['user' => $user->username]);
+        if ( !$this->setOthersNotAccepted() ) return false;
 
-		return ['history' => $history, 'updates' => $data];
-	}
+        $this->projectHistoryManager->forProject($this->project->id)
+                                    ->add('updateDetails', ['user' => $this->user->username]);
+
+        $this->setSuccess('Successfully updated the resource in storage.', 200);
+
+        return true;
+    }
+
+    /**
+     * Update the resource in storage.
+     *
+     * @return boolean
+     */
+    protected function edit()
+    {
+        try {
+            $this->project->update($this->data());
+        } catch ( \Exception $e ) {
+            $this->setError('Could not update the resource in storage.', 500);
+            return false;
+        }
+
+        return true;
+    }
 
 	/**
 	 * Mark a project to use a contract.
@@ -190,21 +266,6 @@ class ProjectManager extends BaseManager
 			'history' => $this->projectHistoryManager->addedRecords(),
 			'usersNotAccepted' => $usersNotAccepted
 		];
-	}
-
-	/**
-	 * Show a users projects.
-	 * 
-	 * @param  App\User 	$user
-	 * @return collection
-	 */
-	public function byUser($user) 
-	{
-		$projects = Project::with(['users' => function($query) use ($user) {
-						$query->where('user_id', $user->id);
-					}])->get();
-
-		return $projects;
 	}
 
 	/**
@@ -268,24 +329,27 @@ class ProjectManager extends BaseManager
 	/**
 	 * Mark other user in the project as not accepted.
 	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user    [myself, to get other ones for the project.]
 	 * @return array
 	 */
-	protected function setOthersNotAccepted($project, $user)
+	protected function setOthersNotAccepted()
 	{
-		$project->load(['users' => function($q) use ($user) {
-			$q->where('user_id', '<>', $user->id);
-		}]);
-
-		// The users that has been marked as not accepted.
-		$users = [];
-		foreach ($project->users as $u) {
-			$project->users()->updateExistingPivot($u->id, ['accepted' => false]);
-			$users[] = $u->id;
-		}
-
-		return $users;
+        try {
+            $this->project->load(['users' => function($q) {
+                $q->where('user_id', '<>', $this->user->id);
+            }]);
+    
+            // The users that has been marked as not accepted.
+            $users = [];
+            foreach ($this->project->users as $u) {
+                $this->project->users()->updateExistingPivot($u->id, ['accepted' => false]);
+                $this->usersNotAccepted[] = $u->id;
+            }
+        } catch ( \Exception $e ) {
+            $this->setError('Could not mark other users as not accepted.', 500);
+            return false;
+        }
+        
+        return true;
 	}
 
 	/**

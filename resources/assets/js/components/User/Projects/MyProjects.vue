@@ -58,7 +58,7 @@
 				new Model('user/projects').get()
 					.then(response => {
 						this.$store.commit('SET_USER_PROJECTS_FETCHED', true);
-						this.$store.commit('SET_USER_PROJECTS', response.projects);
+						this.$store.commit('SET_USER_PROJECTS', response.data.projects);
 					})
 					.catch(error => { console.log(error); });
 			}

@@ -44,7 +44,7 @@ abstract class BaseManager
 	 * Set the user that the manager should work with.
 	 * 
 	 * @param  App\User 	$user
-	 * @return ContractManager
+	 * @return BaseManager
 	 */
 	public function byUser($user)
 	{
