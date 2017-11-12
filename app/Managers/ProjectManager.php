@@ -301,24 +301,32 @@ class ProjectManager extends BaseManager
 	/**
 	 * Accept a project.
 	 * 
-	 * @param  App\Project 	$project
-	 * @param  App\User 	$user    [User that accepted]
 	 * @return boolean
 	 */
-	public function accept($project, $user)
+	public function accept()
 	{
-		// Mark the user that accepted.
-		$project->users()->updateExistingPivot($user->id, ['accepted' => true]);
-		// Insert a project history record that the project was accepted by the user.
-		$this->projectHistoryManager->forProject($project->id)
-									->add('accepted', ['user' => $user->username]);
-		// If all users on the project has accepted we should start the project.
-		$started = $this->shouldStart($project) ? $this->start($project) : false;
+		if ( $this->hasError() ) return false;
 
-		return [
-			'started' => $started, 
-			'history' => $this->projectHistoryManager->addedRecords()
-		];
+		try {
+			// Mark the user that accepted.
+			$this->project->users()->updateExistingPivot($this->user->id, ['accepted' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not accept the project.', 500);
+			return false;
+		}
+		
+		// Insert a project history record that the project was accepted by the user.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('accepted', ['user' => $this->user->username]);
+		
+		// If all users on the project has accepted we should start the project.
+		if ( $this->shouldStart() ) {
+			if ( !$this->start() ) return false;
+		}
+
+		$this->setSuccess('Successfully accepted the project.', 200);
+
+		return true;
 	}
 
 	/**
@@ -379,14 +387,19 @@ class ProjectManager extends BaseManager
 	 * Should we start the project? 
 	 * If all participants have accepted we can start.
 	 * 
-	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
-	protected function shouldStart($project)
+	protected function shouldStart()
 	{
-		$project->load('users');
+		try {
+			$this->project->load('users');
+		} catch ( \Exception $e ) {
+			$this->setError('Could not load users when seeing if the project should start.', 500);
+			return false;
+		}
+		
 		// Loop through each user for the project.
-		foreach ($project->users as $user) {
+		foreach ($this->project->users as $user) {
 			// If one of them still haven't accepted we shouldn't start.
 			if ( !$user->pivot->accepted ) {
 				return false;
@@ -399,16 +412,19 @@ class ProjectManager extends BaseManager
 	/**
 	 * Start a project.
 	 * 
-	 * @param  App\Project 	$project
 	 * @return boolean
 	 */
-	protected function start($project)
+	protected function start()
 	{
-		if ( !$project->update(['started' => true]) ) {
+		try {
+			$this->project->update(['started' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as started.', 500);
 			return false;
 		}
+
 		// Add a history record that the project has been started.
-		$this->projectHistoryManager->forProject($project->id)
+		$this->projectHistoryManager->forProject($this->project->id)
 									->add('started');
 
 		return true;

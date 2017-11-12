@@ -81,8 +81,8 @@
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									// Update the state of the project
 									this.$store.dispatch('acceptProject', {
-										started: response.started,
-										history: response.history
+										started: response.data.started,
+										history: response.data.history
 									});
 
 									this.$store.dispatch('closeModal');
