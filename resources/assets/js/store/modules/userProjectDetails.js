@@ -43,6 +43,21 @@ const actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	removeContract({commit, state}, payload) {
+		let project = state.project;
+		project.use_contract = false;
+		// Set the user to not have use_contract anymore.
+		project.users.forEach(function(user) {
+			if ( user.pivot.use_contract ) {
+				user.pivot.use_contract = false;
+			}
+		});
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	projectContractUpdated({commit, state}, payload) {
 		let project = state.project;
 		// Remove old contracts

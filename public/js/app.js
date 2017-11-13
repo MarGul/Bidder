@@ -14476,9 +14476,27 @@ var actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	projectContractUpdated: function projectContractUpdated(_ref3, payload) {
+	removeContract: function removeContract(_ref3, payload) {
 		var commit = _ref3.commit,
 		    state = _ref3.state;
+
+		var project = state.project;
+		project.use_contract = false;
+		// Set the user to not have use_contract anymore.
+		project.users.forEach(function (user) {
+			if (user.pivot.use_contract) {
+				user.pivot.use_contract = false;
+			}
+		});
+		// Add all of the project history.
+		payload.history.forEach(function (history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	projectContractUpdated: function projectContractUpdated(_ref4, payload) {
+		var commit = _ref4.commit,
+		    state = _ref4.state;
 
 		var project = state.project;
 		// Remove old contracts
@@ -14491,10 +14509,10 @@ var actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	acceptProject: function acceptProject(_ref4, payload) {
-		var commit = _ref4.commit,
-		    state = _ref4.state,
-		    rootState = _ref4.rootState;
+	acceptProject: function acceptProject(_ref5, payload) {
+		var commit = _ref5.commit,
+		    state = _ref5.state,
+		    rootState = _ref5.rootState;
 
 		var project = state.project;
 		// Start the project if we should
@@ -14511,9 +14529,9 @@ var actions = {
 		}).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	reviewSubmitted: function reviewSubmitted(_ref5, payload) {
-		var commit = _ref5.commit,
-		    state = _ref5.state;
+	reviewSubmitted: function reviewSubmitted(_ref6, payload) {
+		var commit = _ref6.commit,
+		    state = _ref6.state;
 
 		var project = state.project;
 		project.users.find(function (u) {
@@ -24534,6 +24552,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -24546,25 +24577,60 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	},
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
-		project: 'userProjectDetails'
-	})),
+		project: 'userProjectDetails',
+		auth: 'authUser'
+	}), {
+		me: function me() {
+			var _this = this;
+
+			return this.project.users.find(function (u) {
+				return u.id === _this.auth.id;
+			});
+		}
+	}),
 	methods: {
 		useContract: function useContract() {
-			var _this = this;
+			var _this2 = this;
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/' + this.project.id + '/use-contract').put().then(function (response) {
-				_this.$store.dispatch('useContract', {
+				_this2.$store.dispatch('useContract', {
 					history: response.data.history,
 					usersNotAccepted: response.data.usersNotAccepted
 				});
-				_this.$store.dispatch('showNotification', {
+				_this2.$store.dispatch('showNotification', {
 					type: 'success',
 					msg: 'Vi har uppdaterat projektet till att nu använda ett avtal.'
 				});
-				_this.processing = false;
+				_this2.processing = false;
 			}).catch(function (error) {
-				_this.processing = false;
+				_this2.processing = false;
+			});
+		},
+		removeContract: function removeContract() {
+			var _this3 = this;
+
+			this.$store.dispatch('openModal', {
+				component: 'confirm',
+				data: {
+					confirmText: 'Är du säker på att du vill ta bort användningen av avtal för projektet? Den andra parten kommer att behöva acceptera projektets start igen?',
+					onConfirm: function onConfirm() {
+						new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('projects/' + _this3.project.id + '/use-contract').delete().then(function (response) {
+							_this3.$store.dispatch('showNotification', {
+								type: 'success',
+								msg: 'Vi har tagit bort användningen av avtal för projektet.'
+							});
+							// Set the projects fetched to false so we break the cache.
+							_this3.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+							// Update the project details in the store.
+							_this3.$store.dispatch('removeContract');
+
+							_this3.$store.dispatch('closeModal');
+						}).catch(function (error) {
+							console.log(error);
+						});
+					}
+				}
 			});
 		}
 	}
@@ -24601,12 +24667,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.useContract($event)
       }
     }
-  })]) : _c('div', {
+  })]) : [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "is-flex c_c"
+  }, [_c('button', {
+    staticClass: "btn btn-info mt10",
+    class: {
+      processing: _vm.processing
+    },
+    attrs: {
+      "type": "button",
+      "disabled": _vm.processing
+    },
+    domProps: {
+      "textContent": _vm._s("Ta bort avtalet")
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.removeContract($event)
+      }
+    }
+  })])], _vm._v(" "), _c('p')], 2)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "is-flex c_c"
   }, [_c('i', {
     staticClass: "icon icon_confirmed wh15 mr5"
-  }), _vm._v(" "), _c('span', [_vm._v("Projektet använder ett avtal")])]), _vm._v(" "), _c('p')])
-},staticRenderFns: []}
+  }), _vm._v(" "), _c('span', [_vm._v("Projektet använder ett avtal")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

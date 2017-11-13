@@ -52,6 +52,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
 	/* Use contract for a project */
 	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
+	/* Remove the use of contract for a project */
+	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
 	/* Cancel a project */
 	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
 	/* Start a project */

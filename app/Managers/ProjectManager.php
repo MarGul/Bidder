@@ -173,7 +173,7 @@ class ProjectManager extends BaseManager
 	/**
 	 * Mark a project to use a contract.
 	 * 
-	 * @return mixed
+	 * @return boolean
 	 */
 	public function useContract()
 	{
@@ -197,6 +197,39 @@ class ProjectManager extends BaseManager
 									->add('useContract', ['user' => $this->user->username]);
 
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
+
+		return true;
+	}
+
+	/**
+	 * Remove the use of contract for the project.
+	 * 
+	 * @return boolean
+	 */
+	public function removeContract()
+	{
+		if ( $this->hasError() ) return false;
+
+		if ( !$this->canRemoveUseOfContract() ) return false;
+
+		try {
+			// Mark the project as not using contract.
+			$this->project->update(['use_contract' => false]);
+			// Remove the user that before wanted to use the contract (Right no only the user that wanted to use contract can remove it.)
+			$this->project->users()->updateExistingPivot($this->user->id, ['use_contract' => false]);
+		} catch (\Exception $e) {
+			$this->setError('Could not remove the use of contract for the project.', 500);
+			return false;
+		}
+
+		// Mark the other user as not accepted.
+		if ( !$this->setOthersNotAccepted() ) return false;
+
+		// Insert a history record that the use of contract has been made.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('removeContract', ['user' => $this->user->username]);
+
+		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 
 		return true;
 	}
@@ -303,6 +336,24 @@ class ProjectManager extends BaseManager
         }
         
         return true;
+	}
+
+	/**
+	 * Is the user allowed to remove the use of contract for the project?
+	 * 
+	 * @return boolean
+	 */
+	protected function canRemoveUseOfContract()
+	{
+		$this->project->load('users');
+
+		foreach ($this->project->users as $user) {
+			if ( $user->id === $this->user->id && $user->use_contract ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

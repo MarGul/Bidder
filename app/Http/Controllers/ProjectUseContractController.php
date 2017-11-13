@@ -49,4 +49,29 @@ class ProjectUseContractController extends Controller
             ]
         ], $this->manager->successCode());
     }
+
+    /**
+     * Remove the specified resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request     $request
+     * @param  App\Project                  $project
+     * @return \Illuminate\Http\Response          
+     */
+    public function destroy(Request $request, Project $project)
+    {
+        $this->authorize('in-project', $project);
+
+        // Try to remove the use of a contract for the project.
+        $this->manager->byUser($request->user())
+                      ->forProject($project)
+                      ->removeContract();
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+        ], $this->manager->successCode());
+    }
 }

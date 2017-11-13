@@ -15,9 +15,22 @@
 					@click.prevent="useContract">
 				</button>
 			</div>
-			<div class="is-flex c_c" v-else>
-				<i class="icon icon_confirmed wh15 mr5"></i> <span>Projektet använder ett avtal</span>
-			</div>
+			<template v-else>
+				<div class="is-flex c_c">
+					<i class="icon icon_confirmed wh15 mr5"></i> <span>Projektet använder ett avtal</span>
+				</div>
+				<div class="is-flex c_c">
+					<button 
+						type="button" 
+						class="btn btn-info mt10"
+						:class="{processing}"
+						:disabled="processing"
+						v-text="`Ta bort avtalet`"
+						@click.prevent="removeContract">
+					</button>
+				</div>
+			</template>
+			
 		</p>
 	</div>
 </template>
@@ -34,8 +47,12 @@
 		},
 		computed: {
 			...mapGetters({
-				project: 'userProjectDetails'
-			})
+				project: 'userProjectDetails',
+				auth: 'authUser'
+			}),
+			me() {
+				return this.project.users.find( u => u.id === this.auth.id );
+			}
 		},
 		methods: {
 			useContract() {
@@ -54,7 +71,33 @@
 					})
 					.catch(error => {
 						this.processing = false;
-					})
+					});
+			},
+			removeContract() {
+				this.$store.dispatch('openModal', {
+					component: 'confirm',
+					data: {
+						confirmText: 'Är du säker på att du vill ta bort användningen av avtal för projektet? Den andra parten kommer att behöva acceptera projektets start igen?',
+						onConfirm: () => {
+							new Model(`projects/${this.project.id}/use-contract`).delete()
+								.then(response => {
+									this.$store.dispatch('showNotification', {
+										type: 'success', 
+										msg: 'Vi har tagit bort användningen av avtal för projektet.'
+									});
+									// Set the projects fetched to false so we break the cache.
+									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+									// Update the project details in the store.
+									this.$store.dispatch('removeContract');
+
+									this.$store.dispatch('closeModal');
+								})
+								.catch(error => {
+									console.log(error);
+								});
+						}
+					}
+				});
 			}
 		}
 	}
