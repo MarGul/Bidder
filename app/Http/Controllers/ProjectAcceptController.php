@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 use App\Project;
 
 class ProjectAcceptController extends Controller
@@ -12,7 +12,7 @@ class ProjectAcceptController extends Controller
 	/**
 	 * Manager
 	 * 
-	 * @var App\Features\ProjectManager
+	 * @var App\Managers\ProjectManager
 	 */
 	private $manager;
 
@@ -33,15 +33,22 @@ class ProjectAcceptController extends Controller
 	{
 		$this->authorize('in-project', $project);
 		
-		if ( !$response = $this->manager->accept($project, $request->user()) ) {
-			return response()->json(['message' => 'Could not accept the project for you.'], 500);
+		// Try to accept the project.
+		$this->manager->byUser($request->user())
+					  ->forProject($project)
+					  ->accept();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
 		return response()->json([
-			'message' => 'Successfully accepted the project.',
-			'started' => $response['started'],
-			'history' => $response['history']
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'started' => $this->manager->project()->started,
+				'history' => $this->manager->history()
+			]
+		], $this->manager->successCode());
 	}
 
 }

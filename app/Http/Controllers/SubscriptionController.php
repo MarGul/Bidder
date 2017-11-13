@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\SubscriptionManager;
+use App\Managers\SubscriptionManager;
+use App\Subscription;
 
 class SubscriptionController extends Controller
 {
@@ -11,7 +12,7 @@ class SubscriptionController extends Controller
     /**
      * Manager
      * 
-     * @var App\Features\SubscriptionManager
+     * @var App\Managers\SubscriptionManager
      */
     private $manager;
 
@@ -28,9 +29,21 @@ class SubscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $subscriptions = $this->manager->byUser($request->user()->id);
+        // Try and get the subscriptions
+        $this->manager->byUser($request->user())
+                      ->get();
+       
+       // The contract could not be created.
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
 
-        return response()->json(['message' => 'Displaying users subscriptions.', 'subscriptions' => $subscriptions], 200);
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'subscriptions' => $this->manager->subscriptions()
+            ]
+        ], $this->manager->successCode());
     }
 
     /**
@@ -41,25 +54,48 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        if ( !$subscription = $this->manager->add($request->user()->id, $request->only('category_id', 'region_id', 'city_id')) ) {
-            return response()->json(['message' => 'Could not add the subscription'], 500);
+        $this->validate($request, [
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        $data = $request->only('category_id', 'region_id', 'city_id');
+
+        // Try and create a subscription
+        $this->manager->byUser($request->user())
+                      ->create($data);
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
-        return response()->json(['message' => 'Successfully added your subscription', 'subscription' => $subscription], 201);
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'subscription' => $this->manager->subscription()
+            ]
+        ], $this->manager->successCode());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Subscription
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subscription $subscription)
     {
-        if ( !$this->manager->delete($id) ) {
-            return response()->json(['message' => 'Could not delete your subscription.'], 500);
+        $this->authorize('my-resource', $subscription);
+
+        // Try and delete the subscription
+        $this->manager->forSubscription($subscription)
+                      ->delete();
+
+         if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
-        return response()->json(['message' => 'Successfully deleted your subscription.', 200]);
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+        ], $this->manager->successCode());
     }
 }

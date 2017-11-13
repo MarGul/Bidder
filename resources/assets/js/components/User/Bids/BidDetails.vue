@@ -38,7 +38,7 @@
 				new Model(`user/bids/${this.$route.params.id}`).get()
 					.then(response => {
 						this.$store.commit('SET_USER_BID_DETAILS_FETCHED', true);
-						this.$store.commit('SET_USER_BID_DETAILS', response.bid);
+						this.$store.commit('SET_USER_BID_DETAILS', response.data.bid);
 					})
 					.catch(error => { console.log(error); });
 			}

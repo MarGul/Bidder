@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreService;
 use App\Service;
 use Carbon\Carbon;
-use App\Features\ServiceManager;
+use App\Managers\ServiceManager;
 
 class ServiceController extends Controller
 {
@@ -14,7 +14,7 @@ class ServiceController extends Controller
     /**
      *  Class to manage services.
      * 
-     * @var App\Features\ServiceManager;
+     * @var App\Managers\ServiceManager;
      */
     protected $manager;
 
@@ -31,18 +31,25 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $services = $this->manager->filter(
-            $request->page, 
-            $request->text, 
-            $request->categories, 
-            $request->regions, 
+       // Try and fetch the services
+       $this->manager->filter(
+            $request->page,
+            $request->text,
+            $request->categories,
+            $request->regions,
             $request->cities
-        );
+       );
+
+       if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
 
         return response()->json([
-            'message' => 'Listing all services.',
-            'services' => $services
-        ], 200);
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'services' => $this->manager->services()
+            ]
+        ], $this->manager->successCode());
     }
 
     /**
@@ -53,9 +60,19 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
+        // Try and find the service
+        $this->manager->forService($service)
+                      ->find();
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
         return response()->json([
-            'message' => 'Showing service details.', 
-            'service' => $this->manager->get($service)
-        ], 200);
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'service' => $this->manager->service()
+            ]
+        ], $this->manager->successCode());
     }
 }

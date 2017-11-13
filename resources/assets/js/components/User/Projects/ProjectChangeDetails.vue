@@ -86,7 +86,8 @@
 		methods: {
 			update() {
 				this.processing = true;
-				new Model(`projects/${this.project.id}/details`).patch(this.form.asDate(['service_start', 'service_end']).data())
+				let data = this.form.asDate(['service_start', 'service_end']).data();
+				new Model(`projects/${this.project.id}/details`).patch(data)
 					.then(response => {
 						window.scrollTo(0,0);
 						this.$store.dispatch('showNotification', {
@@ -95,16 +96,18 @@
 						});
 						// Update the state.
 						let project = this.project;
-						project.service_start = response.updates.service_start;
-						project.service_end = response.updates.service_end;
-						project.service_hours = response.updates.service_hours;
-						project.service_price = response.updates.service_price;
-						// Set the user that is not me to not have accepted the project.
-						project.users.filter(u => u.id !== this.auth.id).forEach(user => {
-							user.pivot.accepted = false;
+						project.service_start = data.service_start;
+						project.service_end = data.service_end;
+						project.service_hours = data.service_hours;
+						project.service_price = data.service_price;
+						// Set the user that should be marked with not accepted.
+						project.users.forEach(user => {
+							if ( response.data.usersNotAccepted.includes(user.id) ) {
+								user.pivot.accepted = false;
+							}
 						});
 						// Add all of the project history.
-						response.history.forEach(function(history) {
+						response.data.history.forEach(function(history) {
 							project.history.unshift(history);
 						});
 

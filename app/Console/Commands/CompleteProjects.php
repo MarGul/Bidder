@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Project;
 use Carbon\Carbon;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 
 class CompleteProjects extends Command
 {

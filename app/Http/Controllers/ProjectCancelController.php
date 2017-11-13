@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 use App\Project;
 
 class ProjectCancelController extends Controller
@@ -12,7 +12,7 @@ class ProjectCancelController extends Controller
 	/**
 	 * Manager
 	 * 
-	 * @var App\Features\ProjectManager
+	 * @var App\Managers\ProjectManager
 	 */
 	private $manager;
 
@@ -24,21 +24,29 @@ class ProjectCancelController extends Controller
 	/**
 	 * Update the resource in storage.
 	 * 
-	 * @param  Request 	$request
+	 * @param  Request 		$request
+	 * @param  App\Project 	$project
 	 * @return Illuminate\Http\Response
 	 */
 	public function update(Request $request, Project $project)
 	{
 		$this->authorize('in-project', $project);
 		
-		if ( !$response = $this->manager->cancel($project, $request->user()) ) {
-			return response()->json(['message' => 'Could not cancel the project for you.'], 500);
+		// Try to cancel the project.
+		$this->manager->byUser($request->user())
+					  ->forProject($project)
+					  ->cancel();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
 		return response()->json([
-			'message' => 'Successfully cancelled the project.',
-			'history' => $response['history']
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'history' => $this->manager->history()
+			]
+		], $this->manager->successCode());
 	}
 
 }

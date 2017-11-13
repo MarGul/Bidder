@@ -85,6 +85,10 @@
 	background-color: #97A9B5;
 }
 
+.icon_contract {
+	@include mask-icon('../svg/contract.svg');
+}
+
 .icon_confirmed {
 	@include mask-icon('../svg/confirm.svg');
 	background-color: $brand-success;
@@ -104,6 +108,10 @@
 
 .icon_delete {
 	@include mask-icon('../svg/delete.svg');
+}
+
+.icon_handshake {
+	@include mask-icon('../svg/handshake.svg');
 }
 
 .icon_question_mark {

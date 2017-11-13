@@ -62,7 +62,7 @@
 				new Model('user/bids').get()
 					.then(response => {
 						this.$store.commit('SET_USER_BIDS_FETCHED', true);
-						this.$store.commit('SET_USER_BIDS', response.bids);
+						this.$store.commit('SET_USER_BIDS', response.data.bids);
 					})
 					.catch(error => { console.log(error); });
 			}

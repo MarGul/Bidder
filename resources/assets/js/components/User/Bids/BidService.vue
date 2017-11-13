@@ -14,7 +14,7 @@
 					<ul class="items-list-icon">
 						<li class="">
 							<div class="item-list-icon pt3">
-								<i class="icon icon_document_check wh15 cursor-default"></i>
+								<i class="icon icon_document_check wh15 light-gray cursor-default"></i>
 							</div>
 							<div class="item-list-icon-content">
 								<div>Titel</div>
@@ -23,7 +23,7 @@
 						</li>
 						<li class="">
 							<div class="item-list-icon">
-								<i class="icon icon_bid wh20 cursor-default"></i>
+								<i class="icon icon_bid wh20 light-gray cursor-default"></i>
 							</div>
 							<div class="item-list-icon-content">
 								<div>Budgivningen {{ statusText }}</div>
@@ -44,7 +44,12 @@
 	import Model from "../../../includes/Model";
 
 	export default {
-		props: ['service'],
+		props: {
+			service: {
+				type: Object,
+				required: true
+			}
+		}, 
 		computed: {
 			fetched() {
 				return this.$store.getters.userBidDetailsFetched;

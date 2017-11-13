@@ -191,7 +191,7 @@
 						this.form.errors.clear();
 						// Break the services cache so it reloads with the updated info.
 						this.$store.commit('SET_USER_SERVICES_FETCHED', false);
-						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
+						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.data.service);
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
 						window.scrollTo(0,0);
 						this.processing = false;
@@ -207,15 +207,15 @@
 			if ( !this.fetched ) {
 				new Model(`user/services/${this.$route.params.id}`).get()
 					.then(response => {
-						this.form.title = response.service.title;
-						this.form.category_id = response.service.category_id;
-						this.form.region_id = response.service.region_id;
-						this.form.city_id = response.service.city_id;
-						this.form.start = response.service.start;
-						this.form.end = response.service.end;
-						this.form.description = response.service.description;
+						this.form.title = response.data.service.title;
+						this.form.category_id = response.data.service.category_id;
+						this.form.region_id = response.data.service.region_id;
+						this.form.city_id = response.data.service.city_id;
+						this.form.start = response.data.service.start;
+						this.form.end = response.data.service.end;
+						this.form.description = response.data.service.description;
 						this.$store.commit('SET_SERVICE_DETAILS_FETCHED', true);
-						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.service);
+						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.data.service);
 					})
 					.catch(error => {
 						console.log(error);

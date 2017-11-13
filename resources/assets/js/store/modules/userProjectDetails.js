@@ -27,6 +27,34 @@ const actions = {
 		project.users.find(u => u.id === rootState.auth.user.id).pivot.cancelled = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	useContract({commit, state}, payload) {
+		let project = state.project;
+		// Set project to use contract
+		project.use_contract = true;
+		// Set users that they haven't accepted.
+		project.users.forEach(function(user) {
+			if ( payload.usersNotAccepted.includes(user.id) ) {
+				user.pivot.accepted = false;
+			}
+		});
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	projectContractUpdated({commit, state}, payload) {
+		let project = state.project;
+		// Remove old contracts
+		project.contracts = [];
+		// Add the project.
+		project.contracts.push(payload.contract);
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	acceptProject({commit, state, rootState}, payload) {
 		let project = state.project;
 		// Start the project if we should

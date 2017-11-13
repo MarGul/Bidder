@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 
 class UserProjectsController extends Controller
 {
@@ -12,7 +12,7 @@ class UserProjectsController extends Controller
     /**
      *  Class to manage projects.
      * 
-     * @var App\Features\ProjectManager;
+     * @var App\Managers\ProjectManager;
      */
 	private $manager;
 
@@ -28,10 +28,20 @@ class UserProjectsController extends Controller
 	 * @return Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
+		// Try to get the users projects.
+		$this->manager->byUser($request->user())
+					  ->get();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+		
 		return response()->json([
-			'message' => 'Displaying projects for a user.', 
-			'projects' => $this->manager->byUser($request->user())
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'projects' => $this->manager->projects()
+			] 
+		], $this->manager->successCode());
 	}
 
 	/**
@@ -45,10 +55,20 @@ class UserProjectsController extends Controller
 	{
 		$this->authorize('in-project', $project);
 
+		// Try to fetch the project
+		$this->manager->forProject($project)
+					  ->show();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+		
 		return response()->json([
-			'message' => 'Displaying a user project.',
-			'project' => $this->manager->show($project)
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'project' => $this->manager->project()
+			]
+		], $this->manager->successCode());
 	}
 
 }

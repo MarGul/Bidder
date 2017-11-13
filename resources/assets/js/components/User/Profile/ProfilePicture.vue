@@ -37,13 +37,14 @@
 			upload(files) {
 				if ( files.length ) {
 					this.processing = true;
+
 					
 					const formData = new FormData();
 					formData.append('avatar', files[0], files[0].name);
 					
 					new Model(`users/${this.$store.getters.authUser.id}/avatar`).post(formData)
 						.then(response => {
-							this.$store.commit('SET_USER', {user: response.user});
+							this.$store.commit('SET_AUTHENTICATED_USER', response.data.user);
 							this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din avatar.'});
 							this.processing = false;
 						})

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 use App\Project;
 
 class ProjectCompleteController extends Controller
@@ -12,7 +12,7 @@ class ProjectCompleteController extends Controller
 	/**
 	 * Manager
 	 * 
-	 * @var App\Features\ProjectManager
+	 * @var App\Managers\ProjectManager
 	 */
 	private $manager;
 
