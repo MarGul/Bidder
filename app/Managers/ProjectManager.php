@@ -4,10 +4,10 @@ namespace App\Managers;
 
 use App\Project;
 use Carbon\Carbon;
-use App\Features\InvoiceManager;
 use App\Managers\Traits\ProjectTrait;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
+
 
 class ProjectManager extends BaseManager 
 {

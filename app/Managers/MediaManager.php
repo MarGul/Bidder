@@ -1,5 +1,5 @@
 <?php
-namespace App\Features;
+namespace App\Managers;
 
 use App\Media;
 use Image;
@@ -8,7 +8,8 @@ use File;
 use Carbon\Carbon;
 
 
-class MediaManager {
+class MediaManager extends BaseManager
+{
 
 	
 	/**
@@ -55,9 +56,9 @@ class MediaManager {
          $options = ['mime' => $mime, 'size' => $size];
 
         if ( !str_contains($mime, 'image/') ) {
-           	if ( !app(MediaManager::class)->processServiceFile($file, $service, $options) ) return false;
+           	if ( !$this->processServiceFile($file, $service, $options) ) return false;
         } else {
-            if ( !app(MediaManager::class)->processServiceImage($file, $service, $options) ) return false;
+            if ( !$this->processServiceImage($file, $service, $options) ) return false;
         }
 
         return $this->deleteLocalFile($file['path']);
@@ -148,7 +149,7 @@ class MediaManager {
      */
     public function storeMedia($file, $thumbPath, $filePath, $service, $options = [])
     {
-    	$cloudUrl = env('AWS_BUCKET_LINK') . '/' . env('AWS_BUCKET') . '/';
+    	$cloudUrl = config('amazon.bucket_link') . '/' . config('amazon.bucket') . '/';
 
     	$media = new Media([
     		'service_id' => $service->id,

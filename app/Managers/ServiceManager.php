@@ -3,7 +3,7 @@
 namespace App\Managers;
 
 use App\Service;
-use App\Features\MediaManager;
+use App\Managers\MediaManager;
 use App\Managers\SubscriptionManager;
 use App\Jobs\UploadServiceMedia;
 use App\Events\NewService;

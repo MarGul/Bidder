@@ -10,7 +10,7 @@ use Notification;
 use App\Notifications\SendInvoice;
 use PDF;
 
-class InvoiceManager
+class InvoiceManager extends BaseManager
 {
 	/**
 	 * The percentage fee that the application takes.
