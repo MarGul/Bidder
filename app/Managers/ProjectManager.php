@@ -348,7 +348,7 @@ class ProjectManager extends BaseManager
 		$this->project->load('users');
 
 		foreach ($this->project->users as $user) {
-			if ( $user->id === $this->user->id && $user->use_contract ) {
+			if ( $user->id === $this->user->id && $user->pivot->use_contract) {
 				return true;
 			}
 		}

@@ -24623,7 +24623,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							// Set the projects fetched to false so we break the cache.
 							_this3.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 							// Update the project details in the store.
-							_this3.$store.dispatch('removeContract');
+							_this3.$store.dispatch('removeContract', { history: response.data.history });
 
 							_this3.$store.dispatch('closeModal');
 						}).catch(function (error) {

@@ -72,6 +72,9 @@ class ProjectUseContractController extends Controller
 
         return response()->json([
             'message' => $this->manager->successMessage(),
+            'data' => [
+                'history' => $this->manager->history()
+            ]
         ], $this->manager->successCode());
     }
 }
