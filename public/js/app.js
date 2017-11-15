@@ -26970,7 +26970,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Beställare")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -26978,7 +26978,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Utförare")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -26986,7 +26986,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Projektets beskrivning")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -26994,7 +26994,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Utförarens avårdande")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -27002,7 +27002,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Tider")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -27010,7 +27010,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-section-description"
@@ -27018,7 +27018,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Betalning")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('ul', {
     staticClass: "m0 pl15 is-extra-small-text"
@@ -27030,7 +27030,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "description-header"
   }, [_vm._v("Övrigt")]), _vm._v(" "), _c('div', {
     staticClass: "description-details"
-  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+  }, [_vm._v("\n\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
