@@ -26117,9 +26117,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('section', {
     staticClass: "white-contentSection"
   }, [_c('header', {
-    staticClass: "white-contentSection-header is-gray is-flex-sm v-center"
+    staticClass: "white-contentSection-header is-gray is-flex v-center"
   }, [_c('h3', {
-    staticClass: "flex-1-sm"
+    staticClass: "flex-1"
   }, [_vm._v("Projektets avtal")]), _vm._v(" "), _c('contract-download')], 1), _vm._v(" "), _c('div', {
     staticClass: "white-contentSection-content"
   }, [_c('div', {
@@ -26655,6 +26655,167 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26662,7 +26823,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		contractDownload: __WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract___default.a
+	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+		project: 'userProjectDetails'
+	}), {
+		contract: function contract() {
+			return this.project.contracts[0];
+		}
+	})
+});
 
 /***/ }),
 /* 422 */
@@ -26671,8 +26846,192 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "project_contract_display-component"
-  }, [_vm._v("\n    Display the contract\n")])
-},staticRenderFns: []}
+  }, [_c('section', {
+    staticClass: "white-contentSection"
+  }, [_c('header', {
+    staticClass: "white-contentSection-header is-gray is-flex v-center"
+  }, [_c('h3', {
+    staticClass: "flex-1"
+  }, [_vm._v("Projektets avtal")]), _vm._v(" "), _c('contract-download')], 1), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.client_name))])]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.client_identity))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Namn")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.contractor_name))])]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Organisations/-personnummer")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.contractor_identity))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.project_description))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Avrådande")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.contractor_dissuasion))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska påbörjas")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.project_start))])]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Arbetet ska vara slutfört")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.project_end))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Totalsumma")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.filters.currency(_vm.contract.project_price)))])]), _vm._v(" "), _c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Specificerat")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.project_price_specified))])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container mb30"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Betalningsalternativ")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_c('ul', [(_vm.contract.payment_full) ? _c('li', [_vm._v("Hela beloppet betalas när arbetet är slutfört.")]) : _vm._e(), _vm._v(" "), (_vm.contract.payment_specified) ? _c('li', [_vm._v("Beställaren vill ha en specificerad faktura.")]) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "is-weight-500 mb3 is-small-text"
+  }, [_vm._v("Om ni ej avtal om något annat så gäller följande:")]), _vm._v(" "), _vm._m(7)])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section no-border"
+  }, [_vm._m(8), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
+  }, [_c('div', {
+    staticClass: "control-container"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('div', {
+    staticClass: "input-data"
+  }, [_vm._v(_vm._s(_vm.contract.other))])])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Beställare")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Utförare")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Projektets beskrivning")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Utförarens avårdande")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tider")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Pris")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Betalning")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "m0 pl15 is-extra-small-text"
+  }, [_c('li', [_vm._v("Arbeten som anges i fakturan ska vara slutförda när faktureringen sker.")]), _vm._v(" "), _c('li', [_vm._v("Fakturan ska betalas inom 30 dagar efter beställaren mottagit fakturan.")]), _vm._v(" "), _c('li', [_vm._v("Om betalningen ej sker inom rätt tid ska beställaren betala dröjsmålsränta enligt räntelagen.")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Övrigt")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

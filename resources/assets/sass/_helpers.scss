@@ -91,6 +91,10 @@
 	}
 }
 
+.flex-1 {
+	flex: 1;
+}
+
 .flex-1-sm {
 	@media screen and (min-width: $screen-sm-min) {
 		flex: 1;

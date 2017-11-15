@@ -1,7 +1,7 @@
 <template>
-  <div class="project_contract-component">
-	  <component :is="template" />
-  </div>
+  	<div class="project_contract-component">
+	  	<component :is="template" />
+  	</div>
 </template>
 
 <script>

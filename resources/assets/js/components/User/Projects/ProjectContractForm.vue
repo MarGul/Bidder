@@ -3,8 +3,8 @@
 		
 		<form class="form-with-sections" @submit.prevent="send">
 			<section class="white-contentSection">
-				<header class="white-contentSection-header is-gray is-flex-sm v-center">
-					<h3 class="flex-1-sm">Projektets avtal</h3>
+				<header class="white-contentSection-header is-gray is-flex v-center">
+					<h3 class="flex-1">Projektets avtal</h3>
 					<contract-download />
 				</header>
 				<div class="white-contentSection-content">
