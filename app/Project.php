@@ -15,7 +15,7 @@ class Project extends Model
      */
     protected $fillable = [
     	'service_id', 'bid_id', 'service_price', 'service_start', 'service_end', 'service_hours', 
-        'accept_ends', 'started', 'cancelled'
+        'use_contract', 'accept_ends', 'started', 'cancelled', 'completed'
     ];
 
     /**
@@ -45,7 +45,7 @@ class Project extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'accepted', 'cancelled');
+        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'review', 'accepted', 'cancelled', 'use_contract');
     }
 
     /**
@@ -55,7 +55,7 @@ class Project extends Model
      */
     public function history()
     {
-        return $this->hasMany('App\ProjectHistory')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\ProjectHistory')->orderBy('id', 'desc');
     }
 
     /**
@@ -66,6 +66,16 @@ class Project extends Model
     public function messages()
     {
         return $this->hasMany('App\Message')->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Each project may have many contracts.
+     * 
+     * @return Eloquent Relationship
+     */
+    public function contracts()
+    {
+        return $this->hasMany('App\Contract');
     }
 
     /**

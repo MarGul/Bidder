@@ -96,8 +96,8 @@
 				
 				new Model('services').get(data)
 					.then(response => {
-						this.$store.commit('SET_SERVICES', appending ? this.services.concat(response.services.data) : response.services.data);
-						this.$store.commit('SET_SERVICES_CAN_LOAD_MORE', response.services.next_page_url ? true : false);
+						this.$store.commit('SET_SERVICES', appending ? this.services.concat(response.data.services.data) : response.data.services.data);
+						this.$store.commit('SET_SERVICES_CAN_LOAD_MORE', response.data.services.next_page_url ? true : false);
 						this.$store.commit('SET_SERVICES_FETCHED', true);
 						this.loadingMore = false;
 						this.processing = false;

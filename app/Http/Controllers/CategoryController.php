@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\CategoryManager;
+use App\Managers\CategoryManager;
 
 class CategoryController extends Controller
 {
@@ -11,7 +11,7 @@ class CategoryController extends Controller
     /**
      * Manager
      * 
-     * @var App\Features\CategoryManager
+     * @var App\Managers\CategoryManager
      */
     private $manager;
 
@@ -26,23 +26,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'message' => 'Listing all categories.',
-            'categories' => $this->manager->getActive()
-        ], 200);
-    }
+        // Try to get the parent categories
+        $this->manager->parents();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  Integer|String  $identifier  [Slug or Id to identify a category]
-     * @return \Illuminate\Http\Response
-     */
-    public function show($identifier)
-    {
-        return response()->json([
-            'message' => 'Not implemented at the time.'
-        ], 200);
-    }
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
 
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'categories' => $this->manager->categories()
+            ]
+        ], $this->manager->successCode());
+    }
 }

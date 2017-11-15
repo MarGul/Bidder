@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
-use App\Features\ServiceManager;
+use App\Managers\ServiceManager;
 
 class UserServicesController extends Controller
 {
@@ -12,7 +12,7 @@ class UserServicesController extends Controller
 	/**
 	 * Manager
 	 * 
-	 * @var App\Features\ServiceManager
+	 * @var App\Manager\ServiceManager
 	 */
 	private $manager;
 
@@ -30,7 +30,19 @@ class UserServicesController extends Controller
 	 */
 	public function index(Request $request) 
 	{
-		return $this->manager->byUser($request->user());
+		$this->manager->byUser($request->user())
+					  ->get();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'services' => $this->manager->services()
+			]
+		], $this->manager->successCode());
 	}
 
 	/**
@@ -43,7 +55,19 @@ class UserServicesController extends Controller
 	{
 		$this->authorize('my-resource', $service);
 
-		return response()->json(['message' => 'Listing a single service.', 'service' => $service]);
+		$this->manager->forService($service)
+					  ->show();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+		
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'service' => $this->manager->service()
+			]
+		], $this->manager->successCode());
 	}
 
 	/**
@@ -70,11 +94,20 @@ class UserServicesController extends Controller
         // In laravel 5.5 we get this from the validate method.
         $data = $request->only(['title', 'description', 'category_id', 'region_id', 'city_id', 'start', 'end', 'bidding', 'media']);
 
-        if ( !$this->manager->create($request->user(), $data) ) {
-            return response()->json(['message' => 'Could not store the service in the database.'], 500);
-        }
-        
-        return response()->json(['message' => 'Service was successfully created.'], 201);
+        // Try and insert the service
+        $this->manager->byUser($request->user())
+        			  ->create($data);
+
+        if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'service' => $this->manager->service()
+			]
+		], $this->manager->successCode());
     }
 
 	/**
@@ -102,11 +135,20 @@ class UserServicesController extends Controller
 
 		$data = $request->only(['title', 'category_id', 'region_id', 'city_id', 'start', 'end', 'description']);
 
-		if ( !$updatedService = $this->manager->update($service, $data) ) {
-			return response()->json(['message' => 'Could not update the service.'], 400);
+		// Try and update the service
+		$this->manager->forService($service)
+					  ->update($data);
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
-		return response()->json(['message' => 'Successfully updated your service', 'service' => $updatedService], 200);
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'service' => $this->manager->service()
+			]
+		], $this->manager->successCode());
 	}
 
 	/**
@@ -117,7 +159,19 @@ class UserServicesController extends Controller
      */
     public function destroy(Service $service)
     {
-        $this->manager->delete($service);
+        $this->authorize('my-resource', $service);
+
+        // Try to delete the service.
+        $this->manager->forService($service)
+        			  ->delete();
+
+        if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
+		return response()->json([
+			'message' => $this->manager->successMessage()
+		], $this->manager->successCode());
     }
 
 }

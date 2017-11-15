@@ -170,7 +170,7 @@
 				new Model('services/{id}/bids').setId(this.id).create(this.finalData)
 					.then(response => {
 						// Add the new bid to the store.
-						this.$store.dispatch('addBid', {bid: response.bid});
+						this.$store.dispatch('addBid', {bid: response.data.bid});
 						this.form.reset();
 						this.processing = false;
 						// Show a success notification for bid created

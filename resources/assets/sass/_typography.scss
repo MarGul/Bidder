@@ -22,6 +22,14 @@ body {
 	@extend .is-bold;
 }
 
+.is-small-text {
+	font-size: 13px;
+}
+
+.is-extra-small-text {
+	font-size: 12px;
+}
+
 .gray-text {
 	color: #97A9B5;
 }

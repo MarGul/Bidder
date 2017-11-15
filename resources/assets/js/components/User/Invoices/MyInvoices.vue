@@ -8,7 +8,7 @@
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
 					<ul class="items-list" v-if="invoices.length > 0">
-						<li class="gray-item clickable" v-for="invoice in invoices" @click="goTo(invoice)">
+						<li class="gray-item clickable" v-for="invoice in invoices" :key="invoice.id" @click="goTo(invoice)">
 							<div class="item-content">
 								<div class="item-header">Faktura #{{ invoice.id }}</div>
 								<div class="item-sub-data">

@@ -14,7 +14,7 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-    	'service_id', 'user_id', 'body', 'parent'
+    	'service_id', 'user_id', 'body'
     ];
 
     /**
@@ -29,7 +29,8 @@ class Comment extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function service() {
+    public function service() 
+    {
     	return $this->belongsTo('App\Service');
     }
 
@@ -38,17 +39,8 @@ class Comment extends Model
      * 
      * @return Eloquent Relationship
      */
-    public function user() {
+    public function user() 
+    {
         return $this->belongsTo('App\User');
     }
-
-    /**
-     * A comment can have many replies.
-     * 
-     * @return Eloquent Relationship
-     */
-    public function replies() {
-        return $this->hasMany(self::class, 'parent', 'id');
-    }
-
 }

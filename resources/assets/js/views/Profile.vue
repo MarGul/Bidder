@@ -80,7 +80,7 @@
 				this.fetched = false;
 				new Model(`users/${this.$route.params.username}`).get()
 					.then(response => {
-						this.user = response.user;
+						this.user = response.data.user;
 						this.fetched = true;
 					})
 					.catch(error => {

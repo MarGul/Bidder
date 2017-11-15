@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Features\UserManager;
-use App\Http\Requests\UpdateProfile;
+use App\Managers\UserManager;
+use Illuminate\Http\Request;
 use App\User;
 
 class UserProfileController extends Controller
@@ -11,7 +11,7 @@ class UserProfileController extends Controller
     /**
      *  Class to manage users.
      *  
-     * @var App\Features\ServiceManager;
+     * @var App\Managers\ServiceManager;
      */
 	private $manager;
 
@@ -28,23 +28,53 @@ class UserProfileController extends Controller
 	 */
 	public function index($username)
 	{
-		if ( !$user = $this->manager->profile($username) ) {
-			return response()->json(['message' => 'Could not fetch the user right now.'], 500);
+		// Try to get the user.
+		$this->manager->profile($username);
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
-		return response()->json(['message' => 'Displaying user profile.', 'user' => $user], 200);
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'user' => $this->manager->user()
+			]
+		], $this->manager->successCode());
 	}
 
 	/**
-	 * Update the resource
+	 * Update the resource in storage
 	 * 
 	 * @param  App\User         $user
-	 * @param  UpdateProfile 	$request
+	 * @param  Request 			$request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(User $user, UpdateProfile $request) 
+	public function update(User $user, Request $request) 
 	{
-		return $this->manager->update($user, $request);
+		$this->validate($request, [
+			'name' => 'required',
+			'username' => 'required|unique:users,username,'.$user->id,
+			'bio' => ''
+		]);
+
+		$this->authorize('my-user', $user);
+
+		$data = $request->only(['name', 'username', 'bio']);
+
+		$this->manager->byUser($user)
+					  ->update($data);
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'user' => $this->manager->user()
+			]
+		], $this->manager->successCode());
 	}
 
 }

@@ -54,7 +54,7 @@
 				new Model('user/services').get()
 					.then(response => {
 						this.$store.commit('SET_USER_SERVICES_FETCHED', true);
-						this.$store.commit('SET_USER_SERVICES', response.services);
+						this.$store.commit('SET_USER_SERVICES', response.data.services);
 					})
 					.catch(error => { console.log(error); });
 			}

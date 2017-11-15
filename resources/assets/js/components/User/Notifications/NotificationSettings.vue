@@ -52,9 +52,9 @@
 			},
 			update() {
 				this.processing = true;
-				new Model(`users/${this.$store.getters.authUser.id}/notification-settings`).patch(this.settings)
+				new Model('users/notification-settings').patch(this.settings)
 					.then(response => {
-						this.$store.commit('SET_NOTIFICATIONSETTINGS', {notificationSettings: this.settings});
+						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', {notificationSettings: this.settings});
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har uppdaterat dina inställningar för när du ska få notifikationer.'});
 						this.processing = false;
 					})
@@ -65,7 +65,7 @@
 			if ( !this.fetched ) {
 				new Model('user/notification-settings').get()
 					.then(response => {
-						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.settings);
+						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.data.settings);
 						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS_FETCHED', true);
 					})
 					.catch(error => { console.log(error); });

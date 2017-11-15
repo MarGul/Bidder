@@ -60,6 +60,7 @@ let routes = [
 			{ path: 'projects/:id', component: require('./components/User/Projects/Project'), meta: { requiresAuth: true },
 				children: [
 					{ path: '', component: require('./components/User/Projects/ProjectPhase'), meta: { requiresAuth: true } },
+					{ path: 'contract', component: require('./components/User/Projects/ProjectContract'), meta: { requiresAuth: true } },
 					{ path: 'service', component: require('./components/User/Projects/ProjectService'), meta: { requiresAuth: true } },
 					{ path: 'bid', component: require('./components/User/Projects/ProjectBid'), meta: { requiresAuth: true } },
 					{ path: 'messages', component: require('./components/User/Projects/ProjectMessages'), meta: { requiresAuth: true } },

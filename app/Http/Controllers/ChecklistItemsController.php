@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\CategoryManager;
+use App\Managers\CategoryManager;
 
 class ChecklistItemsController extends Controller
 {
@@ -11,12 +11,12 @@ class ChecklistItemsController extends Controller
     /**
      * Manager
      * 
-     * @var App\Features\CategoryManager
+     * @var App\Managers\CategoryManager
      */
     private $manager;
 
     public function __construct(CategoryManager $manager) {
-        //$this->middleware('auth:api');
+        $this->middleware('auth:api');
         $this->manager = $manager;
     }
 
@@ -27,20 +27,18 @@ class ChecklistItemsController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'message' => 'Displaying checklist items for categories.',
-            'checklistItems' => $this->manager->checklistItems()
-        ], 200);
-    }
+        // Try to get the checklist items.
+        $this->manager->getChecklistItems();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'checklistItems' => $this->manager->checklistItems()
+            ]
+        ], 200);
     }
 }

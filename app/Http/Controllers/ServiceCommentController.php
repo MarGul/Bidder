@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreComment;
 use App\Comment;
 use App\Service;
-use App\Features\CommentManager;
+use App\Managers\CommentManager;
 
 class ServiceCommentController extends Controller
 {
     /**
      * Class to manage comments
      * 
-     * @var App\Features\CommentManager
+     * @var App\Managers\CommentManager
      */
     protected $manager;
 
@@ -30,7 +30,20 @@ class ServiceCommentController extends Controller
      */
     public function index(Service $service)
     {
-        return $this->manager->all($service);
+        // Try and fetch the comments.
+        $this->manager->forService($service)
+                      ->get();
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'comments' => $this->manager->comments()
+            ]
+        ], $this->manager->successCode());
     }
 
     /**
@@ -40,13 +53,27 @@ class ServiceCommentController extends Controller
      * @param  App\Service               $service
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreComment $request, Service $service)
+    public function store(Request $request, Service $service)
     {
-        if ( !$comment = $this->manager->add($request->only(['body', 'parent']), $service) ) {
-            return response()->json(['message' => 'Could not store the comment in the database.'], 500);
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+
+        // Try and insert the comment
+        $this->manager->byUser($request->user())
+                      ->forService($service)
+                      ->create($request->only(['body']));
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
-        
-        return response()->json(['message' => 'Created was successfully created.', 'comment' => $comment], 201);
+
+        return response()->json([
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'comment' => $this->manager->comment()
+            ]
+        ], $this->manager->successCode());
     }
 
     /**
@@ -59,7 +86,7 @@ class ServiceCommentController extends Controller
      */
     public function update(Request $request, Service $service, Comment $comment)
     {
-        return $this->manager->update($request, $comment);
+        return ['message' => 'Not implemented.'];
     }
 
     /**
@@ -71,6 +98,6 @@ class ServiceCommentController extends Controller
      */
     public function destroy(Service $service, Comment $comment)
     {
-        return $this->manager->destroy($comment);
+        return ['message' => 'Not implemented.'];
     }
 }

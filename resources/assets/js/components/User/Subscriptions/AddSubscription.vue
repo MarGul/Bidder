@@ -7,7 +7,14 @@
 						<label class="control-label">För kategori:</label>
 						<select class="form-control" v-model="form.category_id">
 							<option value="">Välj kategori</option>
-							<option v-for="category in categories" :value="category.id" v-text="category.name"></option>
+							<optgroup v-for="rootCat in categories" :key="rootCat.slug" :label="rootCat.name">
+								<option 
+									v-for="category in rootCat.sub_categories" 
+									:key="category.slug" 
+									:value="category.id" 
+									v-text="category.name"
+								></option>
+							</optgroup>
 						</select>
 						<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
 					</div>
@@ -60,7 +67,7 @@
 		},
 		computed: {
 			categories() {
-				return this.$store.getters.categoriesFlattened;
+				return this.$store.getters.categories;
 			},
 			regions() {
 				return this.$store.getters.regions;
@@ -81,7 +88,7 @@
 				new Model('subscriptions').post(this.form.data())
 					.then(response => {
 						let subscriptions = this.$store.getters.subscriptions;
-						subscriptions.push(response.subscription);
+						subscriptions.push(response.data.subscription);
 						this.$store.commit('SET_SUBSCRIPTIONS', subscriptions);
 						this.$store.dispatch('showNotification', {
 							type: 'success', 

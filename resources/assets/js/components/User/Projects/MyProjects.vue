@@ -8,7 +8,7 @@
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
 					<ul class="items-list" v-if="projects.length > 0">
-						<li class="gray-item clickable" v-for="project in projects" @click="show(project)">
+						<li class="gray-item clickable" v-for="project in projects" :key="project.id" @click="show(project)">
 							<div class="item-content">
 								<div class="item-header">
 									{{ project.users[0].pivot.title }}
@@ -58,7 +58,7 @@
 				new Model('user/projects').get()
 					.then(response => {
 						this.$store.commit('SET_USER_PROJECTS_FETCHED', true);
-						this.$store.commit('SET_USER_PROJECTS', response.projects);
+						this.$store.commit('SET_USER_PROJECTS', response.data.projects);
 					})
 					.catch(error => { console.log(error); });
 			}

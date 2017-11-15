@@ -28,6 +28,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::routes();
 
+        // Is the user resource mine?
+        Gate::define('my-user', function($user, $u) { return $user->id === $u->id; });
         // Is the resource the authenticated users?
         Gate::define('my-resource', function($user, $resource) { return $user->id === $resource->user_id; });
         // Is a user part of a project?

@@ -18,16 +18,16 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('users/{user}/password')->uses('UserPasswordController@update');
 	/* Handle regions */
 	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
-	/* Handle categories */
-	Route::resource('categories', 'CategoryController', ['only' => ['index', 'show']]);
-	/* Handle checklist Items */
-	Route::resource('checklist-items', 'ChecklistItemsController', ['only' => ['index']]);
+	/* Get parent categories */
+	Route::get('categories')->uses('CategoryController@index');
+	/* Get the category checklist Items */
+	Route::get('checklist-items')->uses('ChecklistItemsController@index');
 	/* Handle services */
 	Route::resource('services', 'ServiceController', ['only' => ['index', 'show']]);
 	/* Handle a services comments */
 	Route::resource('services.comments', 'ServiceCommentController', ['except' => ['create', 'edit', 'show']]);
 	/* Handle a services bids */
-	Route::resource('services.bids', 'ServiceBidController', ['except' => ['create', 'edit']]);
+	Route::resource('services.bids', 'ServiceBidController', ['only' => ['index', 'store']]);
 	/* Accept a bid */
 	Route::post('bids/{bid}/accept')->uses('BidAcceptController@create');
 	/* A users services */
@@ -50,6 +50,10 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
 	/* Accept the start of a project */
 	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
+	/* Use contract for a project */
+	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
+	/* Remove the use of contract for a project */
+	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
 	/* Cancel a project */
 	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
 	/* Start a project */
@@ -57,7 +61,11 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Complete a project */
 	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
 	/* Submit a review for a user */
-	Route::post('users/{id}/review')->uses('UserReviewsController@store');
+	Route::post('reviews')->uses('ReviewsController@store');
+	/* Create a contract */
+	Route::post('contracts')->uses('ContractsController@store');
+	/* Update a contract */
+	Route::patch('contracts/{contract}')->uses('ContractsController@update');
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */

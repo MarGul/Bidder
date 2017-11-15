@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Features\ProjectManager;
+use App\Managers\ProjectManager;
 use App\Project;
 
 class ProjectDetailsController extends Controller
@@ -11,7 +11,7 @@ class ProjectDetailsController extends Controller
     /**
 	 * Manager
 	 * 
-	 * @var App\Features\ProjectManager
+	 * @var App\Managers\ProjectManager
 	 */
 	private $manager;
 
@@ -39,15 +39,22 @@ class ProjectDetailsController extends Controller
 		]);
 
 		$data = $request->only(['service_start', 'service_end', 'service_hours', 'service_price']);
+		
+		// Try to update the project.
+		$this->manager->byUser($request->user())
+                      ->forProject($project)
+                      ->update($data);
 
-		if ( !$response = $this->manager->updateDetails($project, $request->user(), $data) ) {
-			return response()->json(['message' => 'Could not update the project details.'], 500);
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
 		return response()->json([
-			'message' => 'Successfully updated the project details', 
-			'history' => $response['history'],
-			'updates' => $response['updates']
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'history' => $this->manager->history(),
+				'usersNotAccepted' => $this->manager->usersNotAccepted()
+			]
+		], $this->manager->successCode());
 	}
 }

@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Service;
-use App\Features\SubscriptionManager;
+use App\Managers\SubscriptionManager;
 
 class SendSubscriptionEmails implements ShouldQueue
 {

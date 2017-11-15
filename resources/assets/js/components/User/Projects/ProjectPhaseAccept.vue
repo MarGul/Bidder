@@ -8,6 +8,9 @@
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum magnam vitae eveniet blanditiis accusamus a amet, numquam quaerat impedit, illo, maiores, quos ab natus. Ex totam impedit at, neque nam.
 			</div>
 			<div class="gray-contentSection-content">
+				<project-use-contract />
+			</div>
+			<div class="gray-contentSection-content">
 				<project-change-details />
 			</div>
 			<div class="white-contentSection-content">
@@ -20,11 +23,13 @@
 <script>
 	import projectChangeDetails from './ProjectChangeDetails';
 	import projectAccept from './ProjectAccept';
+	import projectUseContract from './ProjectUseContract';
 
 	export default {
 		components: {
 			projectChangeDetails,
-			projectAccept
+			projectAccept,
+			projectUseContract
 		}
 	}
 </script>

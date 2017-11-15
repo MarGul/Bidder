@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Features;
+namespace App\Managers;
 
 use App\ProjectHistory;
 
@@ -23,6 +23,10 @@ class ProjectHistoryManager
 		'accepted' => ['type' => 'info', 'message' => '{user} accepterade projektets start.'],
 		'started' => ['type' => 'success', 'message' => 'Projektet startades.'],
 		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
+		'leftReview' => ['type' => 'success', 'message' => '{user} lämnade ett ömdöme.'],
+		'useContract' => ['type' => 'warning', 'message' => '{user} vill använda ett avtal.'],
+		'updatedContract' => ['type' => 'info', 'message' => '{user} uppdaterade avtalet.'],
+		'removeContract' => ['type' => 'critical', 'message' => '{user} tog bort användning av avtal.']
 	];
 	/**
 	 * This holds the records that has been added.
@@ -94,7 +98,7 @@ class ProjectHistoryManager
 
 		$this->addedRecords[] = $projectHistory;
 
-		return $projectHistory->id ? $projectHistory : false;
+		return $projectHistory->id ? [$projectHistory] : false;
 	}
 
 	/**

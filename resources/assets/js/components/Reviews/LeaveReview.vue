@@ -3,28 +3,40 @@
 		<div class="stars-container">
 			<div class="communication">
 				<div class="review-heading">Kommunikation</div>
-				<app-pick-stars @changed="communication = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="communication = $event.stars" />
 			</div>
 			<div class="as-described">
 				<div class="review-heading">Som avtalat</div>
-				<app-pick-stars @changed="as_described = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="as_described = $event.stars" />
 			</div>
 			<div class="would-recommend">
 				<div class="review-heading">Skulle rekommendera</div>
-				<app-pick-stars @changed="would_recommend = $event.stars"></app-pick-stars>
+				<app-pick-stars 
+					:enabled="!submitted" 
+					@changed="would_recommend = $event.stars" />
 			</div>
 		</div>
 		<div class="comment-container">
-			<textarea rows="3" class="form-control mtb20" v-model="review"></textarea>
+			<textarea rows="3" class="form-control mtb20" :disabled="submitted" v-model="review"></textarea>
 		</div>
 		<div class="action-container text-center">
-			<small class="action-text mb10 alert alert-info" v-if="submitted">
-				Du har redan lämnat omdömme för detta projektet.
-			</small>
-			<template v-else>
+			<template v-if="!submitted">
 				<small class="action-text mb10" :class="{'alert alert-danger': error}">Klicka i stjärnorna och skriv en liten text för att beskriva din upplevelse</small>
-				<button class="btn btn-primary" :class="{'processing': processing}" @click.prevent="send">Lämna omdömme</button>
+				<button 
+					class="btn btn-primary" 
+					:class="{'processing': processing}" 
+					:disabled="processing"
+					@click.prevent="send"
+					v-text="`Lämna omdömme`">
+				</button>
 			</template>
+			<div class="alert alert-info mb0" v-else>
+				Du har redan lämnat ett omdöme.
+			</div>
 		</div>
 	</div>
 </template>
@@ -34,7 +46,20 @@
 	import Model from "../../includes/Model";
 
 	export default {
-		props: ['forUser', 'submitted'],
+		props: {
+			forUser: {
+				type: Number,
+				required: true
+			},
+			forProject: {
+				type: Number,
+				required: true
+			},
+			submitted: {
+				type: Boolean,
+				required: true
+			}
+		},
 		components: {
 			appPickStars
 		},
@@ -51,16 +76,19 @@
 		methods: {
 			send() {
 				this.processing = true
-				new Model(`users/${this.forUser}/review`).post({
-					project_id: this.$store.getters.userProjectFocus.id,
+				new Model('reviews').post({
+					user_id: this.forUser,
+					project_id: this.forProject,
 					communication: this.communication,
 					as_described: this.as_described,
 					would_recommend: this.would_recommend,
 					review: this.review
 				}).then(response => {
-					console.log(response);
+					this.$emit('submitted', {review: response.data.review, history: response.data.history});
+					this.processing = false;
 				}).catch(error => {
 					this.error = true;
+					this.processing = false;
 				});
 			}
 		}
