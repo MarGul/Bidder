@@ -22,7 +22,7 @@ const getters = {
 	regionsFetched: state => state.fetched,
 	regions: state => state.regions,
 	regionById: state => id => state.regions.find(r => r.id === id),
-	regionsFlattened: state => state.regions.reduce( (a,b) => a.concat([b].concat(b.sub_categories)), []),
+	regionsFlattened: state => state.regions.filter(r => !!r.active).reduce( (a,b) => a.concat([b].concat(b.cities.filter(c => !!c.active))), []),
 	cities: state => state.regions.reduce( (a,b) => a.concat(b.cities), []),
 	cityById: (state, getters) => id => getters.cities.find(c => c.id === id)
 }

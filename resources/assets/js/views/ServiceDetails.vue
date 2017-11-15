@@ -80,7 +80,7 @@
 <script>
 	import appAddComment from '../components/Comments/AddComment';
 	import appComment from '../components/Comments/Comment';
-	import appServiceDetails from '../components/Services/ServiceDetails';
+	import serviceDetails from '../components/Services/ServiceDetails';
 	import appRatings from '../components/Includes/Ratings';
 	import appTimer from '../components/Includes/Timer';
 
@@ -88,7 +88,7 @@
 		components: {
 			appComment,
 			appAddComment,
-			appServiceDetails,
+			serviceDetails,
 			appRatings,
 			appTimer
 		},

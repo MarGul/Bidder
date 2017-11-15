@@ -20,6 +20,7 @@ class CreateCitiesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('sort');
+            $table->boolean('active')->default(false);
         });
     }
 

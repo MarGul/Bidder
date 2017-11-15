@@ -42,7 +42,7 @@
 				categories: 'filterCategories',
 				allCategories: 'categoriesFlattened',
 				locations: 'filterLocations',
-				allLocations: 'getRegionsFlatten'
+				allLocations: 'regionsFlattened'
 			})
 		},
 		methods: {
@@ -56,7 +56,7 @@
 				categories.splice(index, 1);
 				this.$store.commit('SET_FILTER_CATEGORIES', categories);
 			},
-			addLocation(item) {
+			addLocation({item}) {
 				let locations = this.locations;
 				locations.push(item);
 				this.$store.commit('SET_FILTER_LOCATIONS', locations);

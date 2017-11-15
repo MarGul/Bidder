@@ -18,12 +18,14 @@ class CitiesTableSeeder extends Seeder
                 [
                     'slug' => 'helsingborg',
                     'name' => 'Helsingborg',
-                    'description' => ''
+                    'description' => '',
+                    'active' => true
                 ],
                 [
                     'slug' => 'angelholm',
                     'name' => 'Ängelholm',
-                    'description' => ''
+                    'description' => '',
+                    'active' => true
                 ],
                 [
                     'slug' => 'malmo',
@@ -38,7 +40,8 @@ class CitiesTableSeeder extends Seeder
                 [
                     'slug' => 'landskrona',
                     'name' => 'Landskrona',
-                    'description' => ''
+                    'description' => '',
+                    'active' => true
                 ],
                 [
                     'slug' => 'lund',
@@ -156,7 +159,8 @@ class CitiesTableSeeder extends Seeder
                     'region_id' => $region->id,
                     'name' => $city['name'],
                     'description' => $city['description'],
-                    'sort' => ($index * 10)
+                    'sort' => ($index * 10),
+                    'active' => $city['active'] ?? false
                 ]);
             }
         }

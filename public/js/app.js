@@ -13760,8 +13760,12 @@ var getters = {
 		};
 	},
 	regionsFlattened: function regionsFlattened(state) {
-		return state.regions.reduce(function (a, b) {
-			return a.concat([b].concat(b.sub_categories));
+		return state.regions.filter(function (r) {
+			return !!r.active;
+		}).reduce(function (a, b) {
+			return a.concat([b].concat(b.cities.filter(function (c) {
+				return !!c.active;
+			})));
 		}, []);
 	},
 	cities: function cities(state) {
@@ -16183,14 +16187,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				return cat.value;
 			});
 			data.regions = this.filterLocations.filter(function (loc) {
-				return loc.type === 'region';
+				return !loc.hasOwnProperty('region_id');
 			}).map(function (region) {
-				return region.value;
+				return region.id;
 			});
 			data.cities = this.filterLocations.filter(function (loc) {
-				return loc.type === 'city';
+				return loc.hasOwnProperty('region_id');
 			}).map(function (city) {
-				return city.value;
+				return city.id;
 			});
 
 			new __WEBPACK_IMPORTED_MODULE_3__includes_Model__["a" /* default */]('services').get(data).then(function (response) {
@@ -16322,7 +16326,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		categories: 'filterCategories',
 		allCategories: 'categoriesFlattened',
 		locations: 'filterLocations',
-		allLocations: 'getRegionsFlatten'
+		allLocations: 'regionsFlattened'
 	})),
 	methods: {
 		addCategory: function addCategory(item) {
@@ -16337,13 +16341,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			categories.splice(index, 1);
 			this.$store.commit('SET_FILTER_CATEGORIES', categories);
 		},
-		addLocation: function addLocation(item) {
+		addLocation: function addLocation(_ref2) {
+			var item = _ref2.item;
+
 			var locations = this.locations;
 			locations.push(item);
 			this.$store.commit('SET_FILTER_LOCATIONS', locations);
 		},
-		removeLocation: function removeLocation(_ref2) {
-			var index = _ref2.index;
+		removeLocation: function removeLocation(_ref3) {
+			var index = _ref3.index;
 
 			var locations = this.locations;
 			locations.splice(index, 1);
@@ -16448,11 +16454,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 
 			if (current) {
-				this.$emit('add', {
-					text: current.name,
-					value: current.id,
-					type: current.type
-				});
+				this.$emit('add', { item: current });
 				this.error = false;
 				return this.input = '';
 			}
@@ -16483,8 +16485,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._l((_vm.items), function(item, index) {
     return _c('div', {
+      key: item.slug,
       staticClass: "tag"
-    }, [_vm._v("\n\t\t\t" + _vm._s(item.text)), _c('i', {
+    }, [_vm._v("\n\t\t\t" + _vm._s(item.name)), _c('i', {
       staticClass: "icon icon_delete wh10 light-gray",
       on: {
         "click": function($event) {
@@ -16534,6 +16537,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "list-unstyled"
   }, _vm._l((_vm.matched), function(match) {
     return _c('li', {
+      key: match.slug,
       on: {
         "click": function($event) {
           _vm.addItem(match.name)
@@ -17196,7 +17200,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: {
 		appComment: __WEBPACK_IMPORTED_MODULE_1__components_Comments_Comment___default.a,
 		appAddComment: __WEBPACK_IMPORTED_MODULE_0__components_Comments_AddComment___default.a,
-		appServiceDetails: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDetails___default.a,
+		serviceDetails: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServiceDetails___default.a,
 		appRatings: __WEBPACK_IMPORTED_MODULE_3__components_Includes_Ratings___default.a,
 		appTimer: __WEBPACK_IMPORTED_MODULE_4__components_Includes_Timer___default.a
 	},
