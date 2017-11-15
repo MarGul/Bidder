@@ -63,7 +63,9 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Submit a review for a user */
 	Route::post('reviews')->uses('ReviewsController@store');
 	/* Create a contract */
-	Route::resource('contracts', 'ContractsController', ['only' => ['store', 'update']]);
+	Route::post('contracts')->uses('ContractsController@store');
+	/* Update a contract */
+	Route::patch('contracts/{contract}')->uses('ContractsController@update');
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */

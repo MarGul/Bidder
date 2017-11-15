@@ -97,6 +97,12 @@ a {
 	.white-contentSection-header {
 		padding: 15px 20px;
 
+		&.is-gray {
+			background: #f6f9fc;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+		}
+
 		&.has-actions {
 			display: flex;
 

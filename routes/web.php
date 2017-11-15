@@ -10,9 +10,7 @@
 */
 
 Route::get('/test', function() {
-	$project = \App\Project::find(2);
-	$user = \App\User::find(1);
-	app(\App\Managers\ProjectManager::class)->useContract();
+	return \PDF::loadView('pdf.contract', [])->download("AvtalProjectId.pdf");
 });
 
 /**
@@ -31,6 +29,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
  * ===============
  */
 Route::get('download-invoice/{hash}', 'InvoiceController@index')->name('download.invoice');
+Route::get('projects/{project}/download-contract', 'ProjectDownloadContractController@index')->name('download.contract');
 
 Route::any('{all}', function () {
     return view('index');
