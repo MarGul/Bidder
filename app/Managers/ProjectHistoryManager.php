@@ -25,7 +25,8 @@ class ProjectHistoryManager
 		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
 		'leftReview' => ['type' => 'success', 'message' => '{user} lämnade ett ömdöme.'],
 		'useContract' => ['type' => 'warning', 'message' => '{user} vill använda ett avtal.'],
-		'updatedContract' => ['type' => 'info', 'message' => '{user} uppdaterade avtalet.']
+		'updatedContract' => ['type' => 'info', 'message' => '{user} uppdaterade avtalet.'],
+		'removeContract' => ['type' => 'critical', 'message' => '{user} tog bort användning av avtal.']
 	];
 	/**
 	 * This holds the records that has been added.

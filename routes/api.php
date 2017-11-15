@@ -52,6 +52,8 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
 	/* Use contract for a project */
 	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
+	/* Remove the use of contract for a project */
+	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
 	/* Cancel a project */
 	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
 	/* Start a project */
@@ -61,7 +63,9 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Submit a review for a user */
 	Route::post('reviews')->uses('ReviewsController@store');
 	/* Create a contract */
-	Route::resource('contracts', 'ContractsController', ['only' => ['store', 'update']]);
+	Route::post('contracts')->uses('ContractsController@store');
+	/* Update a contract */
+	Route::patch('contracts/{contract}')->uses('ContractsController@update');
 	/* Handle subscriptions */
 	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
 	/* Show the users invoices */

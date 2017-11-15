@@ -64,16 +64,16 @@ class ContractsController extends Controller
 
         // The contract could not be created.
         if ( $this->manager->hasError() ) {
-            return response()->json(['message' => $this->manager->errorMessage], $this->manager->errorCode);
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
         return response()->json([
-            'message' => $this->manager->successMessage,
+            'message' => $this->manager->successMessage(),
             'data' => [
                 'contract' => $this->manager->contract(),
                 'history' => $this->manager->history()
             ]
-        ], $this->manager->successCode);
+        ], $this->manager->successCode());
     }
 
     /**
@@ -116,16 +116,16 @@ class ContractsController extends Controller
 
         // The contract could not be updated.
         if ( $this->manager->hasError() ) {
-            return response()->json(['message' => $this->manager->errorMessage], $this->manager->errorCode);
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
         return response()->json([
-            'message' => $this->manager->successMessage,
+            'message' => $this->manager->successMessage(),
             'data' => [
                 'contract' => $this->manager->contract(),
                 'history' => $this->manager->history()
             ]
-        ], $this->manager->successCode);
+        ], $this->manager->successCode());
     }
 
 }

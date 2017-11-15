@@ -1,8 +1,9 @@
 <?php
-namespace App\Features;
+namespace App\Managers;
 
 
 use App\Contract;
+use PDF;
 use App\Managers\Traits\ProjectTrait;
 
 class ContractManager extends BaseManager
@@ -73,6 +74,18 @@ class ContractManager extends BaseManager
 	}
 
 	/**
+	 * Download the contract for a project.
+	 * 
+	 * @return PDF view
+	 */
+	public function download()
+	{
+		$data = $this->projectContractExists() ? $this->contractData() : []; 
+
+		return PDF::loadView('pdf.contract', $data)->download("AvtalProjectId{$this->project->id}.pdf");
+	}
+
+	/**
 	 * Insert the contract into storage.
 	 * 
 	 * @return boolean
@@ -136,6 +149,30 @@ class ContractManager extends BaseManager
 	}
 
 	/**
+	 * Get the data from the contract in storage.
+	 * 
+	 * @return array
+	 */
+	protected function contractData()
+	{
+		return [
+			'client_name' => $this->contract->client_name,
+            'client_identity' => $this->contract->client_identity,
+            'contractor_name' => $this->contract->contractor_name, 
+            'contractor_identity' => $this->contract->contractor_identity, 
+            'project_description' => $this->contract->project_description,
+            'contractor_dissuasion' => $this->contract->contractor_dissuasion, 
+            'project_start' => $this->contract->project_start, 
+            'project_end' => $this->contract->project_end, 
+            'project_price' => (float)$this->contract->project_price,
+            'project_price_specified' => $this->contract->project_price_specified,
+            'payment_full' => (boolean)$this->contract->payment_full, 
+            'payment_specified' => (boolean)$this->contract->payment_specified, 
+            'other' => $this->contract->other
+		];
+	}
+
+	/**
 	 * Does the project already have a contract?
 	 * 
 	 * @return boolean
@@ -146,6 +183,7 @@ class ContractManager extends BaseManager
 
 		if ( $this->project->contracts->isNotEmpty() ) {
 			$this->setError('Contract already exists.', 400);
+			$this->contract = $this->project->contracts->first();
 			return true;
 		}
 

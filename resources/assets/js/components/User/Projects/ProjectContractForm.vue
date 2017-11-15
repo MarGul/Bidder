@@ -3,8 +3,9 @@
 		
 		<form class="form-with-sections" @submit.prevent="send">
 			<section class="white-contentSection">
-				<header class="white-contentSection-header">
-					<h3>Projektets avtal</h3>
+				<header class="white-contentSection-header is-gray is-flex v-center">
+					<h3 class="flex-1">Projektets avtal</h3>
+					<contract-download />
 				</header>
 				<div class="white-contentSection-content">
 
@@ -185,6 +186,7 @@
 </template>
 
 <script>
+	import contractDownload from './ProjectDownloadContract';
 	import Form from '../../../includes/classes/Form';
 	import Model from '../../../includes/Model';
 	import datepicker from 'vuejs-datepicker';
@@ -192,7 +194,8 @@
 
 	export default {
 		components: {
-			datepicker
+			datepicker,
+			contractDownload
 		},
 		data() {
 			return {
