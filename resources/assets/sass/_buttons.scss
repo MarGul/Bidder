@@ -68,7 +68,7 @@
 	background-color: $brand-primary;
 
 	&:hover {
-		background-color: $brand-primary-hover;
+		background-color: $brand-primary-hover !important;
 	}
 
 	&:focus,

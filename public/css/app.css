@@ -868,7 +868,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #00caca;
+  background-color: #00caca !important;
 }
 
 .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus {

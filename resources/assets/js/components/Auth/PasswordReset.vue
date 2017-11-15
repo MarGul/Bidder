@@ -24,7 +24,7 @@
 
 				<div class="form-group">
 					<button
-						class="btn-modern primary full-width"
+						class="btn btn-primary full-width"
 						:class="{'processing': processing}" 
 						@click.prevent="send"
 						:disabled="processing || this.form.errors.any()"
