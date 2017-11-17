@@ -18,6 +18,7 @@ class CreateRegionsTable extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('active')->default(false);
         });
     }
 

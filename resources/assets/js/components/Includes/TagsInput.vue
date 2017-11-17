@@ -2,14 +2,14 @@
 	<div class="tags-input-container">
 		<div class="tooltip-error" v-if="error">Ej giltigt val</div>
 		<div class="tags-input" :class="{hasError: error}" @click="$refs.input.focus()">
-			<div class="tag" v-for="(item, index) in items">
-				{{ item.text }}<i class="icon icon_delete wh10" @click="$emit('remove', {item, index})"></i>
+			<div class="tag" v-for="(item, index) in items" :key="item.slug">
+				{{ item.name }}<i class="icon icon_delete wh10 light-gray" @click="$emit('remove', {item, index})"></i>
 			</div>
 			<input type="text" ref="input" @keydown="error = false" @keydown.enter="addItem(input)" v-model.trim="input" :style="inputWidth">
 		</div>
 		<div class="tags-help" v-if="matched.length > 0">
 			<ul class="list-unstyled">
-				<li v-for="match in matched" @click="addItem(match.name)">
+				<li v-for="match in matched" :key="match.slug" @click="addItem(match.name)">
 					{{ match.name }}
 				</li>
 			</ul>
@@ -41,11 +41,7 @@
 				let current = this.options.find(opt => opt.name.toLowerCase() == item.toLowerCase());
 
 				if ( current ) {
-					this.$emit('add', {
-						text: current.name,
-						value: current.id,
-						type: current.type
-					});
+					this.$emit('add', {item: current});
 					this.error = false;
 					return this.input = '';
 				}

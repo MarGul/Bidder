@@ -91,8 +91,8 @@
 				data.page = this.page
 				data.text = this.filterText;
 				data.categories = this.filterCategories.map(cat => cat.value);
-				data.regions = this.filterLocations.filter(loc => loc.type === 'region').map(region => region.value);
-				data.cities = this.filterLocations.filter(loc => loc.type === 'city').map(city => city.value);
+				data.regions = this.filterLocations.filter(loc => !loc.hasOwnProperty('region_id')).map(region => region.id);
+				data.cities = this.filterLocations.filter(loc => loc.hasOwnProperty('region_id')).map(city => city.id);
 				
 				new Model('services').get(data)
 					.then(response => {

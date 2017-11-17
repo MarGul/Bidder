@@ -13,7 +13,7 @@ class RegionsTableSeeder extends Seeder
     public function run()
     {
         $regions = [
-            ['name' => 'Skåne', 'slug' => 'skane', 'description' => ''],
+            ['name' => 'Skåne', 'slug' => 'skane', 'description' => '', 'active' => true],
             ['name' => 'Blekinge', 'slug' => 'blekinge', 'description' => ''],
             ['name' => 'Kronoberg', 'slug' => 'kronoberg', 'description' => ''],
             ['name' => 'Halland', 'slug' => 'halland', 'description' => ''],

@@ -1,38 +1,66 @@
+.btn-modern {
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	line-height: 1.5;
+	font-size: 15px;
+	font-weight: 500;
+	padding: .5em 1.5em;
+	box-shadow: 0 1px 2px 0 rgba(74,144,266,0.44), 0 2px 8px rgba(0,0,0,0.14);
+	text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+	border: none;
+
+	&:hover {
+		text-decoration: none !important;
+	}
+
+	&.primary {
+		background-image: linear-gradient(-180deg, $brand-primary-hover 0%, $brand-primary 100%);
+		color: #FFFFFF;
+
+		&:hover {
+			background: $brand-primary;
+		}
+	}
+
+}
+
+.processing {
+	color: transparent !important;
+	text-shadow: none !important;
+	position: relative;
+
+	&:after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 20px;
+		height: 20px;
+		margin: -10px;
+		border-radius: 50%;
+		border-top: 2px solid transparent;
+		border-left: 2px solid transparent;
+		border-bottom: 2px solid rgba(255,255,255,0.9);
+		border-right: 2px solid rgba(255,255,255,0.9);
+		-webkit-animation: rotate 0.8s linear infinite;
+		-moz-animation: rotate 0.8s linear infinite;
+		-ms-animation: rotate 0.8s linear infinite;
+		-o-animation: rotate 0.8s linear infinite;
+		animation: rotate 0.8s linear infinite;
+	}
+}
+
 .btn {
 	border-radius: 3px;
 	padding: 5px 14px;
 	font-weight: 500;
-	border: 0;
+	border: none;
 	box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
 
 	&:focus,
 	&:active {
 		outline: none !important;
-	}
-
-	&.processing {
-		color: transparent !important;
-		position: relative;
-
-		&:after {
-			content: "";
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			width: 20px;
-			height: 20px;
-			margin: -10px;
-			border-radius: 50%;
-			border-top: 2px solid transparent;
-			border-left: 2px solid transparent;
-			border-bottom: 2px solid rgba(255,255,255,0.9);
-			border-right: 2px solid rgba(255,255,255,0.9);
-			-webkit-animation: rotate 0.8s linear infinite;
-			-moz-animation: rotate 0.8s linear infinite;
-			-ms-animation: rotate 0.8s linear infinite;
-			-o-animation: rotate 0.8s linear infinite;
-			animation: rotate 0.8s linear infinite;
-		}
 	}
 }
 
@@ -40,7 +68,7 @@
 	background-color: $brand-primary;
 
 	&:hover {
-		background-color: $brand-primary-hover;
+		background-color: $brand-primary-hover !important;
 	}
 
 	&:focus,
