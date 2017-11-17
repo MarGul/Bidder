@@ -17,6 +17,7 @@ class ServiceBidController extends Controller
 
     public function __construct(BidManager $manager) {
         $this->manager = $manager;
+        $this->middleware('auth:api', ['only' => ['store']]);
     }
 
     /**

@@ -1153,8 +1153,20 @@ a {
   margin-right: 10px;
 }
 
+@media screen and (min-width: 768px) {
+  .mr10-sm {
+    margin-right: 10px !important;
+  }
+}
+
 .mr15 {
   margin-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .mr15-sm {
+    margin-right: 15px !important;
+  }
 }
 
 .ml3 {
@@ -1167,6 +1179,22 @@ a {
 
 .ml10 {
   margin-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .ml10-sm {
+    margin-left: 10px !important;
+  }
+}
+
+.ml15 {
+  margin-left: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .ml15-sm {
+    margin-left: 15px !important;
+  }
 }
 
 .margin-25 {
@@ -1340,6 +1368,10 @@ form.loading:after {
         -ms-flex: 2;
             flex: 2;
   }
+}
+
+.req {
+  color: #cc0000;
 }
 
 .control-container {

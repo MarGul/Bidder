@@ -9,6 +9,7 @@ class Form {
     constructor(data) {
         this.originalData = data;
         this.dateFields = [];
+        this.floatFields = [];
 
         for (let field in data) {
             this[field] = data[field];
@@ -27,6 +28,16 @@ class Form {
         return this;
     }
 
+    /**
+     * Fields that we want to parse as a float (replacing commas with period)
+     * 
+     * @param  array fields
+     */
+    asFloats(fields) {
+        this.floatFields = fields;
+        return this;
+    }
+
 
     /**
      * Fetch all relevant data for the form.
@@ -35,7 +46,19 @@ class Form {
         let data = {};
 
         for (let property in this.originalData) {
-            data[property] = this.dateFields.includes(property) && this[property] ? this.parseAsDate(property) : this[property];
+            let field = this[property];
+
+            if ( !field ) continue;
+
+            if ( this.dateFields.includes(property) ) {
+                field = this.parseAsDate(field);
+            }
+
+            if ( this.floatFields.includes(property) ) {
+                field = this.parseAsFloat(field);
+            }
+            
+            data[property] = field;
         }
 
         return data;
@@ -54,11 +77,17 @@ class Form {
     }
 
     /**
+     * Parse a property as a float. First replace commas with period.
+     */
+    parseAsFloat(property) {
+        return parseFloat(property.replace(',', '.'));
+    }
+
+    /**
      * Parse a property of the form as a date.
      */
     parseAsDate(property) {
-        let date = new Date(this[property]);
-        return `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())}`;
+        return `${property.getFullYear()}-${this.pad(property.getMonth() + 1)}-${this.pad(property.getDate())}`;
     }
 
     pad(number) {

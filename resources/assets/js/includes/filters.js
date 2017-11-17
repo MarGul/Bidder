@@ -13,7 +13,7 @@ const filters = {
 	},
 	isNumber(event) {
 		let code = event.keyCode || event.which;
-		if ( code >= 48 && code <= 57 ) {
+		if ( code >= 48 && code <= 57 || code == 44 ) {
 			return true;
 		} else {
 			event.preventDefault();

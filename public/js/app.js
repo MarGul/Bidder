@@ -98,128 +98,85 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
 
-var Model = function () {
-	function Model(resource) {
-		_classCallCheck(this, Model);
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
 
-		this.resource = resource;
-		this.instance = null;
-		this.url = null;
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
 	}
 
-	_createClass(Model, [{
-		key: 'new',
-		value: function _new() {
-			var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { baseURL: 'http://bidder.dev' };
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
 
-			this.instance = axios.create(config);
-			return this;
-		}
-	}, {
-		key: 'setId',
-		value: function setId(id) {
-			var match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '{id}';
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
 
-			this.resource = this.resource.replace(match, id);
-			return this;
-		}
-	}, {
-		key: 'setResource',
-		value: function setResource(resource) {
-			this.resource = resource;
-			return this;
-		}
-	}, {
-		key: 'setUrl',
-		value: function setUrl(url) {
-			this.url = url;
-			return this;
-		}
-	}, {
-		key: 'get',
-		value: function get() {
-			var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	return [content].join('\n');
+}
 
-			return this.send('get', this.resource, { params: params });
-		}
-	}, {
-		key: 'post',
-		value: function post() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
-			return this.send('post', this.resource, data);
-		}
-	}, {
-		key: 'patch',
-		value: function patch() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	return '/*# ' + data + ' */';
+}
 
-			return this.send('patch', this.resource, data);
-		}
-	}, {
-		key: 'put',
-		value: function put() {
-			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-			return this.send('put', this.resource, data);
-		}
-	}, {
-		key: 'delete',
-		value: function _delete() {
-			return this.send('delete', this.resource);
-		}
-	}, {
-		key: 'find',
-		value: function find(identifier) {
-			return this.send('get', this.resource + '/' + identifier);
-		}
-	}, {
-		key: 'create',
-		value: function create(data) {
-			return this.send('post', this.resource, data);
-		}
-	}, {
-		key: 'update',
-		value: function update(identifier, data) {
-			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'patch';
-
-			this.setId(identifier);
-			return this.send(type, this.resource, data);
-		}
-	}, {
-		key: 'send',
-		value: function send(requestType, url) {
-			var _this = this;
-
-			var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-			return new Promise(function (resolve, reject) {
-				var instance = _this.instance || axios;
-				var path = _this.url || url;
-
-				instance[requestType](path, config).then(function (response) {
-					resolve(response.data);
-				}).catch(function (error) {
-					reject(error.response.data);
-				});
-				// If a new instance or a custom URL has been used, reset that.
-				_this.instance = null;
-				_this.url = null;
-			});
-		}
-	}]);
-
-	return Model;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Model);
 
 /***/ }),
 /* 3 */
@@ -1244,6 +1201,7 @@ var Form = function () {
 
         this.originalData = data;
         this.dateFields = [];
+        this.floatFields = [];
 
         for (var field in data) {
             this[field] = data[field];
@@ -1267,6 +1225,19 @@ var Form = function () {
         }
 
         /**
+         * Fields that we want to parse as a float (replacing commas with period)
+         * 
+         * @param  array fields
+         */
+
+    }, {
+        key: 'asFloats',
+        value: function asFloats(fields) {
+            this.floatFields = fields;
+            return this;
+        }
+
+        /**
          * Fetch all relevant data for the form.
          */
 
@@ -1276,7 +1247,19 @@ var Form = function () {
             var data = {};
 
             for (var property in this.originalData) {
-                data[property] = this.dateFields.includes(property) && this[property] ? this.parseAsDate(property) : this[property];
+                var field = this[property];
+
+                if (!field) continue;
+
+                if (this.dateFields.includes(property)) {
+                    field = this.parseAsDate(field);
+                }
+
+                if (this.floatFields.includes(property)) {
+                    field = this.parseAsFloat(field);
+                }
+
+                data[property] = field;
             }
 
             return data;
@@ -1297,14 +1280,23 @@ var Form = function () {
         }
 
         /**
+         * Parse a property as a float. First replace commas with period.
+         */
+
+    }, {
+        key: 'parseAsFloat',
+        value: function parseAsFloat(property) {
+            return parseFloat(property.replace(',', '.'));
+        }
+
+        /**
          * Parse a property of the form as a date.
          */
 
     }, {
         key: 'parseAsDate',
         value: function parseAsDate(property) {
-            var date = new Date(this[property]);
-            return date.getFullYear() + '-' + this.pad(date.getMonth() + 1) + '-' + this.pad(date.getDate());
+            return property.getFullYear() + '-' + this.pad(property.getMonth() + 1) + '-' + this.pad(property.getDate());
         }
     }, {
         key: 'pad',
@@ -1383,88 +1375,7 @@ module.exports = Component.exports
 var HeartBeat = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
+/* 11 */,
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5109,7 +5020,7 @@ var filters = {
 	},
 	isNumber: function isNumber(event) {
 		var code = event.keyCode || event.which;
-		if (code >= 48 && code <= 57) {
+		if (code >= 48 && code <= 57 || code == 44) {
 			return true;
 		} else {
 			event.preventDefault();
@@ -10209,7 +10120,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Layout_Footer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__includes_heartbeat__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -10871,7 +10782,7 @@ if(false) {
 /* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -11115,7 +11026,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(6);
 //
 //
@@ -11532,7 +11443,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -11859,7 +11770,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -12048,13 +11959,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(499)
+}
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(204),
   /* template */
   __webpack_require__(205),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
   null,
   /* moduleIdentifier (server only) */
@@ -12089,10 +12004,13 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -12197,18 +12115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -12231,41 +12138,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
-	computed: {
-		id: function id() {
-			return this.$store.getters.getService.id;
-		},
-		finalData: function finalData() {
-			var data = this.form.data();
-			data.start = this.stripTime(data.start);
-			data.end = this.stripTime(data.end);
-			data.hours = parseFloat(data.hours.replace(',', '.'));
-			data.price = parseFloat(data.price.replace(',', '.'));
-
-			return data;
-		}
-	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
+		service: 'getService',
+		authCheck: 'isAuthenticated'
+	})),
 	methods: {
-		isNumber: function isNumber(event) {
-			var code = event.keyCode || event.which;
-			if (code >= 48 && code <= 57 || code == 44) {
-				return true;
-			} else {
-				event.preventDefault();
-			}
-		},
-		stripTime: function stripTime(date) {
-			return date instanceof Date ? date.getFullYear() + '-' + this.pad(date.getMonth() + 1) + '-' + this.pad(date.getDate()) : date;
-		},
-		pad: function pad(number) {
-			return number < 10 ? "0" + number : number;
-		},
 		create: function create() {
 			var _this = this;
 
 			this.processing = true;
+			var data = this.form.asDate(['start', 'end']).asFloats(['hours', 'price']).data();
 
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/{id}/bids').setId(this.id).create(this.finalData).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.service.id + '/bids').post(data).then(function (response) {
 				// Add the new bid to the store.
 				_this.$store.dispatch('addBid', { bid: response.data.bid });
 				_this.form.reset();
@@ -12278,9 +12162,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.form.errors.record(error);
 				_this.processing = false;
 			});
-		},
-		openShowBids: function openShowBids() {
-			this.$store.dispatch('openModal', { component: 'showBids', size: 'size-large' });
 		}
 	}
 });
@@ -12292,26 +12173,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "create_bid-component"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
-  }, [(_vm.$store.getters.isAuthenticated) ? [_c('form', {
+  }, [_vm._m(0), _vm._v(" "), (_vm.authCheck) ? [_c('form', {
+    staticClass: "form-with-sections",
     on: {
-      "keydown": function($event) {
-        _vm.form.errors.clear()
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.create($event)
       }
     }
   }, [_c('div', {
-    staticClass: "row"
+    staticClass: "modal-body"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-6"
+    staticClass: "form-section"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls is-flex-sm"
   }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "control-container flex-1-sm mr15-sm",
     class: {
-      'has-error': _vm.form.errors.has('start')
+      'has-errors': _vm.form.errors.has('start')
     }
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Starta utförandet")]), _vm._v(" "), _c('datepicker', {
+  }, [_vm._m(2), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
       "language": "sv",
@@ -12332,18 +12213,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('start'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("När kan du påbörja utförandet av tjänsten?")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()], 1), _vm._v(" "), _c('div', {
+    staticClass: "control-container flex-1-sm ml10-sm",
     class: {
-      'has-error': _vm.form.errors.has('end')
+      'has-errors': _vm.form.errors.has('end')
     }
-  }, [_c('label', {
-    staticClass: "control-label"
-  }, [_vm._v("Avsluta utförandet")]), _vm._v(" "), _c('datepicker', {
+  }, [_vm._m(3), _vm._v(" "), _c('datepicker', {
     attrs: {
       "input-class": "form-control",
       "language": "sv",
@@ -12364,22 +12239,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('end'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("När är du klar med tjänsten?")])], 1)])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
+  }) : _vm._e()], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls is-flex-sm"
   }, [_c('div', {
-    staticClass: "col-xs-12 col-md-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "control-container flex-1-sm mr15-sm",
     class: {
-      'has-error': _vm.form.errors.has('hours')
+      'has-errors': _vm.form.errors.has('hours')
     }
   }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": "hours"
-    }
+    staticClass: "control-label"
   }, [_vm._v("Antal timmar")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
@@ -12389,15 +12259,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text",
-      "name": "hours"
+      "type": "text"
     },
     domProps: {
       "value": (_vm.form.hours)
     },
     on: {
       "keypress": function($event) {
-        _vm.isNumber($event)
+        _vm.filters.isNumber($event)
       },
       "input": function($event) {
         if ($event.target.composing) { return; }
@@ -12409,21 +12278,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('hours'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Hur många timmar kommer det att ta dig?")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-12 col-md-6"
-  }, [_c('div', {
-    staticClass: "form-group",
+  }) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "control-container flex-1-sm ml10-sm",
     class: {
-      'has-error': _vm.form.errors.has('price')
+      'has-errors': _vm.form.errors.has('price')
     }
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": "price"
-    }
-  }, [_vm._v("Ditt pris")]), _vm._v(" "), _c('input', {
+  }, [_vm._m(5), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -12432,15 +12292,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text",
-      "name": "price"
+      "type": "text"
     },
     domProps: {
       "value": (_vm.form.price)
     },
     on: {
       "keypress": function($event) {
-        _vm.isNumber($event)
+        _vm.filters.isNumber($event)
       },
       "input": function($event) {
         if ($event.target.composing) { return; }
@@ -12452,23 +12311,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('price'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Hur mycket tar du för att utföra tjänsten?")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
+  }) : _vm._e()])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-section no-border"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "form-section-controls"
   }, [_c('div', {
-    staticClass: "col-xs-12"
-  }, [_c('div', {
-    staticClass: "form-group",
+    staticClass: "control-container",
     class: {
-      'has-error': _vm.form.errors.has('description')
+      'has-errors': _vm.form.errors.has('description')
     }
-  }, [_c('label', {
-    staticClass: "control-label",
-    attrs: {
-      "for": "description"
-    }
-  }, [_vm._v("Beskrivning av utförandet")]), _vm._v(" "), _c('textarea', {
+  }, [_vm._m(7), _vm._v(" "), _c('textarea', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -12477,8 +12329,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "name": "description",
-      "rows": "5"
+      "rows": "8"
     },
     domProps: {
       "value": (_vm.form.description)
@@ -12494,64 +12345,71 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.form.errors.get('description'))
     }
-  }) : _vm._e(), _vm._v(" "), _c('span', {
-    staticClass: "help-block"
-  }, [_vm._v("Vad skiljer dig åt från dem andra?")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }) : _vm._e()])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
   }, [_c('button', {
-    staticClass: "btn btn-primary full-width",
+    staticClass: "btn btn-primary",
     class: {
-      'processing': _vm.processing
+      processing: _vm.processing
     },
     attrs: {
-      "type": "submit",
-      "disabled": _vm.processing || this.form.errors.any()
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.create($event)
-      }
+      "type": "submit"
     }
-  }, [_vm._v("Lägg ditt bud")])])])] : _c('div', {
-    staticClass: "alert alert-warning text-center"
-  }, [_vm._v("\n\t\t\tDu måste vara inloggad för att lägga ett bud. \n\t\t\t"), _c('a', {
-    staticClass: "link",
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$store.dispatch('openModal', {
-          component: 'login'
-        })
-      }
-    }
-  }, [_vm._v("Logga In")]), _vm._v(" \n\t\t\teller "), _c('a', {
-    staticClass: "link",
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.$store.dispatch('openModal', {
-          component: 'register'
-        })
-      }
-    }
-  }, [_vm._v("Registrera")]), _vm._v(".\n\t\t")])], 2), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
-  }, [_c('a', {
-    staticClass: "link",
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.openShowBids($event)
-      }
-    }
-  }, [_vm._v("Se alla bud för denna tjänsten")])])])
+  }, [_vm._v("\n                        Lägg ditt bud\n                    ")])])])] : _vm._e()], 2)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
   }, [_c('h3', [_vm._v("Lägg ett bud")]), _vm._v(" "), _c('div', {
     staticClass: "header-text"
   }, [_vm._v("Berätta varför just du ska få utföra tjänsten.")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Tider")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n                                Berätta när du kan påbörja utförandet av tjänsten och när det kan vara klart.\n                            ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Starta utförandet "), _c('span', {
+    staticClass: "req"
+  }, [_vm._v("*")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("avsluta utförandet "), _c('span', {
+    staticClass: "req"
+  }, [_vm._v("*")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Detaljer")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n                                Fyll i hur många timmar utförandet av tjänsten kommer att ta och ditt slutgiltiga pris.\n                            ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Pris "), _c('span', {
+    staticClass: "req"
+  }, [_vm._v("*")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-section-description"
+  }, [_c('div', {
+    staticClass: "description-header"
+  }, [_vm._v("Beskrivning")]), _vm._v(" "), _c('div', {
+    staticClass: "description-details"
+  }, [_vm._v("\n                                Skriv en beskrivning av hur du kommer att utföra tjänsten. Vilka material kommer att användas?\n                                Har du en mer detaljerad beskrivning på priset?\n                            ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("beskrivning "), _c('span', {
+    staticClass: "req"
+  }, [_vm._v("*")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -12742,7 +12600,7 @@ if(false) {
 /* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -13157,7 +13015,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -14190,7 +14048,7 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 
 
 var service = {
@@ -16084,7 +15942,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -16769,7 +16627,7 @@ if(false) {
 /* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -17292,7 +17150,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -18128,7 +17986,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews__ = __webpack_require__(303);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Reviews_ShowReviews__);
 //
@@ -18964,7 +18822,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -19245,7 +19103,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -19523,7 +19381,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -19787,7 +19645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotificationSettingsItem__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -20105,7 +19963,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia__ = __webpack_require__(335);
@@ -21359,7 +21217,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -21624,7 +21482,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(3);
@@ -22378,7 +22236,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -22586,7 +22444,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -22765,7 +22623,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__OneBid__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__OneBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__OneBid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__BidService__ = __webpack_require__(365);
@@ -22865,7 +22723,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -23099,7 +22957,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -23273,7 +23131,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectHandle__ = __webpack_require__(374);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProjectHandle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProjectHandle__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ProjectHistorySidebar__ = __webpack_require__(377);
@@ -23926,7 +23784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -24272,7 +24130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Timer__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Includes_Timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -24561,7 +24419,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -25149,7 +25007,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars__ = __webpack_require__(405);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PickStars___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PickStars__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -25323,7 +25181,7 @@ if(false) {
 /* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -25742,7 +25600,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ProjectDownloadContract__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuejs_datepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(3);
@@ -27410,7 +27268,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -27853,7 +27711,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -28030,7 +27888,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -28304,7 +28162,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription__ = __webpack_require__(450);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddSubscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddSubscription__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -28442,7 +28300,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(498);
 //
 //
 //
@@ -28858,6 +28716,211 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Model = function () {
+	function Model(resource) {
+		_classCallCheck(this, Model);
+
+		this.resource = resource;
+		this.instance = null;
+		this.url = null;
+	}
+
+	_createClass(Model, [{
+		key: 'new',
+		value: function _new() {
+			var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { baseURL: 'http://bidder.dev' };
+
+			this.instance = axios.create(config);
+			return this;
+		}
+	}, {
+		key: 'setId',
+		value: function setId(id) {
+			var match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '{id}';
+
+			this.resource = this.resource.replace(match, id);
+			return this;
+		}
+	}, {
+		key: 'setResource',
+		value: function setResource(resource) {
+			this.resource = resource;
+			return this;
+		}
+	}, {
+		key: 'setUrl',
+		value: function setUrl(url) {
+			this.url = url;
+			return this;
+		}
+	}, {
+		key: 'get',
+		value: function get() {
+			var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('get', this.resource, { params: params });
+		}
+	}, {
+		key: 'post',
+		value: function post() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('post', this.resource, data);
+		}
+	}, {
+		key: 'patch',
+		value: function patch() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('patch', this.resource, data);
+		}
+	}, {
+		key: 'put',
+		value: function put() {
+			var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+			return this.send('put', this.resource, data);
+		}
+	}, {
+		key: 'delete',
+		value: function _delete() {
+			return this.send('delete', this.resource);
+		}
+	}, {
+		key: 'find',
+		value: function find(identifier) {
+			return this.send('get', this.resource + '/' + identifier);
+		}
+	}, {
+		key: 'create',
+		value: function create(data) {
+			return this.send('post', this.resource, data);
+		}
+	}, {
+		key: 'update',
+		value: function update(identifier, data) {
+			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'patch';
+
+			this.setId(identifier);
+			return this.send(type, this.resource, data);
+		}
+	}, {
+		key: 'send',
+		value: function send(requestType, url) {
+			var _this = this;
+
+			var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+			return new Promise(function (resolve, reject) {
+				var instance = _this.instance || axios;
+				var path = _this.url || url;
+
+				instance[requestType](path, config).then(function (response) {
+					resolve(response.data);
+				}).catch(function (error) {
+					reject(error.response.data);
+				});
+				// If a new instance or a custom URL has been used, reset that.
+				_this.instance = null;
+				_this.url = null;
+			});
+		}
+	}]);
+
+	return Model;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+/* 499 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(500);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("f75988e8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e265c70\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateBid.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0e265c70\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateBid.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 500 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-footer {\n    text-align: right !important;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 ],[142]);
