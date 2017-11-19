@@ -7,7 +7,7 @@
 </template>
 
 <script>
-	import oneBid from '../Bids/OneBid';
+	import oneBid from '../../Bids/OneBid';
 
 	export default {
 		components: {

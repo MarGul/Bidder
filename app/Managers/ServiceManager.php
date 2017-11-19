@@ -89,7 +89,7 @@ class ServiceManager extends BaseManager
 	public function find()
 	{
 		try {
-			$this->service->load(['user.rating', 'bid_count', 'media', 'comments.user']);
+			$this->service->load(['user.rating', 'bids.user', 'media', 'comments.user']);
 		} catch (\Exception $e) {
 			$this->setError('Could not find the service.', 500);			
 		}

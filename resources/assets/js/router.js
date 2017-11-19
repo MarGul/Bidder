@@ -43,7 +43,12 @@ let routes = [
 	{ path: "/categories", name: 'categories', component: require('./views/Categories') },
 	{ path: "/locations", name: 'locations', component: require('./views/Locations') },
 	{ path: "/services", name: 'services', component: require('./views/Services') },
-	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails') },
+	{ path: "/services/:id", name: 'serviceDetails', component: require('./views/ServiceDetails'), 
+		children: [
+			{ path: '', component: require('./components/Services/ServiceDetailsView') },
+			{ path: 'bids', name: 'serviceBids', component: require('./components/Services/ServiceDetailsBids') }
+		]
+	},
 	{ path: "/information", name: 'information', component: require('./views/Information') },
 	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
 	{ path: "/user", component: require('./views/User'),

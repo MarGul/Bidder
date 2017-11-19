@@ -1,9 +1,9 @@
 import { 
-	SET_SERVICE_DETAILS_FETCHED,
-	SET_SERVICE_DETAILS_SERVICE,
-	SET_SERVICE_DETAILS_BIDS_FETCHED,
-	SET_SERVICE_DETAILS_BIDS,
-	SET_SERVICE_DETAILS_BID_ACCEPTED
+	SET_USER_SERVICE_DETAILS_FETCHED,
+	SET_USER_SERVICE_DETAILS_SERVICE,
+	SET_USER_SERVICE_DETAILS_BIDS_FETCHED,
+	SET_USER_SERVICE_DETAILS_BIDS,
+	SET_USER_SERVICE_DETAILS_BID_ACCEPTED
 } from '../mutation-types';
 
 
@@ -16,40 +16,40 @@ const state = {
 }
 
 const mutations = {
-	[SET_SERVICE_DETAILS_FETCHED](state, fetched) {
+	[SET_USER_SERVICE_DETAILS_FETCHED](state, fetched) {
 		state.serviceFetched = fetched;
 	},
-	[SET_SERVICE_DETAILS_SERVICE](state, service) {
+	[SET_USER_SERVICE_DETAILS_SERVICE](state, service) {
 		state.service = service;
 	},
-	[SET_SERVICE_DETAILS_BIDS_FETCHED](state, fetched) {
+	[SET_USER_SERVICE_DETAILS_BIDS_FETCHED](state, fetched) {
 		state.bidsFetched = fetched;
 	},
-	[SET_SERVICE_DETAILS_BIDS](state, bids) {
+	[SET_USER_SERVICE_DETAILS_BIDS](state, bids) {
 		state.bids = bids;
 	},
-	[SET_SERVICE_DETAILS_BID_ACCEPTED](state, accepted) {
+	[SET_USER_SERVICE_DETAILS_BID_ACCEPTED](state, accepted) {
 		state.bidAccepted = accepted;
 	}
 }
 
 const actions = {
 	bidAccepted({commit, state}, payload) {
-		commit('SET_SERVICE_DETAILS_BID_ACCEPTED', true);
+		commit('SET_USER_SERVICE_DETAILS_BID_ACCEPTED', true);
 		let bids = state.bids;
 		bids.forEach(function(bid) {
 			if ( bid.id === payload.id ) {
 				bid.accepted = true;
 			}
 		});
-		commit('SET_SERVICE_DETAILS_BIDS', bids);
+		commit('SET_USER_SERVICE_DETAILS_BIDS', bids);
 	},
 	clearServiceDetailsState({commit}) {
-		commit('SET_SERVICE_DETAILS_FETCHED', false);
-		commit('SET_SERVICE_DETAILS_SERVICE', {});
-		commit('SET_SERVICE_DETAILS_BIDS_FETCHED', false);
-		commit('SET_SERVICE_DETAILS_BIDS', []);
-		commit('SET_SERVICE_DETAILS_BID_ACCEPTED', null);
+		commit('SET_USER_SERVICE_DETAILS_FETCHED', false);
+		commit('SET_USER_SERVICE_DETAILS_SERVICE', {});
+		commit('SET_USER_SERVICE_DETAILS_BIDS_FETCHED', false);
+		commit('SET_USER_SERVICE_DETAILS_BIDS', []);
+		commit('SET_USER_SERVICE_DETAILS_BID_ACCEPTED', null);
 	}
 }
 
