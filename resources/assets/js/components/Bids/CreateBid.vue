@@ -93,13 +93,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" :class="{processing}">
-                        Lägg ditt bud
-                    </button>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary" :class="{processing}">
+                            Lägg ditt bud
+                        </button>
+                    </div>
                 </div>
             </form>
-        </template>   
-	</div>
+        </template>
+
+        <template v-else>
+            <div class="modal-body text-center">
+                <div class="icon icon_gate_closed warning-color wh100 cursor-default"></div>
+                <h5 class="warning-color">Du måste vara inloggad för att lägga ett bud.</h5>
+            </div>
+            <div class="modal-footer">
+                <span class="is-link" @click="$store.dispatch('openModal', {component: 'login'})">Logga in</span> eller 
+                <span class="is-link" @click="$store.dispatch('openModal', {component: 'register'})">Registrera</span>
+            </div>
+        </template>  
+	</div> 
 </template>
 
 <script>
@@ -150,13 +163,7 @@
 						this.form.errors.record(error);
 						this.processing = false;
 					});
-			}
+            }
 		}
 	}
 </script>
-
-<style>
-    .modal-footer {
-        text-align: right !important;
-    }
-</style>
