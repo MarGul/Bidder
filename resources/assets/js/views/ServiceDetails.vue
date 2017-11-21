@@ -41,6 +41,10 @@
 					this.$store.dispatch('addBid', {bid: e.bid});
 					this.$store.dispatch('showNotification', {type: 'info', msg: 'Det kom precis in ett bud för denna tjänsten!'})
 				});
+		},
+		destroyed() {
+			this.$store.commit('SET_SERVICE_DETAILS_FETCHED', false);
+			this.$store.commit('SET_SERVICE_DETAILS', {});
 		}
 	}
 </script>

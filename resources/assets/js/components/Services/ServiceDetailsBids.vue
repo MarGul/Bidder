@@ -2,6 +2,9 @@
     <div class="service_details_bids-component">
         <div class="main-area-with-sidebar">
             <div class="main-area">
+                <router-link :to="`/services/${service.id}`" class="btn btn-primary full-width mb30" v-if="breakpoints.isMobile()">
+                    Tillbaka till tjänsten
+                </router-link>
                 <one-bid :bid="bid" v-for="bid in bids" :key="bid.id" />
             </div>
             <div class="main-area-sidebar">
@@ -13,18 +16,18 @@
                         <ul class="items-list-default">
                             <li>
                                 <div class="gray-text">Antal bud</div>
-                                <div class="item-content">3</div>
+                                <div class="item-content" v-text="bids.length"></div>
                             </li>
                             <li>
                                 <div class="gray-text">Senaste budet lagt</div> 
-                                <div class="item-content">18 nov 2017 11:03</div>
+                                <div class="item-content" v-text="latestBid"></div>
                             </li>
                             <li>
                                 <div class="gray-text">Första budet lagt</div>
-                                <div class="item-content">18 nov 2017 11:03</div>    
+                                <div class="item-content" v-text="firstBid"></div>    
                             </li>
                         </ul>
-                        <router-link :to="{name: 'serviceDetails', params: {id: $route.params.id}}" class="btn btn-primary full-width">
+                        <router-link :to="`/services/${service.id}`" class="btn btn-primary full-width">
                             Tillbaka till tjänsten
                         </router-link>
                     </div>
@@ -46,8 +49,21 @@
             ...mapGetters({
                 service: 'service'
             }),
+            breakpoints() {
+				return window.breakpoints;
+			},
             bids() {
                 return this.service.bids;
+            },
+            firstBid() {
+                if ( this.bids.length === 0 ) return 'Inget bud lagt än.';
+
+                return this.filters.time(this.bids[this.bids.length - 1].created_at);
+            },
+            latestBid() {
+                if ( this.bids.length === 0 ) return 'Inget bud lagt än.';
+
+                return this.filters.time(this.bids[0].created_at);
             }
         }
     }

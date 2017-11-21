@@ -17,7 +17,7 @@
 				<div class="services-list mtb20">
 					<transition-group name="slide-out" mode="out-in">
 						<div class="service-multi-container" v-for="service in services" :key="service.id">
-							<router-link :to="{name: 'serviceDetails', params: {id: service.id}}" class="no-underline">
+							<router-link :to="`/services/${service.id}`" class="no-underline">
 								<app-service-multi 
 									:service="service"
 									@bidStop="removeService"
