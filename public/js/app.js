@@ -1361,7 +1361,88 @@ var Form = function () {
 
 /***/ }),
 /* 7 */,
-/* 8 */,
+/* 8 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10831,7 +10912,7 @@ if(false) {
 /* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(510)(undefined);
+exports = module.exports = __webpack_require__(8)(undefined);
 // imports
 
 
@@ -11720,7 +11801,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.remember = $$a.concat($$v))
+            $$i < 0 && (_vm.form.remember = $$a.concat([$$v]))
           } else {
             $$i > -1 && (_vm.form.remember = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
@@ -12690,7 +12771,7 @@ if(false) {
 /* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(510)(undefined);
+exports = module.exports = __webpack_require__(8)(undefined);
 // imports
 
 
@@ -15780,11 +15861,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "categories-view"
   }, [_c('app-hero', [_c('h1', {
+    attrs: {
+      "slot": "title"
+    },
     slot: "title"
   }, [_vm._v("Kategorier")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
+      "slot": "right",
       "src": "mechanic.png",
       "alt": ""
     },
@@ -15902,11 +15990,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "regions-view"
   }, [_c('app-hero', [_c('h1', {
+    attrs: {
+      "slot": "title"
+    },
     slot: "title"
   }, [_vm._v("Platser")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
     slot: "left"
   }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
     attrs: {
+      "slot": "right",
       "src": "mechanic.png",
       "alt": ""
     },
@@ -15978,86 +16073,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Services_Services___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Services_Services__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	components: {
-		appServices: __WEBPACK_IMPORTED_MODULE_0__components_Services_Services___default.a
-	}
-});
-
-/***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(270),
-  /* template */
-  __webpack_require__(284),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/Services.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Services.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-491748d7", Component.options)
-  } else {
-    hotAPI.reload("data-v-491748d7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 270 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ServiceFilter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__ = __webpack_require__(277);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Services_ServiceFilter__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Services_ServiceFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Services_ServiceFilter__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServicesMulti__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Services_ServicesMulti___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Services_ServicesMulti__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__includes_Model__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -16109,9 +16129,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
 
 
 
@@ -16120,8 +16137,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		appServiceFilter: __WEBPACK_IMPORTED_MODULE_0__ServiceFilter___default.a,
-		appServiceMulti: __WEBPACK_IMPORTED_MODULE_1__ServiceMulti_vue___default.a
+		appServicesFilter: __WEBPACK_IMPORTED_MODULE_1__components_Services_ServiceFilter___default.a,
+		appServicesMulti: __WEBPACK_IMPORTED_MODULE_2__components_Services_ServicesMulti___default.a
 	},
 	data: function data() {
 		return {
@@ -16130,7 +16147,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		};
 	},
 
-	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'servicesFetched',
 		page: 'servicesPage',
 		canLoadMore: 'servicesCanLoadMore',
@@ -16180,18 +16197,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			}).catch(function (error) {
 				console.log(error);
 			});
-		},
-		removeService: function removeService(_ref) {
-			var id = _ref.id;
-
-			var services = this.services;
-			var serviceIndex = services.findIndex(function (e) {
-				return e.id === id;
-			});
-			if (serviceIndex !== -1) {
-				services.splice(serviceIndex, 1);
-			}
-			this.$store.commit('SET_SERVICES', services);
 		}
 	},
 	created: function created() {
@@ -16202,6 +16207,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
+/* 269 */,
+/* 270 */,
 /* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16597,123 +16604,8 @@ if (false) {
 }
 
 /***/ }),
-/* 277 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(278),
-  /* template */
-  __webpack_require__(283),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServiceMulti.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ServiceMulti.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ba203706", Component.options)
-  } else {
-    hotAPI.reload("data-v-ba203706", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 278 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['service'],
-	components: {
-		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default.a
-	},
-	computed: {
-		category: function category() {
-			var category = this.$store.getters.categoryById(this.service.category_id);
-			return category ? category.name : '';
-		},
-		location: function location() {
-			var city = this.$store.getters.cityById(this.service.city_id);
-			var region = this.$store.getters.regionById(this.service.region_id);
-			return city && region ? city.name + ', ' + region.name : '';
-		},
-		commentCount: function commentCount() {
-			return this.service.comment_count ? this.service.comment_count.count : 0;
-		},
-		bidCount: function bidCount() {
-			return this.service.bid_count ? this.service.bid_count.count : 0;
-		}
-	},
-	methods: {
-		bidStop: function bidStop() {
-			// Emit an event to bidStop so that the Services component can remove the service from the list.
-			this.$emit('bidStop', { id: this.service.id });
-		}
-	}
-});
-
-/***/ }),
+/* 277 */,
+/* 278 */,
 /* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16743,7 +16635,7 @@ if(false) {
 /* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(510)(undefined);
+exports = module.exports = __webpack_require__(8)(undefined);
 // imports
 
 
@@ -16842,83 +16734,40 @@ if (false) {
 }
 
 /***/ }),
-/* 283 */
+/* 283 */,
+/* 284 */,
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "service-container"
-  }, [_c('div', {
-    staticClass: "service-img"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "service-content"
-  }, [_c('div', {
-    staticClass: "service-title"
-  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.service.title) + "\n\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "service-bottom"
-  }, [_c('ul', {
-    staticClass: "list-unstyled bottom-info"
-  }, [_c('li', {
-    staticClass: "category"
-  }, [_c('i', {
-    staticClass: "fa fa-list-ul",
+    staticClass: "services-view"
+  }, [_c('app-hero', [_c('h1', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.category) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "location"
-  }, [_c('i', {
-    staticClass: "fa fa-map-marker",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.location) + "\n\t\t\t\t")])]), _vm._v(" "), _c('ul', {
-    staticClass: "list-unstyled bottom-meta"
-  }, [_c('li', {
-    staticClass: "bid"
-  }, [_c('i', {
-    staticClass: "fa fa-gavel",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.bidCount) + " bud\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "comments"
-  }, [_c('i', {
-    staticClass: "fa fa-commenting",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.commentCount) + "\n\t\t\t\t")]), _vm._v(" "), _c('li', {
-    staticClass: "time"
-  }, [_c('app-timer', {
-    attrs: {
-      "ends": _vm.service.bid_stop
+      "slot": "title"
     },
-    on: {
-      "ended": _vm.bidStop
-    }
-  }), _vm._v("\n\t\t\t\t\tkvar\n\t\t\t\t")], 1)])])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ba203706", module.exports)
-  }
-}
-
-/***/ }),
-/* 284 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "services-component"
+    slot: "title"
+  }, [_vm._v("Tjänster")]), _vm._v(" "), _c('p', {
+    attrs: {
+      "slot": "left"
+    },
+    slot: "left"
+  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
+    attrs: {
+      "slot": "right",
+      "src": "mechanic.png",
+      "alt": ""
+    },
+    slot: "right"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "content"
   }, [_c('section', {
     staticClass: "white-contentSection service-filter"
   }, [_c('div', {
     staticClass: "white-contentSection-content"
-  }, [_c('app-service-filter')], 1), _vm._v(" "), _c('footer', {
+  }, [_c('app-services-filter')], 1), _vm._v(" "), _c('footer', {
     staticClass: "white-contentSection-footer"
   }, [_c('button', {
     staticClass: "btn btn-primary full-width",
@@ -16934,86 +16783,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fetchServices()
       }
     }
-  }, [_vm._v("\n\t\t\t\tHitta Tjänster\n\t\t\t")])])]), _vm._v(" "), (_vm.fetched) ? [(_vm.services.length) ? [_c('div', {
-    staticClass: "services-list mtb20"
-  }, [_c('transition-group', {
-    attrs: {
-      "name": "slide-out",
-      "mode": "out-in"
-    }
+  }, [_vm._v("\n\t\t\t\t\t\tHitta Tjänster\n\t\t\t\t\t")])])]), _vm._v(" "), (_vm.fetched) ? [(_vm.services.length) ? [_c('div', {
+    staticClass: "services-list"
   }, _vm._l((_vm.services), function(service) {
-    return _c('div', {
+    return _c('app-services-multi', {
       key: service.id,
-      staticClass: "service-multi-container"
-    }, [_c('router-link', {
-      staticClass: "no-underline",
-      attrs: {
-        "to": ("/services/" + (service.id))
-      }
-    }, [_c('app-service-multi', {
       attrs: {
         "service": service
       },
       on: {
-        "bidStop": _vm.removeService
+        "ended": function($event) {}
       }
-    })], 1)], 1)
-  }))], 1), _vm._v(" "), (_vm.canLoadMore) ? _c('div', {
-    staticClass: "is-relative"
-  }, [_c('div', {
-    staticClass: "load-more text-center mt15"
-  }, [_c('button', {
-    staticClass: "btn btn-default btn-transparent is-bold-italic",
-    class: {
-      'processing': _vm.loadingMore
-    },
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.fetchServices(false, true)
-      }
-    }
-  }, [_vm._v("\n\t\t\t\t\t\tHämta fler\n\t\t\t\t\t")])])]) : _vm._e()] : _c('div', {
+    })
+  }))] : _c('div', {
     staticClass: "alert alert-info mt20"
-  }, [_vm._v("\n\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t")])] : _c('app-loading', {
+  }, [_vm._v("\n\t\t\t\t\tTyvärr finns det inga tjänster att visa just nu.\n\t\t\t\t")])] : _c('app-loading', {
     attrs: {
       "bg": "gray"
     }
-  })], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-491748d7", module.exports)
-  }
-}
-
-/***/ }),
-/* 285 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "services-view"
-  }, [_c('app-hero', [_c('h1', {
-    slot: "title"
-  }, [_vm._v("Tjänster")]), _vm._v(" "), _c('p', {
-    slot: "left"
-  }, [_vm._v("\n\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.\n\t\t")]), _vm._v(" "), _c('img', {
-    attrs: {
-      "src": "mechanic.png",
-      "alt": ""
-    },
-    slot: "right"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('app-services')], 1)])], 1)
+  })], 2)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25571,7 +25359,7 @@ if(false) {
 /* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(510)(undefined);
+exports = module.exports = __webpack_require__(8)(undefined);
 // imports
 
 
@@ -26690,7 +26478,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.payment_full = $$a.concat($$v))
+            $$i < 0 && (_vm.form.payment_full = $$a.concat([$$v]))
           } else {
             $$i > -1 && (_vm.form.payment_full = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
@@ -26723,7 +26511,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var $$v = null,
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
-            $$i < 0 && (_vm.form.payment_specified = $$a.concat($$v))
+            $$i < 0 && (_vm.form.payment_specified = $$a.concat([$$v]))
           } else {
             $$i > -1 && (_vm.form.payment_specified = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
           }
@@ -29148,90 +28936,144 @@ if (false) {
 /* 503 */,
 /* 504 */,
 /* 505 */,
-/* 506 */,
-/* 507 */,
-/* 508 */,
-/* 509 */,
-/* 510 */
-/***/ (function(module, exports) {
+/* 506 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(507),
+  /* template */
+  __webpack_require__(508),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/margul/Code/Bidder/resources/assets/js/components/Services/ServicesMulti.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ServicesMulti.vue: functional components are not supported with templates, they should use render functions.")}
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2e42475c", Component.options)
+  } else {
+    hotAPI.reload("data-v-2e42475c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
+module.exports = Component.exports
+
+
+/***/ }),
+/* 507 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Includes_Timer__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		service: {
+			type: Object,
+			required: true
 		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
+	},
+	components: {
+		appTimer: __WEBPACK_IMPORTED_MODULE_0__Includes_Timer___default.a
+	},
+	computed: {
+		category: function category() {
+			var category = this.$store.getters.categoryById(this.service.category_id);
+			return category ? category.name : '';
+		},
+		location: function location() {
+			var city = this.$store.getters.cityById(this.service.city_id);
+			var region = this.$store.getters.regionById(this.service.region_id);
+			return city && region ? city.name + ', ' + region.name : '';
+		},
+		commentCount: function commentCount() {
+			return this.service.comment_count ? this.service.comment_count.count : 0;
+		},
+		bidCount: function bidCount() {
+			return this.service.bid_count ? this.service.bid_count.count : 0;
 		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
+	},
+	methods: {
+		bidStop: function bidStop() {
+			// Emit an event to bidStop so that the Services component can remove the service from the list.
+			this.$emit('bidStop', { id: this.service.id });
+		}
 	}
+});
 
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
+/***/ }),
+/* 508 */
+/***/ (function(module, exports, __webpack_require__) {
 
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "services-multi-container"
+  }, [_c('div', {
+    staticClass: "white-contentSection"
+  }, [_c('div', {
+    staticClass: "white-contentSection-content"
+  }, [_c('div', {
+    staticClass: "services-multi-title",
+    domProps: {
+      "textContent": _vm._s(_vm.service.title)
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "white-contentSection-footer"
+  }, [_c('div', {
+    staticClass: "services-multi-meta bidCount"
+  }, [_c('i', {
+    staticClass: "icon icon_bid light-gray wh12"
+  }), _vm._v(" " + _vm._s(_vm.bidCount) + "\n\t\t\t")]), _vm._v(" "), _c('div', {
+    staticClass: "services-multi-meta commentCount"
+  }, [_c('i', {
+    staticClass: "icon icon_bid light-gray wh12"
+  }), _vm._v(" " + _vm._s(_vm.commentCount) + "\n\t\t\t")])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2e42475c", module.exports)
+  }
 }
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
 
 /***/ })
 ],[142]);

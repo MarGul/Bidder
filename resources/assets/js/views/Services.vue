@@ -10,18 +10,102 @@
 
 		<div class="container">
 			<div class="content">
-				<app-services></app-services>
+
+				<section class="white-contentSection service-filter">
+					<div class="white-contentSection-content">
+						<app-services-filter></app-services-filter>
+					</div>
+					<footer class="white-contentSection-footer">
+						<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices()">
+							Hitta Tjänster
+						</button>
+					</footer>
+				</section>
+
+				<template v-if="fetched">
+					
+					<template v-if="services.length">
+						<div class="services-list">
+							<app-services-multi v-for="service in services" :key="service.id"
+								:service="service"
+								@ended=""
+							></app-services-multi>
+						</div>
+					</template>
+
+					<div class="alert alert-info mt20" v-else>
+						Tyvärr finns det inga tjänster att visa just nu.
+					</div>
+
+				</template>
+
+				<app-loading bg="gray" v-else></app-loading>
+
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import appServices from '../components/Services/Services';
+	import { mapGetters } from 'vuex';
+	import appServicesFilter from '../components/Services/ServiceFilter';
+	import appServicesMulti from '../components/Services/ServicesMulti';
+	import Model from '../includes/Model';
 
 	export default {
 		components: {
-			appServices
+			appServicesFilter,
+			appServicesMulti
+		},
+		data() {
+			return {
+				processing: false,
+				loadingMore: false
+			}
+		},
+		computed: {
+			...mapGetters({
+				fetched: 'servicesFetched',
+				page: 'servicesPage',
+				canLoadMore: 'servicesCanLoadMore',
+				services: 'services',
+				filterText: 'filterText',
+				filterCategories: 'filterCategories',
+				filterLocations: 'filterLocations'
+			})
+		},
+		methods: {
+			fetchServices(processing = true, appending = false) {
+				this.processing = processing ? true : false;
+				// Are we appending to the list?
+				if ( appending ) {
+					this.$store.commit('SET_SERVICES_PAGE', this.page + 1);
+					this.loadingMore = true;
+				}
+
+				// The filtering of services
+				let data = {};
+				data.page = this.page
+				data.text = this.filterText;
+				data.categories = this.filterCategories.map(cat => cat.value);
+				data.regions = this.filterLocations.filter(loc => !loc.hasOwnProperty('region_id')).map(region => region.id);
+				data.cities = this.filterLocations.filter(loc => loc.hasOwnProperty('region_id')).map(city => city.id);
+				
+				new Model('services').get(data)
+					.then(response => {
+						this.$store.commit('SET_SERVICES', appending ? this.services.concat(response.data.services.data) : response.data.services.data);
+						this.$store.commit('SET_SERVICES_CAN_LOAD_MORE', response.data.services.next_page_url ? true : false);
+						this.$store.commit('SET_SERVICES_FETCHED', true);
+						this.loadingMore = false;
+						this.processing = false;
+					})
+					.catch(error => { console.log(error); });
+			}
+		},
+		created() {
+			if ( !this.fetched ) {
+				this.fetchServices(false);
+			}
 		}
 	}
 </script>

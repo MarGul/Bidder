@@ -2582,150 +2582,8 @@ body.mobile-nav-open .overlay {
   }
 }
 
-.service-container {
-  position: relative;
-  background: #fff;
-  border: 1px solid #ededed;
-  margin: 15px 0;
-  height: auto;
-  cursor: pointer;
-  color: #636b6f;
-  border-radius: 6px;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-}
-
-@media screen and (min-width: 992px) {
-  .service-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-}
-
-.service-container .service-img {
-  height: 75px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-image: url(http://www.kilatunik.com/wp-content/uploads/2016/04/landscaping-pics-for-front-yard-christmas-decorating-front-porch-flocked-christmas-tree-decorating-500x500.jpg);
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-}
-
-@media screen and (min-width: 992px) {
-  .service-container .service-img {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    height: 150px;
-    border-radius: 0;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .service-container .service-img {
-    height: 125px;
-  }
-}
-
-.service-container .service-content {
-  position: relative;
-}
-
-@media screen and (min-width: 768px) {
-  .service-container .service-content {
-    height: 150px;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .service-container .service-content {
-    -webkit-box-flex: 3;
-        -ms-flex: 3;
-            flex: 3;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .service-container .service-content {
-    height: 125px;
-  }
-}
-
-.service-container .service-content .service-title {
-  padding: 15px 15px 5px 15px;
-  font-weight: 500;
-}
-
-@media screen and (min-width: 768px) {
-  .service-container .service-content .service-title {
-    height: 65px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .service-container .service-content .service-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
-.service-container .service-content .service-bottom i {
-  margin-right: 7px;
-}
-
-.service-container .service-content .service-bottom ul.bottom-info {
-  padding: 2px 15px;
-  margin: 0 0 10px 0;
-}
-
-@media screen and (min-width: 1200px) {
-  .service-container .service-content .service-bottom ul.bottom-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .service-container .service-content .service-bottom ul.bottom-info li {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-  }
-}
-
-.service-container .service-content .service-bottom ul.bottom-info li i {
-  color: #009999;
-}
-
-.service-container .service-content .service-bottom ul.bottom-meta {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 2px 15px;
-  background: rgba(0, 0, 0, 0.02);
-  border-top: 1px solid #ededed;
-  color: #787c84;
-}
-
-.service-container .service-content .service-bottom ul.bottom-meta li {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.service-container .service-content .service-bottom ul.bottom-meta li i {
-  color: #adb0b5;
-}
-
-.service-container .service-content .service-bottom ul.bottom-meta li.time {
-  text-align: right;
+.services-list {
+  margin: 40px 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -2735,15 +2593,26 @@ body.mobile-nav-open .overlay {
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+    margin: 40px -15px;
   }
 }
 
+.services-list .services-multi-container {
+  margin-bottom: 30px;
+}
+
 @media screen and (min-width: 768px) {
-  .services-list .service-multi-container {
+  .services-list .services-multi-container {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
             flex: 0 0 50%;
+    padding: 0 15px;
   }
+}
+
+.services-list .services-multi-container .services-multi-title {
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .services-component .load-more:before {

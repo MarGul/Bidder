@@ -1,131 +1,23 @@
-.service-container {
-	position: relative;
-	background: #fff;
-	border: 1px solid #ededed;
-	margin: 15px 0;
-	height: auto;
-	cursor: pointer;
-	color: $text-color;
-	border-radius: 6px;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-
-	@media screen and (min-width: $screen-md-min) {
-		display: flex;
-	}
-
-	.service-img {
-		height: 75px;
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: cover;
-		background-image: url(http://www.kilatunik.com/wp-content/uploads/2016/04/landscaping-pics-for-front-yard-christmas-decorating-front-porch-flocked-christmas-tree-decorating-500x500.jpg);
-		border-top-right-radius: 6px;
-		border-top-left-radius: 6px;
-
-		@media screen and (min-width: $screen-md-min) {
-			flex: 1;
-			height: 150px;
-			border-radius: 0;
-			border-top-left-radius: 6px;
-			border-bottom-left-radius: 6px;
-		}
-
-		@media screen and (min-width: $screen-lg-min) {
-			height: 125px;
-		}
-	}
-
-	.service-content {
-		position: relative;
-
-		@media screen and (min-width: $screen-sm-min) {
-			height: 150px;
-		}
-
-		@media screen and (min-width: $screen-md-min) {
-			flex: 3;
-		}
-
-		@media screen and (min-width: $screen-lg-min) {
-			height: 125px;
-		}
-
-		.service-title {
-			padding: 15px 15px 5px 15px;
-			font-weight: 500;
-
-			@media screen and (min-width: $screen-sm-min) {
-				height: 65px;
-			}
-		}
-
-		.service-bottom {
-
-			@media screen and (min-width: $screen-sm-min) {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-			}
-
-			i {
-				margin-right: 7px;
-			}
-
-			ul.bottom-info {
-				padding: 2px 15px;
-				margin: 0 0 10px 0;
-
-				@media screen and (min-width: $screen-lg-min) {
-					display: flex;
-				}
-
-				li {
-					
-					@media screen and (min-width: $screen-lg-min) {
-						flex: 1;
-					}
-
-					i {
-						color: $brand-primary;
-					}
-				}
-			}
-
-			ul.bottom-meta {
-				display: flex;
-				padding: 2px 15px;
-				background: rgba(0,0,0,0.02);
-				border-top: 1px solid #ededed;
-				color: darken($navbar-icon-color, 20%);
-
-				li {
-					flex: 1;
-
-					i {
-						color: $navbar-icon-color;
-					}
-
-					&.time {
-						text-align: right;
-					}
-				}
-			}
-		}
-	}
-}
-
 .services-list {
+	margin: 40px 0;
 
 	@media screen and (min-width: $screen-sm-min) {
 		display: flex;
 		flex-wrap: wrap;
+		margin: 40px -15px;
 	}
 
-	.service-multi-container {
+	.services-multi-container {
+		margin-bottom: 30px;
 
 		@media screen and (min-width: $screen-sm-min) {
 			flex: 0 0 50%;
+			padding: 0 15px;
+		}
+
+		.services-multi-title {
+			font-weight: 500;
+			font-size: 15px;
 		}
 	}
 }

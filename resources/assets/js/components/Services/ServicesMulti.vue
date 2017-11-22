@@ -1,34 +1,16 @@
 <template>
-	<div class="service-container">
-		<div class="service-img"></div>
-		<div class="service-content">
-			<div class="service-title">
-				{{ service.title }}
+	<div class="services-multi-container">
+		<div class="white-contentSection">
+			<div class="white-contentSection-content">
+				<div class="services-multi-title" v-text="service.title"></div>
 			</div>
-			<div class="service-bottom">
-				<ul class="list-unstyled bottom-info">
-					<li class="category">
-						<i class="fa fa-list-ul" aria-hidden="true"></i> {{ category }}
-					</li>
-					<li class="location">
-						<i class="fa fa-map-marker" aria-hidden="true"></i> {{ location }}
-					</li>
-				</ul>
-				<ul class="list-unstyled bottom-meta">
-					<li class="bid">
-						<i class="fa fa-gavel" aria-hidden="true"></i> {{ bidCount }} bud
-					</li>
-					<li class="comments">
-						<i class="fa fa-commenting" aria-hidden="true"></i> {{ commentCount }}
-					</li>
-					<li class="time">
-						<app-timer 
-							:ends="service.bid_stop"
-							@ended="bidStop"
-						></app-timer>
-						kvar
-					</li>
-				</ul>
+			<div class="white-contentSection-footer">
+				<div class="services-multi-meta bidCount">
+					<i class="icon icon_bid light-gray wh12"></i> {{ bidCount }}
+				</div>
+				<div class="services-multi-meta commentCount">
+					<i class="icon icon_bid light-gray wh12"></i> {{ commentCount }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -38,7 +20,12 @@
 	import appTimer from '../Includes/Timer';
 
 	export default {
-		props: ['service'],
+		props: {
+			service: {
+				type: Object,
+				required: true
+			}
+		},
 		components: {
 			appTimer
 		},
