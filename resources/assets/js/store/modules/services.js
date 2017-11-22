@@ -23,7 +23,14 @@ const mutations = {
 }
 
 const actions = {
-	
+	removeService({commit, state}, payload) {
+		let services = state.services;
+		let serviceIndex = services.findIndex(e => e.id === payload.id);
+		if ( serviceIndex !== -1 ) {
+			services.splice(serviceIndex, 1);
+		}
+		commit('SET_SERVICES', services);
+	}
 }
 
 const getters = {

@@ -31,6 +31,19 @@
 								@ended=""
 							></app-services-multi>
 						</div>
+					
+					
+						<div class="is-relative" v-if="canLoadMore">
+						<div class="load-more text-center mt15">
+							<button 
+								type="button" 
+								class="btn btn-default btn-transparent is-bold-italic" 
+								:class="{'processing': loadingMore}"
+								@click.prevent="fetchServices(false, true)">
+								Hämta fler
+							</button>
+						</div>
+					</div>
 					</template>
 
 					<div class="alert alert-info mt20" v-else>

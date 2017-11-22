@@ -47,6 +47,11 @@
 		height: 12px;
 	}
 
+	&.w14h16 {
+		width: 14px;
+		height: 16px;
+	}
+
 	&.wh15 {
 		width: 15px;
 		height: 15px;
@@ -101,6 +106,10 @@
 .icon_confirmed {
 	@include mask-icon('../svg/confirm.svg');
 	background-color: $brand-success;
+}
+
+.icon_comment {
+	@include mask-icon('../svg/comment.svg');
 }
 
 .icon_credit_card {

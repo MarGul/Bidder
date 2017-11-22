@@ -10,6 +10,12 @@
 	.services-multi-container {
 		margin-bottom: 30px;
 
+		a {
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		
 		@media screen and (min-width: $screen-sm-min) {
 			flex: 0 0 50%;
 			padding: 0 15px;
@@ -18,6 +24,51 @@
 		.services-multi-title {
 			font-weight: 500;
 			font-size: 15px;
+			color: $text-color;
+		}
+
+		.white-contentSection-footer {
+			padding: 8px 15px;
+			display: flex;
+			color: #97A9B5;
+
+			.services-multi-meta {
+				flex: 1;
+				
+				&.timer {
+					text-align: right;
+				}
+			}
+		}
+
+		.services-multi-info {
+			width: 230px;
+			margin: 20px auto 0 auto;
+			color: lighten($text-color, 7%);
+
+			@media screen and (min-width: $screen-md-min) {
+				width: auto;
+				margin: 20px 0 0 0;
+				display: flex;
+			}
+
+			.multi-info {
+				
+				&.category {
+					margin-bottom: 5px;
+				}
+
+				@media screen and (min-width: $screen-md-min) {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					&.category {
+						margin-bottom: 0;
+					}
+				}
+			}
 		}
 	}
 }
