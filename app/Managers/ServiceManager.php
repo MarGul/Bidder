@@ -37,7 +37,7 @@ class ServiceManager extends BaseManager
 			$this->services = $query->where('active', true)
 									->where('bid_stop', '>', Carbon::now())
 									->orderBy('bid_stop', 'asc')
-									->simplePaginate(2, ['*'], 'page', $page);
+									->simplePaginate(20, ['*'], 'page', $page);
 		} catch (\Exception $e) {
 			$this->setError('Could not fetch services.', 500);
 			return false;

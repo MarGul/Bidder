@@ -94,10 +94,12 @@
 .btn-default {
 	background-color: #eaeaea;
 	border-color: #cfcfcf;
+	color: $text-color;
 
 	&:hover {
 		background-color: darken(#eaeaea, 5%);
 		border-color: darken(#cfcfcf, 5%);
+		color: $text-color;
 	}
 
 	&.processing:after {
