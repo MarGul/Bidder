@@ -292,7 +292,7 @@
 						this.processing = false;
 					})
 					.catch(error => {
-						this.form.errors.record(error);
+						this.form.errors.record(error.errors);
 						this.mediaErrors = [];
 						// Log the media errors seperatly.
 						for ( let key in error) {

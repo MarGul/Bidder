@@ -197,7 +197,7 @@
 						this.processing = false;
 					})
 					.catch(error => {
-						this.form.errors.record(error);
+						this.form.errors.record(error.errors);
 						window.scrollTo(0,0);
 						this.processing = false;
 					});
