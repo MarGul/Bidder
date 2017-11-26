@@ -101,7 +101,7 @@ class Service extends Model
      */
     public function bids() 
     {
-        return $this->hasMany('App\Bid');
+        return $this->hasMany('App\Bid')->orderBy('created_at', 'desc');
     }
 
     /**

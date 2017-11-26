@@ -16,7 +16,7 @@ class ServicesTableSeeder extends Seeder
         $services = [
             [
                 'user_id' => 1,
-                'category_id' => 4,
+                'category_id' => 5,
                 'region_id' => 1,
                 'city_id' => 1,
                 'title' => 'This is the first test service that I need help with',
@@ -29,7 +29,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'category_id' => 6,
+                'category_id' => 3,
                 'region_id' => 1,
                 'city_id' => 1,
                 'title' => 'This is the second test service that I need help with',
@@ -42,7 +42,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'category_id' => 8,
+                'category_id' => 10,
                 'region_id' => 1,
                 'city_id' => 1,
                 'title' => 'This is the third test service that I need help with',

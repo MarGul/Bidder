@@ -191,7 +191,7 @@
 						this.form.errors.clear();
 						// Break the services cache so it reloads with the updated info.
 						this.$store.commit('SET_USER_SERVICES_FETCHED', false);
-						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.data.service);
+						this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
 						window.scrollTo(0,0);
 						this.processing = false;
@@ -214,8 +214,8 @@
 						this.form.start = response.data.service.start;
 						this.form.end = response.data.service.end;
 						this.form.description = response.data.service.description;
-						this.$store.commit('SET_SERVICE_DETAILS_FETCHED', true);
-						this.$store.commit('SET_SERVICE_DETAILS_SERVICE', response.data.service);
+						this.$store.commit('SET_USER_SERVICE_DETAILS_FETCHED', true);
+						this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
 					})
 					.catch(error => {
 						console.log(error);

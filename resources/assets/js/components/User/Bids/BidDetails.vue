@@ -19,7 +19,7 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
-	import oneBid from './OneBid';
+	import oneBid from '../../Bids/OneBid';
 	import appBidService from './BidService';
 
 	export default {

@@ -78,8 +78,20 @@
 	margin-right: 10px;
 }
 
+.mr10-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin-right: 10px !important;
+	}
+}
+
 .mr15 {
 	margin-right: 15px;
+}
+
+.mr15-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin-right: 15px !important;
+	}
 }
 
 .ml3 {
@@ -92,6 +104,22 @@
 
 .ml10 {
 	margin-left: 10px;
+}
+
+.ml10-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin-left: 10px !important;
+	}
+}
+
+.ml15 {
+	margin-left: 15px;
+}
+
+.ml15-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin-left: 15px !important;
+	}
 }
 
 .margin-25 {

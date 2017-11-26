@@ -45,8 +45,8 @@
 </template>
 
 <script>
-	import appRatings from '../../Includes/Ratings';
-	import appBidAcceptStatus from '../Services/BidAcceptStatus';
+	import appRatings from '../Includes/Ratings';
+	import appBidAcceptStatus from '../User/Services/BidAcceptStatus';
 
 	export default {
 		props: {

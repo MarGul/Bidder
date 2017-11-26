@@ -62,6 +62,10 @@
 	&:active {
 		outline: none !important;
 	}
+
+	&.active {
+		box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+	}
 }
 
 .btn-primary {
@@ -71,6 +75,7 @@
 		background-color: $brand-primary-hover !important;
 	}
 
+	&.active,
 	&:focus,
 	&:active,
 	&:active:focus, {
@@ -89,10 +94,12 @@
 .btn-default {
 	background-color: #eaeaea;
 	border-color: #cfcfcf;
+	color: $text-color;
 
 	&:hover {
 		background-color: darken(#eaeaea, 5%);
 		border-color: darken(#cfcfcf, 5%);
+		color: $text-color;
 	}
 
 	&.processing:after {

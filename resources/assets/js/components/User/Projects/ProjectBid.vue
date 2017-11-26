@@ -6,7 +6,7 @@
 
 <script>
 	import { mapGetters } from 'vuex';
-	import oneBid from '../Bids/OneBid';
+	import oneBid from '../../Bids/OneBid';
 
 	export default {
 		components: {

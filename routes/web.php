@@ -10,7 +10,8 @@
 */
 
 Route::get('/test', function() {
-	return \PDF::loadView('pdf.contract', [])->download("AvtalProjectId.pdf");
+    $service = \App\Service::find(1);
+    event(new App\Events\RemoveService($service->id));
 });
 
 /**

@@ -1,3 +1,40 @@
+import { 
+	SET_SERVICE_DETAILS_FETCHED,
+	SET_SERVICE_DETAILS
+} from '../mutation-types';
+
+const state = {
+	fetched: false,
+	service: {}
+}
+
+const mutations = {
+	[SET_SERVICE_DETAILS_FETCHED](state, fetched) {
+		state.fetched = fetched;
+	},
+	[SET_SERVICE_DETAILS](state, service) {
+		state.service = service;
+	}
+}
+
+const actions = {
+	
+}
+
+const getters = {
+	serviceFetched: state => state.fetched,
+	service: state => state.service
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}
+
+/*
+
 import Model from "../../includes/Model"; 
 
 const service = {
@@ -64,4 +101,4 @@ const service = {
 	}
 }
 
-export default service;
+export default service; */
