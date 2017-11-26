@@ -25,12 +25,11 @@
 				<template v-if="fetched">
 					
 					<template v-if="services.length">
-						<div class="services-list">
+						<transition-group name="slide-out" mode="out-in" tag="div" class="services-list">
 							<app-services-multi v-for="service in services" :key="service.id"
 								:service="service"
-								@ended=""
 							></app-services-multi>
-						</div>
+						</transition-group>
 					
 					
 						<div class="is-relative" v-if="canLoadMore">
