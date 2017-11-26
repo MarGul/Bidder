@@ -46,7 +46,7 @@
 			})
 		},
 		methods: {
-			addCategory(item) {
+			addCategory({item}) {
 				let categories = this.categories;
 				categories.push(item);
 				this.$store.commit('SET_FILTER_CATEGORIES', categories);
