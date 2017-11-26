@@ -99,6 +99,14 @@
 	background-color: #97A9B5;
 }
 
+.icon_checkbox_checked {
+	@include mask-icon('../svg/check_box.svg');
+}
+
+.icon_checkbox_unchecked {
+	@include mask-icon('../svg/blank_square.svg');
+}
+
 .icon_contract {
 	@include mask-icon('../svg/contract.svg');
 }
