@@ -61,7 +61,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return app(\App\Features\UserManager::class)->create($data);
+        return app(\App\Managers\UserManager::class)->create($data);
     }
 
     /**

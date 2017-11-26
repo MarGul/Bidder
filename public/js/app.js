@@ -11842,8 +11842,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('register').new().post(this.form.data()).then(function (response) {
-				_this.$store.commit('SET_AUTHENTICATED', { authenticated: true });
-				_this.$store.commit('SET_USER', { user: response.user });
+				_this.$store.commit('SET_AUTHENTICATED', true);
+				_this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 				_this.$store.dispatch('closeModal');
 				_this.$router.push('/welcome');
 			}).catch(function (error) {
@@ -12137,7 +12137,7 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _c("span", { staticClass: "help-block" }, [
+              _c("span", { staticClass: "help-block gray-sub-text" }, [
                 _vm._v("Minst en bokstav, ett nummer, och 7 tecken.")
               ])
             ]

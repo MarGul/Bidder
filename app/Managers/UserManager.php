@@ -78,7 +78,7 @@ class UserManager extends BaseManager
 		]);
 
 		// Send out email for confirming the users email adress
-		Notification::send($user, new EmailVerification($user));
+		Notification::send($this->user, new EmailVerification($this->user));
 
 		return $this->user;
 	}

@@ -28,7 +28,7 @@
 					<input type="password" name="password" class="form-control" placeholder="Skapa lösenord" v-model="form.password">
 					<i class="fa fa-key form-control-feedback"></i>
 					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
-					<span class="help-block">Minst en bokstav, ett nummer, och 7 tecken.</span>
+					<span class="help-block gray-sub-text">Minst en bokstav, ett nummer, och 7 tecken.</span>
 				</div>
 
 				<div class="form-group">
@@ -70,8 +70,8 @@
 				this.processing = true;
 				new Model('register').new().post(this.form.data())
 					.then(response => {
-						this.$store.commit('SET_AUTHENTICATED', {authenticated: true});
-						this.$store.commit('SET_USER', {user: response.user});
+						this.$store.commit('SET_AUTHENTICATED',  true);
+						this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 						this.$store.dispatch('closeModal');
 						this.$router.push('/welcome');
 					})
