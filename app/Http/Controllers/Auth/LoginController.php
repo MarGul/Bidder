@@ -81,16 +81,8 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
-
-        $request->session()->regenerate();
-
-        $request->session()->regenerateToken();
-
-        $_token = $request->session()->token();
-
         if ( $request->expectsJson() ) {
-            return response()->json(['csrfToken' => $_token], 200);
+            return response()->json(['message' => 'Successfully logged out the user.'], 200);
         }
 
         return redirect('/');

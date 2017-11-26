@@ -1224,7 +1224,7 @@ var Model = function () {
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
-var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDER';
+var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDED';
 
 // Categories
 var SET_CATEGORIES_FETCHED = 'SET_CATEGORIES_FETCHED';
@@ -11154,19 +11154,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.dropdown = !this.dropdown;
 		},
 		logout: function logout() {
-			var _this = this;
-
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('logout').new().post().then(function (response) {
-				console.log(response);
-				_this.$store.dispatch('clearAuthState');
-				_this.$router.push('/');
-			}).catch(function (error) {
-				console.log(error);
+			this.$store.dispatch('clearAuthState');
+			this.$router.push('/');
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('logout').new().post().catch(function (error) {
+				location.reload();
 			});
-			/*
-   this.$store.dispatch('logout');
-   this.$router.push('/');
-   */
 		},
 		close: function close() {
 			this.dropdown = false;
@@ -12325,6 +12317,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -12462,21 +12458,18 @@ var render = function() {
                 [_vm._v("Lösenord")]
               ),
               _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "is-link is-weight-500 pull-right",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.$store.dispatch("openModal", {
-                        component: "passwordReset"
-                      })
-                    }
+              _c("a", {
+                staticClass: "is-link is-weight-500 pull-right",
+                domProps: { textContent: _vm._s("Glömt lösenordet?") },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$store.dispatch("openModal", {
+                      component: "passwordReset"
+                    })
                   }
-                },
-                [_vm._v("Glömt lösenordet?")]
-              ),
+                }
+              }),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -12682,9 +12675,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -12693,7 +12683,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			processing: false,
-			success: false,
 			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
 				email: ''
 			})
@@ -12707,8 +12696,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('password/email').new().post(this.form.data()).then(function (response) {
 				_this.form.email = '';
-				_this.success = true;
 				_this.processing = false;
+				_this.$store.dispatch('showNotification', {
+					type: 'success',
+					msg: 'Vi har skickat ett email till dig med en länk för att återställa ditt lösenord.'
+				});
+				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error.errors);
 				_this.processing = false;
@@ -12729,97 +12722,89 @@ var render = function() {
     _vm._m(0, false, false),
     _vm._v(" "),
     _c("div", { staticClass: "modal-body" }, [
-      _vm.success
-        ? _c("div", { staticClass: "alert alert-success" }, [
-            _vm._v(
-              "\n\t\t\tVi har skickat ett email till dig med en länk för att återställa ditt lösenord.\n\t\t"
-            )
-          ])
-        : _c(
-            "form",
+      _c(
+        "form",
+        {
+          on: {
+            keydown: function($event) {
+              _vm.form.errors.clear()
+            }
+          }
+        },
+        [
+          _c(
+            "div",
             {
-              on: {
-                keydown: function($event) {
-                  _vm.form.errors.clear()
-                }
-              }
+              staticClass: "form-group",
+              class: { "has-error": _vm.form.errors.has("email") }
             },
             [
               _c(
-                "div",
-                {
-                  staticClass: "form-group",
-                  class: { "has-error": _vm.form.errors.has("email") }
-                },
+                "label",
+                { staticClass: "control-label", attrs: { for: "email" } },
                 [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "email" } },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\tAnge din emailadress så skickar vi en länk där du kan återställa ditt lösenord.\n\t\t\t\t"
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.email,
-                        expression: "form.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "email",
-                      name: "email",
-                      placeholder: "Din emailadress"
-                    },
-                    domProps: { value: _vm.form.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "email", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.form.errors.has("email")
-                    ? _c("span", {
-                        staticClass: "help-block",
-                        domProps: {
-                          textContent: _vm._s(_vm.form.errors.get("email"))
-                        }
-                      })
-                    : _vm._e()
+                  _vm._v(
+                    "\n\t\t\t\t\tAnge din emailadress så skickar vi en länk där du kan återställa ditt lösenord.\n\t\t\t\t"
+                  )
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "button",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "btn btn-primary full-width",
-                    class: { processing: _vm.processing },
-                    attrs: {
-                      disabled: _vm.processing || this.form.errors.any()
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.send($event)
-                      }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.email,
+                    expression: "form.email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  name: "email",
+                  placeholder: "Din emailadress"
+                },
+                domProps: { value: _vm.form.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  },
-                  [_vm._v("Skicka lösenordsåterställning")]
-                )
-              ])
+                    _vm.$set(_vm.form, "email", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.form.errors.has("email")
+                ? _c("span", {
+                    staticClass: "help-block",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.get("email"))
+                    }
+                  })
+                : _vm._e()
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary full-width",
+                class: { processing: _vm.processing },
+                attrs: { disabled: _vm.processing || this.form.errors.any() },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.send($event)
+                  }
+                }
+              },
+              [_vm._v("Skicka lösenordsåterställning")]
+            )
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "modal-footer" }, [
@@ -15235,62 +15220,6 @@ var getters = {
 	mutations: mutations,
 	actions: actions,
 	getters: getters
-
-	/*
- const auth = {
- 	state: {
- 		authenticated: window.Laravel.authenticated,
- 		user: window.Laravel.user || {},
- 		intended: null,
- 		dropdown: false,
- 		mobileDropdown: false
- 	},
- 	mutations: {
- 		'SET_AUTHENTICATED'(state, payload) {
- 			state.authenticated = payload.authenticated;
- 		},
- 		'SET_USER'(state, payload) {
- 			state.user = payload.user;
- 		},
- 		'SET_INTENDED'(state, payload) {
- 			state.intended = payload.intended;
- 		},
- 		'SET_DROPDOWN'(state, payload) {
- 			state.dropdown = payload.dropdown;
- 		},
- 		'SET_MOBILE_DROPDOWN'(state, payload) {
- 			state.mobileDropdown = payload.mobileDropdown;
- 		}
- 	},
- 	actions: {
- 		logout({commit, dispatch}) {
- 			commit('SET_DROPDOWN', {dropdown: false});
- 			commit('SET_MOBILE_DROPDOWN', {dropdown: false});
- 			commit('SET_AUTHENTICATED', {authenticated: false});
- 			commit('SET_USER', {user: {}});
- 			// Clear user cached state
- 			dispatch('clearUserState');
- 			new Model().new().setUrl('logout').post().then((response) => {
- 				// Set the new csrf token
- 				window.Laravel.csrfToken = response.csrfToken;
- 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken
- 			}).catch((error) => {
- 				
- 			});
- 		}
- 	},
- 	getters: {
- 		isAuthenticated: state => state.authenticated,
- 		authUser: state => state.user,
- 		authIntended: state => state.intended,
- 		authDropdown: state => state.dropdown,
- 		mobileAuthDropdown: state => state.mobileDropdown
- 	}
- }
- 
- export default auth;
- */
-
 });
 
 /***/ }),

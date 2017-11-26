@@ -8,11 +8,7 @@
 
 		<div class="modal-body">
 
-			<div class="alert alert-success" v-if="success">
-				Vi har skickat ett email till dig med en länk för att återställa ditt lösenord.
-			</div>
-
-			<form @keydown="form.errors.clear()" v-else>
+			<form @keydown="form.errors.clear()">
 
 				<div class="form-group" :class="{'has-error': form.errors.has('email')}">
 					<label for="email" class="control-label">
@@ -31,6 +27,7 @@
 					>Skicka lösenordsåterställning</button> 
 				</div>
 			</form>
+
 		</div>
 
 		<div class="modal-footer">
@@ -49,7 +46,6 @@
 		data() {
 			return {
 				processing: false,
-				success: false,
 				form: new Form({
 					email: ''
 				})
@@ -61,8 +57,12 @@
 				new Model('password/email').new().post(this.form.data())
 					.then(response => {
 						this.form.email = '';
-						this.success = true;
 						this.processing = false;
+						this.$store.dispatch('showNotification', {
+							type: 'success', 
+							msg: 'Vi har skickat ett email till dig med en länk för att återställa ditt lösenord.'
+						});
+						this.$store.dispatch('closeModal');
 					})
 					.catch(error => {
 						this.form.errors.record(error.errors);

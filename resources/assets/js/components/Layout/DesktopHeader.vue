@@ -84,17 +84,9 @@
 				this.dropdown = !this.dropdown;
 			},
 			logout() {
-				new Model('logout').new().post().then((response) => {
-					console.log(response);
-					this.$store.dispatch('clearAuthState');
-					this.$router.push('/');
-				}).catch(error => {
-					console.log(error);
-				});
-				/*
-				this.$store.dispatch('logout');
+				this.$store.dispatch('clearAuthState');
 				this.$router.push('/');
-				*/
+				new Model('logout').new().post().catch(error => { location.reload(); });
 			},
 			close() {
 				this.dropdown = false;
