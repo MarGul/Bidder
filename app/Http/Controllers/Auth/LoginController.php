@@ -63,7 +63,7 @@ class LoginController extends Controller
         $errors = ['invalid_login' => trans('auth.failed')];
 
         if ($request->expectsJson()) {
-            return response()->json($errors, 422);
+            return response()->json(['errors' => $errors], 401);
         }
 
         return redirect()->back()
@@ -77,7 +77,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+     public function logout(Request $request)
     {
         $this->guard()->logout();
 

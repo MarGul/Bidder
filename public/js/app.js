@@ -10710,7 +10710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.$store.commit('SET_CATEGORIES_FETCHED', true);
         });
         new __WEBPACK_IMPORTED_MODULE_6__includes_Model__["a" /* default */]('regions').get().then(function (response) {
-            _this.$store.commit('SET_REGIONS', response.regions);
+            _this.$store.commit('SET_REGIONS', response.data.regions);
             _this.$store.commit('SET_REGIONS_FETCHED', true);
         });
 
@@ -11065,6 +11065,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -11129,6 +11130,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
@@ -11152,8 +11154,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.dropdown = !this.dropdown;
 		},
 		logout: function logout() {
-			this.$store.dispatch('logout');
-			this.$router.push('/');
+			var _this = this;
+
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('logout').new().post().then(function (response) {
+				console.log(response);
+				_this.$store.dispatch('clearAuthState');
+				_this.$router.push('/');
+			}).catch(function (error) {
+				console.log(error);
+			});
+			/*
+   this.$store.dispatch('logout');
+   this.$router.push('/');
+   */
 		},
 		close: function close() {
 			this.dropdown = false;
@@ -15194,12 +15207,14 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 }), _mutations);
 
 var actions = {
-	clearState: function clearState(_ref) {
+	clearAuthState: function clearAuthState(_ref) {
 		var commit = _ref.commit;
 
 		commit('SET_AUTHENTICATED', false);
 		commit('SET_AUTHENTICATED_USER', {});
 		commit('SET_AUTHENTICATED_INTENDED', null);
+		window.auth.authenticated = false;
+		window.auth.user = {};
 	}
 };
 

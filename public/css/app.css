@@ -428,6 +428,7 @@
 .alert {
   border-radius: 0;
   text-align: center;
+  border-left-width: 4px;
 }
 
 .alert .link {

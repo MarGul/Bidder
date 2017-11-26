@@ -19,10 +19,12 @@ const mutations = {
 }
 
 const actions = {
-	clearState({commit}) {
+	clearAuthState({commit}) {
 		commit('SET_AUTHENTICATED', false);
 		commit('SET_AUTHENTICATED_USER', {});
 		commit('SET_AUTHENTICATED_INTENDED', null);
+		window.auth.authenticated = false;
+		window.auth.user = {};
 	}
 }
 
