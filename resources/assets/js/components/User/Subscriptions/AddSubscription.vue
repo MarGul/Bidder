@@ -98,7 +98,7 @@
 						this.processing = false;
 					})
 					.catch(error => {
-						this.form.errors.record(error);
+						this.form.errors.record(error.errors);
 						this.processing = false;
 					})
 			}

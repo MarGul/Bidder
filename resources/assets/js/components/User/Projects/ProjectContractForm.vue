@@ -242,7 +242,7 @@
 						window.scrollTo(0,0);
 					})
 					.catch(error => {
-						this.form.errors.record(error);
+						this.form.errors.record(error.errors);
 						this.processing = false;
 						window.scrollTo(0,0);
 					});

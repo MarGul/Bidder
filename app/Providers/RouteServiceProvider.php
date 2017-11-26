@@ -23,15 +23,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //
 
         parent::boot();
-
-        // Bind the params to their model. Laravel will automatically throw a 404 if the model does not exist.
-        Route::model('services', App\Service::class);
-        Route::model('regions', App\Region::class);
-        Route::model('categories', App\Category::class);
-        Route::model('comments', App\Comment::class);
-        Route::model('bids', App\Bid::class);
     }
 
     /**
@@ -57,12 +51,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/web.php');
-        });
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -74,12 +65,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], function ($router) {
-            require base_path('routes/api.php');
-        });
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }
