@@ -1224,7 +1224,7 @@ var Model = function () {
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
-var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDER';
+var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDED';
 
 // Categories
 var SET_CATEGORIES_FETCHED = 'SET_CATEGORIES_FETCHED';
@@ -10710,7 +10710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.$store.commit('SET_CATEGORIES_FETCHED', true);
         });
         new __WEBPACK_IMPORTED_MODULE_6__includes_Model__["a" /* default */]('regions').get().then(function (response) {
-            _this.$store.commit('SET_REGIONS', response.regions);
+            _this.$store.commit('SET_REGIONS', response.data.regions);
             _this.$store.commit('SET_REGIONS_FETCHED', true);
         });
 
@@ -11065,6 +11065,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -11129,6 +11130,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
@@ -11152,8 +11154,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.dropdown = !this.dropdown;
 		},
 		logout: function logout() {
-			this.$store.dispatch('logout');
+			this.$store.dispatch('clearAuthState');
 			this.$router.push('/');
+			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('logout').new().post().catch(function (error) {
+				location.reload();
+			});
 		},
 		close: function close() {
 			this.dropdown = false;
@@ -11837,8 +11842,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('register').new().post(this.form.data()).then(function (response) {
-				_this.$store.commit('SET_AUTHENTICATED', { authenticated: true });
-				_this.$store.commit('SET_USER', { user: response.user });
+				_this.$store.commit('SET_AUTHENTICATED', true);
+				_this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 				_this.$store.dispatch('closeModal');
 				_this.$router.push('/welcome');
 			}).catch(function (error) {
@@ -12132,7 +12137,7 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _c("span", { staticClass: "help-block" }, [
+              _c("span", { staticClass: "help-block gray-sub-text" }, [
                 _vm._v("Minst en bokstav, ett nummer, och 7 tecken.")
               ])
             ]
@@ -12254,7 +12259,9 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__InputControls_Checkbox__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__InputControls_Checkbox___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__InputControls_Checkbox__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__includes_Model__ = __webpack_require__(3);
 //
 //
 //
@@ -12311,11 +12318,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		inputCheckbox: __WEBPACK_IMPORTED_MODULE_1__InputControls_Checkbox___default.a
+	},
 	data: function data() {
 		return {
 			processing: false,
@@ -12333,7 +12347,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			this.processing = true;
 
-			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]().new().setUrl('login').post(this.form.data()).then(function (response) {
+			new __WEBPACK_IMPORTED_MODULE_2__includes_Model__["a" /* default */]('login').new().post(this.form.data()).then(function (response) {
 				_this.$store.commit('SET_AUTHENTICATED', response.authenticated);
 				_this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 
@@ -12444,21 +12458,18 @@ var render = function() {
                 [_vm._v("Lösenord")]
               ),
               _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "is-link is-weight-500 pull-right",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.$store.dispatch("openModal", {
-                        component: "passwordReset"
-                      })
-                    }
+              _c("a", {
+                staticClass: "is-link is-weight-500 pull-right",
+                domProps: { textContent: _vm._s("Glömt lösenordet?") },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$store.dispatch("openModal", {
+                      component: "passwordReset"
+                    })
                   }
-                },
-                [_vm._v("Glömt lösenordet?")]
-              ),
+                }
+              }),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -12495,48 +12506,16 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "checkbox" }, [
-            _c("label", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.remember,
-                    expression: "form.remember"
-                  }
-                ],
-                attrs: { type: "checkbox" },
-                domProps: {
-                  checked: Array.isArray(_vm.form.remember)
-                    ? _vm._i(_vm.form.remember, null) > -1
-                    : _vm.form.remember
-                },
-                on: {
-                  change: function($event) {
-                    var $$a = _vm.form.remember,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = null,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.form.remember = $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          (_vm.form.remember = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
-                      }
-                    } else {
-                      _vm.$set(_vm.form, "remember", $$c)
-                    }
-                  }
-                }
-              }),
-              _vm._v(" Kom ihåg mig\n\t\t\t\t")
-            ])
-          ]),
+          _c("input-checkbox", {
+            attrs: { text: "Kom ihåg mig" },
+            model: {
+              value: _vm.form.remember,
+              callback: function($$v) {
+                _vm.$set(_vm.form, "remember", $$v)
+              },
+              expression: "form.remember"
+            }
+          }),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c(
@@ -12555,7 +12534,8 @@ var render = function() {
               [_vm._v("Logga In")]
             )
           ])
-        ]
+        ],
+        1
       )
     ]),
     _vm._v(" "),
@@ -12695,9 +12675,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -12706,7 +12683,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			processing: false,
-			success: false,
 			form: new __WEBPACK_IMPORTED_MODULE_0__includes_classes_Form__["a" /* default */]({
 				email: ''
 			})
@@ -12720,8 +12696,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('password/email').new().post(this.form.data()).then(function (response) {
 				_this.form.email = '';
-				_this.success = true;
 				_this.processing = false;
+				_this.$store.dispatch('showNotification', {
+					type: 'success',
+					msg: 'Vi har skickat ett email till dig med en länk för att återställa ditt lösenord.'
+				});
+				_this.$store.dispatch('closeModal');
 			}).catch(function (error) {
 				_this.form.errors.record(error.errors);
 				_this.processing = false;
@@ -12742,97 +12722,89 @@ var render = function() {
     _vm._m(0, false, false),
     _vm._v(" "),
     _c("div", { staticClass: "modal-body" }, [
-      _vm.success
-        ? _c("div", { staticClass: "alert alert-success" }, [
-            _vm._v(
-              "\n\t\t\tVi har skickat ett email till dig med en länk för att återställa ditt lösenord.\n\t\t"
-            )
-          ])
-        : _c(
-            "form",
+      _c(
+        "form",
+        {
+          on: {
+            keydown: function($event) {
+              _vm.form.errors.clear()
+            }
+          }
+        },
+        [
+          _c(
+            "div",
             {
-              on: {
-                keydown: function($event) {
-                  _vm.form.errors.clear()
-                }
-              }
+              staticClass: "form-group",
+              class: { "has-error": _vm.form.errors.has("email") }
             },
             [
               _c(
-                "div",
-                {
-                  staticClass: "form-group",
-                  class: { "has-error": _vm.form.errors.has("email") }
-                },
+                "label",
+                { staticClass: "control-label", attrs: { for: "email" } },
                 [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "email" } },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\tAnge din emailadress så skickar vi en länk där du kan återställa ditt lösenord.\n\t\t\t\t"
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.email,
-                        expression: "form.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "email",
-                      name: "email",
-                      placeholder: "Din emailadress"
-                    },
-                    domProps: { value: _vm.form.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "email", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.form.errors.has("email")
-                    ? _c("span", {
-                        staticClass: "help-block",
-                        domProps: {
-                          textContent: _vm._s(_vm.form.errors.get("email"))
-                        }
-                      })
-                    : _vm._e()
+                  _vm._v(
+                    "\n\t\t\t\t\tAnge din emailadress så skickar vi en länk där du kan återställa ditt lösenord.\n\t\t\t\t"
+                  )
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "button",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "btn btn-primary full-width",
-                    class: { processing: _vm.processing },
-                    attrs: {
-                      disabled: _vm.processing || this.form.errors.any()
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.send($event)
-                      }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.email,
+                    expression: "form.email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  name: "email",
+                  placeholder: "Din emailadress"
+                },
+                domProps: { value: _vm.form.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  },
-                  [_vm._v("Skicka lösenordsåterställning")]
-                )
-              ])
+                    _vm.$set(_vm.form, "email", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.form.errors.has("email")
+                ? _c("span", {
+                    staticClass: "help-block",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.get("email"))
+                    }
+                  })
+                : _vm._e()
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary full-width",
+                class: { processing: _vm.processing },
+                attrs: { disabled: _vm.processing || this.form.errors.any() },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.send($event)
+                  }
+                }
+              },
+              [_vm._v("Skicka lösenordsåterställning")]
+            )
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "modal-footer" }, [
@@ -15220,12 +15192,14 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 }), _mutations);
 
 var actions = {
-	clearState: function clearState(_ref) {
+	clearAuthState: function clearAuthState(_ref) {
 		var commit = _ref.commit;
 
 		commit('SET_AUTHENTICATED', false);
 		commit('SET_AUTHENTICATED_USER', {});
 		commit('SET_AUTHENTICATED_INTENDED', null);
+		window.auth.authenticated = false;
+		window.auth.user = {};
 	}
 };
 
@@ -15246,62 +15220,6 @@ var getters = {
 	mutations: mutations,
 	actions: actions,
 	getters: getters
-
-	/*
- const auth = {
- 	state: {
- 		authenticated: window.Laravel.authenticated,
- 		user: window.Laravel.user || {},
- 		intended: null,
- 		dropdown: false,
- 		mobileDropdown: false
- 	},
- 	mutations: {
- 		'SET_AUTHENTICATED'(state, payload) {
- 			state.authenticated = payload.authenticated;
- 		},
- 		'SET_USER'(state, payload) {
- 			state.user = payload.user;
- 		},
- 		'SET_INTENDED'(state, payload) {
- 			state.intended = payload.intended;
- 		},
- 		'SET_DROPDOWN'(state, payload) {
- 			state.dropdown = payload.dropdown;
- 		},
- 		'SET_MOBILE_DROPDOWN'(state, payload) {
- 			state.mobileDropdown = payload.mobileDropdown;
- 		}
- 	},
- 	actions: {
- 		logout({commit, dispatch}) {
- 			commit('SET_DROPDOWN', {dropdown: false});
- 			commit('SET_MOBILE_DROPDOWN', {dropdown: false});
- 			commit('SET_AUTHENTICATED', {authenticated: false});
- 			commit('SET_USER', {user: {}});
- 			// Clear user cached state
- 			dispatch('clearUserState');
- 			new Model().new().setUrl('logout').post().then((response) => {
- 				// Set the new csrf token
- 				window.Laravel.csrfToken = response.csrfToken;
- 				window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken
- 			}).catch((error) => {
- 				
- 			});
- 		}
- 	},
- 	getters: {
- 		isAuthenticated: state => state.authenticated,
- 		authUser: state => state.user,
- 		authIntended: state => state.intended,
- 		authDropdown: state => state.dropdown,
- 		mobileAuthDropdown: state => state.mobileDropdown
- 	}
- }
- 
- export default auth;
- */
-
 });
 
 /***/ }),
@@ -33711,6 +33629,167 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(510)
+/* template */
+var __vue_template__ = __webpack_require__(511)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/InputControls/Checkbox.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-30052b2e", Component.options)
+  } else {
+    hotAPI.reload("data-v-30052b2e", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 510 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        text: {
+            type: String
+        },
+        value: {
+            type: Boolean
+        }
+    },
+    data: function data() {
+        return {
+            isChecked: this.value
+        };
+    },
+
+    computed: {
+        checkboxIcon: function checkboxIcon() {
+            return this.isChecked ? 'icon_checkbox_checked' : 'icon_checkbox_unchecked';
+        }
+    },
+    methods: {
+        changed: function changed() {
+            this.isChecked = !this.isChecked;
+
+            this.$emit('input', this.isChecked);
+        }
+    }
+});
+
+/***/ }),
+/* 511 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "input_control_checkbox", on: { click: _vm.changed } },
+    [
+      _c("i", { staticClass: "icon wh15 primary", class: [_vm.checkboxIcon] }),
+      _vm._v(" "),
+      _c("span", { domProps: { textContent: _vm._s(_vm.text) } })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-30052b2e", module.exports)
+  }
+}
 
 /***/ })
 ],[147]);

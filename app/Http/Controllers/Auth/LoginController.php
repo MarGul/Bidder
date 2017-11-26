@@ -63,12 +63,12 @@ class LoginController extends Controller
         $errors = ['invalid_login' => trans('auth.failed')];
 
         if ($request->expectsJson()) {
-            return response()->json($errors, 422);
+            return response()->json(['errors' => $errors], 401);
         }
 
         return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors($errors);
+                         ->withInput($request->only($this->username(), 'remember'))
+                         ->withErrors($errors);
     }
 
     /**
@@ -77,20 +77,12 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+     public function logout(Request $request)
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
-
-        $request->session()->regenerate();
-
-        $request->session()->regenerateToken();
-
-        $_token = $request->session()->token();
-
         if ( $request->expectsJson() ) {
-            return response()->json(['csrfToken' => $_token], 200);
+            return response()->json(['message' => 'Successfully logged out the user.'], 200);
         }
 
         return redirect('/');

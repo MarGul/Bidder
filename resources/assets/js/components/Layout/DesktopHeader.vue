@@ -59,6 +59,7 @@
 
 <script>
 	import { mapGetters } from 'vuex';
+	import Model from '../../includes/Model';
 
 	export default {
 		data() {
@@ -83,8 +84,9 @@
 				this.dropdown = !this.dropdown;
 			},
 			logout() {
-				this.$store.dispatch('logout');
+				this.$store.dispatch('clearAuthState');
 				this.$router.push('/');
+				new Model('logout').new().post().catch(error => { location.reload(); });
 			},
 			close() {
 				this.dropdown = false;

@@ -24,17 +24,20 @@
 
 				<div class="form-group has-feedback"  :class="{'has-error': form.errors.has('password')}">
 					<label for="password" class="control-label">Lösenord</label>
-					<a class="is-link is-weight-500 pull-right" @click.prevent="$store.dispatch('openModal', {component: 'passwordReset'})">Glömt lösenordet?</a>
+					<a 
+						class="is-link is-weight-500 pull-right" 
+						@click.prevent="$store.dispatch('openModal', {component: 'passwordReset'})"
+						v-text="`Glömt lösenordet?`"
+					/>
 					<input type="password" name="password" class="form-control" v-model="form.password">
 					<i class="fa fa-key form-control-feedback"></i>
 					<span class="help-block" v-if="form.errors.has('password')" v-text="form.errors.get('password')"></span>
 				</div>
 
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" v-model="form.remember"> Kom ihåg mig
-					</label>
-				</div>
+				<input-checkbox
+					text="Kom ihåg mig"
+					v-model="form.remember"
+				/>
 
 				<div class="form-group">
 					<button
@@ -56,9 +59,13 @@
 
 <script>
 	import Form from '../../includes/classes/Form';
+	import inputCheckbox from '../InputControls/Checkbox';
 	import Model from '../../includes/Model';
 
 	export default {
+		components: {
+			inputCheckbox
+		},
 		data() {
 			return {
 				processing: false,
@@ -73,7 +80,7 @@
 			authenticate() {
 				this.processing = true;
 
-				new Model().new().setUrl('login').post(this.form.data())
+				new Model('login').new().post(this.form.data())
 					.then((response) => {
 						this.$store.commit('SET_AUTHENTICATED', response.authenticated);
 						this.$store.commit('SET_AUTHENTICATED_USER', response.user);

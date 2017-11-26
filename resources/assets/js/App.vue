@@ -58,7 +58,7 @@
                 this.$store.commit('SET_CATEGORIES_FETCHED', true);
             });
             new Model('regions').get().then(response => {
-                this.$store.commit('SET_REGIONS', response.regions);
+                this.$store.commit('SET_REGIONS', response.data.regions);
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 

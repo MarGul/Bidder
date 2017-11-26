@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Region;
+use App\Managers\RegionManager;
+
 
 class RegionController extends Controller
 {
+    
+    /**
+     * Manager
+     * 
+     * @var App\Managers\RegionManager
+     */
+    private $manager;
+    
+    public function __construct(RegionManager $manager) {
+        $this->manager = $manager;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,36 +27,18 @@ class RegionController extends Controller
      */
     public function index()
     {
-        $regions = Region::with('cities')->get();
-
-        Region::parseRegions($regions);
-
-        return response()->json([
-            'message' => 'Listing all regions.',
-            'regions' => $regions
-        ], 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Integer|String  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function show($identifier)
-    {
-        // If integer look for region with that ID. Otherwise look for region with slug of $identifier
-        if ( is_numeric($identifier) ) {
-            $region = Region::with('cities')->findOrFail((int)$identifier);
-        } else {
-            $region = Region::with('cities')->where('slug', $identifier)->firstOrFail();
+        // Try to get the regions with their cities
+        $this->manager->active()->withCities();
+        
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
         }
 
-        Region::parseRegion($region);
-
         return response()->json([
-            'message' => 'Viewing region data',
-            'region' => $region
-        ], 200);
+            'message' => $this->manager->successMessage(),
+            'data' => [
+                'regions' => $this->manager->regions()
+            ]
+        ], $this->manager->successCode());
     }
 }
