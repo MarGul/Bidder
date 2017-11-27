@@ -149,7 +149,7 @@ class MediaManager extends BaseManager
      */
     public function storeMedia($file, $thumbPath, $filePath, $service, $options = [])
     {
-    	$cloudUrl = config('amazon.bucket_link') . '/' . config('amazon.bucket') . '/';
+    	$cloudUrl = config('filesystems.disks.s3.bucket_link') . '/' . config('filesystems.disks.s3.bucket') . '/';
 
     	$media = new Media([
     		'service_id' => $service->id,

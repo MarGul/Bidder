@@ -37,6 +37,10 @@
 		background-color: $light-icon-color;
 	}
 
+	&.white {
+		background-color: #fff !important;
+	}
+
 	&.wh10 {
 		width: 10px;
 		height: 10px;

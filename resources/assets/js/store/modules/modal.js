@@ -1,61 +1,57 @@
-const modal = {
-	state: {
-		open: false,
-		component: '',
-		data: {},
-		size: 'size-small',
-		alert: '',
-		message: ''
+import { 
+	SET_MODAL_OPEN_STATE, 
+	SET_MODAL_COMPONENT, 
+	SET_MODAL_SIZE, 
+	SET_MODAL_DATA 
+} from '../mutation-types';
+
+const state = {
+	open: false,
+	component: '',
+	size: 'size-small',
+	data: {}
+}
+
+const mutations = {
+	[SET_MODAL_OPEN_STATE](state, open) {
+		state.open = open;
 	},
-	mutations: {
-		'OPEN_MODAL'(state) {
-			state.open = true;
-		},
-		'CLOSE_MODAL'(state) {
-			state.open = false;
-		},
-		'SET_MODAL_COMPONENT'(state, component) {
-			state.component = component;
-		},
-		'SET_MODAL_SIZE'(state, size) {
-			state.size = size;
-		},
-		'SET_MODAL_DATA'(state, data) {
-			state.data = data;
-		},
-		'SET_MODAL_ALERT'(state, alert) {
-			state.alert = alert;
-		},
-		'SET_MODAL_MESSAGE'(state, message) {
-			state.message = message;
-		}
+	[SET_MODAL_COMPONENT](state, component) {
+		state.component = component;
 	},
-	actions: {
-		openModal({commit}, {component, size = "size-small", data = {}, alert = {}}) {
-			commit('SET_MODAL_COMPONENT', component);
-			commit('SET_MODAL_SIZE', size);
-			commit('SET_MODAL_DATA', data);
-			if ( alert.type ) commit('SET_MODAL_ALERT', alert.type);
-			if ( alert.message ) commit('SET_MODAL_MESSAGE', alert.message);
-			commit('OPEN_MODAL');
-		},
-		closeModal({commit}) {
-			commit('CLOSE_MODAL');
-			commit('SET_MODAL_COMPONENT', '');
-			commit('SET_MODAL_DATA', {});
-			commit('SET_MODAL_SIZE', 'small');
-			commit('SET_MODAL_ALERT', '');
-			commit('SET_MODAL_MESSAGE', '');
-		}
+	[SET_MODAL_SIZE](state, size) {
+		state.size = size;
 	},
-	getters: {
-		modalOpen: state => state.open,
-		modalComponent: state => state.component,
-		modalData: state => state.data,
-		modalSize: state => state.size,
-		modalAlert: state => state.alert,
-		modalMessage: state => state.message,
+	[SET_MODAL_DATA](state, data) {
+		state.data = data;
 	}
 }
 
-export default modal;
+const actions = {
+	openModal({commit}, {component, size = 'size-small', data = {}}) {
+		commit('SET_MODAL_OPEN_STATE', true);
+		commit('SET_MODAL_COMPONENT', component);
+		commit('SET_MODAL_SIZE', size);
+		commit('SET_MODAL_DATA', data);
+	},
+	closeModal({commit}) {
+		commit('SET_MODAL_OPEN_STATE', false);
+		commit('SET_MODAL_COMPONENT', '');
+		commit('SET_MODAL_SIZE', 'size-small');
+		commit('SET_MODAL_DATA', {});
+	}
+}
+
+const getters = {
+	modalOpen: state => state.open,
+	modalComponent: state => state.component,
+	modalData: state => state.data,
+	modalSize: state => state.size,
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}

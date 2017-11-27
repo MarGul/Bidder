@@ -31,8 +31,8 @@
 		</div>
 
 		<div class="modal-footer">
-			<a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
-			 eller <a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			<a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})">Logga In</a>
+			 eller <a class="is-link" @click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})">Registrera</a>
 		</div>
 
 	</div>

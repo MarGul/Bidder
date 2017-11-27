@@ -136,6 +136,16 @@ form.loading {
 	margin-top: 3px;
 }
 
+label.radio-btn {
+	font-weight: normal;
+	cursor: pointer;
+	margin-bottom: 0;
+
+	input[type=radio] {
+		cursor: pointer;
+	}
+}
+
 .form-control {
 	border: 1px solid #e2e2e2;
 	padding: 10px;
@@ -157,10 +167,6 @@ form.loading {
 
 .form-group small {
 	color: #97A9B5;
-}
-
-.form-control-feedback {
-	color: #c7c7c7;
 }
 
 .form-control[readonly] {
