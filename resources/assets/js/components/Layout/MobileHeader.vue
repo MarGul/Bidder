@@ -26,10 +26,10 @@
 					</li>
 					<template v-else>
 						<li class="nav-item">
-							<a @click.prevent="$store.dispatch('openModal', {component: 'register'})" class="register">Registrera</a>
+							<a @click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})" class="register">Registrera</a>
 						</li>
 						<li class="nav-item">
-							<a @click.prevent="$store.dispatch('openModal', {component: 'login'})" class="login">Logga In</a>
+							<a @click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})" class="login">Logga In</a>
 						</li>
 					</template>
 				</div>

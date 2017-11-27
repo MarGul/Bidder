@@ -108,8 +108,8 @@
                 <h5 class="warning-color">Du måste vara inloggad för att lägga ett bud.</h5>
             </div>
             <div class="modal-footer">
-                <span class="is-link" @click="$store.dispatch('openModal', {component: 'login'})">Logga in</span> eller 
-                <span class="is-link" @click="$store.dispatch('openModal', {component: 'register'})">Registrera</span>
+                <span class="is-link" @click="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})">Logga in</span> eller 
+                <span class="is-link" @click="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})">Registrera</span>
             </div>
         </template>  
 	</div> 

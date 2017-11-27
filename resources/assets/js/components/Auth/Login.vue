@@ -26,7 +26,7 @@
 					<label for="password" class="control-label">Lösenord</label>
 					<a 
 						class="is-link is-weight-500 pull-right" 
-						@click.prevent="$store.dispatch('openModal', {component: 'passwordReset'})"
+						@click.prevent="$store.dispatch('openModal', {component: 'passwordReset', data: {closeClass: 'white'}})"
 						v-text="`Glömt lösenordet?`"
 					/>
 					<input type="password" name="password" class="form-control" v-model="form.password">
@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="modal-footer">
-			Har du inte ett konto än? <a class="is-link" @click="$store.dispatch('openModal', {component: 'register'})">Registrera</a>
+			Har du inte ett konto än? <a class="is-link" @click="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})">Registrera</a>
 		</div>
 
 	</div>

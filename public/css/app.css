@@ -58,6 +58,10 @@
   background-color: #97A9B5;
 }
 
+.icon.white {
+  background-color: #fff !important;
+}
+
 .icon.wh10 {
   width: 10px;
   height: 10px;

@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="modal-footer">
-			Är du redan registrad? <a class="is-link" @click="$store.dispatch('openModal', {component: 'login'})">Logga In</a>
+			Är du redan registrad? <a class="is-link" @click="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})">Logga In</a>
 		</div>
 
 	</div>

@@ -1188,39 +1188,43 @@ var Model = function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_AUTHENTICATED_INTENDED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_CATEGORIES_FETCHED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_CATEGORIES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_REGIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_REGIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_MODAL_OPEN_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_MODAL_COMPONENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_MODAL_SIZE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_MODAL_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_REGIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_REGIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_FILTER_TEXT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_FILTER_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_FILTER_LOCATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_SERVICES_PAGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SERVICES_CAN_LOAD_MORE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICE_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_NOTIFICATION_SETTINGS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_USER_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_USER_BID_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return SET_USER_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SET_USER_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return SET_USER_SERVICE_DETAILS_SERVICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SET_USER_SERVICE_DETAILS_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SET_USER_SERVICE_DETAILS_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SET_USER_SERVICE_DETAILS_BID_ACCEPTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_PROJECTS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_PROJECTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return SET_USER_PROJECT_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_PROJECT_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SUBSCRIPTIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SUBSCRIPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_INVOICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_INVOICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_INVOICES_FOCUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SERVICES_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICES_CAN_LOAD_MORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_SERVICE_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_NOTIFICATION_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return SET_USER_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return SET_USER_SERVICE_DETAILS_SERVICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return SET_USER_SERVICE_DETAILS_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return SET_USER_SERVICE_DETAILS_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return SET_USER_SERVICE_DETAILS_BID_ACCEPTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return SET_USER_PROJECTS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return SET_USER_PROJECTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SET_USER_PROJECT_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SET_USER_PROJECT_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_INVOICES_FOCUS; });
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
@@ -1229,6 +1233,12 @@ var SET_AUTHENTICATED_INTENDED = 'SET_AUTHENTICATED_INTENDED';
 // Categories
 var SET_CATEGORIES_FETCHED = 'SET_CATEGORIES_FETCHED';
 var SET_CATEGORIES = 'SET_CATEGORIES';
+
+// Modal
+var SET_MODAL_OPEN_STATE = 'SET_MODAL_OPEN_STATE';
+var SET_MODAL_COMPONENT = 'SET_MODAL_COMPONENT';
+var SET_MODAL_SIZE = 'SET_MODAL_SIZE';
+var SET_MODAL_DATA = 'SET_MODAL_DATA';
 
 // Regions
 var SET_REGIONS_FETCHED = 'SET_REGIONS_FETCHED';
@@ -10950,7 +10960,8 @@ var render = function() {
                           click: function($event) {
                             $event.preventDefault()
                             _vm.$store.dispatch("openModal", {
-                              component: "register"
+                              component: "register",
+                              data: { closeClass: "white" }
                             })
                           }
                         }
@@ -10968,7 +10979,8 @@ var render = function() {
                           click: function($event) {
                             $event.preventDefault()
                             _vm.$store.dispatch("openModal", {
-                              component: "login"
+                              component: "login",
+                              data: { closeClass: "white" }
                             })
                           }
                         }
@@ -11261,7 +11273,10 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        _vm.$store.dispatch("openModal", { component: "login" })
+                        _vm.$store.dispatch("openModal", {
+                          component: "login",
+                          data: { closeClass: "white" }
+                        })
                       }
                     }
                   },
@@ -11276,7 +11291,8 @@ var render = function() {
                       click: function($event) {
                         $event.preventDefault()
                         _vm.$store.dispatch("openModal", {
-                          component: "register"
+                          component: "register",
+                          data: { closeClass: "white" }
                         })
                       }
                     }
@@ -11664,20 +11680,23 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_Register__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Auth_Register__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Login__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Auth_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_PasswordReset__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_PasswordReset___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Auth_PasswordReset__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Bids_CreateBid__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Bids_CreateBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Bids_CreateBid__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Bids_ShowBids__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Bids_ShowBids___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Bids_ShowBids__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__User_Services_ShowBidModal__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__User_Services_ShowBidModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__User_Services_ShowBidModal__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ConfirmModal__ = __webpack_require__(230);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ConfirmModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__ConfirmModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Register__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Auth_Register__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Login__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Auth_Login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Auth_PasswordReset__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Auth_PasswordReset___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Auth_PasswordReset__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Bids_CreateBid__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Bids_CreateBid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Bids_CreateBid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Bids_ShowBids__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Bids_ShowBids___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__Bids_ShowBids__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__User_Services_ShowBidModal__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__User_Services_ShowBidModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__User_Services_ShowBidModal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ConfirmModal__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ConfirmModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__ConfirmModal__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -11691,6 +11710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -11702,14 +11722,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		register: __WEBPACK_IMPORTED_MODULE_0__Auth_Register___default.a,
-		login: __WEBPACK_IMPORTED_MODULE_1__Auth_Login___default.a,
-		passwordReset: __WEBPACK_IMPORTED_MODULE_2__Auth_PasswordReset___default.a,
-		createBid: __WEBPACK_IMPORTED_MODULE_3__Bids_CreateBid___default.a,
-		showBids: __WEBPACK_IMPORTED_MODULE_4__Bids_ShowBids___default.a,
-		confirm: __WEBPACK_IMPORTED_MODULE_6__ConfirmModal___default.a,
-		showUserBid: __WEBPACK_IMPORTED_MODULE_5__User_Services_ShowBidModal___default.a
-	}
+		register: __WEBPACK_IMPORTED_MODULE_1__Auth_Register___default.a,
+		login: __WEBPACK_IMPORTED_MODULE_2__Auth_Login___default.a,
+		passwordReset: __WEBPACK_IMPORTED_MODULE_3__Auth_PasswordReset___default.a,
+		createBid: __WEBPACK_IMPORTED_MODULE_4__Bids_CreateBid___default.a,
+		showBids: __WEBPACK_IMPORTED_MODULE_5__Bids_ShowBids___default.a,
+		confirm: __WEBPACK_IMPORTED_MODULE_7__ConfirmModal___default.a,
+		showUserBid: __WEBPACK_IMPORTED_MODULE_6__User_Services_ShowBidModal___default.a
+	},
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		modalData: 'modalData'
+	}), {
+		closeClass: function closeClass() {
+			if (this.modalData.hasOwnProperty('closeClass')) {
+				return this.modalData.closeClass;
+			}
+
+			return '';
+		}
+	})
 });
 
 /***/ }),
@@ -12221,7 +12252,10 @@ var render = function() {
           staticClass: "is-link",
           on: {
             click: function($event) {
-              _vm.$store.dispatch("openModal", { component: "login" })
+              _vm.$store.dispatch("openModal", {
+                component: "login",
+                data: { closeClass: "white" }
+              })
             }
           }
         },
@@ -12633,7 +12667,8 @@ var render = function() {
                   click: function($event) {
                     $event.preventDefault()
                     _vm.$store.dispatch("openModal", {
-                      component: "passwordReset"
+                      component: "passwordReset",
+                      data: { closeClass: "white" }
                     })
                   }
                 }
@@ -12715,7 +12750,10 @@ var render = function() {
           staticClass: "is-link",
           on: {
             click: function($event) {
-              _vm.$store.dispatch("openModal", { component: "register" })
+              _vm.$store.dispatch("openModal", {
+                component: "register",
+                data: { closeClass: "white" }
+              })
             }
           }
         },
@@ -12983,7 +13021,10 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.$store.dispatch("openModal", { component: "login" })
+              _vm.$store.dispatch("openModal", {
+                component: "login",
+                data: { closeClass: "white" }
+              })
             }
           }
         },
@@ -12997,7 +13038,10 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.$store.dispatch("openModal", { component: "register" })
+              _vm.$store.dispatch("openModal", {
+                component: "register",
+                data: { closeClass: "white" }
+              })
             }
           }
         },
@@ -13582,7 +13626,10 @@ var render = function() {
                   staticClass: "is-link",
                   on: {
                     click: function($event) {
-                      _vm.$store.dispatch("openModal", { component: "login" })
+                      _vm.$store.dispatch("openModal", {
+                        component: "login",
+                        data: { closeClass: "white" }
+                      })
                     }
                   }
                 },
@@ -13596,7 +13643,8 @@ var render = function() {
                   on: {
                     click: function($event) {
                       _vm.$store.dispatch("openModal", {
-                        component: "register"
+                        component: "register",
+                        data: { closeClass: "white" }
                       })
                     }
                   }
@@ -14885,7 +14933,12 @@ var render = function() {
               }
             }
           },
-          [_c("i", { staticClass: "icon icon_delete wh15 light-gray" })]
+          [
+            _c("i", {
+              staticClass: "icon icon_delete wh15 light-gray",
+              class: [_vm.closeClass]
+            })
+          ]
         ),
         _vm._v(" "),
         _c(_vm.$store.getters.modalComponent, { tag: "component" })
@@ -15191,9 +15244,9 @@ var state = {
 	regions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_REGIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_REGIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_REGIONS */], function (state, regions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_REGIONS */], function (state, regions) {
 	state.regions = regions;
 }), _mutations);
 
@@ -15248,90 +15301,75 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var modal = {
-	state: {
-		open: false,
-		component: '',
-		data: {},
-		size: 'size-small',
-		alert: '',
-		message: ''
-	},
-	mutations: {
-		'OPEN_MODAL': function OPEN_MODAL(state) {
-			state.open = true;
-		},
-		'CLOSE_MODAL': function CLOSE_MODAL(state) {
-			state.open = false;
-		},
-		'SET_MODAL_COMPONENT': function SET_MODAL_COMPONENT(state, component) {
-			state.component = component;
-		},
-		'SET_MODAL_SIZE': function SET_MODAL_SIZE(state, size) {
-			state.size = size;
-		},
-		'SET_MODAL_DATA': function SET_MODAL_DATA(state, data) {
-			state.data = data;
-		},
-		'SET_MODAL_ALERT': function SET_MODAL_ALERT(state, alert) {
-			state.alert = alert;
-		},
-		'SET_MODAL_MESSAGE': function SET_MODAL_MESSAGE(state, message) {
-			state.message = message;
-		}
-	},
-	actions: {
-		openModal: function openModal(_ref, _ref2) {
-			var commit = _ref.commit;
-			var component = _ref2.component,
-			    _ref2$size = _ref2.size,
-			    size = _ref2$size === undefined ? "size-small" : _ref2$size,
-			    _ref2$data = _ref2.data,
-			    data = _ref2$data === undefined ? {} : _ref2$data,
-			    _ref2$alert = _ref2.alert,
-			    alert = _ref2$alert === undefined ? {} : _ref2$alert;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+var _mutations;
 
-			commit('SET_MODAL_COMPONENT', component);
-			commit('SET_MODAL_SIZE', size);
-			commit('SET_MODAL_DATA', data);
-			if (alert.type) commit('SET_MODAL_ALERT', alert.type);
-			if (alert.message) commit('SET_MODAL_MESSAGE', alert.message);
-			commit('OPEN_MODAL');
-		},
-		closeModal: function closeModal(_ref3) {
-			var commit = _ref3.commit;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-			commit('CLOSE_MODAL');
-			commit('SET_MODAL_COMPONENT', '');
-			commit('SET_MODAL_DATA', {});
-			commit('SET_MODAL_SIZE', 'small');
-			commit('SET_MODAL_ALERT', '');
-			commit('SET_MODAL_MESSAGE', '');
-		}
+
+
+var state = {
+	open: false,
+	component: '',
+	size: 'size-small',
+	data: {}
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_MODAL_OPEN_STATE */], function (state, open) {
+	state.open = open;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_MODAL_COMPONENT */], function (state, component) {
+	state.component = component;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_MODAL_SIZE */], function (state, size) {
+	state.size = size;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* SET_MODAL_DATA */], function (state, data) {
+	state.data = data;
+}), _mutations);
+
+var actions = {
+	openModal: function openModal(_ref, _ref2) {
+		var commit = _ref.commit;
+		var component = _ref2.component,
+		    _ref2$size = _ref2.size,
+		    size = _ref2$size === undefined ? 'size-small' : _ref2$size,
+		    _ref2$data = _ref2.data,
+		    data = _ref2$data === undefined ? {} : _ref2$data;
+
+		commit('SET_MODAL_OPEN_STATE', true);
+		commit('SET_MODAL_COMPONENT', component);
+		commit('SET_MODAL_SIZE', size);
+		commit('SET_MODAL_DATA', data);
 	},
-	getters: {
-		modalOpen: function modalOpen(state) {
-			return state.open;
-		},
-		modalComponent: function modalComponent(state) {
-			return state.component;
-		},
-		modalData: function modalData(state) {
-			return state.data;
-		},
-		modalSize: function modalSize(state) {
-			return state.size;
-		},
-		modalAlert: function modalAlert(state) {
-			return state.alert;
-		},
-		modalMessage: function modalMessage(state) {
-			return state.message;
-		}
+	closeModal: function closeModal(_ref3) {
+		var commit = _ref3.commit;
+
+		commit('SET_MODAL_OPEN_STATE', false);
+		commit('SET_MODAL_COMPONENT', '');
+		commit('SET_MODAL_SIZE', 'size-small');
+		commit('SET_MODAL_DATA', {});
 	}
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (modal);
+var getters = {
+	modalOpen: function modalOpen(state) {
+		return state.open;
+	},
+	modalComponent: function modalComponent(state) {
+		return state.component;
+	},
+	modalData: function modalData(state) {
+		return state.data;
+	},
+	modalSize: function modalSize(state) {
+		return state.size;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ }),
 /* 242 */
@@ -15456,13 +15494,13 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_SERVICES_PAGE */], function (state, page) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SERVICES_PAGE */], function (state, page) {
 	state.page = page;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
 	state.canLoadMore = canLoadMore;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* SET_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -15562,9 +15600,9 @@ var state = {
 	service: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICE_DETAILS */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_SERVICE_DETAILS */], function (state, service) {
 	state.service = service;
 }), _mutations);
 
@@ -15745,9 +15783,9 @@ var state = {
 	bids: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_USER_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_BIDS */], function (state, bids) {
 	state.bids = bids;
 }), _mutations);
 
@@ -15786,9 +15824,9 @@ var state = {
 	bid: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_USER_BID_DETAILS */], function (state, bid) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_BID_DETAILS */], function (state, bid) {
 	state.bid = bid;
 }), _mutations);
 
@@ -15827,9 +15865,9 @@ var state = {
 	projects: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_PROJECTS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* SET_USER_PROJECTS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_PROJECTS */], function (state, projects) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* SET_USER_PROJECTS */], function (state, projects) {
 	state.projects = projects;
 }), _mutations);
 
@@ -15868,9 +15906,9 @@ var state = {
 	project: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* SET_USER_PROJECT_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SET_USER_PROJECT_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_PROJECT_DETAILS */], function (state, project) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SET_USER_PROJECT_DETAILS */], function (state, project) {
 	state.project = project;
 }), _mutations);
 
@@ -16014,9 +16052,9 @@ var state = {
 	settings: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
 	state.settingsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
 	state.settings = settings;
 }), _mutations);
 
@@ -16055,9 +16093,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -16096,9 +16134,9 @@ var state = {
 	subscriptions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
 	state.subscriptions = subscriptions;
 }), _mutations);
 
@@ -16140,15 +16178,15 @@ var state = {
 	bidAccepted: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SET_USER_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["O" /* SET_USER_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.serviceFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SET_USER_SERVICE_DETAILS_SERVICE */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["P" /* SET_USER_SERVICE_DETAILS_SERVICE */], function (state, service) {
 	state.service = service;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SET_USER_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* SET_USER_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
 	state.bidsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SET_USER_SERVICE_DETAILS_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SET_USER_SERVICE_DETAILS_BIDS */], function (state, bids) {
 	state.bids = bids;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SET_USER_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["N" /* SET_USER_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
 	state.bidAccepted = accepted;
 }), _mutations);
 
@@ -16220,11 +16258,11 @@ var state = {
 	focusId: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_INVOICES */], function (state, invoices) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
 	state.focusId = parseInt(focusId);
 }), _mutations);
 
@@ -19099,7 +19137,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	}),
 	methods: {
 		createBid: function createBid() {
-			this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large' });
+			this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large', data: { closeClass: 'white' } });
 		}
 	}
 });

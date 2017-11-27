@@ -106,7 +106,7 @@
 		},
 		methods: {
 			createBid() {
-				this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large'});
+				this.$store.dispatch('openModal', { component: 'createBid', size: 'size-large', data: {closeClass: 'white'}});
 			}
 		}
 	}
