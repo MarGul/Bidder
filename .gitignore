@@ -7,3 +7,7 @@
 Homestead.json
 Homestead.yaml
 .env
+/public/js/app.js
+/public/js/manifest.js
+/public/js/vendor.js
+/public/css/app.css

@@ -2,6 +2,10 @@
 	margin: 0;
 }
 
+.mt0 {
+	margin-top: 0px !important;
+}
+
 .mt5 {
 	margin-top: 5px;
 }
@@ -71,7 +75,7 @@
 }
 
 .mr5 {
-	margin-right: 5px;
+	margin-right: 5px !important;
 }
 
 .mr10 {

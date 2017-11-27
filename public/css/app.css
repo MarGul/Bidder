@@ -1139,6 +1139,10 @@ a {
   margin: 0;
 }
 
+.mt0 {
+  margin-top: 0px !important;
+}
+
 .mt5 {
   margin-top: 5px;
 }
@@ -1208,7 +1212,7 @@ a {
 }
 
 .mr5 {
-  margin-right: 5px;
+  margin-right: 5px !important;
 }
 
 .mr10 {
@@ -1470,6 +1474,16 @@ form.loading:after {
   margin-top: 3px;
 }
 
+label.radio-btn {
+  font-weight: normal;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+label.radio-btn input[type=radio] {
+  cursor: pointer;
+}
+
 .form-control {
   border: 1px solid #e2e2e2;
   padding: 10px;
@@ -1492,10 +1506,6 @@ form.loading:after {
 
 .form-group small {
   color: #97A9B5;
-}
-
-.form-control-feedback {
-  color: #c7c7c7;
 }
 
 .form-control[readonly] {
