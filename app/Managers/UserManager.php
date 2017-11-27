@@ -71,6 +71,7 @@ class UserManager extends BaseManager
 			'email' => $this->data('email'),
 			'username' => $this->data('username'),
 			'password' => bcrypt($this->data('password')),
+			'company' => $this->data('company'),
 			'name' => '',
 			'bio' => '',
 			'avatar' => $this->defaultAvatarUrl,
@@ -174,7 +175,7 @@ class UserManager extends BaseManager
 
 		try {
 			$this->user->update([
-				'avatar' => config('amazon.bucket_link') . '/' . config('amazon.bucket') . '/' . $path
+				'avatar' => config('filesystems.disks.s3.bucket_link') . '/' . config('filesystems.disks.s3.bucket') . '/' . $path
 			]);
 		} catch ( \Exception $e ) {
 			$this->setError('Could not update the users avatar.', 500);
