@@ -110,12 +110,21 @@
 							</div>
 						</div>
 						<div class="form-section-controls">
-
+							<app-upload-media 
+								:initialMedia="initialMedia"
+								:media="media" 
+								:errors="mediaErrors" 
+								:disabled="processing"
+								:editAvailable="true"
+								@added="mediaAdded" 
+								@deleted="initialMediaRemoved"
+								@removed="mediaRemoved"> 
+							</app-upload-media>
 						</div>
 					</div>
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}">
+					<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
 						Uppdatera tjänsten
 					</button>
 				</footer>
@@ -129,11 +138,13 @@
 	import Form from '../../../includes/classes/Form';
 	import Model from "../../../includes/Model";
 	import datepicker from 'vuejs-datepicker';
+	import appUploadMedia from './UploadMedia';
 	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
-			datepicker
+			datepicker,
+			appUploadMedia
 		},
 		data() {
 			return {
@@ -146,6 +157,8 @@
 					end: '',
 					description: ''
 				}),
+				initialMedia: [],
+				deletedMedia: [],
 				media: [],
 				mediaErrors: [],
 				processing: false
@@ -156,16 +169,20 @@
 				fetched: 'serviceDetailsFetched',
 				service: 'serviceDetailsService'
 			}),
+
 			categories() {
 				return this.$store.getters.categories;
 			},
+
 			regions() {
 				return this.$store.getters.regions;
 			},
+
 			cities() {
 				let region = this.$store.getters.regionById(this.form.region_id);
 				return region ? region.cities : [];
 			},
+
 			finalData() {
 				const formData = new FormData();
 				let data = this.form.asDate(['start', 'end']).data();
@@ -175,15 +192,42 @@
 					formData.append(key, data[key]);
 				}
 				
-				// Append the media if there is any.
-				for (var i = 0; i < this.media.length; i++) {
+				// Append the added media if there is any.
+				for ( var i = 0; i < this.media.length; i++ ) {
 					formData.append('media[]', this.media[i]);
+				}
+
+				// Append the deleted media id's if any
+				for (var j = 0; j < this.deletedMedia.length; j++ ) {
+					formData.append('deletedMedia[]', this.deletedMedia[j]);
 				}
 
 				return formData;
 			}
 		},
 		methods: {
+			initialMediaRemoved({id}) {
+				// Push the deleted id to media that should be deleted.
+				if ( !this.deletedMedia.includes(id) ) {
+					this.deletedMedia.push(id);
+				}
+				// Remove it from the list.
+				this.initialMedia.splice(this.initialMedia.findIndex(e => e.id === id), 1);
+			},
+
+			mediaAdded({files}) {
+				for (let i = 0; i < files.length; i++) {
+					this.media.push(files[i]);
+				}
+			},
+
+			mediaRemoved() {
+				this.media.splice(index, 1);
+				if ( this.mediaErrors[index] ) {
+					this.mediaErrors.splice(index, 1);
+				}
+			},
+
 			update() {
 				this.processing = true;
 				new Model(`user/services/${this.$route.params.id}`).post(this.finalData)
@@ -192,12 +236,20 @@
 						// Break the services cache so it reloads with the updated info.
 						this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 						this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
-						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi uppdaterade din tjänst!'});
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Din tjänst har blivit uppdaterad!'});
 						window.scrollTo(0,0);
 						this.processing = false;
 					})
 					.catch(error => {
 						this.form.errors.record(error.errors);
+						this.mediaErrors = [];
+						// Log the media errors seperatly.
+						for ( let key in error) {
+							if ( key.includes('media') ) {
+								let index = key.split('.')[1];
+								this.mediaErrors[index] = error[key]; 
+							}
+						}
 						window.scrollTo(0,0);
 						this.processing = false;
 					});
@@ -214,6 +266,7 @@
 						this.form.start = response.data.service.start;
 						this.form.end = response.data.service.end;
 						this.form.description = response.data.service.description;
+						this.initialMedia = response.data.service.media;
 						this.$store.commit('SET_USER_SERVICE_DETAILS_FETCHED', true);
 						this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
 					})
@@ -228,6 +281,7 @@
 				this.form.start = this.service.start;
 				this.form.end = this.service.end;
 				this.form.description = this.service.description;
+				this.initialMedia = this.service.media;
 			}
 		}
 	}

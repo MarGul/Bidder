@@ -3431,6 +3431,10 @@ body.mobile-nav-open .overlay {
   margin: 0 0 10px 0;
 }
 
+.upload_media-component.edit .files-container {
+  width: auto !important;
+}
+
 @media screen and (min-width: 768px) {
   .upload_media-component .files-container {
     width: 85%;
@@ -3457,17 +3461,26 @@ body.mobile-nav-open .overlay {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .upload_media-component .media li:last-child {
   border-bottom: none;
 }
 
+.upload_media-component .media li i.media-type {
+  cursor: default;
+  margin-top: 4px;
+}
+
 .upload_media-component .media li .file-name {
   font-weight: 500;
+  max-width: 220px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  text-align: left;
 }
 
 .upload_media-component .media li .file-name.has-error {
@@ -3475,13 +3488,18 @@ body.mobile-nav-open .overlay {
 }
 
 .upload_media-component .media li .file-size {
-  margin-left: 7px;
+  margin: 1px 0 0 10px;
 }
 
 .upload_media-component .media li .error-block {
   font-size: 85%;
   color: #cc0000;
   margin-top: 3px;
+}
+
+.upload_media-component .media li .icon_delete {
+  margin-left: auto;
+  margin-top: 5px;
 }
 
 .notification_settings-component .notification_settings_item-component {

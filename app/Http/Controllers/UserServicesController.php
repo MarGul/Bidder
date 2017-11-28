@@ -78,7 +78,7 @@ class UserServicesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+       $data =  $this->validate($request, [
             'title' => 'required',
             'category_id' => 'required|numeric|exists:categories,id',
             'region_id' => 'required|numeric|exists:regions,id',
@@ -90,9 +90,6 @@ class UserServicesController extends Controller
             'media' => 'array',
             'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
         ]);
-
-        // In laravel 5.5 we get this from the validate method.
-        $data = $request->only(['title', 'description', 'category_id', 'region_id', 'city_id', 'start', 'end', 'bidding', 'media']);
 
         // Try and insert the service
         $this->manager->byUser($request->user())
@@ -121,7 +118,7 @@ class UserServicesController extends Controller
 	{
 		$this->authorize('my-resource', $service);
 
-		$this->validate($request, [
+		$data = $this->validate($request, [
 			'title' => 'required',
             'category_id' => 'required|numeric|exists:categories,id',
             'region_id' => 'required|numeric|exists:regions,id',
@@ -130,10 +127,9 @@ class UserServicesController extends Controller
             'end' => 'required|date_format:Y-m-d',
             'description' => 'required',
             'media' => 'array',
-            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000',
+            'deletedMedia' => 'array'
 		]);
-
-		$data = $request->only(['title', 'category_id', 'region_id', 'city_id', 'start', 'end', 'description']);
 
 		// Try and update the service
 		$this->manager->forService($service)

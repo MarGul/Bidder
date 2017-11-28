@@ -1418,7 +1418,9 @@ var Form = function () {
     }, {
         key: 'parseAsDate',
         value: function parseAsDate(property) {
-            return property.getFullYear() + '-' + this.pad(property.getMonth() + 1) + '-' + this.pad(property.getDate());
+            var date = property instanceof Date ? property : new Date(property);
+
+            return date.getFullYear() + '-' + this.pad(date.getMonth() + 1) + '-' + this.pad(date.getDate());
         }
     }, {
         key: 'pad',
@@ -23297,9 +23299,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['media', 'errors', 'disabled'],
+	props: {
+		initialMedia: {
+			type: Array
+		},
+		media: {
+			type: Array
+		},
+		errors: {
+			type: Array
+		},
+		disabled: {
+			type: Boolean
+		},
+		editAvailable: {
+			type: Boolean,
+			default: false
+		}
+	},
 	methods: {
 		add: function add(files) {
 			if (files.length) {
@@ -23309,6 +23335,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		remove: function remove(index) {
 			this.$emit('removed', { index: index });
+		},
+		removeInitial: function removeInitial(id) {
+			this.$emit('deleted', { id: id });
 		},
 		type: function type(_type) {
 			return _type.includes('image/') ? 'icon_picture' : 'icon_file';
@@ -23335,73 +23364,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "upload_media-component" }, [
-    _c("h4", [_vm._v("Ladda upp media")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "gray-sub-text mb15" }, [
-      _vm._v(
-        "Har du bilder, ritningar eller annan media som du vill lägga till?"
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "files-container" }, [
-      _c(
-        "ul",
-        { staticClass: "media" },
-        _vm._l(_vm.media, function(file, index) {
-          return _c("li", [
-            _c("i", {
-              staticClass: "icon wh15 light-gray mr10",
-              class: [_vm.type(file.type)]
-            }),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass: "file-name",
-                class: { "has-error": _vm.errors[index] }
-              },
-              [_vm._v(_vm._s(file.name))]
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "file-size" }, [
-              _vm._v(_vm._s(_vm.size(file.size)))
-            ]),
-            _vm._v(" "),
-            _c("i", {
-              staticClass: "icon icon_delete danger wh12 ml15",
-              on: {
-                click: function($event) {
-                  _vm.remove(index)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors[index]
-              ? _c("div", {
-                  staticClass: "error-block",
-                  domProps: { textContent: _vm._s(_vm.errors[index][0]) }
+  return _c(
+    "div",
+    {
+      staticClass: "upload_media-component",
+      class: { edit: _vm.editAvailable }
+    },
+    [
+      _c("h4", [_vm._v("Ladda upp media")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "gray-sub-text mb15" }, [
+        _vm._v(
+          "Har du bilder, ritningar eller annan media som du vill lägga till?"
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "files-container" }, [
+        _c(
+          "ul",
+          { staticClass: "media" },
+          [
+            _vm._l(_vm.initialMedia, function(media, index) {
+              return _c("li", { key: media.id }, [
+                _c("i", {
+                  staticClass: "media-type icon wh15 light-gray mr10",
+                  class: [_vm.type(media.mime_type)]
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "file-name",
+                    class: { "has-error": _vm.errors[index] }
+                  },
+                  [_vm._v(_vm._s(media.original_filename))]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "file-size gray-sub-text" }, [
+                  _vm._v(_vm._s(_vm.size(media.size)))
+                ]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "icon icon_delete danger wh12",
+                  on: {
+                    click: function($event) {
+                      _vm.removeInitial(media.id)
+                    }
+                  }
                 })
-              : _vm._e()
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
-    _c("label", { staticClass: "btn btn-default" }, [
-      _vm._v("\n\t\tVälj media\n\t\t"),
-      _c("input", {
-        ref: "input",
-        staticClass: "hidden",
-        attrs: { type: "file", multiple: "", disabled: _vm.disabled },
-        on: {
-          change: function($event) {
-            _vm.add($event.target.files)
+              ])
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.media, function(file, index) {
+              return _c("li", [
+                _c("i", {
+                  staticClass: "media-type icon wh15 light-gray mr10",
+                  class: [_vm.type(file.type)]
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "file-name",
+                    class: { "has-error": _vm.errors[index] }
+                  },
+                  [_vm._v(_vm._s(file.name))]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "file-size gray-sub-text" }, [
+                  _vm._v(_vm._s(_vm.size(file.size)))
+                ]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "icon icon_delete danger wh12",
+                  on: {
+                    click: function($event) {
+                      _vm.remove(index)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors[index]
+                  ? _c("div", {
+                      staticClass: "error-block",
+                      domProps: { textContent: _vm._s(_vm.errors[index][0]) }
+                    })
+                  : _vm._e()
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("label", { staticClass: "btn btn-default" }, [
+        _vm._v("\n\t\tVälj media\n\t\t"),
+        _c("input", {
+          ref: "input",
+          staticClass: "hidden",
+          attrs: { type: "file", multiple: "", disabled: _vm.disabled },
+          on: {
+            change: function($event) {
+              _vm.add($event.target.files)
+            }
           }
-        }
-      })
-    ])
-  ])
+        })
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -24779,7 +24849,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UploadMedia__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -24909,6 +24981,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -24917,7 +24999,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a
+		datepicker: __WEBPACK_IMPORTED_MODULE_2_vuejs_datepicker___default.a,
+		appUploadMedia: __WEBPACK_IMPORTED_MODULE_3__UploadMedia___default.a
 	},
 	data: function data() {
 		return {
@@ -24930,13 +25013,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				end: '',
 				description: ''
 			}),
+			initialMedia: [],
+			deletedMedia: [],
 			media: [],
 			mediaErrors: [],
 			processing: false
 		};
 	},
 
-	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
 		fetched: 'serviceDetailsFetched',
 		service: 'serviceDetailsService'
 	}), {
@@ -24959,15 +25044,45 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				formData.append(key, data[key]);
 			}
 
-			// Append the media if there is any.
+			// Append the added media if there is any.
 			for (var i = 0; i < this.media.length; i++) {
 				formData.append('media[]', this.media[i]);
+			}
+
+			// Append the deleted media id's if any
+			for (var j = 0; j < this.deletedMedia.length; j++) {
+				formData.append('deletedMedia[]', this.deletedMedia[j]);
 			}
 
 			return formData;
 		}
 	}),
 	methods: {
+		initialMediaRemoved: function initialMediaRemoved(_ref) {
+			var id = _ref.id;
+
+			// Push the deleted id to media that should be deleted.
+			if (!this.deletedMedia.includes(id)) {
+				this.deletedMedia.push(id);
+			}
+			// Remove it from the list.
+			this.initialMedia.splice(this.initialMedia.findIndex(function (e) {
+				return e.id === id;
+			}), 1);
+		},
+		mediaAdded: function mediaAdded(_ref2) {
+			var files = _ref2.files;
+
+			for (var i = 0; i < files.length; i++) {
+				this.media.push(files[i]);
+			}
+		},
+		mediaRemoved: function mediaRemoved() {
+			this.media.splice(index, 1);
+			if (this.mediaErrors[index]) {
+				this.mediaErrors.splice(index, 1);
+			}
+		},
 		update: function update() {
 			var _this = this;
 
@@ -24977,11 +25092,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				// Break the services cache so it reloads with the updated info.
 				_this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 				_this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
-				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Vi uppdaterade din tjänst!' });
+				_this.$store.dispatch('showNotification', { type: 'success', msg: 'Din tjänst har blivit uppdaterad!' });
 				window.scrollTo(0, 0);
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error.errors);
+				_this.mediaErrors = [];
+				// Log the media errors seperatly.
+				for (var key in error) {
+					if (key.includes('media')) {
+						var _index = key.split('.')[1];
+						_this.mediaErrors[_index] = error[key];
+					}
+				}
 				window.scrollTo(0, 0);
 				_this.processing = false;
 			});
@@ -24999,6 +25122,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				_this2.form.start = response.data.service.start;
 				_this2.form.end = response.data.service.end;
 				_this2.form.description = response.data.service.description;
+				_this2.initialMedia = response.data.service.media;
 				_this2.$store.commit('SET_USER_SERVICE_DETAILS_FETCHED', true);
 				_this2.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
 			}).catch(function (error) {
@@ -25012,6 +25136,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			this.form.start = this.service.start;
 			this.form.end = this.service.end;
 			this.form.description = this.service.description;
+			this.initialMedia = this.service.media;
 		}
 	}
 });
@@ -25452,7 +25577,31 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(4, false, false)
+            _c("div", { staticClass: "form-section no-border" }, [
+              _vm._m(4, false, false),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-section-controls" },
+                [
+                  _c("app-upload-media", {
+                    attrs: {
+                      initialMedia: _vm.initialMedia,
+                      media: _vm.media,
+                      errors: _vm.mediaErrors,
+                      disabled: _vm.processing,
+                      editAvailable: true
+                    },
+                    on: {
+                      added: _vm.mediaAdded,
+                      deleted: _vm.initialMediaRemoved,
+                      removed: _vm.mediaRemoved
+                    }
+                  })
+                ],
+                1
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("footer", { staticClass: "white-contentSection-footer" }, [
@@ -25461,7 +25610,7 @@ var render = function() {
               {
                 staticClass: "btn btn-primary",
                 class: { processing: _vm.processing },
-                attrs: { type: "submit" }
+                attrs: { type: "submit", disabled: _vm.processing }
               },
               [_vm._v("\n\t\t\t\t\tUppdatera tjänsten\n\t\t\t\t")]
             )
@@ -25532,20 +25681,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-section no-border" }, [
-      _c("div", { staticClass: "form-section-description" }, [
-        _c("div", { staticClass: "description-header" }, [
-          _vm._v("Tjänstens media")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "description-details" }, [
-          _vm._v(
-            "\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t"
-          )
-        ])
+    return _c("div", { staticClass: "form-section-description" }, [
+      _c("div", { staticClass: "description-header" }, [
+        _vm._v("Tjänstens media")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-section-controls" })
+      _c("div", { staticClass: "description-details" }, [
+        _vm._v(
+          "\n\t\t\t\t\t\t\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit\n\t\t\t\t\t\t"
+        )
+      ])
     ])
   }
 ]
