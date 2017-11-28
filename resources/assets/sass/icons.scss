@@ -171,7 +171,10 @@
 
 .icon_image {
 	@include mask-icon('../svg/image.svg');
-	background-color: #97A9B5;
+}
+
+.icon_file {
+	@include mask-icon('../svg/file.svg');
 }
 
 .icon_list {
@@ -206,6 +209,10 @@
 
 .icon_paper_plane {
 	@include mask-icon('../svg/paper_plane.svg');
+}
+
+.icon_picture {
+	@include mask-icon('../svg/picture.svg');
 }
 
 .icon_star_empty {

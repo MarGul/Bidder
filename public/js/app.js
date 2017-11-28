@@ -23297,7 +23297,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['media', 'errors', 'disabled'],
@@ -23312,7 +23311,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$emit('removed', { index: index });
 		},
 		type: function type(_type) {
-			return _type.includes('image/') ? 'fa-file-image-o' : 'fa-file-text-o';
+			return _type.includes('image/') ? 'icon_picture' : 'icon_file';
 		},
 		size: function size(_size) {
 			if (_size < 1000) {
@@ -23339,62 +23338,58 @@ var render = function() {
   return _c("div", { staticClass: "upload_media-component" }, [
     _c("h4", [_vm._v("Ladda upp media")]),
     _vm._v(" "),
-    _c("div", { staticClass: "help-text mb15" }, [
+    _c("div", { staticClass: "gray-sub-text mb15" }, [
       _vm._v(
         "Har du bilder, ritningar eller annan media som du vill lägga till?"
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-6 col-sm-push-3" }, [
-        _c(
-          "ul",
-          { staticClass: "media" },
-          _vm._l(_vm.media, function(file, index) {
-            return _c("li", [
-              _c("i", {
-                staticClass: "fa icon",
-                class: [_vm.type(file.type)],
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "file-name",
-                  class: { "has-error": _vm.errors[index] }
-                },
-                [_vm._v(_vm._s(file.name))]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "file-size" }, [
-                _vm._v(_vm._s(_vm.size(file.size)))
-              ]),
-              _vm._v(" "),
-              _c("i", {
-                staticClass: "icon icon_delete wh12 ml10",
-                on: {
-                  click: function($event) {
-                    _vm.remove(index)
-                  }
+    _c("div", { staticClass: "files-container" }, [
+      _c(
+        "ul",
+        { staticClass: "media" },
+        _vm._l(_vm.media, function(file, index) {
+          return _c("li", [
+            _c("i", {
+              staticClass: "icon wh15 light-gray mr10",
+              class: [_vm.type(file.type)]
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "file-name",
+                class: { "has-error": _vm.errors[index] }
+              },
+              [_vm._v(_vm._s(file.name))]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "file-size" }, [
+              _vm._v(_vm._s(_vm.size(file.size)))
+            ]),
+            _vm._v(" "),
+            _c("i", {
+              staticClass: "icon icon_delete danger wh12 ml15",
+              on: {
+                click: function($event) {
+                  _vm.remove(index)
                 }
-              }),
-              _vm._v(" "),
-              _vm.errors[index]
-                ? _c("div", {
-                    staticClass: "error-block",
-                    domProps: { textContent: _vm._s(_vm.errors[index][0]) }
-                  })
-                : _vm._e()
-            ])
-          })
-        )
-      ])
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors[index]
+              ? _c("div", {
+                  staticClass: "error-block",
+                  domProps: { textContent: _vm._s(_vm.errors[index][0]) }
+                })
+              : _vm._e()
+          ])
+        })
+      )
     ]),
     _vm._v(" "),
     _c("label", { staticClass: "btn btn-default" }, [
-      _c("i", { staticClass: "icon icon_image wh15 mr10" }),
-      _vm._v(" Välj media\n\t\t"),
+      _vm._v("\n\t\tVälj media\n\t\t"),
       _c("input", {
         ref: "input",
         staticClass: "hidden",
