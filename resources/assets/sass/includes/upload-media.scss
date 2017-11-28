@@ -40,6 +40,7 @@
 			border-bottom: 1px solid #e6ebf1;
 			display: flex;
 			align-items: flex-start;
+			flex-wrap: wrap;
 
 			&:last-child {
 				border-bottom: none;
@@ -48,6 +49,10 @@
 			i.media-type {
 				cursor: default;
 				margin-top: 4px;
+
+				&.has-error {
+					background-color: $brand-danger;
+				}
 			}
 
 			.file-name {
@@ -56,10 +61,6 @@
 				text-overflow: ellipsis;
 				overflow-x: hidden;
 				text-align: left;
-
-				&.has-error {
-					color: $brand-danger;
-				}
 			}
 
 			.file-size {
@@ -70,6 +71,8 @@
 				font-size: 85%;
 				color: $brand-danger;
 				margin-top: 3px;
+				flex: 1 1 100%;
+				text-align: left;
 			}
 
 			.icon_delete {

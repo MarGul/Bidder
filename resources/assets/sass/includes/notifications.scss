@@ -1,0 +1,46 @@
+.notifications-component {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1000;
+	padding: 18px;
+	border: 1px solid rgba(27,31,35,0.15);
+	text-align: center;
+
+	&.success {
+		background-color: rgba(81,163,81,0.95);
+		color: #fff;
+
+		a {
+			color: #008B00;
+		}
+	}
+
+	&.error {
+		background-color: rgba(235,89,59,0.95);
+		color: #fff;
+	}
+
+	&.info {
+		background-color: rgba(219, 237, 255, 0.95);
+		color: #032f62;
+	}
+
+	.notification-area {
+		display: flex;
+
+		.notification-message {
+			flex: 10;
+		}
+
+		.close-notification {
+			flex: 1;
+			text-align: right;
+
+			i {
+				cursor: pointer;
+			}
+		}
+	}
+}

@@ -1192,39 +1192,42 @@ var Model = function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_MODAL_COMPONENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_MODAL_SIZE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_MODAL_DATA; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_REGIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_REGIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_NOTIFICATION_SHOWING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_NOTIFICATION_TYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_NOTIFICATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_REGIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_REGIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_FILTER_TEXT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_FILTER_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_FILTER_LOCATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SERVICES_PAGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_SERVICES_CAN_LOAD_MORE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_SERVICE_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_NOTIFICATION_SETTINGS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_USER_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_USER_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_BID_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_USER_BID_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SET_USER_SERVICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SET_USER_SERVICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return SET_USER_SERVICE_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return SET_USER_SERVICE_DETAILS_SERVICE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return SET_USER_SERVICE_DETAILS_BIDS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return SET_USER_SERVICE_DETAILS_BIDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return SET_USER_SERVICE_DETAILS_BID_ACCEPTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return SET_USER_PROJECTS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return SET_USER_PROJECTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SET_USER_PROJECT_DETAILS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SET_USER_PROJECT_DETAILS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_SUBSCRIPTIONS_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_SUBSCRIPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_INVOICES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_INVOICES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_INVOICES_FOCUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SET_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SET_SERVICES_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SET_SERVICES_CAN_LOAD_MORE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SET_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SET_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SET_SERVICE_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SET_USER_NOTIFICATION_SETTINGS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return SET_USER_NOTIFICATION_SETTINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SET_USER_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SET_USER_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return SET_USER_BID_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return SET_USER_BID_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return SET_USER_SERVICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return SET_USER_SERVICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "R", function() { return SET_USER_SERVICE_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return SET_USER_SERVICE_DETAILS_SERVICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return SET_USER_SERVICE_DETAILS_BIDS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return SET_USER_SERVICE_DETAILS_BIDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return SET_USER_SERVICE_DETAILS_BID_ACCEPTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SET_USER_PROJECTS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SET_USER_PROJECTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return SET_USER_PROJECT_DETAILS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SET_USER_PROJECT_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SET_SUBSCRIPTIONS_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SET_SUBSCRIPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return SET_USER_INVOICES_FETCHED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return SET_USER_INVOICES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return SET_USER_INVOICES_FOCUS; });
 // User authentication
 var SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 var SET_AUTHENTICATED_USER = 'SET_AUTHENTICATED_USER';
@@ -1239,6 +1242,11 @@ var SET_MODAL_OPEN_STATE = 'SET_MODAL_OPEN_STATE';
 var SET_MODAL_COMPONENT = 'SET_MODAL_COMPONENT';
 var SET_MODAL_SIZE = 'SET_MODAL_SIZE';
 var SET_MODAL_DATA = 'SET_MODAL_DATA';
+
+// Notification
+var SET_NOTIFICATION_SHOWING = 'SET_NOTIFICATION_SHOWING';
+var SET_NOTIFICATION_TYPE = 'SET_NOTIFICATION_TYPE';
+var SET_NOTIFICATION = 'SET_NOTIFICATION';
 
 // Regions
 var SET_REGIONS_FETCHED = 'SET_REGIONS_FETCHED';
@@ -11421,21 +11429,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(192)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(195)
 /* template */
-var __vue_template__ = __webpack_require__(196)
+var __vue_template__ = __webpack_require__(512)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-b267410a"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -11469,46 +11473,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 192 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(193);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(13)("ec9028fa", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b267410a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Notifications.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b267410a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Notifications.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 193 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.notifications-component[data-v-b267410a] {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1000;\n  padding: 16px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  text-align: center;\n}\n.notifications-component.success[data-v-b267410a] {\n    background-color: rgba(81, 163, 81, 0.95);\n    color: #fff;\n}\n.notifications-component.success a[data-v-b267410a] {\n      color: #008B00;\n}\n.notifications-component.info[data-v-b267410a] {\n    background-color: rgba(219, 237, 255, 0.95);\n    color: #032f62;\n}\n.notifications-component .notification-area[data-v-b267410a] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.notifications-component .notification-area .notification-message[data-v-b267410a] {\n      -webkit-box-flex: 10;\n          -ms-flex: 10;\n              flex: 10;\n}\n.notifications-component .notification-area .close-notification[data-v-b267410a] {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      text-align: right;\n}\n.notifications-component .notification-area .close-notification i[data-v-b267410a] {\n        cursor: pointer;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 192 */,
+/* 193 */,
 /* 194 */
 /***/ (function(module, exports) {
 
@@ -11559,10 +11525,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	created: function created() {
@@ -11570,65 +11532,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		setTimeout(function () {
 			_this.$store.dispatch('closeNotification');
-		}, 4000);
+		}, 5000);
 	}
 });
 
 /***/ }),
-/* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "notifications-component",
-      class: [_vm.$store.getters.notificationType]
-    },
-    [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "notification-area" }, [
-          _c(
-            "div",
-            { staticClass: "notification-message" },
-            [
-              _vm._v(
-                "\n\t\t\t\t" +
-                  _vm._s(_vm.$store.getters.notificationMessage) +
-                  "\n\t\t\t\t"
-              ),
-              _vm.$store.getters.notificationLink
-                ? [
-                    _vm._v("\n\t\t\t\t\t — \n\t\t\t\t\t"),
-                    _c(
-                      "router-link",
-                      { attrs: { to: _vm.$store.getters.notificationLink } },
-                      [_vm._v(_vm._s(_vm.$store.getters.notificationLinkText))]
-                    )
-                  ]
-                : _vm._e()
-            ],
-            2
-          )
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b267410a", module.exports)
-  }
-}
-
-/***/ }),
+/* 196 */,
 /* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15056,7 +14965,7 @@ var render = function() {
         "transition",
         { attrs: { name: "notification-slide-down-up" } },
         [
-          _vm.$store.getters.showingNotification
+          _vm.$store.getters.notificationShowing
             ? _c("app-notifications")
             : _vm._e()
         ],
@@ -15246,9 +15155,9 @@ var state = {
 	regions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_REGIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_REGIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_REGIONS */], function (state, regions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_REGIONS */], function (state, regions) {
 	state.regions = regions;
 }), _mutations);
 
@@ -15496,13 +15405,13 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* SET_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SERVICES_PAGE */], function (state, page) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_SERVICES_PAGE */], function (state, page) {
 	state.page = page;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_SERVICES_CAN_LOAD_MORE */], function (state, canLoadMore) {
 	state.canLoadMore = canLoadMore;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* SET_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -15602,9 +15511,9 @@ var state = {
 	service: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* SET_SERVICE_DETAILS */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_SERVICE_DETAILS */], function (state, service) {
 	state.service = service;
 }), _mutations);
 
@@ -15702,71 +15611,62 @@ var getters = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var notifications = {
-	state: {
-		showing: false,
-		type: '',
-		notification: '',
-		link: '',
-		linkText: ''
-	},
-	mutations: {
-		'SET_SHOWING': function SET_SHOWING(state, showing) {
-			state.showing = showing;
-		},
-		'SET_TYPE': function SET_TYPE(state, type) {
-			state.type = type;
-		},
-		'SET_NOTIFICATION': function SET_NOTIFICATION(state, notification) {
-			state.notification = notification;
-		},
-		'SET_LINK': function SET_LINK(state, link) {
-			state.link = link;
-		},
-		'SET_LINK_TEXT': function SET_LINK_TEXT(state, linkText) {
-			state.linkText = linkText;
-		}
-	},
-	actions: {
-		showNotification: function showNotification(_ref, payload) {
-			var commit = _ref.commit;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(4);
+var _mutations;
 
-			commit('SET_SHOWING', true);
-			commit('SET_TYPE', payload.type);
-			commit('SET_NOTIFICATION', payload.msg);
-			if (payload.link) commit('SET_LINK', payload.link);
-			if (payload.linkText) commit('SET_LINK_TEXT', payload.linkText);
-		},
-		closeNotification: function closeNotification(_ref2) {
-			var commit = _ref2.commit;
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-			commit('SET_SHOWING', false);
-			commit('SET_TYPE', '');
-			commit('SET_NOTIFICATION', '');
-			commit('SET_LINK', '');
-			commit('SET_LINK_TEXT', '');
-		}
+
+
+var state = {
+	showing: false,
+	type: '',
+	notification: ''
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* SET_NOTIFICATION_SHOWING */], function (state, showing) {
+	state.showing = showing;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* SET_NOTIFICATION_TYPE */], function (state, type) {
+	state.type = type;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* SET_NOTIFICATION */], function (state, notification) {
+	state.notification = notification;
+}), _mutations);
+
+var actions = {
+	showNotification: function showNotification(_ref, payload) {
+		var commit = _ref.commit;
+
+		commit('SET_NOTIFICATION_SHOWING', true);
+		commit('SET_NOTIFICATION_TYPE', payload.type);
+		commit('SET_NOTIFICATION', payload.msg);
 	},
-	getters: {
-		showingNotification: function showingNotification(state) {
-			return state.showing;
-		},
-		notificationType: function notificationType(state) {
-			return state.type;
-		},
-		notificationMessage: function notificationMessage(state) {
-			return state.notification;
-		},
-		notificationLink: function notificationLink(state) {
-			return state.link;
-		},
-		notificationLinkText: function notificationLinkText(state) {
-			return state.linkText;
-		}
+	closeNotification: function closeNotification(_ref2) {
+		var commit = _ref2.commit;
+
+		commit('SET_NOTIFICATION_SHOWING', false);
+		commit('SET_NOTIFICATION_TYPE', '');
+		commit('SET_NOTIFICATION', '');
 	}
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (notifications);
+var getters = {
+	notificationShowing: function notificationShowing(state) {
+		return state.showing;
+	},
+	notificationType: function notificationType(state) {
+		return state.type;
+	},
+	notificationMessage: function notificationMessage(state) {
+		return state.notification;
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	state: state,
+	mutations: mutations,
+	actions: actions,
+	getters: getters
+});
 
 /***/ }),
 /* 247 */
@@ -15785,9 +15685,9 @@ var state = {
 	bids: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_BIDS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* SET_USER_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_BIDS */], function (state, bids) {
 	state.bids = bids;
 }), _mutations);
 
@@ -15826,9 +15726,9 @@ var state = {
 	bid: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_BID_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_USER_BID_DETAILS */], function (state, bid) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_BID_DETAILS */], function (state, bid) {
 	state.bid = bid;
 }), _mutations);
 
@@ -15867,9 +15767,9 @@ var state = {
 	projects: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* SET_USER_PROJECTS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SET_USER_PROJECTS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* SET_USER_PROJECTS */], function (state, projects) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SET_USER_PROJECTS */], function (state, projects) {
 	state.projects = projects;
 }), _mutations);
 
@@ -15908,9 +15808,9 @@ var state = {
 	project: {}
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SET_USER_PROJECT_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SET_USER_PROJECT_DETAILS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SET_USER_PROJECT_DETAILS */], function (state, project) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SET_USER_PROJECT_DETAILS */], function (state, project) {
 	state.project = project;
 }), _mutations);
 
@@ -16054,9 +15954,9 @@ var state = {
 	settings: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SET_USER_NOTIFICATION_SETTINGS_FETCHED */], function (state, fetched) {
 	state.settingsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* SET_USER_NOTIFICATION_SETTINGS */], function (state, settings) {
 	state.settings = settings;
 }), _mutations);
 
@@ -16095,9 +15995,9 @@ var state = {
 	services: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["N" /* SET_USER_SERVICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SET_USER_SERVICES */], function (state, services) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* SET_USER_SERVICES */], function (state, services) {
 	state.services = services;
 }), _mutations);
 
@@ -16136,9 +16036,9 @@ var state = {
 	subscriptions: []
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* SET_SUBSCRIPTIONS_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* SET_SUBSCRIPTIONS */], function (state, subscriptions) {
 	state.subscriptions = subscriptions;
 }), _mutations);
 
@@ -16180,15 +16080,15 @@ var state = {
 	bidAccepted: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["O" /* SET_USER_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["R" /* SET_USER_SERVICE_DETAILS_FETCHED */], function (state, fetched) {
 	state.serviceFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["P" /* SET_USER_SERVICE_DETAILS_SERVICE */], function (state, service) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["S" /* SET_USER_SERVICE_DETAILS_SERVICE */], function (state, service) {
 	state.service = service;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* SET_USER_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["P" /* SET_USER_SERVICE_DETAILS_BIDS_FETCHED */], function (state, fetched) {
 	state.bidsFetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SET_USER_SERVICE_DETAILS_BIDS */], function (state, bids) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["O" /* SET_USER_SERVICE_DETAILS_BIDS */], function (state, bids) {
 	state.bids = bids;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["N" /* SET_USER_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["Q" /* SET_USER_SERVICE_DETAILS_BID_ACCEPTED */], function (state, accepted) {
 	state.bidAccepted = accepted;
 }), _mutations);
 
@@ -16260,11 +16160,11 @@ var state = {
 	focusId: null
 };
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* SET_USER_INVOICES_FETCHED */], function (state, fetched) {
 	state.fetched = fetched;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* SET_USER_INVOICES */], function (state, invoices) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* SET_USER_INVOICES */], function (state, invoices) {
 	state.invoices = invoices;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* SET_USER_INVOICES_FOCUS */], function (state, focusId) {
 	state.focusId = parseInt(focusId);
 }), _mutations);
 
@@ -23198,12 +23098,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				_this.form.errors.record(error.errors);
 				_this.mediaErrors = [];
 				// Log the media errors seperatly.
-				for (var key in error) {
+				for (var key in error.errors) {
 					if (key.includes('media')) {
 						var index = key.split('.')[1];
-						_this.mediaErrors[index] = error[key];
+						_this.mediaErrors[index] = error.errors[key];
 					}
 				}
+				_this.$store.dispatch('showNotification', { type: 'error', msg: 'Valideringsfel. Var vänlig och korrigera fälten med röd text.' });
 				window.scrollTo(0, 0);
 				_this.processing = false;
 			});
@@ -23391,14 +23292,9 @@ var render = function() {
                   class: [_vm.type(media.mime_type)]
                 }),
                 _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "file-name",
-                    class: { "has-error": _vm.errors[index] }
-                  },
-                  [_vm._v(_vm._s(media.original_filename))]
-                ),
+                _c("span", { staticClass: "file-name" }, [
+                  _vm._v(_vm._s(media.original_filename))
+                ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "file-size gray-sub-text" }, [
                   _vm._v(_vm._s(_vm.size(media.size)))
@@ -23419,17 +23315,15 @@ var render = function() {
               return _c("li", [
                 _c("i", {
                   staticClass: "media-type icon wh15 light-gray mr10",
-                  class: [_vm.type(file.type)]
+                  class: [
+                    { "has-error": _vm.errors[index] },
+                    _vm.type(file.type)
+                  ]
                 }),
                 _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "file-name",
-                    class: { "has-error": _vm.errors[index] }
-                  },
-                  [_vm._v(_vm._s(file.name))]
-                ),
+                _c("span", { staticClass: "file-name" }, [
+                  _vm._v(_vm._s(file.name))
+                ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "file-size gray-sub-text" }, [
                   _vm._v(_vm._s(_vm.size(file.size)))
@@ -25099,12 +24993,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				_this.form.errors.record(error.errors);
 				_this.mediaErrors = [];
 				// Log the media errors seperatly.
-				for (var key in error) {
+				for (var key in error.errors) {
 					if (key.includes('media')) {
 						var _index = key.split('.')[1];
-						_this.mediaErrors[_index] = error[key];
+						_this.mediaErrors[_index] = error.errors[key];
 					}
 				}
+				_this.$store.dispatch('showNotification', { type: 'error', msg: 'Valideringsfel. Var vänlig och korrigera fälten med röd text.' });
 				window.scrollTo(0, 0);
 				_this.processing = false;
 			});
@@ -33975,6 +33870,87 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "notifications-component",
+      class: [_vm.$store.getters.notificationType]
+    },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "notification-area" }, [
+          _c("div", { staticClass: "notification-message" }, [
+            _vm._v(
+              "\n\t\t\t\t" +
+                _vm._s(_vm.$store.getters.notificationMessage) +
+                "\n\t\t\t"
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b267410a", module.exports)
+  }
+}
 
 /***/ })
 ],[147]);

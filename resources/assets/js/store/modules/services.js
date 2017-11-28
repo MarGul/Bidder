@@ -1,4 +1,9 @@
-import { SET_SERVICES_FETCHED, SET_SERVICES_PAGE, SET_SERVICES_CAN_LOAD_MORE, SET_SERVICES } from "../mutation-types";
+import { 
+	SET_SERVICES_FETCHED, 
+	SET_SERVICES_PAGE, 
+	SET_SERVICES_CAN_LOAD_MORE, 
+	SET_SERVICES 
+} from "../mutation-types";
 
 const state = {
 	fetched: false,

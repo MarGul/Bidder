@@ -7,14 +7,14 @@
 			<ul class="media">
 				<li v-for="(media, index) in initialMedia" :key="media.id">
 					<i class="media-type icon wh15 light-gray mr10" :class="[type(media.mime_type)]"></i> 
-					<span class="file-name" :class="{'has-error': errors[index]}">{{ media.original_filename }}</span>
+					<span class="file-name">{{ media.original_filename }}</span>
 					<span class="file-size gray-sub-text">{{ size(media.size) }}</span>
 					<i class="icon icon_delete danger wh12" @click="removeInitial(media.id)"></i>
 				</li>
 				
 				<li v-for="(file, index) in media">
-					<i class="media-type icon wh15 light-gray mr10" :class="[type(file.type)]"></i> 
-					<span class="file-name" :class="{'has-error': errors[index]}">{{ file.name }}</span>
+					<i class="media-type icon wh15 light-gray mr10" :class="[{'has-error': errors[index]}, type(file.type)]"></i> 
+					<span class="file-name">{{ file.name }}</span>
 					<span class="file-size gray-sub-text">{{ size(file.size) }}</span>
 					<i class="icon icon_delete danger wh12" @click="remove(index)"></i>
 					<div class="error-block" v-if="errors[index]" v-text="errors[index][0]"></div>

@@ -1552,6 +1552,59 @@ label.radio-btn input[type=radio] {
   color: #cc0000;
 }
 
+.notifications-component {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 18px;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  text-align: center;
+}
+
+.notifications-component.success {
+  background-color: rgba(81, 163, 81, 0.95);
+  color: #fff;
+}
+
+.notifications-component.success a {
+  color: #008B00;
+}
+
+.notifications-component.error {
+  background-color: rgba(235, 89, 59, 0.95);
+  color: #fff;
+}
+
+.notifications-component.info {
+  background-color: rgba(219, 237, 255, 0.95);
+  color: #032f62;
+}
+
+.notifications-component .notification-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.notifications-component .notification-area .notification-message {
+  -webkit-box-flex: 10;
+      -ms-flex: 10;
+          flex: 10;
+}
+
+.notifications-component .notification-area .close-notification {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+}
+
+.notifications-component .notification-area .close-notification i {
+  cursor: pointer;
+}
+
 .input_control_checkbox {
   margin: 10px 0 20px 0;
   display: -webkit-box;
@@ -3464,6 +3517,8 @@ body.mobile-nav-open .overlay {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .upload_media-component .media li:last-child {
@@ -3475,16 +3530,16 @@ body.mobile-nav-open .overlay {
   margin-top: 4px;
 }
 
+.upload_media-component .media li i.media-type.has-error {
+  background-color: #cc0000;
+}
+
 .upload_media-component .media li .file-name {
   font-weight: 500;
   max-width: 220px;
   text-overflow: ellipsis;
   overflow-x: hidden;
   text-align: left;
-}
-
-.upload_media-component .media li .file-name.has-error {
-  color: #cc0000;
 }
 
 .upload_media-component .media li .file-size {
@@ -3495,6 +3550,10 @@ body.mobile-nav-open .overlay {
   font-size: 85%;
   color: #cc0000;
   margin-top: 3px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+  text-align: left;
 }
 
 .upload_media-component .media li .icon_delete {
