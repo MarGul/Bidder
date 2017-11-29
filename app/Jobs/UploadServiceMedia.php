@@ -19,6 +19,12 @@ class UploadServiceMedia implements ShouldQueue
      * @var array
      */
     protected $files;
+    /**
+     * The Media manager
+     *
+     * @var MediaManager2
+     */
+    protected $manager;
 
     /**
      * Create a new job instance.

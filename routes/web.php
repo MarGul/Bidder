@@ -19,15 +19,13 @@ Route::get('test2', function() {
 	$manager = app(App\Managers\MediaManager2::class);
 
 	$files = [
-		['media_id' => 18, 'tmp_path' => storage_path('/tmp/phpyDzf9V')],
-		['media_id' => 19, 'tmp_path' => storage_path('/tmp/phpFzIxXo')]
+		['media_id' => 9, 'tmp_path' => 'tmp/nGvnikwhvMVJzTLu5cTA9GpDCh7nsqjPTfEMgmNN.jpeg'],
+		['media_id' => 10, 'tmp_path' => 'tmp/JU8Y4mSZSmVF0SdCl5ofQIeh2SSf9y7KI1DL5fk1.txt']
 	];
 
 	foreach ($files as $file) {
 		$manager->uploadTempFile($file);
 	}
-
-	dd($manager->hasError(), $manager->errorMessage());
 });
 
 /**

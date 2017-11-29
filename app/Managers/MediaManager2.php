@@ -87,10 +87,14 @@ class MediaManager2 extends BaseManager
 	{
 		$this->media = Media::findOrFail($file['media_id']);
 
-		// If the media is an image we should resize it before we upload it.
-		$media_url = $this->isImage() ? $this->resizeImageAndUpload($file['tmp_path']) : $this->uploadFile($file['tmp_path']);
+		// Lets set the tmp_path to be in the correct storage location
+		$tmp_path = storage_path('app/' . $file['tmp_path']);
 		// If it's an image we should create a thumbnail for the media and upload it.
-		$thumb_url = $this->isImage() ? $this->createThumbAndUpload($file['tmp_path']) : null;
+		$thumb_url = $this->isImage() ? $this->createThumbAndUpload($tmp_path) : null;
+		// If the media is an image we should resize it before we upload it.
+		$media_url = $this->isImage() ? $this->resizeImageAndUpload($tmp_path) : $this->uploadFile($tmp_path);
+		// Delete the temp file
+		$this->deleteTempFile($tmp_path);		
 		// Now update the media object with the uploaded media url's
 		return $this->updateMediaInStorage($media_url, $thumb_url);
 	}
@@ -127,12 +131,12 @@ class MediaManager2 extends BaseManager
 	protected function updateMediaInStorage($media_url, $thumb_url)
 	{
 		// If there has been any errors we shouldn't bother to update the storage.
-		if ( $this->hasError() ) return false;
+		if ( $this->hasError() ) throw new \Exception($this->errorMessage());
 
 		try {
 			$this->media->update([
 				'media_url' => $media_url,
-				'thumb_url' => $thumb_path
+				'thumb_url' => $thumb_url
 			]);
 		} catch (\Exception $e) {
 			$this->setError('Could not update the media in storage for media_id: ' . $this->media->id . '. Exception ' . $e, 500);
@@ -153,7 +157,7 @@ class MediaManager2 extends BaseManager
 		try {
 			$filePath = $this->fileBasePath . Carbon::now()->format('Ym') . '/' . File::basename($tmp_path);
 
-    		Storage::put($filePath, $tmp_path);
+			Storage::put($filePath, fopen($tmp_path, 'r+'));
 		} catch (\Exception $e) {
 			$this->setError('Could not upload file to cloud storage for media_id: ' . $this->media->id . '. Exception: ' . $e, 500);
 			return null;
@@ -202,7 +206,7 @@ class MediaManager2 extends BaseManager
 
 	        $imgPath = $this->imageBasePath . Carbon::now()->format('Ym') . '/' . File::basename($tmp_path);
 
-	        Storage::put($imgPath, $img->stream()->detach());
+			Storage::put($imgPath, $img->stream()->detach());
         } catch (\Exception $e) {
         	$this->setError('Could not resize and upload the image for media_id: ' . $this->media->id . '. Exception: ' . $e, 500);
         	return null;
@@ -211,7 +215,18 @@ class MediaManager2 extends BaseManager
         return $imgPath;
     }
 
-    /**
+	/**
+	 * Delete a file in temporary storage.
+	 *
+	 * @param 	string $path
+	 * @return 	void
+	 */
+	protected function deleteTempFile($path)
+	{
+		unlink($path);
+	}
+	
+	/**
 	 * Prepare the media that has been inserted for the UploadJob.
 	 * Media files is getting uploaded to Cloud storage in a seperate job.
 	 * 
