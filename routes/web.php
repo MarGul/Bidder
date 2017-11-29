@@ -10,8 +10,24 @@
 */
 
 Route::get('/test', function() {
-    $service = \App\Service::find(1);
-    event(new App\Events\RemoveService($service->id));
+	return view('test');
+});
+
+Route::post('/test')->uses('TestController@store');
+
+Route::get('test2', function() {
+	$manager = app(App\Managers\MediaManager2::class);
+
+	$files = [
+		['media_id' => 18, 'tmp_path' => storage_path('/tmp/phpyDzf9V')],
+		['media_id' => 19, 'tmp_path' => storage_path('/tmp/phpFzIxXo')]
+	];
+
+	foreach ($files as $file) {
+		$manager->uploadTempFile($file);
+	}
+
+	dd($manager->hasError(), $manager->errorMessage());
 });
 
 /**
