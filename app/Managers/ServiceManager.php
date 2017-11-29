@@ -117,10 +117,9 @@ class ServiceManager extends BaseManager
 		if ( !$this->setData($data)->insert() ) return false;
 
 		if ( $this->dataExists('media') ) {
-			// Locally store the media that was uploaded.
-			$files = app(MediaManager::class)->tempStore($this->data('media'));
-			// Create a job for further processing of the files and upload to AWS S3.
-			dispatch(new UploadServiceMedia($files, $this->service));
+			// Add media if there were any.
+			$files = app(MediaManager2::class)->forService($this->service)
+											  ->addMedia($this->data('media'));
 		}
 
 		// Broadcast the creation of the new service for everyone listening.

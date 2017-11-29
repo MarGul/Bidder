@@ -81,7 +81,7 @@ class MediaManager2 extends BaseManager
 	 * Upload the temporarly stored file to Cloud storage.
 	 * 
 	 * @param  array 	$file 	[has the media_id and tmp_path as keys]
-	 * @return [type]       	[description]
+	 * @return boolean
 	 */
 	public function uploadTempFile($file)
 	{

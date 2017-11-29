@@ -78,7 +78,7 @@ class UserServicesController extends Controller
      */
     public function store(Request $request)
     {
-       $data =  $this->validate($request, [
+		$data =  $this->validate($request, [
             'title' => 'required',
             'category_id' => 'required|numeric|exists:categories,id',
             'region_id' => 'required|numeric|exists:regions,id',
