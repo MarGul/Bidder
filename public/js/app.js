@@ -25053,7 +25053,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 			this.processing = true;
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('user/services/' + this.$route.params.id).post(this.finalData).then(function (response) {
+				// Reset the form
 				_this.form.errors.clear();
+				_this.media = [];
+				_this.mediaErrors = [];
+				_this.deletedMedia = [];
+				// Set the new edited media.
+				_this.initialMedia = response.data.service.media;
 				// Break the services cache so it reloads with the updated info.
 				_this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 				_this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);

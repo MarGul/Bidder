@@ -234,7 +234,13 @@
 				this.processing = true;
 				new Model(`user/services/${this.$route.params.id}`).post(this.finalData)
 					.then(response => {
+						// Reset the form
 						this.form.errors.clear();
+						this.media = [];
+						this.mediaErrors = [];
+						this.deletedMedia = [];
+						// Set the new edited media.
+						this.initialMedia = response.data.service.media;
 						// Break the services cache so it reloads with the updated info.
 						this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 						this.$store.commit('SET_USER_SERVICE_DETAILS_SERVICE', response.data.service);
