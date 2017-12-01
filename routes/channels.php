@@ -13,5 +13,5 @@
 
 // Authorize if the user can listen into the project message channel.
 Broadcast::channel('project.{project}.messages', function ($user, \App\Project $project) {
-    return Gate::allows('in-project', $project);
+    return \Gate::allows('in-project', $project);
 });

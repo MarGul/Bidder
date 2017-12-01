@@ -9,13 +9,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Managers\MediaManager;
 
-class UploadServiceMedia implements ShouldQueue
+class DeleteServiceMedia implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-
     /**
-     * Data structure for the media and it's corresponding temp file
+     * The files that should be deleted from cloud storage.
      * @var array
      */
     protected $files;
@@ -44,11 +43,6 @@ class UploadServiceMedia implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->files as $file) {
-            $this->manager->uploadTempFile($file);
-        }
-        
-        return true;
+        $this->manager->deleteCloudFiles($this->files);
     }
-
 }

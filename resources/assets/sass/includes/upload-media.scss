@@ -7,60 +7,77 @@
 	text-align: center;
 	color: #97A9B5;
 
-	i {
-		margin-right: 5px;
-	}
-
 	h4 {
 		margin: 0 0 10px 0;
+	}
+
+	&.edit {
+		
+		.files-container {
+			width: auto !important;
+		}
+	}
+
+	.files-container {
+		@media screen and (min-width: $screen-sm-min) {
+			width: 85%;
+			margin: 0 auto;
+		}
+
+		@media screen and (min-width: $screen-lg-min) {
+			width: 75%;
+		}		
 	}
 
 	.media {
 		margin: 0 0 15px 0;
 		padding: 0;
 		list-style-type: none;
-		text-align: left;
 
 		li {
 			padding: 10px 0;
 			color: $text-color;
 			border-bottom: 1px solid #e6ebf1;
+			display: flex;
+			align-items: flex-start;
+			flex-wrap: wrap;
 
 			&:last-child {
 				border-bottom: none;
 			}
 
-			i.icon {
-				color: #97A9B5;
-				margin-right: 7px;
-				font-size: 18px;
-				position: relative;
-				top: 1px;
+			i.media-type {
+				cursor: default;
+				margin-top: 4px;
+
+				&.has-error {
+					background-color: $brand-danger;
+				}
 			}
 
 			.file-name {
 				font-weight: 500;
-				font-size: 15px;
-
-				&.has-error {
-					color: $brand-danger;
-				}
+				max-width: 220px;
+				text-overflow: ellipsis;
+				overflow-x: hidden;
+				text-align: left;
 			}
 
 			.file-size {
-				margin-left: 7px;
-			}
-
-			i.remove {
-				float: right;
-				display: block;
-				padding: 7px 0 7px 7px;
+				margin: 1px 0 0 10px;
 			}
 
 			.error-block {
 				font-size: 85%;
 				color: $brand-danger;
 				margin-top: 3px;
+				flex: 1 1 100%;
+				text-align: left;
+			}
+
+			.icon_delete {
+				margin-left: auto;
+				margin-top: 5px;
 			}
 		}
 	}

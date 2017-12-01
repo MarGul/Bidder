@@ -1,51 +1,49 @@
-const notifications = {
-	state: {
-		showing: false,
-		type: '',
-		notification: '',
-		link: '',
-		linkText: ''
+import { 
+	SET_NOTIFICATION_SHOWING, 
+	SET_NOTIFICATION_TYPE, 
+	SET_NOTIFICATION
+} from '../mutation-types';
+
+const state = {
+	showing: false,
+	type: '',
+	notification: ''
+}
+
+const mutations = {
+	[SET_NOTIFICATION_SHOWING](state, showing) {
+		state.showing = showing;
 	},
-	mutations: {
-		'SET_SHOWING'(state, showing) {
-			state.showing = showing;
-		},
-		'SET_TYPE'(state, type) {
-			state.type = type;
-		},
-		'SET_NOTIFICATION'(state, notification) {
-			state.notification = notification;
-		},
-		'SET_LINK'(state, link) {
-			state.link = link;
-		},
-		'SET_LINK_TEXT'(state, linkText) {
-			state.linkText = linkText;
-		}
+	[SET_NOTIFICATION_TYPE](state, type) {
+		state.type = type;
 	},
-	actions: {
-		showNotification({commit}, payload) {
-			commit('SET_SHOWING', true);
-			commit('SET_TYPE', payload.type);
-			commit('SET_NOTIFICATION', payload.msg);
-			if ( payload.link ) commit('SET_LINK', payload.link);
-			if ( payload.linkText ) commit('SET_LINK_TEXT', payload.linkText);
-		},
-		closeNotification({commit}) {
-			commit('SET_SHOWING', false);
-			commit('SET_TYPE', '');
-			commit('SET_NOTIFICATION', '');
-			commit('SET_LINK', '');
-			commit('SET_LINK_TEXT', '');
-		}
-	},
-	getters: {
-		showingNotification: state => state.showing,
-		notificationType: state => state.type,
-		notificationMessage: state => state.notification,
-		notificationLink: state => state.link,
-		notificationLinkText: state => state.linkText,
+	[SET_NOTIFICATION](state, notification) {
+		state.notification = notification;
 	}
 }
 
-export default notifications;
+const actions = {
+	showNotification({commit}, payload) {
+		commit('SET_NOTIFICATION_SHOWING', true);
+		commit('SET_NOTIFICATION_TYPE', payload.type);
+		commit('SET_NOTIFICATION', payload.msg);
+	},
+	closeNotification({commit}) {
+		commit('SET_NOTIFICATION_SHOWING', false);
+		commit('SET_NOTIFICATION_TYPE', '');
+		commit('SET_NOTIFICATION', '');
+	}
+}
+
+const getters = {
+	notificationShowing: state => state.showing,
+	notificationType: state => state.type,
+	notificationMessage: state => state.notification
+}
+
+export default {
+	state,
+	mutations,
+	actions,
+	getters
+}

@@ -17,7 +17,7 @@ class CreateMediaTable extends Migration
             $table->increments('id');
             $table->integer('service_id')->nullable();
             $table->string('original_filename');
-            $table->string('media_url');
+            $table->string('media_url')->nullable();
             $table->string('thumb_url')->nullable();
             $table->string('mime_type');
             $table->integer('size');

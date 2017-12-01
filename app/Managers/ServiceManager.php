@@ -3,9 +3,6 @@
 namespace App\Managers;
 
 use App\Service;
-use App\Managers\MediaManager;
-use App\Managers\SubscriptionManager;
-use App\Jobs\UploadServiceMedia;
 use App\Events\NewService;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
@@ -78,6 +75,12 @@ class ServiceManager extends BaseManager
 	{
 		$this->setSuccess('Listing a single service', 200);
 
+		try {
+			$this->service->load('media');
+		} catch (\Exception $e) {
+			$this->setError('Could not load the media for the service.', 500);
+		}
+
 		return $this->service;
 	}
 
@@ -111,10 +114,9 @@ class ServiceManager extends BaseManager
 		if ( !$this->setData($data)->insert() ) return false;
 
 		if ( $this->dataExists('media') ) {
-			// Locally store the media that was uploaded.
-			$files = app(MediaManager::class)->tempStore($this->data('media'));
-			// Create a job for further processing of the files and upload to AWS S3.
-			dispatch(new UploadServiceMedia($files, $this->service));
+			// Add media if there were any.
+			app(MediaManager::class)->forService($this->service)
+									 ->addMedia($this->data('media'));
 		}
 
 		// Broadcast the creation of the new service for everyone listening.
@@ -139,6 +141,15 @@ class ServiceManager extends BaseManager
 		if ( $this->hasError() ) return false;
 
 		if ( !$this->setData($data)->edit() ) return false;
+
+		if ( $this->dataExists('media') || $this->dataExists('deletedMedia')) {
+			// Add media if there were any.
+			app(MediaManager::class)->forService($this->service)
+									 ->editMedia($this->data('media') ?? [], $this->data('deletedMedia') ?? []);	
+		}
+
+		// Load in the edited media for the service.
+		$this->service->load('media');
 
 		$this->setSuccess('Successfully updated the service.', 200);
 

@@ -295,12 +295,13 @@
 						this.form.errors.record(error.errors);
 						this.mediaErrors = [];
 						// Log the media errors seperatly.
-						for ( let key in error) {
+						for ( let key in error.errors) {
 							if ( key.includes('media') ) {
 								let index = key.split('.')[1];
-								this.mediaErrors[index] = error[key]; 
+								this.mediaErrors[index] = error.errors[key]; 
 							}
 						}
+						this.$store.dispatch('showNotification', {type: 'error', msg: 'Valideringsfel. Var vänlig och korrigera fälten med röd text.'});
 						window.scrollTo(0,0);
 						this.processing = false;
 					});

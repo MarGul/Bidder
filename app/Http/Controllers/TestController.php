@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Bid;
-use App\Features\NotificationSettingsManager;
+use App\Managers\MediaManager;
 
 class TestController extends Controller
 {
     
-	public function index()
-	{
-		$bid = Bid::find(1);
+	public function store(Request $request) {
+		$data = $this->validate($request, [
+            'media' => 'array',
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
+		]);
 
-		app(NotificationSettingsManager::class)->forCompetingBid($bid);
+		$service = \App\Service::find(1);
 
+		$manager = app(MediaManager::class);
+		$manager->forService($service)
+				->addMedia($data['media']);
 	}
 
 }

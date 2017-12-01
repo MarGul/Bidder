@@ -1,7 +1,7 @@
 <template>
     <div id="site">
         <transition name="notification-slide-down-up">
-            <app-notifications v-if="$store.getters.showingNotification"></app-notifications>
+            <app-notifications v-if="$store.getters.notificationShowing"></app-notifications>
         </transition>
 
         <app-mobile-header v-if="breakpoints.mobile"></app-mobile-header>
