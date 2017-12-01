@@ -115,7 +115,7 @@ class ServiceManager extends BaseManager
 
 		if ( $this->dataExists('media') ) {
 			// Add media if there were any.
-			app(MediaManager2::class)->forService($this->service)
+			app(MediaManager::class)->forService($this->service)
 									 ->addMedia($this->data('media'));
 		}
 
@@ -144,7 +144,7 @@ class ServiceManager extends BaseManager
 
 		if ( $this->dataExists('media') || $this->dataExists('deletedMedia')) {
 			// Add media if there were any.
-			app(MediaManager2::class)->forService($this->service)
+			app(MediaManager::class)->forService($this->service)
 									 ->editMedia($this->data('media') ?? [], $this->data('deletedMedia') ?? []);	
 		}
 

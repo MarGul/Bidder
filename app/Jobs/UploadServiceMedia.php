@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Managers\MediaManager2;
+use App\Managers\MediaManager;
 
 class UploadServiceMedia implements ShouldQueue
 {
@@ -22,7 +22,7 @@ class UploadServiceMedia implements ShouldQueue
     /**
      * The Media manager
      *
-     * @var MediaManager2
+     * @var MediaManager
      */
     protected $manager;
 
@@ -34,7 +34,7 @@ class UploadServiceMedia implements ShouldQueue
     public function __construct($files)
     {
         $this->files = $files;
-        $this->manager = app(MediaManager2::class);
+        $this->manager = app(MediaManager::class);
     }
 
     /**

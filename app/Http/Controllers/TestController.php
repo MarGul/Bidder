@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Managers\MediaManager2;
+use App\Managers\MediaManager;
 
 class TestController extends Controller
 {
@@ -16,7 +16,7 @@ class TestController extends Controller
 
 		$service = \App\Service::find(1);
 
-		$manager = app(MediaManager2::class);
+		$manager = app(MediaManager::class);
 		$manager->forService($service)
 				->addMedia($data['media']);
 	}

@@ -16,7 +16,7 @@ Route::get('/test', function() {
 Route::post('/test')->uses('TestController@store');
 
 Route::get('test2', function() {
-	$manager = app(App\Managers\MediaManager2::class);
+	$manager = app(App\Managers\MediaManager::class);
 
 	$files = [
 		['media_id' => 9, 'tmp_path' => 'tmp/nGvnikwhvMVJzTLu5cTA9GpDCh7nsqjPTfEMgmNN.jpeg'],

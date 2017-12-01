@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Managers\MediaManager2;
+use App\Managers\MediaManager;
 
 class DeleteServiceMedia implements ShouldQueue
 {
@@ -21,7 +21,7 @@ class DeleteServiceMedia implements ShouldQueue
     /**
      * The Media manager
      *
-     * @var MediaManager2
+     * @var MediaManager
      */
     protected $manager;
 
@@ -33,7 +33,7 @@ class DeleteServiceMedia implements ShouldQueue
     public function __construct($files)
     {
         $this->files = $files;
-        $this->manager = app(MediaManager2::class);
+        $this->manager = app(MediaManager::class);
     }
 
     /**
