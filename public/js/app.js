@@ -23379,7 +23379,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _vm._l(_vm.media, function(file, index) {
-              return _c("li", [
+              return _c("li", { key: index }, [
                 _c("i", {
                   staticClass: "media-type icon wh15 light-gray mr10",
                   class: [
@@ -24951,6 +24951,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -25038,7 +25040,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				this.media.push(files[i]);
 			}
 		},
-		mediaRemoved: function mediaRemoved() {
+		mediaRemoved: function mediaRemoved(_ref3) {
+			var index = _ref3.index;
+
 			this.media.splice(index, 1);
 			if (this.mediaErrors[index]) {
 				this.mediaErrors.splice(index, 1);
@@ -25062,8 +25066,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				// Log the media errors seperatly.
 				for (var key in error.errors) {
 					if (key.includes('media')) {
-						var _index = key.split('.')[1];
-						_this.mediaErrors[_index] = error.errors[key];
+						var index = key.split('.')[1];
+						_this.mediaErrors[index] = error.errors[key];
 					}
 				}
 				_this.$store.dispatch('showNotification', { type: 'error', msg: 'Valideringsfel. Var vänlig och korrigera fälten med röd text.' });
@@ -25280,9 +25284,10 @@ var render = function() {
                         _vm._l(_vm.categories, function(rootCat) {
                           return _c(
                             "optgroup",
-                            { attrs: { label: rootCat.name } },
+                            { key: rootCat.id, attrs: { label: rootCat.name } },
                             _vm._l(rootCat.sub_categories, function(category) {
                               return _c("option", {
+                                key: category.id,
                                 domProps: {
                                   value: category.id,
                                   textContent: _vm._s(category.name)
@@ -25358,6 +25363,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.regions, function(region) {
                           return _c("option", {
+                            key: region.id,
                             domProps: {
                               value: region.id,
                               textContent: _vm._s(region.name)
@@ -25432,6 +25438,7 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.cities, function(city) {
                           return _c("option", {
+                            key: city.id,
                             domProps: {
                               value: city.id,
                               textContent: _vm._s(city.name)

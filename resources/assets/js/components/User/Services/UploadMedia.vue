@@ -12,7 +12,7 @@
 					<i class="icon icon_delete danger wh12" @click="removeInitial(media.id)"></i>
 				</li>
 				
-				<li v-for="(file, index) in media">
+				<li v-for="(file, index) in media" :key="index">
 					<i class="media-type icon wh15 light-gray mr10" :class="[{'has-error': errors[index]}, type(file.type)]"></i> 
 					<span class="file-name">{{ file.name }}</span>
 					<span class="file-size gray-sub-text">{{ size(file.size) }}</span>

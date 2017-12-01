@@ -9,6 +9,7 @@ use Image;
 use Storage;
 use Carbon\Carbon;
 use App\Jobs\UploadServiceMedia;
+use App\Jobs\DeleteServiceMedia;
 
 
 class MediaManager2 extends BaseManager
@@ -36,10 +37,15 @@ class MediaManager2 extends BaseManager
 	 */
 	protected $file;
 	/**
-	 * The structure for files for the UploadJob when uploading to S3
+	 * The structure for files for the UploadJob when uploading to cloud storage.
 	 * @var array
 	 */
 	protected $filesForUploadJob;
+	/**
+	 * The structure for files for the DeleteJon when deleting files from cloud storage.
+	 * @var array
+	 */
+	protected $filesForDeleteJob;
 	/**
 	 * The media that the manager is working with.
 	 * @var App\Media
@@ -50,7 +56,8 @@ class MediaManager2 extends BaseManager
 	/**
 	 * Add new media.
 	 * 
-	 * @param array $files
+	 * @param  array $files
+	 * @return void
 	 */
 	public function addMedia(array $files)
 	{
@@ -62,14 +69,40 @@ class MediaManager2 extends BaseManager
 			$this->prepareForFileUploadJob();
 		}
 
-		dispatch(new UploadServiceMedia($this->filesForUploadJob))->onQueue('media-queue');
+		$this->dispatchUploadJob();
 	}
 
+	/**
+	 * Delete old media
+	 *
+	 * @param  array $mediaIds
+	 * @return void
+	 */
 	public function deleteMedia(array $mediaIds)
 	{
+		foreach ($mediaIds as $mediaId ) {
+			$this->media = Media::findOrFail($mediaId);
 
+			// If the attacker just passes in random media. We need to make sure that the media
+			// that is suppose to be deleted belongs to the service. Because we are just accepting
+			// random mediaIds otherwise.
+			if ( !$this->mediaBelongsToService() ) continue;
+			
+			$this->prepareForFileDeleteJob();
+
+			$this->deleteFileFromStorage();
+		}
+
+		$this->dispatchDeleteJob();
 	}
 
+	/**
+	 * Edit media. Just adding the new media and deleting the old that the user wants deleted.
+	 *
+	 * @param  array $added
+	 * @param  array $deleted
+	 * @return void
+	 */
 	public function editMedia(array $added, array $deleted)
 	{
 		$this->addMedia($added);
@@ -97,6 +130,17 @@ class MediaManager2 extends BaseManager
 		$this->deleteTempFile($tmp_path);		
 		// Now update the media object with the uploaded media url's
 		return $this->updateMediaInStorage($media_url, $thumb_url);
+	}
+
+	/**
+	 * Delete a files from cloud storage.
+	 *
+	 * @param 	array $file
+	 * @return 	void
+	 */
+	public function deleteCloudFiles($files)
+	{
+		Storage::delete($files);
 	}
 
 	/**
@@ -140,6 +184,26 @@ class MediaManager2 extends BaseManager
 			]);
 		} catch (\Exception $e) {
 			$this->setError('Could not update the media in storage for media_id: ' . $this->media->id . '. Exception ' . $e, 500);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Delete the media from storage.
+	 *
+	 * @return boolean
+	 */
+	protected function deleteFileFromStorage()
+	{
+		// If there has been any errors we shouldn't bother to delete the media from storage.
+		if ( $this->hasError() ) throw new \Exception($this->errorMessage());
+		
+		try {
+			$this->media->delete();
+		} catch ( \Exception $e ) {
+			$this->setError('Could not delete the media from storage for media_id: ' . $this->media->id . '. Exception ' . $e, 500);
 			return false;
 		}
 
@@ -240,6 +304,38 @@ class MediaManager2 extends BaseManager
 		];
 	}
 
+	/**
+	 * Add the media under consideration by the manager to media that should
+	 * be deleted from cloud storage.
+	 *
+	 * @return void
+	 */
+	protected function prepareForFileDeleteJob()
+	{
+		if ( !is_null($this->media->media_url) ) $this->filesForDeleteJob[] = $this->media->media_url;
+
+		if ( !is_null($this->media->thumb_url) ) $this->filesForDeleteJob[] = $this->media->thumb_url;
+	}
+
+	protected function dispatchUploadJob()
+	{
+		if ( !empty($this->filesForUploadJob) ) {
+			dispatch(new UploadServiceMedia($this->filesForUploadJob))->onQueue('media-queue');
+		}
+	}
+
+	/**
+	 * If we have any files to delete, dispatch the job.
+	 *
+	 * @return void
+	 */
+	protected function dispatchDeleteJob()
+	{
+		if ( !empty($this->filesForDeleteJob) ) {
+			dispatch(new DeleteServiceMedia($this->filesForDeleteJob))->onQueue('media-queue');
+		}
+	}
+
     /**
      * Is the media that the manager is processing an image?
      * 
@@ -248,5 +344,15 @@ class MediaManager2 extends BaseManager
     protected function isImage()
     {
     	return str_contains($this->media->mime_type, 'image');
-    }
+	}
+	
+	/**
+	 * Does the media under consideration belong to the service under consideration?
+	 *
+	 * @return boolean
+	 */
+	protected function mediaBelongsToService()
+	{
+		return $this->media->service_id === $this->service->id;
+	}
 }

@@ -3,9 +3,6 @@
 namespace App\Managers;
 
 use App\Service;
-use App\Managers\MediaManager;
-use App\Managers\SubscriptionManager;
-use App\Jobs\UploadServiceMedia;
 use App\Events\NewService;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
@@ -144,6 +141,15 @@ class ServiceManager extends BaseManager
 		if ( $this->hasError() ) return false;
 
 		if ( !$this->setData($data)->edit() ) return false;
+
+		if ( $this->dataExists('media') || $this->dataExists('deletedMedia')) {
+			// Add media if there were any.
+			$files = app(MediaManager2::class)->forService($this->service)
+											  ->editMedia(
+												  $this->data('media') ?? [], 
+												  $this->data('deletedMedia') ?? []
+												);
+		}
 
 		$this->setSuccess('Successfully updated the service.', 200);
 

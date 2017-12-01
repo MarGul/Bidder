@@ -41,8 +41,10 @@
 								<label class="control-label">Kategori</label>
 								<select class="form-control" v-model="form.category_id">
 									<option value="">Välj kategori</option>
-									<optgroup :label="rootCat.name" v-for="rootCat in categories">
-										<option :value="category.id" v-text="category.name" v-for="category in rootCat.sub_categories"></option>
+									<optgroup :label="rootCat.name" v-for="rootCat in categories" :key="rootCat.id">
+										<option :value="category.id" v-text="category.name" v-for="category in rootCat.sub_categories" :key="category.id">
+
+										</option>
 									</optgroup>
 								</select>
 								<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
@@ -52,7 +54,7 @@
 								<label class="control-label">Region</label>
 								<select class="form-control" v-model="form.region_id">
 									<option value="">Välj region</option>
-									<option :value="region.id" v-text="region.name" v-for="region in regions"></option>
+									<option :value="region.id" v-text="region.name" v-for="region in regions" :key="region.id"></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('region_id')" v-text="form.errors.get('region_id')"></span>
 							</div>
@@ -61,7 +63,7 @@
 								<label class="control-label">Stad</label>
 								<select class="form-control" :disabled="!form.region_id" v-model="form.city_id">
 									<option value="">Välj stad</option>
-									<option :value="city.id" v-text="city.name" v-for="city in cities"></option>
+									<option :value="city.id" v-text="city.name" v-for="city in cities" :key="city.id"></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('city_id')" v-text="form.errors.get('city_id')"></span>
 							</div>
@@ -221,7 +223,7 @@
 				}
 			},
 
-			mediaRemoved() {
+			mediaRemoved({index}) {
 				this.media.splice(index, 1);
 				if ( this.mediaErrors[index] ) {
 					this.mediaErrors.splice(index, 1);
