@@ -15632,7 +15632,16 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 	state.service = service;
 }), _mutations);
 
-var actions = {};
+var actions = {
+	addComment: function addComment(_ref, payload) {
+		var commit = _ref.commit,
+		    state = _ref.state;
+
+		var service = state.service;
+		service.comments.unshift(payload.comment);
+		commit('SET_SERVICE_DETAILS', service);
+	}
+};
 
 var getters = {
 	serviceFetched: function serviceFetched(state) {
@@ -15648,77 +15657,6 @@ var getters = {
 	mutations: mutations,
 	actions: actions,
 	getters: getters
-
-	/*
- 
- import Model from "../../includes/Model"; 
- 
- const service = {
- 	state: {
- 		loaded: false,
- 		service: {comments: [], user: {}},
- 		bids_loaded: false,
- 		bids: []
- 	},
- 	mutations: {
- 		'SET_LOADED'(state, loaded) {
- 			state.loaded = loaded;
- 		},
- 		'SET_SERVICE'(state, service) {
- 			state.service = service;
- 		},
- 		'SET_BIDS_LOADED'(state, loaded) {
- 			state.bids_loaded = loaded;
- 		},
- 		'SET_BIDS'(state, bids) {
- 			state.bids = bids;
- 		},
- 		'ADD_COMMENT'(state, payload) {
- 			state.service.comments.unshift(payload.comment);
- 		}
- 	},
- 	actions: {
- 		getService({commit}, payload) {
- 			// Set the base state first.
- 			commit('SET_LOADED', false);
- 			commit('SET_SERVICE', {comments: [], user: {}});
- 			new Model('services').find(payload.id)
- 			.then(response => {
- 				commit('SET_SERVICE', response.data.service);
- 				commit('SET_LOADED', true);
- 			}).catch(error => { });
- 		},
- 		getBids({commit, state}, payload) {
- 			// Set the base state first.
- 			commit('SET_BIDS_LOADED', false);
- 			commit('SET_BIDS', {bids: []});
- 			new Model('services/{id}/bids').setId(state.service.id).get()
- 				.then(response => {
- 					commit('SET_BIDS', response.data.bids);
- 					commit('SET_BIDS_LOADED', true);
- 				}).catch(error => { });
- 		},
- 		addBid({commit, state}, payload) {
- 			let service = state.service;
- 			service.bid_count = {count: service.bid_count ? service.bid_count.count + 1 : 1};
- 			commit('SET_SERVICE', service);
- 			// If we have fetched bids we should just add this new one to the list.
- 			if ( state.bids_loaded ) {
- 				let bids = state.bids;
- 				bids.unshift(payload.bid);
- 			}
- 		}
- 	},
- 	getters: {
- 		getServiceLoaded: state => state.loaded,
- 		getService: state => state.service,
- 		getBidsLoaded: state => state.bids_loaded,
- 		getBids: state => state.bids
- 	}
- }
- 
- export default service; */
-
 });
 
 /***/ }),
@@ -19111,14 +19049,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -19239,6 +19169,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -19253,26 +19186,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
 		authenticated: 'isAuthenticated',
-		user: 'authUser'
-	}), {
-		serviceId: function serviceId() {
-			return this.$store.getters.getService.id;
-		}
-	}),
+		user: 'authUser',
+		service: 'service'
+	})),
 	methods: {
 		add: function add() {
 			var _this = this;
 
 			this.processing = true;
 
-			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.serviceId + '/comments').post({ body: this.comment }).then(function (response) {
-				_this.$store.commit('ADD_COMMENT', { comment: response.data.comment });
+			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('services/' + this.service.id + '/comments').post({ body: this.comment }).then(function (response) {
+				_this.$store.dispatch('addComment', { comment: response.data.comment });
 
 				// Clear input and stop processing
 				_this.comment = '';
 				_this.processing = false;
 			}).catch(function (error) {
-				console.log(error);
+				_this.processing = false;
 			});
 		}
 	}
@@ -19286,7 +19216,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "add-comment-component" }, [
+  return _c("div", { staticClass: "add-comment-component mb50" }, [
     _c("h3", [_vm._v("Lägg till en kommentar")]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group mb10" }, [
@@ -19321,7 +19251,7 @@ var render = function() {
             ])
           ])
         : _c("span", { staticClass: "comments-as" }, [
-            _vm._v("Du måste "),
+            _vm._v("\n\t\t\tDu måste "),
             _c(
               "a",
               {
@@ -19334,21 +19264,18 @@ var render = function() {
               },
               [_vm._v("logga in")]
             ),
-            _vm._v(" innan du kan kommentera")
+            _vm._v(" innan du kan kommentera\n\t\t")
           ]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          class: { processing: _vm.processing },
-          attrs: {
-            disabled: !_vm.comment || !_vm.authenticated || _vm.processing
-          },
-          on: { click: _vm.add }
+      _c("button", {
+        staticClass: "btn btn-primary",
+        class: { processing: _vm.processing },
+        attrs: {
+          disabled: !_vm.comment || !_vm.authenticated || _vm.processing
         },
-        [_vm._v("Kommentera")]
-      )
+        domProps: { textContent: _vm._s("Kommentera") },
+        on: { click: _vm.add }
+      })
     ])
   ])
 }
@@ -19431,11 +19358,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['comment'],
+	props: {
+		comment: {
+			type: Object,
+			required: true
+		}
+	},
 	data: function data() {
 		return {
 			time: moment(this.comment.updated_at).fromNow()
@@ -19472,22 +19409,23 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "comment-content" }, [
       _c("div", { staticClass: "comment-head" }, [
-        _c("span", {
-          staticClass: "comment-author",
-          domProps: { textContent: _vm._s(_vm.comment.user.username) }
-        }),
+        _c(
+          "span",
+          { staticClass: "comment-author" },
+          [
+            _c("router-link", {
+              staticClass: "is-link",
+              attrs: { to: "/profile/" + _vm.comment.user.username },
+              domProps: { textContent: _vm._s(_vm.comment.user.username) }
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("small", {
+        _c("span", {
           staticClass: "comment-time",
           domProps: { textContent: _vm._s(_vm.time) }
-        }),
-        _vm._v(" "),
-        _vm.comment.canReply
-          ? _c("i", {
-              staticClass: "fa fa-reply",
-              attrs: { "aria-hidden": "true" }
-            })
-          : _vm._e()
+        })
       ]),
       _vm._v(" "),
       _c("div", {
@@ -19913,25 +19851,14 @@ var render = function() {
                   _c("app-add-comment"),
                   _vm._v(" "),
                   _c(
-                    "ul",
-                    { staticClass: "top-comments" },
-                    [
-                      _c(
-                        "transition-group",
-                        { attrs: { name: "slide-in-left" } },
-                        _vm._l(_vm.service.comments, function(comment) {
-                          return _c(
-                            "li",
-                            { key: comment.id },
-                            [
-                              _c("app-comment", { attrs: { comment: comment } })
-                            ],
-                            1
-                          )
-                        })
-                      )
-                    ],
-                    1
+                    "transition-group",
+                    { attrs: { name: "slide-in-left" } },
+                    _vm._l(_vm.service.comments, function(comment) {
+                      return _c("app-comment", {
+                        key: comment.id,
+                        attrs: { comment: comment }
+                      })
+                    })
                   )
                 ],
                 1
@@ -20073,23 +20000,14 @@ var render = function() {
               _c("app-add-comment"),
               _vm._v(" "),
               _c(
-                "ul",
-                { staticClass: "top-comments" },
-                [
-                  _c(
-                    "transition-group",
-                    { attrs: { name: "slide-in-left" } },
-                    _vm._l(_vm.service.comments, function(comment) {
-                      return _c(
-                        "li",
-                        { key: comment.id },
-                        [_c("app-comment", { attrs: { comment: comment } })],
-                        1
-                      )
-                    })
-                  )
-                ],
-                1
+                "transition-group",
+                { attrs: { name: "slide-in-left" } },
+                _vm._l(_vm.service.comments, function(comment) {
+                  return _c("app-comment", {
+                    key: comment.id,
+                    attrs: { comment: comment }
+                  })
+                })
               )
             ],
             1

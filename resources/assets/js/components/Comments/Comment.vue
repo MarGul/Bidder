@@ -3,9 +3,14 @@
 		<div class="comment-avatar" :style="{'background-image': avatar}"></div>
 		<div class="comment-content">
 			<div class="comment-head">
-				<span class="comment-author" v-text="comment.user.username"></span>
-				<small class="comment-time" v-text="time"></small>
-				<i class="fa fa-reply" aria-hidden="true" v-if="comment.canReply"></i>
+				<span class="comment-author">
+					<router-link 
+						:to="`/profile/${comment.user.username}`" 
+						class="is-link"
+						v-text="comment.user.username">
+					</router-link>
+				</span>
+				<span class="comment-time" v-text="time"></span>
 			</div>
 			<div class="comment-body" v-text="comment.body"></div>
 		</div>
@@ -16,7 +21,12 @@
 	import { HeartBeat } from '../../includes/heartbeat';
 
 	export default {
-		props: ['comment'],
+		props: {
+			comment: {
+				type: Object,
+				required: true
+			}
+		},
 		data() {
 			return {
 				time: moment(this.comment.updated_at).fromNow()

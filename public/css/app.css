@@ -1216,6 +1216,10 @@ a {
   margin-bottom: 40px;
 }
 
+.mb50 {
+  margin-bottom: 50px;
+}
+
 .mtb10 {
   margin: 10px 0;
 }
@@ -3172,7 +3176,8 @@ body.mobile-nav-open .overlay {
 }
 
 .add-comment-component .comments-as {
-  font-size: 0.9em;
+  color: #97A9B5;
+  font-size: 12px;
   padding-right: 10px;
 }
 
@@ -3181,24 +3186,6 @@ body.mobile-nav-open .overlay {
   -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
           box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
   border: none;
-}
-
-.top-comments {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.comment-replies {
-  list-style-type: none;
-  margin: 0 0 0 30px;
-  padding: 0;
-}
-
-@media screen and (min-width: 768px) {
-  .comment-replies {
-    margin: 0 0 0 70px;
-  }
 }
 
 .comment-component {
@@ -3210,8 +3197,8 @@ body.mobile-nav-open .overlay {
 .comment-component .comment-avatar {
   border: 3px solid #fff;
   border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
-          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
@@ -3224,12 +3211,11 @@ body.mobile-nav-open .overlay {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  margin: 0 0 20px 20px;
+  margin: 0 0 35px 20px;
   background: #fff;
-  border: 1px solid #e6ebf1;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-  border-radius: 6px;
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  border-radius: 4px;
 }
 
 .comment-component .comment-content:before {
@@ -3241,15 +3227,15 @@ body.mobile-nav-open .overlay {
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 10px solid #e6ebf1;
+  border-right: 10px solid #d5d7dc;
 }
 
 .comment-component .comment-content .comment-head {
   padding: 7.5px 15px;
-  border-bottom: 1px solid #e6ebf1;
-  background: #fafafa;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
+  border-bottom: 1px solid #d5d7dc;
+  background: #f6f9fc;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
 .comment-component .comment-content .comment-head .comment-author {
@@ -3257,11 +3243,9 @@ body.mobile-nav-open .overlay {
 }
 
 .comment-component .comment-content .comment-head .comment-time {
+  font-size: 11px;
   margin-left: 10px;
-}
-
-.comment-component .comment-content .comment-head i {
-  float: right;
+  color: #97A9B5;
 }
 
 .comment-component .comment-content .comment-body {
