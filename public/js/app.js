@@ -16290,7 +16290,7 @@ let routes = [
 ];
 */
 
-var routes = [{ path: "/", name: 'home', component: __webpack_require__(256) }, { path: "/categories", name: 'categories', component: __webpack_require__(265) }, { path: "/locations", name: 'locations', component: __webpack_require__(270) }, { path: "/services", name: 'services', component: __webpack_require__(273) }, { path: "/services/:id", component: __webpack_require__(289),
+var routes = [{ path: "/", name: 'home', component: __webpack_require__(256) }, { path: "/email-verified", name: 'emailVerified', component: __webpack_require__(512) }, { path: "/categories", name: 'categories', component: __webpack_require__(265) }, { path: "/locations", name: 'locations', component: __webpack_require__(270) }, { path: "/services", name: 'services', component: __webpack_require__(273) }, { path: "/services/:id", component: __webpack_require__(289),
 	children: [{ path: '', name: 'serviceDetails', component: __webpack_require__(292) }, { path: 'bids', name: 'serviceBids', component: __webpack_require__(306) }]
 }, { path: "/information", name: 'information', component: __webpack_require__(309) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(312) }, { path: "/user", component: __webpack_require__(321),
 	children: [{ path: '', component: __webpack_require__(145), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(145), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(335), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(344), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(355), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(358), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(370), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(373), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(379), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(382), meta: { requiresAuth: true },
@@ -33868,6 +33868,152 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(513)
+/* template */
+var __vue_template__ = __webpack_require__(514)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/EmailVerified.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-16fc31c1", Component.options)
+  } else {
+    hotAPI.reload("data-v-16fc31c1", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 513 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        isAuth: 'isAuthenticated'
+    })),
+    created: function created() {
+        this.$store.dispatch('showNotification', {
+            type: 'success',
+            msg: 'Din email har blivit verifierad. Du kan nu använda systemet till fullo!'
+        });
+
+        if (this.isAuth) {
+            this.$router.push('/user/profile');
+        } else {
+            this.$router.push('/');
+        }
+    }
+});
+
+/***/ }),
+/* 514 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-16fc31c1", module.exports)
+  }
+}
 
 /***/ })
 ],[148]);
