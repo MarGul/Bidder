@@ -14,13 +14,6 @@ use Storage;
 
 class UserManager extends BaseManager
 {
-
-	/**
-	 * When a user is created this is the default avatar being used. 
-	 * Also when a user is updating his avatar this one should not be deleted in the job.
-	 * @var string
-	 */
-	protected $defaultAvatarUrl = 'http://mccollinsmedia.com/wp-content/uploads/2015/04/default-avatar.jpg';
 	/**
 	 * The user that the manager is working with.
 	 * @var App\User
@@ -74,7 +67,6 @@ class UserManager extends BaseManager
 			'company' => $this->data('company'),
 			'name' => '',
 			'bio' => '',
-			'avatar' => $this->defaultAvatarUrl,
 			'email_verification_code' => str_random(35)
 		]);
 
@@ -169,7 +161,7 @@ class UserManager extends BaseManager
 		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
 
 		// Delete the old profile picture in a job
-		if ( $this->user->avatar && ($this->user->avatar !== $this->defaultAvatarUrl) ) {
+		if ( $this->user->avatar ) {
 			dispatch(new DeleteOldProfilePicture($this->user->avatar));
 		}
 

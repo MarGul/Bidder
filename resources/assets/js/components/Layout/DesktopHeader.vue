@@ -30,7 +30,7 @@
 					</div>
 
 					<div class="auth-user" @click="toggleDropdown" v-else v-click-outside="close">
-						<div class="auth-avatar" :style="avatar"></div>
+						<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
 						<div class="auth-name">
 							{{ user.username }}
 							<i class="icon wh12 light-gray ml10" :class="[chevron]"></i>
@@ -73,7 +73,10 @@
 				user: 'authUser'
 			}),
 			avatar() {
-				return { backgroundImage: `url(${this.user.avatar})` };
+				return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
+			},
+			defaultAvatar() {
+				return !!this.user.avatar ? [] : ['defaultAvatar'];
 			},
 			chevron() {
 				return this.dropdown ? 'icon_up_chevron' : 'icon_down_chevron';

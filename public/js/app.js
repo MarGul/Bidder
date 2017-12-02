@@ -1379,7 +1379,7 @@ var Form = function () {
             for (var property in this.originalData) {
                 var field = this[property];
 
-                if (!field) continue;
+                //if ( !field ) continue;
 
                 if (this.dateFields.includes(property)) {
                     field = this.parseAsDate(field);
@@ -10881,6 +10881,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -10926,12 +10929,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	computed: {
+	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+		user: 'authUser'
+	}), {
 		avatar: function avatar() {
-			return { backgroundImage: 'url(' + this.$store.getters.authUser.avatar };
+			return !!this.user.avatar ? { backgroundImage: 'url(' + this.user.avatar } : {};
+		},
+		defaultAvatar: function defaultAvatar() {
+			return !!this.user.avatar ? [] : ['defaultAvatar'];
 		}
-	},
+	}),
 	methods: {
 		navToggle: function navToggle() {
 			if (document.body.classList.contains('mobile-nav-open')) {
@@ -11028,6 +11038,7 @@ var render = function() {
                       _c("div", { staticClass: "auth-user" }, [
                         _c("div", {
                           staticClass: "auth-avatar",
+                          class: _vm.defaultAvatar,
                           style: _vm.avatar
                         }),
                         _vm._v(" "),
@@ -11244,7 +11255,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		user: 'authUser'
 	}), {
 		avatar: function avatar() {
-			return { backgroundImage: 'url(' + this.user.avatar + ')' };
+			return !!this.user.avatar ? { backgroundImage: 'url(' + this.user.avatar } : {};
+		},
+		defaultAvatar: function defaultAvatar() {
+			return !!this.user.avatar ? [] : ['defaultAvatar'];
 		},
 		chevron: function chevron() {
 			return this.dropdown ? 'icon_up_chevron' : 'icon_down_chevron';
@@ -11404,7 +11418,11 @@ var render = function() {
                   on: { click: _vm.toggleDropdown }
                 },
                 [
-                  _c("div", { staticClass: "auth-avatar", style: _vm.avatar }),
+                  _c("div", {
+                    staticClass: "auth-avatar",
+                    class: _vm.defaultAvatar,
+                    style: _vm.avatar
+                  }),
                   _vm._v(" "),
                   _c("div", { staticClass: "auth-name" }, [
                     _vm._v(
@@ -11880,6 +11898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			this.processing = true;
+
 			new __WEBPACK_IMPORTED_MODULE_0__includes_Model__["a" /* default */]('register').new().post(this.form.data()).then(function (response) {
 				_this.$store.commit('SET_AUTHENTICATED', true);
 				_this.$store.commit('SET_AUTHENTICATED_USER', response.user);
