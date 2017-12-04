@@ -24,7 +24,8 @@ class Media extends Model
     public function toArray()
     {
     	return [
-    		'service_id' => $this->service_id,
+    		'id' => $this->id,
+            'service_id' => $this->service_id,
     		'original_filename' => $this->original_filename,
     		'media_url' => config('filesystems.disks.s3.bucket_link') . '/' . config('filesystems.disks.s3.bucket') . '/' . $this->media_url,
     		'thumb_url' => config('filesystems.disks.s3.bucket_link') . '/' . config('filesystems.disks.s3.bucket') . '/' . $this->thumb_url,

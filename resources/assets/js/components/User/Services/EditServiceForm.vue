@@ -7,28 +7,7 @@
 					<h3>Redigera tjänst</h3>
 				</header>
 				<div class="white-contentSection-content">
-					<div class="form-section">
-						<div class="form-section-description">
-							<div class="description-header">Tjänstens innehåll</div>
-							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
-							</div>
-						</div>
-						<div class="form-section-controls">
-							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
-								<label class="control-label">Titel</label>
-								<input type="text" class="form-control" v-model="form.title">
-								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
-							</div>
-
-							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
-								<label class="control-label">Beskrivning</label>
-								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
-								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
-							</div>
-						</div>
-					</div>
-
+					
 					<div class="form-section">
 						<div class="form-section-description">
 							<div class="description-header">Tjänstens detaljer</div>
@@ -66,6 +45,28 @@
 									<option :value="city.id" v-text="city.name" v-for="city in cities" :key="city.id"></option>
 								</select>
 								<span class="help-block" v-if="form.errors.has('city_id')" v-text="form.errors.get('city_id')"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-section">
+						<div class="form-section-description">
+							<div class="description-header">Tjänstens innehåll</div>
+							<div class="description-details">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+							</div>
+						</div>
+						<div class="form-section-controls">
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
+								<label class="control-label">Titel</label>
+								<input type="text" class="form-control" v-model="form.title">
+								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
+							</div>
+
+							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
+								<label class="control-label">Beskrivning</label>
+								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
+								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
 							</div>
 						</div>
 					</div>

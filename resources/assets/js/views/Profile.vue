@@ -14,7 +14,7 @@
 									<h3 class="profile-username" v-text="user.username"></h3>
 									<ul class="list-unstyled">
 										<li>
-											<i class="icon icon_user wh15 mr5"></i> Medlem sedan {{ member_since }}
+											<i class="icon icon_user wh15 light-gray mr5"></i> Medlem sedan {{ member_since }}
 										</li>
 									</ul>
 								</div>

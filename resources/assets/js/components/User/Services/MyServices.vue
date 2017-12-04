@@ -6,20 +6,26 @@
 				<h3>Mina tjänster</h3>
 			</header>
 			<div class="white-contentSection-content">
-				<ul class="items-list" v-if="fetched">
-					<li class="gray-item clickable" v-for="service in services" @click="goTo(service)">
-						<div class="item-content">
-							<div class="item-header" v-text="service.title"></div>
-							<div class="item-sub-data">
-								<span class="mr5">{{ categoryName(service.category_id) }}</span>&bull;
-								<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
+				<template v-if="fetched">
+					<ul class="items-list" v-if="services.length > 0">
+						<li class="gray-item clickable" v-for="service in services" @click="goTo(service)">
+							<div class="item-content">
+								<div class="item-header" v-text="service.title"></div>
+								<div class="item-sub-data">
+									<span class="mr5">{{ categoryName(service.category_id) }}</span>&bull;
+									<span class="ml5">{{ service.active ? 'Budgivning pågår' : 'Avslutad' }}</span>
+								</div>
 							</div>
-						</div>
-						<div class="item-go-to">
-							<i class="icon icon_arrow_right wh12"></i>
-						</div>
-					</li>
-				</ul>
+							<div class="item-go-to">
+								<i class="icon icon_arrow_right wh12"></i>
+							</div>
+						</li>
+					</ul>
+
+					<div class="alert alert-info" v-else>
+						Du har inte skapat några tjänster än.
+					</div>
+				</template>
 
 				<app-loading v-else></app-loading>
 			</div>
