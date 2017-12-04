@@ -6,7 +6,7 @@
 				<nav class="user-navigation">
 					<div class="small-device-actions clearfix">
 						<button class="btn btn-primary-bordered user-nav-button mb10" @click.prevent="toggleMenu" v-if="breakpoints.isSmallDevices()">
-							Andra inställningar
+							Meny
 						</button>
 					</div>
 					<ul class="user-nav">

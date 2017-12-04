@@ -75,13 +75,13 @@ class MediaManager extends BaseManager
 	/**
 	 * Delete old media
 	 *
-	 * @param  array $mediaIds
+	 * @param  array $media
 	 * @return void
 	 */
-	public function deleteMedia(array $mediaIds)
+	public function deleteMedia($media)
 	{
-		foreach ($mediaIds as $mediaId ) {
-			$this->media = Media::findOrFail($mediaId);
+		foreach ($media as $m ) {
+			$this->media = $m instanceof \App\Media ? $m : Media::findOrFail($m);
 
 			// If the attacker just passes in random media. We need to make sure that the media
 			// that is suppose to be deleted belongs to the service. Because we are just accepting
@@ -94,6 +94,18 @@ class MediaManager extends BaseManager
 		}
 
 		$this->dispatchDeleteJob();
+	}
+
+	/**
+	 * Delete all the media for a service.
+	 * 
+	 * @return boolean
+	 */
+	public function deleteAllMedia()
+	{
+		$media = Media::where('service_id', $this->service->id)->get();
+
+		return $this->deleteMedia($media);
 	}
 
 	/**

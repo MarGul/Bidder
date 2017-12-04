@@ -7,6 +7,10 @@
 			</div>
 			<div class="main-area-sidebar">
 				<app-service-bids @changeView="changeView"></app-service-bids>
+				
+				<button class="btn btn-danger full-width is-flex c_c" v-if="fetched && service.active" @click.prevent="removeService">
+					<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
+				</button>
 			</div>
 		</div>
 
@@ -17,6 +21,8 @@
 	import appEditServiceForm from "./EditServiceForm";
 	import appViewAllBids from "./ViewAllBids";
 	import appServiceBids from "./ServiceBids";
+	import Model from '../../../includes/Model';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
@@ -29,9 +35,44 @@
 				currentView: 'appEditServiceForm'
 			}
 		},
+		computed: {
+			...mapGetters({
+				fetched: 'serviceDetailsFetched',
+				service: 'serviceDetailsService',
+				services: 'userServices'
+			})
+		},
 		methods: {
 			changeView({view}) {
 				this.currentView = view;
+			},
+			removeService() {
+				this.$store.dispatch('openModal', {
+					component: 'confirm',
+					data: {
+						confirmText: 'Är du säker på att du vill ta bort tjänsten?',
+						onConfirm: () => {
+							new Model(`user/services/${this.service.id}`).delete()
+								.then(response => {
+									this.$store.dispatch('showNotification', {
+										type: 'success', 
+										msg: 'Vi har tagit bort din tjänst.'
+									});
+									
+									// Remove the service from the store
+									let services = this.services;
+									services.splice(services.findIndex(s => s.id === this.service.id), 1);
+									this.$store.commit('SET_USER_SERVICES', services);
+
+									this.$router.push('/user/services');
+									this.$store.dispatch('closeModal');
+								})
+								.catch(error => {
+									console.log(error);
+								});
+						}
+					}
+				});
 			}
 		},
 		destroyed() {

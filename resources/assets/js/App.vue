@@ -30,7 +30,6 @@
     import appModal from './components/Includes/Modal';
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
-
     import Model from './includes/Model';
 
     export default {

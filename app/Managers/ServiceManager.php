@@ -166,6 +166,9 @@ class ServiceManager extends BaseManager
 		if ( $this->hasError() ) return false;
 
 		try {
+			app(MediaManager::class)->forService($this->service)
+									->deleteAllMedia();
+
 			$this->service->delete();
 		} catch (\Exception $e) {
 			$this->setError('Could not delete the service.', 500);
