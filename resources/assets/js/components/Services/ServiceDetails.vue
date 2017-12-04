@@ -1,26 +1,29 @@
 <template>
-	<section class="white-contentSection">
-		<header class="white-contentSection-header">
-			<h3 class="service-title" v-text="service.title"></h3>
-		</header>
-		<div class="gray-contentSection-content">
-			<div class="service-details">
-				<div class="detail-item">
-					<div class="detail-header">
-						<i class="icon icon_list wh15 cursor-default primary mr10"></i><span>Kategori</span>
+	<div class="service_details-component">
+		<section class="white-contentSection">
+			<header class="white-contentSection-header">
+				<h3 class="service-title" v-text="service.title"></h3>
+			</header>
+			<div class="gray-contentSection-content">
+				<div class="service-details">
+					<div class="detail-item">
+						<div class="detail-header">
+							<i class="icon icon_list wh15 cursor-default primary mr10"></i><span>Kategori</span>
+						</div>
+						<div class="detail-value" v-text="category"></div>
 					</div>
-					<div class="detail-value" v-text="category"></div>
-				</div>
-				<div class="detail-item">
-					<div class="detail-header">
-						<i class="icon icon_map_pin wh15 cursor-default primary mr10"></i><span>Plats</span>
+					<div class="detail-item">
+						<div class="detail-header">
+							<i class="icon icon_map_pin wh15 cursor-default primary mr10"></i><span>Plats</span>
+						</div>
+						<div class="detail-value" v-text="location"></div>
 					</div>
-					<div class="detail-value" v-text="location"></div>
 				</div>
 			</div>
-		</div>
-		<div class="white-contentSection-content service-description" v-text="service.description"></div>
-	</section>
+			<div class="white-contentSection-content service-description" v-text="service.description"></div>
+		</section>
+		<service-media :media="service.media" v-if="service.media.length > 0" />
+	</div>
 </template>
 
 <script>
