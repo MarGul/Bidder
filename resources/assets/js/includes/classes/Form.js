@@ -48,7 +48,7 @@ class Form {
         for (let property in this.originalData) {
             let field = this[property];
 
-            if ( !field ) continue;
+            //if ( !field ) continue;
 
             if ( this.dateFields.includes(property) ) {
                 field = this.parseAsDate(field);

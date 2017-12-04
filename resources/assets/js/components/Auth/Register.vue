@@ -83,6 +83,7 @@
 		methods: {
 			register() {
 				this.processing = true;
+
 				new Model('register').new().post(this.form.data())
 					.then(response => {
 						this.$store.commit('SET_AUTHENTICATED',  true);

@@ -1,42 +1,33 @@
 <template>
-	<div class="service_media-component">
-		
-		<template v-if="images.length > 0">
-			<ul class="images-list hide-overflow-images clearfix" ref="imagesList">
-				<li v-for="image in images">
-					<a :href="image.media_url" target="_blank">
-						<div class="image-container" :style="{backgroundImage: `url('${image.thumb_url}')`}"></div>
+	<div class="service-media-container">
+		<div class="service-images-container" v-if="images.length > 0">
+			<div class="service-media-heading mb0">Bilder</div>
+			<ul class="services-images-list">
+				<li v-for="image in images" :key="image.id">
+					<a :href="image.media_url" target="_blank" rel="noopener">
+						<img :src="image.thumb_url" :alt="`Thumbnail for ${image.original_filename}`">
 					</a>
 				</li>
 			</ul>
-
-			<div class="show-more-container mt15 text-center" v-if="hasMoreImages">
-				<button class="btn btn-default show-all" @click="toggleOverflowImages">
-					Visa alla bilder <i class="fa" :class="{'fa-chevron-down': !showingAllImages, 'fa-chevron-up': showingAllImages}" aria-hidden="true"></i>
-				</button>
-			</div>
-		</template>
-
-		<div class="media-spacer" v-if="!hasMoreImages"></div>
-
-		<template v-if="files.length > 0">
-			<ul class="files-list" :class="{mt30: images.length > 0 && hasMoreImages, mt15: images.length > 0 && !hasMoreImages}">
-				<li v-for="file in files">
-					<i class="fa fa-file-text-o" aria-hidden="true"></i> 
-					<a :href="file.media_url" target="_blank">{{ file.original_filename }}</a>
+		</div>
+		<div class="service-files-container" v-if="files.length > 0">
+			<div class="service-media-heading">Filer</div>
+			<ul class="services-files-list">
+				<li v-for="file in files" :key="file.id">
+					<i class="icon icon_file wh15 light-gray mr5"></i>
+					<a :href="file.media_url" target="_blank" class="is-link" rel="noopener" v-text="file.original_filename"></a>
 				</li>
 			</ul>
-		</template>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		props: ['media'],
-		data() {
-			return {
-				showingAllImages: false,
-				hasMoreImages: false
+		props: {
+			media: {
+				type: Array,
+				required: true
 			}
 		},
 		computed: {
@@ -45,26 +36,6 @@
 			},
 			files() {
 				return this.media.filter(media => !media.mime_type.includes('image/'));
-			}
-		},
-		methods: {
-			hasImagesOverflow() {
-				this.hasMoreImages = this.$refs.imagesList.offsetHeight < this.$refs.imagesList.scrollHeight;
-			},
-			toggleOverflowImages() {
-				if ( this.showingAllImages ) {
-					this.showingAllImages = false;
-					this.$refs.imagesList.classList.add('hide-overflow-images');
-				} else {
-					this.showingAllImages = true;
-					this.$refs.imagesList.classList.remove('hide-overflow-images');
-				}
-			}
-		},
-		mounted() {
-			if ( this.images.length > 0 ) {
-				this.hasImagesOverflow();
-				window.onresize = this.hasImagesOverflow;
 			}
 		}
 	}

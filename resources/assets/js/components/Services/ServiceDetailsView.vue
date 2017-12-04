@@ -5,13 +5,9 @@
                 <service-details :service="service" />
                 <section class="transparent-contentSection service-comments mt50" v-if="!breakpoints.isSmallDevices()">
                     <app-add-comment></app-add-comment>
-                    <ul class="top-comments">
-                        <transition-group name="slide-in-left">
-                            <li v-for="comment in service.comments" :key="comment.id">
-                                <app-comment :comment="comment"></app-comment>
-                            </li>
-                        </transition-group>
-                    </ul>
+                    <transition-group name="slide-in-left">
+                        <app-comment v-for="comment in service.comments" :comment="comment" :key="comment.id" />
+                    </transition-group>
                 </section>
             </div>
             <div class="main-area-sidebar">
@@ -58,13 +54,9 @@
             </div>
             <section class="transparent-contentSection service-comments mt50" v-if="breakpoints.isSmallDevices()">
                 <app-add-comment></app-add-comment>
-                <ul class="top-comments">
-                    <transition-group name="slide-in-left">
-                        <li v-for="comment in service.comments" :key="comment.id">
-                            <app-comment :comment="comment"></app-comment>
-                        </li>
-                    </transition-group>
-                </ul>
+                <transition-group name="slide-in-left">
+                    <app-comment v-for="comment in service.comments" :comment="comment" :key="comment.id" />
+                </transition-group>
             </section>
         </div>
     </div>

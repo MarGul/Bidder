@@ -19,7 +19,7 @@
 					<li v-if="$store.getters.isAuthenticated" class="nav-item">
 						<router-link to="/user/profile">
 							<div class="auth-user">
-								<div class="auth-avatar" :style="avatar"></div>
+								<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
 								<div class="auth-name">{{ $store.getters.authUser.username }}</div>
 							</div>
 						</router-link>
@@ -43,11 +43,19 @@
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+
 	export default {
 		computed: {
+			...mapGetters({
+				user: 'authUser'
+			}),
 			avatar() {
-				return { backgroundImage: `url(${this.$store.getters.authUser.avatar}` };
-			}
+				return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
+			},
+			defaultAvatar() {
+				return !!this.user.avatar ? [] : ['defaultAvatar'];
+			},
 		},
 		methods: {
 			navToggle() {
