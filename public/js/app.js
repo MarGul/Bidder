@@ -10771,6 +10771,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -15059,6 +15061,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -15070,9 +15111,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("footer", { staticClass: "main-footer" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "footer-callouts" }, [
+        _c(
+          "div",
+          { staticClass: "f__callout footer-brand" },
+          [
+            _c("router-link", { attrs: { to: "/" } }, [
+              _c("img", {
+                staticClass: "logo-img",
+                attrs: { src: "http://bidder.dev/logo_mock.png" }
+              })
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0, false, false),
+        _vm._v(" "),
+        _vm._m(1, false, false)
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "f__callout" }, [
+      _c("div", { staticClass: "f__callout-heading" }, [_vm._v("Bidder")]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "f__links" }, [
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Om Bidder")])]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Hur fungerar det?")])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Almänna vilkor")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "f__callout" }, [
+      _c("div", { staticClass: "f__callout-heading" }, [_vm._v("Kontakt")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "contact-container" }, [
+        _c("div", [
+          _vm._v("email: "),
+          _c("a", { attrs: { href: "mailto:hej@bidder.se" } }, [
+            _vm._v("hej@bidder.se")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", [_vm._v("orgnr: 556677-3344")])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "f__social-media-link" }, [
+        _c("li", [_c("i", { staticClass: "icon icon_facebook wh30" })]),
+        _vm._v(" "),
+        _c("li", [_c("i", { staticClass: "icon icon_instagram wh30" })])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -15128,7 +15237,7 @@ var render = function() {
               })
             : _vm._e(),
           _vm._v(" "),
-          _c("router-view"),
+          _c("div", { staticClass: "main-content" }, [_c("router-view")], 1),
           _vm._v(" "),
           _c("app-footer")
         ],

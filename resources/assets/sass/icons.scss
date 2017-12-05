@@ -66,6 +66,11 @@
 		height: 20px;
 	}
 
+	&.wh30 {
+		width: 30px;
+		height: 30px;
+	}
+
 	&.wh40 {
 		width: 40px;
 		height: 40px;
@@ -171,6 +176,24 @@
 
 .icon_image {
 	@include mask-icon('../svg/image.svg');
+}
+
+.icon_instagram {
+	@include mask-icon('../svg/social_instagram.svg');
+	background-color: #8b96a3;
+
+	&:hover {
+		background-color: #cd486b;
+	}
+}
+
+.icon_facebook {
+	@include mask-icon('../svg/social_facebook.svg');
+	background-color: #8b96a3;
+
+	&:hover {
+		background-color: #3b5998;
+	}
 }
 
 .icon_file {
