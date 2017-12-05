@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700);/*!
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500);/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -971,7 +971,7 @@ a {
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #636b6f;
   line-height: 1.6;
   font-size: 14px;
@@ -2901,6 +2901,7 @@ body.mobile-nav-open .overlay {
   display: -ms-flexbox;
   display: flex;
   color: #97A9B5;
+  font-size: 13px;
 }
 
 .services-multi-container .white-contentSection-footer .services-multi-meta {
@@ -3099,6 +3100,7 @@ body.mobile-nav-open .overlay {
       -ms-flex-pack: center;
           justify-content: center;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .service-media-container {
