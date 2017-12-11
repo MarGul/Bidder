@@ -1,0 +1,72 @@
+.payment_component {
+
+	.payment-methods-container {
+
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+			margin: 0 -15px;
+		}
+
+		.payment-method {
+			margin-bottom: 15px;
+			border: 2px solid #cfd2d7;
+			border-radius: 4px;
+			padding: 10px 20px;
+			display: flex;
+			cursor: pointer;
+
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+				margin: 0 15px;
+			}
+
+			&.selected {
+				background: #f6f9fc;
+
+				.payment-heading {
+					font-weight: 500;
+				}
+
+				.payment-checked-icon {
+					@include mask-icon('../svg/checkmark.svg');
+				}
+			}
+
+			.payment-select {
+				display: flex;
+				align-items: center;
+
+				.payment-checked-icon {
+					@include mask-icon('../svg/circle_shape_outline.svg');
+				}
+			}
+
+			.payment-content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.payment-icon-invoice {
+				@include icon('../svg/invoice.svg');
+				width: 50px;
+				height: 40px;
+				flex: 2;
+			}
+
+			.payment-icon-cc {
+				@include icon('../svg/creditcards.svg');
+				width: 50px;
+				height: 40px;
+				flex: 2;
+			}
+
+			.payment-heading {
+				flex: 1;
+				margin-top: 10px;
+			}
+		}
+	}
+}

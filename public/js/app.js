@@ -33082,6 +33082,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__includes_Model__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Payment__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Payment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Payment__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -33166,12 +33168,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		appPayment: __WEBPACK_IMPORTED_MODULE_2__Payment___default.a
+	},
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
 		invoice: 'userInvoicesFocus',
@@ -33225,55 +33230,68 @@ var render = function() {
       _vm.fetched
         ? [
             _c("div", { staticClass: "main-area-with-sidebar" }, [
-              _c("div", { staticClass: "main-area" }, [
-                _c("section", { staticClass: "white-contentSection" }, [
-                  _c("header", { staticClass: "white-contentSection-header" }, [
-                    _c("h3", [_vm._v("Faktura #" + _vm._s(_vm.invoice.id))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "white-contentSection-content" }, [
-                    _vm._v(
-                      "\n\t\t\t\t\t\tHär ska det stå lite om hur man betalar osv\n\t\t\t\t\t"
+              _c(
+                "div",
+                { staticClass: "main-area" },
+                [
+                  _c("section", { staticClass: "white-contentSection" }, [
+                    _c(
+                      "header",
+                      { staticClass: "white-contentSection-header" },
+                      [_c("h3", [_vm._v("Faktura #" + _vm._s(_vm.invoice.id))])]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "white-contentSection-content" }, [
+                      _vm._v(
+                        "\n\t\t\t\t\t\tHär ska det stå lite om hur man betalar osv\n\t\t\t\t\t"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "footer",
+                      { staticClass: "white-contentSection-footer" },
+                      [
+                        _c("div", { staticClass: "invoice-totals-container" }, [
+                          _c("div", { staticClass: "totals-section" }, [
+                            _c("div", { staticClass: "totals-header" }, [
+                              _vm._v("Totalsumma")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "totals-value",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.filters.currency(_vm.invoice.total)
+                                )
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invoice-totals-container" }, [
+                          _c("div", { staticClass: "totals-section" }, [
+                            _c("div", { staticClass: "totals-header" }, [
+                              _vm._v("Varav moms")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass: "totals-value",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.filters.currency(_vm.invoice.vat)
+                                )
+                              }
+                            })
+                          ])
+                        ])
+                      ]
                     )
                   ]),
                   _vm._v(" "),
-                  _c("footer", { staticClass: "white-contentSection-footer" }, [
-                    _c("div", { staticClass: "invoice-totals-container" }, [
-                      _c("div", { staticClass: "totals-section" }, [
-                        _c("div", { staticClass: "totals-header" }, [
-                          _vm._v("Totalsumma")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "totals-value",
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.filters.currency(_vm.invoice.total)
-                            )
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "invoice-totals-container" }, [
-                      _c("div", { staticClass: "totals-section" }, [
-                        _c("div", { staticClass: "totals-header" }, [
-                          _vm._v("Varav moms")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "totals-value",
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.filters.currency(_vm.invoice.vat)
-                            )
-                          }
-                        })
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
+                  _c("app-payment", { attrs: { invoice: _vm.invoice } })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "main-area-sidebar" }, [
                 _c("section", { staticClass: "transparent-contentSection" }, [
@@ -33350,10 +33368,6 @@ var render = function() {
                   )
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "alert alert-warning mt30" }, [
-              _vm._v("\n\t\t\tHär ska payment iFrame finnas\n\t\t")
             ])
           ]
         : _c("app-loading")
@@ -34155,6 +34169,249 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(518)
+/* template */
+var __vue_template__ = __webpack_require__(519)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/User/Invoices/Payment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-10b0490c", Component.options)
+  } else {
+    hotAPI.reload("data-v-10b0490c", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 518 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			selectedMethod: 'invoice'
+		};
+	}
+});
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "payment_component" }, [
+    _c("section", { staticClass: "white-contentSection mt30" }, [
+      _vm._m(0, false, false),
+      _vm._v(" "),
+      _c("div", { staticClass: "white-contentSection-content" }, [
+        _c("div", { staticClass: "payment-methods-container" }, [
+          _c(
+            "div",
+            {
+              staticClass: "payment-method payment-method-invoice",
+              class: { selected: _vm.selectedMethod === "invoice" },
+              on: {
+                click: function($event) {
+                  _vm.selectedMethod = "invoice"
+                }
+              }
+            },
+            [_vm._m(1, false, false), _vm._v(" "), _vm._m(2, false, false)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "payment-method payment-methods-card",
+              class: { selected: _vm.selectedMethod === "creditcard" },
+              on: {
+                click: function($event) {
+                  _vm.selectedMethod = "creditcard"
+                }
+              }
+            },
+            [_vm._m(3, false, false), _vm._v(" "), _vm._m(4, false, false)]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "white-contentSection-header" }, [
+      _c("h3", [_vm._v("Betalning")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "payment-select" }, [
+      _c("i", { staticClass: "icon wh20 light-gray payment-checked-icon" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "payment-content" }, [
+      _c("div", { staticClass: "payment-icon-invoice" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "payment-heading" }, [
+        _vm._v("Betala med faktura")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "payment-select" }, [
+      _c("i", { staticClass: "icon wh20 light-gray payment-checked-icon" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "payment-content" }, [
+      _c("div", { staticClass: "payment-icon-cc" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "payment-heading" }, [_vm._v("Betala med kort")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-10b0490c", module.exports)
+  }
+}
 
 /***/ })
 ],[148]);

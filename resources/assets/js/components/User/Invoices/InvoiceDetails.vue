@@ -27,6 +27,9 @@
 							</div>
 						</footer>
 					</section>
+
+					<app-payment :invoice="invoice" />
+
 				</div>
 				<div class="main-area-sidebar">
 					<section class="transparent-contentSection">
@@ -70,10 +73,6 @@
 					</section>
 				</div>
 			</div>
-
-			<div class="alert alert-warning mt30">
-				Här ska payment iFrame finnas
-			</div>
 		</template>
 
 		<app-loading v-else></app-loading>
@@ -84,8 +83,12 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
+	import appPayment from './Payment';
 
 	export default {
+		components: {
+			appPayment
+		},
 		computed: {
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
