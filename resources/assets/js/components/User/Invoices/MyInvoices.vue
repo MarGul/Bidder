@@ -13,7 +13,7 @@
 								<div class="item-header">Faktura #{{ invoice.id }}</div>
 								<div class="item-sub-data">
 									<span class="mr5">Totalsumma: {{ filters.currency(invoice.total) }}</span>&bull;
-									<span class="ml5" v-text="paymentStatus"></span>
+									<span class="ml5">{{ paymentStatus(invoice) }}</span>
 								</div>
 							</div>
 							<div class="item-go-to">
@@ -41,24 +41,25 @@
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
 			 	invoices: 'userInvoices'
-			}),
-			paymentStatus(invoice) {
-				let paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
-				let paymentDate =  invoice.payment ? '' : moment(invoice.due).format('LL');
-				return `${paymentText} den ${paymentDate}`
-			}
+			})
 		},
 		methods: {
 			goTo(invoice) {
 				this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
 				this.$router.push(`/user/invoices/${invoice.id}`);
+			},
+			paymentStatus(invoice) {
+				let paymentText = invoice.payment_id ? 'Betalad' : 'Förfaller';
+				let paymentDate =  invoice.payment_id ? '' : moment(invoice.due).format('LL');
+				
+				return `${paymentText} den ${paymentDate}`
 			}
 		},
 		created() {
 			if ( !this.fetched ) {
 				new Model('invoices').get()
 					.then(response => {
-						this.$store.commit('SET_USER_INVOICES', response.invoices);
+						this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 						this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 					})
 					.catch(error => { console.log(error); });

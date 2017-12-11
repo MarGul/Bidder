@@ -10,7 +10,7 @@
 							<h3>Faktura #{{ invoice.id }}</h3>
 						</header>
 						<div class="white-contentSection-content">
-							bla
+							Här ska det stå lite om hur man betalar osv
 						</div>
 						<footer class="white-contentSection-footer">
 							<div class="invoice-totals-container">
@@ -35,27 +35,27 @@
 						</header>
 						<div class="transparent-contentSection-content">
 							<ul class="items-list-icon">
-								<li class="">
+								<li>
 									<div class="item-list-icon pt3">
-										<i class="icon icon_two_users wh15 cursor-default"></i>
+										<i class="icon icon_two_users light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
-										<div>För projektet</div>
-										<div class="gray-sub-text" v-text="invoice.project.title"></div>
+										<div>För projekt</div>
+										<div class="gray-sub-text" v-text="projectTitle"></div>
 									</div>
 								</li>
-								<li class="">
+								<li>
 									<div class="item-list-icon pt3">
-										<i class="icon icon_clock wh15 cursor-default"></i>
+										<i class="icon icon_clock light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>Skapad</div>
 										<div class="gray-sub-text" v-text="filters.time(invoice.created_at)"></div>
 									</div>
 								</li>
-								<li class="">
+								<li>
 									<div class="item-list-icon">
-										<i class="icon icon_credit_card wh15 cursor-default"></i>
+										<i class="icon icon_credit_card light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>{{ paymentTitle }}</div>
@@ -63,7 +63,7 @@
 									</div>
 								</li>
 							</ul>
-							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank">
+							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank" rel="noopener noreferrer">
 								<i class="icon icon_download wh20 mr10"></i> Ladda ner fakturan
 							</a>
 						</div>
@@ -89,20 +89,28 @@
 		computed: {
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
-				invoice: 'userInvoicesFocus'
+				invoice: 'userInvoicesFocus',
+				user: 'authUser'
 			}),
 			paymentTitle() {
 				return this.invoice.payment ? 'Betalad' : 'Förfallodag';
 			},
 			paymentDate() {
 				return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+			},
+			projectTitle() {
+				let me = this.invoice.project.users.find(u => u.id === this.user.id);
+
+				if ( me ) {
+					return me.pivot.title;
+				}
 			}
 		},
 		created() {
 			if ( !this.fetched ) {
 				new Model('invoices').get()
 					.then(response => {
-						this.$store.commit('SET_USER_INVOICES', response.invoices);
+						this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 						this.$store.commit('SET_USER_INVOICES_FOCUS', this.$route.params.id);
 						this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 					})

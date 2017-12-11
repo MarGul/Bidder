@@ -32898,17 +32898,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
 		invoices: 'userInvoices'
-	}), {
-		paymentStatus: function paymentStatus(invoice) {
-			var paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
-			var paymentDate = invoice.payment ? '' : moment(invoice.due).format('LL');
-			return paymentText + ' den ' + paymentDate;
-		}
-	}),
+	})),
 	methods: {
 		goTo: function goTo(invoice) {
 			this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
 			this.$router.push('/user/invoices/' + invoice.id);
+		},
+		paymentStatus: function paymentStatus(invoice) {
+			var paymentText = invoice.payment_id ? 'Betalad' : 'Förfaller';
+			var paymentDate = invoice.payment_id ? '' : moment(invoice.due).format('LL');
+
+			return paymentText + ' den ' + paymentDate;
 		}
 	},
 	created: function created() {
@@ -32916,7 +32916,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
-				_this.$store.commit('SET_USER_INVOICES', response.invoices);
+				_this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 			}).catch(function (error) {
 				console.log(error);
@@ -32975,12 +32975,9 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v("•\n\t\t\t\t\t\t\t\t"),
-                                _c("span", {
-                                  staticClass: "ml5",
-                                  domProps: {
-                                    textContent: _vm._s(_vm.paymentStatus)
-                                  }
-                                })
+                                _c("span", { staticClass: "ml5" }, [
+                                  _vm._v(_vm._s(_vm.paymentStatus(invoice)))
+                                ])
                               ])
                             ]),
                             _vm._v(" "),
@@ -33177,23 +33174,35 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* harmony default export */ __webpack_exports__["default"] = ({
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
-		invoice: 'userInvoicesFocus'
+		invoice: 'userInvoicesFocus',
+		user: 'authUser'
 	}), {
 		paymentTitle: function paymentTitle() {
 			return this.invoice.payment ? 'Betalad' : 'Förfallodag';
 		},
 		paymentDate: function paymentDate() {
 			return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+		},
+		projectTitle: function projectTitle() {
+			var _this = this;
+
+			var me = this.invoice.project.users.find(function (u) {
+				return u.id === _this.user.id;
+			});
+
+			if (me) {
+				return me.pivot.title;
+			}
 		}
 	}),
 	created: function created() {
-		var _this = this;
+		var _this2 = this;
 
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
-				_this.$store.commit('SET_USER_INVOICES', response.invoices);
-				_this.$store.commit('SET_USER_INVOICES_FOCUS', _this.$route.params.id);
-				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
+				_this2.$store.commit('SET_USER_INVOICES', response.data.invoices);
+				_this2.$store.commit('SET_USER_INVOICES_FOCUS', _this2.$route.params.id);
+				_this2.$store.commit('SET_USER_INVOICES_FETCHED', true);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -33223,7 +33232,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "white-contentSection-content" }, [
-                    _vm._v("\n\t\t\t\t\t\tbla\n\t\t\t\t\t")
+                    _vm._v(
+                      "\n\t\t\t\t\t\tHär ska det stå lite om hur man betalar osv\n\t\t\t\t\t"
+                    )
                   ]),
                   _vm._v(" "),
                   _c("footer", { staticClass: "white-contentSection-footer" }, [
@@ -33273,22 +33284,22 @@ var render = function() {
                     { staticClass: "transparent-contentSection-content" },
                     [
                       _c("ul", { staticClass: "items-list-icon" }, [
-                        _c("li", {}, [
+                        _c("li", [
                           _vm._m(1, false, false),
                           _vm._v(" "),
                           _c("div", { staticClass: "item-list-icon-content" }, [
-                            _c("div", [_vm._v("För projektet")]),
+                            _c("div", [_vm._v("För projekt")]),
                             _vm._v(" "),
                             _c("div", {
                               staticClass: "gray-sub-text",
                               domProps: {
-                                textContent: _vm._s(_vm.invoice.project.title)
+                                textContent: _vm._s(_vm.projectTitle)
                               }
                             })
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("li", {}, [
+                        _c("li", [
                           _vm._m(2, false, false),
                           _vm._v(" "),
                           _c("div", { staticClass: "item-list-icon-content" }, [
@@ -33305,7 +33316,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("li", {}, [
+                        _c("li", [
                           _vm._m(3, false, false),
                           _vm._v(" "),
                           _c("div", { staticClass: "item-list-icon-content" }, [
@@ -33324,7 +33335,8 @@ var render = function() {
                           staticClass: "btn btn-success full-width is-flex c_c",
                           attrs: {
                             href: "/download-invoice/" + _vm.invoice.hash,
-                            target: "_blank"
+                            target: "_blank",
+                            rel: "noopener noreferrer"
                           }
                         },
                         [
@@ -33363,7 +33375,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-list-icon pt3" }, [
-      _c("i", { staticClass: "icon icon_two_users wh15 cursor-default" })
+      _c("i", {
+        staticClass: "icon icon_two_users light-gray wh15 cursor-default"
+      })
     ])
   },
   function() {
@@ -33371,7 +33385,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-list-icon pt3" }, [
-      _c("i", { staticClass: "icon icon_clock wh15 cursor-default" })
+      _c("i", { staticClass: "icon icon_clock light-gray wh15 cursor-default" })
     ])
   },
   function() {
@@ -33379,7 +33393,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-list-icon" }, [
-      _c("i", { staticClass: "icon icon_credit_card wh15 cursor-default" })
+      _c("i", {
+        staticClass: "icon icon_credit_card light-gray wh15 cursor-default"
+      })
     ])
   }
 ]

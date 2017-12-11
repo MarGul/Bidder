@@ -29,10 +29,19 @@ class UserInvoiceController extends Controller
 	 */
 	public function index(Request $request)
 	{
+		// Try to get the users invoices.
+		$this->manager->byUser($request->user())->get();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
 		return response()->json([
-			'message' => 'Displaying users invoices.', 
-			'invoices' =>  $this->manager->byUser($request->user())
-		], 200);
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'invoices' => $this->manager->invoices()
+			]
+		], $this->manager->successCode());
 	}
 
 }

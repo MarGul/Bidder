@@ -73,5 +73,4 @@ Route::group(['prefix' => 'v1'], function() {
 	/* Handle the users notification settings. */
 	Route::get('user/notification-settings')->uses('UserNotificationSettingsController@index');
 	Route::patch('users/notification-settings')->uses('UserNotificationSettingsController@update');
-
 });

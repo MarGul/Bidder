@@ -10,22 +10,9 @@
 */
 
 Route::get('/test', function() {
-	return view('test');
-});
+	$invoice = \App\Invoice::find(1000001);
 
-Route::post('/test')->uses('TestController@store');
-
-Route::get('test2', function() {
-	$manager = app(App\Managers\MediaManager::class);
-
-	$files = [
-		['media_id' => 9, 'tmp_path' => 'tmp/nGvnikwhvMVJzTLu5cTA9GpDCh7nsqjPTfEMgmNN.jpeg'],
-		['media_id' => 10, 'tmp_path' => 'tmp/JU8Y4mSZSmVF0SdCl5ofQIeh2SSf9y7KI1DL5fk1.txt']
-	];
-
-	foreach ($files as $file) {
-		$manager->uploadTempFile($file);
-	}
+	dd($invoice->project->users()->where('user_id', $invoice->user->id)->first()->pivot->title);
 });
 
 /**
