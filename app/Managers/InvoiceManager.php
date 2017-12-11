@@ -77,6 +77,12 @@ class InvoiceManager extends BaseManager
 		return true;
 	}
 
+	/**
+	 * Create a new invoice.
+	 * 
+	 * @param  array  $data
+	 * @return boolean
+	 */
 	public function create($data = [])
 	{
 		if ( $this->hasError() ) return false;
@@ -159,32 +165,29 @@ class InvoiceManager extends BaseManager
 	 */
 	public function downloadInvoice($hash)
 	{
-		$invoice = Invoice::where('hash', $hash)->firstOrFail();
-
-		$data = $this->invoicePDFData($invoice);
+		$this->invoice = Invoice::where('hash', $hash)->firstOrFail();
 		
-		return PDF::loadView('pdf.invoice', $data)->download($invoice->hash . '.pdf');
+		return PDF::loadView('pdf.invoice', $this->invoicePDFData())->download("Faktura_" . $this->invoice->id . '.pdf');
 	}
 
 	/**
 	 * Fetch the data needed for the invoice.
 	 * 
-	 * @param  App\Invoice 	$invoice
 	 * @return array
 	 */
-	protected function invoicePDFData($invoice)
+	protected function invoicePDFData()
 	{
 		return [
-			'title' => 'Faktura #' . ($invoice->id + $this->invoiceIncrement),
-			'invoice_id' => $invoice->id + $this->invoiceIncrement,
-			'created' => Carbon::parse($invoice->created_at)->formatLocalized('%d %B, %Y'),
-			'due' => Carbon::parse($invoice->due)->formatLocalized('%d %B, %Y'),
-			'user' => $invoice->user,
-			'project' => $invoice->project,
-			'notes' => $invoice->notes,
-			'sub_total' => number_format((float)($invoice->total - $invoice->vat), 2, ',', '.'),
-			'vat' => number_format($invoice->vat, 2, ',', '.'),
-			'total' => number_format($invoice->total, 2, ',', '.')
+			'title' => 'Faktura #' . $this->invoice->id,
+			'invoice_id' => $this->invoice->id,
+			'created' => Carbon::parse($this->invoice->created_at)->formatLocalized('%d %B, %Y'),
+			'due' => Carbon::parse($this->invoice->due)->formatLocalized('%d %B, %Y'),
+			'user' => $this->invoice->user,
+			'project' => $this->invoice->project,
+			'notes' => $this->invoice->notes,
+			'sub_total' => number_format((float)($this->invoice->total - $this->invoice->vat), 2, ',', '.'),
+			'vat' => number_format($this->invoice->vat, 2, ',', '.'),
+			'total' => number_format($this->invoice->total, 2, ',', '.')
 		];
 	}
 

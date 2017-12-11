@@ -33299,7 +33299,8 @@ var render = function() {
                           staticClass: "btn btn-success full-width is-flex c_c",
                           attrs: {
                             href: "/download-invoice/" + _vm.invoice.hash,
-                            target: "_blank"
+                            target: "_blank",
+                            rel: "noopener noreferrer"
                           }
                         },
                         [
