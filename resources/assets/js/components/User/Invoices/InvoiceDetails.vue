@@ -10,7 +10,7 @@
 							<h3>Faktura #{{ invoice.id }}</h3>
 						</header>
 						<div class="white-contentSection-content">
-							bla
+							Här ska det stå lite om hur man betalar osv
 						</div>
 						<footer class="white-contentSection-footer">
 							<div class="invoice-totals-container">
@@ -35,27 +35,18 @@
 						</header>
 						<div class="transparent-contentSection-content">
 							<ul class="items-list-icon">
-								<li class="">
+								<li>
 									<div class="item-list-icon pt3">
-										<i class="icon icon_two_users wh15 cursor-default"></i>
-									</div>
-									<div class="item-list-icon-content">
-										<div>För projektet</div>
-										<div class="gray-sub-text" v-text="invoice.project.title"></div>
-									</div>
-								</li>
-								<li class="">
-									<div class="item-list-icon pt3">
-										<i class="icon icon_clock wh15 cursor-default"></i>
+										<i class="icon icon_clock light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>Skapad</div>
 										<div class="gray-sub-text" v-text="filters.time(invoice.created_at)"></div>
 									</div>
 								</li>
-								<li class="">
+								<li>
 									<div class="item-list-icon">
-										<i class="icon icon_credit_card wh15 cursor-default"></i>
+										<i class="icon icon_credit_card light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>{{ paymentTitle }}</div>
@@ -102,7 +93,7 @@
 			if ( !this.fetched ) {
 				new Model('invoices').get()
 					.then(response => {
-						this.$store.commit('SET_USER_INVOICES', response.invoices);
+						this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 						this.$store.commit('SET_USER_INVOICES_FOCUS', this.$route.params.id);
 						this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 					})

@@ -33158,15 +33158,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -33188,7 +33179,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
-				_this.$store.commit('SET_USER_INVOICES', response.invoices);
+				_this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 				_this.$store.commit('SET_USER_INVOICES_FOCUS', _this.$route.params.id);
 				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 			}).catch(function (error) {
@@ -33220,7 +33211,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "white-contentSection-content" }, [
-                    _vm._v("\n\t\t\t\t\t\tbla\n\t\t\t\t\t")
+                    _vm._v(
+                      "\n\t\t\t\t\t\tHär ska det stå lite om hur man betalar osv\n\t\t\t\t\t"
+                    )
                   ]),
                   _vm._v(" "),
                   _c("footer", { staticClass: "white-contentSection-footer" }, [
@@ -33270,23 +33263,8 @@ var render = function() {
                     { staticClass: "transparent-contentSection-content" },
                     [
                       _c("ul", { staticClass: "items-list-icon" }, [
-                        _c("li", {}, [
+                        _c("li", [
                           _vm._m(1, false, false),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "item-list-icon-content" }, [
-                            _c("div", [_vm._v("För projektet")]),
-                            _vm._v(" "),
-                            _c("div", {
-                              staticClass: "gray-sub-text",
-                              domProps: {
-                                textContent: _vm._s(_vm.invoice.project.title)
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", {}, [
-                          _vm._m(2, false, false),
                           _vm._v(" "),
                           _c("div", { staticClass: "item-list-icon-content" }, [
                             _c("div", [_vm._v("Skapad")]),
@@ -33302,8 +33280,8 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("li", {}, [
-                          _vm._m(3, false, false),
+                        _c("li", [
+                          _vm._m(2, false, false),
                           _vm._v(" "),
                           _c("div", { staticClass: "item-list-icon-content" }, [
                             _c("div", [_vm._v(_vm._s(_vm.paymentTitle))]),
@@ -33360,15 +33338,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-list-icon pt3" }, [
-      _c("i", { staticClass: "icon icon_two_users wh15 cursor-default" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item-list-icon pt3" }, [
-      _c("i", { staticClass: "icon icon_clock wh15 cursor-default" })
+      _c("i", { staticClass: "icon icon_clock light-gray wh15 cursor-default" })
     ])
   },
   function() {
@@ -33376,7 +33346,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-list-icon" }, [
-      _c("i", { staticClass: "icon icon_credit_card wh15 cursor-default" })
+      _c("i", {
+        staticClass: "icon icon_credit_card light-gray wh15 cursor-default"
+      })
     ])
   }
 ]

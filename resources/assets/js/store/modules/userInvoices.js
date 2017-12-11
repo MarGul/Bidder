@@ -25,9 +25,7 @@ const actions = {
 const getters = {
 	userInvoicesFetched: state => state.fetched,
 	userInvoices: state => state.invoices,
-	userInvoicesFocus: state => {
-		return state.invoices.find(invoice => invoice.id === state.focusId);
-	}
+	userInvoicesFocus: state => state.invoices.find(invoice => invoice.id === state.focusId)
 }
 
 export default {
