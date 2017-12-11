@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('user_id');
             $table->integer('project_id');
-            $table->integer('payment_id');
+            $table->integer('payment_id')->nullable();
             $table->string('hash');
             $table->float('total');
             $table->float('vat');

@@ -32898,17 +32898,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		fetched: 'userInvoicesFetched',
 		invoices: 'userInvoices'
-	}), {
-		paymentStatus: function paymentStatus(invoice) {
-			var paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
-			var paymentDate = invoice.payment ? '' : moment(invoice.due).format('LL');
-			return paymentText + ' den ' + paymentDate;
-		}
-	}),
+	})),
 	methods: {
 		goTo: function goTo(invoice) {
 			this.$store.commit('SET_USER_INVOICES_FOCUS', invoice.id);
 			this.$router.push('/user/invoices/' + invoice.id);
+		},
+		paymentStatus: function paymentStatus(invoice) {
+			var paymentText = invoice.payment_id ? 'Betalad' : 'Förfaller';
+			var paymentDate = invoice.payment_id ? '' : moment(invoice.due).format('LL');
+
+			return paymentText + ' den ' + paymentDate;
 		}
 	},
 	created: function created() {
@@ -32916,7 +32916,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		if (!this.fetched) {
 			new __WEBPACK_IMPORTED_MODULE_1__includes_Model__["a" /* default */]('invoices').get().then(function (response) {
-				_this.$store.commit('SET_USER_INVOICES', response.invoices);
+				_this.$store.commit('SET_USER_INVOICES', response.data.invoices);
 				_this.$store.commit('SET_USER_INVOICES_FETCHED', true);
 			}).catch(function (error) {
 				console.log(error);
@@ -32975,12 +32975,9 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v("•\n\t\t\t\t\t\t\t\t"),
-                                _c("span", {
-                                  staticClass: "ml5",
-                                  domProps: {
-                                    textContent: _vm._s(_vm.paymentStatus)
-                                  }
-                                })
+                                _c("span", { staticClass: "ml5" }, [
+                                  _vm._v(_vm._s(_vm.paymentStatus(invoice)))
+                                ])
                               ])
                             ]),
                             _vm._v(" "),

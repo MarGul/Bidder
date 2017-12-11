@@ -10,22 +10,13 @@
 */
 
 Route::get('/test', function() {
-	return view('test');
-});
+	$manager = app(App\Managers\InvoiceManager::class);
 
-Route::post('/test')->uses('TestController@store');
+	$project = \App\Project::find(1);
 
-Route::get('test2', function() {
-	$manager = app(App\Managers\MediaManager::class);
+	$manager->forProject($project)->create();
 
-	$files = [
-		['media_id' => 9, 'tmp_path' => 'tmp/nGvnikwhvMVJzTLu5cTA9GpDCh7nsqjPTfEMgmNN.jpeg'],
-		['media_id' => 10, 'tmp_path' => 'tmp/JU8Y4mSZSmVF0SdCl5ofQIeh2SSf9y7KI1DL5fk1.txt']
-	];
-
-	foreach ($files as $file) {
-		$manager->uploadTempFile($file);
-	}
+	dd($manager->errorMessage());
 });
 
 /**

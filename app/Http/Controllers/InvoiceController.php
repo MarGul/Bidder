@@ -7,7 +7,6 @@ use App\Managers\InvoiceManager;
 
 class InvoiceController extends Controller
 {
-    
 	/**
 	 * Display the resource
 	 * 
