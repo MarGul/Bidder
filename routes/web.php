@@ -10,13 +10,9 @@
 */
 
 Route::get('/test', function() {
-	$manager = app(App\Managers\InvoiceManager::class);
+	$invoice = \App\Invoice::find(1000001);
 
-	$project = \App\Project::find(1);
-
-	$manager->forProject($project)->create();
-
-	dd($manager->errorMessage());
+	dd($invoice->project->users()->where('user_id', $invoice->user->id)->first()->pivot->title);
 });
 
 /**

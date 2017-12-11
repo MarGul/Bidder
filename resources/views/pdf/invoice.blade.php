@@ -149,7 +149,7 @@
             <tr class="item">
                 <td>
                     <div>Tjänst förmedlad</div>
-                    <small><strong>För projekt:</strong> {{ $project->bid_user_title ?? '#' . $project->id }}</small>
+                    <small><strong>För projekt:</strong> {{ $project_title }}</small>
                 </td>
                 
                 <td>

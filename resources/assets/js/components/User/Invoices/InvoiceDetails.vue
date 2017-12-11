@@ -37,6 +37,15 @@
 							<ul class="items-list-icon">
 								<li>
 									<div class="item-list-icon pt3">
+										<i class="icon icon_two_users light-gray wh15 cursor-default"></i>
+									</div>
+									<div class="item-list-icon-content">
+										<div>För projekt</div>
+										<div class="gray-sub-text" v-text="projectTitle"></div>
+									</div>
+								</li>
+								<li>
+									<div class="item-list-icon pt3">
 										<i class="icon icon_clock light-gray wh15 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
@@ -80,13 +89,21 @@
 		computed: {
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
-				invoice: 'userInvoicesFocus'
+				invoice: 'userInvoicesFocus',
+				user: 'authUser'
 			}),
 			paymentTitle() {
 				return this.invoice.payment ? 'Betalad' : 'Förfallodag';
 			},
 			paymentDate() {
 				return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+			},
+			projectTitle() {
+				let me = this.invoice.project.users.find(u => u.id === this.user.id);
+
+				if ( me ) {
+					return me.pivot.title;
+				}
 			}
 		},
 		created() {

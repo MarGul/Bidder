@@ -66,7 +66,11 @@ class InvoiceManager extends BaseManager
 		if ( $this->hasError() ) return false;
 
 		try {
-			$this->invoices = $this->user->invoices;
+			$this->invoices = Invoice::with(['project.users' => function($q) {
+										$q->where('user_id', $this->user->id);
+									 }])
+									 ->where('user_id', $this->user->id)
+									 ->get();
 		} catch (\Exception $e) {
 			$this->setError('Could not fetch the users invoices.', 500);
 			return false;
@@ -149,7 +153,6 @@ class InvoiceManager extends BaseManager
 				'notes' => $this->data('notes')
 			]);
 		} catch (\Exception $e) {
-			dd($e);
 			$this->setError('Could not insert the invoice into storage.', 500);
 			return false;
 		}
@@ -183,7 +186,7 @@ class InvoiceManager extends BaseManager
 			'created' => Carbon::parse($this->invoice->created_at)->formatLocalized('%d %B, %Y'),
 			'due' => Carbon::parse($this->invoice->due)->formatLocalized('%d %B, %Y'),
 			'user' => $this->invoice->user,
-			'project' => $this->invoice->project,
+			'project_title' => $this->invoice->project->users()->where('user_id', $this->invoice->user->id)->first()->pivot->title,
 			'notes' => $this->invoice->notes,
 			'sub_total' => number_format((float)($this->invoice->total - $this->invoice->vat), 2, ',', '.'),
 			'vat' => number_format($this->invoice->vat, 2, ',', '.'),
