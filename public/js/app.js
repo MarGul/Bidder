@@ -15767,6 +15767,14 @@ var actions = {
 		var service = state.service;
 		service.comments.unshift(payload.comment);
 		commit('SET_SERVICE_DETAILS', service);
+	},
+	addBid: function addBid(_ref2, payload) {
+		var commit = _ref2.commit,
+		    state = _ref2.state;
+
+		var service = state.service;
+		service.bids.unshift(payload.bid);
+		commit('SET_SERVICE_DETAILS', service);
 	}
 };
 
@@ -19102,7 +19110,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		}).catch(function (error) {});
 
 		Echo.channel('service.' + this.$route.params.id).listen('CommentCreated', function (e) {
-			_this.$store.commit('ADD_COMMENT', { comment: e.comment });
+			_this.$store.dispatch('addComment', { comment: e.comment });
 		}).listen('NewBid', function (e) {
 			_this.$store.dispatch('addBid', { bid: e.bid });
 			_this.$store.dispatch('showNotification', { type: 'info', msg: 'Det kom precis in ett bud för denna tjänsten!' });
