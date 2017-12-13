@@ -39,7 +39,9 @@
 				})
 				.listen('NewBid', (e) => {
 					this.$store.dispatch('addBid', {bid: e.bid});
-					this.$store.dispatch('showNotification', {type: 'info', msg: 'Det kom precis in ett bud för denna tjänsten!'})
+					this.$store.dispatch('eventNotification', {
+						type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.'
+					});
 				});
 		},
 		destroyed() {
