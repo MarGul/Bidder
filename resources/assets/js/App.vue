@@ -1,15 +1,21 @@
 <template>
     <div id="site">
+        
         <transition name="notification-slide-down-up">
-            <app-notifications v-if="$store.getters.notificationShowing"></app-notifications>
+            <app-notifications v-if="$store.getters.notificationShowing" />>
         </transition>
+
+        <transition name="event-notification-animation">
+            <app-event-notification v-if="$store.getters.eventNotificationShowing" />
+        </transition>
+
+        <transition name="slide-down-up">
+            <app-modal v-if="$store.getters.modalOpen" />
+        </transition>
+
 
         <app-mobile-header v-if="breakpoints.mobile"></app-mobile-header>
         <app-desktop-header v-else></app-desktop-header>
-
-        <transition name="slide-down-up">
-            <app-modal v-if="$store.getters.modalOpen"></app-modal>
-        </transition>
 
         <div id="site-wrap">
             <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
@@ -29,6 +35,7 @@
     import appMobileHeader from './components/Layout/MobileHeader';
     import appDesktopHeader from './components/Layout/DesktopHeader';
     import appNotifications from './components/Includes/Notifications';
+    import appEventNotification from './components/Includes/EventNotification';
     import appModal from './components/Includes/Modal';
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
@@ -39,6 +46,7 @@
             appMobileHeader,
             appDesktopHeader,
             appNotifications,
+            appEventNotification,
             appModal,
             appFooter
         },
@@ -50,6 +58,9 @@
         methods: {
             hideMobileNav() {
                 document.body.classList.remove('mobile-nav-open');
+            },
+            test() {
+                this.$store.dispatch('eventNotification', {type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.'});
             }
         },
         created() {

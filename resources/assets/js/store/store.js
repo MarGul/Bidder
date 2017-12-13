@@ -12,6 +12,7 @@ import servicesFilter from './modules/servicesFilter';
 import services from './modules/services';
 import service from './modules/service';
 import notifications from './modules/notifications';
+import eventNotification from './modules/eventNotification';
 import userBids from './modules/userBids';
 import userBidDetails from './modules/userBidDetails';
 import userProjects from './modules/userProjects';
@@ -32,6 +33,7 @@ export default new Vuex.Store({
 		services,
 		service,
 		notifications,
+		eventNotification,
 		userBids,
 		userBidDetails,
 		userProjects,

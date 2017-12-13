@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700);/*!
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500);/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -970,7 +970,7 @@ a {
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #636b6f;
   line-height: 1.6;
   font-size: 14px;
@@ -1741,6 +1741,77 @@ label.radio-btn input[type=radio] {
 
 .notifications-component .notification-area .close-notification i {
   cursor: pointer;
+}
+
+.event_notification-component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  padding: 20px 15px;
+  z-index: 1000;
+  -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .event_notification-component {
+    top: 50px;
+    right: 3%;
+    width: auto;
+    max-width: 400px;
+  }
+}
+
+.event_notification-component.success {
+  background: #2ab27b;
+  color: #FFF;
+}
+
+.event_notification-component.success .event-icon {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 305.002 305.002' style='enable-background:new 0 0 305.002 305.002;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M152.502,0.001C68.412,0.001,0,68.412,0,152.501s68.412,152.5,152.502,152.5c84.089,0,152.5-68.411,152.5-152.5 S236.591,0.001,152.502,0.001z M152.502,280.001C82.197,280.001,25,222.806,25,152.501c0-70.304,57.197-127.5,127.502-127.5 c70.304,0,127.5,57.196,127.5,127.5C280.002,222.806,222.806,280.001,152.502,280.001z'/%3E %3Cpath d='M218.473,93.97l-90.546,90.547l-41.398-41.398c-4.882-4.881-12.796-4.881-17.678,0c-4.881,4.882-4.881,12.796,0,17.678 l50.237,50.237c2.441,2.44,5.64,3.661,8.839,3.661c3.199,0,6.398-1.221,8.839-3.661l99.385-99.385 c4.881-4.882,4.881-12.796,0-17.678C231.269,89.089,223.354,89.089,218.473,93.97z'/%3E %3C/g%3E %3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 305.002 305.002' style='enable-background:new 0 0 305.002 305.002;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M152.502,0.001C68.412,0.001,0,68.412,0,152.501s68.412,152.5,152.502,152.5c84.089,0,152.5-68.411,152.5-152.5 S236.591,0.001,152.502,0.001z M152.502,280.001C82.197,280.001,25,222.806,25,152.501c0-70.304,57.197-127.5,127.502-127.5 c70.304,0,127.5,57.196,127.5,127.5C280.002,222.806,222.806,280.001,152.502,280.001z'/%3E %3Cpath d='M218.473,93.97l-90.546,90.547l-41.398-41.398c-4.882-4.881-12.796-4.881-17.678,0c-4.881,4.882-4.881,12.796,0,17.678 l50.237,50.237c2.441,2.44,5.64,3.661,8.839,3.661c3.199,0,6.398-1.221,8.839-3.661l99.385-99.385 c4.881-4.882,4.881-12.796,0-17.678C231.269,89.089,223.354,89.089,218.473,93.97z'/%3E %3C/g%3E %3C/svg%3E");
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.event_notification-component.danger {
+  background: #cc0000;
+  color: #FFF;
+}
+
+.event_notification-component.danger .event-icon {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M505.403,406.394L295.389,58.102c-8.274-13.721-23.367-22.245-39.39-22.245c-16.023,0-31.116,8.524-39.391,22.246 L6.595,406.394c-8.551,14.182-8.804,31.95-0.661,46.37c8.145,14.42,23.491,23.378,40.051,23.378h420.028 c16.56,0,31.907-8.958,40.052-23.379C514.208,438.342,513.955,420.574,505.403,406.394z M477.039,436.372 c-2.242,3.969-6.467,6.436-11.026,6.436H45.985c-4.559,0-8.784-2.466-11.025-6.435c-2.242-3.97-2.172-8.862,0.181-12.765 L245.156,75.316c2.278-3.777,6.433-6.124,10.844-6.124c4.41,0,8.565,2.347,10.843,6.124l210.013,348.292 C479.211,427.512,479.281,432.403,477.039,436.372z'/%3E %3C/g%3E %3Cg%3E %3Cpath d='M256.154,173.005c-12.68,0-22.576,6.804-22.576,18.866c0,36.802,4.329,89.686,4.329,126.489 c0.001,9.587,8.352,13.607,18.248,13.607c7.422,0,17.937-4.02,17.937-13.607c0-36.802,4.329-89.686,4.329-126.489 C278.421,179.81,268.216,173.005,256.154,173.005z'/%3E %3C/g%3E %3Cg%3E %3Cpath d='M256.465,353.306c-13.607,0-23.814,10.824-23.814,23.814c0,12.68,10.206,23.814,23.814,23.814 c12.68,0,23.505-11.134,23.505-23.814C279.97,364.13,269.144,353.306,256.465,353.306z'/%3E %3C/g%3E %3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M505.403,406.394L295.389,58.102c-8.274-13.721-23.367-22.245-39.39-22.245c-16.023,0-31.116,8.524-39.391,22.246 L6.595,406.394c-8.551,14.182-8.804,31.95-0.661,46.37c8.145,14.42,23.491,23.378,40.051,23.378h420.028 c16.56,0,31.907-8.958,40.052-23.379C514.208,438.342,513.955,420.574,505.403,406.394z M477.039,436.372 c-2.242,3.969-6.467,6.436-11.026,6.436H45.985c-4.559,0-8.784-2.466-11.025-6.435c-2.242-3.97-2.172-8.862,0.181-12.765 L245.156,75.316c2.278-3.777,6.433-6.124,10.844-6.124c4.41,0,8.565,2.347,10.843,6.124l210.013,348.292 C479.211,427.512,479.281,432.403,477.039,436.372z'/%3E %3C/g%3E %3Cg%3E %3Cpath d='M256.154,173.005c-12.68,0-22.576,6.804-22.576,18.866c0,36.802,4.329,89.686,4.329,126.489 c0.001,9.587,8.352,13.607,18.248,13.607c7.422,0,17.937-4.02,17.937-13.607c0-36.802,4.329-89.686,4.329-126.489 C278.421,179.81,268.216,173.005,256.154,173.005z'/%3E %3C/g%3E %3Cg%3E %3Cpath d='M256.465,353.306c-13.607,0-23.814,10.824-23.814,23.814c0,12.68,10.206,23.814,23.814,23.814 c12.68,0,23.505-11.134,23.505-23.814C279.97,364.13,269.144,353.306,256.465,353.306z'/%3E %3C/g%3E %3C/svg%3E");
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.event_notification-component .event-icon {
+  width: 55px;
+  height: 55px;
+  margin-right: 30px;
+  background: #FFF;
+}
+
+.event_notification-component .event-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.event_notification-component .event-content .event-heading {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
 
 .input_control_checkbox {
@@ -2900,6 +2971,7 @@ body.mobile-nav-open .overlay {
   display: -ms-flexbox;
   display: flex;
   color: #97A9B5;
+  font-size: 13px;
 }
 
 .services-multi-container .white-contentSection-footer .services-multi-meta {
@@ -3006,6 +3078,7 @@ body.mobile-nav-open .overlay {
 
 .service-details-view .service-bids .time-left .ends {
   font-size: 13px;
+  color: #97A9B5;
 }
 
 .service-details-view .service-bids .active-bids {
@@ -3098,6 +3171,7 @@ body.mobile-nav-open .overlay {
       -ms-flex-pack: center;
           justify-content: center;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .service-media-container {
@@ -4645,6 +4719,70 @@ body.mobile-nav-open .overlay {
   to {
     -webkit-transform: translateY(-100px);
             transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.event-notification-animation-enter-active {
+  -webkit-animation: event-notification-slide-down 400ms ease-out forwards;
+  animation: event-notification-slide-down 400ms ease-out forwards;
+}
+
+@media screen and (min-width: 768px) {
+  .event-notification-animation-enter-active {
+    -webkit-animation: event-notification-slide-in 400ms ease-out forwards;
+    animation: event-notification-slide-in 400ms ease-out forwards;
+  }
+}
+
+.event-notification-animation-leave-active {
+  -webkit-animation: event-notification-slide-up 800ms ease-out forwards;
+  animation: event-notification-slide-up 800ms ease-out forwards;
+}
+
+@media screen and (min-width: 768px) {
+  .event-notification-animation-leave-active {
+    -webkit-animation: event-notification-slide-out 800ms ease-out forwards;
+    animation: event-notification-slide-out 800ms ease-out forwards;
+  }
+}
+
+@keyFrames event-notification-slide-down {
+  from {
+    top: -200px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyFrames event-notification-slide-up {
+  from {
+    top: 0;
+  }
+  to {
+    top: -200px;
+  }
+}
+
+@keyFrames event-notification-slide-in {
+  from {
+    right: -400px;
+    opacity: 0;
+  }
+  to {
+    right: 3%;
+    opacity: 1;
+  }
+}
+
+@keyFrames event-notification-slide-out {
+  from {
+    right: 3%;
+    opacity: 1;
+  }
+  to {
+    right: -400px;
     opacity: 0;
   }
 }

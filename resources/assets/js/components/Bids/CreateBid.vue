@@ -139,7 +139,7 @@
 		},
 		computed: {
             ...mapGetters({
-                service: 'getService',
+                service: 'service',
                 authCheck: 'isAuthenticated'
             })
 		},

@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500);
 // Variables
 @import "variables";
 // Mixins
@@ -40,6 +40,7 @@
 
 // Notifications
 @import "includes/notifications.scss";
+@import "includes/event-notification.scss";
 
 // InputControls
 @import 'includes/InputControls/checkbox.scss';
@@ -142,4 +143,5 @@
 @import "animations/_fade-in.scss";
 @import "animations/_fade-out.scss";
 @import "animations/_notification-slide-down-up.scss";
+@import "animations/_event-notification-animation.scss";
 @import "animations/_tada.scss";
