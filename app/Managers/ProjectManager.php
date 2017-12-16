@@ -205,7 +205,9 @@ class ProjectManager extends BaseManager
 									->add('useContract', ['user' => $this->user->username]);
 
 		// Send out the notification about the use of contract.
-		Notification::send($this->otherUsers(), new ProjectUsingContract($this->project, $this->history(), $this->usersNotAccepted()));
+		Notification::send($this->otherUsers(), new ProjectUsingContract(
+			$this->project, $this->history(), $this->usersNotAccepted()
+		));
 		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
 
@@ -221,7 +223,7 @@ class ProjectManager extends BaseManager
 	{
 		if ( $this->hasError() ) return false;
 
-		if ( !$this->canRemoveUseOfContract() ) return false;
+		//if ( !$this->canRemoveUseOfContract() ) return false;
 
 		try {
 			// Mark the project as not using contract.
@@ -241,7 +243,10 @@ class ProjectManager extends BaseManager
 									->add('removeContract', ['user' => $this->user->username]);
 
 		// Send out the notification about the removal of the contract.
-		Notification::send($this->otherUsers(), new ProjectRemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
+		
+		Notification::send($this->otherUsers(), new ProjectRemoveContract(
+			$this->project, $this->history(), $this->usersNotAccepted())
+		);
 
 		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 
@@ -379,24 +384,6 @@ class ProjectManager extends BaseManager
 		}
 
 		return false;
-	}
-
-	/**
-	 * Get the other users of the project.
-	 *
-	 * @return collection
-	 */
-	protected function otherUsers()
-	{
-		if ( $this->project->users->isEmpty() ) {
-			$this->project->load(['users' => function($q) {
-				$q->where('user_id', '<>', $this->user->id);
-			}]);
-
-			return $this->project->users;
-		}
-
-		return $this->project->users->whereNotIn('id', [$this->user->id]);
 	}
 
 	/**

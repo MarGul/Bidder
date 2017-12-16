@@ -62,6 +62,20 @@ class ProjectEvents
     }
 
     /**
+     * Event for when a contract is updated
+     * @param {Object} data 
+     */
+    contractUpdated(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.dispatch('projectContractUpdated', {contract: data.contract, history: data.history});
+        store.dispatch('eventNotification', {
+            type: 'success', heading: 'Avtalet uppdaterades!', text: 'Avtalet för projektet har uppdaterats.'
+        });
+    }
+
+    /**
      * Is the project view active for the user that we are receiving an event for?
      */
     projectDetailsActive(projectId)
@@ -103,6 +117,9 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectCancelled':
                             projectEvents.cancelled(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectContractUpdated':
+                            projectEvents.contractUpdated(notification.data);
                             break;
                     }
                 })

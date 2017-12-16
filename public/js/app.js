@@ -34548,6 +34548,22 @@ var ProjectEvents = function () {
         }
 
         /**
+         * Event for when a contract is updated
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'contractUpdated',
+        value: function contractUpdated(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('projectContractUpdated', { contract: data.contract, history: data.history });
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'success', heading: 'Avtalet uppdaterades!', text: 'Avtalet för projektet har uppdaterats.'
+            });
+        }
+
+        /**
          * Is the project view active for the user that we are receiving an event for?
          */
 
@@ -34591,6 +34607,9 @@ var ProjectEvents = function () {
                         break;
                     case 'App\\Notifications\\ProjectCancelled':
                         projectEvents.cancelled(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectContractUpdated':
+                        projectEvents.contractUpdated(notification.data);
                         break;
                 }
             });

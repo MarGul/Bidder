@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class ProjectCancelled extends Notification implements ShouldQueue
+class ProjectContractUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -23,22 +23,23 @@ class ProjectCancelled extends Notification implements ShouldQueue
      */
     protected $history;
     /**
-     * The user that accepted the project.
-     * @var array
+     * The contract that has been updated.
+     * @var App\Contract
      */
-    protected $userCancelledId;
+    protected $contract;
+
     
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($project, $history, $userCancelledId)
+    public function __construct($project, $contract, $history)
     {
-        $this->queue = 'notifications';
+        //$this->queue = 'notifications';
         $this->project = $project;
+        $this->contract = $contract;
         $this->history = $history;
-        $this->userCancelledId = $userCancelledId;
     }
 
     /**
@@ -77,10 +78,12 @@ class ProjectCancelled extends Notification implements ShouldQueue
         return (new BroadcastMessage([
             'data' => [
                 'project' => $this->project,
+                'contract' => $this->contract,
                 'history' => $this->history,
-                'userCancelledId' => $this->userCancelledId
             ]
-        ]))->onQueue('real-time-events');
+        ]));
+
+        // ->onQueue('real-time-events')
     }
 
     /**
