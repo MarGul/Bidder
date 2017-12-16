@@ -18,6 +18,20 @@ class ProjectEvents
     }
 
     /**
+     * Event for project removing the contract
+     * @param {Object} data 
+     */
+    removedContract(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.dispatch('removeContract', {history: data.history, usersNotAccepted: data.usersNotAccepted });
+        store.dispatch('eventNotification', {
+            type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
+        });
+    }
+
+    /**
      * Is the project view active for the user that we are receiving an event for?
      */
     projectDetailsActive(projectId)
@@ -50,6 +64,9 @@ export default {
                     switch (notification.type) {
                         case 'App\\Notifications\\ProjectUsingContract':
                             projectEvents.usingContract(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectRemoveContract':
+                            projectEvents.removedContract(notification.data);
                             break;
                     }
                 })

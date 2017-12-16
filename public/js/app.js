@@ -27516,18 +27516,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		/*
   Echo.private(`project.${this.$route.params.id}`)
-               .listen('UseContract', (e) => {
-  		this.$store.dispatch('useContract', {history: e.history, usersNotAccepted: e.usersNotAccepted });
-  		this.$store.dispatch('eventNotification', {
-  			type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
-  		});
-               })
-               .listen('RemoveContract', (e) => {
-  		this.$store.dispatch('removeContract', {history: e.history,usersNotAccepted: e.usersNotAccepted });
-  		this.$store.dispatch('eventNotification', {
-  			type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
-  		});
-               })
   	.listen('DetailsUpdated', (e) => {
   		this.$store.dispatch('projectDetailsUpdated', {project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
   		this.$store.dispatch('eventNotification', {
@@ -34523,6 +34511,22 @@ var ProjectEvents = function () {
         }
 
         /**
+         * Event for project removing the contract
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'removedContract',
+        value: function removedContract(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('removeContract', { history: data.history, usersNotAccepted: data.usersNotAccepted });
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
+            });
+        }
+
+        /**
          * Is the project view active for the user that we are receiving an event for?
          */
 
@@ -34557,6 +34561,9 @@ var ProjectEvents = function () {
                 switch (notification.type) {
                     case 'App\\Notifications\\ProjectUsingContract':
                         projectEvents.usingContract(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectRemoveContract':
+                        projectEvents.removedContract(notification.data);
                         break;
                 }
             });

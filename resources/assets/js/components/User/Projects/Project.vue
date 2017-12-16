@@ -45,18 +45,6 @@
 
 			/*
 			Echo.private(`project.${this.$route.params.id}`)
-                .listen('UseContract', (e) => {
-					this.$store.dispatch('useContract', {history: e.history, usersNotAccepted: e.usersNotAccepted });
-					this.$store.dispatch('eventNotification', {
-						type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
-					});
-                })
-                .listen('RemoveContract', (e) => {
-					this.$store.dispatch('removeContract', {history: e.history,usersNotAccepted: e.usersNotAccepted });
-					this.$store.dispatch('eventNotification', {
-						type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
-					});
-                })
 				.listen('DetailsUpdated', (e) => {
 					this.$store.dispatch('projectDetailsUpdated', {project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
 					this.$store.dispatch('eventNotification', {

@@ -9,6 +9,7 @@ use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
 use Notification;
 use App\Notifications\ProjectUsingContract;
+use App\Notifications\ProjectRemoveContract;
 
 
 class ProjectManager extends BaseManager 
@@ -237,8 +238,8 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('removeContract', ['user' => $this->user->username]);
 
-		// Broadcast that the contract has been removed to the other user.
-		event(new RemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
+		// Send out the notification about the removal of the contract.
+		Notification::send($this->project->users, new ProjectRemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
 
 		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 

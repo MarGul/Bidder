@@ -8,10 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class ProjectUsingContract extends Notification implements ShouldQueue
+class ProjectRemoveContract extends Notification implements ShouldQueue
 {
     use Queueable;
-    
+
     /**
      * The project that has a notification.
      * @var App\Project
