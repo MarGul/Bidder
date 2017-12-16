@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Managers\Traits\ProjectTrait;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
+use App\Events\UseContract;
 
 
 class ProjectManager extends BaseManager 
@@ -196,6 +197,9 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('useContract', ['user' => $this->user->username]);
 
+		// Broadcast the use of contract to the user user.
+		event(new UseContract($this->project, $this->history(), $this->usersNotAccepted()));
+		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
 
 		return true;
