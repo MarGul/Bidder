@@ -27522,13 +27522,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   			type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
   		});
   	})
-  	.listen('AcceptedProject', (e) => {
-  		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-  		this.$store.dispatch('acceptProject', {started: e.started, userAcceptedId: e.userAcceptedId, history: e.history });
-  		this.$store.dispatch('eventNotification', {
-  			type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
-  		});
-  	})
   	.listen('CancelledProject', (e) => {
   		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
   		this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });
@@ -34527,6 +34520,23 @@ var ProjectEvents = function () {
         }
 
         /**
+         * Event for project removing the contract
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'accepted',
+        value: function accepted(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].commit('SET_USER_PROJECTS_FETCHED', false);
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('acceptProject', { started: data.started, userAcceptedId: data.userAcceptedId, history: data.history });
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+            });
+        }
+
+        /**
          * Is the project view active for the user that we are receiving an event for?
          */
 
@@ -34564,6 +34574,9 @@ var ProjectEvents = function () {
                         break;
                     case 'App\\Notifications\\ProjectRemoveContract':
                         projectEvents.removedContract(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectAccepted':
+                        projectEvents.accepted(notification.data);
                         break;
                 }
             });

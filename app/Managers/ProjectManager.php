@@ -10,6 +10,7 @@ use App\Managers\Traits\BidTrait;
 use Notification;
 use App\Notifications\ProjectUsingContract;
 use App\Notifications\ProjectRemoveContract;
+use App\Notifications\ProjectAccepted;
 
 
 class ProjectManager extends BaseManager 
@@ -203,7 +204,7 @@ class ProjectManager extends BaseManager
 									->add('useContract', ['user' => $this->user->username]);
 
 		// Send out the notification about the use of contract.
-		Notification::send($this->project->users, new ProjectUsingContract($this->project, $this->history(), $this->usersNotAccepted()));
+		Notification::send($this->otherUsers(), new ProjectUsingContract($this->project, $this->history(), $this->usersNotAccepted()));
 		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
 
@@ -239,7 +240,7 @@ class ProjectManager extends BaseManager
 									->add('removeContract', ['user' => $this->user->username]);
 
 		// Send out the notification about the removal of the contract.
-		Notification::send($this->project->users, new ProjectRemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
+		Notification::send($this->otherUsers(), new ProjectRemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
 
 		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 
@@ -291,8 +292,10 @@ class ProjectManager extends BaseManager
 			if ( !$this->start() ) return false;
 		}
 
-		// Broadcast that the project has been accepted to the other user.
-		event(new AcceptedProject($this->project, $this->user->id, $this->history()));
+		// Send out notification to the other users that you accepted the project.
+		Notification::send($this->otherUsers(), new ProjectAccepted(
+			$this->project, $this->project->started, $this->history(), $this->user->id
+		));
 
 		$this->setSuccess('Successfully accepted the project.', 200);
 
@@ -373,6 +376,24 @@ class ProjectManager extends BaseManager
 		}
 
 		return false;
+	}
+
+	/**
+	 * Get the other users of the project.
+	 *
+	 * @return collection
+	 */
+	protected function otherUsers()
+	{
+		if ( $this->project->users->isEmpty() ) {
+			$this->project->load(['users' => function($q) {
+				$q->where('user_id', '<>', $this->user->id);
+			}]);
+
+			return $this->project->users;
+		}
+
+		return $this->project->users->whereNotIn('id', [$this->user->id]);
 	}
 
 	/**

@@ -51,13 +51,6 @@
 						type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
 					});
 				})
-				.listen('AcceptedProject', (e) => {
-					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-					this.$store.dispatch('acceptProject', {started: e.started, userAcceptedId: e.userAcceptedId, history: e.history });
-					this.$store.dispatch('eventNotification', {
-						type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
-					});
-				})
 				.listen('CancelledProject', (e) => {
 					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 					this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });

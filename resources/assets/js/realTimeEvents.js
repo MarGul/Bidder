@@ -32,6 +32,21 @@ class ProjectEvents
     }
 
     /**
+     * Event for project removing the contract
+     * @param {Object} data 
+     */
+    accepted(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.commit('SET_USER_PROJECTS_FETCHED', false);
+        store.dispatch('acceptProject', {started: data.started, userAcceptedId: data.userAcceptedId, history: data.history });
+        store.dispatch('eventNotification', {
+            type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+        });
+    }
+
+    /**
      * Is the project view active for the user that we are receiving an event for?
      */
     projectDetailsActive(projectId)
@@ -67,6 +82,9 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectRemoveContract':
                             projectEvents.removedContract(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectAccepted':
+                            projectEvents.accepted(notification.data);
                             break;
                     }
                 })
