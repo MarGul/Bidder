@@ -9,6 +9,8 @@ use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
 use App\Events\UseContract;
 use App\Events\RemoveContract;
+use App\Events\DetailsUpdated;
+use App\Events\CancelledProject;
 
 
 class ProjectManager extends BaseManager 
@@ -148,7 +150,10 @@ class ProjectManager extends BaseManager
         if ( !$this->setOthersNotAccepted() ) return false;
 
         $this->projectHistoryManager->forProject($this->project->id)
-                                    ->add('updateDetails', ['user' => $this->user->username]);
+									->add('updateDetails', ['user' => $this->user->username]);
+									
+		// Broadcast that the project details has been updated to the other user.
+		event(new DetailsUpdated($this->project, $this->history(), $this->usersNotAccepted()));
 
         $this->setSuccess('Successfully updated the resource in storage.', 200);
 
@@ -315,6 +320,10 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('cancelled', ['user' => $this->user->username]);
 
+		// Broadcast that the project has been cancelled to the other user.
+		event(new CancelledProject($this->project, $this->history()));
+
+		
 		$this->setSuccess('Successfully cancelled the project.', 200);
 
 		return true;

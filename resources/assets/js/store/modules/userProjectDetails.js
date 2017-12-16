@@ -15,18 +15,6 @@ const mutations = {
 }
 
 const actions = {
-	cancelProject({commit, state, rootState}, payload) {
-		let project = state.project;
-		// Cancel the project.
-		project.cancelled = true;
-		// Add all of the project history.
-		payload.history.forEach(function(history) {
-			project.history.unshift(history);
-		});
-		// Set the user that cancelled that he has.
-		project.users.find(u => u.id === rootState.auth.user.id).pivot.cancelled = true;
-		commit('SET_USER_PROJECT_DETAILS', project);
-	},
 	useContract({commit, state}, payload) {
 		let project = state.project;
 		// Set project to use contract
@@ -73,6 +61,24 @@ const actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	projectDetailsUpdated({commit, state}, payload) {
+		let project = state.project;
+		project.service_start = payload.project.service_start;
+		project.service_end = payload.project.service_end;
+		project.service_hours = payload.project.service_hours;
+		project.service_price = payload.project.service_price;
+		// Set the user that should be marked with not accepted.
+		project.users.forEach(user => {
+			if ( payload.usersNotAccepted.includes(user.id) ) {
+				user.pivot.accepted = false;
+			}
+		});
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	acceptProject({commit, state, rootState}, payload) {
 		let project = state.project;
 		// Start the project if we should
@@ -85,6 +91,18 @@ const actions = {
 		});
 		// Set the user that accepted that he has.
 		project.users.find(u => u.id === rootState.auth.user.id).pivot.accepted = true;
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	cancelProject({commit, state, rootState}, payload) {
+		let project = state.project;
+		// Cancel the project.
+		project.cancelled = true;
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		// Set the user that cancelled that he has.
+		project.users.find(u => u.id === rootState.auth.user.id).pivot.cancelled = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
 	reviewSubmitted({commit, state}, payload) {

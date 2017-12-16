@@ -16234,27 +16234,9 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 }), _mutations);
 
 var actions = {
-	cancelProject: function cancelProject(_ref, payload) {
+	useContract: function useContract(_ref, payload) {
 		var commit = _ref.commit,
-		    state = _ref.state,
-		    rootState = _ref.rootState;
-
-		var project = state.project;
-		// Cancel the project.
-		project.cancelled = true;
-		// Add all of the project history.
-		payload.history.forEach(function (history) {
-			project.history.unshift(history);
-		});
-		// Set the user that cancelled that he has.
-		project.users.find(function (u) {
-			return u.id === rootState.auth.user.id;
-		}).pivot.cancelled = true;
-		commit('SET_USER_PROJECT_DETAILS', project);
-	},
-	useContract: function useContract(_ref2, payload) {
-		var commit = _ref2.commit,
-		    state = _ref2.state;
+		    state = _ref.state;
 
 		var project = state.project;
 		// Set project to use contract
@@ -16271,9 +16253,9 @@ var actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	removeContract: function removeContract(_ref3, payload) {
-		var commit = _ref3.commit,
-		    state = _ref3.state;
+	removeContract: function removeContract(_ref2, payload) {
+		var commit = _ref2.commit,
+		    state = _ref2.state;
 
 		var project = state.project;
 		project.use_contract = false;
@@ -16292,15 +16274,36 @@ var actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	projectContractUpdated: function projectContractUpdated(_ref4, payload) {
-		var commit = _ref4.commit,
-		    state = _ref4.state;
+	projectContractUpdated: function projectContractUpdated(_ref3, payload) {
+		var commit = _ref3.commit,
+		    state = _ref3.state;
 
 		var project = state.project;
 		// Remove old contracts
 		project.contracts = [];
 		// Add the project.
 		project.contracts.push(payload.contract);
+		// Add all of the project history.
+		payload.history.forEach(function (history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	projectDetailsUpdated: function projectDetailsUpdated(_ref4, payload) {
+		var commit = _ref4.commit,
+		    state = _ref4.state;
+
+		var project = state.project;
+		project.service_start = payload.project.service_start;
+		project.service_end = payload.project.service_end;
+		project.service_hours = payload.project.service_hours;
+		project.service_price = payload.project.service_price;
+		// Set the user that should be marked with not accepted.
+		project.users.forEach(function (user) {
+			if (payload.usersNotAccepted.includes(user.id)) {
+				user.pivot.accepted = false;
+			}
+		});
 		// Add all of the project history.
 		payload.history.forEach(function (history) {
 			project.history.unshift(history);
@@ -16327,9 +16330,27 @@ var actions = {
 		}).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	reviewSubmitted: function reviewSubmitted(_ref6, payload) {
+	cancelProject: function cancelProject(_ref6, payload) {
 		var commit = _ref6.commit,
-		    state = _ref6.state;
+		    state = _ref6.state,
+		    rootState = _ref6.rootState;
+
+		var project = state.project;
+		// Cancel the project.
+		project.cancelled = true;
+		// Add all of the project history.
+		payload.history.forEach(function (history) {
+			project.history.unshift(history);
+		});
+		// Set the user that cancelled that he has.
+		project.users.find(function (u) {
+			return u.id === rootState.auth.user.id;
+		}).pivot.cancelled = true;
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	reviewSubmitted: function reviewSubmitted(_ref7, payload) {
+		var commit = _ref7.commit,
+		    state = _ref7.state;
 
 		var project = state.project;
 		project.users.find(function (u) {
@@ -27511,7 +27532,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			_this.$store.dispatch('eventNotification', {
 				type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
 			});
-		}).listen('DetailsUpdated', function (e) {}).listen('AcceptedProject', function (e) {}).listen('DecliedProject', function (e) {});
+		}).listen('DetailsUpdated', function (e) {
+			_this.$store.dispatch('projectDetailsUpdated', { project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
+			_this.$store.dispatch('eventNotification', {
+				type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
+			});
+		}).listen('AcceptedProject', function (e) {}).listen('CancelledProject', function (e) {
+			_this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+			_this.$store.dispatch('cancelProject', { history: e.history });
+			_this.$store.dispatch('eventNotification', {
+				type: 'danger', heading: 'Projektet avbrutit!', text: 'Den andra parten valde att avbryta projektet.'
+			});
+		});
 	},
 	destroyed: function destroyed() {
 		this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);
@@ -28369,23 +28401,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 					msg: 'Vi har uppdaterat projektets detailjer. Nu måste den andra parten acceptera uppdateringen innan vi kan starta.'
 				});
 				// Update the state.
-				var project = _this.project;
-				project.service_start = data.service_start;
-				project.service_end = data.service_end;
-				project.service_hours = data.service_hours;
-				project.service_price = data.service_price;
-				// Set the user that should be marked with not accepted.
-				project.users.forEach(function (user) {
-					if (response.data.usersNotAccepted.includes(user.id)) {
-						user.pivot.accepted = false;
-					}
+				_this.$store.dispatch('projectDetailsUpdated', {
+					project: response.data.project,
+					history: response.data.history,
+					usersNotAccepted: response.data.usersNotAccepted
 				});
-				// Add all of the project history.
-				response.data.history.forEach(function (history) {
-					project.history.unshift(history);
-				});
-
-				_this.$store.commit('SET_USER_PROJECT_DETAILS', project);
 				_this.processing = false;
 			}).catch(function (error) {
 				_this.form.errors.record(error.errors);

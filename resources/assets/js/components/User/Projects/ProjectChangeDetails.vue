@@ -95,23 +95,11 @@
 							msg: 'Vi har uppdaterat projektets detailjer. Nu måste den andra parten acceptera uppdateringen innan vi kan starta.'
 						});
 						// Update the state.
-						let project = this.project;
-						project.service_start = data.service_start;
-						project.service_end = data.service_end;
-						project.service_hours = data.service_hours;
-						project.service_price = data.service_price;
-						// Set the user that should be marked with not accepted.
-						project.users.forEach(user => {
-							if ( response.data.usersNotAccepted.includes(user.id) ) {
-								user.pivot.accepted = false;
-							}
+						this.$store.dispatch('projectDetailsUpdated', {
+							project: response.data.project,
+							history: response.data.history,
+							usersNotAccepted: response.data.usersNotAccepted
 						});
-						// Add all of the project history.
-						response.data.history.forEach(function(history) {
-							project.history.unshift(history);
-						});
-
-						this.$store.commit('SET_USER_PROJECT_DETAILS', project);
 						this.processing = false;
 					})
 					.catch(error => {

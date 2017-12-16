@@ -57,13 +57,20 @@
 					});
                 })
 				.listen('DetailsUpdated', (e) => {
-
+					this.$store.dispatch('projectDetailsUpdated', {project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
+					this.$store.dispatch('eventNotification', {
+						type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
+					});
 				})
 				.listen('AcceptedProject', (e) => {
 
 				})
-				.listen('DecliedProject', (e) => {
-
+				.listen('CancelledProject', (e) => {
+					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+					this.$store.dispatch('cancelProject', {history: e.history });
+					this.$store.dispatch('eventNotification', {
+						type: 'danger', heading: 'Projektet avbrutit!', text: 'Den andra parten valde att avbryta projektet.'
+					});
 				});
 		},
 		destroyed() {
