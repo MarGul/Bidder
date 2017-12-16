@@ -46,8 +46,11 @@ const actions = {
 	removeContract({commit, state}, payload) {
 		let project = state.project;
 		project.use_contract = false;
-		// Set the user to not have use_contract anymore.
+		// Set the user to not have use_contract anymore and the other users to not have accepted anymore.
 		project.users.forEach(function(user) {
+			if ( payload.usersNotAccepted.includes(user.id) ) {
+				user.pivot.accepted = false;
+			}
 			if ( user.pivot.use_contract ) {
 				user.pivot.use_contract = false;
 			}

@@ -51,7 +51,10 @@
 					});
                 })
                 .listen('RemoveContract', (e) => {
-                    
+					this.$store.dispatch('removeContract', {history: e.history,usersNotAccepted: e.usersNotAccepted });
+					this.$store.dispatch('eventNotification', {
+						type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
+					});
                 })
 				.listen('DetailsUpdated', (e) => {
 

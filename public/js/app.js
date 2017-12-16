@@ -16277,8 +16277,11 @@ var actions = {
 
 		var project = state.project;
 		project.use_contract = false;
-		// Set the user to not have use_contract anymore.
+		// Set the user to not have use_contract anymore and the other users to not have accepted anymore.
 		project.users.forEach(function (user) {
+			if (payload.usersNotAccepted.includes(user.id)) {
+				user.pivot.accepted = false;
+			}
 			if (user.pivot.use_contract) {
 				user.pivot.use_contract = false;
 			}
@@ -27503,7 +27506,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			_this.$store.dispatch('eventNotification', {
 				type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
 			});
-		}).listen('RemoveContract', function (e) {}).listen('DetailsUpdated', function (e) {}).listen('AcceptedProject', function (e) {}).listen('DecliedProject', function (e) {});
+		}).listen('RemoveContract', function (e) {
+			_this.$store.dispatch('removeContract', { history: e.history, usersNotAccepted: e.usersNotAccepted });
+			_this.$store.dispatch('eventNotification', {
+				type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
+			});
+		}).listen('DetailsUpdated', function (e) {}).listen('AcceptedProject', function (e) {}).listen('DecliedProject', function (e) {});
 	},
 	destroyed: function destroyed() {
 		this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);
@@ -29121,7 +29129,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							// Set the projects fetched to false so we break the cache.
 							_this3.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 							// Update the project details in the store.
-							_this3.$store.dispatch('removeContract', { history: response.data.history });
+							_this3.$store.dispatch('removeContract', {
+								history: response.data.history,
+								usersNotAccepted: response.data.usersNotAccepted
+							});
 
 							_this3.$store.dispatch('closeModal');
 						}).catch(function (error) {

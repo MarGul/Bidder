@@ -88,7 +88,10 @@
 									// Set the projects fetched to false so we break the cache.
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									// Update the project details in the store.
-									this.$store.dispatch('removeContract', {history: response.data.history});
+									this.$store.dispatch('removeContract', {
+										history: response.data.history,
+										usersNotAccepted: response.data.usersNotAccepted
+									});
 
 									this.$store.dispatch('closeModal');
 								})

@@ -8,6 +8,7 @@ use App\Managers\Traits\ProjectTrait;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
 use App\Events\UseContract;
+use App\Events\RemoveContract;
 
 
 class ProjectManager extends BaseManager 
@@ -197,7 +198,7 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('useContract', ['user' => $this->user->username]);
 
-		// Broadcast the use of contract to the user user.
+		// Broadcast the use of contract to the other user.
 		event(new UseContract($this->project, $this->history(), $this->usersNotAccepted()));
 		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
@@ -232,6 +233,9 @@ class ProjectManager extends BaseManager
 		// Insert a history record that the use of contract has been made.
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('removeContract', ['user' => $this->user->username]);
+
+		// Broadcast that the contract has been removed to the other user.
+		event(new RemoveContract($this->project, $this->history(), $this->usersNotAccepted()));
 
 		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 
