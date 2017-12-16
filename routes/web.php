@@ -10,9 +10,10 @@
 */
 
 Route::get('/test', function() {
-	$invoice = \App\Invoice::find(1000001);
+	$user = App\User::find(1);
+	$project = App\Project::find(1);
 
-	dd($invoice->project->users()->where('user_id', $invoice->user->id)->first()->pivot->title);
+	$user->notify(new \App\Notifications\ProjectUsingContract($project));
 });
 
 /**

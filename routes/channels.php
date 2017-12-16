@@ -11,11 +11,6 @@
 |
 */
 
-// Authorize if the user can listen into the project message channel.
-Broadcast::channel('project.{project}.messages', function ($user, \App\Project $project) {
-    return \Gate::allows('in-project', $project);
-});
-
-Broadcast::channel('project.{project}', function($user, \App\Project $project) {
-    return \Gate::allows('in-project', $project);
+Broadcast::channel('users.{user}', function($user, $userId) {
+    return $user->id === (int) $userId;
 });

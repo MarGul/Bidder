@@ -22,17 +22,18 @@ class CancelledProject implements ShouldBroadcast
     public $broadcastQueue = 'real-time-events';
     
     protected $project;
+    protected $userCancelledId;
     protected $history;
-    protected $usersNotAccepted;
     
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($project, $history)
+    public function __construct($project, $userCancelledId, $history)
     {
         $this->project = $project;
+        $this->userCancelledId = $userCancelledId;
         $this->history = $history;
 
         $this->dontBroadcastToCurrentUser();
@@ -56,6 +57,7 @@ class CancelledProject implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
+            'userCancelledId' => $this->userCancelledId,
             'history' => $this->history
         ];
     }

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UseContract implements ShouldBroadcast
+class AcceptedProject implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,19 +22,19 @@ class UseContract implements ShouldBroadcast
     public $broadcastQueue = 'real-time-events';
     
     protected $project;
+    protected $userAcceptedId;
     protected $history;
-    protected $usersNotAccepted;
     
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($project, $history, $usersNotAccepted)
+    public function __construct($project, $userAcceptedId, $history)
     {
         $this->project = $project;
+        $this->userAcceptedId = $userAcceptedId;
         $this->history = $history;
-        $this->usersNotAccepted = $usersNotAccepted;
 
         $this->dontBroadcastToCurrentUser();
     }
@@ -57,8 +57,9 @@ class UseContract implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'history' => $this->history,
-            'usersNotAccepted' => $this->usersNotAccepted
+            'started' => $this->project->started,
+            'userAcceptedId' => $this->userAcceptedId,
+            'history' => $this->history
         ];
     }
 }

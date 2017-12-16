@@ -10758,6 +10758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Layout_Footer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__includes_heartbeat__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__includes_Model__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__realTimeEvents__ = __webpack_require__(524);
 //
 //
 //
@@ -10791,6 +10792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -10819,9 +10821,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         hideMobileNav: function hideMobileNav() {
             document.body.classList.remove('mobile-nav-open');
-        },
-        test: function test() {
-            this.$store.dispatch('eventNotification', { type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.' });
         }
     },
     created: function created() {
@@ -10837,12 +10836,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.$store.commit('SET_REGIONS_FETCHED', true);
         });
 
-        // Listen to global broadcasts
-        Echo.channel('services').listen('NewService', function (e) {
-            _this.$store.dispatch('addService', { service: e.service });
-        }).listen('RemoveService', function (e) {
-            _this.$store.dispatch('removeService', { id: e.id });
-        });
+        __WEBPACK_IMPORTED_MODULE_8__realTimeEvents__["a" /* default */].listen();
 
         // Start the applications heartbeat
         setInterval(function () {
@@ -16312,8 +16306,7 @@ var actions = {
 	},
 	acceptProject: function acceptProject(_ref5, payload) {
 		var commit = _ref5.commit,
-		    state = _ref5.state,
-		    rootState = _ref5.rootState;
+		    state = _ref5.state;
 
 		var project = state.project;
 		// Start the project if we should
@@ -16326,14 +16319,13 @@ var actions = {
 		});
 		// Set the user that accepted that he has.
 		project.users.find(function (u) {
-			return u.id === rootState.auth.user.id;
+			return u.id === payload.userAcceptedId;
 		}).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
 	cancelProject: function cancelProject(_ref6, payload) {
 		var commit = _ref6.commit,
-		    state = _ref6.state,
-		    rootState = _ref6.rootState;
+		    state = _ref6.state;
 
 		var project = state.project;
 		// Cancel the project.
@@ -16344,7 +16336,7 @@ var actions = {
 		});
 		// Set the user that cancelled that he has.
 		project.users.find(function (u) {
-			return u.id === rootState.auth.user.id;
+			return u.id === payload.userCancelledId;
 		}).pivot.cancelled = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
@@ -27522,28 +27514,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			console.log(error);
 		});
 
-		Echo.private('project.' + this.$route.params.id).listen('UseContract', function (e) {
-			_this.$store.dispatch('useContract', { history: e.history, usersNotAccepted: e.usersNotAccepted });
-			_this.$store.dispatch('eventNotification', {
-				type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
-			});
-		}).listen('RemoveContract', function (e) {
-			_this.$store.dispatch('removeContract', { history: e.history, usersNotAccepted: e.usersNotAccepted });
-			_this.$store.dispatch('eventNotification', {
-				type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
-			});
-		}).listen('DetailsUpdated', function (e) {
-			_this.$store.dispatch('projectDetailsUpdated', { project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
-			_this.$store.dispatch('eventNotification', {
-				type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
-			});
-		}).listen('AcceptedProject', function (e) {}).listen('CancelledProject', function (e) {
-			_this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-			_this.$store.dispatch('cancelProject', { history: e.history });
-			_this.$store.dispatch('eventNotification', {
-				type: 'danger', heading: 'Projektet avbrutit!', text: 'Den andra parten valde att avbryta projektet.'
-			});
-		});
+		/*
+  Echo.private(`project.${this.$route.params.id}`)
+               .listen('UseContract', (e) => {
+  		this.$store.dispatch('useContract', {history: e.history, usersNotAccepted: e.usersNotAccepted });
+  		this.$store.dispatch('eventNotification', {
+  			type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
+  		});
+               })
+               .listen('RemoveContract', (e) => {
+  		this.$store.dispatch('removeContract', {history: e.history,usersNotAccepted: e.usersNotAccepted });
+  		this.$store.dispatch('eventNotification', {
+  			type: 'danger', heading: 'Tog bort avtal!', text: 'Den andra parten tog bort att ett avtal skulle användas för projektet.'
+  		});
+               })
+  	.listen('DetailsUpdated', (e) => {
+  		this.$store.dispatch('projectDetailsUpdated', {project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
+  		this.$store.dispatch('eventNotification', {
+  			type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
+  		});
+  	})
+  	.listen('AcceptedProject', (e) => {
+  		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+  		this.$store.dispatch('acceptProject', {started: e.started, userAcceptedId: e.userAcceptedId, history: e.history });
+  		this.$store.dispatch('eventNotification', {
+  			type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+  		});
+  	})
+  	.listen('CancelledProject', (e) => {
+  		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+  		this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });
+  		this.$store.dispatch('eventNotification', {
+  			type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
+  		});
+  	});*/
 	},
 	destroyed: function destroyed() {
 		this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);
@@ -28799,6 +28803,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							// Update the state of the project
 							_this3.$store.dispatch('acceptProject', {
 								started: response.data.started,
+								userAcceptedId: response.data.userAcceptedId,
 								history: response.data.history
 							});
 
@@ -28827,6 +28832,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 							_this4.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 							// Update the state of the project.
 							_this4.$store.dispatch('cancelProject', {
+								userCancelledId: response.data.userCancelledId,
 								history: response.data.history
 							});
 
@@ -34433,6 +34439,130 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_store__ = __webpack_require__(240);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var ProjectEvents = function () {
+    function ProjectEvents() {
+        _classCallCheck(this, ProjectEvents);
+    }
+
+    _createClass(ProjectEvents, [{
+        key: 'usingContract',
+
+        /**
+         * Event for project using a contract
+         * @param {Object} data 
+         */
+        value: function usingContract(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('useContract', { history: data.history, usersNotAccepted: data.usersNotAccepted });
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'success', heading: 'Använda avtal!', text: 'Den andra parten vill använda ett avtal för projektet.'
+            });
+        }
+
+        /**
+         * Is the project view active for the user that we are receiving an event for?
+         */
+
+    }, {
+        key: 'projectDetailsActive',
+        value: function projectDetailsActive(projectId) {
+            return __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].getters.userProjectDetailsFetched && __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].getters.userProjectDetails.id === projectId;
+        }
+    }]);
+
+    return ProjectEvents;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    listen: function listen() {
+        this.listenGuest();
+        this.listenAuth();
+    },
+    listenGuest: function listenGuest() {
+        Echo.channel('services').listen('NewService', function (e) {
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('addService', { service: e.service });
+        }).listen('RemoveService', function (e) {
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('removeService', { id: e.id });
+        });
+    },
+    listenAuth: function listenAuth() {
+        if (__WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].getters.isAuthenticated) {
+
+            var projectEvents = new ProjectEvents();
+
+            Echo.private('users.' + __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].getters.authUser.id).notification(function (notification) {
+                switch (notification.type) {
+                    case 'App\\Notifications\\ProjectUsingContract':
+                        projectEvents.usingContract(notification.data);
+                        break;
+                }
+            });
+        }
+    }
+});
 
 /***/ })
 ],[148]);

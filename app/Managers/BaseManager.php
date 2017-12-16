@@ -94,6 +94,12 @@ abstract class BaseManager
 	}
 
 	/**
+	 * The user that the manager has been working with
+	 *
+	 * @return void
+	 */
+	public function user() { return $this->user; }
+	/**
 	 * Does the manager have any errors?
 	 * 
 	 * @return boolean

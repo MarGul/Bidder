@@ -40,6 +40,7 @@
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
     import Model from './includes/Model';
+    import RealTimeEvents from './realTimeEvents';
 
     export default {
         components: {
@@ -58,9 +59,6 @@
         methods: {
             hideMobileNav() {
                 document.body.classList.remove('mobile-nav-open');
-            },
-            test() {
-                this.$store.dispatch('eventNotification', {type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.'});
             }
         },
         created() {
@@ -74,14 +72,7 @@
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 
-            // Listen to global broadcasts
-            Echo.channel('services')
-                .listen('NewService', (e) => {
-                    this.$store.dispatch('addService', {service: e.service});
-                })
-                .listen('RemoveService', (e) => {
-                    this.$store.dispatch('removeService', {id: e.id});
-                });
+            RealTimeEvents.listen();            
 
             // Start the applications heartbeat
             setInterval(function() {

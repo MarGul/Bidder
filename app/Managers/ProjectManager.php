@@ -7,10 +7,8 @@ use Carbon\Carbon;
 use App\Managers\Traits\ProjectTrait;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
-use App\Events\UseContract;
-use App\Events\RemoveContract;
-use App\Events\DetailsUpdated;
-use App\Events\CancelledProject;
+use Notification;
+use App\Notifications\ProjectUsingContract;
 
 
 class ProjectManager extends BaseManager 
@@ -203,8 +201,8 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('useContract', ['user' => $this->user->username]);
 
-		// Broadcast the use of contract to the other user.
-		event(new UseContract($this->project, $this->history(), $this->usersNotAccepted()));
+		// Send out the notification about the use of contract.
+		Notification::send($this->project->users, new ProjectUsingContract($this->project, $this->history(), $this->usersNotAccepted()));
 		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
 
@@ -292,6 +290,9 @@ class ProjectManager extends BaseManager
 			if ( !$this->start() ) return false;
 		}
 
+		// Broadcast that the project has been accepted to the other user.
+		event(new AcceptedProject($this->project, $this->user->id, $this->history()));
+
 		$this->setSuccess('Successfully accepted the project.', 200);
 
 		return true;
@@ -321,7 +322,7 @@ class ProjectManager extends BaseManager
 									->add('cancelled', ['user' => $this->user->username]);
 
 		// Broadcast that the project has been cancelled to the other user.
-		event(new CancelledProject($this->project, $this->history()));
+		event(new CancelledProject($this->project, $this->user->id, $this->history()));
 
 		
 		$this->setSuccess('Successfully cancelled the project.', 200);

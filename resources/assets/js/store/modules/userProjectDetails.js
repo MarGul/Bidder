@@ -79,7 +79,7 @@ const actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	acceptProject({commit, state, rootState}, payload) {
+	acceptProject({commit, state}, payload) {
 		let project = state.project;
 		// Start the project if we should
 		if ( payload.started ) {
@@ -90,10 +90,10 @@ const actions = {
 			project.history.unshift(history);
 		});
 		// Set the user that accepted that he has.
-		project.users.find(u => u.id === rootState.auth.user.id).pivot.accepted = true;
+		project.users.find(u => u.id === payload.userAcceptedId).pivot.accepted = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
-	cancelProject({commit, state, rootState}, payload) {
+	cancelProject({commit, state}, payload) {
 		let project = state.project;
 		// Cancel the project.
 		project.cancelled = true;
@@ -102,7 +102,7 @@ const actions = {
 			project.history.unshift(history);
 		});
 		// Set the user that cancelled that he has.
-		project.users.find(u => u.id === rootState.auth.user.id).pivot.cancelled = true;
+		project.users.find(u => u.id === payload.userCancelledId).pivot.cancelled = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
 	reviewSubmitted({commit, state}, payload) {

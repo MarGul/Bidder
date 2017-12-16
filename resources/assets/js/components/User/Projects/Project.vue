@@ -43,6 +43,7 @@
 				})
 				.catch(error => { console.log(error); });
 
+			/*
 			Echo.private(`project.${this.$route.params.id}`)
                 .listen('UseContract', (e) => {
 					this.$store.dispatch('useContract', {history: e.history, usersNotAccepted: e.usersNotAccepted });
@@ -63,15 +64,19 @@
 					});
 				})
 				.listen('AcceptedProject', (e) => {
-
+					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+					this.$store.dispatch('acceptProject', {started: e.started, userAcceptedId: e.userAcceptedId, history: e.history });
+					this.$store.dispatch('eventNotification', {
+						type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+					});
 				})
 				.listen('CancelledProject', (e) => {
 					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-					this.$store.dispatch('cancelProject', {history: e.history });
+					this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });
 					this.$store.dispatch('eventNotification', {
-						type: 'danger', heading: 'Projektet avbrutit!', text: 'Den andra parten valde att avbryta projektet.'
+						type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
 					});
-				});
+				});*/
 		},
 		destroyed() {
 			this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);

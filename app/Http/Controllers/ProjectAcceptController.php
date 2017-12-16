@@ -46,6 +46,7 @@ class ProjectAcceptController extends Controller
 			'message' => $this->manager->successMessage(),
 			'data' => [
 				'started' => $this->manager->project()->started,
+				'userAcceptedId' => $this->manager->user()->id,
 				'history' => $this->manager->history()
 			]
 		], $this->manager->successCode());
