@@ -27522,12 +27522,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   			type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
   		});
   	})
-  	.listen('CancelledProject', (e) => {
-  		this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-  		this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });
-  		this.$store.dispatch('eventNotification', {
-  			type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
-  		});
   	});*/
 	},
 	destroyed: function destroyed() {
@@ -34520,7 +34514,7 @@ var ProjectEvents = function () {
         }
 
         /**
-         * Event for project removing the contract
+         * Event for project being accepted by other user.
          * @param {Object} data 
          */
 
@@ -34533,6 +34527,23 @@ var ProjectEvents = function () {
             __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('acceptProject', { started: data.started, userAcceptedId: data.userAcceptedId, history: data.history });
             __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
                 type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+            });
+        }
+
+        /**
+         * Event for project being cancelled by other user.
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'cancelled',
+        value: function cancelled(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].commit('SET_USER_PROJECTS_FETCHED', false);
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('cancelProject', { userCancelledId: data.userCancelledId, history: data.history });
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
             });
         }
 
@@ -34577,6 +34588,9 @@ var ProjectEvents = function () {
                         break;
                     case 'App\\Notifications\\ProjectAccepted':
                         projectEvents.accepted(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectCancelled':
+                        projectEvents.cancelled(notification.data);
                         break;
                 }
             });

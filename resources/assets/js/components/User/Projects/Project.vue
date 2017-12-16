@@ -51,12 +51,6 @@
 						type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
 					});
 				})
-				.listen('CancelledProject', (e) => {
-					this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
-					this.$store.dispatch('cancelProject', {userCancelledId: e.userCancelledId, history: e.history });
-					this.$store.dispatch('eventNotification', {
-						type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
-					});
 				});*/
 		},
 		destroyed() {

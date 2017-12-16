@@ -11,6 +11,7 @@ use Notification;
 use App\Notifications\ProjectUsingContract;
 use App\Notifications\ProjectRemoveContract;
 use App\Notifications\ProjectAccepted;
+use App\Notifications\ProjectCancelled;
 
 
 class ProjectManager extends BaseManager 
@@ -325,8 +326,10 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('cancelled', ['user' => $this->user->username]);
 
-		// Broadcast that the project has been cancelled to the other user.
-		event(new CancelledProject($this->project, $this->user->id, $this->history()));
+		// Send out notification to the other users that you cancelled the project.
+		Notification::send($this->otherUsers(), new ProjectCancelled(
+			$this->project, $this->history(), $this->user->id
+		));
 
 		
 		$this->setSuccess('Successfully cancelled the project.', 200);

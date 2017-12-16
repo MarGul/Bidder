@@ -32,7 +32,7 @@ class ProjectEvents
     }
 
     /**
-     * Event for project removing the contract
+     * Event for project being accepted by other user.
      * @param {Object} data 
      */
     accepted(data)
@@ -43,6 +43,21 @@ class ProjectEvents
         store.dispatch('acceptProject', {started: data.started, userAcceptedId: data.userAcceptedId, history: data.history });
         store.dispatch('eventNotification', {
             type: 'success', heading: 'Projektet accepterat!', text: 'Den andra parten har accepterat projektets start.'
+        });
+    }
+
+    /**
+     * Event for project being cancelled by other user.
+     * @param {Object} data 
+     */
+    cancelled(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.commit('SET_USER_PROJECTS_FETCHED', false);
+        store.dispatch('cancelProject', {userCancelledId: data.userCancelledId, history: data.history });
+        store.dispatch('eventNotification', {
+            type: 'danger', heading: 'Projektet avbröts!', text: 'Den andra parten valde att avbryta projektet.'
         });
     }
 
@@ -85,6 +100,9 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectAccepted':
                             projectEvents.accepted(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectCancelled':
+                            projectEvents.cancelled(notification.data);
                             break;
                     }
                 })
