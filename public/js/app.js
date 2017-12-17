@@ -13491,6 +13491,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13516,7 +13527,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
 		service: 'service',
-		authCheck: 'isAuthenticated'
+		authCheck: 'isAuthenticated',
+		user: 'authUser'
 	})),
 	methods: {
 		create: function create() {
@@ -13571,8 +13583,33 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "modal-body" }, [
+                  !_vm.user.email_verified
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-danger text-left is-small-text"
+                        },
+                        [
+                          _vm._m(1, false, false),
+                          _vm._v(
+                            "\n                        Var vänlig och verifiera din email innan du skapar ett nytt bud. Detta är för din, våran och våra användares säkerhet.\n                        Du kan skicka email verifikationen igen under "
+                          ),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "is-link",
+                              attrs: { to: "/user/profile" }
+                            },
+                            [_vm._v("din profil")]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-section" }, [
-                    _vm._m(1, false, false),
+                    _vm._m(2, false, false),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -13587,7 +13624,7 @@ var render = function() {
                             }
                           },
                           [
-                            _vm._m(2, false, false),
+                            _vm._m(3, false, false),
                             _vm._v(" "),
                             _c("datepicker", {
                               attrs: {
@@ -13626,7 +13663,7 @@ var render = function() {
                             class: { "has-errors": _vm.form.errors.has("end") }
                           },
                           [
-                            _vm._m(3, false, false),
+                            _vm._m(4, false, false),
                             _vm._v(" "),
                             _c("datepicker", {
                               attrs: {
@@ -13662,7 +13699,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-section" }, [
-                    _vm._m(4, false, false),
+                    _vm._m(5, false, false),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -13732,7 +13769,7 @@ var render = function() {
                             }
                           },
                           [
-                            _vm._m(5, false, false),
+                            _vm._m(6, false, false),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -13780,7 +13817,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-section no-border" }, [
-                    _vm._m(6, false, false),
+                    _vm._m(7, false, false),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-section-controls" }, [
                       _c(
@@ -13792,7 +13829,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._m(7, false, false),
+                          _vm._m(8, false, false),
                           _vm._v(" "),
                           _c("textarea", {
                             directives: [
@@ -13838,26 +13875,22 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
                   _c("div", { staticClass: "text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        class: { processing: _vm.processing },
-                        attrs: { type: "submit" }
+                    _c("button", {
+                      staticClass: "btn btn-primary",
+                      class: { processing: _vm.processing },
+                      attrs: {
+                        type: "submit",
+                        disabled: _vm.processing || !_vm.user.email_verified
                       },
-                      [
-                        _vm._v(
-                          "\n                            Lägg ditt bud\n                        "
-                        )
-                      ]
-                    )
+                      domProps: { textContent: _vm._s("Lägg ditt bud") }
+                    })
                   ])
                 ])
               ]
             )
           ]
         : [
-            _vm._m(8, false, false),
+            _vm._m(9, false, false),
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
               _c(
@@ -13908,6 +13941,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "header-text" }, [
         _vm._v("Berätta varför just du ska få utföra tjänsten.")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb10" }, [
+      _c("strong", [_vm._v("Din email är inte verifierad.")])
     ])
   },
   function() {
@@ -23699,6 +23740,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -23746,7 +23797,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
 		categories: 'categories',
 		regions: 'regions',
-		regionById: 'regionById'
+		regionById: 'regionById',
+		user: 'authUser'
 	}), {
 		cities: function cities() {
 			var region = this.regionById(this.form.region_id);
@@ -24371,6 +24423,25 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "create_service-component" }, [
+    !_vm.user.email_verified
+      ? _c(
+          "div",
+          { staticClass: "alert alert-danger text-left is-small-text" },
+          [
+            _vm._m(0, false, false),
+            _vm._v(
+              "\n\t\tVar vänlig och verifiera din email innan du skapar en ny tjänst. Detta är för din, våran och våra användares säkerhet.\n\t\tDu kan skicka email verifikationen igen under "
+            ),
+            _c(
+              "router-link",
+              { staticClass: "is-link", attrs: { to: "/user/profile" } },
+              [_vm._v("din profil")]
+            )
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -24384,11 +24455,11 @@ var render = function() {
       },
       [
         _c("section", { staticClass: "white-contentSection" }, [
-          _vm._m(0, false, false),
+          _vm._m(1, false, false),
           _vm._v(" "),
           _c("div", { staticClass: "white-contentSection-content" }, [
             _c("div", { staticClass: "form-section" }, [
-              _vm._m(1, false, false),
+              _vm._m(2, false, false),
               _vm._v(" "),
               _c("div", { staticClass: "form-section-controls" }, [
                 _c(
@@ -24624,7 +24695,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-section" }, [
-              _vm._m(2, false, false),
+              _vm._m(3, false, false),
               _vm._v(" "),
               _c("div", { staticClass: "form-section-controls" }, [
                 _c(
@@ -24721,7 +24792,7 @@ var render = function() {
             _vm._v(" "),
             _vm.checklistItemsActive.length > 0
               ? _c("div", { staticClass: "form-section" }, [
-                  _vm._m(3, false, false),
+                  _vm._m(4, false, false),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -24743,7 +24814,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-section" }, [
-              _vm._m(4, false, false),
+              _vm._m(5, false, false),
               _vm._v(" "),
               _c("div", { staticClass: "form-section-controls" }, [
                 _c(
@@ -24901,7 +24972,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-section no-border" }, [
-              _vm._m(5, false, false),
+              _vm._m(6, false, false),
               _vm._v(" "),
               _c(
                 "div",
@@ -24922,15 +24993,15 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("footer", { staticClass: "white-contentSection-footer" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                class: { processing: _vm.processing },
-                attrs: { type: "submit" }
+            _c("button", {
+              staticClass: "btn btn-primary",
+              class: { processing: _vm.processing },
+              attrs: {
+                type: "submit",
+                disabled: _vm.processing || !_vm.user.email_verified
               },
-              [_vm._v("\n\t\t\t\t\tSkapa tjänst\n\t\t\t\t")]
-            )
+              domProps: { textContent: _vm._s("Skapa tjänst") }
+            })
           ])
         ])
       ]
@@ -24938,6 +25009,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb10" }, [
+      _c("strong", [_vm._v("Din email är inte verifierad.")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

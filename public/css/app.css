@@ -1185,6 +1185,10 @@ a {
   text-decoration: none;
 }
 
+.text-left {
+  text-align: left !important;
+}
+
 .clickable {
   cursor: pointer;
 }
