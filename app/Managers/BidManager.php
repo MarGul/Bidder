@@ -10,6 +10,8 @@ use App\Jobs\NotificationsForNewBid;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
+use Notification;
+use App\Notifications\ProjectCreated;
 
 class BidManager extends BaseManager
 {
@@ -101,6 +103,9 @@ class BidManager extends BaseManager
 			$this->setError('Could not insert a project into storage.', 500);
 			return false;
 		}
+
+		// Send out the notification that your bid has been accepted and a project created.
+		Notification::send($this->bid->user, new ProjectCreated($projectManager->project()));
 
 		$this->setSuccess('Bid was accepted and a project created.', 201);
 		

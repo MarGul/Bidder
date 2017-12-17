@@ -76,6 +76,25 @@ class ProjectEvents
     }
 
     /**
+     * Event for when a new project is created.
+     * @param {*} data 
+     */
+    created(data)
+    {
+        store.dispatch('eventNotification', {
+            type: 'success', 
+            heading: 'Ditt bud accepterades!', 
+            text: 'Ditt bud har accepterats för en tjänst och ett projekt har skapats. Du hittar det under "Mina projekt"'
+        });
+
+        if ( store.getters.userProjectsFetched ) {
+            let projects = store.getters.userProjects;
+            projects.unshift(data.project);
+            store.commit('SET_USER_PROJECTS', projects);
+        }
+    }
+
+    /**
      * Is the project view active for the user that we are receiving an event for?
      */
     projectDetailsActive(projectId)
@@ -120,6 +139,10 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectContractUpdated':
                             projectEvents.contractUpdated(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectCreated':
+                            console.log(notification);
+                            projectEvents.created(notification.data);
                             break;
                     }
                 })

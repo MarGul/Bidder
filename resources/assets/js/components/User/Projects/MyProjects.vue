@@ -10,9 +10,7 @@
 					<ul class="items-list" v-if="projects.length > 0">
 						<li class="gray-item clickable" v-for="project in projects" :key="project.id" @click="show(project)">
 							<div class="item-content">
-								<div class="item-header">
-									{{ project.users[0].pivot.title }}
-								</div>
+								<div class="item-header" v-text="title(project)"></div>
 								<div class="item-sub-data">
 									<span class="mr5"></span>&bull;
 									<span class="ml5"></span>
@@ -45,12 +43,18 @@
 		computed: {
 			...mapGetters({
 				fetched: 'userProjectsFetched',
-				projects: 'userProjects'
-			}),
+				projects: 'userProjects',
+				user: 'authUser'
+			})
 		},
 		methods: {
 			show(project) {
 				this.$router.push(`/user/projects/${project.id}`);
+			},
+			title(project) {
+				let me = project.users.find(u => u.id === this.user.id );
+
+				return me ? me.pivot.title : '';
 			}
 		},
 		created() {

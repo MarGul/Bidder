@@ -8,25 +8,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class ProjectContractUpdated extends Notification implements ShouldQueue
+class ProjectCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The project that has a notification.
+     * The project that has benn created.
      * @var App\Project
      */
     protected $project;
-    /**
-     * The project history
-     * @var array
-     */
-    protected $history;
-    /**
-     * The contract that has been updated.
-     * @var App\Contract
-     */
-    protected $contract;
 
     
     /**
@@ -34,12 +24,10 @@ class ProjectContractUpdated extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($project, $contract, $history)
+    public function __construct($project)
     {
-        $this->queue = 'notifications';
+        //$this->queue = 'notifications';
         $this->project = $project;
-        $this->contract = $contract;
-        $this->history = $history;
     }
 
     /**
@@ -77,11 +65,11 @@ class ProjectContractUpdated extends Notification implements ShouldQueue
     {
         return (new BroadcastMessage([
             'data' => [
-                'project' => $this->project,
-                'contract' => $this->contract,
-                'history' => $this->history,
+                'project' => $this->project->load('users')
             ]
-        ]))->onQueue('real-time-events');
+        ]));
+
+        // ->onQueue('real-time-events')
     }
 
     /**

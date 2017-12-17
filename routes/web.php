@@ -10,10 +10,12 @@
 */
 
 Route::get('/test', function() {
-	$user = App\User::find(1);
-	$project = App\Project::find(1);
+	$service = App\Service::find(1);
+	$bid = App\Bid::find(1);
 
-	$user->notify(new \App\Notifications\ProjectUsingContract($project));
+	app(App\Managers\BidManager::class)->forService($service)
+										->forBid($bid)
+										->accept();
 });
 
 /**
