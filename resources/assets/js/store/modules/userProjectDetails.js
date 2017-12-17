@@ -113,6 +113,11 @@ const actions = {
 			project.history.unshift(history);
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	messageAdded({commit, state}, payload) {
+		let project = state.project;
+		project.messages.unshift(payload.message);
+		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 }
 

@@ -15565,6 +15565,19 @@ var ProjectEvents = function () {
         }
 
         /**
+         * When a message is created for a project.
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'messageCreated',
+        value: function messageCreated(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('messageAdded', { message: data.message });
+        }
+
+        /**
          * Is the project view active for the user that we are receiving an event for?
          */
 
@@ -15617,6 +15630,9 @@ var ProjectEvents = function () {
                         break;
                     case 'App\\Notifications\\ProjectDetailsUpdated':
                         projectEvents.detailsUpdated(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectMessageCreated':
+                        projectEvents.messageCreated(notification.data);
                         break;
                 }
             });
@@ -16494,6 +16510,14 @@ var actions = {
 		payload.history.forEach(function (history) {
 			project.history.unshift(history);
 		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	messageAdded: function messageAdded(_ref8, payload) {
+		var commit = _ref8.commit,
+		    state = _ref8.state;
+
+		var project = state.project;
+		project.messages.unshift(payload.message);
 		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 };
@@ -32777,20 +32801,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 				created_at: moment().format('YYYY-MM-DD HH:mm:ss');
 			}
 
-			var project = this.project;
-			project.messages.unshift(message);
-			this.$store.commit('SET_USER_PROJECT_DETAILS', project);
+			this.$store.dispatch('messageAdded', { message: message });
 		},
 		isMe: function isMe(message) {
 			return message.user.id == this.auth.id;
 		}
-	},
-	created: function created() {
-		var _this = this;
-
-		Echo.private('project.' + this.project.id + '.messages').listen('NewMessage', function (e) {
-			_this.addMessage(e.message);
-		});
 	}
 });
 

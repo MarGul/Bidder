@@ -117,6 +117,17 @@ class ProjectEvents
     }
 
     /**
+     * When a message is created for a project.
+     * @param {Object} data 
+     */
+    messageCreated(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.dispatch('messageAdded', {message: data.message});
+    }
+
+    /**
      * Is the project view active for the user that we are receiving an event for?
      */
     projectDetailsActive(projectId)
@@ -167,6 +178,9 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectDetailsUpdated':
                             projectEvents.detailsUpdated(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectMessageCreated':
+                            projectEvents.messageCreated(notification.data);
                             break;
                     }
                 })
