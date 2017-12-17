@@ -81,7 +81,33 @@
 			...mapGetters({
 				project: 'userProjectDetails',
 				auth: 'authUser'
-			})
+			}),
+			projectStart() {
+				return this.project.service_start;
+			},
+			projectEnd() {
+				return this.project.service_end;
+			},
+			projectHours() {
+				return this.project.service_hours;
+			},
+			projectPrice() {
+				return this.project.service_price;
+			},
+		},
+		watch: {
+			projectStart(newProjectStart, oldProjectStart) {
+				this.form.service_start = newProjectStart;
+			},
+			projectEnd(newProjectEnd, oldProjectEnd) {
+				this.form.service_end = newProjectEnd;
+			},
+			projectHours(newProjectHours, oldProjectHours) {
+				this.form.service_hours = newProjectHours;
+			},
+			projectPrice(newProjectPrice, oldProjectPrice) {
+				this.form.service_price = newProjectPrice;
+			}
 		},
 		methods: {
 			update() {
@@ -109,10 +135,10 @@
 			}
 		},
 		created() {
-			this.form.service_start = this.project.service_start;
-			this.form.service_end = this.project.service_end;
-			this.form.service_hours = this.project.service_hours;
-			this.form.service_price = this.project.service_price;
+			this.form.service_start = this.projectStart;
+			this.form.service_end = this.projectEnd;
+			this.form.service_hours = this.projectHours;
+			this.form.service_price = this.projectPrice;
 		}
 	}
 </script>

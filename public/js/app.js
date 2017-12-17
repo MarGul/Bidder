@@ -15411,9 +15411,12 @@ if (false) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_store__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -15506,7 +15509,7 @@ var ProjectEvents = function () {
 
         /**
          * Event for when a new project is created.
-         * @param {*} data 
+         * @param {Object} data 
          */
 
     }, {
@@ -15523,6 +15526,29 @@ var ProjectEvents = function () {
                 projects.unshift(data.project);
                 __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].commit('SET_USER_PROJECTS', projects);
             }
+        }
+
+        /**
+         * Details for a project is updated.
+         * @param {Object} data 
+         */
+
+    }, {
+        key: 'detailsUpdated',
+        value: function detailsUpdated(data) {
+            if (!this.projectDetailsActive(data.project.id)) return;
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('projectDetailsUpdated', {
+                project: data.project,
+                history: data.history,
+                usersNotAccepted: data.usersNotAccepted
+            });
+
+            __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].dispatch('eventNotification', {
+                type: 'success',
+                heading: 'Projektets detaljer uppdaterades!',
+                text: 'Den andra parten uppdaterade detaljerna för projektet.'
+            });
         }
 
         /**
@@ -15574,8 +15600,10 @@ var ProjectEvents = function () {
                         projectEvents.contractUpdated(notification.data);
                         break;
                     case 'App\\Notifications\\ProjectCreated':
-                        console.log(notification);
                         projectEvents.created(notification.data);
+                        break;
+                    case 'App\\Notifications\\ProjectDetailsUpdated':
+                        projectEvents.detailsUpdated(notification.data);
                         break;
                 }
             });
@@ -28551,7 +28579,34 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 	computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
 		project: 'userProjectDetails',
 		auth: 'authUser'
-	})),
+	}), {
+		projectStart: function projectStart() {
+			return this.project.service_start;
+		},
+		projectEnd: function projectEnd() {
+			return this.project.service_end;
+		},
+		projectHours: function projectHours() {
+			return this.project.service_hours;
+		},
+		projectPrice: function projectPrice() {
+			return this.project.service_price;
+		}
+	}),
+	watch: {
+		projectStart: function projectStart(newProjectStart, oldProjectStart) {
+			this.form.service_start = newProjectStart;
+		},
+		projectEnd: function projectEnd(newProjectEnd, oldProjectEnd) {
+			this.form.service_end = newProjectEnd;
+		},
+		projectHours: function projectHours(newProjectHours, oldProjectHours) {
+			this.form.service_hours = newProjectHours;
+		},
+		projectPrice: function projectPrice(newProjectPrice, oldProjectPrice) {
+			this.form.service_price = newProjectPrice;
+		}
+	},
 	methods: {
 		update: function update() {
 			var _this = this;
@@ -28578,10 +28633,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 		}
 	},
 	created: function created() {
-		this.form.service_start = this.project.service_start;
-		this.form.service_end = this.project.service_end;
-		this.form.service_hours = this.project.service_hours;
-		this.form.service_price = this.project.service_price;
+		this.form.service_start = this.projectStart;
+		this.form.service_end = this.projectEnd;
+		this.form.service_hours = this.projectHours;
+		this.form.service_price = this.projectPrice;
 	}
 });
 

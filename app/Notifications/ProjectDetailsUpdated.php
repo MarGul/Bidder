@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class ProjectCreated extends Notification implements ShouldQueue
+class ProjectDetailsUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -17,17 +17,29 @@ class ProjectCreated extends Notification implements ShouldQueue
      * @var App\Project
      */
     protected $project;
-
+    /**
+     * The project history
+     * @var array
+     */
+    protected $history;
+    /**
+     * The users that should be set to not have accepted to project.
+     * @var array
+     */
+    protected $usersNotAccepted;
     
+        
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($project)
+    public function __construct($project, $history, $usersNotAccepted)
     {
         $this->queue = 'notifications';
         $this->project = $project;
+        $this->history = $history;
+        $this->usersNotAccepted = $usersNotAccepted;
     }
 
     /**
@@ -65,7 +77,9 @@ class ProjectCreated extends Notification implements ShouldQueue
     {
         return (new BroadcastMessage([
             'data' => [
-                'project' => $this->project->load('users')
+                'project' => $this->project,
+                'history' => $this->history,
+                'usersNotAccepted' => $this->usersNotAccepted
             ]
         ]))->onQueue('real-time-events');
     }

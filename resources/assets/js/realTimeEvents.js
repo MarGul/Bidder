@@ -1,4 +1,5 @@
 import store from './store/store';
+import vue from 'vue';
 
 
 class ProjectEvents
@@ -77,7 +78,7 @@ class ProjectEvents
 
     /**
      * Event for when a new project is created.
-     * @param {*} data 
+     * @param {Object} data 
      */
     created(data)
     {
@@ -92,6 +93,27 @@ class ProjectEvents
             projects.unshift(data.project);
             store.commit('SET_USER_PROJECTS', projects);
         }
+    }
+
+    /**
+     * Details for a project is updated.
+     * @param {Object} data 
+     */
+    detailsUpdated(data)
+    {                
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.dispatch('projectDetailsUpdated', {
+            project: data.project,
+            history: data.history,
+            usersNotAccepted: data.usersNotAccepted
+        });
+
+        store.dispatch('eventNotification', {
+            type: 'success', 
+            heading: 'Projektets detaljer uppdaterades!', 
+            text: 'Den andra parten uppdaterade detaljerna för projektet.'
+        });
     }
 
     /**
@@ -141,8 +163,10 @@ export default {
                             projectEvents.contractUpdated(notification.data);
                             break;
                         case 'App\\Notifications\\ProjectCreated':
-                            console.log(notification);
                             projectEvents.created(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectDetailsUpdated':
+                            projectEvents.detailsUpdated(notification.data);
                             break;
                     }
                 })

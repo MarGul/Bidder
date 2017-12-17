@@ -12,6 +12,7 @@ use App\Notifications\ProjectUsingContract;
 use App\Notifications\ProjectRemoveContract;
 use App\Notifications\ProjectAccepted;
 use App\Notifications\ProjectCancelled;
+use App\Notifications\ProjectDetailsUpdated;
 
 
 class ProjectManager extends BaseManager 
@@ -153,8 +154,10 @@ class ProjectManager extends BaseManager
         $this->projectHistoryManager->forProject($this->project->id)
 									->add('updateDetails', ['user' => $this->user->username]);
 									
-		// Broadcast that the project details has been updated to the other user.
-		event(new DetailsUpdated($this->project, $this->history(), $this->usersNotAccepted()));
+		// Send out a notification that the projects details has been updated
+		Notification::send($this->otherUsers(), new ProjectDetailsUpdated(
+			$this->project, $this->history(), $this->usersNotAccepted()
+		));
 
         $this->setSuccess('Successfully updated the resource in storage.', 200);
 
@@ -261,7 +264,7 @@ class ProjectManager extends BaseManager
 	public function show()
 	{
 		try {
-			$this->project->load('service', 'users', 'bid.user', 'contracts', 'history', 'messages.user');
+			$this->project->load('service.media', 'users', 'bid.user', 'contracts', 'history', 'messages.user');
 		} catch ( \Exception $e ) {
 			$this->setError('Could not display the project.', 500);
 			return false;
