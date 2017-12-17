@@ -82,6 +82,7 @@
 									// Update the state of the project
 									this.$store.dispatch('acceptProject', {
 										started: response.data.started,
+										userAcceptedId: response.data.userAcceptedId,
 										history: response.data.history
 									});
 
@@ -110,6 +111,7 @@
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									// Update the state of the project.
 									this.$store.dispatch('cancelProject', {
+										userCancelledId: response.data.userCancelledId,
 										history: response.data.history
 									});
 

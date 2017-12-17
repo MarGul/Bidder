@@ -44,6 +44,7 @@ class ProjectCancelController extends Controller
 		return response()->json([
 			'message' => $this->manager->successMessage(),
 			'data' => [
+				'userCancelledId' => $this->manager->user()->id,
 				'history' => $this->manager->history()
 			]
 		], $this->manager->successCode());

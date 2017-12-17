@@ -7,6 +7,12 @@ use Carbon\Carbon;
 use App\Managers\Traits\ProjectTrait;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
+use Notification;
+use App\Notifications\ProjectUsingContract;
+use App\Notifications\ProjectRemoveContract;
+use App\Notifications\ProjectAccepted;
+use App\Notifications\ProjectCancelled;
+use App\Notifications\ProjectDetailsUpdated;
 
 
 class ProjectManager extends BaseManager 
@@ -146,7 +152,12 @@ class ProjectManager extends BaseManager
         if ( !$this->setOthersNotAccepted() ) return false;
 
         $this->projectHistoryManager->forProject($this->project->id)
-                                    ->add('updateDetails', ['user' => $this->user->username]);
+									->add('updateDetails', ['user' => $this->user->username]);
+									
+		// Send out a notification that the projects details has been updated
+		Notification::send($this->otherUsers(), new ProjectDetailsUpdated(
+			$this->project, $this->history(), $this->usersNotAccepted()
+		));
 
         $this->setSuccess('Successfully updated the resource in storage.', 200);
 
@@ -196,6 +207,11 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('useContract', ['user' => $this->user->username]);
 
+		// Send out the notification about the use of contract.
+		Notification::send($this->otherUsers(), new ProjectUsingContract(
+			$this->project, $this->history(), $this->usersNotAccepted()
+		));
+		
 		$this->setSuccess('Successfully marked the project as using a contract.', 200);
 
 		return true;
@@ -210,7 +226,7 @@ class ProjectManager extends BaseManager
 	{
 		if ( $this->hasError() ) return false;
 
-		if ( !$this->canRemoveUseOfContract() ) return false;
+		//if ( !$this->canRemoveUseOfContract() ) return false;
 
 		try {
 			// Mark the project as not using contract.
@@ -229,6 +245,12 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('removeContract', ['user' => $this->user->username]);
 
+		// Send out the notification about the removal of the contract.
+		
+		Notification::send($this->otherUsers(), new ProjectRemoveContract(
+			$this->project, $this->history(), $this->usersNotAccepted())
+		);
+
 		$this->setSuccess('Successfully removed the use of contract for the project.', 200);
 
 		return true;
@@ -242,7 +264,7 @@ class ProjectManager extends BaseManager
 	public function show()
 	{
 		try {
-			$this->project->load('service', 'users', 'bid.user', 'contracts', 'history', 'messages.user');
+			$this->project->load('service.media', 'users', 'bid.user', 'contracts', 'history', 'messages.user');
 		} catch ( \Exception $e ) {
 			$this->setError('Could not display the project.', 500);
 			return false;
@@ -279,6 +301,11 @@ class ProjectManager extends BaseManager
 			if ( !$this->start() ) return false;
 		}
 
+		// Send out notification to the other users that you accepted the project.
+		Notification::send($this->otherUsers(), new ProjectAccepted(
+			$this->project, $this->project->started, $this->history(), $this->user->id
+		));
+
 		$this->setSuccess('Successfully accepted the project.', 200);
 
 		return true;
@@ -307,6 +334,12 @@ class ProjectManager extends BaseManager
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('cancelled', ['user' => $this->user->username]);
 
+		// Send out notification to the other users that you cancelled the project.
+		Notification::send($this->otherUsers(), new ProjectCancelled(
+			$this->project, $this->history(), $this->user->id
+		));
+
+		
 		$this->setSuccess('Successfully cancelled the project.', 200);
 
 		return true;

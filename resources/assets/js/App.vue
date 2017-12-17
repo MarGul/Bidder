@@ -40,6 +40,7 @@
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
     import Model from './includes/Model';
+    import RealTimeEvents from './realTimeEvents';
 
     export default {
         components: {
@@ -55,12 +56,22 @@
                 breakpoints: window.breakpoints,
             }
         },
+        computed: {
+            authenticated() {
+                return this.$store.getters.isAuthenticated;
+            }
+        },
+        watch: {
+            authenticated(newAuth, oldAuth) {
+                if ( newAuth ) {
+                    // If the user logs in we need to start listening for he's real time events.
+                    RealTimeEvents.listenAuth();
+                }
+            }
+        }, 
         methods: {
             hideMobileNav() {
                 document.body.classList.remove('mobile-nav-open');
-            },
-            test() {
-                this.$store.dispatch('eventNotification', {type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.'});
             }
         },
         created() {
@@ -74,14 +85,7 @@
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 
-            // Listen to global broadcasts
-            Echo.channel('services')
-                .listen('NewService', (e) => {
-                    this.$store.dispatch('addService', {service: e.service});
-                })
-                .listen('RemoveService', (e) => {
-                    this.$store.dispatch('removeService', {id: e.id});
-                });
+            RealTimeEvents.listen();            
 
             // Start the applications heartbeat
             setInterval(function() {

@@ -6,22 +6,28 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class SendInvoice extends Notification implements ShouldQueue
+class ProjectCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $invoice;
+    /**
+     * The project that has benn created.
+     * @var App\Project
+     */
+    protected $project;
 
-
+    
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($invoice)
+    public function __construct($project)
     {
-        $this->invoice = $invoice;
+        $this->queue = 'notifications';
+        $this->project = $project;
     }
 
     /**
@@ -32,7 +38,7 @@ class SendInvoice extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['broadcast'];
     }
 
     /**
@@ -44,12 +50,24 @@ class SendInvoice extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Faktura #'. ($this->invoice->id))
-                    ->greeting('Hej!')
-                    ->line('Tack så mycket för att du har låtit oss förmedla en tjänst åt dig!')
-                    ->line('Du kan betala online och ladda ner fakturan nedan.')
-                    ->action('Betala fakturan', url('user/invoices/' . ($this->invoice->id + 1000000)))
-                    ->line('Vi hoppas att har märkt hur enkelt det kan vara och skaffa mer jobb.');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
+    }
+
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast()
+    {
+        return (new BroadcastMessage([
+            'data' => [
+                'project' => $this->project->load('users')
+            ]
+        ]))->onQueue('real-time-events');
     }
 
     /**

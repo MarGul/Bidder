@@ -10,20 +10,31 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NewMessage implements ShouldBroadcast
+class DetailsUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
-
+    /**
+     * The queue that the broadcast will be added on.
+     *
+     * @var string
+     */
+    public $broadcastQueue = 'real-time-events';
+    
+    protected $project;
+    protected $history;
+    protected $usersNotAccepted;
+    
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($project, $history, $usersNotAccepted)
     {
-        $this->message = $message;
+        $this->project = $project;
+        $this->history = $history;
+        $this->usersNotAccepted = $usersNotAccepted;
 
         $this->dontBroadcastToCurrentUser();
     }
@@ -31,11 +42,11 @@ class NewMessage implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel|array
+     * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('project.'.$this->message->project_id.'.messages');
+        return new PrivateChannel('project.'.$this->project->id);
     }
 
     /**
@@ -45,8 +56,10 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        $this->message->load('user');
-
-        return ['message' => $this->message];
+        return [
+            'project' => $this->project,
+            'history' => $this->history,
+            'usersNotAccepted' => $this->usersNotAccepted
+        ];
     }
 }
