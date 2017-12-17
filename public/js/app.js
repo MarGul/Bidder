@@ -10892,6 +10892,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        authenticated: function authenticated() {
+            return this.$store.getters.isAuthenticated;
+        }
+    },
+    watch: {
+        authenticated: function authenticated(newAuth, oldAuth) {
+            if (newAuth) {
+                // If the user logs in we need to start listening for he's real time events.
+                __WEBPACK_IMPORTED_MODULE_8__realTimeEvents__["a" /* default */].listenAuth();
+            }
+        }
+    },
     methods: {
         hideMobileNav: function hideMobileNav() {
             document.body.classList.remove('mobile-nav-open');

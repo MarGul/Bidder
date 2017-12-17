@@ -56,6 +56,19 @@
                 breakpoints: window.breakpoints,
             }
         },
+        computed: {
+            authenticated() {
+                return this.$store.getters.isAuthenticated;
+            }
+        },
+        watch: {
+            authenticated(newAuth, oldAuth) {
+                if ( newAuth ) {
+                    // If the user logs in we need to start listening for he's real time events.
+                    RealTimeEvents.listenAuth();
+                }
+            }
+        }, 
         methods: {
             hideMobileNav() {
                 document.body.classList.remove('mobile-nav-open');
