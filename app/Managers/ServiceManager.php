@@ -109,7 +109,7 @@ class ServiceManager extends BaseManager
 	 * @return boolean
 	 */
 	public function create($data) {
-		if ( $this->hasError() ) return false;
+		if ( $this->hasError() || $this->usersEmailNotVerified() ) return false;
 
 		if ( !$this->setData($data)->insert() ) return false;
 

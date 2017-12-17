@@ -61,9 +61,7 @@ class BidManager extends BaseManager
 	 */
 	public function create($data)
 	{
-		if ( $this->hasError() ) return false;
-
-		if ( $this->biddingTimeEnded() ) return false;
+		if ( $this->hasError() || $this->usersEmailNotVerified() || $this->biddingTimeEnded() ) return false;
 
 		if ( !$this->setData($data)->insert() ) return false;
 
@@ -195,6 +193,8 @@ class BidManager extends BaseManager
 				'hours' => $this->data('hours'),
 				'price' => (float)$this->data('price')
 			]);
+
+			$this->bid->load('user');
 		} catch (\Exception $e) {
 			$this->setError('Could not stor the bid in storage.', 500);
 			return false;

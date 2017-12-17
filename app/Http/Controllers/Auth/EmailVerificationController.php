@@ -17,7 +17,27 @@ class EmailVerificationController extends Controller
 	private $manager;
 
 	public function __construct(UserManager $manager) {
+		$this->middleware('auth:api')->only('send');
 		$this->manager = $manager;
+	}
+
+	/**
+	 * Send out the email verification
+	 *
+	 * @param 	Request $request
+	 * @return 	Illuminate\Http\Response
+	 */
+	public function send(Request $request)
+	{
+		// Try to sen the email verification.
+		$this->manager->byUser($request->user())
+					  ->sendEmailVerification();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+		}
+
+		return response()->json(['message' => $this->manager->successMessage()], $this->manager->successCode());
 	}
 
 	/**

@@ -149,4 +149,19 @@ abstract class BaseManager
 	{
 		return isset($this->originalData[$key]);
 	}
+
+	/**
+	 * Is the users email verified that we are working with?
+	 *
+	 * @return boolean
+	 */
+	protected function usersEmailNotVerified()
+	{
+		if ( !$this->user->email_verified ) {
+			$this->setError('Users email not verified.', 403);
+			return true;
+		}
+
+		return false;
+	}
 }

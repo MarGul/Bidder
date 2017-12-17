@@ -23,6 +23,13 @@
 					</div>
 
 					<div class="form-section-controls">
+						<div class="control-container full-width">
+							<label class="control-label">Email</label>
+							<app-email-verified />
+						</div>
+					</div>
+
+					<div class="form-section-controls">
 						<div class="control-container full-width" :class="{'has-errors': form.errors.has('bio')}">
 							<label class="control-label">Profiltext</label>
 							<textarea rows="4" class="form-control" v-model="form.bio"></textarea>
@@ -30,6 +37,7 @@
 							<small>En beskrivning av dig själv eller ditt företag. Detta kommer att visas på din publika profil.</small>
 						</div>
 					</div>
+
 				</div>
 
 				<footer class="white-contentSection-footer">
@@ -51,8 +59,12 @@
 <script>
 	import Form from '../../../includes/classes/Form';
 	import Model from "../../../includes/Model";
+	import appEmailVerified from './EmailVerified';
 
 	export default {
+		components: {
+			appEmailVerified
+		},
 		data() {
 			return {
 				form: new Form({

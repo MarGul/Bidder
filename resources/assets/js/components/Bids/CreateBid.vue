@@ -7,8 +7,15 @@
 		</div>
 			
         <template v-if="authCheck">
+        
             <form class="form-with-sections" @submit.prevent="create">
                 <div class="modal-body">
+                    <div class="alert alert-danger text-left is-small-text" v-if="!user.email_verified">
+                        <div class="mb10"><strong>Din email är inte verifierad.</strong></div>
+                        Var vänlig och verifiera din email innan du skapar ett nytt bud. Detta är för din, våran och våra användares säkerhet.
+                        Du kan skicka email verifikationen igen under <router-link class="is-link" :to="'/user/profile'">din profil</router-link>
+                    </div>
+                    
                     <div class="form-section">
                         <div class="form-section-description">
                             <div class="description-header">Tider</div>
@@ -94,9 +101,13 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary" :class="{processing}">
-                            Lägg ditt bud
-                        </button>
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary" 
+                            :class="{processing}"
+                            :disabled="processing || !user.email_verified"
+                            v-text="'Lägg ditt bud'"
+                        />
                     </div>
                 </div>
             </form>
@@ -140,7 +151,8 @@
 		computed: {
             ...mapGetters({
                 service: 'service',
-                authCheck: 'isAuthenticated'
+                authCheck: 'isAuthenticated',
+                user: 'authUser'
             })
 		},
 		methods: {
