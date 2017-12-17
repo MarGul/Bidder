@@ -2405,6 +2405,93 @@ body.mobile-nav-open .overlay {
   margin-bottom: 30px;
 }
 
+@media screen and (min-width: 992px) {
+  .welcome-numbers {
+    width: 65%;
+    margin: 0 auto;
+  }
+}
+
+.numbered-step-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.numbered-step-container .step-number-container {
+  padding: 8px 20px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+@media screen and (min-width: 768px) {
+  .numbered-step-container .step-number-container {
+    padding: 8px 25px 0 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .numbered-step-container .step-number-container {
+    padding: 8px 35px 0 0;
+  }
+}
+
+.numbered-step-container .step-number-container:before {
+  content: "";
+  position: absolute;
+  background: #b5c2ca;
+  top: 25.5px;
+  right: 0;
+  height: 1px;
+  left: 15px;
+  z-index: 1;
+}
+
+.numbered-step-container .step-number-container:after {
+  content: "";
+  position: absolute;
+  background: #b5c2ca;
+  top: 8px;
+  left: 17.5px;
+  width: 1px;
+  bottom: -8px;
+}
+
+.numbered-step-container .step-number-container .step-number {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #009999;
+  color: #FFF;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.numbered-step-container .step-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-bottom: 50px;
+}
+
+.numbered-step-container .step-container .white-contentSection {
+  position: relative;
+  z-index: 2;
+}
+
 .checklist-component .checklist-error {
   color: #cc0000;
   font-size: 12px;

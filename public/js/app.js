@@ -16956,7 +16956,7 @@ let routes = [
 ];
 */
 
-var routes = [{ path: "/", name: 'home', component: __webpack_require__(261) }, { path: "/email-verified", name: 'emailVerified', component: __webpack_require__(270) }, { path: "/categories", name: 'categories', component: __webpack_require__(273) }, { path: "/locations", name: 'locations', component: __webpack_require__(278) }, { path: "/services", name: 'services', component: __webpack_require__(281) }, { path: "/services/:id", component: __webpack_require__(297),
+var routes = [{ path: "/", name: 'home', component: __webpack_require__(261) }, { path: "/email-verified", name: 'emailVerified', component: __webpack_require__(270) }, { path: "/welcome", name: 'welcome', component: __webpack_require__(528), meta: { requiresAuth: true } }, { path: "/categories", name: 'categories', component: __webpack_require__(273) }, { path: "/locations", name: 'locations', component: __webpack_require__(278) }, { path: "/services", name: 'services', component: __webpack_require__(281) }, { path: "/services/:id", component: __webpack_require__(297),
 	children: [{ path: '', name: 'serviceDetails', component: __webpack_require__(300) }, { path: 'bids', name: 'serviceBids', component: __webpack_require__(314) }]
 }, { path: "/information", name: 'information', component: __webpack_require__(317) }, { path: "/profile/:username", name: 'profile', component: __webpack_require__(320) }, { path: "/user", component: __webpack_require__(329),
 	children: [{ path: '', component: __webpack_require__(146), meta: { requiresAuth: true } }, { path: 'profile', component: __webpack_require__(146), meta: { requiresAuth: true } }, { path: 'notifications', component: __webpack_require__(346), meta: { requiresAuth: true } }, { path: 'create-service', component: __webpack_require__(355), meta: { requiresAuth: true } }, { path: 'services', component: __webpack_require__(366), meta: { requiresAuth: true } }, { path: 'services/:id', component: __webpack_require__(369), meta: { requiresAuth: true } }, { path: 'bids', component: __webpack_require__(381), meta: { requiresAuth: true } }, { path: 'bids/:id', component: __webpack_require__(384), meta: { requiresAuth: true } }, { path: 'projects', component: __webpack_require__(390), meta: { requiresAuth: true } }, { path: 'projects/:id', component: __webpack_require__(393), meta: { requiresAuth: true },
@@ -34929,6 +34929,198 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */,
+/* 528 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(529)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/Welcome.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-40504942", Component.options)
+  } else {
+    hotAPI.reload("data-v-40504942", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 529 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0, false, false)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "welcome-view" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "content" }, [
+          _c("div", { staticClass: "welcome-numbers" }, [
+            _c("div", { staticClass: "numbered-step-container" }, [
+              _c("div", { staticClass: "step-number-container" }, [
+                _c("div", { staticClass: "step-number" }, [
+                  _c("span", [_vm._v("1")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "step-container" }, [
+                _c("section", { staticClass: "white-contentSection" }, [
+                  _c("header", { staticClass: "white-contentSection-header" }, [
+                    _c("h3", [_vm._v("Verifiera din email")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "white-contentSection-content" }, [
+                    _vm._v(
+                      "\n                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praesentium vel pariatur.\n                            "
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "numbered-step-container" }, [
+              _c("div", { staticClass: "step-number-container" }, [
+                _c("div", { staticClass: "step-number" }, [_vm._v("2")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "step-container" }, [
+                _c("section", { staticClass: "white-contentSection" }, [
+                  _c("header", { staticClass: "white-contentSection-header" }, [
+                    _c("h3", [_vm._v("Uppdatera din profil")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "white-contentSection-content" }, [
+                    _vm._v(
+                      "\n                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praesentium vel pariatur.\n                            "
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "numbered-step-container" }, [
+              _c("div", { staticClass: "step-number-container" }, [
+                _c("div", { staticClass: "step-number" }, [_vm._v("3")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "step-container mb0" }, [
+                _c("section", { staticClass: "white-contentSection" }, [
+                  _c("header", { staticClass: "white-contentSection-header" }, [
+                    _c("h3", [_vm._v("Lägg till prenumerationer")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "white-contentSection-content" }, [
+                    _vm._v(
+                      "\n                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praesentium vel pariatur.\n                            "
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-40504942", module.exports)
+  }
+}
 
 /***/ })
 ],[149]);
