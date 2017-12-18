@@ -6,6 +6,33 @@
     }
 }
 
+.account-container {
+    
+    @media screen and (min-width: $screen-sm-min) {
+        display: flex;
+    }
+
+    .account-component {
+        margin: 0 0 30px 0;
+
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 2;
+            margin: 0 30px 0 0;
+        }
+    }
+
+    .profile_picture-component {
+        
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 1;
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            padding-top: 20px;
+        }
+    }
+}
+
 .numbered-step-container {
     display: flex;
 
@@ -17,6 +44,7 @@
         @media screen and (min-width: $screen-sm-min) {
             padding: 8px 25px 0 0;
         }
+
         @media screen and (min-width: $screen-sm-min) {
             padding: 8px 35px 0 0;
         }
@@ -67,5 +95,80 @@
             position: relative;
             z-index: 2;
         }
+    }
+}
+
+.welcome-action-buttons {
+    margin: 38px 0 0 55px;
+    position: relative;
+    
+
+    @media screen and (min-width: $screen-sm-min) {
+        display: flex;
+        margin-left: 70px;
+        align-items: center;
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        margin-left: 75px;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: -37.5px;
+        top: -31.5px;
+        height: 1px;
+        width: calc(50% + 37.5px);
+        background: lighten(#97A9B5, 10%);
+
+        @media screen and (min-width: $screen-sm-min) {
+            left: -52.5px;
+            width: calc(50% + 52.5px);
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            left: -57.5px;
+            width: calc(50% + 57.5px);
+        }
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 18px;
+        width: 100%;
+
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 1;
+            width: auto;
+        }
+    }
+
+    .btn-divider {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 13px;
+        font-style: italic;
+        color: #97A9B5;
+
+        @media screen and (min-width: $screen-sm-min) {
+            margin: 0 15px;
+        }
+    }
+
+    .btn-icon-search {
+        @include mask-icon('../svg/search.svg');
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.7);
+        margin-right: 10px;
+    }
+
+    .btn-icon-create {
+        @include mask-icon('../svg/document_check.svg');
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.6);
+        margin-right: 10px;
     }
 }
