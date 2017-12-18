@@ -67,7 +67,7 @@
 								</li>
 							</ul>
 							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank" rel="noopener noreferrer">
-								<i class="icon icon_download wh20 mr10"></i> Ladda ner fakturan
+								<i class="icon icon_download wh20 mr10"></i> Ladda ner kvitto
 							</a>
 						</div>
 					</section>

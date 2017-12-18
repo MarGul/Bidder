@@ -33606,7 +33606,7 @@ var render = function() {
                           _c("i", {
                             staticClass: "icon icon_download wh20 mr10"
                           }),
-                          _vm._v(" Ladda ner fakturan\n\t\t\t\t\t\t")
+                          _vm._v(" Ladda ner kvitto\n\t\t\t\t\t\t")
                         ]
                       )
                     ]
