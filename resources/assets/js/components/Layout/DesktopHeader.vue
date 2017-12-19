@@ -4,7 +4,7 @@
 			<div class="desktop-nav">
 				<div class="logo">
 					<router-link to="/">
-						<img src="http://bidder.dev/logo_mock.png" class="logo-img">
+						<img src="/logo_mock.png" class="logo-img">
 					</router-link>
 				</div>
 				<nav class="desktop-navigation-container">

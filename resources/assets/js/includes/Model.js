@@ -6,7 +6,7 @@ class Model {
 		this.url = null;
 	}
 
-	new(config = {baseURL: 'http://bidder.dev'}) {
+	new(config = {baseURL: 'http://bidder.loc'}) {
 		this.instance = axios.create(config);
 		return this;
 	}
