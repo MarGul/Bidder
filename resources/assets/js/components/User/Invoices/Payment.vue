@@ -32,7 +32,7 @@
 					</div>
 				</div>
 
-				<component :is="activePaymentMethod" />
+				<component :is="activePaymentMethod" :amount="invoice.total" />
 			</div>
 		</section>
 	</div>

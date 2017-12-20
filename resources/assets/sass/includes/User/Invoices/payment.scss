@@ -103,3 +103,45 @@
 		}
 	}
 }
+
+.payment-method-description {
+
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+	}
+
+	.payment-method-description-content {
+
+		p {
+			font-size: 13px;
+		}
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 2;
+			padding-right: 15px;
+		}
+	}
+
+	.payment-method-description-image {
+		margin: 15px 0;
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+			margin: 0;
+			align-self: center;
+		}
+	}
+}
+
+.payment_method_credit_card-component {
+
+	.stripe-button-el {
+		margin-top: 10px;
+
+		span {
+			background: $brand-primary !important;
+			border: none;
+			box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07) !important;
+		}
+	}
+}
