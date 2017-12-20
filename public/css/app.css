@@ -1457,6 +1457,12 @@ a {
   margin-bottom: 10px !important;
 }
 
+@media screen and (min-width: 768px) {
+  .margin-row-sm {
+    margin: 0 -10px;
+  }
+}
+
 .pl15 {
   padding-left: 15px;
 }
@@ -1491,6 +1497,12 @@ a {
 
 .ptb10lr15 {
   padding: 10px 15px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .padding-col-sm {
+    padding: 0 10px;
+  }
 }
 
 form.loading {
@@ -2577,6 +2589,16 @@ body.mobile-nav-open .overlay {
     left: -57.5px;
     width: calc(50% + 57.5px);
   }
+}
+
+.welcome-action-buttons:after {
+  content: "";
+  position: absolute;
+  top: -31.5px;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: #b5c2ca;
 }
 
 .welcome-action-buttons button {

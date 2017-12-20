@@ -133,6 +133,16 @@
         }
     }
 
+    &:after {
+        content: "";
+        position: absolute;
+        top: -31.5px;
+        left: 50%;
+        width: 1px;
+        height: 20px;
+        background: lighten(#97A9B5, 10%);
+    }
+
     button {
         padding: 10px 15px;
         font-size: 18px;

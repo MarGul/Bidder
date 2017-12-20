@@ -56,8 +56,14 @@
                                 <header class="white-contentSection-header">
                                     <h3>Lägg till prenumerationer</h3>
                                 </header>
+                                <div class="gray-contentSection-content">
+                                    Genom att prenumerera på områden eller kategorier så kommer du att bli kontaktad av oss via mail varje gång en ny tjänst läggs till.
+                                </div>
                                 <div class="white-contentSection-content">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praesentium vel pariatur.
+                                    <app-add-subscription />
+                                    <div class="mt30">
+                                        <app-list-subscriptions />
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -102,12 +108,16 @@
     import appEmailVerified from '../components/User/Profile/EmailVerified';
     import appAccount from '../components/User/Profile/Account';
     import appProfilePicture from '../components/User/Profile/ProfilePicture';
+    import appAddSubscription from '../components/User/Subscriptions/AddSubscription';
+    import appListSubscriptions from '../components/User/Subscriptions/ListSubscriptions';
 
     export default {
         components: {
             appEmailVerified,
             appAccount,
-            appProfilePicture
+            appProfilePicture,
+            appAddSubscription,
+            appListSubscriptions
         }
     }
 </script>

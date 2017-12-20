@@ -154,6 +154,12 @@
 	margin-bottom: 10px !important;
 }
 
+.margin-row-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin: 0 -10px;
+	}
+}
+
 .pl15 {
 	padding-left: 15px;
 }
@@ -188,4 +194,10 @@
 
 .ptb10lr15 {
 	padding: 10px 15px !important;
+}
+
+.padding-col-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		padding: 0 10px;
+	}
 }
