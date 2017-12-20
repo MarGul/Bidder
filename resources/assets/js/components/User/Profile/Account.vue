@@ -1,11 +1,11 @@
 <template>
 	<div class="account-component">			
-		<section class="white-contentSection">
-			<header class="white-contentSection-header">
+		<section :class="{'white-contentSection': withHTMLMarkup} ">
+			<header class="white-contentSection-header" v-if="withHTMLMarkup">
 				<h3>Min profil</h3>
 			</header>
 			<form @keydown="form.errors.clear()">
-				<div class="white-contentSection-content">
+				<div :class="{'white-contentSection-content': withHTMLMarkup}">
 					<div class="form-section-controls">
 						<div class="control-container full-width" :class="{'has-errors': form.errors.has('name')}">
 							<label class="control-label">Namn</label>
@@ -22,7 +22,7 @@
 						</div>
 					</div>
 
-					<div class="form-section-controls">
+					<div class="form-section-controls" v-if="showEmailVerified">
 						<div class="control-container full-width">
 							<label class="control-label">Email</label>
 							<app-email-verified />
@@ -40,7 +40,7 @@
 
 				</div>
 
-				<footer class="white-contentSection-footer">
+				<footer :class="{'white-contentSection-footer': withHTMLMarkup}">
 					<button 
 						type="submit" 
 						class="btn btn-primary" 
@@ -62,6 +62,18 @@
 	import appEmailVerified from './EmailVerified';
 
 	export default {
+		props: {
+			showEmailVerified: {
+				type: Boolean,
+				required: false,
+				default: true
+			},
+			withHTMLMarkup: {
+				type: Boolean,
+				required: false,
+				default: true
+			}
+		},
 		components: {
 			appEmailVerified
 		},
@@ -80,7 +92,7 @@
 				this.processing = true;
 				new Model(`users/${this.$store.getters.authUser.id}/profile`).patch(this.form.data())
 					.then(response => {
-						this.$store.dispatch('showNotification', {type: 'success', msg: 'Nice! Du uppdaterade din profil.'});
+						this.$store.dispatch('showNotification', {type: 'success', msg: 'Din profil har blivit uppdaterad.'});
 						this.$store.commit('SET_USER', {user: response.data.user});
 						this.processing = false;
 					})

@@ -42,6 +42,8 @@
     import Model from './includes/Model';
     import RealTimeEvents from './realTimeEvents';
 
+    //import { fetchCategories } from './data/test';
+
     export default {
         components: {
             appMobileHeader,
@@ -75,6 +77,8 @@
             }
         },
         created() {
+            //let categories = await fetchCategories();
+            //console.log(categories);
             // Initialize Data
             new Model('categories').get().then(response => {
                 this.$store.commit('SET_CATEGORIES', response.data.categories);

@@ -12,9 +12,6 @@
 					<li class="nav-item">
 						<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr15"></i> Information</router-link>
 					</li>
-					<li class="nav-item">
-						<router-link to="/contact"><i class="icon icon_paper_plane wh15 light-gray mr15"></i> Kontakt</router-link>
-					</li>
 					<li class="spacer"></li>
 					<li v-if="$store.getters.isAuthenticated" class="nav-item">
 						<router-link to="/user/profile">
