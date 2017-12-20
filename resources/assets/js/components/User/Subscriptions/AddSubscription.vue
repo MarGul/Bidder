@@ -1,43 +1,39 @@
 <template>
 	<div class="add_subscription-component">
 		<form @keydown="form.errors.clear()">
-			<div class="row">
-				<div class="col-xs-12 col-md-4">
-					<div class="form-group">
-						<label class="control-label">För kategori:</label>
-						<select class="form-control" v-model="form.category_id">
-							<option value="">Välj kategori</option>
-							<optgroup v-for="rootCat in categories" :key="rootCat.slug" :label="rootCat.name">
-								<option 
-									v-for="category in rootCat.sub_categories" 
-									:key="category.slug" 
-									:value="category.id" 
-									v-text="category.name"
-								></option>
-							</optgroup>
-						</select>
-						<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
-					</div>
+			<div class="is-flex-sm margin-row-sm">
+				<div class="control-container flex-1-sm padding-col-sm" :class="{'has-errors': form.errors.has('category_id')}">
+					<label class="control-label">För kategori:</label>
+					<select class="form-control" v-model="form.category_id">
+						<option value="">Välj kategori</option>
+						<optgroup v-for="rootCat in categories" :key="rootCat.slug" :label="rootCat.name">
+							<option 
+								v-for="category in rootCat.sub_categories" 
+								:key="category.slug" 
+								:value="category.id" 
+								v-text="category.name"
+							></option>
+						</optgroup>
+					</select>
+					<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
 				</div>
-				<div class="col-xs-12 col-md-4">
-					<div class="form-group">
-						<label class="control-label">För region:</label>
-						<select class="form-control" :disabled="regionDisabled" v-model="form.region_id">
-							<option value="">Välj region</option>
-							<option v-for="region in regions" :value="region.id" v-text="region.name"></option>
-						</select>
-					</div>
+				<div class="control-container flex-1-sm padding-col-sm" :class="{'has-errors': form.errors.has('category_id')}">
+					<label class="control-label">För region:</label>
+					<select class="form-control" :disabled="regionDisabled" v-model="form.region_id">
+						<option value="">Välj region</option>
+						<option v-for="region in regions" :value="region.id" v-text="region.name" :key="region.slug"></option>
+					</select>
 				</div>
-				<div class="col-xs-12 col-md-4">
-					<div class="form-group">
-						<label class="control-label">Eller för stad:</label>
-						<select class="form-control" :disabled="citiesDisabled" v-model="form.city_id">
-							<option value="">Välj stad</option>
-							<option v-for="city in cities" :value="city.id" v-text="city.name"></option>
-						</select>
-					</div>
+				<div class="control-container flex-1-sm padding-col-sm" :class="{'has-errors': form.errors.has('category_id')}">
+					<label class="control-label">Eller för stad:</label>
+					<select class="form-control" :disabled="citiesDisabled" v-model="form.city_id">
+						<option value="">Välj stad</option>
+						<option v-for="city in cities" :value="city.id" v-text="city.name" :key="city.slug"></option>
+					</select>
 				</div>
+
 			</div>
+
 			<div class="row">
 				<div class="col-xs-12">
 					<button type="button" class="btn btn-primary full-width" :class="{'processing': processing}"

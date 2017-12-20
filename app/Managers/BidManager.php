@@ -10,6 +10,8 @@ use App\Jobs\NotificationsForNewBid;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
+use Notification;
+use App\Notifications\ProjectCreated;
 
 class BidManager extends BaseManager
 {
@@ -59,9 +61,7 @@ class BidManager extends BaseManager
 	 */
 	public function create($data)
 	{
-		if ( $this->hasError() ) return false;
-
-		if ( $this->biddingTimeEnded() ) return false;
+		if ( $this->hasError() || $this->usersEmailNotVerified() || $this->biddingTimeEnded() ) return false;
 
 		if ( !$this->setData($data)->insert() ) return false;
 
@@ -101,6 +101,9 @@ class BidManager extends BaseManager
 			$this->setError('Could not insert a project into storage.', 500);
 			return false;
 		}
+
+		// Send out the notification that your bid has been accepted and a project created.
+		Notification::send($this->bid->user, new ProjectCreated($projectManager->project()));
 
 		$this->setSuccess('Bid was accepted and a project created.', 201);
 		
@@ -190,6 +193,8 @@ class BidManager extends BaseManager
 				'hours' => $this->data('hours'),
 				'price' => (float)$this->data('price')
 			]);
+
+			$this->bid->load('user');
 		} catch (\Exception $e) {
 			$this->setError('Could not stor the bid in storage.', 500);
 			return false;

@@ -52,6 +52,7 @@ class ProjectDetailsController extends Controller
 		return response()->json([
 			'message' => $this->manager->successMessage(),
 			'data' => [
+				'project' => $this->manager->project(),
 				'history' => $this->manager->history(),
 				'usersNotAccepted' => $this->manager->usersNotAccepted()
 			]

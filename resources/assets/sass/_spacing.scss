@@ -50,6 +50,10 @@
 	margin-bottom: 20px;
 }
 
+.mb25 {
+	margin-bottom: 25px !important;
+}
+
 .mb30 {
 	margin-bottom: 30px !important;
 }
@@ -150,6 +154,12 @@
 	margin-bottom: 10px !important;
 }
 
+.margin-row-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		margin: 0 -10px;
+	}
+}
+
 .pl15 {
 	padding-left: 15px;
 }
@@ -184,4 +194,10 @@
 
 .ptb10lr15 {
 	padding: 10px 15px !important;
+}
+
+.padding-col-sm {
+	@media screen and (min-width: $screen-sm-min) {
+		padding: 0 10px;
+	}
 }

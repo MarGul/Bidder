@@ -25,6 +25,7 @@ class EmailVerification extends Notification implements ShouldQueue
      */
     public function __construct($user)
     {
+        $this->queue = 'notifications';
         $this->user = $user;
     }
 
@@ -48,10 +49,10 @@ class EmailVerification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Välkommen till Bidder!')
+                    ->subject('Verifiera din email-adress')
                     ->greeting('Hej!')
-                    ->line('Först och främst så vill vi hälsa dig hjärtligt välkommen till Bidder!')
-                    ->line('Innan du börjar använda tjänsten så skulle vi be dig om att verifiera din email adress.')
+                    ->line('Innan du kan börja använda GoBid till fullo så behöver du verifiera din email adress.')
+                    ->line('Klicka på knappen nedan för att slutföra verifikationen.')
                     ->action('Verifiera din email', url('/email-verify/'.$this->user->email_verification_code));
     }
 

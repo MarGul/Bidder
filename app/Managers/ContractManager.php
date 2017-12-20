@@ -5,6 +5,8 @@ namespace App\Managers;
 use App\Contract;
 use PDF;
 use App\Managers\Traits\ProjectTrait;
+use Notification;
+use App\Notifications\ProjectContractUpdated;
 
 class ContractManager extends BaseManager
 {
@@ -47,10 +49,12 @@ class ContractManager extends BaseManager
 
 		if ( $this->projectContractExists() ) return false;
 
-		if ( $this->setData($data)->insert() ) {
-			$this->projectHistoryManager->forProject($this->project->id)
-										->add('updatedContract', ['user' => $this->user->username]);
-		}
+		if ( !$this->setData($data)->insert() )  return false;
+
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('updatedContract', ['user' => $this->user->username]);
+
+		$this->setSuccess('Successfully inserted the contract into storage.', 201);
 
 		return $this->hasError();
 	}
@@ -65,10 +69,17 @@ class ContractManager extends BaseManager
 	{
 		if ( $this->hasError() ) return false;
 
-		if ( $this->setData($data)->edit() ) {
-			$this->projectHistoryManager->forProject($this->contract->project_id)
-										->add('updatedContract', ['user' => $this->user->username]);
-		}
+		if ( !$this->setData($data)->edit() ) return false;
+			
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('updatedContract', ['user' => $this->user->username]);
+
+		// Send out notification to other users that the contract has been updated.
+		Notification::send($this->otherUsers(), new ProjectContractUpdated(
+			$this->project, $this->contract, $this->history()
+		));
+		
+		$this->setSuccess('Successfully updated the contract into storage.', 200);
 
 		return $this->hasError();
 	}
@@ -102,7 +113,6 @@ class ContractManager extends BaseManager
 			return false;;
 		}
 
-		$this->setSuccess('Successfully inserted the contract into storage.', 201);
 		return true;
 	}
 
@@ -117,10 +127,9 @@ class ContractManager extends BaseManager
 			$this->contract->update($this->dataToArray());	
 		} catch (\Exception $e) {
 			$this->setError('Could not edit the contract to storage.', 500);
-			return false;;
+			return false;
 		}
-
-		$this->setSuccess('Successfully updated the contract into storage.', 200);
+		
 		return true;
 	}
 

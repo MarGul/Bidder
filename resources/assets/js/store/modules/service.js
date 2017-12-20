@@ -22,6 +22,11 @@ const actions = {
 		let service = state.service;
 		service.comments.unshift(payload.comment);
 		commit('SET_SERVICE_DETAILS', service);
+	},
+	addBid({commit, state}, payload) {
+		let service = state.service;
+		service.bids.unshift(payload.bid);
+		commit('SET_SERVICE_DETAILS', service);
 	}
 }
 

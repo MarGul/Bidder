@@ -1,0 +1,184 @@
+.welcome-numbers {
+
+    @media screen and (min-width: $screen-md-min) {
+        width: 65%;
+        margin: 0 auto;
+    }
+}
+
+.account-container {
+    
+    @media screen and (min-width: $screen-sm-min) {
+        display: flex;
+    }
+
+    .account-component {
+        margin: 0 0 30px 0;
+
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 2;
+            margin: 0 30px 0 0;
+        }
+    }
+
+    .profile_picture-component {
+        
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 1;
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            padding-top: 20px;
+        }
+    }
+}
+
+.numbered-step-container {
+    display: flex;
+
+    .step-number-container {
+        padding: 8px 20px 0 0;
+        position: relative;
+        z-index: 2;
+
+        @media screen and (min-width: $screen-sm-min) {
+            padding: 8px 25px 0 0;
+        }
+
+        @media screen and (min-width: $screen-sm-min) {
+            padding: 8px 35px 0 0;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            background: lighten(#97A9B5, 10%);
+            top: 25.5px;
+            right: 0;
+            height: 1px;
+            left: 15px;
+            z-index: 1;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            background: lighten(#97A9B5, 10%);
+            top: 8px;
+            left: 17.5px;
+            width: 1px;
+            bottom: -8px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: $brand-primary;
+            color: #FFF;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+    }
+
+    .step-container {
+        flex: 1;
+        margin-bottom: 50px;
+
+        .white-contentSection {
+            position: relative;
+            z-index: 2;
+        }
+    }
+}
+
+.welcome-action-buttons {
+    margin: 38px 0 0 55px;
+    position: relative;
+    
+
+    @media screen and (min-width: $screen-sm-min) {
+        display: flex;
+        margin-left: 70px;
+        align-items: center;
+    }
+
+    @media screen and (min-width: $screen-md-min) {
+        margin-left: 75px;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: -37.5px;
+        top: -31.5px;
+        height: 1px;
+        width: calc(50% + 37.5px);
+        background: lighten(#97A9B5, 10%);
+
+        @media screen and (min-width: $screen-sm-min) {
+            left: -52.5px;
+            width: calc(50% + 52.5px);
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            left: -57.5px;
+            width: calc(50% + 57.5px);
+        }
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -31.5px;
+        left: 50%;
+        width: 1px;
+        height: 20px;
+        background: lighten(#97A9B5, 10%);
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 18px;
+        width: 100%;
+
+        @media screen and (min-width: $screen-sm-min) {
+            flex: 1;
+            width: auto;
+        }
+    }
+
+    .btn-divider {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 13px;
+        font-style: italic;
+        color: #97A9B5;
+
+        @media screen and (min-width: $screen-sm-min) {
+            margin: 0 15px;
+        }
+    }
+
+    .btn-icon-search {
+        @include mask-icon('../svg/search.svg');
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.7);
+        margin-right: 10px;
+    }
+
+    .btn-icon-create {
+        @include mask-icon('../svg/document_check.svg');
+        width: 18px;
+        height: 18px;
+        background: rgba(255,255,255,0.6);
+        margin-right: 10px;
+    }
+}

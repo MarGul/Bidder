@@ -63,4 +63,23 @@ trait ProjectTrait
 	 * @return array
 	 */
 	public function history() { return $this->projectHistoryManager->addedRecords(); }
+
+	/**
+	 * Get the other users of the project.
+	 *
+	 * @return collection
+	 */
+	protected function otherUsers()
+	{
+		if ( isset($this->project->users) && $this->project->users->isNotEmpty() ) {
+			return $this->project->users->whereNotIn('id', [$this->user->id]);
+		}
+		
+		$this->project->load(['users' => function($q) {
+			$q->where('user_id', '<>', $this->user->id);
+		}]);
+
+		return $this->project->users;
+
+	}
 }

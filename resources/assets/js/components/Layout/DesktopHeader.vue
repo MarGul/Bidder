@@ -4,7 +4,7 @@
 			<div class="desktop-nav">
 				<div class="logo">
 					<router-link to="/">
-						<img src="http://bidder.dev/logo_mock.png" class="logo-img">
+						<img src="/logo_mock.png" class="logo-img">
 					</router-link>
 				</div>
 				<nav class="desktop-navigation-container">
@@ -17,9 +17,6 @@
 						</li>
 						<li class="nav-item">
 							<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr10"></i> Information</router-link>
-						</li>
-						<li class="nav-item">
-							<router-link to="/contact"><i class="icon icon_paper_plane wh15 light-gray mr10"></i> Kontakt</router-link>
 						</li>
 					</ul>
 				</nav>

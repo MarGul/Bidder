@@ -35,11 +35,13 @@
 
 			Echo.channel('service.' + this.$route.params.id)
 				.listen('CommentCreated', (e) => {
-					this.$store.commit('ADD_COMMENT', {comment: e.comment});
+					this.$store.dispatch('addComment', {comment: e.comment});
 				})
 				.listen('NewBid', (e) => {
 					this.$store.dispatch('addBid', {bid: e.bid});
-					this.$store.dispatch('showNotification', {type: 'info', msg: 'Det kom precis in ett bud för denna tjänsten!'})
+					this.$store.dispatch('eventNotification', {
+						type: 'success', heading: 'Nytt bud!', text: 'Tjänsten fick precis ett nytt bud.'
+					});
 				});
 		},
 		destroyed() {

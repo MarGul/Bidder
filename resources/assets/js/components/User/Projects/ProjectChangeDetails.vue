@@ -81,7 +81,33 @@
 			...mapGetters({
 				project: 'userProjectDetails',
 				auth: 'authUser'
-			})
+			}),
+			projectStart() {
+				return this.project.service_start;
+			},
+			projectEnd() {
+				return this.project.service_end;
+			},
+			projectHours() {
+				return this.project.service_hours;
+			},
+			projectPrice() {
+				return this.project.service_price;
+			},
+		},
+		watch: {
+			projectStart(newProjectStart, oldProjectStart) {
+				this.form.service_start = newProjectStart;
+			},
+			projectEnd(newProjectEnd, oldProjectEnd) {
+				this.form.service_end = newProjectEnd;
+			},
+			projectHours(newProjectHours, oldProjectHours) {
+				this.form.service_hours = newProjectHours;
+			},
+			projectPrice(newProjectPrice, oldProjectPrice) {
+				this.form.service_price = newProjectPrice;
+			}
 		},
 		methods: {
 			update() {
@@ -95,23 +121,11 @@
 							msg: 'Vi har uppdaterat projektets detailjer. Nu måste den andra parten acceptera uppdateringen innan vi kan starta.'
 						});
 						// Update the state.
-						let project = this.project;
-						project.service_start = data.service_start;
-						project.service_end = data.service_end;
-						project.service_hours = data.service_hours;
-						project.service_price = data.service_price;
-						// Set the user that should be marked with not accepted.
-						project.users.forEach(user => {
-							if ( response.data.usersNotAccepted.includes(user.id) ) {
-								user.pivot.accepted = false;
-							}
+						this.$store.dispatch('projectDetailsUpdated', {
+							project: response.data.project,
+							history: response.data.history,
+							usersNotAccepted: response.data.usersNotAccepted
 						});
-						// Add all of the project history.
-						response.data.history.forEach(function(history) {
-							project.history.unshift(history);
-						});
-
-						this.$store.commit('SET_USER_PROJECT_DETAILS', project);
 						this.processing = false;
 					})
 					.catch(error => {
@@ -121,10 +135,10 @@
 			}
 		},
 		created() {
-			this.form.service_start = this.project.service_start;
-			this.form.service_end = this.project.service_end;
-			this.form.service_hours = this.project.service_hours;
-			this.form.service_price = this.project.service_price;
+			this.form.service_start = this.projectStart;
+			this.form.service_end = this.projectEnd;
+			this.form.service_hours = this.projectHours;
+			this.form.service_price = this.projectPrice;
 		}
 	}
 </script>

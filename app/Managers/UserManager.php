@@ -77,6 +77,22 @@ class UserManager extends BaseManager
 	}
 
 	/**
+	 * Send out a users email verification.
+	 *
+	 * @return void
+	 */
+	public function sendEmailVerification()
+	{
+		if ( $this->hasError() ) return false;
+		
+		Notification::send($this->user, new EmailVerification($this->user));
+
+		$this->setSuccess('Successfully sent the users email verification', 200);
+
+		return true;
+	}
+
+	/**
 	 * Verify a users email address
 	 * 
 	 * @param  string 	$code

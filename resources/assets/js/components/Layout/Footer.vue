@@ -4,7 +4,7 @@
 			<div class="footer-callouts">
 				<div class="f__callout footer-brand">
 					<router-link to="/">
-						<img src="http://bidder.dev/logo_mock.png" class="logo-img">
+						<img src="/logo_mock.png" class="logo-img">
 					</router-link>
 				</div>
 				<div class="f__callout">

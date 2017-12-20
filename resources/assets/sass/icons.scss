@@ -263,3 +263,7 @@
 .icon_user {
 	@include mask-icon('../svg/user.svg');
 }
+
+.icon_warning_color {
+	@include icon('../svg/warning_color.svg');
+}

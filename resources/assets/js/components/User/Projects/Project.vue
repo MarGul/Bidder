@@ -42,6 +42,16 @@
 					this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', true);
 				})
 				.catch(error => { console.log(error); });
+
+			/*
+			Echo.private(`project.${this.$route.params.id}`)
+				.listen('DetailsUpdated', (e) => {
+					this.$store.dispatch('projectDetailsUpdated', {project: e.project, history: e.history, usersNotAccepted: e.usersNotAccepted });
+					this.$store.dispatch('eventNotification', {
+						type: 'success', heading: 'Projektets detaljer uppdaterade!', text: 'Den andra parten har uppdaterat detaljerna för projektet.'
+					});
+				})
+				});*/
 		},
 		destroyed() {
 			this.$store.commit('SET_USER_PROJECT_DETAILS_FETCHED', false);

@@ -94,6 +94,12 @@ abstract class BaseManager
 	}
 
 	/**
+	 * The user that the manager has been working with
+	 *
+	 * @return void
+	 */
+	public function user() { return $this->user; }
+	/**
 	 * Does the manager have any errors?
 	 * 
 	 * @return boolean
@@ -142,5 +148,20 @@ abstract class BaseManager
 	protected function dataExists($key)
 	{
 		return isset($this->originalData[$key]);
+	}
+
+	/**
+	 * Is the users email verified that we are working with?
+	 *
+	 * @return boolean
+	 */
+	protected function usersEmailNotVerified()
+	{
+		if ( !$this->user->email_verified ) {
+			$this->setError('Users email not verified.', 403);
+			return true;
+		}
+
+		return false;
 	}
 }

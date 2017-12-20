@@ -1,0 +1,59 @@
+.event-notification-animation-enter-active {
+	-webkit-animation: event-notification-slide-down 400ms ease-out forwards;
+            animation: event-notification-slide-down 400ms ease-out forwards;
+            
+    @media screen and (min-width: $screen-sm-min) {
+        -webkit-animation: event-notification-slide-in 400ms ease-out forwards;
+                animation: event-notification-slide-in 400ms ease-out forwards;
+    }
+}
+
+.event-notification-animation-leave-active {
+	-webkit-animation: event-notification-slide-up 800ms ease-out forwards;
+            animation: event-notification-slide-up 800ms ease-out forwards;
+            
+    @media screen and (min-width: $screen-sm-min) {
+        -webkit-animation: event-notification-slide-out 800ms ease-out forwards;
+                animation: event-notification-slide-out 800ms ease-out forwards;
+    }
+}
+
+@keyFrames event-notification-slide-down {
+	from {
+		top: -200px;
+	}
+	to {
+		top: 0;
+	}
+}
+
+@keyFrames event-notification-slide-up {
+	from {
+		top: 0;
+	}
+	to {
+		top: -200px;
+	}
+}
+
+@keyFrames event-notification-slide-in {
+	from {
+        right: -400px;
+        opacity: 0;
+	}
+	to {
+        right: 3%;
+        opacity: 1;
+	}
+}
+
+@keyFrames event-notification-slide-out {
+	from {
+        right: 3%;
+        opacity: 1;
+	}
+	to {
+        right: -400px;
+        opacity: 0;
+	}
+}

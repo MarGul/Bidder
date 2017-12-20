@@ -1,15 +1,21 @@
 <template>
     <div id="site">
+        
         <transition name="notification-slide-down-up">
-            <app-notifications v-if="$store.getters.notificationShowing"></app-notifications>
+            <app-notifications v-if="$store.getters.notificationShowing" />>
         </transition>
+
+        <transition name="event-notification-animation">
+            <app-event-notification v-if="$store.getters.eventNotificationShowing" />
+        </transition>
+
+        <transition name="slide-down-up">
+            <app-modal v-if="$store.getters.modalOpen" />
+        </transition>
+
 
         <app-mobile-header v-if="breakpoints.mobile"></app-mobile-header>
         <app-desktop-header v-else></app-desktop-header>
-
-        <transition name="slide-down-up">
-            <app-modal v-if="$store.getters.modalOpen"></app-modal>
-        </transition>
 
         <div id="site-wrap">
             <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
@@ -29,16 +35,21 @@
     import appMobileHeader from './components/Layout/MobileHeader';
     import appDesktopHeader from './components/Layout/DesktopHeader';
     import appNotifications from './components/Includes/Notifications';
+    import appEventNotification from './components/Includes/EventNotification';
     import appModal from './components/Includes/Modal';
     import appFooter from './components/Layout/Footer';
     import { HeartBeat } from './includes/heartbeat';
     import Model from './includes/Model';
+    import RealTimeEvents from './realTimeEvents';
+
+    //import { fetchCategories } from './data/test';
 
     export default {
         components: {
             appMobileHeader,
             appDesktopHeader,
             appNotifications,
+            appEventNotification,
             appModal,
             appFooter
         },
@@ -47,12 +58,27 @@
                 breakpoints: window.breakpoints,
             }
         },
+        computed: {
+            authenticated() {
+                return this.$store.getters.isAuthenticated;
+            }
+        },
+        watch: {
+            authenticated(newAuth, oldAuth) {
+                if ( newAuth ) {
+                    // If the user logs in we need to start listening for he's real time events.
+                    RealTimeEvents.listenAuth();
+                }
+            }
+        }, 
         methods: {
             hideMobileNav() {
                 document.body.classList.remove('mobile-nav-open');
             }
         },
         created() {
+            //let categories = await fetchCategories();
+            //console.log(categories);
             // Initialize Data
             new Model('categories').get().then(response => {
                 this.$store.commit('SET_CATEGORIES', response.data.categories);
@@ -63,14 +89,7 @@
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 
-            // Listen to global broadcasts
-            Echo.channel('services')
-                .listen('NewService', (e) => {
-                    this.$store.dispatch('addService', {service: e.service});
-                })
-                .listen('RemoveService', (e) => {
-                    this.$store.dispatch('removeService', {id: e.id});
-                });
+            RealTimeEvents.listen();            
 
             // Start the applications heartbeat
             setInterval(function() {

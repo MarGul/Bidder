@@ -1,6 +1,12 @@
 <template>
 	<div class="create_service-component">
 		
+		<div class="alert alert-danger text-left is-small-text" v-if="!user.email_verified">
+			<div class="mb10"><strong>Din email är inte verifierad.</strong></div>
+			Var vänlig och verifiera din email innan du skapar en ny tjänst. Detta är för din, våran och våra användares säkerhet.
+			Du kan skicka email verifikationen igen under <router-link class="is-link" :to="'/user/profile'">din profil</router-link>
+		</div>
+
 		<form class="form-with-sections" @submit.prevent="create">
 			<section class="white-contentSection">
 				<header class="white-contentSection-header">
@@ -165,9 +171,13 @@
 					</div>
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}">
-						Skapa tjänst
-					</button>
+					<button 
+						type="submit" 
+						class="btn btn-primary" 
+						:class="{processing}"
+						:disabled="processing || !user.email_verified"
+						v-text="'Skapa tjänst'"
+					/>
 				</footer>
 			</section>
 		</form>
@@ -223,7 +233,8 @@
 			...mapGetters({
 				categories: 'categories',
 				regions: 'regions',
-				regionById: 'regionById'
+				regionById: 'regionById',
+				user: 'authUser'
 			}),
 
 			cities() {

@@ -111,6 +111,7 @@ class ContractsController extends Controller
 
         // Try and update the resource
         $this->manager->byUser( $request->user() )
+                      ->forProject($project)
                       ->forContract( $contract )
                       ->update( $data );
 
