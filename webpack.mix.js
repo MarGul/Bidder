@@ -28,6 +28,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .extract(['vue', 'axios', 'moment']);
 
+
 if ( mix.inProduction() ) {
 	mix.version();
 }

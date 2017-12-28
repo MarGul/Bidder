@@ -27,6 +27,9 @@
 							</div>
 						</footer>
 					</section>
+
+					<app-payment :invoice="invoice" />
+
 				</div>
 				<div class="main-area-sidebar">
 					<section class="transparent-contentSection">
@@ -64,15 +67,11 @@
 								</li>
 							</ul>
 							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank" rel="noopener noreferrer">
-								<i class="icon icon_download wh20 mr10"></i> Ladda ner fakturan
+								<i class="icon icon_download wh20 mr10"></i> Ladda ner kvitto
 							</a>
 						</div>
 					</section>
 				</div>
-			</div>
-
-			<div class="alert alert-warning mt30">
-				Här ska payment iFrame finnas
 			</div>
 		</template>
 
@@ -84,8 +83,12 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../../includes/Model';
+	import appPayment from './Payment';
 
 	export default {
+		components: {
+			appPayment
+		},
 		computed: {
 			...mapGetters({
 				fetched: 'userInvoicesFetched',
@@ -96,7 +99,7 @@
 				return this.invoice.payment ? 'Betalad' : 'Förfallodag';
 			},
 			paymentDate() {
-				return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+				return this.invoice.payment ? moment(this.invoice.payment.created_at).format('D MMM YYYY HH:mm') : moment(this.invoice.due).format('LL');
 			},
 			projectTitle() {
 				let me = this.invoice.project.users.find(u => u.id === this.user.id);

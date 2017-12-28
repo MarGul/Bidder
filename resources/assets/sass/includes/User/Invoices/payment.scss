@@ -1,0 +1,147 @@
+.payment_component {
+
+	.payment-methods-container {
+
+		@media screen and (min-width: $screen-sm-min) {
+			display: flex;
+			margin: 0 -15px;
+		}
+
+		.payment-methods {
+			margin-bottom: 15px;
+			border: 2px solid #cfd2d7;
+			border-radius: 4px;
+			padding: 10px 20px;
+			display: flex;
+			cursor: pointer;
+
+
+			@media screen and (min-width: $screen-sm-min) {
+				flex: 1;
+				margin: 0 15px;
+			}
+
+			&.selected {
+				background: #f6f9fc;
+
+				.payment-heading {
+					font-weight: 500;
+				}
+			}
+
+			.payment-select {
+				display: flex;
+				align-items: center;
+
+				.payment-checked-icon {
+					@include mask-icon('../svg/checkmark.svg');
+				}
+
+				.payment-unchecked-icon {
+					@include mask-icon('../svg/circle_shape_outline.svg');
+				}
+			}
+
+			.payment-content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.payment-icon-invoice {
+				@include icon('../svg/invoice.svg');
+				width: 50px;
+				height: 40px;
+				flex: 2;
+			}
+
+			.payment-icon-cc {
+				@include icon('../svg/creditcards.svg');
+				width: 50px;
+				height: 40px;
+				flex: 2;
+			}
+
+			.payment-heading {
+				flex: 1;
+				margin-top: 10px;
+			}
+		}
+	}
+}
+
+/*
+	Single Payment methods
+ */
+.payment-method-container {
+	margin-top: 15px;
+	background: #f6f9fc;
+	padding: 15px 25px;
+	border: 1px solid #e6ebf1;
+	position: relative;
+
+	&:before {
+		content: "";
+		width: 0;
+		height: 0;
+		position: absolute;
+		border-left: 12px solid transparent;
+		border-right: 12px solid transparent;
+		border-bottom: 12px solid #e6ebf1;
+		top: -12px;
+		left: calc(50% - 12px);
+	}
+
+	@media screen and (min-width: 768px) {
+		&.arrow-left:before {
+			left: calc(25% - 18px);
+		}
+
+		&.arrow-right:before {
+			left: 75%;
+		}
+	}
+}
+
+.payment-method-description {
+
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+	}
+
+	.payment-method-description-content {
+
+		p {
+			font-size: 13px;
+		}
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 2;
+			padding-right: 15px;
+		}
+	}
+
+	.payment-method-description-image {
+		margin: 15px 0;
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+			margin: 0;
+			align-self: center;
+		}
+	}
+}
+
+.payment_method_credit_card-component {
+
+	.stripe-button-el {
+		margin-top: 10px;
+
+		span {
+			background: $brand-primary !important;
+			border: none;
+			box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07) !important;
+		}
+	}
+}

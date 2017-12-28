@@ -4,6 +4,7 @@ namespace App\Managers;
 
 use App\Invoice;
 use App\Managers\Traits\ProjectTrait;
+use App\Managers\Traits\InvoiceTrait;
 use Carbon\Carbon;
 use Notification;
 use App\Notifications\SendInvoice;
@@ -11,7 +12,7 @@ use PDF;
 
 class InvoiceManager extends BaseManager
 {
-	use ProjectTrait;
+	use ProjectTrait, InvoiceTrait;
 
 	/**
 	 * The percentage fee that the application takes.
@@ -29,32 +30,11 @@ class InvoiceManager extends BaseManager
 	 */
 	protected $dueDays = 30;	
 	/**
-	 * The invoice that the manager is working with.
-	 * @var App\Invoice
-	 */
-	protected $invoice;
-	/**
-	 * The invoices that the manager has been working with.
-	 * @var Collection
-	 */
-	protected $invoices;
-	/**
 	 * Data structure for holding the costs for the invoice the manager is creating.
 	 * @var array
 	 */
 	protected $invoiceCosts;
 
-
-	/**
-	 * Return the invoice that the manager has been working on.
-	 * @return App\Invoice
-	 */
-	public function invoice() { return $this->invoice; }
-	/**
-	 * Return the invoices that the manager has been working on.
-	 * @return Collection
-	 */
-	public function invoices() { return $this->invoices; }
 
 	/**
 	 * Get a users invoices.
@@ -68,7 +48,7 @@ class InvoiceManager extends BaseManager
 		try {
 			$this->invoices = Invoice::with(['project.users' => function($q) {
 										$q->where('user_id', $this->user->id);
-									 }])
+									 }, 'payment'])
 									 ->where('user_id', $this->user->id)
 									 ->get();
 		} catch (\Exception $e) {
@@ -95,7 +75,7 @@ class InvoiceManager extends BaseManager
 
 		$this->sendInvoice();
 
-		$this->setSuccess('Successfully insert eh invoice into storage.', 201);
+		$this->setSuccess('Successfully inserted the invoice into storage.', 201);
 
 		return true;
 	}

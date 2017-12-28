@@ -203,6 +203,10 @@
 	@include mask-icon('../svg/list.svg');
 }
 
+.icon_lock {
+	@include icon('../svg/lock.svg');
+}
+
 .icon_retweet {
 	@include mask-icon('../svg/retweet.svg');
 }

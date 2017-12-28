@@ -1,0 +1,34 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 339.346 339.346" style="enable-background:new 0 0 339.346 339.346;" xml:space="preserve">
+	<g>
+		<rect y="18.601" style="fill:#D1D3D3;" width="185.888" height="302.145"/>
+		<rect x="46.803" y="54.843" style="fill:#333E48;" width="92.283" height="11"/>
+		<rect x="62.051" y="75.905" style="fill:#333E48;" width="61.786" height="11"/>
+		<rect x="21.765" y="127.904" style="fill:#5C6670;" width="142.359" height="9"/>
+		<rect x="21.765" y="153.025" style="fill:#5C6670;" width="142.359" height="9"/>
+		<rect x="27.73" y="196.238" style="fill:#5C6670;" width="76.43" height="9"/>
+		<rect x="27.73" y="220.238" style="fill:#5C6670;" width="76.43" height="9"/>
+		<rect x="27.73" y="244.238" style="fill:#5C6670;" width="76.43" height="9"/>
+		<rect x="27.73" y="268.238" style="fill:#5C6670;" width="76.43" height="9"/>
+		<rect x="127.729" y="196.238" style="fill:#333E48;" width="30.43" height="9"/>
+		<rect x="127.729" y="220.238" style="fill:#333E48;" width="30.43" height="9"/>
+		<rect x="127.729" y="244.238" style="fill:#333E48;" width="30.43" height="9"/>
+		<rect x="127.729" y="268.238" style="fill:#333E48;" width="30.43" height="9"/>
+	</g>
+	<g>
+		
+			<rect x="135.539" y="146.634" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 538.8729 169.3377)" style="fill:#006132;" width="197.653" height="99.278"/>
+		
+			<rect x="200.799" y="113.516" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 261.3057 500.7798)" style="fill:#00783E;" width="67.137" height="165.512"/>
+		
+			<ellipse transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 261.2996 500.782)" style="fill:#006132;" cx="234.365" cy="196.274" rx="24.011" ry="17.896"/>
+	</g>
+	<g>
+		<circle style="fill:#D9A460;" cx="213.191" cy="134.504" r="36.424"/>
+		<circle style="fill:#FEDD3D;" cx="213.191" cy="134.504" r="25.986"/>
+	</g>
+	<g>
+		<circle style="fill:#5C6670;" cx="249.254" cy="55.451" r="28.08"/>
+		<circle style="fill:#D1D3D3;" cx="249.254" cy="55.451" r="20.033"/>
+	</g>
+</svg>
