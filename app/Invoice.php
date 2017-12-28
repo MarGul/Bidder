@@ -13,8 +13,15 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'project_id', 'hash', 'total', 'vat', 'due', 'notes'
+    	'user_id', 'project_id', 'payment_id', 'hash', 'total', 'vat', 'due', 'notes'
     ];
+
+    /**
+     * Attributes that are hidden when toArray
+     *
+     * @var array
+     */
+    protected $hidden = ['payment_id'];
 
     /**
      * An invoice belongs to a user.

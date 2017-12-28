@@ -10,12 +10,9 @@
 */
 
 Route::get('/test', function() {
-	$service = App\Service::find(1);
-	$bid = App\Bid::find(1);
+	$project = App\Project::find(1);
 
-	app(App\Managers\BidManager::class)->forService($service)
-										->forBid($bid)
-										->accept();
+	app(App\Managers\InvoiceManager::class)->forProject($project)->create();
 });
 
 /**

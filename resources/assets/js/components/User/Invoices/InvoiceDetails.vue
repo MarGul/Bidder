@@ -99,7 +99,7 @@
 				return this.invoice.payment ? 'Betalad' : 'Förfallodag';
 			},
 			paymentDate() {
-				return this.invoice.payment ? '' : moment(this.invoice.due).format('LL');
+				return this.invoice.payment ? moment(this.invoice.payment.created_at).format('D MMM YYYY HH:mm') : moment(this.invoice.due).format('LL');
 			},
 			projectTitle() {
 				let me = this.invoice.project.users.find(u => u.id === this.user.id);

@@ -21,6 +21,8 @@
 				</div>
 			</div>
 
+			<div class="alert alert-danger mt10" v-if="error" v-text="errorMessage"></div>
+
 			<button 
 				type="button" 
 				class="btn btn-primary mt10" 
@@ -35,8 +37,14 @@
 </template>
 
 <script>
+	import Model from '../../../includes/Model';
+	
 	export default {
 		props: {
+			invoiceId: {
+				type: Number,
+				required: true
+			},
 			amount: {
 				type: Number,
 				required: true
@@ -44,6 +52,8 @@
 		},
 		data() {
 			return {
+				error: false,
+				errorMessage: '',
 				processing: true
 			}
 		},
@@ -64,9 +74,30 @@
 					allowRememberMe: false,
 					currency: 'sek',
 					email: 'mackan@mack.com',
+					panelLabel: `Betala {{amount}}`,
 					token: (token) => {
 						this.processing = true;
-						console.log(token);
+						
+						new Model(`payments/stripe`).post({invoice: this.invoiceId, token: token})
+							.then(response => {
+								let invoices = this.$store.getters.userInvoices;
+								for ( let i = 0; i < invoices.length; i++) {
+									if ( invoices[i].id === this.invoiceId ) {
+										invoices[i].payment = response.data.payment;
+									}
+								}
+								this.$store.commit('SET_USER_INVOICES', invoices);
+								
+								this.$store.dispatch('showNotification', {type: 'success', msg: 'Din betalning har blivit mottagen.'});
+								this.error = false;
+								this.errorMessage = false;
+								this.processing = false;
+							})
+							.catch(error => {
+								this.error = true;
+								this.errorMessage = error.message;
+								this.processing = false;
+							});
 					}
 				});
 			}
@@ -80,7 +111,7 @@
 			stripe.onload = () => {
 				this.handler = StripeCheckout.configure({
 					key: 'pk_test_yXsbQM0R6fq2kdNKGqhtkhCP',
-					locale: 'auto'
+					locale: 'sv'
 				});
 				this.processing = false;
 			}

@@ -49,8 +49,8 @@
 				this.$router.push(`/user/invoices/${invoice.id}`);
 			},
 			paymentStatus(invoice) {
-				let paymentText = invoice.payment_id ? 'Betalad' : 'Förfaller';
-				let paymentDate =  invoice.payment_id ? '' : moment(invoice.due).format('LL');
+				let paymentText = invoice.payment ? 'Betalad' : 'Förfaller';
+				let paymentDate =  invoice.payment ? moment(invoice.payment.created_at).format('LLL') : moment(invoice.due).format('LL');
 				
 				return `${paymentText} den ${paymentDate}`
 			}
