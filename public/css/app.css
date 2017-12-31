@@ -569,6 +569,10 @@ a {
   }
 }
 
+.contentSection-heading {
+  font-size: 16px;
+}
+
 @media screen and (min-width: 992px) {
   .main-area-with-sidebar {
     display: -webkit-box;
@@ -4415,6 +4419,106 @@ body.mobile-nav-open .overlay {
 
 .project_accept-component .project-user .acceptance-status-container .acceptance-buttons-container {
   margin-top: 5px;
+}
+
+.project-users-action-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.project-users-action-container .action-part.action-time-container {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+  margin: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .project-users-action-container .action-part.action-time-container {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin: 0;
+  }
+}
+
+.project-users-action-container .action-part.action-time-container .timer-component {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.project-users-action-container .action-part.user-me {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+@media screen and (min-width: 768px) {
+  .project-users-action-container .action-part.user-me {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+}
+
+.project-users-action-container .action-part.user-other {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.project-users-action-container .project-user {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .project-users-action-container .project-user {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+
+.project-users-action-container .project-user .user-username {
+  font-weight: 500;
+  color: #009999;
+}
+
+.project-users-action-container .project-user .user-avatar {
+  width: 75px;
+  height: 75px;
+  margin: 10px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+          box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
 }
 
 .invoice_details-component .invoice-totals-container {

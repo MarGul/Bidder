@@ -125,6 +125,9 @@
 // Info Accept for projects
 @import "includes/User/Projects/project-accept.scss";
 
+// Project user actions (used on accept and project running)
+@import "includes/User/Projects/project-user-action.scss";
+
 // Invoice
 @import "includes/User/Invoices/invoice-details.scss";
 @import "includes/User/Invoices/payment.scss";
