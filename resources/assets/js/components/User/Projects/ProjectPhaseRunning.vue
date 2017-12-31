@@ -18,14 +18,33 @@
 					</template>
 					
 					<template slot="me-status">
-						<div class="gray-sub-text mb10">Är projketet avslutat?</div>
-						<button type="button" class="btn btn-primary" @click="complete">
-							Ja
-						</button>
+						<div class="gray-sub-text mb5">Slutfört?</div>
+						<template v-if="me.pivot.completed">
+							<div class="is-flex c_c">
+								<i class="icon icon_confirmed wh15 mr5 cursor-default"></i> <span>Ja</span>
+							</div>
+						</template>
+						<template v-else>
+							<button type="button" class="btn btn-primary" @click="complete">
+								<div class="is-flex c_c">
+									<i class="icon icon_checkbox_checked white wh12 mr10"></i> <span>Ja</span>
+								</div>
+							</button>
+						</template>
 					</template>
 
 					<template slot="other-status">
-						<div class="gray-sub-text mb10">Markerat som avslutat</div>
+						<div class="gray-sub-text mb5">Slutfört?</div>
+						<template v-if="other.pivot.completed">
+							<div class="is-flex c_c">
+								<i class="icon icon_confirmed wh15 mr5"></i> <span>Ja</span>
+							</div>
+						</template>
+						<template v-else>
+							<div class="is-flex c_c">
+								<i class="icon icon_decline wh15 mr5"></i> <span>Nej</span>
+							</div>
+						</template>
 					</template>
 
 				</app-project-user-actions>

@@ -136,6 +136,10 @@
 	@include mask-icon('../svg/down_chevron.svg');
 }
 
+.icon_decline {
+	@include icon('../svg/decline.svg');
+}
+
 .icon_danger {
 	@include icon('../svg/danger.svg');
 }
