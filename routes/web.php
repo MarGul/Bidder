@@ -12,7 +12,8 @@
 Route::get('/test', function() {
 	$project = App\Project::find(1);
 
-	app(App\Managers\InvoiceManager::class)->forProject($project)->create();
+	$test = new \Carbon\Carbon($project->service_end);
+	dd($test);
 });
 
 /**

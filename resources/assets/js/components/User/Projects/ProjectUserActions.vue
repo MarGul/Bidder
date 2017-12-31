@@ -7,10 +7,8 @@
                 <slot name="me-status"></slot>
             </div>
         </div>
-        <div class="action-part action-time-container">
-            <slot name="action-end-text"></slot>
-            <app-timer :ends="actionEnds" />
-            <div class="gray-sub-text">den {{ timeEnds }}</div>
+        <div class="action-part action-type-container">
+            <slot name="action-type-container"></slot>
         </div>
         <div class="action-part project-user user-other">
             <div class="user-username" v-text="other.username"></div>
@@ -23,36 +21,15 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import appTimer from '../../Includes/Timer';
-
     export default {
-        components: {
-			appTimer
-        },
         props: {
-            actionEnds: {
+            me: {
+                type: Object,
                 required: true
             },
-            actionEndsDisplayTime: {
-                type: Boolean,
-                required: false,
-                default: true
-            }
-        },
-        computed: {
-            ...mapGetters({
-                auth: 'authUser',
-                project: 'userProjectDetails'
-            }),
-            me() {
-				return this.project.users.find(u => u.id === this.auth.id);
-			},
-			other() {
-				return this.project.users.find(u => u.id !== this.auth.id);
-            },
-            timeEnds() {
-                return this.actionEndsDisplayTime ? this.filters.time(this.actionsEnds) : this.filters.date(this.actionEnds);
+            other: {
+                type: Object,
+                required: true
             }
         }
     }

@@ -276,7 +276,7 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
-	 * Accept a project.
+	 * The user has accepted the project.
 	 * 
 	 * @return boolean
 	 */
@@ -312,7 +312,7 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
-	 * Cancel a project.
+	 * The user has cancelled the project.
 	 * 
 	 * @return boolean
 	 */
@@ -341,6 +341,40 @@ class ProjectManager extends BaseManager
 
 		
 		$this->setSuccess('Successfully cancelled the project.', 200);
+
+		return true;
+	}
+
+	/**
+	 * The user has completed the project.
+	 *
+	 * @return void
+	 */
+	public function complete()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			// Mark the user that completed.
+			$this->project->users()->updateExistingPivot($this->user->id, ['completed' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as completed.', 500);
+			return false;
+		}
+
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('complete', ['user' => $this->user->username]);
+
+
+		// If all users on the project has marked the project as completed, or the time has run out,
+		// we should mark the full project as completed.
+		if ( $this->isCompleted() ) {
+			if ( !$this->completed() ) return false;
+		}
+
+		// Send out a notification
+
+		$this->setSuccess('Successfully completed the project.', 200);
 
 		return true;
 	}
@@ -432,6 +466,57 @@ class ProjectManager extends BaseManager
 		// Add a history record that the project has been started.
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('started');
+
+		return true;
+	}
+
+	/**
+	 * Check to see if a project is completed or not.
+	 *
+	 * @return boolean
+	 */
+	protected function isCompleted()
+	{
+		// If the time has run out for the project, it's completed.
+		$ends = new Carbon($this->project->service_end);
+		if ( Carbon::now() > $ends ) return true;
+
+		// If all the projects users has marked it as completed, it's completed.
+		try {
+			$this->project->load('users');
+		} catch ( \Exception $e ) {
+			$this->setError('Could not load users when seeing if the project is completed.', 500);
+			return false;
+		}
+		
+		// Loop through each user for the project.
+		foreach ($this->project->users as $user) {
+			// If one of them still haven't accepted we shouldn't start.
+			if ( !$user->pivot->completed ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Fully complete a project.
+	 *
+	 * @return boolean
+	 */
+	protected function completed()
+	{
+		try {
+			$this->project->update(['completed' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as completed.', 500);
+			return false;
+		}
+
+		// Add a history record that the project has been started.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('completed');
 
 		return true;
 	}
