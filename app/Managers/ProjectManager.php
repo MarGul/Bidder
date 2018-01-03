@@ -374,10 +374,10 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
-	 * This is run from a job. We should mark projects as cancelled where the time has run out for 
-	 * acceptance. 
+	 * This is run from a job. 
+	 * We should mark projects as cancelled where the time has run out for acceptance. 
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	public function cancelProjects()
 	{
@@ -388,7 +388,8 @@ class ProjectManager extends BaseManager
 
 			foreach ( $this->projects as $project ) {
 				$this->project = $project;
-				$this->cancel();
+
+				if ( !$this->cancel() ) throw new Exception;
 			}
 		} catch ( \Exception $e ) {
 			$this->setError('Could not fetch the projects that should be cancelled.', 500);
@@ -401,11 +402,37 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
+	 * Complete a project
+	 *
+	 * @return boolean
+	 */
+	public function complete()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			$this->project->update(['completed' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as completed.', 500);
+			return false;
+		}
+
+		// Add a history record that the project has been started.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('completed');
+
+		
+		// Send out a notification
+
+		return true;
+	}
+
+	/**
 	 * The user has completed the project.
 	 *
 	 * @return void
 	 */
-	public function complete()
+	public function completedByUser()
 	{
 		if ( $this->hasError() ) return false;
 
@@ -418,18 +445,46 @@ class ProjectManager extends BaseManager
 		}
 
 		$this->projectHistoryManager->forProject($this->project->id)
-									->add('complete', ['user' => $this->user->username]);
+									->add('completedByUser', ['user' => $this->user->username]);
 
 
 		// If all users on the project has marked the project as completed, or the time has run out,
 		// we should mark the full project as completed.
 		if ( $this->isCompleted() ) {
-			if ( !$this->completed() ) return false;
+			if ( !$this->complete() ) return false;
 		}
 
 		// Send out a notification
 
 		$this->setSuccess('Successfully completed the project.', 200);
+
+		return true;
+	}
+
+	/**
+	 * Run from a job.
+	 * Mark projects that are completed as completed.
+	 *
+	 * @return void
+	 */
+	public function completeProjects()
+	{
+		try {
+			$this->projects = Project::where('started', true)
+									 ->where('service_end', '<', Carbon::now())
+									 ->get();
+
+			foreach ( $this->projects as $project ) {
+				$this->project = $project;
+
+				if ( !$this->complete() ) throw new Exception;
+			}
+		} catch ( \Exception $e ) {
+			$this->setError('Could not fetch projects for completion.', 500);
+			return false;
+		}
+
+		$this->setSuccess('Successfully marked projects that should be completed.', 200);
 
 		return true;
 	}
@@ -551,27 +606,6 @@ class ProjectManager extends BaseManager
 				return false;
 			}
 		}
-
-		return true;
-	}
-
-	/**
-	 * Fully complete a project.
-	 *
-	 * @return boolean
-	 */
-	protected function completed()
-	{
-		try {
-			$this->project->update(['completed' => true]);
-		} catch ( \Exception $e ) {
-			$this->setError('Could not mark the project as completed.', 500);
-			return false;
-		}
-
-		// Add a history record that the project has been started.
-		$this->projectHistoryManager->forProject($this->project->id)
-									->add('completed');
 
 		return true;
 	}

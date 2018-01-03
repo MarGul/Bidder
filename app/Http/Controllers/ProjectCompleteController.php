@@ -34,7 +34,7 @@ class ProjectCompleteController extends Controller
 		// Try to complete the project.
 		$this->manager->byUser($request->user())
 					  ->forProject($project)
-					  ->complete();
+					  ->completedByUser();
 
 		if ( $this->manager->hasError() ) {
 			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
