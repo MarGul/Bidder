@@ -35,7 +35,7 @@ class ProjectCancelController extends Controller
 		// Try to cancel the project.
 		$this->manager->byUser($request->user())
 					  ->forProject($project)
-					  ->cancel();
+					  ->cancelledByUser();
 
 		if ( $this->manager->hasError() ) {
 			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());

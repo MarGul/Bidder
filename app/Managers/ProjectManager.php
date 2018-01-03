@@ -312,8 +312,8 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
-	 * The user has cancelled the project.
-	 * 
+	 * Cancel a project.
+	 *
 	 * @return boolean
 	 */
 	public function cancel()
@@ -323,16 +323,44 @@ class ProjectManager extends BaseManager
 		try {
 			// Mark the project as cancelled.
 			$this->project->update(['cancelled' => true]);
-			// Set the user that cancelled.
-			$this->project->users()->updateExistingPivot($this->user->id, ['cancelled' => true]);
 		} catch ( \Exception $e ) {
 			$this->setError('Could not mark the project as cancelled.', 500);
 			return false;
 		}
-		
+
 		// Insert a project history record that the project was cancelled.
 		$this->projectHistoryManager->forProject($this->project->id)
-									->add('cancelled', ['user' => $this->user->username]);
+									->add('cancelled');
+
+		// Should send out notification that is was cancelled.
+
+		$this->setSuccess('Successfully cancelled the project.', 200);
+
+		return true;
+	}
+
+	/**
+	 * The user has cancelled the project.
+	 * 
+	 * @return boolean
+	 */
+	public function cancelledByUser()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			// Mark the project as cancelled.
+			$this->project->update(['cancelled' => true]);
+			// Set the user that cancelled.
+			$this->project->users()->updateExistingPivot($this->user->id, ['cancelled' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as cancelled by user.', 500);
+			return false;
+		}
+		
+		// Insert a project history record that the project was cancelled by the user.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('cancelledByUser', ['user' => $this->user->username]);
 
 		// Send out notification to the other users that you cancelled the project.
 		Notification::send($this->otherUsers(), new ProjectCancelled(
@@ -340,7 +368,34 @@ class ProjectManager extends BaseManager
 		));
 
 		
-		$this->setSuccess('Successfully cancelled the project.', 200);
+		$this->setSuccess('Successfully marked the project as cancelled for a user.', 200);
+
+		return true;
+	}
+
+	/**
+	 * This is run from a job. We should mark projects as cancelled where the time has run out for 
+	 * acceptance. 
+	 *
+	 * @return void
+	 */
+	public function cancelProjects()
+	{
+		try {
+			$this->projects = Project::where('started', false)
+									 ->where('accept_ends', '<', Carbon::now())
+									 ->get();
+
+			foreach ( $this->projects as $project ) {
+				$this->project = $project;
+				$this->cancel();
+			}
+		} catch ( \Exception $e ) {
+			$this->setError('Could not fetch the projects that should be cancelled.', 500);
+			return false;
+		}
+
+		$this->setSuccess('Successfully marked projects that should be cancelled.', 200);
 
 		return true;
 	}
