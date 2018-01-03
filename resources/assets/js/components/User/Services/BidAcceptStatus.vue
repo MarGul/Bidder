@@ -34,6 +34,8 @@
 										type: 'success', 
 										msg: 'Woohoo! Budet var accepterat. Vi har skapat ett nytt projekt åt dig som du hittar under "Mina projekt".'
 									});
+									// Break the cache for you services as well.
+									this.$store.commit('SET_USER_SERVICES_FETCHED', false);
 									// Set the projects fetched to false so we break the cache.
 									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									this.$store.dispatch('bidAccepted', {id: this.bid.id});

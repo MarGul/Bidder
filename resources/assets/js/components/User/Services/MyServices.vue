@@ -8,7 +8,7 @@
 			<div class="white-contentSection-content">
 				<template v-if="fetched">
 					<ul class="items-list" v-if="services.length > 0">
-						<li class="gray-item clickable" v-for="service in services" @click="goTo(service)">
+						<li class="gray-item clickable" v-for="service in services" :key="service.id" @click="goTo(service)">
 							<div class="item-content">
 								<div class="item-header" v-text="service.title"></div>
 								<div class="item-sub-data">

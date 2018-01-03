@@ -43,6 +43,10 @@ const actions = {
 			}
 		});
 		commit('SET_USER_SERVICE_DETAILS_BIDS', bids);
+		// Set the service to not be active anymore.
+		let service = state.service;
+		service.active = false;
+		commit('SET_USER_SERVICE_DETAILS_SERVICE', service);
 	},
 	clearServiceDetailsState({commit}) {
 		commit('SET_USER_SERVICE_DETAILS_FETCHED', false);
