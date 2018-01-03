@@ -27,15 +27,27 @@ class ProjectCompleteController extends Controller
 	 * @param  Project 	$project
 	 * @return Illuminate\Http\Response
 	 */
-	public function update(Project $project)
+	public function update(Request $request, Project $project)
 	{
 		$this->authorize('in-project', $project);
 
-		if ( !$this->manager->complete($project) ) {
-			return response()->json(['message' => 'Could not complete the project'], 500);
+		// Try to complete the project.
+		$this->manager->byUser($request->user())
+					  ->forProject($project)
+					  ->completedByUser();
+
+		if ( $this->manager->hasError() ) {
+			return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
 		}
 
-		return response()->json(['message' => 'Successfully completed the project'], 200);
+		return response()->json([
+			'message' => $this->manager->successMessage(),
+			'data' => [
+				'completed' => $this->manager->project()->completed,
+				'userCompletedId' => $this->manager->user()->id,
+				'history' => $this->manager->history(),
+			]
+		], $this->manager->successCode());
 	}
 
 }

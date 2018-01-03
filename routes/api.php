@@ -50,16 +50,14 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::patch('projects/{project}/details')->uses('ProjectDetailsController@update');
 	/* Update a projects title */
 	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
-	/* Accept the start of a project */
-	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
 	/* Use contract for a project */
 	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
 	/* Remove the use of contract for a project */
 	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
+	/* Accept the start of a project */
+	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
 	/* Cancel a project */
 	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
-	/* Start a project */
-	Route::put('projects/{project}/start')->uses('ProjectStartController@update');
 	/* Complete a project */
 	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
 	/* Submit a review for a user */

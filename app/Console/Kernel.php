@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\CompleteProjects::class
+        Commands\ProjectsCancelled::class,
+        Commands\ProjectsCompleted::class,
     ];
 
     /**
@@ -24,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Where the acceptance time has run out, mark the project as cancelled.
+        $schedule->command('projects:cancelled')->everyMinute();
+        // When the time has run out for the project, mark it as completed.
+        $schedule->command('projects:completed')->everyMinute();
     }
 
     /**

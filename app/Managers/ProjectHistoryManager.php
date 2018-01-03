@@ -19,9 +19,12 @@ class ProjectHistoryManager
 	 */
 	protected $entries = [
 		'created' => ['type' => 'info', 'message' => 'Projektet skapades.'],
-		'cancelled' => ['type' => 'critical', 'message' => '{user} accepterade inte projektets start.'],
+		'cancelled' => ['type' => 'critical', 'message' => 'Projektet blev ej accepterat.'],
+		'cancelledByUser' => ['type' => 'critical', 'message' => '{user} accepterade inte projektets start.'],
 		'accepted' => ['type' => 'info', 'message' => '{user} accepterade projektets start.'],
 		'started' => ['type' => 'success', 'message' => 'Projektet startades.'],
+		'completed' => ['type' => 'success', 'message' => 'Projektet slutfördes.'],
+		'completedByUser' => ['type' => 'success', 'message' => '{user} markerade projektet som slutfört.'],
 		'updateDetails' => ['type' => 'warning', 'message' => '{user} uppdaterade projektets detaljer.'],
 		'leftReview' => ['type' => 'success', 'message' => '{user} lämnade ett ömdöme.'],
 		'useContract' => ['type' => 'warning', 'message' => '{user} vill använda ett avtal.'],

@@ -105,6 +105,18 @@ const actions = {
 		project.users.find(u => u.id === payload.userCancelledId).pivot.cancelled = true;
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	completeProject({commit, state}, payload) {
+		let project = state.project;
+		// Cancel the project.
+		project.completed = payload.completed;
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		// Set the user that completed that he has.
+		project.users.find(u => u.id === payload.userCompletedId).pivot.completed = true;
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	reviewSubmitted({commit, state}, payload) {
 		let project = state.project;
 		project.users.find(u => u.id === payload.user.id).pivot.review = payload.review.id;
