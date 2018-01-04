@@ -5,7 +5,7 @@
 			<section class="white-contentSection">
 				<header class="white-contentSection-header is-gray is-flex v-center">
 					<h3 class="flex-1">Projektets avtal</h3>
-					<contract-download />
+					<contract-download v-if="project.contracts.length" />
 				</header>
 				<div class="white-contentSection-content">
 
@@ -175,9 +175,21 @@
 
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
-						Uppdatera avtalet
-					</button>
+					<div class="other-accepted-contract">
+						<div class="is-flex c_c">
+							<i class="icon icon_confirmed wh15 mr5"></i> Elon har godkänt avtalet
+						</div>
+					</div>
+					<div class="btn-accept-contract">
+						<button type="button" class="btn btn-success">
+							Godkänn avtalet
+						</button>
+					</div>
+					<div class="btn-update-contract">
+						<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
+							Uppdatera avtalet
+						</button>
+					</div>		
 				</footer>
 			</section>
 		</form>
