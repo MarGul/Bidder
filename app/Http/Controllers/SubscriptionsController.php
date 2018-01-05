@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Managers\SubscriptionManager;
 use App\Subscription;
 
-class SubscriptionController extends Controller
+class SubscriptionsController extends Controller
 {
 
     /**

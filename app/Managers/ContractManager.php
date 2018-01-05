@@ -45,14 +45,17 @@ class ContractManager extends BaseManager
 	 */
 	public function create($data)
 	{
-		if ( $this->hasError() ) return false;
-
-		if ( $this->projectContractExists() ) return false;
+		if ( $this->hasError() || $this->projectContractExists() ) return false;
 
 		if ( !$this->setData($data)->insert() )  return false;
 
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('updatedContract', ['user' => $this->user->username]);
+
+		// Send out notification to other users that the contract has been updated.
+		Notification::send($this->otherUsers(), new ProjectContractUpdated(
+			$this->project, $this->contract, $this->history()
+		));
 
 		$this->setSuccess('Successfully inserted the contract into storage.', 201);
 

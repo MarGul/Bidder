@@ -84,7 +84,7 @@ class ContractsController extends Controller
      */
     public function update(Request $request, Contract $contract)
     {
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'client_name' => 'required',
             'client_identity' => 'required',
             'contractor_name' => 'required', 
@@ -102,12 +102,6 @@ class ContractsController extends Controller
 
         $project = Project::findOrFail($contract->project_id);
         $this->authorize('in-project', $project);
-
-        // Fixed for 5.5
-        $data = $request->only([
-            'client_name','client_identity','contractor_name','contractor_identity','project_description','contractor_dissuasion', 
-            'project_start','project_end','project_price','project_price_specified','payment_full','payment_specified','other'
-        ]);
 
         // Try and update the resource
         $this->manager->byUser( $request->user() )

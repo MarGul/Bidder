@@ -34,45 +34,59 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::post('bids/{bid}/accept')->uses('BidAcceptController@create');
 	/* A users services */
 	Route::resource('user/services', 'UserServicesController', ['except' => ['create']]);
-	/* Get a users bids */
-	Route::get('user/bids')->uses('UserBidsController@index');
-	/* Get a user bid */
-	Route::get('user/bids/{bid}')->uses('UserBidsController@show');
-	/* Delete a user bid */
-	Route::delete('user/bids/{bid}')->uses('UserBidsController@destroy');
-	/* Get a users projects */
-	Route::get('user/projects')->uses('UserProjectsController@index');
-	/* Get a user project */
-	Route::get('user/projects/{project}')->uses('UserProjectsController@show');
-	/* Create and show messages for a project */
-	Route::post('projects/{project}/messages')->uses('ProjectMessagesController@store');
-	/* Update a projects details */
-	Route::patch('projects/{project}/details')->uses('ProjectDetailsController@update');
-	/* Update a projects title */
-	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
-	/* Use contract for a project */
-	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
-	/* Remove the use of contract for a project */
-	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
-	/* Accept the start of a project */
-	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
-	/* Cancel a project */
-	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
-	/* Complete a project */
-	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
-	/* Submit a review for a user */
-	Route::post('reviews')->uses('ReviewsController@store');
-	/* Create a contract */
-	Route::post('contracts')->uses('ContractsController@store');
-	/* Update a contract */
-	Route::patch('contracts/{contract}')->uses('ContractsController@update');
-	/* Handle subscriptions */
-	Route::resource('subscriptions', 'SubscriptionController', ['only' => ['index', 'store', 'destroy']]);
-	/* Show the users invoices */
-	Route::get('invoices')->uses('UserInvoiceController@index');
-	/* Payment methods */
-	Route::post('payments/stripe')->uses('PaymentStripeController@store');
-	/* Handle the users notification settings. */
+	
+
+	/**
+	 * Handle the users notification settings
+	 */
 	Route::get('user/notification-settings')->uses('UserNotificationSettingsController@index');
 	Route::patch('users/notification-settings')->uses('UserNotificationSettingsController@update');
+	
+	/**
+	 * Handle the users bids
+	 */
+	Route::get('user/bids')->uses('UserBidsController@index');
+	Route::get('user/bids/{bid}')->uses('UserBidsController@show');
+	Route::delete('user/bids/{bid}')->uses('UserBidsController@destroy');
+	
+	/**
+	 * Handle Projects
+	 */
+	Route::get('user/projects')->uses('UserProjectsController@index');
+	Route::get('user/projects/{project}')->uses('UserProjectsController@show');
+	Route::post('projects/{project}/messages')->uses('ProjectMessagesController@store');
+	Route::patch('projects/{project}/details')->uses('ProjectDetailsController@update');
+	Route::put('projects/{project}/title')->uses('ProjectTitleController@update');
+	Route::put('projects/{project}/use-contract')->uses('ProjectUseContractController@update');
+	Route::delete('projects/{project}/use-contract')->uses('ProjectUseContractController@destroy');
+	Route::put('projects/{project}/accept')->uses('ProjectAcceptController@update');
+	Route::put('projects/{project}/cancel')->uses('ProjectCancelController@update');
+	Route::put('projects/{project}/complete')->uses('ProjectCompleteController@update');
+	
+	/**
+	 * Handle Reviews
+	 */
+	Route::post('reviews')->uses('ReviewsController@store');
+	
+	/**
+	 * Handle contracts
+	 */
+	Route::post('contracts')->uses('ContractsController@store');
+	Route::patch('contracts/{contract}')->uses('ContractsController@update');
+	Route::put('contracts/{contract}/accept')->uses('ContractsAcceptController@update');
+	
+	/**
+	 * Handle subscriptions
+	 */
+	Route::get('subscriptions')->uses('SubscriptionsController@index');
+	Route::post('subscriptions')->uses('SubscriptionsController@store');
+	Route::delete('subscriptions/{subscription}')->uses('SubscriptionsController@destroy');
+	
+	/**
+	 * Handle invoices and payments
+	 */
+	Route::get('invoices')->uses('UserInvoicesController@index');
+	Route::post('payments/stripe')->uses('PaymentStripeController@store');
+
+	
 });

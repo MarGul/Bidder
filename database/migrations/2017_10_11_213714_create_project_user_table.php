@@ -21,6 +21,7 @@ class CreateProjectUserTable extends Migration
             $table->string('title');
             $table->integer('review')->nullable();
             $table->boolean('use_contract')->default(false);
+            $table->boolean('contract_accepted')->default(false);
             $table->boolean('accepted')->default(false);
             $table->boolean('cancelled')->default(false);
             $table->boolean('completed')->default(false);

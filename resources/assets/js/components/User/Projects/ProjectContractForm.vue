@@ -1,7 +1,7 @@
 <template>
 	<div class="project_contract_form-component">
 		
-		<form class="form-with-sections" @submit.prevent="send">
+		<form class="form-with-sections">
 			<section class="white-contentSection">
 				<header class="white-contentSection-header is-gray is-flex v-center">
 					<h3 class="flex-1">Projektets avtal</h3>
@@ -176,19 +176,32 @@
 				</div>
 				<footer class="white-contentSection-footer">
 					<div class="other-accepted-contract">
-						<div class="is-flex c_c">
-							<i class="icon icon_confirmed wh15 mr5"></i> Elon har godkänt avtalet
+						<div class="is-flex c_c gray-sub-text">
+							<template v-if="other.pivot.contract_accepted">
+								<i class="icon icon_confirmed wh12 mr5"></i> {{ other.username }} har godkänt avtalet
+							</template>
+							<template v-else>
+								<i class="icon icon_decline wh12 mr5"></i> {{ other.username }} har inte godkänt avtalet
+							</template>
 						</div>
 					</div>
-					<div class="btn-accept-contract">
-						<button type="button" class="btn btn-success">
-							Godkänn avtalet
-						</button>
+					<div class="btn-accept-contract" v-if="project.contracts.length">
+						<button 
+							type="submit" 
+							class="btn btn-success"
+							v-text="'Godkänn avtalet'"
+							@click.prevent="accept"	
+						/>
 					</div>
 					<div class="btn-update-contract">
-						<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
-							Uppdatera avtalet
-						</button>
+						<button 
+							type="submit" 
+							class="btn btn-primary" 
+							:class="{processing}" 
+							:disabled="processing"
+							v-text="'Uppdatera avtalet'"
+							@click.prevent="update"
+						/>
 					</div>		
 				</footer>
 			</section>
@@ -233,15 +246,19 @@
 		},
 		computed: {
 			...mapGetters({
-				project: 'userProjectDetails'
+				project: 'userProjectDetails',
+				auth: 'authUser'
 			}),
 			updating() {
 				// Are we updating an existing contract?
 				return this.contract_id ? true : false;
+			},
+			other() {
+				return this.project.users.find(u => u.id !== this.auth.id);
 			}
 		},
 		methods: {
-			send() {
+			update() {
 				this.processing = true;
 				let requestUrl = this.updating ? `contracts/${this.contract_id}` : 'contracts';
 				let requestMethod = this.updating ? 'patch' : 'post';
@@ -250,15 +267,48 @@
 					.then(response => {
 						this.$store.dispatch('projectContractUpdated', {contract: response.data.contract, history: response.data.history});
 						this.processing = false;
-						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har uppdaterat avtalet!'});
-						window.scrollTo(0,0);
+						this.updating = true;
+						this.contract_id = response.data.contract.id;
+						this.$store.dispatch('showNotification', {
+							type: 'success', 
+							msg: 'Vi har uppdaterat avtalet! Du kan nu godkänna avtalet.'
+						});
+						document.body.scrollTop = document.documentElement.scrollTop = 0;
 					})
 					.catch(error => {
+						document.body.scrollTop = document.documentElement.scrollTop = 0;
 						this.form.errors.record(error.errors);
 						this.processing = false;
-						window.scrollTo(0,0);
+						this.$store.dispatch('showNotification', {type: 'error', msg: 'Valideringsfel. Var vänlig och korrigera fälten med röd text.'});
 					});
 
+			},
+			accept() {
+				this.$store.dispatch('openModal', {
+					component: 'confirm',
+					data: {
+						confirmText: 'Är du säker på att du vill godkänna avtalet?',
+						onConfirm: () => {
+							new Model(`contracts/${this.contract_id}/accept`).put()
+								.then(response => {
+									this.$store.dispatch('showNotification', {type: 'success', msg: 'Du har nu godkänt avtalet!'});
+									// Set the projects fetched to false so we break the cache.
+									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
+									// Update the state of the project
+									this.$store.dispatch('acceptProject', {
+										started: response.data.started,
+										userAcceptedId: response.data.userAcceptedId,
+										history: response.data.history
+									});
+
+									this.$store.dispatch('closeModal');
+								})
+								.catch(error => {
+									console.log(error);
+								});
+						}
+					}
+				});
 			},
 			initCreateContract() {         
 				this.form.project_id = this.project.id;
