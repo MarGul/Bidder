@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contract;
+use App\Project;
 use App\Managers\ContractManager;
 
 class ContractsAcceptController extends Controller
@@ -48,7 +49,8 @@ class ContractsAcceptController extends Controller
         return response()->json([
             'message' => $this->manager->successMessage(),
             'data' => [
-
+                'userAcceptedId' => $this->manager->user()->id,
+                'history' => $this->manager->history()
             ]
         ], $this->manager->successCode());
     }

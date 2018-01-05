@@ -130,6 +130,15 @@ const actions = {
 		let project = state.project;
 		project.messages.unshift(payload.message);
 		commit('SET_USER_PROJECT_DETAILS', project);
+	},
+	acceptContract({commit, state}, payload) {
+		let project = state.project;
+		project.users.find(u => u.id === payload.userAcceptedId).pivot.contract_accepted = true;
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 }
 

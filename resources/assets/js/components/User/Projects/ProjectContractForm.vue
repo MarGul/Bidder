@@ -189,7 +189,8 @@
 						<button 
 							type="submit" 
 							class="btn btn-success"
-							v-text="'Godkänn avtalet'"
+							:disabled="!!me.pivot.contract_accepted"
+							v-text="!!me.pivot.contract_accepted ? 'Godkänt' : 'Godkänn avtalet'"
 							@click.prevent="accept"	
 						/>
 					</div>
@@ -253,6 +254,9 @@
 				// Are we updating an existing contract?
 				return this.contract_id ? true : false;
 			},
+			me() {
+				return this.project.users.find(u => u.id === this.auth.id);
+			},
 			other() {
 				return this.project.users.find(u => u.id !== this.auth.id);
 			}
@@ -292,16 +296,14 @@
 							new Model(`contracts/${this.contract_id}/accept`).put()
 								.then(response => {
 									this.$store.dispatch('showNotification', {type: 'success', msg: 'Du har nu godkänt avtalet!'});
-									// Set the projects fetched to false so we break the cache.
-									this.$store.commit('SET_USER_PROJECTS_FETCHED', false);
 									// Update the state of the project
-									this.$store.dispatch('acceptProject', {
-										started: response.data.started,
+									this.$store.dispatch('acceptContract', {
 										userAcceptedId: response.data.userAcceptedId,
 										history: response.data.history
 									});
 
 									this.$store.dispatch('closeModal');
+									document.body.scrollTop = document.documentElement.scrollTop = 0;
 								})
 								.catch(error => {
 									console.log(error);

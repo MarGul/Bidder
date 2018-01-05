@@ -88,6 +88,32 @@ class ContractManager extends BaseManager
 	}
 
 	/**
+	 * A user is accepting a contract.
+	 *
+	 * @return boolean
+	 */
+	public function accept()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			$this->project->users()->updateExistingPivot($this->user->id, ['contract_accepted' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not accept the contract.', 500);
+			return false;
+		}
+
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('acceptedContract', ['user' => $this->user->username]);
+
+		// Send out notification to the other users that the contract was accepted.
+
+		$this->setSuccess('Successfully updated the contract into storage.', 200);
+
+		return true;
+	}
+
+	/**
 	 * Download the contract for a project.
 	 * 
 	 * @return PDF view
