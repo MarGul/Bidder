@@ -19,7 +19,8 @@
     import createBid from '../Bids/CreateBid';
     import showBids from '../Bids/ShowBids';
     import showUserBid from '../User/Services/ShowBidModal';
-    import confirm from './ConfirmModal';
+	import confirm from './ConfirmModal';
+	import alert from './AlertModal';
 
 	export default {
 		components: {
@@ -29,6 +30,7 @@
 			createBid,
 			showBids,
 			confirm,
+			alert,
 			showUserBid
 		},
 		computed: {

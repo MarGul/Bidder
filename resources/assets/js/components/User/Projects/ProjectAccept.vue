@@ -72,10 +72,29 @@
 			},
 			other() {
 				return this.project.users.find(u => u.id !== this.auth.id);
+			},
+			canAccept() {
+				if ( !this.project.use_contract ) return true;
+
+				if ( this.me.pivot.contract_accepted ) return true;
+
+				return false;
 			}
 		},
 		methods: {
 			accept() {
+				// If the project is using contract and the user hasn't accepted the contract.
+				if ( !this.canAccept ) {
+					this.$store.dispatch('openModal', {
+						component: 'alert',
+						data: {
+							alertText: `Projektet använder sig av ett avtal. Du måste först godkänna avtalet innan du accepterar projketes start.`
+						}
+					});
+					return;
+				}
+
+				// Everything is good, let him accept the start.
 				this.$store.dispatch('openModal', {
 					component: 'confirm',
 					data: {
