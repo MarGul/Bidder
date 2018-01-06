@@ -31,12 +31,31 @@ class ContractsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'project_id' => 'required|exists:projects,id',
-            'client_name' => 'required',
-            'client_identity' => 'required',
-            'contractor_name' => 'required', 
-            'contractor_identity' => 'required', 
+        $project = Project::findOrFail($request->project_id);
+        $this->authorize('in-project', $project);
+
+        // Depending on the users role in the project different validation occur
+        $project->load('users');
+        $role = $project->users->where('id', 1)->first()->pivot->role;
+
+        if ( $role === 'service' ) {
+            $custom = [
+                'client_name' => 'required',
+                'client_identity' => 'required', 
+                'contractor_name' => '',
+                'contractor_identity' => ''
+            ];
+        } else {
+            $custom = [
+                'client_name' => '',
+                'client_identity' => '', 
+                'contractor_name' => 'required',
+                'contractor_identity' => 'required'
+            ];
+        }
+        
+        $data = $this->validate($request, array_merge($custom, [
+            'project_id' => 'required|exists:projects,id', 
             'project_description' => 'required',
             'contractor_dissuasion' => '', 
             'project_start' => 'required|date_format:Y-m-d|after_or_equal:today', 
@@ -46,16 +65,7 @@ class ContractsController extends Controller
             'payment_full' => '', 
             'payment_specified' => '', 
             'other' => ''
-        ]);
-
-        $project = Project::findOrFail($request->project_id);
-        $this->authorize('in-project', $project);
-
-        // Fixed for 5.5
-        $data = $request->only([
-            'client_name','client_identity','contractor_name','contractor_identity','project_description','contractor_dissuasion', 
-            'project_start','project_end','project_price','project_price_specified','payment_full','payment_specified','other'
-        ]);
+        ]));
 
         // Try and create the contract.
         $this->manager->byUser( $request->user() )
@@ -84,11 +94,30 @@ class ContractsController extends Controller
      */
     public function update(Request $request, Contract $contract)
     {
-        $data = $this->validate($request, [
-            'client_name' => 'required',
-            'client_identity' => 'required',
-            'contractor_name' => 'required', 
-            'contractor_identity' => 'required', 
+        $project = Project::findOrFail($request->project_id);
+        $this->authorize('in-project', $project);
+
+        // Depending on the users role in the project different validation occur
+        $project->load('users');
+        $role = $project->users->where('id', $request->user()->id)->first()->pivot->role;
+
+        if ( $role === 'service' ) {
+            $custom = [
+                'client_name' => 'required',
+                'client_identity' => 'required', 
+                'contractor_name' => '',
+                'contractor_identity' => ''
+            ];
+        } else {
+            $custom = [
+                'client_name' => '',
+                'client_identity' => '', 
+                'contractor_name' => 'required',
+                'contractor_identity' => 'required'
+            ];
+        }
+        
+        $data = $this->validate($request, array_merge($custom, [ 
             'project_description' => 'required',
             'contractor_dissuasion' => '', 
             'project_start' => 'required|date_format:Y-m-d', 
@@ -98,10 +127,7 @@ class ContractsController extends Controller
             'payment_full' => '', 
             'payment_specified' => '', 
             'other' => ''
-        ]);
-
-        $project = Project::findOrFail($contract->project_id);
-        $this->authorize('in-project', $project);
+        ]));
 
         // Try and update the resource
         $this->manager->byUser( $request->user() )
