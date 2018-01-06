@@ -2,44 +2,52 @@
 	<div class="project_accept-component">
 		<h4 class="text-center">Acceptera startandet av projektet</h4>
 		<div class="gray-sub-text mb30">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, fuga, aliquam ipsam cupiditate asperiores doloribus repellat.</div>
-		<div class="project-acceptance-container">
-			<div class="acceptance-box project-user user__me">
-				<div class="user-username" v-text="me.username"></div>
-				<div class="user-avatar" :style="{'background-image': `url(${me.avatar})`}"></div>
-				<div class="acceptance-status-container">
-					<div class="gray-sub-text">Accepterar du projektet?</div>
-					<div class="acceptance-buttons-container">
-						<template v-if="me.pivot.accepted">
-							<div class="is-flex c_c">
-								<i class="icon icon_confirmed wh15 mr5"></i> <span>Du har accepterat</span>
-							</div>
-						</template>
-						<template v-else>
-							<button type="button" class="btn btn-primary" @click.prevent="accept">Ja</button>
-							<button type="button" class="btn btn-danger" @click.prevent="cancel">Nej</button>
-						</template>
+		
+		<app-project-user-actions :me="me" :other="other">
+					
+			<template slot="action-type-container">
+				<div class="gray-sub-text">Avbryts om</div>
+				<app-timer :ends="project.service_end" />
+				<div class="gray-sub-text">den {{ filters.time(project.accept_ends) }}</div>
+			</template>
+			
+			<template slot="me-status">
+				<div class="gray-sub-text mb5">Starta projektet?</div>
+				<template v-if="me.pivot.accepted">
+					<div class="is-flex c_c">
+						<i class="icon icon_confirmed wh15 mr5"></i> <span>Du har accepterat</span>
 					</div>
-				</div>
-			</div>
-			<div class="acceptance-box acceptance__time">
-				<div class="time-items-container">
-					<app-timer :ends="project.accept_ends" />
-					<div class="gray-sub-text" v-text="filters.time(project.accept_ends)"></div>
-				</div>
-			</div>
-			<div class="acceptance-box project-user user__other">
-				<div class="user-username" v-text="other.username"></div>
-				<div class="user-avatar" :style="{'background-image': `url(${other.avatar})`}"></div>
-				<div class="acceptance-status-container">
-					<div class="gray-sub-text">Har {{ other.username }} accepterat?</div>
-					<div class="acceptance-buttons-container">
-						<button type="button" class="btn btn-default" disabled>
-							{{ other.pivot.accepted ? 'Ja' : 'Nej' }}
-						</button>
+				</template>
+				<template v-else>
+					<button type="button" class="btn btn-primary" @click.prevent="accept">
+						<div class="is-flex c_c">
+							<i class="icon icon_checkbox_checked white wh12 mr10"></i> <span>Ja</span>
+						</div>
+					</button>
+					<button type="button" class="btn btn-danger" @click.prevent="cancel">
+						<div class="is-flex c_c">
+							<i class="icon icon_delete white wh12 mr10"></i> <span>Nej</span>
+						</div>
+					</button>
+				</template>
+			</template>
+
+			<template slot="other-status">
+				<div class="gray-sub-text mb5">Har {{ other.username }} acceperat?</div>
+				<template v-if="other.pivot.accepted">
+					<div class="is-flex c_c">
+						<i class="icon icon_confirmed wh15 mr5"></i> <span>Ja</span>
 					</div>
-				</div>
-			</div>
-		</div>
+				</template>
+				<template v-else>
+					<div class="is-flex c_c">
+						<i class="icon icon_decline wh15 mr5"></i> <span>Nej</span>
+					</div>
+				</template>
+			</template>
+
+		</app-project-user-actions>
+		
 	</div>
 </template>
 
@@ -47,10 +55,12 @@
 	import { mapGetters } from 'vuex';
 	import appTimer from '../../Includes/Timer';
 	import Model from '../../../includes/Model';
+	import appProjectUserActions from './ProjectUserActions';
 
 	export default {
 		components: {
-			appTimer
+			appTimer,
+			appProjectUserActions
 		},
 		computed: {
 			...mapGetters({
