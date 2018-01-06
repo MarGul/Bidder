@@ -61,6 +61,15 @@ const actions = {
 		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	},
+	projectContractAccepted({commit, state}, payload) {
+		let project = state.project;
+		project.users.find(u => u.id === payload.userAcceptedId).pivot.contract_accepted = true;
+		// Add all of the project history.
+		payload.history.forEach(function(history) {
+			project.history.unshift(history);
+		});
+		commit('SET_USER_PROJECT_DETAILS', project);
+	},
 	projectDetailsUpdated({commit, state}, payload) {
 		let project = state.project;
 		project.service_start = payload.project.service_start;
@@ -129,15 +138,6 @@ const actions = {
 	messageAdded({commit, state}, payload) {
 		let project = state.project;
 		project.messages.unshift(payload.message);
-		commit('SET_USER_PROJECT_DETAILS', project);
-	},
-	acceptContract({commit, state}, payload) {
-		let project = state.project;
-		project.users.find(u => u.id === payload.userAcceptedId).pivot.contract_accepted = true;
-		// Add all of the project history.
-		payload.history.forEach(function(history) {
-			project.history.unshift(history);
-		});
 		commit('SET_USER_PROJECT_DETAILS', project);
 	}
 }

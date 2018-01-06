@@ -297,7 +297,7 @@
 								.then(response => {
 									this.$store.dispatch('showNotification', {type: 'success', msg: 'Du har nu godkänt avtalet!'});
 									// Update the state of the project
-									this.$store.dispatch('acceptContract', {
+									this.$store.dispatch('projectContractAccepted', {
 										userAcceptedId: response.data.userAcceptedId,
 										history: response.data.history
 									});

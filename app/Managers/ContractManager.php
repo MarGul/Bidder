@@ -7,6 +7,7 @@ use PDF;
 use App\Managers\Traits\ProjectTrait;
 use Notification;
 use App\Notifications\ProjectContractUpdated;
+use App\Notifications\ProjectContractAccepted;
 
 class ContractManager extends BaseManager
 {
@@ -107,6 +108,9 @@ class ContractManager extends BaseManager
 									->add('acceptedContract', ['user' => $this->user->username]);
 
 		// Send out notification to the other users that the contract was accepted.
+		Notification::send($this->otherUsers(), new ProjectContractAccepted(
+			$this->project, $this->user->id, $this->history()
+		));
 
 		$this->setSuccess('Successfully updated the contract into storage.', 200);
 
