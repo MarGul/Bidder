@@ -10,7 +10,7 @@
 						</div>
 					</template>
 					<template v-else>
-						<router-link :to="`/profile/${bid.user.username}`" class="is-link" v-text="bid.user.username"></router-link>
+						<a class="is-link" @click="goToUser" v-text="bid.user.username" />
 						<app-ratings :rating="bid.user.rating || 0" :showAvg="true"></app-ratings>
 						<div class="gray-sub-text" v-text="filters.time(bid.created_at)"></div>
 					</template>
@@ -66,6 +66,12 @@
 		components: {
 			appRatings,
 			appBidAcceptStatus
+		},
+		methods: {
+			goToUser() {
+				this.$store.dispatch('closeModal');
+				this.$router.push(`/profile/${this.bid.user.username}`);
+			}
 		}
 	}
 </script>

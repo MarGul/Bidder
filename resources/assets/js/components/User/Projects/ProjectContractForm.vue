@@ -278,6 +278,7 @@
 							msg: 'Vi har uppdaterat avtalet! Du kan nu godkänna avtalet.'
 						});
 						document.body.scrollTop = document.documentElement.scrollTop = 0;
+						this.form.errors.clear();
 					})
 					.catch(error => {
 						document.body.scrollTop = document.documentElement.scrollTop = 0;

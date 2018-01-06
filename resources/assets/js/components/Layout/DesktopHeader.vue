@@ -22,8 +22,16 @@
 				</nav>
 				<div class="desktop-user-container">
 					<div class="guest-actions" v-if="!authenticated">
-						<a class="btn btn-transparent" @click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})">Logga In</a>
-						<a class="btn btn-primary" @click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})">Registrera</a>
+						<a 
+							class="btn btn-transparent" 
+							@click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})"
+							v-text="'Logga In'"
+						/>
+						<a 
+							class="btn btn-primary" 
+							@click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})"
+							v-text="'Registrera'"
+						/>
 					</div>
 
 					<div class="auth-user" @click="toggleDropdown" v-else v-click-outside="close">
@@ -36,7 +44,7 @@
 
 					<ul class="auth-dropdown" v-if="dropdown">
 						<li>
-							<router-link to="/profile/margul"><i class="icon icon_user wh15 light-gray mr10"></i>Min profil</router-link>
+							<router-link :to="`/profile/${user.username}`"><i class="icon icon_user wh15 light-gray mr10"></i>Min profil</router-link>
 						</li>
 						<li>
 							<router-link to="/user/create-service"><i class="icon icon_two_users wh15 light-gray mr10"></i>Skapa tjänst</router-link>

@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('category_id')}">
-								<label class="control-label">Kategori</label>
+								<label class="control-label">Kategori <span class="req">*</span></label>
 								<select class="form-control" v-model="form.category_id">
 									<option value="">Välj kategori</option>
 									<optgroup v-for="rootCat in categories" :key="rootCat.slug" :label="rootCat.name">
@@ -39,7 +39,7 @@
 							</div>
 
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('region_id')}">
-								<label class="control-label">Region</label>
+								<label class="control-label">Region <span class="req">*</span></label>
 								<select class="form-control" v-model="form.region_id">
 									<option value="">Välj region</option>
 									<option 
@@ -53,7 +53,7 @@
 							</div>
 
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('city_id')}">
-								<label class="control-label">Stad</label>
+								<label class="control-label">Stad <span class="req">*</span></label>
 								<select class="form-control" :disabled="!form.region_id" v-model="form.city_id">
 									<option value="">Välj stad</option>
 									<option 
@@ -77,13 +77,13 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
-								<label class="control-label">Titel</label>
+								<label class="control-label">Titel <span class="req">*</span></label>
 								<input type="text" class="form-control" v-model="form.title">
 								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
 							</div>
 
 							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
-								<label class="control-label">Beskrivning</label>
+								<label class="control-label">Beskrivning <span class="req">*</span></label>
 								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
 							</div>
@@ -115,7 +115,7 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('start')}">
-								<label class="control-label">Påbörja tjänsten</label>
+								<label class="control-label">Påbörja tjänsten <span class="req">*</span></label>
 								<datepicker
 									input-class="form-control"  
 									language="sv"
@@ -127,7 +127,7 @@
 							</div>
 
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('end')}">
-								<label class="control-label">Avsluta tjänsten</label>
+								<label class="control-label">Avsluta tjänsten <span class="req">*</span></label>
 								<datepicker
 									input-class="form-control" 
 									language="sv"
@@ -139,7 +139,7 @@
 							</div>
 
 							<div class="control-container half-width" :class="{'has-errors': form.errors.has('bidding')}">
-								<label class="control-label">Dagar för budgivning</label>
+								<label class="control-label">Dagar för budgivning <span class="req">*</span></label>
 								<select class="form-control" v-model.number="form.bidding">
 									<option value="">Välj antal dagar för budgivning</option>
 									<option value="7">7</option>
@@ -285,6 +285,10 @@
 				// If the checklist isn't accepted don't proceed.
 				if ( !this.checklistAccepted ) {
 					this.$refs.checklist.$el.scrollIntoView();
+					this.$store.dispatch('showNotification', {
+						type: 'error', 
+						msg: 'Var vänlig och kryssa i att du tagit del av "Har du tänkt på?"'
+					});
 					this.checklistError = true;
 					return;
 				}
@@ -301,6 +305,8 @@
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
 						window.scrollTo(0,0);
 						this.processing = false;
+						// Push the user to the newly created service.
+						this.$router.push(`/services/${response.data.service.id}`);
 					})
 					.catch(error => {
 						this.form.errors.record(error.errors);

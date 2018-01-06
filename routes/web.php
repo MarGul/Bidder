@@ -12,8 +12,9 @@
 Route::get('/test', function() {
 	$project = App\Project::find(1);
 
-	$test = new \Carbon\Carbon($project->service_end);
-	dd($test);
+	$project->load('users');
+	$role = $project->users->where('id', 1)->first()->pivot->role;
+	dd($role);
 });
 
 /**
