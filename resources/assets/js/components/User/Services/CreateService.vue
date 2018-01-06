@@ -305,6 +305,8 @@
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Woohoo! Vi skapade din tjänst.'});
 						window.scrollTo(0,0);
 						this.processing = false;
+						// Push the user to the newly created service.
+						this.$router.push(`/services/${response.data.service.id}`);
 					})
 					.catch(error => {
 						this.form.errors.record(error.errors);
