@@ -45,7 +45,9 @@ class Project extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('role', 'title', 'review', 'accepted', 'cancelled', 'completed', 'use_contract');
+        return $this->belongsToMany('App\User')->withPivot(
+            'role', 'title', 'review', 'use_contract', 'contract_accepted', 'accepted', 'cancelled', 'completed'
+        );
     }
 
     /**

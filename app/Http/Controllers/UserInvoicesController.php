@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Managers\InvoiceManager;
 
-class UserInvoiceController extends Controller
+class UserInvoicesController extends Controller
 {
     
 	/**

@@ -7,6 +7,7 @@ use PDF;
 use App\Managers\Traits\ProjectTrait;
 use Notification;
 use App\Notifications\ProjectContractUpdated;
+use App\Notifications\ProjectContractAccepted;
 
 class ContractManager extends BaseManager
 {
@@ -45,14 +46,17 @@ class ContractManager extends BaseManager
 	 */
 	public function create($data)
 	{
-		if ( $this->hasError() ) return false;
-
-		if ( $this->projectContractExists() ) return false;
+		if ( $this->hasError() || $this->projectContractExists() ) return false;
 
 		if ( !$this->setData($data)->insert() )  return false;
 
 		$this->projectHistoryManager->forProject($this->project->id)
 									->add('updatedContract', ['user' => $this->user->username]);
+
+		// Send out notification to other users that the contract has been updated.
+		Notification::send($this->otherUsers(), new ProjectContractUpdated(
+			$this->project, $this->contract, $this->history()
+		));
 
 		$this->setSuccess('Successfully inserted the contract into storage.', 201);
 
@@ -82,6 +86,35 @@ class ContractManager extends BaseManager
 		$this->setSuccess('Successfully updated the contract into storage.', 200);
 
 		return $this->hasError();
+	}
+
+	/**
+	 * A user is accepting a contract.
+	 *
+	 * @return boolean
+	 */
+	public function accept()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			$this->project->users()->updateExistingPivot($this->user->id, ['contract_accepted' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not accept the contract.', 500);
+			return false;
+		}
+
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('acceptedContract', ['user' => $this->user->username]);
+
+		// Send out notification to the other users that the contract was accepted.
+		Notification::send($this->otherUsers(), new ProjectContractAccepted(
+			$this->project, $this->user->id, $this->history()
+		));
+
+		$this->setSuccess('Successfully updated the contract into storage.', 200);
+
+		return true;
 	}
 
 	/**

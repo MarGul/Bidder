@@ -1,0 +1,46 @@
+.project_contract_form-component {
+
+    .white-contentSection-footer {
+        flex-wrap: wrap;
+
+        .other-accepted-contract {
+            flex: 1 1 100%;
+            text-align: center;
+            margin-bottom: 10px;
+
+            @media screen and (min-width: $screen-sm-min) {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        
+        .btn-accept-contract {
+            flex: 1 1 100%;
+            margin-bottom: 10px;
+
+            @media screen and (min-width: $screen-sm-min) {
+                flex: none;
+                margin: 0 10px 0 0;
+                padding-right: 10px;
+                border-right: 1px solid darken(#e6ebf1, 5%);
+            }
+        }
+
+        .btn-update-contract {
+            flex: 1 1 100%;
+
+            @media screen and (min-width: $screen-sm-min) {
+                flex: none;
+                margin-bottom: 0;
+            }
+        }
+
+        button {
+            width: 100%;
+
+            @media screen and (min-width: $screen-sm-min) {
+                width: auto;
+            }
+        }
+    }
+}

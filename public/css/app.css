@@ -4329,6 +4329,73 @@ body.mobile-nav-open .overlay {
   font-size: 20px;
 }
 
+.project_contract_form-component .white-contentSection-footer {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.project_contract_form-component .white-contentSection-footer .other-accepted-contract {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .project_contract_form-component .white-contentSection-footer .other-accepted-contract {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+}
+
+.project_contract_form-component .white-contentSection-footer .btn-accept-contract {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .project_contract_form-component .white-contentSection-footer .btn-accept-contract {
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
+    margin: 0 10px 0 0;
+    padding-right: 10px;
+    border-right: 1px solid #d6dee8;
+  }
+}
+
+.project_contract_form-component .white-contentSection-footer .btn-update-contract {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .project_contract_form-component .white-contentSection-footer .btn-update-contract {
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
+    margin-bottom: 0;
+  }
+}
+
+.project_contract_form-component .white-contentSection-footer button {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .project_contract_form-component .white-contentSection-footer button {
+    width: auto;
+  }
+}
+
 .project_accept-component .project-acceptance-container {
   display: -webkit-box;
   display: -ms-flexbox;

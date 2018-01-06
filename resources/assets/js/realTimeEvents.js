@@ -77,6 +77,20 @@ class ProjectEvents
     }
 
     /**
+     * Event for when a user accept a contract
+     * @param {Object} data 
+     */
+    contractAccepted(data)
+    {
+        if ( !this.projectDetailsActive(data.project.id) ) return;
+
+        store.dispatch('projectContractAccepted', {userAcceptedId: data.userAcceptedId, history: data.history});
+        store.dispatch('eventNotification', {
+            type: 'success', heading: 'Avtalet godkändes!', text: 'Den andra parten har godkänt avtalet.'
+        });
+    }
+
+    /**
      * Event for when a new project is created.
      * @param {Object} data 
      */
@@ -172,6 +186,10 @@ export default {
                             break;
                         case 'App\\Notifications\\ProjectContractUpdated':
                             projectEvents.contractUpdated(notification.data);
+                            break;
+                        case 'App\\Notifications\\ProjectContractAccepted':
+                            console.log(notification.data);
+                            projectEvents.contractAccepted(notification.data);
                             break;
                         case 'App\\Notifications\\ProjectCreated':
                             projectEvents.created(notification.data);
