@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateServicesTable extends Migration
 {
+    
     /**
      * Run the migrations.
      *
@@ -25,6 +26,7 @@ class CreateServicesTable extends Migration
             $table->date('end');
             $table->dateTime('bid_start');
             $table->dateTime('bid_stop');
+            $table->boolean('has_accepted_bid')->default(false);
             $table->boolean('active');
             $table->timestamps();
         });

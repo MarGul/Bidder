@@ -39,8 +39,7 @@ class ServiceBidController extends Controller
         return response()->json([
             'message' => $this->manager->successMessage(),
             'data' => [
-                'bids' => $this->manager->bids(),
-                'bid_accepted' => $this->manager->bidAccepted()
+                'bids' => $this->manager->bids()
             ]
         ], $this->manager->successCode());
     }

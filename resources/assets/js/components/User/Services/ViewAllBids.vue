@@ -6,7 +6,7 @@
 			</a>
 		</div>
 		<one-bid 
-			v-for="bid in service.bids" 
+			v-for="bid in bids" 
 			:bid="bid" 
 			:hasAccept="true"
 			:key="bid.id" 
@@ -24,9 +24,11 @@
 		},
 		computed: {
 			...mapGetters({
-				service: 'serviceDetailsService',
-				bidAccepted: 'serviceDetailsBidAccepted'
-			})
+				service: 'serviceDetailsService'
+			}),
+			bids() {
+				return this.service.bids;
+			}
 		}
 	}
 </script>
