@@ -1,8 +1,6 @@
 import { 
 	SET_USER_SERVICE_DETAILS_FETCHED,
 	SET_USER_SERVICE_DETAILS_SERVICE,
-	SET_USER_SERVICE_DETAILS_BIDS_FETCHED,
-	SET_USER_SERVICE_DETAILS_BIDS,
 	SET_USER_SERVICE_DETAILS_BID_ACCEPTED
 } from '../mutation-types';
 
@@ -10,8 +8,6 @@ import {
 const state = {
 	serviceFetched: false,
 	service: {},
-	bidsFetched: false,
-	bids: [],
 	bidAccepted: null
 }
 
@@ -21,12 +17,6 @@ const mutations = {
 	},
 	[SET_USER_SERVICE_DETAILS_SERVICE](state, service) {
 		state.service = service;
-	},
-	[SET_USER_SERVICE_DETAILS_BIDS_FETCHED](state, fetched) {
-		state.bidsFetched = fetched;
-	},
-	[SET_USER_SERVICE_DETAILS_BIDS](state, bids) {
-		state.bids = bids;
 	},
 	[SET_USER_SERVICE_DETAILS_BID_ACCEPTED](state, accepted) {
 		state.bidAccepted = accepted;
@@ -51,8 +41,6 @@ const actions = {
 	clearServiceDetailsState({commit}) {
 		commit('SET_USER_SERVICE_DETAILS_FETCHED', false);
 		commit('SET_USER_SERVICE_DETAILS_SERVICE', {});
-		commit('SET_USER_SERVICE_DETAILS_BIDS_FETCHED', false);
-		commit('SET_USER_SERVICE_DETAILS_BIDS', []);
 		commit('SET_USER_SERVICE_DETAILS_BID_ACCEPTED', null);
 	}
 }
@@ -60,8 +48,6 @@ const actions = {
 const getters = {
 	serviceDetailsFetched: state => state.serviceFetched,
 	serviceDetailsService: state => state.service,
-	serviceDetailsBidsFetched: state => state.bidsFetched,
-	serviceDetailsBids: state => state.bids,
 	serviceDetailsBidAccepted: state => state.bidAccepted
 }
 

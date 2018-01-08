@@ -6,18 +6,19 @@
 				<component :is="currentView" @changeView="changeView"></component>
 			</div>
 			<div class="main-area-sidebar">
-				<div class="handle-service mb25" v-if="fetched && service.active">
-					<router-link :to="`/services/${service.id}`" class="btn btn-info full-width is-flex c_c mb10">
-						Visa tjänsten
-					</router-link>
+				<template v-if="fetched">
+					<div class="handle-service mb25" v-if="service.active">
+						<router-link :to="`/services/${service.id}`" class="btn btn-info full-width is-flex c_c mb10">
+							Visa tjänsten
+						</router-link>
+						
+						<button class="btn btn-danger full-width is-flex c_c" @click.prevent="removeService">
+							<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
+						</button>
+					</div>
 					
-					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="removeService">
-						<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
-					</button>
-				</div>
-				
-				<app-service-bids @changeView="changeView"></app-service-bids>
-				
+					<app-service-bids :bids="service.bids" @changeView="changeView" />
+				</template>		
 			</div>
 		</div>
 
