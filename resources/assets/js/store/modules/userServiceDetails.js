@@ -20,17 +20,16 @@ const mutations = {
 
 const actions = {
 	bidAccepted({commit, state}, payload) {
-		let bids = state.bids;
-		bids.forEach(function(bid) {
-			if ( bid.id === payload.id ) {
-				bid.accepted = true;
-			}
-		});
-		commit('SET_USER_SERVICE_DETAILS_BIDS', bids);
 		// Set the service to not be active anymore and that it has an accepted bid
 		let service = state.service;
 		service.active = false;
 		service.has_accepted_bid = true;
+		service.bids.forEach(function(bid) {
+			if ( bid.id === payload.id ) {
+				bid.accepted = true;
+			}
+		});
+
 		commit('SET_USER_SERVICE_DETAILS_SERVICE', service);
 	},
 	clearServiceDetailsState({commit}) {

@@ -17,7 +17,7 @@
 						</button>
 					</div>
 					
-					<app-service-bids :bids="service.bids" @changeView="changeView" />
+					<app-service-bids :bids="bids" @changeView="changeView" />
 				</template>		
 			</div>
 		</div>
@@ -48,7 +48,17 @@
 				fetched: 'serviceDetailsFetched',
 				service: 'serviceDetailsService',
 				services: 'userServices'
-			})
+			}),
+			bids() {
+				if ( !this.service.has_accepted_bid ) return this.service.bids;
+				
+				// Sort the accepted bid first.
+				return this.service.bids.sort((a,b) => {
+					if ( a.accepted ) return -1;
+
+					return b.accepted ? 1 : 0;
+				});
+			}
 		},
 		methods: {
 			changeView({view}) {

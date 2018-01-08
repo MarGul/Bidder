@@ -27,7 +27,14 @@
 				service: 'serviceDetailsService'
 			}),
 			bids() {
-				return this.service.bids;
+				if ( !this.service.has_accepted_bid ) return this.service.bids;
+				
+				// Sort the accepted bid first.
+				return this.service.bids.sort((a,b) => {
+					if ( a.accepted ) return -1;
+
+					return b.accepted ? 1 : 0;
+				});
 			}
 		}
 	}
