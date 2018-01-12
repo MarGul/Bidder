@@ -6,11 +6,7 @@
 }
 
 .icon_go_back {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
 	@include mask-icon('../svg/go_back_arrow.svg');
-	background-color: $brand-primary;
 }
 
 .icon {

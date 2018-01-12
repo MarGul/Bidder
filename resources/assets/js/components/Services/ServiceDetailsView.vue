@@ -31,8 +31,9 @@
                     </footer>
                 </section>
                 <section class="transparent-contentSection">
-                    <header class="transparent-contentSection-header">
+                    <header class="transparent-contentSection-header" :class="{'has-link': myService}">
                         <h3>Upplagd av</h3>
+                        <router-link :to="`/user/services/${service.id}`" class="is-link" v-if="myService">Redigera</router-link>
                     </header>
                     <div class="transparent-contentSection-content">
                         <div class="service-user">
@@ -80,8 +81,9 @@
 		},
 		computed: {
 			...mapGetters({
-				'fetched': 'serviceFetched',
-				'service': 'service'
+				fetched: 'serviceFetched',
+                service: 'service',
+                auth: 'authUser'
 			}),
 			breakpoints() {
 				return window.breakpoints;
@@ -94,7 +96,10 @@
 			},
 			ratingAvg() {
 				return this.service.user.rating ? this.service.user.rating.avg : 0;
-			}
+            },
+            myService() {
+                return this.auth.id === this.service.user.id;
+            }
 		},
 		methods: {
 			createBid() {
