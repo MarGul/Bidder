@@ -17,7 +17,7 @@
 								</div>
 							</div>
 							<div class="item-go-to">
-								<i class="icon icon_arrow_right wh12"></i>
+								<i class="icon h_chevron_right wh15 light-gray"></i>
 							</div>
 						</li>
 					</ul>

@@ -40,7 +40,7 @@
 							<ul class="items-list-icon">
 								<li>
 									<div class="item-list-icon pt3">
-										<i class="icon icon_two_users light-gray wh15 cursor-default"></i>
+										<i class="icon h_users light-gray wh20 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>För projekt</div>
@@ -49,7 +49,7 @@
 								</li>
 								<li>
 									<div class="item-list-icon pt3">
-										<i class="icon icon_clock light-gray wh15 cursor-default"></i>
+										<i class="icon h_clock light-gray wh20 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>Skapad</div>
@@ -58,7 +58,7 @@
 								</li>
 								<li>
 									<div class="item-list-icon">
-										<i class="icon icon_credit_card light-gray wh15 cursor-default"></i>
+										<i class="icon h_payment light-gray wh20 cursor-default"></i>
 									</div>
 									<div class="item-list-icon-content">
 										<div>{{ paymentTitle }}</div>
@@ -67,7 +67,7 @@
 								</li>
 							</ul>
 							<a class="btn btn-success full-width is-flex c_c" :href="`/download-invoice/${invoice.hash}`" target="_blank" rel="noopener noreferrer">
-								<i class="icon icon_download wh20 mr10"></i> Ladda ner kvitto
+								<i class="icon h_download white wh20 mr10"></i> Ladda ner kvitto
 							</a>
 						</div>
 					</section>

@@ -7,7 +7,7 @@
                         <div class="item-header" v-text="title(subscription)"></div>
                     </div>
                     <div class="item-go-to">
-                        <i class="icon icon_delete wh12 danger" @click="remove(subscription.id)"></i>
+                        <i class="icon h_delete wh15 danger" @click="remove(subscription.id)"></i>
                     </div>
                 </li>
             </ul>

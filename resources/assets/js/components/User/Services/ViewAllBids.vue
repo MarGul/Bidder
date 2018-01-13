@@ -2,7 +2,7 @@
 	<div class="view_all_bids-component">
 		<div class="content-link-section mb15">
 			<a @click.prevent="$emit('changeView', {view: 'appEditServiceForm'})" class="is-link is-flex v-center">
-				<i class="icon icon_go_back wh12 primary mr10"></i> Tillbaka
+				<i class="icon h_go_back wh20 light-gray mr10"></i>Tillbaka
 			</a>
 		</div>
 		<one-bid 

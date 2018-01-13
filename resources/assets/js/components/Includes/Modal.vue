@@ -2,7 +2,7 @@
 	<div class="modal-mask">
 		<div class="modal-container" :class="[$store.getters.modalSize]">
 			<span class="close" @click="$store.dispatch('closeModal')">
-				<i class="icon icon_delete wh15 light-gray" :class="[closeClass]"></i>
+				<i class="icon h_delete wh15 light-gray" :class="[closeClass]"></i>
 			</span>
 
 			<component :is="$store.getters.modalComponent"></component>

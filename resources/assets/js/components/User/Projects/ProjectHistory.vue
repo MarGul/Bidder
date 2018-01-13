@@ -6,7 +6,7 @@
 			</header>
 			<div class="white-contentSection-content">
 				<ul class="items-list-default">
-					<li v-for="history in projectHistory" class="has-left-border" :class="[history.type]">
+					<li v-for="history in projectHistory" class="has-left-border" :key="history.id" :class="[history.type]">
 						<div class="gray-sub-text" v-text="filters.time(history.created_at)"></div>
 						<div class="item-content" v-text="history.message"></div>
 					</li>

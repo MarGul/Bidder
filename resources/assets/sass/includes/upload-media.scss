@@ -48,7 +48,6 @@
 
 			i.media-type {
 				cursor: default;
-				margin-top: 4px;
 
 				&.has-error {
 					background-color: $brand-danger;
@@ -75,7 +74,7 @@
 				text-align: left;
 			}
 
-			.icon_delete {
+			.h_delete {
 				margin-left: auto;
 				margin-top: 5px;
 			}

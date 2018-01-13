@@ -26,7 +26,7 @@
 					</button>
 					<button type="button" class="btn btn-danger" @click.prevent="cancel">
 						<div class="is-flex c_c">
-							<i class="icon icon_delete white wh12 mr10"></i> <span>Nej</span>
+							<i class="icon h_delete white wh15 mr10"></i> <span>Nej</span>
 						</div>
 					</button>
 				</template>

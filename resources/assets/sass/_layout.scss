@@ -283,7 +283,7 @@ a {
 				position: absolute;
 				top: calc(50% - 7.5px);
 				right: 0;
-				@include mask-icon('../svg/right_arrow.svg');
+				@include mask-icon('../svg/heroicons-ui/svg/icon-cheveron-right.svg');
 				background-color: $light-icon-color;
 			}
 
@@ -305,7 +305,7 @@ a {
 				}
 
 				.item-list-icon-content {
-					color: $brand-primary;
+					color: #282c2f;
 					font-weight: 500;
 				}
 

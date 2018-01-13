@@ -1,7 +1,7 @@
 <template>
 	<div class="bid_service-component">
 		<section class="transparent-contentSection">
-			<header class="transparent-contentSection-header">
+			<header class="transparent-contentSection-header has-link">
 				<h3>Tjänsten</h3>
 				<template v-if="fetched">
 					<router-link :to="`/services/${service.id}`" class="is-link" v-if="service.active">
@@ -14,7 +14,7 @@
 					<ul class="items-list-icon">
 						<li class="">
 							<div class="item-list-icon pt3">
-								<i class="icon icon_document_check wh15 light-gray cursor-default"></i>
+								<i class="icon h_browser wh20 light-gray cursor-default"></i>
 							</div>
 							<div class="item-list-icon-content">
 								<div>Titel</div>
@@ -23,7 +23,7 @@
 						</li>
 						<li class="">
 							<div class="item-list-icon">
-								<i class="icon icon_bid wh20 light-gray cursor-default"></i>
+								<i class="icon h_megafon wh20 light-gray cursor-default"></i>
 							</div>
 							<div class="item-list-icon-content">
 								<div>Budgivningen {{ statusText }}</div>
@@ -31,7 +31,7 @@
 							</div>
 						</li>
 					</ul>
-					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="remove">
+					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="remove" v-if="service.active">
 						<i class="icon icon_danger wh20 mr10"></i> Ta bort budet
 					</button>
 				</div>

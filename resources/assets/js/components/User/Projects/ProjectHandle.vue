@@ -8,7 +8,7 @@
 				<ul class="items-list-icon">
 					<router-link :to="`/user/projects/${project.id}`" tag="li" class="has-go-to" exact>
 						<div class="item-list-icon vertical-centered">
-							<i class="icon icon_two_users wh15 light-gray"></i>
+							<i class="icon h_users wh20 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">
 							Visa projektet
@@ -16,7 +16,7 @@
 					</router-link>
 					<router-link :to="`/user/projects/${project.id}/contract`" tag="li" class="has-go-to" v-if="project.use_contract" exact>
 						<div class="item-list-icon vertical-centered">
-							<i class="icon icon_handshake wh15 light-gray"></i>
+							<i class="icon h_institution wh20 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">
 							Visa avtalet
@@ -24,7 +24,7 @@
 					</router-link>
 					<router-link :to="`/user/projects/${project.id}/service`" tag="li" class="has-go-to" exact>
 						<div class="item-list-icon vertical-centered">
-							<i class="icon icon_document_check wh15 light-gray"></i>
+							<i class="icon h_browser wh20 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">
 							Visa tjänsten
@@ -32,7 +32,7 @@
 					</router-link>
 					<router-link :to="`/user/projects/${project.id}/bid`" tag="li" class="has-go-to" exact>
 						<div class="item-list-icon vertical-centered">
-							<i class="icon icon_bid wh15 light-gray"></i>
+							<i class="icon h_megafon wh20 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">
 							Visa budet
@@ -40,7 +40,7 @@
 					</router-link>
 					<router-link :to="`/user/projects/${project.id}/messages`" tag="li" class="has-go-to" exact>
 						<div class="item-list-icon vertical-centered">
-							<i class="icon icon_messages wh15 light-gray"></i>
+							<i class="icon h_messages wh20 light-gray"></i>
 						</div>
 						<div class="item-list-icon-content">
 							Visa meddelanden
