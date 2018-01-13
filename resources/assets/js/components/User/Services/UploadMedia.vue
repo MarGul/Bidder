@@ -6,17 +6,17 @@
 		<div class="files-container">
 			<ul class="media">
 				<li v-for="(media, index) in initialMedia" :key="media.id">
-					<i class="media-type icon wh15 light-gray mr10" :class="[type(media.mime_type)]"></i> 
+					<i class="media-type icon wh20 light-gray mr10" :class="[type(media.mime_type)]"></i> 
 					<span class="file-name">{{ media.original_filename }}</span>
 					<span class="file-size gray-sub-text">{{ size(media.size) }}</span>
-					<i class="icon icon_delete danger wh12" @click="removeInitial(media.id)"></i>
+					<i class="icon h_delete danger wh12" @click="removeInitial(media.id)"></i>
 				</li>
 				
 				<li v-for="(file, index) in media" :key="index">
-					<i class="media-type icon wh15 light-gray mr10" :class="[{'has-error': errors[index]}, type(file.type)]"></i> 
+					<i class="media-type icon wh20 light-gray mr10" :class="[{'has-error': errors[index]}, type(file.type)]"></i> 
 					<span class="file-name">{{ file.name }}</span>
 					<span class="file-size gray-sub-text">{{ size(file.size) }}</span>
-					<i class="icon icon_delete danger wh12" @click="remove(index)"></i>
+					<i class="icon h_delete danger wh12" @click="remove(index)"></i>
 					<div class="error-block" v-if="errors[index]" v-text="errors[index][0]"></div>
 				</li>
 			</ul>
@@ -63,7 +63,7 @@
 				this.$emit('deleted', {id});
 			},
 			type(type) {
-				return type.includes('image/') ? 'icon_picture' : 'icon_file';
+				return type.includes('image/') ? 'h_image' : 'h_file';
 			},
 			size(size) {
 				if ( size < 1000 ) {

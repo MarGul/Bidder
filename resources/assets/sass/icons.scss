@@ -1,18 +1,3 @@
-.icon_right_arrow {
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	@include icon('../svg/right_arrow.svg');
-}
-
-.icon_go_back {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	@include mask-icon('../svg/go_back_arrow.svg');
-	background-color: $brand-primary;
-}
-
 .icon {
 	display: inline-block;
 	cursor: pointer;
@@ -82,6 +67,81 @@
 	}
 }
 
+/* Heroicons */
+.h_profile {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-user.svg');
+}
+
+.h_notification {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-notification.svg');
+}
+
+.h_repeat {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-repeat.svg');
+}
+
+.h_payment {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-currency-dollar.svg');
+}
+
+.h_megafon {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-announcement.svg');
+}
+
+.h_users {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-group.svg');
+}
+
+.h_briefcase {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-briefcase.svg');
+}
+
+.h_browser {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-browser.svg');
+}
+
+.h_chevron_right {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-cheveron-right.svg');
+}
+
+.h_messages {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-chat.svg');
+}
+
+.h_institution {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-building.svg');
+}
+
+.h_download {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-download.svg');
+}
+
+.h_delete {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-x.svg');
+}
+
+.h_clock {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-clock.svg');
+}
+
+.h_go_back {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-arrow-left.svg');
+}
+
+.h_image {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-image.svg');
+}
+
+.h_file {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-file.svg');
+}
+
+.h_check_circle {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-check-circle.svg');
+}
+
+
+
 .confirm_modal_icon {
 	@include icon('../svg/question_mark_bordered.svg');
 	width: 150px;
@@ -89,22 +149,9 @@
 	margin: 0 auto;
 }
 
-.icon_arrow_right {
-	@include mask-icon('../svg/right_arrow.svg');
-	background-color: #97A9B5;
-}
-
-.icon_bell {
-	@include mask-icon('../svg/bell.svg');
-}
-
 .icon_bid {
 	@include mask-icon('../svg/bid.svg');
 	background-color: #97A9B5;
-}
-
-.icon_clock {
-	@include mask-icon('../svg/clock.svg');
 }
 
 .icon_checkbox_checked {
@@ -115,21 +162,9 @@
 	@include mask-icon('../svg/blank_square.svg');
 }
 
-.icon_contract {
-	@include mask-icon('../svg/contract.svg');
-}
-
 .icon_confirmed {
 	@include mask-icon('../svg/confirm.svg');
 	background-color: $brand-success;
-}
-
-.icon_comment {
-	@include mask-icon('../svg/comment.svg');
-}
-
-.icon_credit_card {
-	@include mask-icon('../svg/credit_card.svg');
 }
 
 .icon_down_chevron {
@@ -144,29 +179,12 @@
 	@include icon('../svg/danger.svg');
 }
 
-.icon_delete {
-	@include mask-icon('../svg/delete.svg');
-}
-
 .icon_gate_closed {
 	@include mask-icon('../svg/gate_closed.svg');
 }
 
-.icon_handshake {
-	@include mask-icon('../svg/handshake.svg');
-}
-
 .icon_question_mark {
 	@include mask-icon('../svg/question_mark.svg');
-}
-
-.icon_download {
-	@include mask-icon('../svg/download.svg');
-	background-color: #fff;
-}
-
-.icon_document_check {
-	@include mask-icon('../svg/document_check.svg');
 }
 
 .icon_exit {
@@ -175,10 +193,6 @@
 
 .icon_gears {
 	@include mask-icon('../svg/settings_gears.svg');
-}
-
-.icon_image {
-	@include mask-icon('../svg/image.svg');
 }
 
 .icon_instagram {
@@ -199,32 +213,12 @@
 	}
 }
 
-.icon_file {
-	@include mask-icon('../svg/file.svg');
-}
-
 .icon_list {
 	@include mask-icon('../svg/list.svg');
 }
 
 .icon_lock {
 	@include icon('../svg/lock.svg');
-}
-
-.icon_retweet {
-	@include mask-icon('../svg/retweet.svg');
-}
-
-.icon_messages {
-	@include mask-icon('../svg/messages.svg');
-}
-
-.icon_monitor {
-	@include mask-icon('../svg/monitor.svg');
-}
-
-.icon_map_pin {
-	@include mask-icon('../svg/map_pin.svg');
 }
 
 .icon_on {
@@ -235,14 +229,6 @@
 .icon_off {
 	@include mask-icon('../svg/off.svg');
 	background-color: $brand-primary;
-}
-
-.icon_paper_plane {
-	@include mask-icon('../svg/paper_plane.svg');
-}
-
-.icon_picture {
-	@include mask-icon('../svg/picture.svg');
 }
 
 .icon_star_empty {
@@ -266,10 +252,6 @@
 
 .icon_up_chevron {
 	@include mask-icon('../svg/up_chevron.svg');
-}
-
-.icon_user {
-	@include mask-icon('../svg/user.svg');
 }
 
 .icon_warning_color {

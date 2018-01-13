@@ -175,7 +175,7 @@
     }
 
     .btn-icon-create {
-        @include mask-icon('../svg/document_check.svg');
+        @include mask-icon('../svg/heroicons-ui/svg/icon-browser.svg');
         width: 18px;
         height: 18px;
         background: rgba(255,255,255,0.6);

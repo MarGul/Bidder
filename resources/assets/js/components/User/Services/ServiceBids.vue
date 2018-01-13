@@ -7,7 +7,7 @@
 			</header>
 			<div class="transparent-contentSection-content">
 				<ul class="items-list-icon">
-					<li class="clickable has-go-to" v-for="bid in bids" @click="showBid(bid)">
+					<li class="clickable has-go-to" v-for="bid in bids" :key="bid.id" @click="showBid(bid)">
 						<div class="item-list-icon">
 							<div class="bid-user-avatar" :style="{backgroundImage: `url(${bid.user.avatar})`}"></div>
 						</div>

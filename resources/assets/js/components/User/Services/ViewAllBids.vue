@@ -1,8 +1,8 @@
 <template>
 	<div class="view_all_bids-component">
 		<div class="content-link-section mb15">
-			<a @click.prevent="$emit('changeView', {view: 'appEditServiceForm'})">
-				<i class="icon_go_back mr5"></i>Redigera
+			<a @click.prevent="$emit('changeView', {view: 'appEditServiceForm'})" class="is-link is-flex v-center">
+				<i class="icon h_go_back wh20 light-gray mr10"></i>Tillbaka
 			</a>
 		</div>
 		<one-bid 
