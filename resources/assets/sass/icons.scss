@@ -172,6 +172,18 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-flag.svg');
 }
 
+.h_plus {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-plus.svg');
+}
+
+.h_lock_open {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-lock-open.svg');
+}
+
+.h_help {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-help.svg');
+}
+
 
 
 
