@@ -3,7 +3,7 @@
 		<div class="content">
 			
 			<div class="user-view">
-				<nav class="user-navigation">
+				<nav class="user-navigation" v-if="!breakpoints.isSmallDevices()">
 					<h3 class="nav-section-heading">Inställningar</h3>
 					<ul class="nav-section">
 						<li>

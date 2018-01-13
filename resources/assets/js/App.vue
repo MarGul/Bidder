@@ -14,7 +14,7 @@
         </transition>
 
 
-        <app-mobile-header v-if="breakpoints.mobile"></app-mobile-header>
+        <app-mobile-header v-if="breakpoints.isSmallDevices()"></app-mobile-header>
         <app-desktop-header v-else></app-desktop-header>
 
         <div id="site-wrap">

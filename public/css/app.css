@@ -1961,7 +1961,7 @@ label.radio-btn input[type=radio] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1.2em;
+  padding: 12px 35px;
   color: #fff;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -1971,29 +1971,17 @@ label.radio-btn input[type=radio] {
   font-weight: 500;
 }
 
-.mobile-nav .nav-item a:hover {
-  background: #009999;
-}
-
-.mobile-nav .active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#00caca), to(#009999));
-  background-image: linear-gradient(-180deg, #00caca 0%, #009999 100%);
-  cursor: default;
-}
-
-.mobile-nav .active i {
-  background-color: #FFF;
-}
-
-.mobile-nav .spacer {
-  margin: 10px 15px;
-  border-top: 1px solid #009999;
+.mobile-nav .nav-item a.active {
+  color: #009999;
 }
 
 .mobile-nav .auth-user {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding: 10px 15px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
+          box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
 }
 
 .mobile-nav .auth-user .auth-avatar {
@@ -2018,6 +2006,67 @@ label.radio-btn input[type=radio] {
   font-weight: 500;
   -ms-flex-item-align: center;
       align-self: center;
+}
+
+.mobile-nav .user-mobile-sub-nav {
+  list-style-type: none;
+  border-left: 5px solid #009999;
+  padding: 10px 0 10px 60px;
+  position: relative;
+  background-color: #2d353f;
+  margin-top: 1px;
+}
+
+.mobile-nav .user-mobile-sub-nav:before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 10px;
+  bottom: 24px;
+  width: 1px;
+  background-color: #465363;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav .user-mobile-sub-nav:before {
+    bottom: 26px;
+  }
+}
+
+.mobile-nav .user-mobile-sub-nav li a {
+  color: #FFF;
+  display: block;
+  padding: 3px 0;
+  position: relative;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav .user-mobile-sub-nav li a {
+    padding: 5px 0;
+  }
+}
+
+.mobile-nav .user-mobile-sub-nav li a.active {
+  background-color: transparent;
+  color: #009999;
+  font-weight: bold;
+}
+
+.mobile-nav .user-mobile-sub-nav li a:before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 14px;
+  height: 1px;
+  width: 20px;
+  background-color: #465363;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav .user-mobile-sub-nav li a:before {
+    top: 16px;
+  }
 }
 
 #mobile-nav-toggle {
