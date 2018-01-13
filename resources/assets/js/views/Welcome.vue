@@ -88,11 +88,11 @@
                     <div class="welcome-action-buttons">
 
                         <router-link :to="'/user/create-service'" tag="button" class="btn btn-orange is-flex c_c">
-                            <i class="btn-icon-create"></i> Skapa en tjänst
+                            <i class="icon h_browser white wh20 mr15"></i> <span>Skapa en tjänst</span>
                         </router-link>
                         <div class="btn-divider">eller</div>
                         <router-link :to="'/services'" tag="button" class="btn btn-success is-flex c_c">
-                            <i class="btn-icon-search"></i> Sök efter tjänster
+                            <i class="icon h_search white wh20 mr15"></i> <span>Sök efter tjänster</span>
                         </router-link>
                         
                     </div>

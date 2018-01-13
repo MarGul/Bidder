@@ -13,8 +13,8 @@
 								<div class="profile-info">
 									<h3 class="profile-username" v-text="user.username"></h3>
 									<ul class="list-unstyled">
-										<li>
-											<i class="icon h_profile wh20 light-gray mr5"></i> Medlem sedan {{ member_since }}
+										<li class="is-flex v-align">
+											<i class="icon h_profile wh20 light-gray mr10"></i> <span>Medlem sedan {{ member_since }}</span>
 										</li>
 									</ul>
 								</div>

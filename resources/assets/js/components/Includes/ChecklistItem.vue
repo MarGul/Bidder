@@ -6,7 +6,7 @@
 			</div>
 			<div class="checklist-title" v-text="item.title"></div>
 			<div class="checklist-read-more-container" v-if="item.description" @click="descriptionOpen = !descriptionOpen">
-				<i class="icon wh15 light-gray" :class="[descriptionIcon]"></i>
+				<i class="icon wh20 light-gray" :class="[descriptionIcon]"></i>
 			</div>
 		</div>
 		<div class="checklist-description" v-text="item.description" v-if="descriptionOpen"></div>
@@ -32,7 +32,7 @@
 				return this.checked ? 'checked' : 'unchecked';
 			},
 			descriptionIcon() {
-				return this.descriptionOpen ? 'icon_up_chevron' : 'icon_down_chevron';
+				return this.descriptionOpen ? 'h_cheveron_up' : 'h_cheveron_down';
 			}
 		},
 		methods: {

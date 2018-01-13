@@ -18,9 +18,9 @@
                             <app-timer :ends="service.bid_stop"></app-timer>
                             <div class="ends" v-text="`den ${filters.time(service.bid_stop)}`"></div>
                         </div>
-                        <div class="active-bids text-center">
-                            <i class="icon icon_ wh15 cursor-default mr5"></i>
-                            <span>{{ service.bids.length }}</span> bud. 
+                        <div class="active-bids text-center is-flex c_c">
+                            <i class="icon h_megafon wh20 light-gray cursor-default mr15"></i>
+                            <span class="mr5">{{ service.bids.length }}</span> bud. 
                             <router-link :to="{ name: 'serviceBids' }" class="is-link">Visa alla bud</router-link>
                         </div>
                     </div>

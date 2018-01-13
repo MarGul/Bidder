@@ -165,20 +165,4 @@
             margin: 0 15px;
         }
     }
-
-    .btn-icon-search {
-        @include mask-icon('../svg/search.svg');
-        width: 18px;
-        height: 18px;
-        background: rgba(255,255,255,0.7);
-        margin-right: 10px;
-    }
-
-    .btn-icon-create {
-        @include mask-icon('../svg/heroicons-ui/svg/icon-browser.svg');
-        width: 18px;
-        height: 18px;
-        background: rgba(255,255,255,0.6);
-        margin-right: 10px;
-    }
 }
