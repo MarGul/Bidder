@@ -76,7 +76,7 @@ class ServiceManager extends BaseManager
 		$this->setSuccess('Listing a single service', 200);
 
 		try {
-			$this->service->load('media');
+			$this->service->load('bids.user', 'media');
 		} catch (\Exception $e) {
 			$this->setError('Could not load the media for the service.', 500);
 		}

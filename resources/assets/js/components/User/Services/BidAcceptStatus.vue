@@ -1,11 +1,11 @@
 <template>
 	<div class="bid_accept_status-component">
-		<template v-if="!bidAccepted">
+		<template v-if="!hasAcceptedBid">
 			<button class="btn btn-primary" @click="openAcceptBidModal">
 				Acceptera budet
 			</button>
 		</template>
-		<div class="accepted-bid-container" v-if="bidAccepted && bid.accepted">
+		<div class="accepted-bid-container" v-if="hasAcceptedBid && bid.accepted">
 			<i class="confirm-icon"></i><span class="bid-accepted">Accepterat bud</span>
 		</div>
 	</div>
@@ -15,10 +15,17 @@
 	import Model from '../../../includes/Model';
 
 	export default {
-		props: ['bid'],
+		props: {
+			bid: {
+				type: Object,
+				required: true
+			}
+		},
 		computed: {
-			bidAccepted() {
-				return this.$store.getters.serviceDetailsBidAccepted;
+			hasAcceptedBid() {
+				let service = this.$store.getters.serviceDetailsService;
+
+				return !!service.has_accepted_bid;
 			}
 		},
 		methods: {

@@ -17,17 +17,6 @@ class BidManager extends BaseManager
 {
 	use ServiceTrait, BidTrait;
 
-	/**
-	 * Does the service have a bid already accepted?
-	 * 
-	 * @return boolean
-	 */
-	public function bidAccepted() 
-	{
-		return (boolean)Bid::where('service_id', $this->service->id)
-							->where('accepted', true)
-							->count();
-	}
 
 	/**
 	 * Get the bids for a service.
@@ -211,7 +200,10 @@ class BidManager extends BaseManager
 	protected function acceptBid()
 	{
 		try {
+			// Mark the bid that it has been accepted
 			$this->bid->update(['accepted' => true]);
+			// Mark the service that it has an accepted bid.
+			$this->service->update(['has_accepted_bid' => true]);
 		} catch (\Exception $e) {
 			$this->setError('Could not accpt the bid.', 500);
 			return false;
