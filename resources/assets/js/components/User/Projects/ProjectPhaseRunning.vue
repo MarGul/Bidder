@@ -5,8 +5,11 @@
 				<h3>Projektet är i full gång!</h3>
 			</header>
 			<div class="white-contentSection-content">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque laudantium ipsum, velit fugit ab iusto eius officia unde
-				 accusamus, porro, omnis harum voluptatum dicta nisi error magnam voluptatem. Quae, vitae.
+				<p>Projektet kommer automatiskt att avslutas enligt tiden som ni har kommit överens om.</p>
+				<p>
+					Är projektet slutfört innan den överenskomna tiden? Då kan du välja att slutföra projektet i förtid genom att klicka på Ja knappen.<br>
+				</p>
+				<p>Båda parterna behöver klicka på knappen för att projektet ska avslutas tidigare än överenskommet.</p>
 			</div>
 			<div class="gray-contentSection-content">
 				<app-project-user-actions :me="me" :other="other">
@@ -82,8 +85,8 @@
 				this.$store.dispatch('openModal', {
 					component: 'confirm',
 					data: {
-						confirmText: `Är du säker på att du vill markera projketet som klart? När den andra parten också har markerat projektet 
-										som klart så avslutar vi projket. Annars avslutas det den ${this.filters.date(this.project.service_end)}.`,
+						confirmText: `Är du säker på att du vill markera projketet som slutfört?
+									Annars slutförs det per automatik den ${this.filters.date(this.project.service_end)}.`,
 						onConfirm: () => {
 							new Model(`projects/${this.project.id}/complete`).put()
 								.then(response => {

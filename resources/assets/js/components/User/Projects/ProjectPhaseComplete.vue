@@ -5,7 +5,12 @@
 				<h3>Projektet är färdigt!</h3>
 			</header>
 			<div class="white-contentSection-content">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius cum excepturi animi tempora expedita, nemo saepe laudantium. Id harum, suscipit deserunt praesentium reiciendis recusandae officiis eaque, quaerat illo minima temporibus!
+				<p>Hur skötte sig {{ other.username }}?</p>
+				<p>
+					Lämna ett omdöme om hur du tyckte projektet gick. Omdöme kommer att hjälpa dig och 
+					övriga användare i framtiden att kunna välja rätt samarbetspartner för framtida projekt.
+				</p>
+				<p>{{ other.username }} kommer även att att lämna ett omdöme om dig.</p>
 			</div>
 			<div class="gray-contentSection-content">
 				<app-leave-review 

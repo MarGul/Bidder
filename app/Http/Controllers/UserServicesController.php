@@ -88,7 +88,7 @@ class UserServicesController extends Controller
             'bidding' => 'required|numeric|in:7,14,30,60',
             'description' => 'required',
             'media' => 'array',
-            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000'
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,doc,xls,odt,ppt,rtf,pdf,txt,docx,xlsx|max:8000'
         ]);
 
         // Try and insert the service
@@ -127,7 +127,7 @@ class UserServicesController extends Controller
             'end' => 'required|date_format:Y-m-d',
             'description' => 'required',
             'media' => 'array',
-            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,svg,doc,odt,ppt,rtf,pdf,txt|max:8000',
+            'media.*' => 'file|mimes:jpeg,jpg,bmp,png,gif,doc,xls,odt,ppt,rtf,pdf,txt,docx,xlsx|max:8000',
             'deletedMedia' => 'array'
 		]);
 

@@ -12,7 +12,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Tjänstens detaljer</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Välj vilken kategori tjänsten tillhör och även var någonstans tjänsten skall utföras.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -53,7 +53,8 @@
 						<div class="form-section-description">
 							<div class="description-header">Tjänstens innehåll</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Beskriv så detaljerat du kan vad det är för tjänst du vill ha utförd.</p> 
+								<p>Tänk på att ju mer detaljerad beskrivning på tjänsten desto lättare är det för andra användare att lägga ett så korrekt bud som möjligt.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -75,7 +76,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Tjänstens datum</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Ange datum du vill att tjänsten skall bli påbörjad och även när du vill att den ska vara slutförd.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -109,7 +110,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Tjänstens media</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Har du bilder, ritningar eller annan media som du vill lägga till i beskrivningen av din tjänst?</p>
 							</div>
 						</div>
 						<div class="form-section-controls">

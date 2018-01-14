@@ -1,7 +1,9 @@
 <template>
 	<div class="upload_media-component" :class="{edit: editAvailable}">
 		<h4>Ladda upp media</h4>
-		<div class="gray-sub-text mb15">Har du bilder, ritningar eller annan media som du vill lägga till?</div>
+		<div class="gray-sub-text">
+			Giltiga filer: jpeg, jpg, bmp, png, gif, doc, xls, odt, ppt, rtf, pdf, txt, docx, xlsx
+		</div>
 
 		<div class="files-container">
 			<ul class="media">

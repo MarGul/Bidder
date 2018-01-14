@@ -13,7 +13,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Beställare</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Personen som har lagt upp tjänsten. Fyll i ditt namn och organisations/-personnummer.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -32,7 +32,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Utförare</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Personen som har lagt det vinnande budet. Fyll i ditt namn och organisations/-personnummer.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -51,7 +51,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Projektets beskrivning</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>En tydlig beskrivning av det arbete som ska utföras.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -66,7 +66,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Utförarens avårdande</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Arbete som beställaren vill ha utfört trots att utföraren har avrått.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -81,7 +81,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Tider</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Fyll i datum för när arbetet ska påbörjas och vara avslutat.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -111,7 +111,11 @@
 						<div class="form-section-description">
 							<div class="description-header">Pris</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Fyll i totalsumman för arbetet.</p>
+								<p>
+									I rutan specificeras kan du fylla i bland annat moms, RUT, eller på 
+									annat sätt specificera totalsumman. Tänk på att specificera de resekostnader som krävs för att utföra arbetet. 
+								</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -132,7 +136,10 @@
 						<div class="form-section-description">
 							<div class="description-header">Betalning</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>
+									Här beslutar ni om hur betalningen för arbetet ska hanteras. 
+									Om ni vill avtala om något annat kring betalning så ska det skrivas under rubriken övrigt.
+								</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
@@ -162,7 +169,7 @@
 						<div class="form-section-description">
 							<div class="description-header">Övrigt</div>
 							<div class="description-details">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias itaque dignissimos odit
+								<p>Här kan ni avtala om allt som inte passade in de andra rubrikerna.</p>
 							</div>
 						</div>
 						<div class="form-section-controls">
