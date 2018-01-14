@@ -7,7 +7,7 @@
 		<form class="clearfix" @submit.prevent="update">
 			<div class="is-flex-sm wrap is-row">
 				<div class="control-container is-half" :class="{'has-errors': form.errors.has('service_start')}">
-					<label class="control-label">Kan påbörja</label>
+					<label class="control-label">Påbörjas den</label>
 					<datepicker
 						input-class="form-control" 
 						language="sv"
@@ -18,7 +18,7 @@
 					<span class="help-block" v-if="form.errors.has('service_start')" v-text="form.errors.get('service_start')"></span>
 				</div>
 				<div class="control-container is-half" :class="{'has-errors': form.errors.has('service_end')}">
-					<label class="control-label">Är klart</label>
+					<label class="control-label">Är klart den</label>
 					<datepicker
 						input-class="form-control" 
 						language="sv"

@@ -5,8 +5,9 @@
 				<h3>Projektet är avbrutit!</h3>
 			</header>
 			<div class="white-contentSection-content">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi non dolores, facere deleniti, consequuntur sed quasi quae debitis? Officiis incidunt iusto, non quas voluptatem voluptatum! Vel,
-				 voluptate eaque. Sequi, modi.
+				<p>
+					En av parterna har valt att inte gå vidare med projektet. Projektet kommer inte att påbörjas.
+				</p>
 				<ul class="items-list-default mt30">
 					<li class="has-left-border" :class="[cancelHistory.type]">
 						<div class="gray-sub-text" v-text="filters.time(cancelHistory.created_at)"></div>

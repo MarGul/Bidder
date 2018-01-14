@@ -1,7 +1,15 @@
 <template>
 	<div class="project_accept-component">
 		<h4 class="text-center">Acceptera startandet av projektet</h4>
-		<div class="gray-sub-text mb30">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, fuga, aliquam ipsam cupiditate asperiores doloribus repellat.</div>
+		<div class="gray-sub-text mb30">
+			<p>
+				Är alla detaljer på plats? Isåfall kan du välja att acceptera projektets start i genom att klicka på Ja knappen nedan.
+				Vill du inte gå vidare? Klicka på Nej knappen för att avböja projektets start. 
+			</p>
+			<p>
+				När båda parter har accepterat projektets start så börjar projektet. 
+			</p>
+		</div>
 		
 		<app-project-user-actions :me="me" :other="other">
 					
