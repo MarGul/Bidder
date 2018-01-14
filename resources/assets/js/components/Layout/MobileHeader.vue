@@ -10,7 +10,7 @@
 						<router-link to="/information">Information</router-link>
 					</li>
 					<li v-if="$store.getters.isAuthenticated" class="user-mobile-nav">
-						<router-link to="/user/profile" tag="div" class="auth-user">
+						<router-link to="/user/profile" tag="div" class="mobile-nav-highlight">
 							<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
 							<div class="auth-name">{{ $store.getters.authUser.username }}</div>
 						</router-link>
@@ -44,14 +44,18 @@
 							</li>
 						</ul>
 					</li>
-					<template v-else>
-						<li class="nav-item">
-							<a @click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})" class="register">Registrera</a>
-						</li>
-						<li class="nav-item">
-							<a @click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})" class="login">Logga In</a>
-						</li>
-					</template>
+					<li class="mobile-nav-highlight is-flex c_c py-15 mt15" v-else>
+						<a 
+							@click.prevent="$store.dispatch('openModal', {component: 'login', data: {closeClass: 'white'}})" 
+							class="is-link is-weight-500 mr15"
+							v-text="`Logga in`"
+						/>
+						<a 
+							@click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})" 
+							class="btn btn-primary"
+							v-text="`Registrera`"
+						/>
+					</li>
 				</div>
 			</ul>
 		</nav>
