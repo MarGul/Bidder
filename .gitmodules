@@ -1,0 +1,3 @@
+[submodule "resources/assets/svg/heroicons-ui"]
+	path = resources/assets/svg/heroicons-ui
+	url = git@github.com:MarGul/heroicons-ui.git
