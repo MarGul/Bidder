@@ -88,6 +88,10 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-announcement.svg');
 }
 
+.h_megafon_sm {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-announcement-sm.svg');
+}
+
 .h_users {
 	@include mask-icon('../svg/heroicons-ui/svg/icon-group.svg');
 }
@@ -100,12 +104,24 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-browser.svg');
 }
 
-.h_chevron_right {
+.h_cheveron_right {
 	@include mask-icon('../svg/heroicons-ui/svg/icon-cheveron-right.svg');
+}
+
+.h_cheveron_down {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-cheveron-down.svg');
+}
+
+.h_cheveron_up {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-cheveron-up.svg');
 }
 
 .h_messages {
 	@include mask-icon('../svg/heroicons-ui/svg/icon-chat.svg');
+}
+
+.h_messages_sm {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-chat-sm.svg');
 }
 
 .h_institution {
@@ -140,6 +156,35 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-check-circle.svg');
 }
 
+.h_search {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-search.svg');
+}
+
+.h_items {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-grid.svg');
+}
+
+.h_pin {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-location.svg');
+}
+
+.h_flag {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-flag.svg');
+}
+
+.h_plus {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-plus.svg');
+}
+
+.h_lock_open {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-lock-open.svg');
+}
+
+.h_help {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-help.svg');
+}
+
+
 
 
 .confirm_modal_icon {
@@ -147,11 +192,6 @@
 	width: 150px;
 	height: 150px;
 	margin: 0 auto;
-}
-
-.icon_bid {
-	@include mask-icon('../svg/bid.svg');
-	background-color: #97A9B5;
 }
 
 .icon_checkbox_checked {
@@ -165,10 +205,6 @@
 .icon_confirmed {
 	@include mask-icon('../svg/confirm.svg');
 	background-color: $brand-success;
-}
-
-.icon_down_chevron {
-	@include mask-icon('../svg/down_chevron.svg');
 }
 
 .icon_decline {
@@ -248,10 +284,6 @@
 
 .icon_two_users {
 	@include mask-icon('../svg/two_users.svg');
-}
-
-.icon_up_chevron {
-	@include mask-icon('../svg/up_chevron.svg');
 }
 
 .icon_warning_color {

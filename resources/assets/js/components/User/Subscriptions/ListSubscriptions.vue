@@ -52,7 +52,7 @@
 				let location = isRegion ? this.$store.getters.regionById(locationId) : this.$store.getters.cityById(locationId);
 				let category = this.$store.getters.categoryById(sub.category_id);
 
-				return `${category.name} i ${location.name}`;
+				return category && location ? `${category.name} i ${location.name}` : '';
 			}
 		},
 		created() {

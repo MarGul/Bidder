@@ -18,7 +18,7 @@
             });
 
             if ( this.isAuth ) {
-                this.$router.push('/user/profile');
+                this.$router.push('/welcome');
             } else {
                 this.$router.push('/');
             }

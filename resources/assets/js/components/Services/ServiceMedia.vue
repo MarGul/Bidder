@@ -14,7 +14,7 @@
 			<div class="service-media-heading">Filer</div>
 			<ul class="services-files-list">
 				<li v-for="file in files" :key="file.id">
-					<i class="icon icon_file wh15 light-gray mr5"></i>
+					<i class="icon h_file wh20 light-gray mr5"></i>
 					<a :href="file.media_url" target="_blank" class="is-link" rel="noopener" v-text="file.original_filename"></a>
 				</li>
 			</ul>

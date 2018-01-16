@@ -8,13 +8,13 @@
 				<div class="service-details">
 					<div class="detail-item">
 						<div class="detail-header">
-							<i class="icon icon_list wh15 cursor-default primary mr10"></i><span>Kategori</span>
+							<i class="icon h_items wh20 cursor-default primary mr10"></i><span>Kategori</span>
 						</div>
 						<div class="detail-value" v-text="category"></div>
 					</div>
 					<div class="detail-item">
 						<div class="detail-header">
-							<i class="icon icon_map_pin wh15 cursor-default primary mr10"></i><span>Plats</span>
+							<i class="icon h_flag wh20 cursor-default primary mr10"></i><span>Plats</span>
 						</div>
 						<div class="detail-value" v-text="location"></div>
 					</div>

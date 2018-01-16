@@ -10,9 +10,6 @@
 				<nav class="desktop-navigation-container">
 					<ul class="desktop-navigation">
 						<li class="nav-item">
-							<router-link to="/categories"><i class="icon icon_list wh15 light-gray mr10"></i> Kategorier</router-link>
-						</li>
-						<li class="nav-item">
 							<router-link to="/services"><i class="icon icon_two_users wh15 light-gray mr10"></i> Sök tjänster</router-link>
 						</li>
 						<li class="nav-item">
@@ -34,26 +31,48 @@
 						/>
 					</div>
 
-					<div class="auth-user" @click="toggleDropdown" v-else v-click-outside="close">
-						<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
-						<div class="auth-name">
-							{{ user.username }}
-							<i class="icon wh12 light-gray ml10" :class="[chevron]"></i>
+					<div class="auth-user" v-else>
+						<router-link to="/user/create-service" class="btn btn-orange is-flex c_c mr40">
+							<i class="icon h_plus white wh15 mr10"></i><span>Skapa ny tjänst</span>
+						</router-link>
+						<div class="is-flex c_c" @click="toggleDropdown" v-click-outside="close">
+							<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
+							<i class="icon h_cheveron_down wh20 light-gray ml5" :class="[chevron]"></i>
 						</div>
 					</div>
 
 					<ul class="auth-dropdown" v-if="dropdown">
 						<li>
-							<router-link :to="`/profile/${user.username}`"><i class="icon icon_user wh15 light-gray mr10"></i>Min profil</router-link>
+							<router-link :to="`/profile/${user.username}`">
+								<i class="icon h_profile wh20 light-gray mr15"></i>Min profil
+							</router-link>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<router-link to="/user/services">
+								<i class="icon h_briefcase wh20 light-gray mr15"></i>Mina tjänster
+							</router-link>
 						</li>
 						<li>
-							<router-link to="/user/create-service"><i class="icon icon_two_users wh15 light-gray mr10"></i>Skapa tjänst</router-link>
+							<router-link to="/user/bids">
+								<i class="icon h_megafon wh20 light-gray mr15"></i>Mina bud
+							</router-link>
 						</li>
 						<li>
-							<router-link to="/user/profile"><i class="icon icon_gears wh15 light-gray mr10"></i>Inställningar</router-link>
+							<router-link to="/user/bids">
+								<i class="icon h_users wh20 light-gray mr15"></i>Mina projekt
+							</router-link>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<router-link to="/user/bids">
+								<i class="icon h_help wh20 light-gray mr15"></i>Hjälp
+							</router-link>
 						</li>
 						<li>
-							<a href="/logout" @click.prevent="logout"><i class="icon icon_exit wh15 light-gray mr10"></i>Logga Ut</a>
+							<a href="/logout" @click.prevent="logout">
+								<i class="icon h_lock_open wh20 light-gray mr15"></i>Logga Ut
+							</a>
 						</li>
 					</ul>
 				</div>

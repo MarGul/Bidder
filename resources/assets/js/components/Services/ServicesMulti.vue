@@ -6,20 +6,20 @@
 					<div class="services-multi-title" v-text="service.title"></div>
 					<div class="services-multi-info">
 						<div class="multi-info category">
-							<i class="icon icon_list primary wh15 mr10 cursor-default"></i> {{ category }}
+							<i class="icon h_items primary wh20 mr10 cursor-default"></i> {{ category }}
 						</div>
 						<div class="multi-info location">
-							<i class="icon icon_map_pin primary wh15 mr10 cursor-default"></i> {{ location }}
+							<i class="icon h_flag primary wh20 mr10 cursor-default"></i> {{ location }}
 						</div>
 					</div>
 				</div>
 				<div class="white-contentSection-footer">
 					<div class="services-multi-meta is-flex">
 						<div class="meta-bidCount is-flex c_c mr15">
-							<i class="icon icon_bid light-gray w14h16 mr10"></i> {{ bidCount }}
+							<i class="icon h_megafon_sm light-gray wh15 mr10"></i> {{ bidCount }}
 						</div>
 						<div class="meta-commentCount is-flex c_c">
-							<i class="icon icon_comment light-gray w14h16 mr10"></i> {{ commentCount }}
+							<i class="icon h_messages_sm light-gray wh15 mr10"></i> {{ commentCount }}
 						</div>
 					</div>
 					<div class="services-multi-meta timer">

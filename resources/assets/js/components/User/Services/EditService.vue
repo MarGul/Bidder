@@ -8,16 +8,16 @@
 			<div class="main-area-sidebar">
 				<template v-if="fetched">
 					<div class="handle-service mb25" v-if="service.active">
-						<router-link :to="`/services/${service.id}`" class="btn btn-info full-width is-flex c_c mb10">
+						<router-link :to="`/services/${service.id}`" class="btn btn-primary full-width is-flex c_c mb10">
 							Visa tjänsten
 						</router-link>
-						
-						<button class="btn btn-danger full-width is-flex c_c" @click.prevent="removeService">
-							<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
-						</button>
 					</div>
 					
 					<app-service-bids :bids="bids" @changeView="changeView" />
+
+					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="removeService" v-if="service.active">
+						<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
+					</button>
 				</template>		
 			</div>
 		</div>
