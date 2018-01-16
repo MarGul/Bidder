@@ -1,6 +1,7 @@
 <template>
 	<span class="timer-component" :class="{critical: critical}">
 		{{ left }}
+		{{ Math.trunc((new Date()).getTime() / 1000) }}
 	</span>
 </template>
 
