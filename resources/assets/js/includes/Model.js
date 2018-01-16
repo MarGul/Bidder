@@ -6,7 +6,7 @@ class Model {
 		this.url = null;
 	}
 
-	new(config = {baseURL: 'http://gobid.test'}) {
+	new(config = {baseURL: window.location.origin}) {
 		this.instance = axios.create(config);
 		return this;
 	}
