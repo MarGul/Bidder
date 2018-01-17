@@ -178,7 +178,7 @@ class UserManager extends BaseManager
 
 		// Delete the old profile picture in a job
 		if ( $this->user->avatar ) {
-			dispatch(new DeleteOldProfilePicture($this->user->avatar));
+			dispatch(new DeleteOldProfilePicture($this->user->avatar))->onQueue('media-queue');
 		}
 
 		try {
