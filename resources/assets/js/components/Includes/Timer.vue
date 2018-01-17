@@ -1,7 +1,6 @@
 <template>
 	<span class="timer-component" :class="{critical: critical}">
 		{{ left }}
-		{{ ending }}
 	</span>
 </template>
 
@@ -9,11 +8,16 @@
 	import { HeartBeat } from '../../includes/heartbeat';
 
 	export default {
-		props: ['ends'],
+		props: {
+			ends: {
+				type: String,
+				required: true,
+			}
+		},
 		data() {
 			return {
 				timer: null,
-				now: Math.trunc((new Date()).getTime() / 1000),
+				now: Math.trunc(moment().utcOffset(1).unix()),
 				critical: false
 			}
 		},
@@ -31,7 +35,7 @@
 				return Math.trunc((this.ending - this.now) / 60 / 60 / 24);
 			},
 			ending() {
-				return Math.trunc(Date.parse(this.ends) / 1000)
+				return Math.trunc(moment(this.ends).unix());
 			},
 			left() {
 				this.critical = false;
@@ -48,7 +52,7 @@
 		},
 		mounted() {
 			HeartBeat.$on('beat', () => {
-				this.now = Math.trunc((new Date()).getTime() / 1000);
+				this.now = Math.trunc(moment().utcOffset(1).unix());
 
 				if ( this.now == this.ending ) {
 					this.$emit('ended');

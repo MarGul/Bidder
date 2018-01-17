@@ -8,10 +8,10 @@
 					</router-link>
 				</div>
 				<div class="f__callout">
-					<div class="f__callout-heading">Bidder</div>
+					<div class="f__callout-heading">GoBid</div>
 					<ul class="f__links">
 						<li>
-							<a href="#">Om Bidder</a>
+							<a href="#">Om GoBid</a>
 						</li>
 						<li>
 							<a href="#">Hur fungerar det?</a>
@@ -24,7 +24,7 @@
 				<div class="f__callout">
 					<div class="f__callout-heading">Kontakt</div>
 					<div class="contact-container">
-						<div>email: <a href="mailto:hej@bidder.se">hej@bidder.se</a></div>
+						<div>email: <a href="mailto:hej@bidder.se">hej@gobid.se</a></div>
 						<div>orgnr: 556677-3344</div>
 					</div>
 					<ul class="f__social-media-link">
