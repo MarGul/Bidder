@@ -17,125 +17,95 @@
 			}
 		}
 	}
-	
-	.rating-container {
-		text-align: center;
+}
+
+.ratings-component {
+
+	@media screen and (min-width: $screen-sm-min) {
+		display: inline-block;
+	}
+
+	.rating-avg {
+		margin: 0 5px;
+	}
+}
+
+.ratings-details-container {
+
+	@media screen and (min-width: $screen-sm-min) {
+		display: flex;
+	}
+
+	.detail-container {
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 
 		@media screen and (min-width: $screen-sm-min) {
-			text-align: left;
+			flex: 1;
+			margin-bottom: 0;
 		}
 
-		.review-username {
-			margin: 5px 15px 10px 0;
+		.detail-heading {
+			font-weight: 500;
+		}
+	}
+}
 
-			@media screen and (min-width: $screen-sm-min) {
-				float: left;
+.review {
+	display: flex;
+	margin: 0 -20px;
+	padding: 20px 0;
+	border-bottom: 1px solid $border-color-gray;
+
+	&:first-child {
+		padding: 0 0 20px 0;
+	}
+	
+	&:last-child {
+		border-bottom: none;
+		padding: 20px 0 0 0;
+	}
+
+	.review-user {
+		flex: 1;
+		padding: 0 30px 0 20px;
+
+		.reviewer-avatar {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+			margin: 0 auto;
+
+			@media screen and (min-width: $screen-lg-min) {
+				width: 65px;
+				height: 65px;
 			}
 		}
+	}
 
-		.review-ratings {
+	.review-body {
+		flex: 3;
 
-			@media screen and (min-width: $screen-sm-min) {
-				
-			}
+		@media screen and (min-width: $screen-lg-min) {
+			flex: 5;
+		}
 
-			.ratings-component {
-				color: $navbar-icon-color;
+		.review-body-header {
+			margin-bottom: 15px;
+
+			.reviewed-at {
 
 				@media screen and (min-width: $screen-sm-min) {
 					display: inline-block;
-				}
-
-				.rating-avg {
-					margin-right: 7px;
+					margin-left: 5px;
 				}
 			}
 		}
 	}
-
-	.ratings-details-container {
-
-		@media screen and (min-width: $screen-sm-min) {
-			display: flex;
-		}
-
-		.detail-container {
-			margin-bottom: 10px;
-
-			@media screen and (min-width: $screen-sm-min) {
-				flex: 1;
-				margin-bottom: 0;
-			}
-
-			.detail-heading {
-				font-weight: 500;
-			}
-		}
-	}
-
-	.reviewes-container {
-
-		.review {
-			display: flex;
-			margin: 0 -15px;
-			padding: 10px 15px;
-			border-bottom: 1px solid $border-color-gray;
-
-			&:last-child {
-				border-bottom: 0px solid transparent;
-			}
-
-			.reviewer {
-				flex: 1;
-				font-size: 90%;
-
-				.reviewer-avatar {
-					width: 50px;
-					height: 50px;
-					border-radius: 50%;
-					border: 2px solid $brand-primary;
-					background-repeat: no-repeat;
-					background-position: center center;
-					background-size: cover;
-					margin: 0 auto;
-				}
-
-				.reviewed-by {
-					color: $navbar-icon-color;
-				}
-			}
-
-			.review-text {
-				flex: 2;
-				padding-left: 20px;
-
-				@media screen and (min-width: $screen-sm-min) {
-					flex: 4;
-				}
-
-				@media screen and (min-width: $screen-lg-min) {
-					flex: 5;
-				}
-
-				.review-text-header {
-					
-					.ratings-component {
-						float: left;
-					}
-
-					.reviewed-at {
-						color: $navbar-icon-color;
-						display: inline-block;
-						padding-left: 5px;
-						font-size: 90%;
-					}
-				}
-
-				.review-text-body {
-					margin-top: 15px;
-				}
-			}
-		}
-	}
-
 }

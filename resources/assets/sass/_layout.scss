@@ -28,7 +28,7 @@ a {
 	z-index: 1;
 	transition: left 0.5s ease-in-out;
 
-	@media screen and (min-width: $screen-sm-min) {
+	@media screen and (min-width: $screen-md-min) {
 		height: calc(100vh - 60px);
 	}
 }

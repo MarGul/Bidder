@@ -188,7 +188,6 @@ export default {
                             projectEvents.contractUpdated(notification.data);
                             break;
                         case 'App\\Notifications\\ProjectContractAccepted':
-                            console.log(notification.data);
                             projectEvents.contractAccepted(notification.data);
                             break;
                         case 'App\\Notifications\\ProjectCreated':

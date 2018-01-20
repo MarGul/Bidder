@@ -1,18 +1,22 @@
 <template>
 	<div class="review">
-		<div class="reviewer text-center" v-if="review.reviewer">
+		<div class="review-user" v-if="review.reviewer">
 			<div class="reviewer-avatar" :style="avatar(review.reviewer.avatar)"></div>
-			<div class="reviewed-by mt5">Omdömme av</div>
-			<div class="reviewer-username is-weight-500">
-				<router-link :to="`/profile/${review.reviewer.username.toLowerCase()}`" v-text="review.reviewer.username"></router-link>
+			<div class="reviewed-at gray-sub-text mt10 text-center">Omdömme av</div>
+			<div class="reviewer-username text-center mt5">
+				<router-link 
+					:to="`/profile/${review.reviewer.username.toLowerCase()}`" 
+					v-text="review.reviewer.username" 
+					class="is-link"
+				/>
 			</div>
 		</div>
-		<div class="review-text">
-			<div class="review-text-header">
-				<app-ratings :rating="review.would_recommend" :showCount="false"></app-ratings>
-				<div class="reviewed-at" v-text="reviewedAt"></div>
+		<div class="review-body">
+			<div class="review-body-header">
+				<app-ratings :rating="parseFloat(review.would_recommend)" :showCount="false"></app-ratings>
+				<div class="reviewed-at gray-sub-text" v-text="reviewedAt"></div>
 			</div>
-			<div class="review-text-body" v-text="review.review"></div>
+			<div class="review-body-review" v-text="review.review"></div>
 		</div>
 	</div>
 </template>
@@ -22,7 +26,12 @@
 	import { HeartBeat } from '../../includes/heartbeat'
 
 	export default {
-		props: ['review'],
+		props: {
+			review: {
+				type: Object,
+				required: true
+			}	
+		},
 		components: {
 			appRatings
 		},
