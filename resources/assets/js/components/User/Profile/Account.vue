@@ -93,7 +93,7 @@
 				new Model(`users/${this.$store.getters.authUser.id}/profile`).patch(this.form.data())
 					.then(response => {
 						this.$store.dispatch('showNotification', {type: 'success', msg: 'Din profil har blivit uppdaterad.'});
-						this.$store.commit('SET_USER', {user: response.data.user});
+						this.$store.commit('SET_AUTHENTICATED_USER', response.data.user);
 						this.processing = false;
 					})
 					.catch(error => {

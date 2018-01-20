@@ -1,13 +1,15 @@
 <template>
 	<div class="modal-mask">
-		<div class="modal-container" :class="[$store.getters.modalSize]">
-			<span class="close" @click="$store.dispatch('closeModal')">
-				<i class="icon h_delete wh15 light-gray" :class="[closeClass]"></i>
-			</span>
+		<transition name="slide-down-up" v-if="$store.getters.modalOpen" appear>
+			<div class="modal-container" :class="[$store.getters.modalSize]" v-click-outside="close">
+				<span class="close" @click="close">
+					<i class="icon h_delete wh15 light-gray" :class="[closeClass]"></i>
+				</span>
 
-			<component :is="$store.getters.modalComponent"></component>
+				<component :is="$store.getters.modalComponent"></component>
 
-		</div>
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -43,6 +45,11 @@
 				}
 
 				return '';
+			}
+		},
+		methods: {
+			close() {
+				this.$store.dispatch('closeModal');
 			}
 		}
 	}

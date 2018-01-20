@@ -2885,7 +2885,7 @@ body.mobile-nav-open .overlay {
   z-index: 9999;
   top: 0;
   left: 0;
-  bottom: -1000px;
+  bottom: 0;
   right: 0;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.7);
