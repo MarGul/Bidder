@@ -9,7 +9,7 @@
             <app-event-notification v-if="$store.getters.eventNotificationShowing" />
         </transition>
 
-        <app-modal v-if="$store.getters.modalOpen" />
+        <app-modal />
 
 
         <app-mobile-header v-if="breakpoints.isSmallDevices()"></app-mobile-header>

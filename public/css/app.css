@@ -5401,6 +5401,20 @@ body.mobile-nav-open .overlay {
   }
 }
 
+.fast-fade-out-leave-active {
+  -webkit-animation: fast-fade-out 200ms ease-out forwards;
+  animation: fast-fade-out 200ms ease-out forwards;
+}
+
+@keyFrames fast-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .notification-slide-down-up-enter-active {
   -webkit-animation: slide-du-in 400ms ease-out forwards;
   animation: slide-du-in 400ms ease-out forwards;

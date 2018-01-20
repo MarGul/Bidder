@@ -94,7 +94,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <a class="is-clickable">
+                    <a class="is-clickable" @click="logout">
                         <div class="link-section-container">
                             <i class="icon h_lock_open wh20 light-gray mr15"></i>
                             <div class="link-container">
