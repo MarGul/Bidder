@@ -21,34 +21,3 @@ Vue.directive('click-outside', {
         delete el.ClickOutside
     }
 });
-
-/**
-
-import Vue from 'vue'
-
-Vue.directive('click-outside', {
-    bind(element, binding, vnode) {
-        const handler = (event) => {
-            if (!vnode.context || element.contains(event.target)) return
-
-            element.clickOutside.callback(event)
-        }
-
-        element.clickOutside = {
-            handler: handler,
-            callback: binding.value
-        }
-
-        document.addEventListener('click', handler)
-    },
-
-    update(element, binding) {
-        element.clickOutside.callback = binding.value
-    },
-
-    unbind(element) {
-        document.removeEventListener('click', element.clickOutside.handler)
-        delete element.clickOutside
-    }
-})
- */
