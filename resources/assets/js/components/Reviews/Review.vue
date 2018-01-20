@@ -1,6 +1,6 @@
 <template>
 	<div class="review">
-		<div class="review-user" v-if="review.reviewer">
+		<div class="review-user">
 			<div class="reviewer-avatar" :style="avatar(review.reviewer.avatar)"></div>
 			<div class="reviewed-at gray-sub-text mt10 text-center">Omdömme av</div>
 			<div class="reviewer-username text-center mt5">

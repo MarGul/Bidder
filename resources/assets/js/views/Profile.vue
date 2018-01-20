@@ -35,7 +35,11 @@
 								</div>
 							</section>
 
-							<app-show-reviews :username="user.username" :rating="user.rating" :reviews="user.reviews"></app-show-reviews>
+							<app-show-reviews 
+								:username="user.username" 
+								:rating="user.rating || {}" 
+								:reviews="user.reviews" 
+							/>
 						</div>
 					</div>
 				</template>

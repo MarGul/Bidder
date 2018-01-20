@@ -58,16 +58,16 @@
 		},
 		computed: {
 			avg() {
-				return this.rating ? parseFloat(this.rating.avg) : 0.0;
+				return this.rating.avg ? parseFloat(this.rating.avg) : 0.0;
 			},
 			count() {
-				return this.rating ? parseFloat(this.rating.count) : 0;
+				return this.rating.count ? parseFloat(this.rating.count) : 0;
 			},
 			communication() {
-				return this.rating ? parseFloat(this.rating.communication) : 0.0;
+				return this.rating.communication ? parseFloat(this.rating.communication) : 0.0;
 			},
 			as_described() {
-				return this.rating ? parseFloat(this.rating.as_described) : 0.0;
+				return this.rating.as_described ? parseFloat(this.rating.as_described) : 0.0;
 			}
 		}
 	}
