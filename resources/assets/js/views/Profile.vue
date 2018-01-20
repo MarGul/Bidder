@@ -23,7 +23,7 @@
 						<div class="main-area">
 							<section class="white-contentSection mb30">
 								<header class="white-contentSection-header">
-									<h3 v-text="user.name"></h3>
+									<h3 v-text="user.name || user.username"></h3>
 								</header>
 								<div class="white-contentSection-content">
 									<div class="user-bio" v-if="user.bio">

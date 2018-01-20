@@ -36,7 +36,7 @@
 							<i class="icon h_plus white wh15 mr10"></i><span>Skapa ny tjänst</span>
 						</router-link>
 						<div class="is-flex c_c" @click="toggleDropdown" v-click-outside="close">
-							<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
+							<div class="auth-avatar" :style="avatar"></div>
 							<i class="icon h_cheveron_down wh20 light-gray ml5" :class="[chevron]"></i>
 						</div>
 					</div>
@@ -98,9 +98,6 @@
 			}),
 			avatar() {
 				return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
-			},
-			defaultAvatar() {
-				return !!this.user.avatar ? [] : ['defaultAvatar'];
 			},
 			chevron() {
 				return this.dropdown ? 'icon_up_chevron' : 'icon_down_chevron';

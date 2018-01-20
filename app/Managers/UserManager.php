@@ -19,6 +19,11 @@ class UserManager extends BaseManager
 	 * @var App\User
 	 */
 	protected $user;
+	/**
+	 * Filename of the default avatar.
+	 * @var string
+	 */
+	protected $defaultAvatar = 'default_avatar.png';
 
 
 	/**
@@ -67,6 +72,7 @@ class UserManager extends BaseManager
 			'company' => $this->data('company'),
 			'name' => '',
 			'bio' => '',
+			'avatar' => asset("images/{$this->defaultAvatar}"),
 			'email_verification_code' => str_random(35)
 		]);
 

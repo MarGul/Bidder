@@ -223,10 +223,6 @@
 	@include mask-icon('../svg/question_mark.svg');
 }
 
-.icon_exit {
-	@include mask-icon('../svg/exit.svg');
-}
-
 .icon_gears {
 	@include mask-icon('../svg/settings_gears.svg');
 }
@@ -247,10 +243,6 @@
 	&:hover {
 		background-color: #3b5998;
 	}
-}
-
-.icon_list {
-	@include mask-icon('../svg/list.svg');
 }
 
 .icon_lock {

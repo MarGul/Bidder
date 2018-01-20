@@ -3,7 +3,9 @@
 		<div class="tooltip-error" v-if="error">Ej giltigt val</div>
 		<div class="tags-input" :class="{hasError: error}" @click="$refs.input.focus()">
 			<div class="tag" v-for="(item, index) in items" :key="item.slug">
-				{{ item.name }}<i class="icon h_delete wh15 light-gray" @click="$emit('remove', {item, index})"></i>
+				<div class="is-flex c_c">
+					<span>{{ item.name }}</span><i class="icon h_delete wh15 danger" @click="$emit('remove', {item, index})"></i>
+				</div>
 			</div>
 			<input type="text" ref="input" @keydown="error = false" @keydown.enter="addItem(input)" v-model.trim="input" :style="inputWidth">
 		</div>
