@@ -13,7 +13,7 @@
 						</router-link>
 					</div>
 					
-					<app-service-bids :bids="bids" @changeView="changeView" />
+					<app-service-bids :bids="service.bids" @changeView="changeView" />
 
 					<button class="btn btn-danger full-width is-flex c_c" @click.prevent="removeService" v-if="service.active">
 						<i class="icon icon_danger wh20 mr10"></i> Ta bort tjänsten
@@ -48,17 +48,7 @@
 				fetched: 'serviceDetailsFetched',
 				service: 'serviceDetailsService',
 				services: 'userServices'
-			}),
-			bids() {
-				if ( !this.service.has_accepted_bid ) return this.service.bids;
-				
-				// Sort the accepted bid first.
-				return this.service.bids.sort((a,b) => {
-					if ( a.accepted ) return -1;
-
-					return b.accepted ? 1 : 0;
-				});
-			}
+			})
 		},
 		methods: {
 			changeView({view}) {

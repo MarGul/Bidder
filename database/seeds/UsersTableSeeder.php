@@ -18,21 +18,24 @@ class UsersTableSeeder extends Seeder
                 'email' => 'gullbeerg@gmail.com',
                 'password' => bcrypt('tester'),
                 'name' => 'Marcus Gullberg',
-                'avatar' => 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460'
+                'avatar' => 'https://avatars0.githubusercontent.com/u/11759765?v=3&s=460',
+                'email_verified' => true
             ],
             [
                 'username' => 'Musk',
                 'email' => 'elon@spacex.com',
                 'password' => bcrypt('tester'),
                 'name' => 'Elon Musk',
-                'avatar' => 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg'
+                'avatar' => 'https://lh3.googleusercontent.com/lviuiKeKp3sfoMWnVyxkkM6WFvetT7XOMwH0qoZMDRmLChh_skg',
+                'email_verified' => true
             ],
             [
                 'username' => 'PThiel',
                 'email' => 'peter@paypal.com',
                 'password' => bcrypt('tester'),
                 'name' => 'Pieter Thiel',
-                'avatar' => 'http://static4.businessinsider.com/image/552568d2ecad04377e91955f-480/peter-thiel.jpg'
+                'avatar' => 'http://static4.businessinsider.com/image/552568d2ecad04377e91955f-480/peter-thiel.jpg',
+                'email_verified' => true
             ]
         ];
 
