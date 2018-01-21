@@ -56,9 +56,11 @@ class ProjectManager extends BaseManager
 	public function get()
 	{
 		try {
-			$this->projects = Project::with(['users' => function($query) {
-				$query->where('user_id', $this->user->id);
-			}])->get();
+			$this->projects = Project::with('users')
+									 ->whereHas('users', function($query) {
+										$query->where('user_id', $this->user->id);
+									 })
+									 ->get();
 		} catch ( \Exception $e ) {
 			$this->setError('Could not fetch the users projects from storage.', 500);
 			return false;
