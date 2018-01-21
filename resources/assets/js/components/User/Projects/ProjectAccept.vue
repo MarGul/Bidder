@@ -15,7 +15,7 @@
 					
 			<template slot="action-type-container">
 				<div class="gray-sub-text">Avbryts om</div>
-				<app-timer :ends="project.service_end" />
+				<app-timer :ends="project.accept_ends" />
 				<div class="gray-sub-text">den {{ filters.time(project.accept_ends) }}</div>
 			</template>
 			
