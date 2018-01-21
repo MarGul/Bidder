@@ -3,7 +3,7 @@
         <div class="is-flex v-center ml10" v-if="user.email_verified">
             <i class="icon icon_confirmed wh15 cursor-default mr10"></i> Din email är verifierad. 
         </div>
-        <div class="is-flex v-center ml10" v-else>
+        <div class="is-flex-sm v-center ml10" v-else>
             <i class="icon icon_warning_color wh20 cursor-default mr10"></i> Din email ej är verifierad&nbsp;&mdash;&nbsp;  
             <span class="is-link is-small-text" @click="sendVerification">Skicka verifikationen igen</span>
         </div>

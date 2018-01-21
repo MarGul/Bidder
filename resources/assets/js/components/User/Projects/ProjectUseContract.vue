@@ -18,6 +18,13 @@
 			<template v-else>
 				<div class="is-flex c_c">
 					<i class="icon icon_confirmed wh15 mr5"></i> <span>Projektet använder ett avtal</span>
+					<template v-if="!breakpoints.isMobile()">
+						&nbsp;&mdash;&nbsp;
+						<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
+					</template>
+				</div>
+				<div class="text-center" v-if="breakpoints.isMobile()">
+					<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
 				</div>
 				<div class="is-flex c_c">
 					<button 
@@ -42,7 +49,8 @@
 	export default {
 		data() {
 			return {
-				processing: false
+				processing: false,
+				breakpoints: window.breakpoints
 			}
 		},
 		computed: {
