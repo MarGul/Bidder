@@ -33,7 +33,9 @@
                 <section class="transparent-contentSection">
                     <header class="transparent-contentSection-header" :class="{'has-link': myService}">
                         <h3>Upplagd av</h3>
-                        <router-link :to="`/user/services/${service.id}`" class="is-link" v-if="myService">Redigera</router-link>
+                        <router-link :to="`/user/services/${service.id}`" class="is-link is-flex v-center justify-end" v-if="myService">
+                            Redigera<i class="icon h_edit wh20 primary ml10"></i>
+                        </router-link>
                     </header>
                     <div class="transparent-contentSection-content">
                         <div class="service-user">

@@ -14,7 +14,15 @@ class CommentCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    
+    /**
+     * The queue that the broadcast will be added on.
+     * @var string
+     */
+    public $broadcastQueue = 'real-time-events';
+    /**
+     * The comment to broadcast
+     * @var App\Comment
+     */
     public $comment;
 
     /**
