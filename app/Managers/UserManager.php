@@ -192,7 +192,7 @@ class UserManager extends BaseManager
 		if ( !Storage::put($path, $img->stream()->detach()) ) return false;
 
 		// Delete the old profile picture in a job
-		if ( $this->user->avatar ) {
+		if ( $this->user->avatar !== asset("images/{$this->defaultAvatar}") ) {
 			dispatch(new DeleteOldProfilePicture($this->user->avatar))->onQueue('media-queue');
 		}
 
