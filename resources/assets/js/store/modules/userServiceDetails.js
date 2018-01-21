@@ -30,6 +30,13 @@ const actions = {
 			}
 		});
 
+		// Put the accepted bid at front
+		let index = service.bids.findIndex(bid => bid.id === payload.id);
+		let bid = service.bids[index];
+		// Set the accepted bid at the front
+		service.bids.splice(index, 1);
+		service.bids.unshift(bid);
+
 		commit('SET_USER_SERVICE_DETAILS_SERVICE', service);
 	},
 	clearServiceDetailsState({commit}) {

@@ -2,16 +2,14 @@
     <div id="site">
         
         <transition name="notification-slide-down-up">
-            <app-notifications v-if="$store.getters.notificationShowing" />>
+            <app-notifications v-if="$store.getters.notificationShowing" />
         </transition>
 
         <transition name="event-notification-animation">
             <app-event-notification v-if="$store.getters.eventNotificationShowing" />
         </transition>
 
-        <transition name="slide-down-up">
-            <app-modal v-if="$store.getters.modalOpen" />
-        </transition>
+        <app-modal />
 
 
         <app-mobile-header v-if="breakpoints.isSmallDevices()"></app-mobile-header>

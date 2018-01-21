@@ -19,6 +19,11 @@ class UserManager extends BaseManager
 	 * @var App\User
 	 */
 	protected $user;
+	/**
+	 * Filename of the default avatar.
+	 * @var string
+	 */
+	protected $defaultAvatar = 'default_avatar.png';
 
 
 	/**
@@ -67,6 +72,7 @@ class UserManager extends BaseManager
 			'company' => $this->data('company'),
 			'name' => '',
 			'bio' => '',
+			'avatar' => asset("images/{$this->defaultAvatar}"),
 			'email_verification_code' => str_random(35)
 		]);
 
@@ -84,6 +90,15 @@ class UserManager extends BaseManager
 	public function sendEmailVerification()
 	{
 		if ( $this->hasError() ) return false;
+
+		try {
+			if ( is_null($this->user->email_verification_code) ) {
+				$this->user->update(['email_verification_code' => str_random(35)]);
+			}
+		} catch ( \Exception $e ) {
+			$this->setError('Could not set a new email verification code.', 500);
+			return false;
+		}
 		
 		Notification::send($this->user, new EmailVerification($this->user));
 

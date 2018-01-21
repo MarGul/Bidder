@@ -1,0 +1,99 @@
+.desktop-auth-dropdown {
+    z-index: 100;
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: #fff;
+	box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.2);
+    border-radius: 4px;
+
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #fff;
+        right: 35px;
+        top: -7px;
+    }
+
+    .auth-dropdown-top {
+        display: flex;
+        background: #FFF;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        padding: 30px;
+
+        .left-section {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .right-section {
+            flex: 1;
+            padding-left: 30px;
+        }
+    }
+
+    .auth-dropdown-bottom {
+        background: #f6f9fc;
+        border-top: 2px solid $border-color-gray;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        padding: 30px;
+
+        .link-section-container {
+            align-items: center;
+        }
+        
+        .link-text {
+            display: inline-block;
+        }
+
+        .gray-sub-text {
+            display: inline-block;
+            margin-left: 10px;
+        }
+    }
+
+    .auth-nav-section {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+
+            a {
+                display: block;
+                margin-bottom: 20px;
+                text-decoration: none !important;
+                color: #282c2f;
+                font-weight: 500;
+
+                &.active {
+                    color: $brand-primary;
+
+                    i {
+                        background-color: $brand-primary !important;
+                    }
+                }
+
+                .link-section-container {
+                    display: flex;
+                    align-items: flex-start;
+
+                    .gray-sub-text {
+                        white-space: nowrap;
+                        font-weight: normal !important;
+                    }
+                }
+            }
+
+            &:last-child a {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

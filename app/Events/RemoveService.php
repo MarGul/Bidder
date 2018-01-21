@@ -16,13 +16,11 @@ class RemoveService implements ShouldBroadcast
 
     /**
      * The queue that the broadcast will be added on.
-     *
      * @var string
      */
     public $broadcastQueue = 'real-time-events';
     /**
      * The id of the service that has been removed.
-     *
      * @var Integer
      */
     public $id;

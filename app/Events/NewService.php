@@ -16,13 +16,11 @@ class NewService implements ShouldBroadcast
 
     /**
      * The queue that the broadcast will be added on.
-     *
      * @var string
      */
     public $broadcastQueue = 'real-time-events';
     /**
      * The new service created
-     *
      * @var App\Service;
      */
     public $service;

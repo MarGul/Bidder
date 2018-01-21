@@ -1,0 +1,15 @@
+.fast-fade-out-leave-active {
+	-webkit-animation: 	fast-fade-out 200ms ease-out forwards;
+	-moz-animation: 	fast-fade-out 200ms ease-out forwards;
+	-o-animation: 		fast-fade-out 200ms ease-out forwards;
+	animation: 			fast-fade-out 200ms ease-out forwards;
+}
+
+@keyFrames fast-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

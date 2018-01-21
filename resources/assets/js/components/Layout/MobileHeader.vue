@@ -11,7 +11,7 @@
 					</li>
 					<li v-if="$store.getters.isAuthenticated" class="user-mobile-nav">
 						<router-link to="/user/profile" tag="div" class="mobile-nav-highlight">
-							<div class="auth-avatar" :class="defaultAvatar" :style="avatar"></div>
+							<div class="auth-avatar" :style="avatar"></div>
 							<div class="auth-name">{{ $store.getters.authUser.username }}</div>
 						</router-link>
 						<ul class="user-mobile-sub-nav">
@@ -77,10 +77,7 @@
 			}),
 			avatar() {
 				return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
-			},
-			defaultAvatar() {
-				return !!this.user.avatar ? [] : ['defaultAvatar'];
-			},
+			}
 		},
 		methods: {
 			navToggle() {

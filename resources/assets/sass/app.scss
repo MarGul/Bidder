@@ -48,6 +48,7 @@
 
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";
+@import "navigation/desktop-auth-dropdown.scss";
 
 // Desktop Navigation
 @import "navigation/desktop-nav.scss";
@@ -153,6 +154,7 @@
 @import "animations/_slide-down.scss";
 @import "animations/_fade-in.scss";
 @import "animations/_fade-out.scss";
+@import "animations/_fast-fade-out.scss";
 @import "animations/_notification-slide-down-up.scss";
 @import "animations/_event-notification-animation.scss";
 @import "animations/_tada.scss";

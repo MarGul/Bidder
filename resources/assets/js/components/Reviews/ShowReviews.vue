@@ -4,7 +4,7 @@
 		<section class="white-contentSection">
 			<header class="white-contentSection-header">
 				<h3>{{ username }}'s omdömmen</h3>
-				<div class="review-ratings">
+				<div class="review-ratings gray-text">
 					<app-ratings :rating="avg" :total="count" :showAvg="true"></app-ratings>
 				</div>
 			</header>
@@ -37,23 +37,37 @@
 	import appReview from './Review';
 
 	export default {
-		props: ['username', 'rating', 'reviews'],
+		props: {
+			username: {
+				type: String,
+				required: true
+			},
+			rating: {
+				type: Object,
+				required: true
+			},
+			reviews: {
+				type: Array,
+				required: true
+			}
+
+		},
 		components: {
 			appRatings,
 			appReview
 		},
 		computed: {
 			avg() {
-				return this.rating ? this.rating.avg : 0.0;
+				return this.rating.avg ? parseFloat(this.rating.avg) : 0.0;
 			},
 			count() {
-				return this.rating ? this.rating.count : 0;
+				return this.rating.count ? parseFloat(this.rating.count) : 0;
 			},
 			communication() {
-				return this.rating ? this.rating.communication : 0.0;
+				return this.rating.communication ? parseFloat(this.rating.communication) : 0.0;
 			},
 			as_described() {
-				return this.rating ? this.rating.as_described : 0.0;
+				return this.rating.as_described ? parseFloat(this.rating.as_described) : 0.0;
 			}
 		}
 	}

@@ -6,6 +6,10 @@
 		background-color: $brand-primary;
 	}
 
+	&.primary-light {
+		background-color: $brand-primary-hover;
+	}
+
 	&.danger {
 		background-color: $text-color;
 
@@ -26,19 +30,9 @@
 		background-color: #fff !important;
 	}
 
-	&.wh10 {
-		width: 10px;
-		height: 10px;
-	}
-
 	&.wh12 {
 		width: 12px;
 		height: 12px;
-	}
-
-	&.w14h16 {
-		width: 14px;
-		height: 16px;
 	}
 
 	&.wh15 {
@@ -54,11 +48,6 @@
 	&.wh30 {
 		width: 30px;
 		height: 30px;
-	}
-
-	&.wh40 {
-		width: 40px;
-		height: 40px;
 	}
 
 	&.wh100 {
@@ -184,6 +173,10 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-help.svg');
 }
 
+.h_edit {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-edit.svg');
+}
+
 
 
 
@@ -223,14 +216,6 @@
 	@include mask-icon('../svg/question_mark.svg');
 }
 
-.icon_exit {
-	@include mask-icon('../svg/exit.svg');
-}
-
-.icon_gears {
-	@include mask-icon('../svg/settings_gears.svg');
-}
-
 .icon_instagram {
 	@include mask-icon('../svg/social_instagram.svg');
 	background-color: #8b96a3;
@@ -247,10 +232,6 @@
 	&:hover {
 		background-color: #3b5998;
 	}
-}
-
-.icon_list {
-	@include mask-icon('../svg/list.svg');
 }
 
 .icon_lock {

@@ -1,14 +1,18 @@
 <template>
-	<div class="modal-mask">
-		<div class="modal-container" :class="[$store.getters.modalSize]">
-			<span class="close" @click="$store.dispatch('closeModal')">
-				<i class="icon h_delete wh15 light-gray" :class="[closeClass]"></i>
-			</span>
+	<transition name="fast-fade-out" v-if="maskShow">
+		<div class="modal-mask" v-if="maskShow">
+			<transition name="slide-down-up" v-if="open" appear>
+				<div class="modal-container" :class="[$store.getters.modalSize]" v-click-outside="close">
+					<span class="close" @click="close">
+						<i class="icon h_delete wh15 light-gray" :class="[closeClass]"></i>
+					</span>
 
-			<component :is="$store.getters.modalComponent"></component>
+					<component :is="component"></component>
 
+				</div>
+			</transition>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <script>
@@ -33,9 +37,16 @@
 			alert,
 			showUserBid
 		},
+		data() {
+			return {
+				maskShow: false
+			}
+		},
 		computed: {
 			...mapGetters({
-				modalData: 'modalData'
+				open: 'modalOpen',
+				modalData: 'modalData',
+				component: 'modalComponent'
 			}),
 			closeClass() {
 				if ( this.modalData.hasOwnProperty('closeClass') ) {
@@ -43,6 +54,22 @@
 				}
 
 				return '';
+			}
+		},
+		watch: {
+			open(newOpen, oldOpen) {
+				if ( newOpen ) {
+					this.maskShow = true;
+				} else {
+					setTimeout(() => {
+						this.maskShow = false;
+					}, 200);
+				}
+			}
+		},
+		methods: {
+			close() {
+				this.$store.dispatch('closeModal');
 			}
 		}
 	}
