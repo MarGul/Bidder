@@ -202,5 +202,10 @@ export default {
                     }
                 })
         }
+    },
+    stopListenAuth() {
+        if ( store.getters.isAuthenticated ) {
+            Echo.leave(`users.${store.getters.authUser.id}`);
+        }
     }
 };

@@ -69,6 +69,7 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../includes/Model';
+	import realTimeEvents from '../../realTimeEvents';
 
 	export default {
 		computed: {
@@ -91,6 +92,7 @@
 				document.body.classList.remove('mobile-nav-open');
 			},
 			logout() {
+				realTimeEvents.stopListenAuth();
 				this.$store.dispatch('clearAuthState');
 				this.$router.push('/');
 				new Model('logout').new().post().catch(error => { location.reload(); });

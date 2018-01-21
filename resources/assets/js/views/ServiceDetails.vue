@@ -17,13 +17,19 @@
 	import { mapGetters } from 'vuex';
 
 	export default {
+		data() {
+			return {
+				serviceId: null
+			}
+		},
 		computed: {
 			...mapGetters({
 				fetched: 'serviceFetched'
 			})
 		},
 		created() {
-			new Model(`services/${this.$route.params.id}`).get()
+			this.serviceId = this.$route.params.id;
+			new Model(`services/${this.serviceId}`).get()
 				.then(response => {
 					this.$store.commit('SET_SERVICE_DETAILS_FETCHED', true);
 					this.$store.commit('SET_SERVICE_DETAILS', response.data.service);
@@ -32,9 +38,9 @@
 
 				});
 
-
-			Echo.channel('service.' + this.$route.params.id)
+			Echo.channel('service.' + this.serviceId)
 				.listen('CommentCreated', (e) => {
+					console.log('listening');
 					this.$store.dispatch('addComment', {comment: e.comment});
 				})
 				.listen('NewBid', (e) => {
@@ -45,6 +51,9 @@
 				});
 		},
 		destroyed() {
+			// Leave the echo channel
+			Echo.leave(`service.${this.serviceId}`);
+			
 			this.$store.commit('SET_SERVICE_DETAILS_FETCHED', false);
 			this.$store.commit('SET_SERVICE_DETAILS', {});
 		}
