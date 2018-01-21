@@ -2,22 +2,20 @@ import Vue from 'vue'
 
 Vue.directive('click-outside', {
     bind(el, binding, vnode) {
+        const bubble = binding.modifiers.bubble;
         const handler = (e) => {
-            if (!vnode.context || el.contains(e.target)) return
-
-            binding.value(e)
+            if (bubble || (!el.contains(e.target) && el !== e.target)) {
+                binding.value(e)
+            }
         }
+        el.__vueClickOutside__ = handler
 
-        el.ClickOutside = handler
         document.addEventListener('click', handler)
     },
 
-    update(el, binding) {
-        el.ClickOutside = binding.value
-    },
-
     unbind(el) {
-        document.removeEventListener('click', el.ClickOutside)
-        delete el.ClickOutside
+        // Remove Event Listeners
+        document.removeEventListener('click', el.__vueClickOutside__)
+        el.__vueClickOutside__ = null
     }
 });
