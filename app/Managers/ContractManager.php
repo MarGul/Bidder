@@ -143,6 +143,7 @@ class ContractManager extends BaseManager
 			));	
 		} catch (\Exception $e) {
 			$this->setError('Could not insert the contract to storage.', 500);
+			dd($e);
 			return false;;
 		}
 
