@@ -1,0 +1,30 @@
+.use-contract-text-container {
+
+    @media screen and (min-width: $screen-sm-min) {
+        display: flex;
+
+        .use-contract-text {
+            flex: 2;
+        }
+
+        .use-contract-icon {
+            flex: 1;
+        }
+    }
+
+    .use-contract-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    
+}
+
+.contract-icon {
+    @include icon('../svg/contract.svg');
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}

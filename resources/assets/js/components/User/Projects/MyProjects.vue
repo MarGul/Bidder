@@ -11,10 +11,7 @@
 						<li class="gray-item clickable" v-for="project in projects" :key="project.id" @click="show(project)">
 							<div class="item-content">
 								<div class="item-header" v-text="title(project)"></div>
-								<div class="item-sub-data">
-									<span class="mr5"></span>&bull;
-									<span class="ml5"></span>
-								</div>
+								<div class="item-sub-data" v-text="projectStatusText(project)"></div>
 							</div>
 							<div class="item-go-to">
 								<i class="icon h_cheveron_right light-gray wh15"></i>
@@ -55,6 +52,15 @@
 				let me = project.users.find(u => u.id === this.user.id );
 
 				return me ? me.pivot.title : '';
+			},
+			projectStatusText(project) {				
+				if ( project.completed ) return 'Avslutat';
+
+				if ( project.cancelled ) return 'Avbrutet';
+
+				if ( project.started ) return 'Pågår';
+
+				return 'Ej startat';
 			}
 		},
 		created() {
