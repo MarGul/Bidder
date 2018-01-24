@@ -118,6 +118,9 @@ class UserServicesController extends Controller
 	{
 		$this->authorize('my-resource', $service);
 
+		// If the service isn't active. You can't update it.
+		if ( !$service->active ) abort(403, 'Unauthorized action.');
+
 		$data = $this->validate($request, [
 			'title' => 'required',
             'category_id' => 'required|numeric|exists:categories,id',
