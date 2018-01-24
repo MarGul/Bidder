@@ -1,9 +1,5 @@
 <template>
 	<div class="service_filter-component">
-		<div class="filter-container filter-text">
-			<label class="control-label">Fritext</label>
-			<input type="text" id="filter_text" class="form-control" v-model="filterText">
-		</div>
 		<div class="filter-container filter-category">
 			<label class="control-label">Kategorier</label>
 			<app-tags-input 
@@ -22,6 +18,10 @@
 				@remove="removeLocation"
 			></app-tags-input>
 		</div>
+		<div class="filter-container filter-text">
+			<label class="control-label">Fritext</label>
+			<input type="text" id="filter_text" class="form-control" v-model="filterText">
+		</div>
 	</div>
 </template>
 
@@ -35,7 +35,7 @@
 		},
 		computed: {
 			filterText: {
-				get() { return this.$store.getters.getFilterText; },
+				get() { return this.$store.getters.filterText; },
 				set(value) { this.$store.commit('SET_FILTER_TEXT', value); }
 			},
 			...mapGetters({

@@ -3303,7 +3303,7 @@ body.mobile-nav-open .overlay {
         -ms-flex: 1;
             flex: 1;
   }
-  .service_filter-component .filter-container.filter-text, .service_filter-component .filter-container.filter-category {
+  .service_filter-component .filter-container.filter-category, .service_filter-component .filter-container.filter-locations {
     margin-right: 20px;
   }
 }
