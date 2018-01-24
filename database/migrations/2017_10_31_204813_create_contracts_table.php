@@ -16,10 +16,10 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('project_id');
-            $table->string('client_name');
-            $table->string('client_identity');
-            $table->string('contractor_name');
-            $table->string('contractor_identity');
+            $table->string('client_name')->nullable();
+            $table->string('client_identity')->nullable();
+            $table->string('contractor_name')->nullable();
+            $table->string('contractor_identity')->nullable();
             $table->text('project_description');
             $table->text('contractor_dissuasion')->nullable();
             $table->date('project_start');

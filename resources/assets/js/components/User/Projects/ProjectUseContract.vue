@@ -1,44 +1,43 @@
 <template>
 	<div class="project_use_contract-component">
 		<h4 class="text-center">Vill du använda avtal?</h4>
-		<p class="gray-sub-text mb30">
-			Vi har automatiskt lagt in detaljerna från det accepterade budet. Detta kan du själv ändra innan vi startar projektet men tänk på att den andra parten kommer behöva acceptera ändringarna.
+		<p class="gray-sub-text text-center mb30">
+			Om du önskar så kan ni använda ett avtal för projektet. Detta kan vara värdefullt och förhindra en hel del bekymmer!
 		</p>
-		<p>
-			<div class="is-flex c_c" v-if="!project.use_contract">
+		<div>
+		<div class="is-flex c_c" v-if="!project.use_contract">
+			<button 
+				type="submit" 
+				class="btn btn-success" 
+				:class="{processing}" 
+				:disabled="processing"
+				v-text="`Jag vill använda avtal`"
+				@click.prevent="useContract">
+			</button>
+		</div>
+		<template v-else>
+			<div class="is-flex c_c">
+				<i class="icon icon_confirmed wh15 mr5"></i> <span>Projektet använder ett avtal</span>
+				<template v-if="!breakpoints.isMobile()">
+					&nbsp;&mdash;&nbsp;
+					<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
+				</template>
+			</div>
+			<div class="text-center" v-if="breakpoints.isMobile()">
+				<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
+			</div>
+			<div class="is-flex c_c">
 				<button 
-					type="submit" 
-					class="btn btn-success" 
-					:class="{processing}" 
+					type="button" 
+					class="btn btn-info mt10"
+					:class="{processing}"
 					:disabled="processing"
-					v-text="`Jag vill använda avtal`"
-					@click.prevent="useContract">
+					v-text="`Ta bort avtalet`"
+					@click.prevent="removeContract">
 				</button>
 			</div>
-			<template v-else>
-				<div class="is-flex c_c">
-					<i class="icon icon_confirmed wh15 mr5"></i> <span>Projektet använder ett avtal</span>
-					<template v-if="!breakpoints.isMobile()">
-						&nbsp;&mdash;&nbsp;
-						<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
-					</template>
-				</div>
-				<div class="text-center" v-if="breakpoints.isMobile()">
-					<router-link :to="`/user/projects/${project.id}/contract`" class="is-link">Visa avtalet</router-link>
-				</div>
-				<div class="is-flex c_c">
-					<button 
-						type="button" 
-						class="btn btn-info mt10"
-						:class="{processing}"
-						:disabled="processing"
-						v-text="`Ta bort avtalet`"
-						@click.prevent="removeContract">
-					</button>
-				</div>
-			</template>
-			
-		</p>
+		</template>
+		</div>
 	</div>
 </template>
 

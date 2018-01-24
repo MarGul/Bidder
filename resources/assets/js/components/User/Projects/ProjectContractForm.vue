@@ -18,11 +18,15 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container" :class="{'has-errors': form.errors.has('client_name')}">
-								<label class="control-label">Namn</label>
+								<label class="control-label">
+									Namn <span class="req" v-if="serviceRole">*</span>
+								</label>
 								<input type="text" class="form-control" v-model="form.client_name">
 							</div>
 							<div class="control-container" :class="{'has-errors': form.errors.has('client_identity')}">
-								<label class="control-label">Organisations/-personnummer</label>
+								<label class="control-label">
+									Organisations/-personnummer <span class="req" v-if="serviceRole">*</span>
+								</label>
 								<input type="text" class="form-control" v-model="form.client_identity">
 							</div>
 						</div>
@@ -37,11 +41,15 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container" :class="{'has-errors': form.errors.has('contractor_name')}">
-								<label class="control-label">Namn</label>
+								<label class="control-label">
+									Namn <span class="req" v-if="!serviceRole">*</span>
+								</label>
 								<input type="text" class="form-control" v-model="form.contractor_name">
 							</div>
 							<div class="control-container" :class="{'has-errors': form.errors.has('contractor_identity')}">
-								<label class="control-label">Organisations/-personnummer</label>
+								<label class="control-label">
+									Organisations/-personnummer <span class="req" v-if="!serviceRole">*</span>
+								</label>
 								<input type="text" class="form-control" v-model="form.contractor_identity">
 							</div>
 						</div>
@@ -56,7 +64,9 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container" :class="{'has-errors': form.errors.has('project_description')}">
-								<label class="control-label">Beskrivning</label>
+								<label class="control-label">
+									Beskrivning <span class="req">*</span>
+								</label>
 								<textarea rows="6" class="form-control" v-model="form.project_description"></textarea>
 							</div>
 						</div>
@@ -86,7 +96,9 @@
 						</div>
 						<div class="form-section-controls">
 							<div class="control-container" :class="{'has-errors': form.errors.has('project_start')}">
-								<label class="control-label">Arbetet ska påbörjas</label>
+								<label class="control-label">
+									Arbetet ska påbörjas <span class="req">*</span>
+								</label>
 								<datepicker
 									input-class="form-control" 
 									language="sv"
@@ -96,7 +108,9 @@
 								></datepicker>
 							</div>
 							<div class="control-container" :class="{'has-errors': form.errors.has('project_end')}">
-								<label class="control-label">Arbetet ska vara slutfört</label>
+								<label class="control-label">
+									Arbetet ska vara slutfört <span class="req">*</span>
+								</label>
 								<datepicker
 									input-class="form-control" 
 									language="sv"
@@ -121,7 +135,9 @@
 						<div class="form-section-controls">
 							<div class="control-container">
 								<div class="control-container" :class="{'has-errors': form.errors.has('project_price')}">
-									<label class="control-label">Totalsumma</label>
+									<label class="control-label">
+										Totalsumma ink. moms <span class="req">*</span>
+									</label>
 									<input type="text" class="form-control" v-model="form.project_price">
 								</div>
 								<div class="control-container" :class="{'has-errors': form.errors.has('project_price_specified')}">
@@ -192,12 +208,12 @@
 							</template>
 						</div>
 					</div>
-					<div class="btn-accept-contract" v-if="project.contracts.length">
+					<div class="btn-accept-contract">
 						<button 
 							type="submit" 
 							class="btn btn-success"
 							:disabled="!!me.pivot.contract_accepted"
-							v-text="!!me.pivot.contract_accepted ? 'Godkänt' : 'Godkänn avtalet'"
+							v-text="!!me.pivot.contract_accepted ? 'Har godkänt' : 'Godkänn avtalet'"
 							@click.prevent="accept"	
 						/>
 					</div>
@@ -266,6 +282,25 @@
 			},
 			other() {
 				return this.project.users.find(u => u.id !== this.auth.id);
+			},
+			serviceRole() {
+				return this.me.pivot.role === 'service';
+			},
+			canAccept() {
+				if ( !this.project.contracts.length ) return false;
+
+				if ( this.serviceRole ) {
+					// If you have the service role and haven't filled out your information.
+					if ( !this.project.contracts[0].client_name || !this.project.contracts[0].client_identity ) {
+						return false;
+					}
+				} else {
+					if ( !this.project.contracts[0].contractor_name || !this.project.contracts[0].contractor_identity ) {
+						return false;
+					}
+				}
+
+				return true; 
 			}
 		},
 		methods: {
@@ -296,6 +331,22 @@
 
 			},
 			accept() {
+				// If the user is not allowed to accept the contract yet.
+				// Then we will show an alert. A user can not accept the contract yet if it
+				// hasn't yet been stored with the required fields.
+				if ( !this.canAccept ) {
+					this.$store.dispatch('openModal', {
+						component: 'alert',
+						data: {
+							alertText: `Innan du kan godkänna avtalet så behöver du fylla i de uppgifter som är obligatoriska för dig
+										och uppdatera avtalet.
+										De uppgifter som är obligatoriska för dig är märkta med en röd stjärna.`
+						}
+					});
+
+					return;
+				}
+				
 				this.$store.dispatch('openModal', {
 					component: 'confirm',
 					data: {

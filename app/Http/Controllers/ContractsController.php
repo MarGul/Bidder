@@ -36,7 +36,7 @@ class ContractsController extends Controller
 
         // Depending on the users role in the project different validation occur
         $project->load('users');
-        $role = $project->users->where('id', 1)->first()->pivot->role;
+        $role = $project->users->where('id', $request->user()->id)->first()->pivot->role;
 
         if ( $role === 'service' ) {
             $custom = [
