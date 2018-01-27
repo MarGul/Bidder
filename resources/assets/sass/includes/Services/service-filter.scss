@@ -1,9 +1,16 @@
+.service-filter-container {
+	background: #FFF;
+	padding: 3rem 0;
+	box-shadow: 0 0 20px 1px rgba(0,0,0,.2);
+}
+
 .service_filter-component {
 	
 	@media screen and (min-width: $screen-sm-min) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-wrap: wrap;
 	}
 	
 	.filter-container {
@@ -14,8 +21,43 @@
 			flex: 1;
 
 			&.filter-category,
-			&.filter-locations {
+			&.filter-text {
 				margin-right: 20px;
+			}
+		}
+
+		.form-control {
+			height: 5.5rem;
+			font-size: 1.7rem;
+			padding: 0 1.7rem;
+			@include placeholder-color($text-color);
+		}
+	}
+
+	.filter-search-btn {
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1 1 100%;
+		}
+
+		@media screen and (min-width: $screen-lg-min) {
+			flex: 0 0 15%;
+			margin-left: 20px;
+		}
+
+		.btn {
+			width: 100%;
+			height: 4rem;
+			font-size: 1.7rem;
+			letter-spacing: 2px;
+	
+			@media screen and (min-width: $screen-sm-min) {
+				margin-top: 20px;
+			}
+
+			@media screen and (min-width: $screen-lg-min) {
+				height: 5.5rem;
+				margin-top: 0;
 			}
 		}
 	}
