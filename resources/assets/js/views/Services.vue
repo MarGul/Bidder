@@ -10,7 +10,7 @@
 
 		<div class="service-filter-container">
 			<div class="container">
-				<app-services-filter></app-services-filter>
+				<app-services-filter @search="fetchServices" />
 			</div>
 		</div>
 

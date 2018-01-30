@@ -20,7 +20,7 @@
 			/>
 		</div>
 		<div class="filter-search-btn">
-			<button type="button" class="btn btn-primary is-flex c_c">
+			<button type="button" class="btn btn-primary is-flex c_c" @click="$emit('search')">
 				<i class="icon h_search wh20 white mr15"></i> Sök
 			</button>
 		</div>
@@ -28,13 +28,11 @@
 </template>
 
 <script>
-	import appTagsInput from '../Includes/TagsInput';
 	import appMultiSelect from '../InputControls/MultiSelect';
 	import { mapGetters } from 'vuex';
 
 	export default {
 		components: {
-			appTagsInput,
 			appMultiSelect
 		},
 		computed: {
