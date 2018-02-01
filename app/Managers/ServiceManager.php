@@ -25,7 +25,12 @@ class ServiceManager extends BaseManager
 		$query = Service::query();
 		$query->with('bid_count', 'comment_count');
 
-		if ( $text ) $query = $query->where('description', 'LIKE', '%'.$text.'%');
+		if ( $text ) {
+			$query = $query->where(function($q) use ($text) {
+				$q->where('description', 'LIKE', '%'.$text.'%')->orWhere('title', 'LIKE', '%'.$text.'%');
+				
+			});	
+		}
 		if ( !empty($categories) ) $query = $query->whereIn('category_id', $categories);
 		if ( !empty($regions) ) $query = $query->whereIn('region_id', $regions);
 		if ( !empty($cities) ) $query = $query->whereIn('city_id', $cities);
@@ -149,7 +154,7 @@ class ServiceManager extends BaseManager
 		}
 
 		// Load in the edited media for the service.
-		$this->service->load('media');
+		$this->service->load(['media', 'bids']);
 
 		$this->setSuccess('Successfully updated the service.', 200);
 

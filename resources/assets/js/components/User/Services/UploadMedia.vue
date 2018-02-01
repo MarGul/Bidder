@@ -24,7 +24,7 @@
 			</ul>
 		</div>
 
-		<label class="btn btn-default">
+		<label class="btn btn-default" :class="{disabled}">
 			Välj media
 			<input type="file" class="hidden" ref="input" multiple @change="add($event.target.files)" :disabled="disabled">
 		</label>

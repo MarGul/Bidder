@@ -18,7 +18,7 @@
 						<div class="form-section-controls">
 							<div class="control-container" :class="{'has-errors': form.errors.has('category_id')}">
 								<label class="control-label">Kategori</label>
-								<select class="form-control" v-model="form.category_id">
+								<select class="form-control" v-model="form.category_id" :disabled="!service.active">
 									<option value="">Välj kategori</option>
 									<optgroup :label="rootCat.name" v-for="rootCat in categories" :key="rootCat.id">
 										<option :value="category.id" v-text="category.name" v-for="category in rootCat.sub_categories" :key="category.id">
@@ -31,7 +31,7 @@
 
 							<div class="control-container" :class="{'has-errors': form.errors.has('region_id')}">
 								<label class="control-label">Region</label>
-								<select class="form-control" v-model="form.region_id">
+								<select class="form-control" v-model="form.region_id" :disabled="!service.active">
 									<option value="">Välj region</option>
 									<option :value="region.id" v-text="region.name" v-for="region in regions" :key="region.id"></option>
 								</select>
@@ -40,7 +40,7 @@
 
 							<div class="control-container" :class="{'has-errors': form.errors.has('city_id')}">
 								<label class="control-label">Stad</label>
-								<select class="form-control" :disabled="!form.region_id" v-model="form.city_id">
+								<select class="form-control" :disabled="!form.region_id || !service.active" v-model="form.city_id">
 									<option value="">Välj stad</option>
 									<option :value="city.id" v-text="city.name" v-for="city in cities" :key="city.id"></option>
 								</select>
@@ -60,13 +60,13 @@
 						<div class="form-section-controls">
 							<div class="control-container full-width" :class="{'has-errors': form.errors.has('title')}">
 								<label class="control-label">Titel</label>
-								<input type="text" class="form-control" v-model="form.title">
+								<input type="text" class="form-control" v-model="form.title" :disabled="!service.active">
 								<span class="help-block" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
 							</div>
 
 							<div class="control-container full-width" :class="{'has-errors': form.errors.has('description')}">
 								<label class="control-label">Beskrivning</label>
-								<textarea rows="10" class="form-control" v-model="form.description"></textarea>
+								<textarea rows="10" class="form-control" v-model="form.description" :disabled="!service.active"></textarea>
 								<span class="help-block" v-if="form.errors.has('description')" v-text="form.errors.get('description')"></span>
 							</div>
 						</div>
@@ -88,7 +88,9 @@
 									:monday-first="true"
 									:disabled="{to: new Date()}"
 									v-model="form.start"
+									v-if="service.active"
 								></datepicker>
+								<input type="text" class="form-control" v-model="form.end" disabled v-else />
 								<span class="help-block" v-if="form.errors.has('start')" v-text="form.errors.get('start')"></span>
 							</div>
 
@@ -100,7 +102,9 @@
 									:monday-first="true"
 									:disabled="{to: new Date()}"
 									v-model="form.end"
+									v-if="service.active"
 								></datepicker>
+								<input type="text" class="form-control" v-model="form.end" disabled v-else />
 								<span class="help-block" v-if="form.errors.has('end')" v-text="form.errors.get('end')"></span>
 							</div>
 						</div>
@@ -118,7 +122,7 @@
 								:initialMedia="initialMedia"
 								:media="media" 
 								:errors="mediaErrors" 
-								:disabled="processing"
+								:disabled="processing || !service.active"
 								:editAvailable="true"
 								@added="mediaAdded" 
 								@deleted="initialMediaRemoved"
@@ -128,8 +132,8 @@
 					</div>
 				</div>
 				<footer class="white-contentSection-footer">
-					<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing">
-						Uppdatera tjänsten
+					<button type="submit" class="btn btn-primary" :class="{processing}" :disabled="processing || !service.active">
+						{{ service.active ? 'Uppdatera tjänsten' : 'Tjänsten är avslutad' }}
 					</button>
 				</footer>
 			</section>

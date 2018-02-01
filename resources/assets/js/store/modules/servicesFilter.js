@@ -1,9 +1,9 @@
-import { SET_FILTER_TEXT, SET_FILTER_CATEGORIES, SET_FILTER_LOCATIONS } from '../mutation-types';
+import { SET_FILTER_TEXT, SET_FILTER_CATEGORIES, SET_FILTER_CITIES } from '../mutation-types';
 
 const state = {
 	text: '',
 	categories: [],
-	locations: []
+	cities: []
 }
 
 const mutations = {
@@ -13,8 +13,8 @@ const mutations = {
 	[SET_FILTER_CATEGORIES](state, categories) {
 		state.categories = categories;
 	},
-	[SET_FILTER_LOCATIONS](state, locations) {
-		state.locations = locations;
+	[SET_FILTER_CITIES](state, cities) {
+		state.cities = cities;
 	}
 }
 
@@ -25,7 +25,7 @@ const actions = {
 const getters = {
 	filterText: state => state.text,
 	filterCategories: state => state.categories,
-	filterLocations: state => state.locations
+	filterCities: state => state.cities
 }
 
 export default {

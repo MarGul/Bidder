@@ -1,10 +1,10 @@
 .services-list {
-	margin: 40px 0;
+	margin: 10px 0;
 
 	@media screen and (min-width: $screen-sm-min) {
 		display: flex;
 		flex-wrap: wrap;
-		margin: 40px -15px;
+		margin: 10px -15px;
 	}
 }
 

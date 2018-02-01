@@ -8,23 +8,19 @@
 			<img slot="right" src="mechanic.png" alt="">
 		</app-hero>
 
+		<div class="service-filter-container">
+			<div class="container">
+				<app-services-filter @search="fetchServices" />
+			</div>
+		</div>
+
 		<div class="container">
 			<div class="content">
-
-				<section class="white-contentSection service-filter">
-					<div class="white-contentSection-content">
-						<app-services-filter></app-services-filter>
-					</div>
-					<footer class="white-contentSection-footer">
-						<button type="button" class="btn btn-primary full-width" :class="{processing}" :disabled="processing" @click="fetchServices()">
-							Hitta Tjänster
-						</button>
-					</footer>
-				</section>
 
 				<template v-if="fetched">
 					
 					<template v-if="services.length">
+						
 						<transition-group name="slide-out" mode="out-in" tag="div" class="services-list" appear>
 							<app-services-multi v-for="service in services" :key="service.id"
 								:service="service"
@@ -83,7 +79,7 @@
 				services: 'services',
 				filterText: 'filterText',
 				filterCategories: 'filterCategories',
-				filterLocations: 'filterLocations'
+				filterCities: 'filterCities'
 			})
 		},
 		methods: {
@@ -100,8 +96,7 @@
 				data.page = this.page
 				data.text = this.filterText;
 				data.categories = this.filterCategories.map(cat => cat.id);
-				data.regions = this.filterLocations.filter(loc => !loc.hasOwnProperty('region_id')).map(region => region.id);
-				data.cities = this.filterLocations.filter(loc => loc.hasOwnProperty('region_id')).map(city => city.id);
+				data.cities = this.filterCities.map(city => city.id);
 				
 				new Model('services').get(data)
 					.then(response => {

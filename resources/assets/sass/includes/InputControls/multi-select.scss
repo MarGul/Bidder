@@ -1,0 +1,90 @@
+.multi-select-container {
+    position: relative;
+    
+
+    .multi-select-head {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 5.5rem;
+        width: 100%;
+        font-size: 1.7rem;
+        border: 1px solid #e2e2e2;
+        border-radius: 3px;
+        padding: 0 1.7rem;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 1.7rem;
+            top: calc(50% - 10px);
+            background: $light-icon-color;
+            @extend .h_cheveron_down;
+        }
+    
+        &.isOpen {
+            color: #FFF;
+            background: $brand-primary;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            box-shadow: 3px 1px 3px 0 rgba(0,0,0,.3);
+            border: none;
+    
+            &:after {
+                background: #FFF;
+                @extend .h_cheveron_up;
+            }
+        }
+    }
+
+    .multi-dropdown-container {
+        background: #FFF;
+        color: $text-color;
+        position: absolute;
+        top: calc(5.5rem - 2px);
+        left: 0;
+        right: 0;
+        z-index: 999;
+        border: 1px solid $brand-primary;
+        border-top: none;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 3px 3px 3px 0 rgba(0,0,0,.3);
+        padding: 1.7rem;
+        cursor: default;
+        max-height: 260px;
+        overflow-y: auto;
+
+        .top-level-container {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+
+            &:last-child .sub-level-container {
+                padding: 5px 0 0 25px;
+            }
+        }
+
+        .sub-level-container {
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 10px 25px;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+
+            &.top-level span {
+                font-weight: 500;
+            }
+
+            i {
+                margin-right: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}
