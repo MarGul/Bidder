@@ -242,16 +242,6 @@
 	@include icon('../svg/lock.svg');
 }
 
-.icon_on {
-	@include mask-icon('../svg/on.svg');
-	background-color: $brand-primary;
-}
-
-.icon_off {
-	@include mask-icon('../svg/off.svg');
-	background-color: $brand-primary;
-}
-
 .icon_star_empty {
 	@include mask-icon('../svg/star_empty.svg');
 	background-color: #FFC100;
