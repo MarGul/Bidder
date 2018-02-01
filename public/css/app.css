@@ -1970,6 +1970,8 @@ label.radio-btn input[type=radio] {
           box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.3);
   padding: 1.7rem;
   cursor: default;
+  max-height: 260px;
+  overflow-y: auto;
 }
 
 .multi-select-container .multi-dropdown-container .top-level-container {

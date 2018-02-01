@@ -20,7 +20,6 @@
 				<template v-if="fetched">
 					
 					<template v-if="services.length">
-						<h4>Din sökning efter jobb inom: Utvecklare / Programmerare gav 105 träffar.</h4>
 						
 						<transition-group name="slide-out" mode="out-in" tag="div" class="services-list" appear>
 							<app-services-multi v-for="service in services" :key="service.id"
