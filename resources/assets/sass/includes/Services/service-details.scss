@@ -119,10 +119,21 @@
 .service-details {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 
 	.detail-item {
-		flex: 1;
+		flex: 1 1 100%;
 		text-align: center;
+		margin-bottom: 30px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@media screen and (min-width: $screen-sm-min) {
+			flex: 1;
+			margin-bottom: 0;
+		}
 
 		.detail-header {
 			display: flex;

@@ -18,6 +18,14 @@
 						</div>
 						<div class="detail-value" v-text="location"></div>
 					</div>
+					<div class="detail-item">
+						<div class="detail-header">
+							<i class="icon h_calender wh20 cursor-default primary mr10"></i><span>Utförs mellan</span>
+						</div>
+						<div class="detail-value">
+							 {{filters.date(service.start) }} <span class="gray-sub-text">&mdash;</span> {{ filters.date(service.end) }}
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="white-contentSection-content service-description" v-text="service.description"></div>

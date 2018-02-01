@@ -1,7 +1,13 @@
 <template>
 	<div class="service_filter-component">
 		<div class="filter-container filter-text">
-			<input type="text" id="filter_text" class="form-control" v-model="filterText" placeholder="Sök tjänster">
+			<input 
+				type="text"
+				class="form-control" 
+				v-model="filterText" 
+				placeholder="Sök tjänster"
+				@keyup.enter="$emit('search')"
+			/>
 		</div>
 		<div class="filter-container filter-category">
 			<app-multi-select 
