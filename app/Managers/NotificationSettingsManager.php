@@ -3,33 +3,40 @@
 namespace App\Managers;
 
 use App\NotificationSettings;
-use Notification;
-use App\User;
-use App\Bid;
-use App\Notifications\NewBidOnMyService;
-use App\Notifications\CompetingBid;
 
 class NotificationSettingsManager extends BaseManager
 {
 
-	protected $usersSettings;
 	/**
-	 * The notification settings that the manager is working on.
-	 * @var App\NotificationSetting
+	 * The notification settings that the manager is working with.
+	 * @var App\NotificationSettings;
 	 */
 	protected $notificationSettings;
-
-
+	
 	/**
-	 * Return the notification settings that the manager has been working on.
-	 * 
-	 * @return Collection
+	 * The notification settings that the manager has been working
+	 * @return App\NotificationSettings
 	 */
 	public function notificationSettings() { return $this->notificationSettings; }
+	
+	
+	/**
+	 * Create the users notifications settings entry.
+	 *
+	 * @return boolean
+	 */
+	public function create()
+	{
+		if ( $this->hasError() ) return false;
+
+		$this->notificationSettings = NotificationSettings::create(['user_id' => $this->user->id]);
+
+		return true;
+	}
 
 	/**
-	 * Get notification settings for a user.
-	 * 
+	 * Get the notification settings for a user.
+	 *
 	 * @return boolean
 	 */
 	public function get()
@@ -37,25 +44,24 @@ class NotificationSettingsManager extends BaseManager
 		if ( $this->hasError() ) return false;
 
 		try {
-			$this->notificationSettings = NotificationSettings::where('user_id', $this->user->id)->first();
-		} catch (\Exception $e) {
-			$this->setError('Could not fetch the users notification settings.', 500);
+			$this->notificationSettings = $this->user->notification_settings;
+		} catch ( \Exception $e ) {
+			$this->setError('Could not fetch the users notification settings from storage.', 500);
 			return false;
 		}
 
-		$this->setSuccess('Listing the users notification settings.', 200);
+		$this->setSuccess('Displaying the users notification settings.', 200);
 
 		return true;
 	}
 
 	/**
-	 * Update the notification settings for a user.
-	 * 
-	 * @param  array 		$data
-	 * @return boolean
+	 * Update the users notification settings
+	 *
+	 * @param 	array $data
+	 * @return 	boolean
 	 */
-	public function update($data)
-	{
+	public function update($data) {
 		if ( $this->hasError() ) return false;
 
 		if ( !$this->setData($data)->edit() ) return false;
@@ -66,67 +72,19 @@ class NotificationSettingsManager extends BaseManager
 	}
 
 	/**
-	 * Edit the resource in storage.
-	 * 
+	 * Edit the notification settings for a user in storage.
+	 *
 	 * @return boolean
 	 */
-	protected function edit()
-	{
+	protected function edit() {
 		try {
-			$this->notificationSettings = NotificationSettings::where('user_id', $this->user->id)->first();
-
-			$this->notificationSettings->update($this->data());
-		} catch (\Exception $e) {
-			$this->setError('Could not update the notification settings in storage.', 500);
+			$this->notificationSettings = $this->user->notification_settings->update($this->data());
+		} catch ( \Exception $e ) {
+			$this->setError('Could not update the notification settings.', 500);
 			return false;
 		}
 
 		return true;
-	}
-
-	/**
-	 * If the user that created the service has notifications on for when a new bid gets laid
-	 * on his service, send out that notification.
-	 * 
-	 * @param void
-	 */
-	public function BidOnMyService($bid)
-	{
-		$this->usersSettings = $this->forUser($bid->service->user_id);
-
-		if ( $this->notificationActive('bid_on_service') ) {
-			$user = User::find($bid->service->user_id);
-			Notification::send($user, new NewBidOnMyService($bid));
-		}
-	}
-
-	/**
-	 * Send out notifications for the users that said that wanted them when a competing bid occurs
-	 * 
-	 * @param  App\Bid 	$bid
-	 * @return void
-	 */
-	public function forCompetingBid($bid)
-	{
-		$bids = Bid::with('user')
-						->select('user_id')
-						->where('service_id', $bid->service_id)
-						->where('user_id', '<>', $bid->user_id)
-						->groupBy('user_id')
-						->get();
-
-		if ( $bids->isNotEmpty() ) {
-			foreach ($bids as $b) {
-				if ( $b->user->notification_settings->competing_bid) {
-					Notification::send($b->user, new CompetingBid($bid));
-				}
-			}
-		}
-	}
-
-	protected function notificationActive($setting)
-	{
-		return $this->usersSettings[$setting];
 	}
 
 }

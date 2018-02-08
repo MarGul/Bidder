@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\NotificationSettings;
 
 class UsersTableSeeder extends Seeder
 {
@@ -40,7 +41,9 @@ class UsersTableSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            User::create($user);
+            $u = User::create($user);
+
+            NotificationSettings::create(['user_id' => $u->id]);
         }
     }
 }

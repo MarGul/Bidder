@@ -16,15 +16,9 @@ class CreateNotificationSettingsTable extends Migration
         Schema::create('notification_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->boolean('bid_on_service')->default(true);
-            $table->boolean('comment_on_service')->default(true);
-            $table->boolean('message_in_project')->default(true);
-            $table->boolean('project_details_changed')->default(true);
-            $table->boolean('other_party_accepted')->default(true);
-            $table->boolean('project_started')->default(true);
-            $table->boolean('leave_review')->default(true);
-            $table->boolean('competing_bid')->default(true);
-            $table->boolean('comment_reply')->default(true);
+            $table->boolean('for_my_services')->default(true);
+            $table->boolean('for_my_bids')->default(true);
+            $table->boolean('for_my_projects')->default(true);
             $table->timestamps();
         });
     }

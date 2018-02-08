@@ -52,10 +52,11 @@ class UserNotificationSettingsController extends Controller
 	 */
 	public function update(Request $request)
 	{
-		$data = $request->only([
-			'bid_on_service', 'comment_on_service', 'message_in_project', 'project_details_changed',
-    		'other_party_accepted', 'project_started', 'leave_review', 'competing_bid', 'comment_reply'
-    	]);
+		$data = $this->validate($request, [
+			'for_my_services' => 'required|boolean',
+			'for_my_bids' => 'required|boolean',
+			'for_my_projects' => 'required|boolean'
+		]);
 
 		// Try to update the notification settings.
 		$this->manager->byUser($request->user())

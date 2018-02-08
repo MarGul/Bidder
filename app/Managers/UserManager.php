@@ -76,6 +76,9 @@ class UserManager extends BaseManager
 			'email_verification_code' => str_random(35)
 		]);
 
+		// Create the users notifications entry
+		app(NotificationSettingsManager::class)->forUser($this->user)->create();
+		
 		// Send out email for confirming the users email adress
 		Notification::send($this->user, new EmailVerification($this->user));
 
