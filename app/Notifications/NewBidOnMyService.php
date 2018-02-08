@@ -32,7 +32,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        $channels = [];
+        $channels = ['database'];
 
         if ( $notifiable->wantsMailForHis('services') ) $channels[] = 'mail';
 
@@ -64,7 +64,9 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'image' => $this->bid->user->avatar,
+            'text' => "{$this->bid->user->username} har lagt ett bud på en av dina tjänster",
+            'link' => url("services/{$this->bid->service_id}/bids")
         ];
     }
 }

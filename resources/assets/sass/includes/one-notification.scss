@@ -1,0 +1,32 @@
+.one-notification {
+    padding: 5px 15px;
+    border-bottom: 1px solid $border-color-gray;
+    display: flex;
+    cursor: pointer;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .notification-image {
+        
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    }
+
+    .notification-body {
+        flex: 1;
+        padding-left: 15px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .notification-text {
+            flex: 1 1 100%;
+        }
+    }
+}

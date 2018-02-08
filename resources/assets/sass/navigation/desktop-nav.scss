@@ -132,7 +132,6 @@
 			.auth-user {
 				display: flex;
 				align-items: center;
-				cursor: pointer;
 
 				.auth-avatar {
 					width: 40px;
@@ -142,6 +141,7 @@
 					background-repeat: no-repeat;
 					background-position: center center;
 					background-size: cover;
+					cursor: pointer;
 				}
 
 				.auth-name {
