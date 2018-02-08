@@ -69,7 +69,7 @@
 		data() {
 			return {
 				authDropdown: false,
-				notificationsDropdown: true
+				notificationsDropdown: false
 			}
 		},
 		computed: {

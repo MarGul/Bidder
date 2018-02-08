@@ -11,7 +11,7 @@ const state = {
 	fetched: false,
 	notifications: [],
 	canLoadMore: false,
-	page: 1
+	page: 0
 }
 
 const mutations = {
@@ -31,6 +31,8 @@ const mutations = {
 
 const actions = {
 	getNotifications({commit, state}) {
+		commit('SET_USER_NOTIFICATIONS_PAGE', state.page + 1);
+		
 		new Model('user/notifications').get({page: state.page})
 			.then(response => {
 				// Fetching the first ones or loading more?
@@ -40,6 +42,13 @@ const actions = {
 				commit('SET_USER_NOTIFICATIONS_CAN_LOAD_MORE', response.data.hasMore);
 				commit('SET_USER_NOTIFICATIONS_FETCHED', true);
 			});
+	},
+	markNotificationsAsRead({commit, state}) {
+		let notifications = state.notifications;
+		notifications.forEach(notification => notification.read_at = 'read');
+		commit('SET_USER_NOTIFICATIONS', notifications);
+
+		new Model('user/notifications/mark-all-read').patch();
 	}
 }
 

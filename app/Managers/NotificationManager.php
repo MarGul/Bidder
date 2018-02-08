@@ -40,4 +40,25 @@ class NotificationManager extends BaseManager
         return true;
     }
 
+    /**
+     * Mark the users notifications as read.
+     *
+     * @return boolean
+     */
+    public function markAllAsRead()
+    {
+        if ( $this->hasError() ) return false;
+        
+        try {
+            $this->user->unreadNotifications->markAsRead();  
+        } catch ( \Exception $e ) {
+            $this->setError('Could not mark the users notifications as read.', 500);
+            return false;
+        }
+
+        $this->setSuccess('Successfully marked the users notifications as read.', 200);
+        
+        return true;
+    }
+
 }

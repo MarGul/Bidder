@@ -3,6 +3,8 @@
         <div class="notifications-dropdown-top-container">
             <div class="notifications-dropdown-title">Notifieringar</div>
             <div class="notifications-dropdown-actions">
+                <span class="is-link" @click="markRead">Markera alla som lästa</span>
+                <span class="gray-sub-text mr5 ml5">&bull;</span>
                 <router-link :to="`/user/notifications`" class="is-link">Inställningar</router-link>
             </div>
         </div>
@@ -13,7 +15,7 @@
                 <app-notification 
                     v-for="(notification, index) in notifications" 
                     :key="index" 
-                    :data="notification.data"
+                    :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
                     v-if="notifications.length"
                 />
 
@@ -39,6 +41,11 @@ export default {
             fetched: 'userNotificationsFetched',
             notifications: 'userNotifications'
         })
+    },
+    methods: {
+        markRead() {
+            this.$store.dispatch('markNotificationsAsRead');
+        }
     }
 }
 </script>

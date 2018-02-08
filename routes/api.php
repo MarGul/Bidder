@@ -40,6 +40,7 @@ Route::group(['prefix' => 'v1'], function() {
 	 * Handle the users notifications
 	 */
 	Route::get('user/notifications')->uses('UserNotificationsController@index');
+	Route::patch('user/notifications/mark-all-read')->uses('UserNotificationsController@update');
 
 	/**
 	 * Handle the users notification settings
