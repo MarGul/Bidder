@@ -20,6 +20,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
      */
     public function __construct($bid)
     {
+        $this->queue = 'notifications';
         $this->bid = $bid;
     }
 
@@ -31,7 +32,11 @@ class NewBidOnMyService extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        $channels = [];
+
+        if ( $notifiable->wantsMailForHis('services') ) $channels[] = 'mail';
+
+        return $channels;
     }
 
     /**
@@ -47,7 +52,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
                     ->greeting('Hej!')
                     ->line('Någon har precis lagt ett nytt bud på att få utföra din tjänst.')
                     ->line('För tjänsten: ' . $this->bid->service->title)
-                    ->action('Se det nya budet', url('/user/service/' . $this->bid->service_id . '/bids'));
+                    ->action('Se det nya budet', url('services/' . $this->bid->service_id . '/bids'));
     }
 
     /**

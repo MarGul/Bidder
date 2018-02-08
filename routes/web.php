@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\NewBidOnMyService;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,11 +12,10 @@
 */
 
 Route::get('/test', function() {
-	$project = App\Project::find(1);
+	$user = App\User::find(3);
+	$bid = App\Bid::find(1);
 
-	$project->load('users');
-	$role = $project->users->where('id', 1)->first()->pivot->role;
-	dd($role);
+	\Notification::send($user, new \App\Notifications\NewBidOnMyService($bid));
 });
 
 /**

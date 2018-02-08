@@ -6,12 +6,12 @@ use App\Bid;
 use App\Service;
 use App\Events\NewBid;
 use App\Events\RemoveService;
-use App\Jobs\NotificationsForNewBid;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
 use Notification;
 use App\Notifications\ProjectCreated;
+use App\Notifications\NewBidOnMyService;
 
 class BidManager extends BaseManager
 {
@@ -57,8 +57,8 @@ class BidManager extends BaseManager
 		// Broadcast that a new bid has been created
 		event(new NewBid($this->bid));
 
-		// Dispatch a job for this new bid that will send out the appropriate notifications.
-		dispatch(new NotificationsForNewBid($this->bid));
+		// Send out notification about new bid on the users service.
+		Notification::send($this->service->user, new NewBidOnMyService($this->bid));
 
 		$this->setSuccess('Successfully stored your bid in storage.', 201);
 
@@ -81,7 +81,7 @@ class BidManager extends BaseManager
 		// Broadcast that the bidding for this service has now stopped
 		event(new RemoveService($this->service->id));
 		// Create a project between the users.
-		$projectManager = app(\App\Managers\ProjectManager::class);
+		$projectManager = app(ProjectManager::class);
 		$projectManager->forService($this->service)
 					   ->forBid($this->bid)
 					   ->create();
