@@ -8,6 +8,10 @@
         border-bottom: none;
     }
 
+    &.not-read {
+        background: #edf0f3;
+    }
+
     .notification-image {
         
         img {

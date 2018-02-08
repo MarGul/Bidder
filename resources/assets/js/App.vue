@@ -75,8 +75,6 @@
             }
         },
         created() {
-            //let categories = await fetchCategories();
-            //console.log(categories);
             // Initialize Data
             new Model('categories').get().then(response => {
                 this.$store.commit('SET_CATEGORIES', response.data.categories);
@@ -86,6 +84,8 @@
                 this.$store.commit('SET_REGIONS', response.data.regions);
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
+
+            if ( this.authenticated ) this.$store.dispatch('getNotifications');
 
             RealTimeEvents.listen();            
 

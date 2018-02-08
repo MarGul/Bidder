@@ -12,10 +12,10 @@ use App\Notifications\NewBidOnMyService;
 */
 
 Route::get('/test', function() {
-	$user = App\User::find(3);
-	$bid = App\Bid::find(1);
+	$user = App\User::find(2);
 
-	\Notification::send($user, new \App\Notifications\NewBidOnMyService($bid));
+	dd($user->notifications()->simplePaginate(20));
+
 });
 
 /**

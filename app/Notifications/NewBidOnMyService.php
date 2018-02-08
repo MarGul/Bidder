@@ -66,7 +66,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
         return [
             'image' => $this->bid->user->avatar,
             'text' => "{$this->bid->user->username} har lagt ett bud på en av dina tjänster",
-            'link' => url("services/{$this->bid->service_id}/bids")
+            'link' => "/user/services/{$this->bid->service_id}"
         ];
     }
 }

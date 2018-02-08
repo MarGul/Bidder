@@ -1,5 +1,5 @@
 <template>
-    <div class="one-notification">
+    <div class="one-notification" :class="{'not-read': !data.read_at}" @click="go">
         <div class="notification-image">
             <img :src="data.image" />
         </div>
@@ -15,6 +15,11 @@ export default {
     props: {
         data: {
             type: Object
+        }
+    },
+    methods: {
+        go() {
+            this.$router.push(this.data.link);
         }
     }
 }

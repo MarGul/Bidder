@@ -2589,6 +2589,8 @@ body.mobile-nav-open .overlay {
 }
 
 .desktop-notifications-dropdown .notifications-dropdown-top-container {
+  position: relative;
+  z-index: 10;
   padding: 10px 15px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2976,6 +2978,10 @@ body.mobile-nav-open .overlay {
 
 .one-notification:last-child {
   border-bottom: none;
+}
+
+.one-notification.not-read {
+  background: #edf0f3;
 }
 
 .one-notification .notification-image img {

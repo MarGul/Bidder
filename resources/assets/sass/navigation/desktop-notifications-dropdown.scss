@@ -21,6 +21,8 @@
     }
 
     .notifications-dropdown-top-container {
+        position: relative;
+        z-index: 10;
         padding: 10px 15px;
         display: flex;
         border-bottom: 1px solid #e6ebf1;

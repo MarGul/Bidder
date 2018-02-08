@@ -13,11 +13,11 @@
                 <app-notification 
                     v-for="(notification, index) in notifications" 
                     :key="index" 
-                    :data="notification"
+                    :data="notification.data"
                     v-if="notifications.length"
                 />
 
-                <div class="alert alert-info text-center m0">Du har inga notifieringar än.</div>
+                <div class="alert alert-info text-center m0" v-else>Du har inga notifieringar än.</div>
             </template>
         </div>
         <div class="notifications-dropdown-footer-container">
