@@ -5,6 +5,8 @@ namespace App\Managers;
 use App\Comment;
 use App\Events\CommentCreated;
 use App\Managers\Traits\ServiceTrait;
+use App\Notifications\NewCommentOnMyService;
+use Notification;
 
 
 class CommentManager extends BaseManager
@@ -74,6 +76,9 @@ class CommentManager extends BaseManager
 
 		// Broadcast an event that a comment was created
 		event(new CommentCreated($this->comment));
+
+		// Send out notification about new comment on the users service.
+		Notification::send($this->service->user, new NewCommentOnMyService($this->comment));
 
 		$this->setSuccess('Successfully inserted the comment into storage.', 201);
 

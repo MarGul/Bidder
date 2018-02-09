@@ -4,7 +4,7 @@
             <div class="main-area">
                 <section class="white-contentSection">
                     <header class="white-contentSection-header has-link">
-                        <h3>Notifikationer</h3>
+                        <h3>Notifieringar</h3>
                         <a class="is-link" @click="markRead">Markera alla som lästa</a>
                     </header>
                     <div class="white-contentSection-content">
