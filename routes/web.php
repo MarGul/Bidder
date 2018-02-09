@@ -12,10 +12,18 @@ use App\Notifications\NewBidOnMyService;
 */
 
 Route::get('/test', function() {
-	$user = App\User::find(2);
+	$service = App\Service::find(1);
 
-	dd($user->notifications()->simplePaginate(20));
+	$bids = $service->bids()->where('accepted', false)->with('user')->get();
+	
+	$users = collect([]);
+	foreach ( $bids as $bid ) {
+		if ( !$users->where('id', $bid->user->id)->count() ) {
+			$users->push($bid->user);
+		}
+	}
 
+	dd($users);
 });
 
 /**

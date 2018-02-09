@@ -12,6 +12,8 @@ use App\Managers\Traits\BidTrait;
 use Notification;
 use App\Notifications\ProjectCreated;
 use App\Notifications\NewBidOnMyService;
+use App\Notifications\NewAcceptedBid;
+use App\Notifications\NewDeclinedBid;
 
 class BidManager extends BaseManager
 {
@@ -93,6 +95,12 @@ class BidManager extends BaseManager
 
 		// Send out the notification that your bid has been accepted and a project created.
 		Notification::send($this->bid->user, new ProjectCreated($projectManager->project()));
+
+		// Send out the notification of an accepted bid. (Should combine this with project created)
+		Notification::send($this->bid->user, new NewAcceptedBid($this->bid));
+
+		// Send out the notification of a declined bid.
+		Notification::send($this->usersWhoHasDeclinedBid(), new NewDeclinedBid($this->service));
 
 		$this->setSuccess('Bid was accepted and a project created.', 201);
 		
@@ -210,6 +218,27 @@ class BidManager extends BaseManager
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get all of the users who has a declined bid on the service.
+	 *
+	 * @return collection
+	 */
+	protected function usersWhoHasDeclinedBid() 
+	{
+		$bids = $this->service->bids()->where('accepted', false)->with('user')->get();
+	
+		$users = collect([]);
+		foreach ( $bids as $bid ) {
+			// Put all of the users if we don't already have them in there and that the user doesn't have
+			// the accepted bid. 
+			if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $this->bid->user->id ) {
+				$users->push($bid->user);
+			}
+		}
+
+		return $users;
 	}
 
 	/**
