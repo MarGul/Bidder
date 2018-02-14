@@ -2456,6 +2456,24 @@ body.mobile-nav-open .overlay {
           align-items: center;
 }
 
+.desktop-header .desktop-nav .desktop-user-container .auth-user .notifications-icon-container {
+  position: relative;
+}
+
+.desktop-header .desktop-nav .desktop-user-container .auth-user .notifications-icon-container .notifications-badge {
+  position: absolute;
+  background: #fa3e3e;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 1px 3px;
+  line-height: 1.3;
+  top: -3px;
+  right: -4px;
+  cursor: pointer;
+}
+
 .desktop-header .desktop-nav .desktop-user-container .auth-user .auth-avatar {
   width: 40px;
   height: 40px;
@@ -2465,21 +2483,6 @@ body.mobile-nav-open .overlay {
   background-position: center center;
   background-size: cover;
   cursor: pointer;
-}
-
-.desktop-header .desktop-nav .desktop-user-container .auth-user .auth-name {
-  margin-left: 10px;
-  color: #fdfdfe;
-  font-weight: 500;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .desktop-auth-dropdown {
@@ -3005,11 +3008,12 @@ body.mobile-nav-open .overlay {
 }
 
 .one-notification:last-child {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .one-notification.not-read {
   background: #edf0f3;
+  border-bottom: 1px solid #d6dee8;
 }
 
 .one-notification .notification-image img {

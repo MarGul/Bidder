@@ -54,7 +54,8 @@ const actions = {
 
 const getters = {
 	userNotificationsFetched: state => state.fetched,
-	userNotifications: state => state.notifications
+	userNotifications: state => state.notifications,
+	userUnreadNotifications: state => state.notifications.filter(notification => !notification.read_at).length
 }
 
 export default {

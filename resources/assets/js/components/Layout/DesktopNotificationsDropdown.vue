@@ -44,9 +44,6 @@ export default {
         markRead() {
             this.$store.dispatch('markNotificationsAsRead');
         }
-    },
-    created() {
-        if ( !this.fetched ) this.$store.dispatch('getNotifications');
     }
 }
 </script>

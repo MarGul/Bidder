@@ -5,11 +5,12 @@
     cursor: pointer;
 
     &:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
     }
 
     &.not-read {
         background: #edf0f3;
+        border-bottom: 1px solid darken($border-color-gray, 5%);
     }
 
     .notification-image {
