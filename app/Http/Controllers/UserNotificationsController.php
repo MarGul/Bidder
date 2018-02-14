@@ -45,8 +45,35 @@ class UserNotificationsController extends Controller
             ]
         ], $this->manager->successCode());
     }
-
+    
+    /**
+     * Mark of the users notifications as read.
+     *
+     * @param   Request $request
+     * @return  Illuminate\Http\Response
+     */
     public function update(Request $request)
+    {
+        // Try to mark the notification as read.
+        $this->manager->byUser($request->user())
+                      ->markAsRead($request->notification);
+
+        if ( $this->manager->hasError() ) {
+            return response()->json(['message' => $this->manager->errorMessage()], $this->manager->errorCode());
+        }
+
+        return response()->json([
+            'message' => $this->manager->successMessage()
+        ], $this->manager->successCode());
+    }
+
+    /**
+     * Mark all of the users notifications as read.
+     *
+     * @param   Request $request
+     * @return  Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
     {
         // Try to mark the users notifications as read.
         $this->manager->byUser($request->user())

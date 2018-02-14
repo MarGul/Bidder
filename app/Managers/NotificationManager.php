@@ -6,6 +6,11 @@ class NotificationManager extends BaseManager
 {
 
     /**
+     * The single notification that the manager is working with
+     * @var mixed
+     */
+    protected $notification;
+    /**
      * The notifications that the manager is working with.
      * @var mixed
      */
@@ -37,6 +42,29 @@ class NotificationManager extends BaseManager
 
         $this->setSuccess('Displaying the users notifications', 200);
 
+        return true;
+    }
+
+    /**
+     * Mark a single users notification as read.
+     *
+     * @param   mixed $notification
+     * @return  boolean
+     */
+    public function markAsRead($notification)
+    {
+        if ( $this->hasError() ) return false;
+        
+        try {
+            $this->notification = $this->user->unreadNotifications()->findOrFail($notification);
+            $this->notification->markAsRead();  
+        } catch ( \Exception $e ) {
+            $this->setError('Could not mark the notification as read.', 500);
+            return false;
+        }
+
+        $this->setSuccess('Successfully marked the notification as read.', 200);
+        
         return true;
     }
 
