@@ -85,8 +85,6 @@
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 
-            if ( this.authenticated ) this.$store.dispatch('getNotifications');
-
             RealTimeEvents.listen();            
 
             // Start the applications heartbeat

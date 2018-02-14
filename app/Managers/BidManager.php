@@ -14,6 +14,7 @@ use App\Notifications\ProjectCreated;
 use App\Notifications\NewBidOnMyService;
 use App\Notifications\NewAcceptedBid;
 use App\Notifications\NewDeclinedBid;
+use App\Notifications\NewCompetingBid;
 
 class BidManager extends BaseManager
 {
@@ -61,6 +62,9 @@ class BidManager extends BaseManager
 
 		// Send out notification about new bid on the users service.
 		Notification::send($this->service->user, new NewBidOnMyService($this->bid));
+
+		// Send out notification about a competing bid.
+		Notification::send($this->usersWhoHasLeftBid(), new NewCompetingBid($this->bid));
 
 		$this->setSuccess('Successfully stored your bid in storage.', 201);
 
@@ -234,6 +238,25 @@ class BidManager extends BaseManager
 			// Put all of the users if we don't already have them in there and that the user doesn't have
 			// the accepted bid. 
 			if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $this->bid->user->id ) {
+				$users->push($bid->user);
+			}
+		}
+
+		return $users;
+	}
+
+	/**
+	 * Get all of the users that currently have a bid on the service that the manager is handling.
+	 *
+	 * @return collection
+	 */
+	protected function usersWhoHasLeftBid()
+	{
+		$bids = $this->service->bids()->with('user')->get();
+
+		$users = collect([]);
+		foreach ( $bids as $bid ) {
+			if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $this->user->id ) {
 				$users->push($bid->user);
 			}
 		}

@@ -10,16 +10,14 @@
                     <div class="white-contentSection-content">
                         <app-loading v-if="!fetched" />
 
-                        <template v-else>
-                            <app-notification 
-                                v-for="(notification, index) in notifications" 
-                                :key="index" 
-                                :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
-                                v-if="notifications.length"
-                            />
-
-                            <div class="alert alert-info text-center m0" v-else>Du har inga notifieringar än.</div>
-                        </template>
+                        <app-notification 
+                            v-for="(notification, index) in notifications" 
+                            :key="index" 
+                            :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
+                            v-else-if="fetched && notifications.length > 0"
+                        />
+                        
+                        <div class="alert alert-info text-center m0" v-else>Du har inga notifieringar än.</div>
                     </div>
                 </section>
             </div>
@@ -50,6 +48,9 @@
             markRead(){
                 this.$store.dispatch('markNotificationsAsRead');
             }
+        },
+        created() {
+            if ( !this.fetched ) this.$store.dispatch('getNotifications');
         }
     }
 </script>

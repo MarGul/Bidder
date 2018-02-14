@@ -11,16 +11,14 @@
         <div class="notifications-dropdown-body-container">
             <app-loading v-if="!fetched" class="mtb10"/>
             
-            <template v-else>
-                <app-notification 
-                    v-for="(notification, index) in notifications" 
-                    :key="index" 
-                    :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
-                    v-if="notifications.length"
-                />
+            <app-notification 
+                v-for="(notification, index) in notifications" 
+                :key="index" 
+                :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
+                v-else-if="fetched && notifications.length > 0"
+            />
 
-                <div class="alert alert-info text-center m0" v-else>Du har inga notifieringar än.</div>
-            </template>
+            <div class="alert alert-info text-center m0" v-else>Du har inga notifieringar än.</div>
         </div>
         <div class="notifications-dropdown-footer-container">
             <router-link :to="`/user/notifications`" class="is-link is-weight-500" v-text="`Visa alla`" />
@@ -46,6 +44,9 @@ export default {
         markRead() {
             this.$store.dispatch('markNotificationsAsRead');
         }
+    },
+    created() {
+        if ( !this.fetched ) this.$store.dispatch('getNotifications');
     }
 }
 </script>

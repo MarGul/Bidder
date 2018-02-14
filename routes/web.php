@@ -13,12 +13,13 @@ use App\Notifications\NewBidOnMyService;
 
 Route::get('/test', function() {
 	$service = App\Service::find(1);
+	$user = App\User::find(1);
 
-	$bids = $service->bids()->where('accepted', false)->with('user')->get();
-	
+	$bids = $service->bids()->with('user')->get();
+
 	$users = collect([]);
 	foreach ( $bids as $bid ) {
-		if ( !$users->where('id', $bid->user->id)->count() ) {
+		if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $user->id ) {
 			$users->push($bid->user);
 		}
 	}
