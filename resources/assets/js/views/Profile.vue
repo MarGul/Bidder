@@ -22,8 +22,11 @@
 						</div>
 						<div class="main-area">
 							<section class="white-contentSection mb30">
-								<header class="white-contentSection-header">
+								<header class="white-contentSection-header" :class="{'has-link': myProfile}">
 									<h3 v-text="user.name || user.username"></h3>
+									<router-link :to="'/user/profile'" class="is-link is-flex v-center justify-end" v-if="myProfile">
+										Redigera<i class="icon h_edit wh20 primary ml10"></i>
+									</router-link>
 								</header>
 								<div class="white-contentSection-content">
 									<div class="user-bio" v-if="user.bio">
@@ -62,8 +65,7 @@
 		data() {
 			return {
 				fetched: false,
-				user: {},
-                breakpoints: window.breakpoints,
+				user: {}
 			}
 		},
 		computed: {
@@ -72,6 +74,9 @@
 			},
 			member_since() {
 				return moment(this.user.created_at).format('D MMM, YYYY');
+			},
+			myProfile() {
+				return this.$store.getters.authUser.id === this.user.id;
 			}
 		},
 		watch: {
