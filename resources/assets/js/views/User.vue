@@ -15,7 +15,7 @@
 						<li>
 							<router-link to="/user/notifications">
 								<i class="icon h_notification wh20 light-gray"></i>
-								<span class="link-text">Notifikationer</span>
+								<span class="link-text">Notifieringar</span>
 							</router-link>
 						</li>
 						<li>

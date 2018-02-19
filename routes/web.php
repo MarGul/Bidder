@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\NewBidOnMyService;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,11 +12,19 @@
 */
 
 Route::get('/test', function() {
-	$project = App\Project::find(1);
+	$service = App\Service::find(1);
+	$user = App\User::find(1);
 
-	$project->load('users');
-	$role = $project->users->where('id', 1)->first()->pivot->role;
-	dd($role);
+	$bids = $service->bids()->with('user')->get();
+
+	$users = collect([]);
+	foreach ( $bids as $bid ) {
+		if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $user->id ) {
+			$users->push($bid->user);
+		}
+	}
+
+	dd($users);
 });
 
 /**

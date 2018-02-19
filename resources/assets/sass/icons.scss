@@ -181,14 +181,16 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-calander.svg');
 }
 
-
-
-
+/* Customs */
 .confirm_modal_icon {
 	@include icon('../svg/question_mark_bordered.svg');
 	width: 150px;
 	height: 150px;
 	margin: 0 auto;
+}
+
+.icon_notifications {
+	@include mask-icon('../svg/notification.svg');
 }
 
 .icon_checkbox_checked {
@@ -240,16 +242,6 @@
 
 .icon_lock {
 	@include icon('../svg/lock.svg');
-}
-
-.icon_on {
-	@include mask-icon('../svg/on.svg');
-	background-color: $brand-primary;
-}
-
-.icon_off {
-	@include mask-icon('../svg/off.svg');
-	background-color: $brand-primary;
 }
 
 .icon_star_empty {

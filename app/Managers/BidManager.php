@@ -6,12 +6,15 @@ use App\Bid;
 use App\Service;
 use App\Events\NewBid;
 use App\Events\RemoveService;
-use App\Jobs\NotificationsForNewBid;
 use Carbon\Carbon;
 use App\Managers\Traits\ServiceTrait;
 use App\Managers\Traits\BidTrait;
 use Notification;
 use App\Notifications\ProjectCreated;
+use App\Notifications\NewBidOnMyService;
+use App\Notifications\NewAcceptedBid;
+use App\Notifications\NewDeclinedBid;
+use App\Notifications\NewCompetingBid;
 
 class BidManager extends BaseManager
 {
@@ -57,8 +60,11 @@ class BidManager extends BaseManager
 		// Broadcast that a new bid has been created
 		event(new NewBid($this->bid));
 
-		// Dispatch a job for this new bid that will send out the appropriate notifications.
-		dispatch(new NotificationsForNewBid($this->bid));
+		// Send out notification about new bid on the users service.
+		Notification::send($this->service->user, new NewBidOnMyService($this->bid));
+
+		// Send out notification about a competing bid.
+		Notification::send($this->usersWhoHasLeftBid(), new NewCompetingBid($this->bid));
 
 		$this->setSuccess('Successfully stored your bid in storage.', 201);
 
@@ -81,7 +87,7 @@ class BidManager extends BaseManager
 		// Broadcast that the bidding for this service has now stopped
 		event(new RemoveService($this->service->id));
 		// Create a project between the users.
-		$projectManager = app(\App\Managers\ProjectManager::class);
+		$projectManager = app(ProjectManager::class);
 		$projectManager->forService($this->service)
 					   ->forBid($this->bid)
 					   ->create();
@@ -93,6 +99,12 @@ class BidManager extends BaseManager
 
 		// Send out the notification that your bid has been accepted and a project created.
 		Notification::send($this->bid->user, new ProjectCreated($projectManager->project()));
+
+		// Send out the notification of an accepted bid. (Should combine this with project created)
+		Notification::send($this->bid->user, new NewAcceptedBid($this->bid));
+
+		// Send out the notification of a declined bid.
+		Notification::send($this->usersWhoHasDeclinedBid(), new NewDeclinedBid($this->service));
 
 		$this->setSuccess('Bid was accepted and a project created.', 201);
 		
@@ -210,6 +222,46 @@ class BidManager extends BaseManager
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get all of the users who has a declined bid on the service.
+	 *
+	 * @return collection
+	 */
+	protected function usersWhoHasDeclinedBid() 
+	{
+		$bids = $this->service->bids()->where('accepted', false)->with('user')->get();
+	
+		$users = collect([]);
+		foreach ( $bids as $bid ) {
+			// Put all of the users if we don't already have them in there and that the user doesn't have
+			// the accepted bid. 
+			if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $this->bid->user->id ) {
+				$users->push($bid->user);
+			}
+		}
+
+		return $users;
+	}
+
+	/**
+	 * Get all of the users that currently have a bid on the service that the manager is handling.
+	 *
+	 * @return collection
+	 */
+	protected function usersWhoHasLeftBid()
+	{
+		$bids = $this->service->bids()->with('user')->get();
+
+		$users = collect([]);
+		foreach ( $bids as $bid ) {
+			if ( !$users->where('id', $bid->user->id)->count() && $bid->user->id !== $this->user->id ) {
+				$users->push($bid->user);
+			}
+		}
+
+		return $users;
 	}
 
 	/**

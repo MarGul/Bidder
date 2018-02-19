@@ -33,10 +33,14 @@
 						</div>
 
 						<div class="auth-user" v-else>
-							<router-link to="/user/create-service" class="btn btn-orange is-flex c_c mr40">
+							<router-link to="/user/create-service" class="btn btn-orange is-flex c_c mr40" v-if="false">
 								<i class="icon h_plus white wh15 mr10"></i><span>Skapa ny tjänst</span>
 							</router-link>
-							<div class="is-flex c_c" @click="toggleDropdown" v-click-outside="close">
+							<div class="is-flex c_c mr25 notifications-icon-container" @click="toggleNotificationsDropdown" v-click-outside="closeNotifications">
+								<i class="icon icon_notifications wh20 white"></i>
+								<span class="notifications-badge" v-text="unreadNotifications" v-if="unreadNotifications !== 0" />
+							</div>
+							<div class="is-flex c_c" @click="toggleAuthDropdown" v-click-outside="closeAuth">
 								<div class="auth-avatar" :style="avatar"></div>
 								<i class="icon wh20 white ml5" :class="[chevron]"></i>
 							</div>
@@ -45,7 +49,8 @@
 					</div>
 				</div>
 
-				<desktop-auth-dropdown v-if="dropdown" />
+				<desktop-auth-dropdown v-if="authDropdown" />
+				<desktop-notifications-dropdown v-if="notificationsDropdown" />
 			</div>
 		</div>
 	</header>
@@ -54,21 +59,25 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../includes/Model';
-	import desktopAuthDropdown from './DesktopAuthDropdown'
+	import desktopAuthDropdown from './DesktopAuthDropdown';
+	import desktopNotificationsDropdown from './DesktopNotificationsDropdown';
 
 	export default {
 		components: {
-			desktopAuthDropdown
+			desktopAuthDropdown,
+			desktopNotificationsDropdown
 		},
 		data() {
 			return {
-				dropdown: false
+				authDropdown: false,
+				notificationsDropdown: false
 			}
 		},
 		computed: {
 			...mapGetters({
 				authenticated: 'isAuthenticated',
-				user: 'authUser'
+				user: 'authUser',
+				unreadNotifications: 'userUnreadNotifications'
 			}),
 			avatar() {
 				return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
@@ -78,11 +87,17 @@
 			}
 		},
 		methods: {
-			toggleDropdown() {
-				this.dropdown = !this.dropdown;
+			toggleAuthDropdown() {
+				this.authDropdown = !this.authDropdown;
 			},
-			close() {
-				this.dropdown = false;
+			closeAuth() {
+				this.authDropdown = false;
+			},
+			toggleNotificationsDropdown() {
+				this.notificationsDropdown = !this.notificationsDropdown;
+			},
+			closeNotifications() {
+				this.notificationsDropdown = false;
 			}
 		}
 	}

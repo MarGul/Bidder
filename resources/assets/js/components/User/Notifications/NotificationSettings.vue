@@ -1,75 +1,96 @@
 <template>
-	<div class="notification_settings-component">
-		<section class="white-contentSection">
-			<header class="white-contentSection-header">
-				<h3>Inställningar för notifikationer</h3>
-			</header>
-			<div class="white-contentSection-content">
-				<template v-if="fetched">
-
-					<app-notification-settings-item v-for="(value, setting) in settings" :key="setting"
-						:setting="setting"
-						:value="value"
-						@updated="settingChanged">		
-					</app-notification-settings-item>
-					
-				</template>
-
-				<app-loading v-else></app-loading>
-			</div>
-			<footer class="white-contentSection-footer">
-				<button type="button" class="btn btn-primary" :class="{processing}" :disabled="processing" @click.prevent="update">
-					Uppdatera
-				</button>
-			</footer>
-		</section>
-	</div>
+    <section class="transparent-contentSection">
+        <header class="transparent-contentSection-header has-link">
+            <h3>Mail-inställningar</h3>
+        </header>
+        <div class="transparent-contentSection-content loading">
+            <ul class="notification-settings-list">
+                <li>
+                    <div class="notification-setting-header">
+                        <div class="notification-setting-title" v-text="`För mina tjänster`" />
+                        <div class="notification-setting-control">
+                            <app-checkbox v-model="settings.for_my_services" />
+                        </div>
+                    </div>
+                    <div class="notification-setting-content">
+                        Få ett email så fort något händer på dina tjänster. Exempelvis en ny
+                        kommentar, nytt bud eller när din tjänst håller på att gå ut.
+                    </div>
+                </li>
+                <li>
+                    <div class="notification-setting-header">
+                        <div class="notification-setting-title" v-text="`För mina bud`" />
+                        <div class="notification-setting-control">
+                            <app-checkbox v-model="settings.for_my_bids" />
+                        </div>
+                    </div>
+                    <div class="notification-setting-content">
+                        Få ett email när någon annan skapar ett tävlande bud på en tjänst du
+                        också lagt ett bud på eller när ditt bud blir accepterat/nekat.
+                    </div>
+                </li>
+                <li>
+                    <div class="notification-setting-header">
+                        <div class="notification-setting-title" v-text="`För mina projekt`" />
+                        <div class="notification-setting-control">
+                            <app-checkbox v-model="settings.for_my_projects" />
+                        </div>
+                    </div>
+                    <div class="notification-setting-content">
+                        Få ett email så fort något händer på dina projekt. Exempelvis när 
+                        detaljerna uppdateras eller den andra parten godkänner projektet.
+                    </div>
+                </li>
+            </ul>
+            <button 
+                type="submit" 
+                class="btn btn-primary full-width c_c" 
+                :class="{processing}"
+                @click.prevent="update"
+                v-text="`Uppdatera inställningarna`"
+                :disabled="!fetched"
+            />
+        </div>
+    </section>
 </template>
 
 <script>
-	import { mapGetters } from 'vuex';
-	import appNotificationSettingsItem from "./NotificationSettingsItem";
-	import Model from "../../../includes/Model";
+    import appCheckbox from '../../InputControls/Checkbox';
+    import Model from '../../../includes/Model';
 
-	export default {
-		components: {
-			appNotificationSettingsItem
-		},
-		data() {
-			return {
-				processing: false
-			}
-		},
-		computed: {
-			...mapGetters({
-				fetched: 'userNotificationSettingsFetched',
-				settings: 'userNotificationSettings'
-			})
-		},
-		methods: {
-			settingChanged(event) {
-				this.settings[event.setting] = Boolean(!this.settings[event.setting]);
-			},
-			update() {
-				this.processing = true;
-				new Model('users/notification-settings').patch(this.settings)
-					.then(response => {
-						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', {notificationSettings: this.settings});
-						this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har uppdaterat dina inställningar för när du ska få notifikationer.'});
-						this.processing = false;
-					})
-					.catch(error => console.log(error));
-			}
-		},
-		created() {
-			if ( !this.fetched ) {
-				new Model('user/notification-settings').get()
-					.then(response => {
-						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS', response.data.settings);
-						this.$store.commit('SET_USER_NOTIFICATION_SETTINGS_FETCHED', true);
-					})
-					.catch(error => { console.log(error); });
-			}
-		}
-	}
+    export default {
+        components: {
+            appCheckbox
+        },
+        data() {
+            return {
+                fetched: false,
+                processing: false,
+                settings: {}
+            }
+        },
+        methods: {
+            update() {
+                this.processing = true;
+                new Model(`user/notification-settings`).patch(this.settings)
+                    .then(response => {
+                        this.$store.dispatch('showNotification', {type: 'success', msg: 'Dina mail-inställningar är uppdaterade.'});
+                    })
+                    .catch(error => { 
+                        this.$store.dispatch('showNotification', {type: 'error', msg: 'Något gick fel :('});
+                    })
+                    .finally(() => this.processing = false);
+            }
+        },
+        created() {
+            if ( !this.fetched ) {
+                new Model(`user/notification-settings`).get()
+                    .then(response => {
+                        this.settings = response.data.settings;
+                        this.fetched = true;
+                    })
+                    .catch(error => { console.log(error); });
+            }
+        }
+    }
 </script>

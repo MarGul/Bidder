@@ -7,26 +7,26 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewBidOnMyService extends Notification implements ShouldQueue
+class NewCommentOnMyService extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The new bid
+     * The new comment
      *
-     * @var App\Bid
+     * @var App\Comment
      */
-    protected $bid;
-
+    public $comment;
+    
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($bid)
+    public function __construct($comment)
     {
         $this->queue = 'notifications';
-        $this->bid = $bid;
+        $this->comment = $comment;
     }
 
     /**
@@ -53,11 +53,11 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Du har fått ett nytt bud på en av dina tjänster!')
+                    ->subject('Du har fått en ny kommentar på en av dina tjänster!')
                     ->greeting('Hej!')
-                    ->line('Någon har precis lagt ett nytt bud på att få utföra din tjänst.')
-                    ->line('För tjänsten: ' . $this->bid->service->title)
-                    ->action('Se det nya budet', url('services/' . $this->bid->service_id . '/bids'));
+                    ->line('Någon har precis skapat en kommentar på en av dina tjänster.')
+                    ->line('För tjänsten: ' . $this->comment->service->title)
+                    ->action('Se den nya kommentaren', url('services/' . $this->comment->service_id));
     }
 
     /**
@@ -69,9 +69,9 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'image' => $this->bid->user->avatar,
-            'text' => "{$this->bid->user->username} har lagt ett bud på en av dina tjänster",
-            'link' => "/user/services/{$this->bid->service_id}"
+            'image' => $this->comment->user->avatar,
+            'text' => "{$this->comment->user->username} har lagt en kommentar på en av dina tjänster",
+            'link' => "/services/{$this->comment->service_id}"
         ];
     }
 }

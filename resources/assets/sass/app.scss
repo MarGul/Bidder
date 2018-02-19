@@ -49,10 +49,11 @@
 
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";
-@import "navigation/desktop-auth-dropdown.scss";
 
 // Desktop Navigation
 @import "navigation/desktop-nav.scss";
+@import "navigation/desktop-auth-dropdown.scss";
+@import "navigation/desktop-notifications-dropdown.scss";
 
 // Home Page
 @import "includes/Home/home-hero.scss";
@@ -60,6 +61,9 @@
 
 // Welcome page
 @import "includes/Welcome/welcome.scss";
+
+// One Notification
+@import "includes/one-notification.scss";
 
 // Checklist block
 @import "includes/mg-checklist.scss";

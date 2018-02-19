@@ -8,33 +8,33 @@
             </div>
         </div>
 
-            <div class="multi-dropdown-container" v-if="open" v-click-outside="close">
-                <ul class="top-level-container" v-for="(item, index) in shadowItems" :key="item.slug">
-                    <li class="top-level-item">
-                        <div class="level-item" :class="{'top-level': multiLevel}">
-                            <i 
-                                class="icon wh15 primary" 
-                                :class="{'icon_checkbox_unchecked': !item.selected, 'icon_checkbox_checked': item.selected}"
-                                @click="itemChecked(index, null)"
-                            />
-                            <span v-text="item.name"></span>
-                        </div>
-                        
-                        <ul class="sub-level-container" v-if="multiLevel">
-                            <li v-for="(subItem, subIndex) in item[multiKey]" :key="subItem.slug">
-                                <div class="level-item sub-level">
-                                    <i 
-                                        class="icon wh15 primary" 
-                                        :class="{'icon_checkbox_unchecked': !subItem.selected, 'icon_checkbox_checked': subItem.selected}"
-                                    @click="itemChecked(index, subIndex)"
-                                    />
-                                    <span v-text="subItem.name"></span>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <div class="multi-dropdown-container" v-if="open" v-click-outside="close">
+            <ul class="top-level-container" v-for="(item, index) in shadowItems" :key="item.slug">
+                <li class="top-level-item">
+                    <div class="level-item" :class="{'top-level': multiLevel}">
+                        <i 
+                            class="icon wh15 primary" 
+                            :class="{'icon_checkbox_unchecked': !item.selected, 'icon_checkbox_checked': item.selected}"
+                            @click="itemChecked(index, null)"
+                        />
+                        <span v-text="item.name"></span>
+                    </div>
+                    
+                    <ul class="sub-level-container" v-if="multiLevel">
+                        <li v-for="(subItem, subIndex) in item[multiKey]" :key="subItem.slug">
+                            <div class="level-item sub-level">
+                                <i 
+                                    class="icon wh15 primary" 
+                                    :class="{'icon_checkbox_unchecked': !subItem.selected, 'icon_checkbox_checked': subItem.selected}"
+                                @click="itemChecked(index, subIndex)"
+                                />
+                                <span v-text="subItem.name"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 

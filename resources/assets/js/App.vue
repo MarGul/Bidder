@@ -66,6 +66,8 @@
                 if ( newAuth ) {
                     // If the user logs in we need to start listening for he's real time events.
                     RealTimeEvents.listenAuth();
+
+                    this.$store.dispatch('getNotifications');
                 }
             }
         }, 
@@ -75,8 +77,6 @@
             }
         },
         created() {
-            //let categories = await fetchCategories();
-            //console.log(categories);
             // Initialize Data
             new Model('categories').get().then(response => {
                 this.$store.commit('SET_CATEGORIES', response.data.categories);
@@ -87,7 +87,9 @@
                 this.$store.commit('SET_REGIONS_FETCHED', true);
             });
 
-            RealTimeEvents.listen();            
+            RealTimeEvents.listen(); 
+            
+            if ( this.authenticated ) this.$store.dispatch('getNotifications');
 
             // Start the applications heartbeat
             setInterval(function() {

@@ -12,24 +12,18 @@
                 type: String
             },
             value: {
-                type: Boolean
-            }
-        },
-        data() {
-            return {
-                isChecked: this.value
+                type: Boolean,
+                default: false
             }
         },
         computed: {
             checkboxIcon() {
-                return this.isChecked ? 'icon_checkbox_checked' : 'icon_checkbox_unchecked';
+                return this.value ? 'icon_checkbox_checked' : 'icon_checkbox_unchecked';
             }
         },
         methods: {
             changed() {
-                this.isChecked = !this.isChecked;
-
-                this.$emit('input', this.isChecked);
+                this.$emit('input', !this.value);
             }
         }
     }

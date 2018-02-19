@@ -52,6 +52,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Does the user want mail notifications for a group
+     *
+     * @param   string $group
+     * @return  boolean
+     */
+    public function wantsMailForHis($group) {
+        return !is_null($this->notification_settings()->where("for_my_{$group}", true)->first());
+    }
+
+    /**
      * A user may have many services.
      * 
      * @return Eloquent Relationship

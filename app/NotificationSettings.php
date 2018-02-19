@@ -13,16 +13,28 @@ class NotificationSettings extends Model
      * @var array
      */
     protected $fillable = [
-    	'user_id', 'bid_on_service', 'comment_on_service', 'message_in_project', 'project_details_changed',
-    	'other_party_accepted', 'project_started', 'leave_review', 'competing_bid', 'comment_reply'
-    ];
+    	'user_id', 'for_my_services', 'for_my_bids', 'for_my_projects'
+	];
+	
+	/**
+	 * Attributes that are hidden when toArray
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'id', 'user_id', 'created_at', 'updated_at'
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
+	/**
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $hidden = ['user_id', 'created_at', 'updated_at', 'id'];
+    protected $casts = [
+        'for_my_services' => 'boolean',
+        'for_my_bids' => 'boolean',
+        'for_my_projects' => 'boolean',
+    ];
 
    	/**
    	 * A notification settings belongs to a user.

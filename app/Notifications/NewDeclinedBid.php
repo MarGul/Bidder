@@ -7,26 +7,26 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewBidOnMyService extends Notification implements ShouldQueue
+class NewDeclinedBid extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The new bid
+     * The service for the declined bid
      *
-     * @var App\Bid
+     * @var App\Service
      */
-    protected $bid;
+    protected $service;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($bid)
+    public function __construct($service)
     {
         $this->queue = 'notifications';
-        $this->bid = $bid;
+        $this->service = $service;
     }
 
     /**
@@ -39,7 +39,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     {
         $channels = ['database'];
 
-        if ( $notifiable->wantsMailForHis('services') ) $channels[] = 'mail';
+        if ( $notifiable->wantsMailForHis('bids') ) $channels[] = 'mail';
 
         return $channels;
     }
@@ -53,11 +53,12 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Du har fått ett nytt bud på en av dina tjänster!')
+                    ->subject('Ditt bud blev ej accepterat!')
                     ->greeting('Hej!')
-                    ->line('Någon har precis lagt ett nytt bud på att få utföra din tjänst.')
-                    ->line('För tjänsten: ' . $this->bid->service->title)
-                    ->action('Se det nya budet', url('services/' . $this->bid->service_id . '/bids'));
+                    ->line('Ett av dina bud för att få utföra en tjänst blev ej accepterat.')
+                    ->line('Ett annat bud blev accepterat. Bättre lycka nästa gång!')
+                    ->line('Det nekade budet var för tjänsten med titel:')
+                    ->line($this->service->title);
     }
 
     /**
@@ -69,9 +70,9 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'image' => $this->bid->user->avatar,
-            'text' => "{$this->bid->user->username} har lagt ett bud på en av dina tjänster",
-            'link' => "/user/services/{$this->bid->service_id}"
+            'image' => $this->service->user->avatar,
+            'text' => "{$this->service->user->username} accepterade ett annat bud än ditt.",
+            'link' => "/user/bids"
         ];
     }
 }

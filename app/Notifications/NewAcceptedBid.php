@@ -7,12 +7,12 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewBidOnMyService extends Notification implements ShouldQueue
+class NewAcceptedBid extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The new bid
+     * The accepted bid
      *
      * @var App\Bid
      */
@@ -39,7 +39,7 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     {
         $channels = ['database'];
 
-        if ( $notifiable->wantsMailForHis('services') ) $channels[] = 'mail';
+        if ( $notifiable->wantsMailForHis('bids') ) $channels[] = 'mail';
 
         return $channels;
     }
@@ -53,11 +53,11 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Du har fått ett nytt bud på en av dina tjänster!')
+                    ->subject('Ditt bud har blivit accepterat!')
                     ->greeting('Hej!')
-                    ->line('Någon har precis lagt ett nytt bud på att få utföra din tjänst.')
-                    ->line('För tjänsten: ' . $this->bid->service->title)
-                    ->action('Se det nya budet', url('services/' . $this->bid->service_id . '/bids'));
+                    ->line('Ett av dina bud för att få utföra en tjänst har blivit accepterat. Grattis!')
+                    ->line('Vi har skapat ett projekt åt er som du hittar under "Mina Projekt"')
+                    ->action('Se det accepterade budet', url('user/bids/' . $this->bid->id));
     }
 
     /**
@@ -69,9 +69,9 @@ class NewBidOnMyService extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'image' => $this->bid->user->avatar,
-            'text' => "{$this->bid->user->username} har lagt ett bud på en av dina tjänster",
-            'link' => "/user/services/{$this->bid->service_id}"
+            'image' => $this->bid->service->user->avatar,
+            'text' => "{$this->bid->service->user->username} har accepterat ditt bud.",
+            'link' => "/user/bids/{$this->bid->id}"
         ];
     }
 }
