@@ -13,7 +13,7 @@
                         <app-notification 
                             v-for="(notification, index) in notifications" 
                             :key="index" 
-                            :data="Object.assign(notification.data, {read_at: notification.read_at, created_at: notification.created_at})"
+                            :notification="notification"
                             v-else-if="fetched && notifications.length > 0"
                         />
                         
