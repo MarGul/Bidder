@@ -1,6 +1,6 @@
 <template>
 	<div class="payment_method_invoice-component">
-		<div class="payment-method-container arrow-left">
+		<div class="payment-method-container arrow-right">
 			Invoice
 		</div>
 	</div>

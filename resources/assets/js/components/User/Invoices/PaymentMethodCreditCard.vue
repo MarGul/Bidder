@@ -1,6 +1,6 @@
 <template>
 	<div class="payment_method_credit_card-component">
-		<div class="payment-method-container arrow-right">
+		<div class="payment-method-container arrow-left">
 			
 			<div class="payment-method-description">
 				<div class="payment-method-description-content">
