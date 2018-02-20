@@ -36,7 +36,7 @@ class PaymentManager extends BaseManager
             $charge = \Stripe\Charge::create([
                 'amount' => $this->invoice->total * 100,
                 'currency' => 'sek',
-                'description' => 'Test charge',
+                'description' => "Betalning för faktura #{$this->invoice->id}",
                 'metadata' => ['invoice_id' => $this->invoice->id],
                 'receipt_email' => $this->user->email,
                 'source' => $token['id']

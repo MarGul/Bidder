@@ -10,20 +10,8 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'v1'], function() {
 
 	Route::post('send-email-verification')->uses('Auth\EmailVerificationController@send');
-	/* Get a users profile */
+	/* Get a user profile */
 	Route::get('users/{username}')->uses('UserProfileController@index');
-	/* Update a users profile */
-	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
-	/* Update a users avatar */
-	Route::post('users/{user}/avatar')->uses('UserAvatarController@store');
-	/* Update a users password */
-	Route::put('users/{user}/password')->uses('UserPasswordController@update');
-	/* Handle regions */
-	Route::resource('regions', 'RegionController', ['only' => ['index', 'show']]);
-	/* Get parent categories */
-	Route::get('categories')->uses('CategoryController@index');
-	/* Get the category checklist Items */
-	Route::get('checklist-items')->uses('ChecklistItemsController@index');
 	/* Handle services */
 	Route::resource('services', 'ServiceController', ['only' => ['index', 'show']]);
 	/* Handle a services comments */
@@ -35,6 +23,25 @@ Route::group(['prefix' => 'v1'], function() {
 	/* A users services */
 	Route::resource('user/services', 'UserServicesController', ['except' => ['create']]);
 	
+
+	/** 
+	 * Handle Categories
+	 */
+	Route::get('categories')->uses('CategoryController@index');
+	Route::get('checklist-items')->uses('ChecklistItemsController@index');
+
+	/**
+	 * Handle Regions
+	 */
+	Route::get('regions')->uses('RegionController@index');
+
+	/**
+	 * Handle users
+	 */
+	Route::get('users/{user}/email')->uses('UserEmailController@index');
+	Route::patch('users/{user}/profile')->uses('UserProfileController@update');
+	Route::post('users/{user}/avatar')->uses('UserAvatarController@store');
+	Route::put('users/{user}/password')->uses('UserPasswordController@update');
 
 	/**
 	 * Handle the users notifications

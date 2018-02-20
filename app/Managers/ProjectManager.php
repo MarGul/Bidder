@@ -228,8 +228,6 @@ class ProjectManager extends BaseManager
 	{
 		if ( $this->hasError() ) return false;
 
-		//if ( !$this->canRemoveUseOfContract() ) return false;
-
 		try {
 			// Mark the project as not using contract.
 			$this->project->update(['use_contract' => false]);
@@ -376,6 +374,65 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
+	 * Start a project.
+	 * 
+	 * @return boolean
+	 */
+	protected function start()
+	{
+		try {
+			$this->project->update(['started' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as started.', 500);
+			return false;
+		}
+
+		// Generate the invoice
+		$invoiceManager = app(InvoiceManager::class);
+		$invoiceManager->forProject($this->project)->create();
+
+		// Add a history record that the project has been started.
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('started');
+
+		return true;
+	}
+
+	/**
+	 * The user has completed the project.
+	 *
+	 * @return void
+	 */
+	public function completedByUser()
+	{
+		if ( $this->hasError() ) return false;
+
+		try {
+			// Mark the user that completed.
+			$this->project->users()->updateExistingPivot($this->user->id, ['completed' => true]);
+		} catch ( \Exception $e ) {
+			$this->setError('Could not mark the project as completed.', 500);
+			return false;
+		}
+
+		$this->projectHistoryManager->forProject($this->project->id)
+									->add('completedByUser', ['user' => $this->user->username]);
+
+
+		// If all users on the project has marked the project as completed, or the time has run out,
+		// we should mark the full project as completed.
+		if ( $this->isCompleted() ) {
+			if ( !$this->complete() ) return false;
+		}
+
+		// Send out a notification
+
+		$this->setSuccess('Successfully completed the project.', 200);
+
+		return true;
+	}
+
+	/**
 	 * This is run from a job. 
 	 * We should mark projects as cancelled where the time has run out for acceptance. 
 	 *
@@ -425,40 +482,6 @@ class ProjectManager extends BaseManager
 
 		
 		// Send out a notification
-
-		return true;
-	}
-
-	/**
-	 * The user has completed the project.
-	 *
-	 * @return void
-	 */
-	public function completedByUser()
-	{
-		if ( $this->hasError() ) return false;
-
-		try {
-			// Mark the user that completed.
-			$this->project->users()->updateExistingPivot($this->user->id, ['completed' => true]);
-		} catch ( \Exception $e ) {
-			$this->setError('Could not mark the project as completed.', 500);
-			return false;
-		}
-
-		$this->projectHistoryManager->forProject($this->project->id)
-									->add('completedByUser', ['user' => $this->user->username]);
-
-
-		// If all users on the project has marked the project as completed, or the time has run out,
-		// we should mark the full project as completed.
-		if ( $this->isCompleted() ) {
-			if ( !$this->complete() ) return false;
-		}
-
-		// Send out a notification
-
-		$this->setSuccess('Successfully completed the project.', 200);
 
 		return true;
 	}
@@ -518,24 +541,6 @@ class ProjectManager extends BaseManager
 	}
 
 	/**
-	 * Is the user allowed to remove the use of contract for the project?
-	 * 
-	 * @return boolean
-	 */
-	protected function canRemoveUseOfContract()
-	{
-		$this->project->load('users');
-
-		foreach ($this->project->users as $user) {
-			if ( $user->id === $this->user->id && $user->pivot->use_contract) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Should we start the project? 
 	 * If all participants have accepted we can start.
 	 * 
@@ -557,27 +562,6 @@ class ProjectManager extends BaseManager
 				return false;
 			}
 		}
-
-		return true;
-	}
-
-	/**
-	 * Start a project.
-	 * 
-	 * @return boolean
-	 */
-	protected function start()
-	{
-		try {
-			$this->project->update(['started' => true]);
-		} catch ( \Exception $e ) {
-			$this->setError('Could not mark the project as started.', 500);
-			return false;
-		}
-
-		// Add a history record that the project has been started.
-		$this->projectHistoryManager->forProject($this->project->id)
-									->add('started');
 
 		return true;
 	}

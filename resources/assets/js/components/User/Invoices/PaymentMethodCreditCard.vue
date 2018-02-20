@@ -27,7 +27,7 @@
 				type="button" 
 				class="btn btn-primary mt10" 
 				:class="{processing: processing}"
-				:disabled="processing"
+				:disabled="processing || !emailFetched"
 				@click="checkout"
 				v-text="'Slutför betalningen'"
 			/>
@@ -52,6 +52,8 @@
 		},
 		data() {
 			return {
+				email: '',
+				emailFetched: false,
 				error: false,
 				errorMessage: '',
 				processing: true
@@ -60,20 +62,17 @@
 		computed: {
 			totalInCents() {
 				return this.amount * 100;
-			},
-			email() {
-				//return this.$store.getters.authUser.email;
 			}
 		},
 		methods: {
 			checkout() {
 				this.handler.open({
 					name: 'GoBid AB',
-					description: 'Genomför en testbetalning',
+					description: `Betalning för faktura #${this.invoiceId}`,
 					amount: this.totalInCents,
 					allowRememberMe: false,
 					currency: 'sek',
-					email: 'mackan@mack.com',
+					email: this.email,
 					panelLabel: `Betala {{amount}}`,
 					token: (token) => {
 						this.processing = true;
@@ -103,6 +102,16 @@
 			}
 		},
 		created() {
+			// Fetch the users email.
+			new Model(`users/${this.$store.getters.authUser.id}/email`).get()
+				.then(response => {
+					this.email = response.data.email;
+					this.emailFetched = true;
+				})
+				.catch(error => {
+					this.errorMessage = error.message;
+				});
+			
 			let stripe = document.createElement('script');
 			stripe.src = 'https://checkout.stripe.com/checkout.js';
 			stripe.type = 'text/javascript';
