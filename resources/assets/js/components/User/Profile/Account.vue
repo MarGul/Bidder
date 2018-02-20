@@ -1,8 +1,11 @@
 <template>
 	<div class="account-component">			
 		<section :class="{'white-contentSection': withHTMLMarkup} ">
-			<header class="white-contentSection-header" v-if="withHTMLMarkup">
+			<header class="white-contentSection-header has-link" v-if="withHTMLMarkup">
 				<h3>Min profil</h3>
+				<router-link :to="`/profile/${this.$store.getters.authUser.username}`" class="is-link is-flex v-center justify-end">
+					Visa profil <i class="icon h_external_link wh20 primary ml10"></i>
+				</router-link>
 			</header>
 			<form @keydown="form.errors.clear()">
 				<div :class="{'white-contentSection-content': withHTMLMarkup}">

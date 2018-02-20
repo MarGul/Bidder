@@ -181,6 +181,11 @@
 	@include mask-icon('../svg/heroicons-ui/svg/icon-calander.svg');
 }
 
+.h_external_link {
+	@include mask-icon('../svg/heroicons-ui/svg/icon-external-link.svg');
+}
+
+
 /* Customs */
 .confirm_modal_icon {
 	@include icon('../svg/question_mark_bordered.svg');

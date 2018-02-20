@@ -3,8 +3,11 @@
 
 		<form class="form-with-sections" :class="{loading: !fetched}" @submit.prevent="update">
 			<section class="white-contentSection">
-				<header class="white-contentSection-header">
+				<header class="white-contentSection-header" :class="{'has-link': service.active}">
 					<h3>Redigera tjänst</h3>
+					<router-link :to="`/services/${service.id}`" class="is-link is-flex v-center justify-end" v-if="service.active">
+						Visa tjänsten <i class="icon h_external_link wh20 primary ml10"></i>
+					</router-link>
 				</header>
 				<div class="white-contentSection-content">
 					
@@ -21,9 +24,12 @@
 								<select class="form-control" v-model="form.category_id" :disabled="!service.active">
 									<option value="">Välj kategori</option>
 									<optgroup :label="rootCat.name" v-for="rootCat in categories" :key="rootCat.id">
-										<option :value="category.id" v-text="category.name" v-for="category in rootCat.sub_categories" :key="category.id">
-
-										</option>
+										<option 
+											:value="category.id" 
+											v-text="category.name" 
+											v-for="category in rootCat.sub_categories" 
+											:key="category.id"
+										/>
 									</optgroup>
 								</select>
 								<span class="help-block" v-if="form.errors.has('category_id')" v-text="form.errors.get('category_id')"></span>
