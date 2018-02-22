@@ -4,6 +4,8 @@ namespace App\Managers;
 
 use App\Managers\Traits\InvoiceTrait;
 use App\Payment;
+use App\Mail\UserRequestedInvoice;
+use Mail;
 
 class PaymentManager extends BaseManager
 {
@@ -94,13 +96,34 @@ class PaymentManager extends BaseManager
     /**
      * Complete a payment with invoice
      *
-     * @return boolean
+     * @param   string      $notes
+     * @return  boolean
      */
-    public function payWithInvoice()
+    public function payWithInvoice($notes)
     {
+        if ( $this->hasError() ) return false;
 
+        try {
+            $this->setData([
+                'invoice_id' => $this->invoice->id,
+                'user_id' => $this->user->id,
+                'payment_method' => 'invoice',
+                'amount_paid' => 0.0,
+                'transaction_id' => (string)$this->invoice->id . rand(10000, 99999),
+                'notes' => $notes
+            ])->insert();
+
+            // Send admins a mail about the new request.
+            Mail::to('gullbeerg@gmail.com')->send(new UserRequestedInvoice($this->invoice));
+        } catch ( \Exception $e ) {
+            $this->setError('Kunde inte ta emot förfrågningen om att betala med faktura. Var vänlig och försök igen eller kontakta oss om problemet kvarstår.', 500);
+            return false;
+        }
+
+        $this->setSuccess('Successfully accepted the request to send invoice', 200);
+
+        return true;
     }
-
 
     /**
      * Insert a payment into storage.

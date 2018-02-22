@@ -10,7 +10,19 @@
 							<h3>Faktura #{{ invoice.id }}</h3>
 						</header>
 						<div class="white-contentSection-content">
-							Här ska det stå lite om hur man betalar osv
+							<p>Tack så mycket för att du har använt GoBid!</p>
+							<p>
+								Du kan betala fakturan direkt med kort. Vi använder oss av Stripe som behandlar flera miljarder kronor
+								i betalningar om året runt om i hela världen. Betalningen sker säkert och inga av dina uppgifter behandlas av oss,
+								allt behandlas via Stripe. Stripe kommer också att skicka ett seperat kvitto till dig för din betalning.
+							</p>
+							<p>
+								Om du inte vill betala med kort så kan du be oss att skicka en faktura till dig. På fakturan så skickar vi med
+								vårt bankgironummer så att du kan göra en insättning.
+							</p>
+							<p>
+								Du kan ladda ner kvitto genom att klicka på knappen "Ladda ner kvitto". 
+							</p>
 						</div>
 						<footer class="white-contentSection-footer">
 							<div class="invoice-totals-container">
