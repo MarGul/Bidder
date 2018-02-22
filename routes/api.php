@@ -101,6 +101,7 @@ Route::group(['prefix' => 'v1'], function() {
 	 */
 	Route::get('invoices')->uses('UserInvoicesController@index');
 	Route::post('payments/stripe')->uses('PaymentStripeController@store');
+	Route::post('payments/invoice')->uses('PaymentInvoiceController@store');
 
 	
 });

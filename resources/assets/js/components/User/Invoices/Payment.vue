@@ -16,11 +16,16 @@
 				
 				<template v-else>
 					<div class="payment-methods-container">
-						<div class="payment-methods payment-methods-card" :class="{selected: selectedMethod === 'creditcard'}" @click="selectedMethod = 'creditcard'">
+						<div class="payment-methods payment-methods-card" 
+							:class="{selected: selectedMethod === 'creditcard'}" 
+							@click="selectedMethod = 'creditcard'">
 							<div class="payment-select">
 								<i 
 									class="icon wh20 light-gray"
-									:class="{'payment-checked-icon': selectedMethod === 'creditcard', 'payment-unchecked-icon': selectedMethod !== 'creditcard'}"
+									:class="{
+										'payment-checked-icon': selectedMethod === 'creditcard', 
+										'payment-unchecked-icon': selectedMethod !== 'creditcard'
+									}"
 								></i>
 							</div>
 							<div class="payment-content">
@@ -28,16 +33,21 @@
 								<div class="payment-heading">Betala med kort</div>
 							</div>
 						</div>
-						<div class="payment-methods payment-method-invoice" :class="{selected: selectedMethod === 'invoice'}" @click="selectedMethod = 'invoice'">
+						<div class="payment-methods payment-method-invoice" 
+							:class="{selected: selectedMethod === 'invoice'}" 
+							@click="selectedMethod = 'invoice'">
 							<div class="payment-select">
 								<i 
 									class="icon wh20 light-gray"
-									:class="{'payment-checked-icon': selectedMethod === 'invoice', 'payment-unchecked-icon': selectedMethod !== 'invoice'}"
+									:class="{
+										'payment-checked-icon': selectedMethod === 'invoice', 
+										'payment-unchecked-icon': selectedMethod !== 'invoice'
+									}"
 								></i>
 							</div>
 							<div class="payment-content">
 								<div class="payment-icon-invoice"></div>
-								<div class="payment-heading">Betala med faktura</div>
+								<div class="payment-heading">Betala via bankgiro</div>
 							</div>
 						</div>
 					</div>

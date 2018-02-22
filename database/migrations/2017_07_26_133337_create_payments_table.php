@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payment_method');
             $table->float('amount_paid');
             $table->string('transaction_id')->nullable();
+            $table->mediumText('notes')->nullable();
             $table->timestamps();
         });
     }
