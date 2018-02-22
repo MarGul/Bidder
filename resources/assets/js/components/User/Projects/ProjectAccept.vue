@@ -27,16 +27,18 @@
 					</div>
 				</template>
 				<template v-else>
-					<button type="button" class="btn btn-primary" @click.prevent="accept">
-						<div class="is-flex c_c">
-							<i class="icon icon_checkbox_checked white wh12 mr10"></i> <span>Ja</span>
-						</div>
-					</button>
-					<button type="button" class="btn btn-danger" @click.prevent="cancel">
-						<div class="is-flex c_c">
-							<i class="icon h_delete white wh15 mr10"></i> <span>Nej</span>
-						</div>
-					</button>
+					<div class="is-flex c_c">
+						<button type="button" class="btn btn-primary mr10" @click.prevent="accept">
+							<div class="is-flex c_c">
+								<i class="icon icon_checkbox_checked white wh12 mr10"></i> <span>Ja</span>
+							</div>
+						</button>
+						<button type="button" class="btn btn-danger" @click.prevent="cancel">
+							<div class="is-flex c_c">
+								<i class="icon h_delete white wh15 mr10"></i> <span>Nej</span>
+							</div>
+						</button>
+					</div>
 				</template>
 			</template>
 

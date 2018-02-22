@@ -44,7 +44,7 @@
 				if ( !message.hasOwnProperty('user') ) {
 					message.project_id = this.project.id;
 					message.user = this.auth;
-					created_at: moment().format('YYYY-MM-DD HH:mm:ss');
+					message.created_at = moment().format('YYYY-MM-DD HH:mm:ss');
 				}
 
 				this.$store.dispatch('messageAdded', {message});
