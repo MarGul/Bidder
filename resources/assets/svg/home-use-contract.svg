@@ -1,0 +1,27 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<path style="fill:#EE964B;" d="M32,32L32,32C32,14.328,46.328,0,64,0h288c17.672,0,32,14.328,32,32v384c0,17.672-14.328,32-32,32
+	l0,0L32,32z"/>
+<path style="fill:#70C1B3;" d="M320,480H32c-17.672,0-32-14.328-32-32V64c0-17.672,14.328-32,32-32h288c17.672,0,32,14.328,32,32
+	v384C352,465.672,337.672,480,320,480z"/>
+<path style="fill:#3F3F3F;" d="M176,136c-22.056,0-40-17.944-40-40s17.944-40,40-40s40,17.944,40,40S198.056,136,176,136z M176,72
+	c-13.232,0-24,10.768-24,24s10.768,24,24,24s24-10.768,24-24S189.232,72,176,72z"/>
+<g>
+	<rect x="40" y="176" style="fill:#EBEBD3;" width="272" height="16"/>
+	<rect x="40" y="208" style="fill:#EBEBD3;" width="272" height="16"/>
+	<rect x="72" y="240" style="fill:#EBEBD3;" width="240" height="16"/>
+	<rect x="72" y="272" style="fill:#EBEBD3;" width="240" height="16"/>
+	<rect x="72" y="304" style="fill:#EBEBD3;" width="240" height="16"/>
+	<rect x="72" y="336" style="fill:#EBEBD3;" width="240" height="16"/>
+	<rect x="40" y="408" style="fill:#EBEBD3;" width="120" height="16"/>
+	<rect x="240" y="408" style="fill:#EBEBD3;" width="72" height="16"/>
+	<rect x="40" y="240" style="fill:#EBEBD3;" width="16" height="16"/>
+	<rect x="40" y="272" style="fill:#EBEBD3;" width="16" height="16"/>
+	<rect x="40" y="304" style="fill:#EBEBD3;" width="16" height="16"/>
+	<rect x="40" y="336" style="fill:#EBEBD3;" width="16" height="16"/>
+</g>
+<polygon style="fill:#F4D35E;" points="440,440 424,456 408,440 408,152 440,152 "/>
+<rect x="408" y="288" style="fill:#EE964B;" width="32" height="16"/>
+<path style="fill:#3F3F3F;" d="M480,304h-16v-22.112L455.056,264L464,246.112V184c0-4.408-3.592-8-8-8h-16v-16h16
+	c13.232,0,24,10.768,24,24v65.888L472.944,264L480,278.112V304z"/>
+</svg>

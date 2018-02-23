@@ -1,0 +1,37 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<circle style="fill:#70C1B3;" cx="248" cy="64" r="48"/>
+<circle style="fill:#EE964B;" cx="248" cy="384" r="40"/>
+<path style="fill:#70C1B3;" d="M184,240v-64l-72-72L72,16l40-16l40,80l56,48h72h32c17.672,0,32,14.328,32,32v80"/>
+<rect x="288" y="176" style="fill:#F4D35E;" width="16" height="64"/>
+<g>
+	<rect x="240" y="168" style="fill:#3F3F3F;" width="16" height="72"/>
+	<rect x="232" y="160" style="fill:#3F3F3F;" width="32" height="16"/>
+</g>
+<g>
+	<path style="fill:#F4D35E;" d="M456,0H352c-8.84,0-16,7.16-16,16v64c0,8.84,7.16,16,16,16h8v32l32-32h64c8.84,0,16-7.16,16-16V16
+		C472,7.16,464.84,0,456,0z"/>
+	<path style="fill:#F4D35E;" d="M24,216h72c8.84,0,16-7.16,16-16v-32c0-8.84-7.16-16-16-16H80v-32l-32,32H24c-8.84,0-16,7.16-16,16
+		v32C8,208.84,15.16,216,24,216z"/>
+</g>
+<g>
+	<rect x="360" y="56" style="fill:#3F3F3F;" width="88" height="16"/>
+	<rect x="360" y="24" style="fill:#3F3F3F;" width="88" height="16"/>
+</g>
+<g>
+	<path style="fill:#EE964B;" d="M184,480v-24c0-8.84,7.16-16,16-16h96c8.84,0,16,7.16,16,16v24H184z"/>
+	<circle style="fill:#EE964B;" cx="408" cy="384" r="40"/>
+	<path style="fill:#EE964B;" d="M344,480v-24c0-8.84,7.16-16,16-16h96c8.84,0,16,7.16,16,16v24H344z"/>
+	<circle style="fill:#EE964B;" cx="88" cy="384" r="40"/>
+</g>
+<rect x="136" y="240" style="fill:#F4D35E;" width="224" height="72"/>
+<path style="fill:#EE964B;" d="M24,480v-24c0-8.84,7.16-16,16-16h96c8.84,0,16,7.16,16,16v24H24z"/>
+<g>
+	<rect x="112" y="232" style="fill:#3F3F3F;" width="272" height="16"/>
+	<polygon style="fill:#3F3F3F;" points="143.888,241.312 128.112,238.688 136.528,188.16 154.344,170.344 165.656,181.656 
+		151.472,195.84 	"/>
+	<rect x="320" y="264" style="fill:#3F3F3F;" width="16" height="16"/>
+	<rect x="288" y="264" style="fill:#3F3F3F;" width="16" height="16"/>
+	<rect x="256" y="264" style="fill:#3F3F3F;" width="16" height="16"/>
+</g>
+</svg>
