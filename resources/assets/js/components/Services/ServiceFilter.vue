@@ -10,6 +10,11 @@
 			/>
 		</div>
 		<div class="filter-container filter-category">
+			<a 
+				class="is-link is-extra-small-text" 
+				v-text="'Min kategori finns inte? '" 
+				@click="categoryDontExist"
+			/>
 			<app-multi-select 
 				placeholder="Kategorier"
 				:items="categories"
@@ -18,6 +23,11 @@
 			/>
 		</div>
 		<div class="filter-container filter-locations">
+			<a 
+				class="is-link is-extra-small-text" 
+				v-text="'Mitt område finns inte? '" 
+				@click="locationDontExist"
+			/>
 			<app-multi-select 
 				placeholder="Platser"
 				:items="regions"
@@ -57,6 +67,24 @@
 			},
 			citiesChanged({items}) {
 				this.$store.commit('SET_FILTER_CITIES', items);
+			},
+			categoryDontExist() {
+				this.$store.dispatch('openModal', {
+					component: 'feedback', 
+					data: {
+						closeClass: 'white',
+						subject: 'categoryDontExist'
+					}
+				});
+			},
+			locationDontExist() {
+				this.$store.dispatch('openModal', {
+					component: 'feedback', 
+					data: {
+						closeClass: 'white',
+						subject: 'locationDontExist'
+					}
+				});
 			}
 		}
 	}

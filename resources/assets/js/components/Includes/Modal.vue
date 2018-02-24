@@ -25,6 +25,7 @@
     import showUserBid from '../User/Services/ShowBidModal';
 	import confirm from './ConfirmModal';
 	import alert from './AlertModal';
+	import feedback from './FeedbackModal';
 
 	export default {
 		components: {
@@ -35,7 +36,8 @@
 			showBids,
 			confirm,
 			alert,
-			showUserBid
+			showUserBid,
+			feedback
 		},
 		data() {
 			return {

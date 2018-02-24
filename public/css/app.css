@@ -3344,6 +3344,20 @@ body.mobile-nav-open .overlay {
   border-bottom-right-radius: 6px;
 }
 
+.feedback-component .modal-body {
+  padding: 15px 30px 10px 30px !important;
+}
+
+.feedback-component .modal-footer {
+  text-align: right !important;
+}
+
+.feedback-question-answer-container {
+  background: #f6f9fc;
+  border-bottom: 1px solid #e6ebf1;
+  padding: 30px;
+}
+
 .hero {
   position: relative;
   -webkit-background: linear-gradient(-45deg, #009999, #00caca);
@@ -3633,13 +3647,19 @@ body.mobile-nav-open .overlay {
 }
 
 @media screen and (min-width: 768px) {
+  .service-filter-container {
+    padding: 1.5rem 0 3rem 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
   .service_filter-component {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;

@@ -2,13 +2,17 @@
 	background: #FFF;
 	padding: 3rem 0;
 	box-shadow: 0 0 20px 1px rgba(0,0,0,.2);
+
+	@media screen and (min-width: $screen-sm-min) {
+		padding: 1.5rem 0 3rem 0;
+	}
 }
 
 .service_filter-component {
 	
 	@media screen and (min-width: $screen-sm-min) {
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: center;
 		flex-wrap: wrap;
 	}
