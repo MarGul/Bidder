@@ -1,0 +1,118 @@
+.home-handle-service-steps-outer {
+    padding: 80px 0px 60px 0px;
+
+    &.create-service {
+        background: #FFF;
+    }
+
+    &.bid-on-service {
+        background: $body-bg;
+    }
+
+    &.after-match {
+        background: #FFF;
+    }
+
+    .handle-service-steps-heading-container {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 55px 0;
+        
+        span {
+            font-weight: 500;
+            font-size: 22px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid $brand-primary;
+        }
+    }
+
+    .handle-service-steps-container {
+
+        @media screen and (min-width: $screen-sm-min) {
+            display: flex;
+            margin: 0px -s15px;
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            margin: 0px -30px;
+        }
+
+        .handle-service-step  {
+            text-align: center;
+            margin-bottom: 40px;
+
+            @media screen and (min-width: $screen-sm-min) {
+                flex: 1;
+                margin-bottom: 0;
+                margin: 0 15px;
+            }
+
+            @media screen and (min-width: $screen-md-min) {
+                margin: 0 30px;
+            }
+
+            .handle-service-step-icon {
+                width: 75px;
+                height: 75px;
+                margin: 0 auto 30px auto;
+
+                &.icon-create-service {
+                    @include icon('../svg/home-create-service.svg');
+                }
+
+                &.icon-get-bids {
+                    @include icon('../svg/home-get-bids.svg');
+                }
+
+                &.icon-choose-service {
+                    @include icon('../svg/home-choose-service.svg');
+                }
+
+                &.icon-subscribe-on-services {
+                    @include icon('../svg/home-subscribe.svg');
+                }
+
+                &.icon-create-bids {
+                    @include icon('../svg/home-create-bids.svg');
+                }
+
+                &.icon-more-jobs {
+                    @include icon('../svg/home-more-jobs.svg');
+                }
+
+                &.icon-project-created {
+                    @include icon('../svg/home-project-created.svg');
+                }
+
+                &.icon-use-contract {
+                    @include icon('../svg/home-use-contract.svg');
+                }
+
+                &.icon-leave-review {
+                    @include icon('../svg/home-leave-review.svg');
+                }
+            }
+            
+            .handle-service-step-heading {
+                font-size: 16px;
+                margin: 0 0 20px 0;
+            }
+            
+            .handle-service-step-content {
+                font-size: 13px;
+                padding: 0 15px;
+                color: $gray-text;
+
+                @media screen and (min-width: $screen-sm-min) {
+                    padding: 0;
+                }
+
+                @media screen and (min-width: $screen-md-min) {
+                    padding: 0 15px;
+                }
+            }
+        }
+    }
+    
+    
+}

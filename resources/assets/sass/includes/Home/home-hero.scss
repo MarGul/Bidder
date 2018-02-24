@@ -17,12 +17,15 @@
 
 	.hh-left {
 		color: #fff;
-		text-shadow: 0 1px 1px rgba(0,0,0,0.3);
 
 		@media screen and (min-width: $screen-sm-min) {
 			flex: 1;
 		}
 
+		.hh-title {
+			line-height: 50px;
+		}
+		
 		.hh-content {
 			font-size: 18px;
 			margin: 40px 0;

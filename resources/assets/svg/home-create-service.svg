@@ -1,0 +1,36 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<rect style="fill:#EBEBD3;" width="480" height="480"/>
+<path style="fill:#EE964B;" d="M232,328l107.032,107.032c3.184,3.184,7.496,4.968,12,4.968l0,0C360.4,440,368,432.4,368,423.032l0,0
+	c0-4.504-1.784-8.816-4.968-12L256,304L232,328z"/>
+<circle style="fill:#F4D35E;" cx="168" cy="232" r="112"/>
+<path style="fill:#3F3F3F;" d="M168,352c-66.168,0-120-53.832-120-120s53.832-120,120-120s120,53.832,120,120S234.168,352,168,352z
+	 M168,128c-57.344,0-104,46.656-104,104s46.656,104,104,104s104-46.656,104-104S225.344,128,168,128z"/>
+<rect y="56" style="fill:#EE964B;" width="480" height="16"/>
+<rect x="104" y="184" style="fill:#70C1B3;" width="128" height="96"/>
+<g>
+	<path style="fill:#EE964B;" d="M200,464H72v-80h128V464z M88,448h96v-48H88V448z"/>
+	<rect x="304" y="128" style="fill:#EE964B;" width="112" height="16"/>
+	<rect x="304" y="160" style="fill:#EE964B;" width="112" height="16"/>
+	<rect x="304" y="192" style="fill:#EE964B;" width="112" height="16"/>
+	<rect x="304" y="256" style="fill:#EE964B;" width="112" height="16"/>
+	<rect x="304" y="288" style="fill:#EE964B;" width="112" height="16"/>
+	<rect x="320" y="320" style="fill:#EE964B;" width="96" height="16"/>
+	<rect x="392" y="384" style="fill:#EE964B;" width="24" height="16"/>
+	<rect x="392" y="416" style="fill:#EE964B;" width="24" height="16"/>
+	<rect x="392" y="448" style="fill:#EE964B;" width="24" height="16"/>
+	<circle style="fill:#EE964B;" cx="56" cy="32" r="8"/>
+	<circle style="fill:#EE964B;" cx="88" cy="32" r="8"/>
+	<circle style="fill:#EE964B;" cx="120" cy="32" r="8"/>
+	<path style="fill:#EE964B;" d="M104,184v32c0,8.84,7.16,16,16,16h96c8.84,0,16-7.16,16-16v-32H104z"/>
+</g>
+<g>
+	<path style="fill:#3F3F3F;" d="M200,184h-16v-16c0-4.408-3.592-8-8-8h-16c-4.408,0-8,3.592-8,8v16h-16v-16
+		c0-13.232,10.768-24,24-24h16c13.232,0,24,10.768,24,24V184z"/>
+	<rect x="160" y="232" style="fill:#3F3F3F;" width="16" height="16"/>
+</g>
+<g>
+	<path style="fill:#EE964B;" d="M168,392h-16v-16h-32v16h-16v-16c0-8.824,7.176-16,16-16h32c8.824,0,16,7.176,16,16V392z"/>
+	<rect x="128" y="416" style="fill:#EE964B;" width="16" height="16"/>
+</g>
+</svg>

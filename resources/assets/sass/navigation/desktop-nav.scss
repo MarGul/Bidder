@@ -64,15 +64,15 @@
 				padding: 0;
 				display: flex;
 				height: 100%;
+				margin-left: 30px;
 
 				li {
-					flex: 1;
-					text-align: center;
 
 					a {
 						display: flex;
 						align-items: center;
 						padding: 17px 12px;
+						margin: 0 7.5px;
 						color: $navbar-color;
 						font-weight: 500;
 						border-bottom: 2px solid transparent;
@@ -111,10 +111,6 @@
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-
-			@media screen and (min-width: $screen-lg-min) {
-				flex: 2;
-			}
 
 			.guest-actions {
 				margin: 12px 0;

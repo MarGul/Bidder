@@ -11,10 +11,13 @@
 					<nav class="desktop-navigation-container">
 						<ul class="desktop-navigation">
 							<li class="nav-item">
-								<router-link to="/services"><i class="icon icon_two_users wh15 light-gray mr10"></i> Sök tjänster</router-link>
+								<router-link to="/services">Hitta Tjänster</router-link>
 							</li>
 							<li class="nav-item">
-								<router-link to="/information"><i class="icon icon_question_mark wh15 light-gray mr10"></i> Information</router-link>
+								<router-link to="/user/create-service">Skapa Tjänst</router-link>
+							</li>
+							<li class="nav-item">
+								<router-link to="/about">Om GoBid</router-link>
 							</li>
 						</ul>
 					</nav>

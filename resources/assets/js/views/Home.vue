@@ -1,21 +1,29 @@
 <template>
 	<div class="home-view">
 
-		<app-home-hero></app-home-hero>
+		<app-home-hero />
 
-		<app-home-features></app-home-features>
+		<app-create-service-steps />
+
+		<app-bid-on-service-steps />
+
+		<app-after-match-steps />
 			
 	</div>
 </template>
 
 <script>
 	import appHomeHero from "../components/Home/HomeHero"; 
-	import appHomeFeatures from "../components/Home/HomeFeatures"; 
+	import appCreateServiceSteps from "../components/Home/CreateServiceSteps"; 
+	import appBidOnServiceSteps from "../components/Home/BidOnServiceSteps"; 
+	import appAfterMatchSteps from "../components/Home/AfterMatchSteps"; 
 
 	export default {
 		components: {
 			appHomeHero,
-			appHomeFeatures
+			appCreateServiceSteps,
+			appBidOnServiceSteps,
+			appAfterMatchSteps
 		}	
 	}
 </script>
