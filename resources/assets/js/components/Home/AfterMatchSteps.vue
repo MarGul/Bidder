@@ -1,5 +1,5 @@
 <template>
-    <div class="home-handle-service-steps-outer after-match">
+    <section class="home-handle-service-steps-outer after-match">
         <div class="container">
             <div class="handle-service-steps-heading-container">
                 <span>Vad händer sen?</span>
@@ -29,13 +29,13 @@
                     <h4 class="handle-service-step-heading">Lämna omdöme</h4>
                     <div class="handle-service-step-content">
                         När jobbet är slutfört så får ni möjligheten att betygsätta varandra. Med hjälp av vårt omdömessystem så
-                        kommer dåliga aktörer på plattformen att försvinna.
+                        blir det lättare att välja vem du vill arbeta med.
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+    </section>
 </template>
 
 <script>

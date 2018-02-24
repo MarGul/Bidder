@@ -1,5 +1,5 @@
 <template>
-    <div class="home-handle-service-steps-outer create-service">
+    <section class="home-handle-service-steps-outer create-service">
         <div class="container">
             <div class="handle-service-steps-heading-container">
                 <span>Vill du få en tjänst utförd?</span>
@@ -35,7 +35,7 @@
             </div>
 
         </div>
-    </div>
+    </section>
 </template>
 
 <script>

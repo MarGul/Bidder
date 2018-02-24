@@ -1,5 +1,5 @@
 .home-handle-service-steps-outer {
-    padding: 40px 0px 60px 0px;;
+    padding: 80px 0px 60px 0px;
 
     &.create-service {
         background: #FFF;
@@ -10,7 +10,7 @@
     }
 
     &.after-match {
-        background: darken($body-bg, 5%);
+        background: #FFF;
     }
 
     .handle-service-steps-heading-container {

@@ -1,5 +1,5 @@
 <template>
-    <div class="home-handle-service-steps-outer bid-on-service">
+    <section class="home-handle-service-steps-outer bid-on-service">
         <div class="container">
             <div class="handle-service-steps-heading-container">
                 <span>Vill du utföra tjänster?</span>
@@ -35,7 +35,7 @@
             </div>
 
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
