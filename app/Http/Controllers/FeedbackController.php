@@ -31,13 +31,12 @@ class FeedbackController extends Controller
     {
         $data = $this->validate($request, [
             'subject' => 'required',
-            'email' => auth()->check() ? 'required' : '',
+            'email' => 'required|email',
             'feedback' => 'required'
         ]);
 
         // Try to store the feedback
-        $this->manager->byUser($request->user())
-                      ->create($data);
+        $this->manager->create($data);
 
 
         if ( $this->manager->hasError() ) {

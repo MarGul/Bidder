@@ -14,7 +14,9 @@
 		<div class="modal-body">
 			<form @keydown="form.errors.clear()">
 
-				<div class="form-group" :class="{'has-error': form.errors.has('subject')}">
+				<div class="alert alert-danger" v-if="errorMessage" v-text="errorMessage" />
+                
+                <div class="form-group" :class="{'has-error': form.errors.has('subject')}">
 					<label for="subject" class="control-label">Ämne</label>
 					<select class="form-control" v-model="form.subject">
                         <option value="categoryDontExist">Min kategori finns inte</option>
@@ -27,7 +29,7 @@
 					<span class="help-block" v-if="form.errors.has('subject')" v-text="form.errors.get('subject')"></span>
 				</div>
                 
-                <div class="form-group" :class="{'has-error': form.errors.has('email')}" v-if="!authenticated">
+                <div class="form-group" :class="{'has-error': form.errors.has('email')}">
 					<label for="email" class="control-label">Email</label>
 					<input type="email" class="form-control" v-model="form.email">
 
@@ -48,7 +50,10 @@
 			<button 
                 type="submit"
                 class="btn btn-primary"
+                :class="{processing}"
+                :disabled="processing"
                 v-text="'Skicka feedback'"
+                @click.prevent="send"
             />
 		</div>
 
@@ -63,7 +68,8 @@
 	export default {
 		data() {
 			return {
-				processing: false,
+                processing: false,
+                errorMessage: '',
 				form: new Form({
                     subject: '',
                     email: '',
@@ -98,7 +104,6 @@
         },
         computed: {
             ...mapGetters({
-                authenticated: 'isAuthenticated',
                 data: 'modalData'
             }),
             question() {
@@ -106,7 +111,18 @@
             }
         },
 		methods: {
-			
+            send() {
+                this.processing = true;
+                new Model('feedback').post(this.form.data())
+                    .then(response => {
+                        this.$store.dispatch('closeModal');
+                        this.$store.dispatch('showNotification', {type: 'success', msg: 'Vi har tagit emot din feedback. Tack!'});
+                    })
+                    .catch(error => {
+                        this.form.errors.record(error.errors);
+                    })
+                    .finally(() => this.processing = false );
+            }
         },
         created() {
             this.form.subject = this.data.subject;
