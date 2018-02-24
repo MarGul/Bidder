@@ -36,6 +36,11 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::get('regions')->uses('RegionController@index');
 
 	/**
+	 * Handle Feedback
+	 */
+	Route::post('feedback')->uses('FeedbackController@store');
+
+	/**
 	 * Handle users
 	 */
 	Route::get('users/{user}/email')->uses('UserEmailController@index');

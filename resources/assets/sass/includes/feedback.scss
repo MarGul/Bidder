@@ -1,0 +1,16 @@
+.feedback-component {
+
+    .modal-body {
+        padding: 15px 30px 10px 30px !important;
+    }
+
+    .modal-footer {
+        text-align: right !important;
+    }
+}
+
+.feedback-question-answer-container {
+    background: #f6f9fc;
+    border-bottom: 1px solid $border-color-gray;
+    padding: 30px;
+}
