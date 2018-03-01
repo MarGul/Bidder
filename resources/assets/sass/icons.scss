@@ -26,6 +26,10 @@
 		background-color: $light-icon-color;
 	}
 
+	&.extra-light-gray {
+		background-color: #C8C8C4;
+	}
+
 	&.white {
 		background-color: #fff !important;
 	}
@@ -187,6 +191,22 @@
 
 
 /* Customs */
+.icon_facebook-2 {
+	@include mask-icon('../svg/facebook.svg');
+}
+
+.icon_twitter {
+	@include mask-icon('../svg/twitter.svg');
+}
+
+.icon_email {
+	@include mask-icon('../svg/email.svg');
+}
+
+.icon_linkedin {
+	@include mask-icon('../svg/linkedin.svg');
+}
+
 .confirm_modal_icon {
 	@include icon('../svg/question_mark_bordered.svg');
 	width: 150px;

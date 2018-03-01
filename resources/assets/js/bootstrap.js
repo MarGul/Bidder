@@ -10,6 +10,12 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 /**
+ * Tell Vue to use the social sharing package
+ */
+let SocialSharing = require('vue-social-sharing');
+Vue.use(SocialSharing);
+
+/**
  * Global Vue components
  */
 Vue.component('app-hero', require('./components/Includes/Hero'));

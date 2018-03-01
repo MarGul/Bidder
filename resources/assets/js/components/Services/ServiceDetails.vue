@@ -29,6 +29,29 @@
 				</div>
 			</div>
 			<div class="white-contentSection-content service-description" v-text="service.description"></div>
+			
+			<social-sharing 
+				:url="url"
+				:title="service.title"
+				description="Skulle du kunna utföra denna tjänsten? Gå in och buda."
+				inline-template
+			>
+				<div class="social-share-container">
+					<network network="facebook">
+						<i class="icon icon_facebook-2 wh15 extra-light-gray mr10" title="Dela på facebook"></i>
+					</network>
+					<network network="linkedin">
+						<i class="icon icon_linkedin wh15 extra-light-gray mr10" title="Dela på LinkedIn"></i>
+					</network>
+					<network network="twitter">
+						<i class="icon icon_twitter wh15 extra-light-gray mr10" title="Dela på Twitter"></i>
+					</network>
+					<network network="email">
+						<i class="icon icon_email wh15 extra-light-gray" title="Skicka som email"></i>
+					</network>
+				</div>
+			</social-sharing>
+			
 		</section>
 		<service-media :media="service.media" v-if="service.media.length > 0" />
 	</div>
@@ -56,6 +79,9 @@
 				let city = this.$store.getters.cityById(this.service.city_id);
 				let region = this.$store.getters.regionById(this.service.region_id);
 				return region && city ? `${city.name}, ${region.name}` : '';
+			},
+			url() {
+				return `${window.location.origin}/services/${this.service.id}`;
 			}
 		}
 	}
