@@ -20,17 +20,6 @@
                             Att lägga ut din tjänst på GoBid är ett utmärkt sätt för att slippa kontakta en massa olika företag och få in offerter.
                             Du lägger ut din tjänst och sen låter du företag lägga bud på att få utföra tjänsten.
                         </p>
-                        <p>
-                            När budgivningen är slut så är du i full kontroll själv. Du kan välja vilket av buden som passar dig bäst. Eller kanske
-                            du inte fick något bud som passade dig? Därför är det helt riskfritt att lägga ut en tjänst på GoBid.
-                        </p>
-                        <p>
-                            Om du accepterar ett bud så kommer ett projekt att skapas mellan dig och företaget. Här har ni 14 dagar på er att starta
-                            projektet. Detta gör att ni kan träffas och lära känna varandra lite bättre innan ni sätter igång.
-                        </p>
-                        <p>
-                            Om projektet är lite större kan du använda GoBid's avtal för att känna extra trygghet.
-                        </p>
                         <p class="mt30 mb30">
                             Innan du kan skapa en tjänst så behöver du registrera dig. Det är helt kostnadsfritt och tar inte mer än 60 sekunder.
                         </p>
