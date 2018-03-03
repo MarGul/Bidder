@@ -34,7 +34,7 @@
 						<div class="detail-value" v-text="filters.commaSeparator(bid.hours)"></div>
 					</li> 
 					<li>
-						<div class="detail-item">Pris</div>
+						<div class="detail-item">Totalpris</div>
 						<div class="detail-value" v-text="filters.currency(bid.price)"></div>
 					</li>
 				</ul> 

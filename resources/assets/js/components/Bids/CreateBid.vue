@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="control-container flex-1-sm ml10-sm" :class="{'has-errors': form.errors.has('price')}">
-                                <label class="control-label">Pris <span class="req">*</span></label>
+                                <label class="control-label">Totalpris <span class="req">*</span></label>
                                 <input 
                                     type="text" 
                                     class="form-control" 
