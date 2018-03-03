@@ -50,7 +50,7 @@ let routes = [
 			{ path: 'bids', name: 'serviceBids', component: require('./components/Services/ServiceDetailsBids') }
 		]
 	},
-	{ path: "/information", name: 'information', component: require('./views/Information') },
+	{ path: "/about", name: 'about', component: require('./views/About') },
 	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
 	{ path: "/user", component: require('./views/User'),
 		children: [

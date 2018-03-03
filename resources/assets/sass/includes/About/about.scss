@@ -1,0 +1,82 @@
+.team-container {
+    padding: 60px 0;
+
+    .page-heading {
+        margin: 0 0 30px 0;
+    }
+
+    .the-team {
+        
+        @media screen and (min-width: $screen-sm-min) {
+            width: 60%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .member-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            
+            &:first-child {
+                margin-bottom: 50px;
+
+                @media screen and (min-width: $screen-sm-min) {
+                    margin: 0 30px;
+                }
+
+                @media screen and (min-width: $screen-md-min) {
+                    margin: 0 50px;
+                }
+            }
+
+            @media screen and (min-width: $screen-sm-min) {
+                margin: 0 30px;
+            }
+
+            @media screen and (min-width: $screen-md-min) {
+                margin: 0 50px;
+            }
+
+            .member-image {
+                margin-bottom: 20px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+                background-image: url('/images/marcus.jpg');
+            }
+
+            .member-name {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.about-container {
+    background: #FFF;
+    padding: 60px 0;
+    text-align: center;
+
+    .about-text-container {
+
+        @media screen and (min-width: $screen-sm-min) {
+            width: 60%;
+            margin: 0 auto;
+        }
+    }
+
+    .ul-keywords {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 5px 0;
+        }
+    }
+}

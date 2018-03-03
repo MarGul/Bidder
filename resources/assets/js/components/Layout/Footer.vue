@@ -11,10 +11,10 @@
 					<div class="f__callout-heading">GoBid</div>
 					<ul class="f__links">
 						<li>
-							<a href="#">Om GoBid</a>
+							<router-link to="/about">Om GoBid</router-link>
 						</li>
 						<li>
-							<a href="#">Hur fungerar det?</a>
+							<router-link to="/faq">Frågor &amp; svar</router-link>
 						</li>
 						<li>
 							<a href="#">Almänna vilkor</a>

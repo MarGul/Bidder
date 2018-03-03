@@ -1117,6 +1117,10 @@ body {
   color: #97A9B5;
 }
 
+.page-heading {
+  color: #009999;
+}
+
 .btn-modern {
   border-radius: 3px;
   text-transform: uppercase;
@@ -3141,6 +3145,106 @@ body.mobile-nav-open .overlay {
   .welcome-action-buttons .btn-divider {
     margin: 0 15px;
   }
+}
+
+.team-container {
+  padding: 60px 0;
+}
+
+.team-container .page-heading {
+  margin: 0 0 30px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .team-container .the-team {
+    width: 60%;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.team-container .the-team .member-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.team-container .the-team .member-container:first-child {
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .team-container .the-team .member-container:first-child {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .team-container .the-team .member-container:first-child {
+    margin: 0 50px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .team-container .the-team .member-container {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .team-container .the-team .member-container {
+    margin: 0 50px;
+  }
+}
+
+.team-container .the-team .member-container .member-image {
+  margin-bottom: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("/images/marcus.jpg");
+}
+
+.team-container .the-team .member-container .member-name {
+  margin: 0;
+}
+
+.about-container {
+  background: #FFF;
+  padding: 60px 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .about-container .about-text-container {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+.about-container .ul-keywords {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-container .ul-keywords li {
+  margin: 5px 0;
 }
 
 .one-notification {
