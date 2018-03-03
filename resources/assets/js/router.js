@@ -51,6 +51,7 @@ let routes = [
 		]
 	},
 	{ path: "/about", name: 'about', component: require('./views/About') },
+	{ path: "/faq", name: 'faq', component: require('./views/Faq') },
 	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
 	{ path: "/user", component: require('./views/User'),
 		children: [

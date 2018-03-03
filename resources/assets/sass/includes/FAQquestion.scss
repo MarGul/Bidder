@@ -1,0 +1,28 @@
+.faq-view {
+
+    .content {
+
+        @media screen and (min-width: $screen-md-min) {
+            padding: 40px 150px;
+        }
+    }
+}
+
+.faq-question {
+    background: #FFF;
+    box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+    border-radius: 4px;
+    margin-bottom: 30px;
+
+    .question-header {
+        padding: 7px 15px;
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1px solid $border-color-gray;
+        color: $brand-primary;
+    }
+
+    .question-body {
+        padding: 15px 15px 10px 15px;
+    }
+}
