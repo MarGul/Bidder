@@ -7,7 +7,8 @@
 						<router-link to="/services">Hitta tjänster</router-link>
 					</li>
 					<li class="nav-item">
-						<router-link to="/user/create-service">Skapa Tjänst</router-link>
+						<router-link to="/user/create-service" v-if="$store.getters.isAuthenticated">Skapa Tjänst</router-link>
+						<router-link to="/how-to-create-service" v-else>Skapa Tjänst</router-link>
 					</li>
 					<li v-if="$store.getters.isAuthenticated" class="user-mobile-nav">
 						<router-link to="/user/profile" tag="div" class="mobile-nav-highlight">

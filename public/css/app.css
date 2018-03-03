@@ -618,6 +618,12 @@ a {
   padding: 40px 0;
 }
 
+@media screen and (min-width: 992px) {
+  .content.smaller-content {
+    padding: 40px 150px;
+  }
+}
+
 .white-container {
   background: #fff;
   -webkit-box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
@@ -1102,6 +1108,10 @@ body {
 
 .is-extra-small-text {
   font-size: 12px !important;
+}
+
+.is-large-text {
+  font-size: 18px;
 }
 
 .warning-color {
@@ -2744,7 +2754,7 @@ body.mobile-nav-open .overlay {
 }
 
 .home_hero-component .hh-left .hh-title {
-  line-height: 50px;
+  line-height: 40px;
 }
 
 .home_hero-component .hh-left .hh-content {
