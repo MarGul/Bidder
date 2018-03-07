@@ -14,7 +14,8 @@
 								<router-link to="/services">Hitta Tjänster</router-link>
 							</li>
 							<li class="nav-item">
-								<router-link to="/user/create-service">Skapa Tjänst</router-link>
+								<router-link to="/user/create-service" v-if="$store.getters.isAuthenticated">Skapa Tjänst</router-link>
+								<router-link to="/how-to-create-service" v-else>Skapa Tjänst</router-link>
 							</li>
 							<li class="nav-item">
 								<router-link to="/about">Om GoBid</router-link>

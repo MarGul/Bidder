@@ -1,11 +1,12 @@
 <template>
 	<div class="services-view">
 		<app-hero>
-			<h1 slot="title">Tjänster</h1>
+			<h1 slot="title">Hitta tjänster</h1>
 			<p slot="left">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, nesciunt aspernatur fugiat! Sequi impedit reiciendis, ratione, id aperiam iusto, nulla, provident pariatur qui earum magnam nobis eligendi optio dolores debitis.
+				Sök efter tjänster nedan. Är du bara intresserad av en viss kategori eller ett visst område? Använd
+				filtreringsfunktionen för att hitta tjänsterna just för dig.
 			</p>
-			<img slot="right" src="mechanic.png" alt="">
+			<img slot="right" src="/images/mechanic.png" alt="">
 		</app-hero>
 
 		<div class="service-filter-container">

@@ -40,6 +40,12 @@ a {
 
 .content {
 	padding: 40px 0;
+
+	&.smaller-content {
+		@media screen and (min-width: $screen-md-min) {
+			padding: 40px 150px;
+		}
+	}
 }
 
 .white-container {

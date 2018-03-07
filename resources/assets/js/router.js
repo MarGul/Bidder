@@ -50,7 +50,10 @@ let routes = [
 			{ path: 'bids', name: 'serviceBids', component: require('./components/Services/ServiceDetailsBids') }
 		]
 	},
-	{ path: "/information", name: 'information', component: require('./views/Information') },
+	{ path: "/about", name: 'about', component: require('./views/About') },
+	{ path: "/faq", name: 'faq', component: require('./views/Faq') },
+	{ path: "/terms", name: 'terms', component: require('./views/Terms') },
+	{ path: "/how-to-create-service", name: 'howToCreateService', component: require('./views/HowToCreateService') },
 	{ path: "/profile/:username", name: 'profile', component: require('./views/Profile')},
 	{ path: "/user", component: require('./views/User'),
 		children: [

@@ -29,7 +29,7 @@
 				@click="locationDontExist"
 			/>
 			<app-multi-select 
-				placeholder="Platser"
+				placeholder="Områden"
 				:items="regions"
 				multiKey="cities"
 				@changed="citiesChanged"
