@@ -3236,7 +3236,6 @@ body.mobile-nav-open .overlay {
 
 .about-container {
   background: #FFF;
-  padding: 60px 0;
   text-align: center;
 }
 
@@ -3560,12 +3559,6 @@ body.mobile-nav-open .overlay {
   -ms-flex-item-align: center;
       align-self: center;
   text-align: center;
-}
-
-@media screen and (min-width: 992px) {
-  .faq-view .content {
-    padding: 40px 150px;
-  }
 }
 
 .faq-question {

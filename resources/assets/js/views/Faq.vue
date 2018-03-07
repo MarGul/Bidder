@@ -10,7 +10,7 @@
 		</app-hero>
 
         <div class="container">
-            <div class="content">
+            <div class="content smaller-content">
                 
                 <app-faq-question>
                     <span slot="question">Vad är GoBid?</span>
