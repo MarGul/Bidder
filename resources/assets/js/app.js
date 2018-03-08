@@ -15,6 +15,16 @@ import store from './store/store';
  */
 import router from './router';
 /**
+ * Use Google Analytics
+ */
+import VueAnalytics from 'vue-analytics';
+
+Vue.use(VueAnalytics, {
+    id: 'UA-115412960-1',
+    router
+});
+
+/**
  * Create the Vue instance.
  */
 const app = new Vue({
