@@ -52,6 +52,7 @@
 							v-text="`Logga in`"
 						/>
 						<a 
+							v-ga="$ga.commands.registerOpened.bind(this, 'Mobile Nav Button')"
 							@click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})" 
 							class="btn btn-primary"
 							v-text="`Registrera`"

@@ -86,6 +86,10 @@
 
 				new Model('register').new().post(this.form.data())
 					.then(response => {
+						// Notify Google Analytics about the signup
+						let analyticsLabel = response.user.company ? 'Company User' : 'Person User';
+						this.$ga.event('Sign Up', 'User Signup', analyticsLabel);
+						
 						this.$store.commit('SET_AUTHENTICATED',  true);
 						this.$store.commit('SET_AUTHENTICATED_USER', response.user);
 						this.$store.dispatch('closeModal');

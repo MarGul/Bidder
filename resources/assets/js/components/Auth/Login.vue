@@ -51,7 +51,13 @@
 		</div>
 
 		<div class="modal-footer">
-			Har du inte ett konto än? <a class="is-link" @click="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})">Registrera</a>
+			Har du inte ett konto än? 
+			<a 
+				class="is-link" 
+				v-ga="$ga.commands.registerOpened.bind(this, 'Login Modal Link')"
+				@click="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})"
+				v-text="'Registrera'"
+			/>
 		</div>
 
 	</div>
