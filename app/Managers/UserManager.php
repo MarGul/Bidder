@@ -77,7 +77,7 @@ class UserManager extends BaseManager
 		]);
 
 		// Create the users notifications entry
-		app(NotificationSettingsManager::class)->forUser($this->user)->create();
+		app(NotificationSettingsManager::class)->byUser($this->user)->create();
 		
 		// Send out email for confirming the users email adress
 		Notification::send($this->user, new EmailVerification($this->user));

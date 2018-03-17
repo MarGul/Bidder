@@ -84,14 +84,38 @@
 			register() {
 				this.processing = true;
 
+				let userType = this.form.company ? 'Company User' : 'Person User';
+				// Send the register submission request to GA
+				this.$ga.event('Login and Signup', 'Signup Submit', 'Onsite', {
+					nonInteraction: false,
+					dimension2: userType,
+					metric3: 1
+				});
+
 				new Model('register').new().post(this.form.data())
 					.then(response => {
 						this.$store.commit('SET_AUTHENTICATED',  true);
 						this.$store.commit('SET_AUTHENTICATED_USER', response.user);
+						
+						// Send the successful registration to GA
+						this.$ga.event('Login and Signup', 'Signup Success', 'Onsite', {
+							nonInteraction: false,
+							dimension1: response.user.id,
+							dimension2: userType,
+							metric1: 1
+						});
+					
 						this.$store.dispatch('closeModal');
 						this.$router.push('/welcome');
 					})
 					.catch((error) => {
+						// Send the failed attempt to GA
+						this.$ga.event('Login and Signup', 'Signup Fail', `Onsite :${JSON.stringify(error.errors)}`, {
+							nonInteraction: false,
+							dimension2: userType,
+							metric2: 1
+						});
+
 						this.form.errors.record(error.errors);
 						this.processing = false;
 					});

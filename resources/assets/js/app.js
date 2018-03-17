@@ -18,10 +18,15 @@ import router from './router';
  * Use Google Analytics
  */
 import VueAnalytics from 'vue-analytics';
+import trackingCommands from './trackingCommands';
 
 Vue.use(VueAnalytics, {
     id: 'UA-115412960-1',
-    router
+    router,
+    commands: trackingCommands,
+    debug: {
+        enabled: true
+    }
 });
 
 /**

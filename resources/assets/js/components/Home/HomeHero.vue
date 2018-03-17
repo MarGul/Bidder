@@ -27,6 +27,7 @@
 							<button 
 								class="btn btn-orange" 
 								v-text="'Registrera dig'"
+								v-ga="$ga.commands.registerOpened.bind(this, 'Home Hero Button')"
 								@click="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})"
 								v-else
 							/>

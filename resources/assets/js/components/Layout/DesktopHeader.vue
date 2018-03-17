@@ -31,6 +31,7 @@
 							/>
 							<a 
 								class="btn btn-primary" 
+								v-ga="$ga.commands.registerOpened.bind(this, 'Desktop Nav Button')"
 								@click.prevent="$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}})"
 								v-text="'Registrera'"
 							/>

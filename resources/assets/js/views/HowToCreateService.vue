@@ -24,9 +24,13 @@
                             Innan du kan skapa en tjänst så behöver du registrera dig. Det är helt kostnadsfritt och tar inte mer än 60 sekunder.
                         </p>
                         <p class="text-center">
-                            <button type="button" class="btn btn-primary is-large-text" @click="register">
-                                Skapa ett konto
-                            </button>
+                            <button 
+                                type="button" 
+                                class="btn btn-primary is-large-text" 
+                                v-ga="$ga.commands.registerOpened.bind(this, 'How To Create Service Page Button')"
+                                @click="$store.dispatch('openModal', {component: 'register', data: { closeClass: 'white' }})"
+                                v-text="'Skapa ett konto'"   
+                            />
                         </p>
                     </div>
                 </section>
@@ -43,11 +47,6 @@ import appCreateServiceSteps from '../components/Home/CreateServiceSteps';
 export default {
     components: {
         appCreateServiceSteps
-    },
-    methods: {
-        register() {
-            this.$store.dispatch('openModal', {component: 'register', data: { closeClass: 'white' }});
-        }
     }
 }
 </script>

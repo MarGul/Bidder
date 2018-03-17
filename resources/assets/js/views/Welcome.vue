@@ -15,7 +15,20 @@
                                     <h3>Verifiera din email</h3>
                                 </header>
                                 <div class="gray-contentSection-content">
-                                    Innan du kan börja använda GoBid till fullo så behöver du verifiera din email adress som du använde när du registrerade dig. Detta är för din, våran och våra användares säkerhet.
+                                    <p>
+                                        Innan du kan börja använda GoBid till fullo så behöver du verifiera din email adress som du använde när du 
+                                        registrerade dig. Detta är för din, våran och våra användares säkerhet.
+                                    </p>
+                                    <p>
+                                        <strong>Fick du inte mailet?</strong> Kolla i ditt spamfilter om mailet finns där. Har du fortfarande inte 
+                                        fått mailet så var vänlig att 
+                                        <span 
+                                            class="is-link" 
+                                            @click="$store.dispatch('openModal', {component: 'feedback', data: {closeClass: 'white',subject: 'bugg'}})"
+                                            v-text="'kontakta oss'"
+                                        />.
+                                    </p>
+                                    
                                 </div>
                                 <div class="white-contentSection-content">
                                     <app-email-verified />
@@ -37,7 +50,7 @@
                                 <div class="gray-contentSection-content">
                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praese
                                 </div>
-                                <div class="white-contentSection-content">
+                                <div class="white-contentSection-content">      
                                     <div class="account-container">
                                         <app-account :showEmailVerified="false" :withHTMLMarkup="false" />
                                         <app-profile-picture />

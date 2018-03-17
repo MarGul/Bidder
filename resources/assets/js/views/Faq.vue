@@ -23,7 +23,7 @@
                 <app-faq-question>
                     <span slot="question">Hur blir jag medlem?</span>
                     <p slot="answer">
-                        Du blir enkelt medlem hos oss genom att skapa en profil <span class="is-link" @click="register">här</span>. 
+                        Du blir enkelt medlem hos oss genom att skapa en profil <span class="is-link" @click="register('How To Register')">här</span>. 
                         Det tar 1 minut och efter det så kan du antingen skapa den tjänst som du vill ha utförd eller hitta en 
                         uppgift som passar just dig.
                     </p>
@@ -84,7 +84,7 @@
                 <app-faq-question>
                     <span slot="question">Hur lägger jag upp en tjänst?</span>
                     <p slot="answer">
-                        För att skapa en tjänst så behöver du först <span class="is-link" @click="register">registrera</span> dig om du inte gjort det än. 
+                        För att skapa en tjänst så behöver du först <span class="is-link" @click="register('How To Create Service')">registrera</span> dig om du inte gjort det än. 
                         När du har registrerat dig och loggat in kan du trycka på länken "Skapa tjänst" uppe i menyn. Du följer sedan instruktionerna om 
                         vad som behöver finnas med i tjänsten.  
                     </p>
@@ -153,7 +153,8 @@ export default {
         appFaqQuestion
     },
     methods: {
-        register() {
+        register(question) {
+            this.$ga.event('Sign Up', 'Register Modal Opened', `${question} Question Link`);
             this.$store.dispatch('openModal', {component: 'register', data: {closeClass: 'white'}});
         },
         feedback(component) {
