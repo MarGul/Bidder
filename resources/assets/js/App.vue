@@ -40,8 +40,6 @@
     import Model from './includes/Model';
     import RealTimeEvents from './realTimeEvents';
 
-    //import { fetchCategories } from './data/test';
-
     export default {
         components: {
             appMobileHeader,
@@ -66,8 +64,13 @@
                 if ( newAuth ) {
                     // If the user logs in we need to start listening for he's real time events.
                     RealTimeEvents.listenAuth();
+                    // If the user logs in we set his userId for GA
+                    this.$ga.set('userId', this.$store.getters.authUser.id);
 
                     this.$store.dispatch('getNotifications');
+                } else {
+                    // If the user logs out we need to remove the userId for GA
+                    this.$ga.set('userId', '');
                 }
             }
         }, 
@@ -89,7 +92,11 @@
 
             RealTimeEvents.listen(); 
             
-            if ( this.authenticated ) this.$store.dispatch('getNotifications');
+            if ( this.authenticated ) {
+                // Set the userId for GA
+                this.$ga.set('userId', this.$store.getters.authUser.id);
+                this.$store.dispatch('getNotifications');
+            }
 
             // Start the applications heartbeat
             setInterval(function() {

@@ -4,6 +4,6 @@
 
  export default {
      registerOpened(label = 'unknown') {
-         this.$ga.event('Sign Up', 'Register Modal Opened', label);
+         this.$ga.event('Login and Signup', 'Register Modal Opened', label);
      }
  }
