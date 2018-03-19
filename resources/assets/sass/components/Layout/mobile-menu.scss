@@ -1,0 +1,38 @@
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: $navbar-bg;
+    width: 265px;
+    max-width: 95%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 60000;
+    transform: translateX(-265px);
+    transition: transform .5s;
+
+    &:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        right: -15px;
+        top: 0;
+        height: 100%;
+        width: 15px;
+        background: transparent;
+        z-index: 1000;
+        box-shadow: 0 0 15px rgba(0,0,0,.8);
+    }
+}
+
+body.mobile-menu-open {
+
+    .mobile-menu {
+        max-height: 480px;
+        transform: translateX(0);
+    }
+}
