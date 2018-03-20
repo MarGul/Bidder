@@ -17,33 +17,15 @@
                     <div class="auth-name">{{ user.username }}</div>
                 </router-link>
                 <ul class="user-mobile-sub-nav">
-                    <li>
-                        <router-link to="/user/profile" @click.native="closeMenu">Profil</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/notifications" @click.native="closeMenu">Notifikationer</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/create-service" @click.native="closeMenu">Skapa ny tjänst</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/services" @click.native="closeMenu">Mina tjänster</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/bids" @click.native="closeMenu">Mina bud</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/projects" @click.native="closeMenu">Mina projekt</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/subscruptions" @click.native="closeMenu">Prenumerationer</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/invoices" @click.native="closeMenu">Betalningar</router-link>
-                    </li>
-                    <li>
-                        <a @click="logout">Logga ut</a>
-                    </li>
+                    <li><router-link to="/user/profile" @click.native="closeMenu">Profil</router-link></li>
+                    <li><router-link to="/user/notifications" @click.native="closeMenu">Notifikationer</router-link></li>
+                    <li><router-link to="/user/create-service" @click.native="closeMenu">Skapa ny tjänst</router-link></li>
+                    <li><router-link to="/user/services" @click.native="closeMenu">Mina tjänster</router-link></li>
+                    <li><router-link to="/user/bids" @click.native="closeMenu">Mina bud</router-link></li>
+                    <li><router-link to="/user/projects" @click.native="closeMenu">Mina projekt</router-link></li>
+                    <li><router-link to="/user/subscruptions" @click.native="closeMenu">Prenumerationer</router-link></li>
+                    <li><router-link to="/user/invoices" @click.native="closeMenu">Betalningar</router-link></li>
+                    <li><a @click="logout">Logga ut</a></li>
                 </ul>
             </li>
             <li class="mobile-nav-highlight is-flex c_c py-15" v-else>
