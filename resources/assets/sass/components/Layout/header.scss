@@ -3,11 +3,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0 15px;
+    padding: 5px 15px;
     box-sizing: border-box;
     z-index: 50000;
     background: $navbar-bg;
     transition: transform .5s;
+    display: flex;
+    align-items: center;
+    border-top: 2px solid $brand-primary;
 
     .mobile-menu-toggle {
         display: flex;
@@ -37,6 +40,22 @@
         span:after {
             bottom: -6px;
         }
+    }
+
+    .logo-container {
+        flex: 1;
+        display: flex; 
+        justify-content: center;
+        padding: 5px 0;
+
+        img {
+            height: 30px;
+        }
+    }
+
+    .header-actions {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 

@@ -2130,7 +2130,7 @@ label.radio-btn input[type=radio] {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0 15px;
+  padding: 5px 15px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   z-index: 50000;
@@ -2139,6 +2139,13 @@ label.radio-btn input[type=radio] {
   transition: -webkit-transform .5s;
   transition: transform .5s;
   transition: transform .5s, -webkit-transform .5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-top: 2px solid #009999;
 }
 
 .site-header .mobile-menu-toggle {
@@ -2176,6 +2183,32 @@ label.radio-btn input[type=radio] {
 
 .site-header .mobile-menu-toggle span:after {
   bottom: -6px;
+}
+
+.site-header .logo-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 5px 0;
+}
+
+.site-header .logo-container img {
+  height: 30px;
+}
+
+.site-header .header-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 body.mobile-menu-open .site-header {
@@ -2239,8 +2272,117 @@ body.mobile-menu-open .mobile-menu-toggle span:after {
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
+.mobile-menu .mobile-navigation {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu .mobile-navigation .nav-item a {
+  display: block;
+  background: transparent;
+  padding: 15px 25px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  color: #fdfdfe;
+  border-top: 1px solid #404c5a;
+  border-bottom: 1px solid #222830;
+  text-decoration: none !important;
+}
+
+.mobile-menu .mobile-navigation .nav-item a.active {
+  background: #009999;
+}
+
+.mobile-menu .mobile-navigation .mobile-nav-highlight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 15px;
+  border-top: 1px solid #404c5a;
+  border-bottom: 1px solid #222830;
+}
+
+.mobile-menu .mobile-navigation .mobile-nav-highlight .auth-avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #009999;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.mobile-menu .mobile-navigation .mobile-nav-highlight .auth-name {
+  padding-left: 15px;
+  color: #fff;
+  font-weight: 500;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.mobile-menu .mobile-navigation .user-mobile-sub-nav {
+  list-style-type: none;
+  border-left: 3px solid #009999;
+  padding: 10px 0 10px 60px;
+  position: relative;
+  background-color: #2d353f;
+}
+
+.mobile-menu .mobile-navigation .user-mobile-sub-nav:before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 10px;
+  bottom: 24px;
+  width: 1px;
+  background-color: #465363;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-menu .mobile-navigation .user-mobile-sub-nav:before {
+    bottom: 26px;
+  }
+}
+
+.mobile-menu .mobile-navigation .user-mobile-sub-nav li a {
+  color: #FFF;
+  display: block;
+  padding: 3px 0;
+  position: relative;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-menu .mobile-navigation .user-mobile-sub-nav li a {
+    padding: 5px 0;
+  }
+}
+
+.mobile-menu .mobile-navigation .user-mobile-sub-nav li a.active {
+  background-color: transparent;
+  color: #009999;
+  font-weight: bold;
+}
+
+.mobile-menu .mobile-navigation .user-mobile-sub-nav li a:before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 14px;
+  height: 1px;
+  width: 20px;
+  background-color: #465363;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-menu .mobile-navigation .user-mobile-sub-nav li a:before {
+    top: 16px;
+  }
+}
+
 body.mobile-menu-open .mobile-menu {
-  max-height: 480px;
+  max-height: 100vh;
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
@@ -3540,7 +3682,7 @@ body.mobile-nav-open .overlay {
 
 .modal-mask {
   position: fixed;
-  z-index: 9999;
+  z-index: 70000;
   top: 0;
   left: 0;
   bottom: 0;

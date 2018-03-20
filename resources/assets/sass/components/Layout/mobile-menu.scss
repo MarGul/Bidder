@@ -27,12 +27,118 @@
         z-index: 1000;
         box-shadow: 0 0 15px rgba(0,0,0,.8);
     }
+
+    .mobile-navigation {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        .nav-item {
+
+            a {
+                display: block;
+                background: transparent;
+                padding: 15px 25px;
+                text-transform: uppercase;
+                text-shadow: 0 1px 1px rgba(0,0,0,.5);
+                color: $navbar-color;
+                border-top: 1px solid lighten($navbar-bg, 7%);
+                border-bottom: 1px solid darken($navbar-bg, 7%);
+                text-decoration: none !important;
+
+                &.active {
+                    background: $brand-primary;
+                }
+            }
+        }
+
+        .mobile-nav-highlight {
+            display: flex;
+            padding: 10px 15px;
+            border-top: 1px solid lighten($navbar-bg, 7%);
+            border-bottom: 1px solid darken($navbar-bg, 7%);
+    
+            .auth-avatar {
+                width: 40px;
+                height: 40px;
+                border: 2px solid $brand-primary;
+                border-radius: 50%;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+            }
+    
+            .auth-name {
+                padding-left: 15px;
+                color: #fff;
+                font-weight: 500;
+                align-self: center;
+            }
+        }
+    
+        .user-mobile-sub-nav {
+            list-style-type: none;
+            border-left: 3px solid $brand-primary;
+            padding: 10px 0 10px 60px;
+            position: relative;
+            background-color: darken($navbar-bg, 2%);
+    
+            &:before {
+                content: "";
+                position: absolute;
+                left: 30px;
+                top: 10px;
+                bottom: 24px;
+                width: 1px;
+                background-color: lighten($navbar-bg, 10%);
+    
+                @media screen and (min-width: $screen-sm-min) {
+                    bottom: 26px;
+                }
+            }
+    
+            li {
+    
+                a {
+                    color: #FFF;
+                    display: block;
+                    padding: 3px 0;
+                    position: relative;
+                    line-height: 22px;
+    
+                    @media screen and (min-width: $screen-sm-min) {
+                        padding: 5px 0;
+                    }
+    
+                    &.active {
+                        background-color: transparent;
+                        color: $brand-primary;
+                        font-weight: bold;
+                    }
+    
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        left: -30px;
+                        top: 14px;
+                        height: 1px;
+                        width: 20px;
+                        background-color: lighten($navbar-bg, 10%);
+    
+                        @media screen and (min-width: $screen-sm-min) {
+                            top: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 body.mobile-menu-open {
 
     .mobile-menu {
-        max-height: 480px;
+        max-height: 100vh;
         transform: translateX(0);
     }
 }
