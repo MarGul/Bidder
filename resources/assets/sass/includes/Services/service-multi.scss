@@ -29,6 +29,7 @@
             
             &.timer {
                 text-align: right;
+                flex: 2;
             }
         }
     }
@@ -45,15 +46,15 @@
         }
 
         .multi-info {
-            
+            display: flex;
+            align-items: center;
+
             &.category {
-                margin-bottom: 5px;
+                margin-bottom: 15px;
             }
 
             @media screen and (min-width: $screen-md-min) {
                 flex: 1;
-                display: flex;
-                align-items: center;
                 justify-content: center;
 
                 &.category {
