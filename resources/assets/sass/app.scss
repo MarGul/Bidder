@@ -47,8 +47,10 @@
 @import 'includes/InputControls/checkbox.scss';
 @import 'includes/InputControls/multi-select.scss';
 
+// Header and navigation
 @import 'components/Layout/header.scss';
 @import 'components/Layout/mobile-menu.scss';
+@import 'components/Layout/notifications-dropdown.scss';
 
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";
@@ -56,7 +58,6 @@
 // Desktop Navigation
 @import "navigation/desktop-nav.scss";
 @import "navigation/desktop-auth-dropdown.scss";
-@import "navigation/desktop-notifications-dropdown.scss";
 
 // Home Page
 @import "includes/Home/home-hero.scss";

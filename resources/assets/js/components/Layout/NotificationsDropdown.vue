@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop-notifications-dropdown">
+    <div class="notifications-dropdown">
         <div class="notifications-dropdown-top-container">
             <div class="notifications-dropdown-title">Notifieringar</div>
             <div class="notifications-dropdown-actions">
