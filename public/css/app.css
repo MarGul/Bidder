@@ -579,7 +579,7 @@ a {
   top: 0;
   left: 0;
   margin: 0;
-  padding: 35px 0 0 0;
+  padding: 60px 0 0 0;
   overflow: hidden;
   z-index: 250;
   -webkit-transition: -webkit-transform .5s;
@@ -2128,7 +2128,7 @@ label.radio-btn input[type=radio] {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 5px 15px;
+  padding: 9px 15px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   z-index: 50000;
