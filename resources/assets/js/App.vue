@@ -12,18 +12,16 @@
         <app-modal />
 
 
-        <app-mobile-header v-if="breakpoints.isSmallDevices()"></app-mobile-header>
-        <app-desktop-header v-else></app-desktop-header>
+        <app-header />
 
-        <div id="site-wrap">
-            <div class="overlay" @click="hideMobileNav" v-if="breakpoints.mobile"></div>
+        <app-mobile-menu v-if="breakpoints.isSmallDevices()" />
 
-            <div class="main-content">
-                <!-- This is where the router view component will be loaded -->
-                <router-view></router-view>
-            </div>
+        <div class="site-wrapper">
+
+            <router-view></router-view>
 
             <app-footer></app-footer>
+
         </div>
 
     </div>
@@ -40,6 +38,9 @@
     import Model from './includes/Model';
     import RealTimeEvents from './realTimeEvents';
 
+    import appHeader from './components/Layout/Header';
+    import appMobileMenu from './components/Layout/MobileMenu';
+
     export default {
         components: {
             appMobileHeader,
@@ -47,6 +48,11 @@
             appNotifications,
             appEventNotification,
             appModal,
+            
+            
+            appHeader,
+            appMobileMenu,
+            
             appFooter
         },
         data() {
