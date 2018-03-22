@@ -64,7 +64,7 @@
 <script>
 	import { mapGetters } from 'vuex';
 	import Model from '../../includes/Model';
-	import desktopAuthDropdown from './DesktopAuthDropdown';
+	import desktopAuthDropdown from './AuthDropdown';
 	import desktopNotificationsDropdown from './NotificationsDropdown';
 
 	export default {

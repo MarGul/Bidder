@@ -28,23 +28,20 @@
 </template>
 
 <script>
-    import appMobileHeader from './components/Layout/MobileHeader';
-    import appDesktopHeader from './components/Layout/DesktopHeader';
     import appNotifications from './components/Includes/Notifications';
     import appEventNotification from './components/Includes/EventNotification';
     import appModal from './components/Includes/Modal';
-    import appFooter from './components/Layout/Footer';
+    
     import { HeartBeat } from './includes/heartbeat';
     import Model from './includes/Model';
     import RealTimeEvents from './realTimeEvents';
 
-    import appHeader from './components/Layout/Header';
-    import appMobileMenu from './components/Layout/MobileMenu';
+    import appHeader from './patterns/Header';
+    import appMobileMenu from './patterns/MobileMenu';
+    import appFooter from './patterns/Footer';
 
     export default {
         components: {
-            appMobileHeader,
-            appDesktopHeader,
             appNotifications,
             appEventNotification,
             appModal,
@@ -52,7 +49,6 @@
             
             appHeader,
             appMobileMenu,
-            
             appFooter
         },
         data() {

@@ -1,0 +1,15 @@
+.avatar-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+
+    &.-has-border {
+        border: 2px solid $brand-primary;
+    }
+
+    &.-small {
+        width: 40px;
+        height: 40px;
+    }
+}

@@ -47,10 +47,17 @@
 @import 'includes/InputControls/checkbox.scss';
 @import 'includes/InputControls/multi-select.scss';
 
-// Header and navigation
-@import 'components/Layout/header.scss';
-@import 'components/Layout/mobile-menu.scss';
-@import 'components/Layout/notifications-dropdown.scss';
+// Patterns - Components with parent/child dependencies
+@import 'patterns/header.scss';
+@import 'patterns/header-actions-guest.scss';
+@import 'patterns/header-actions-auth.scss';
+@import 'patterns/mobile-menu.scss';
+@import 'patterns/desktop-navigation.scss';
+@import 'patterns/auth-dropdown.scss';
+@import 'patterns/notifications-dropdown.scss';
+
+// Misc components som ska läggas till sass glob
+@import 'components/avatar.scss';
 
 // Mobile Navigation
 @import "navigation/mobile-nav.scss";

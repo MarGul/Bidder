@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import appNotification from '../Includes/OneNotification';
+import appNotification from '../components/Includes/OneNotification';
 import { mapGetters } from 'vuex';
 
 export default {
