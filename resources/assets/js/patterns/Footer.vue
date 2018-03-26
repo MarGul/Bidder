@@ -1,5 +1,5 @@
 <template>
-	<footer class="main-footer">
+	<footer class="site-footer">
 		<div class="container">
 			<div class="footer-callouts">
 				<div class="f__callout footer-brand">

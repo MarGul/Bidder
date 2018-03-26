@@ -1,7 +1,8 @@
-.main-footer {
+.site-footer {
 	flex-shrink: 0;
 	background-color: #313a45;
 	padding: 50px 0 25px 0;
+	transition: transform .5s;
 
 	.footer-callouts {
 		display: flex;

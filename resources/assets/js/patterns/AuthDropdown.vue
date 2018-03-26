@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop-auth-dropdown">
+    <div class="auth-dropdown">
         <div class="auth-dropdown-top">
 
             <div class="left-section">
@@ -111,8 +111,8 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import Model from '../../includes/Model';
-    import realTimeEvents from '../../realTimeEvents';
+    //import Model from '../../includes/Model';
+    //import realTimeEvents from '../../realTimeEvents';
 
     export default {
         computed: {
@@ -122,10 +122,12 @@
         },
         methods: {
             logout() {
+                /*
                 realTimeEvents.stopListenAuth();
                 this.$store.dispatch('clearAuthState');
 				this.$router.push('/');
 				new Model('logout').new().post().catch(error => { location.reload(); });
+                */
 			}
         }
     }

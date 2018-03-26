@@ -1,0 +1,33 @@
+.header-actions__auth {
+    display: flex;
+
+    .header-actions__auth__notifications-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .header-actions__auth__notifications-icon__badge {
+            position: absolute;
+            background: #fa3e3e;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 1px 3px;
+            line-height: 1.3;
+            top: -3px;
+            right: -4px;
+            cursor: pointer;
+        }
+
+    }
+
+    .header-actions__auth__user {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+
+}
