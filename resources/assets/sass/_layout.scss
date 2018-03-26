@@ -8,7 +8,14 @@ a {
 	outline: 0;
 }
 
+#site {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
 .site-wrapper {
+	flex: 1;
 	position: relative;
 	top: 0;
 	left: 0;
@@ -23,28 +30,8 @@ body.mobile-menu-open .site-wrapper {
 	transform: translateX(265px);
 }
 
-
-#site {
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-#site-wrap {
-	display: flex;
-	flex-direction: column;
-	height: calc(100vh - 50px);
-	min-width: 100%;
-	position: relative;
-	top: 0;
-	bottom: 100%;
-	left: 0;
-	z-index: 1;
-	transition: left 0.5s ease-in-out;
-
-	@media screen and (min-width: $screen-md-min) {
-		height: calc(100vh - 60px);
-	}
+body.mobile-menu-open .site-footer {
+	transform: translateX(265px);
 }
 
 .main-content {

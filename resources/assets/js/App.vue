@@ -11,18 +11,15 @@
 
         <app-modal />
 
-
         <app-header />
 
         <app-mobile-menu v-if="breakpoints.isSmallDevices()" />
 
         <div class="site-wrapper">
-
             <router-view></router-view>
-
-            <app-footer></app-footer>
-
         </div>
+
+        <app-footer />
 
     </div>
 </template>
@@ -41,6 +38,9 @@
     import appFooter from './patterns/Footer';
 
     export default {
+
+        name: 'App',
+
         components: {
             appNotifications,
             appEventNotification,
@@ -51,16 +51,19 @@
             appMobileMenu,
             appFooter
         },
+
         data() {
             return {
                 breakpoints: window.breakpoints,
             }
         },
+
         computed: {
             authenticated() {
                 return this.$store.getters.isAuthenticated;
             }
         },
+
         watch: {
             authenticated(newAuth, oldAuth) {
                 if ( newAuth ) {
@@ -76,11 +79,7 @@
                 }
             }
         }, 
-        methods: {
-            hideMobileNav() {
-                document.body.classList.remove('mobile-nav-open');
-            }
-        },
+
         created() {
             // Initialize Data
             new Model('categories').get().then(response => {
