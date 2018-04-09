@@ -40,7 +40,7 @@
 				</transition>
 				<transition name="slide-in-right" appear>
 					<div class="hh-right">
-						<img src="/screen.png" class="img-responsive" alt="">
+						<img src="/images/screen.png" class="img-responsive" alt="">
 					</div>
 				</transition>
 			</div>

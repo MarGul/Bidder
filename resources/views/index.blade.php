@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         
         <script>
-            window.auth = <?php echo json_encode([
-                'authenticated' => Auth::check(),
-                'user' => Auth::user()
-            ]); ?>
+            window.auth = {
+                authenticated: {!! json_encode(Auth::check()) !!},
+                user: {!! json_encode(Auth::user()) !!}
+            }
         </script>
 
     </head>
