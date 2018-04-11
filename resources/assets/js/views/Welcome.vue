@@ -48,7 +48,10 @@
                                     <h3>Uppdatera din profil</h3>
                                 </header>
                                 <div class="gray-contentSection-content">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praese
+                                    <p>
+                                        Gör din profil lite mer attraktiv genom att ange ditt namn och en kort presentation av dig själv eller ditt företag.
+                                        Glöm inte att även ladda upp en bild för en mer personlig touch.
+                                    </p> 
                                 </div>
                                 <div class="white-contentSection-content">      
                                     <div class="account-container">
@@ -70,7 +73,12 @@
                                     <h3>Lägg till prenumerationer</h3>
                                 </header>
                                 <div class="gray-contentSection-content">
-                                    Genom att prenumerera på områden eller kategorier så kommer du att bli kontaktad av oss via mail varje gång en ny tjänst läggs till.
+                                    <p>
+                                        <strong>Obs, den här funktionen är endast till för företag.</strong> 
+                                    </p>
+                                    <p>
+                                        Genom att prenumerera på områden eller kategorier så kommer du att bli kontaktad av oss via mail varje gång en ny tjänst läggs till.
+                                    </p>
                                 </div>
                                 <div class="white-contentSection-content">
                                     <app-add-subscription />
@@ -92,7 +100,14 @@
                                     <h3>Behöver du mer information?</h3>
                                 </header>
                                 <div class="white-contentSection-content">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nesciunt eaque voluptatum, sapiente ut odio excepturi cupiditate veniam et odit repellat veritatis sit debitis corrupti. Id culpa praesentium vel pariatur.
+                                    <ul>
+                                        <li class="mb5">Om du är intresserad av att veta lite mer om GoBid så klicka <router-link class="is-link" to="/about">här</router-link></li>
+                                        <li class="mb5">Om du vill veta mer om om våra vanligaste frågor och svar så klickar du <router-link class="is-link" to="/faq">här</router-link></li>
+                                        <li>
+                                            För att komma i kontakt med oss så klickar du 
+                                            <span class="is-link" @click="$store.dispatch('openModal', {component: 'feedback', data: {closeClass: 'white', subject: 'other'}})">här</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </section>
                         </div>

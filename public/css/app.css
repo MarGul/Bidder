@@ -997,101 +997,6 @@ body.mobile-menu-open .site-footer {
           flex: 4;
 }
 
-.site-footer {
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
-  background-color: #313a45;
-  padding: 50px 0 25px 0;
-  -webkit-transition: -webkit-transform .5s;
-  transition: -webkit-transform .5s;
-  transition: transform .5s;
-  transition: transform .5s, -webkit-transform .5s;
-}
-
-.site-footer .footer-callouts {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  margin: 0 -15px;
-}
-
-.site-footer .footer-callouts .f__callout {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 0 15px;
-}
-
-.site-footer .footer-callouts .f__callout.footer-brand {
-  display: none;
-}
-
-@media screen and (min-width: 768px) {
-  .site-footer .footer-callouts .f__callout.footer-brand {
-    display: block;
-    -webkit-box-flex: 2;
-        -ms-flex: 2;
-            flex: 2;
-  }
-}
-
-.site-footer .footer-callouts .f__callout .f__callout-heading {
-  color: #fff;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  border-bottom: 1px solid #687079;
-}
-
-.site-footer .footer-callouts .f__callout .f__links {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.site-footer .footer-callouts .f__callout .f__links li {
-  margin-bottom: 5px;
-}
-
-.site-footer .footer-callouts .f__callout .f__links li a {
-  color: #8b96a3;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.site-footer .footer-callouts .f__callout .f__links li a:hover {
-  color: #009999;
-}
-
-.site-footer .footer-callouts .f__callout .f__social-media-link {
-  margin: 10px 0 0 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.site-footer .footer-callouts .f__callout .f__social-media-link li {
-  float: left;
-  padding-right: 10px;
-}
-
-.site-footer .footer-callouts .f__callout .contact-container {
-  color: #8b96a3;
-  font-size: 13px;
-}
-
-.site-footer .footer-callouts .f__callout .contact-container a {
-  color: #009999;
-}
-
-.site-footer .footer-callouts .f__callout .contact-container a:hover {
-  color: #00caca;
-}
-
 body {
   font-family: "Montserrat", sans-serif;
   color: #636b6f;
@@ -1884,7 +1789,7 @@ label.radio-btn input[type=radio] {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 60000;
   padding: 18px;
   border: 1px solid rgba(27, 31, 35, 0.15);
   text-align: center;
@@ -2689,6 +2594,105 @@ body.mobile-menu-open .mobile-menu {
   padding: 10px 0;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+
+.site-footer {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background-color: #313a45;
+  padding: 50px 0 25px 0;
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+}
+
+.site-footer .footer-callouts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 0 -15px;
+}
+
+.site-footer .footer-callouts .f__callout {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 15px;
+}
+
+.site-footer .footer-callouts .f__callout.footer-brand {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .site-footer .footer-callouts .f__callout.footer-brand {
+    display: block;
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+  }
+}
+
+.site-footer .footer-callouts .f__callout.footer-brand img {
+  max-width: 225px;
+}
+
+.site-footer .footer-callouts .f__callout .f__callout-heading {
+  color: #fff;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #687079;
+}
+
+.site-footer .footer-callouts .f__callout .f__links {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.site-footer .footer-callouts .f__callout .f__links li {
+  margin-bottom: 5px;
+}
+
+.site-footer .footer-callouts .f__callout .f__links li a {
+  color: #8b96a3;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.site-footer .footer-callouts .f__callout .f__links li a:hover {
+  color: #009999;
+}
+
+.site-footer .footer-callouts .f__callout .f__social-media-link {
+  margin: 10px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.site-footer .footer-callouts .f__callout .f__social-media-link li {
+  float: left;
+  padding-right: 10px;
+}
+
+.site-footer .footer-callouts .f__callout .contact-container {
+  color: #8b96a3;
+  font-size: 13px;
+}
+
+.site-footer .footer-callouts .f__callout .contact-container a {
+  color: #009999;
+}
+
+.site-footer .footer-callouts .f__callout .contact-container a:hover {
+  color: #00caca;
 }
 
 .avatar-container {
@@ -3760,7 +3764,6 @@ body.mobile-nav-open .overlay {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-image: url("/images/marcus.jpg");
 }
 
 .team-container .the-team .member-container .member-name {

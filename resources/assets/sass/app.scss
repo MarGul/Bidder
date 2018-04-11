@@ -18,9 +18,6 @@
 // Layout
 @import "_layout.scss";
 
-// Footer
-@import "includes/_footer.scss";
-
 // Typography
 @import "_typography.scss";
 
@@ -55,6 +52,7 @@
 @import 'patterns/desktop-navigation.scss';
 @import 'patterns/auth-dropdown.scss';
 @import 'patterns/notifications-dropdown.scss';
+@import 'patterns/footer.scss';
 
 // Misc components som ska läggas till sass glob
 @import 'components/avatar.scss';

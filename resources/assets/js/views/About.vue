@@ -8,12 +8,12 @@
 				<div class="the-team">
 
 					<div class="member-container">
-						<div class="member-image"></div>
+						<div class="member-image" :style="{backgroundImage: 'url(/images/marcus.jpg)'}"></div>
 						<h5 class="member-name">Marcus Gullberg</h5>
 					</div>
 
 					<div class="member-container">
-						<div class="member-image"></div>
+						<div class="member-image" :style="{backgroundImage: 'url(/images/anders.jpg)'}"></div>
 						<h5 class="member-name">Anders Wahlström</h5>
 					</div>
 
