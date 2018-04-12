@@ -16,14 +16,14 @@
 
                 <div class="header-actions">
                     
-                    <header-actions-guest v-if="!authenticated" />
+                    <header-actions-guest v-if="!authenticated && !breakpoints.isSmallDevices()" />
                     
                     <header-actions-auth 
                         :authDropdown="authDropdown"
                         :notificationsDropdown="notificationsDropdown"
                         @authDropdownChanged="authDropdown = $event"
                         @notificationDropdownChanged="notificationsDropdown = $event"
-                        v-else 
+                        v-if="authenticated" 
                     />
 
                 </div>
