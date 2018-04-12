@@ -46,28 +46,33 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
+
+    name: 'MobileMenu',
+
     computed: {
         ...mapGetters({
             authenticated: 'isAuthenticated',
             user: 'authUser'
         }),
         avatar() {
-            return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {};
+            return !!this.user.avatar ? { backgroundImage: `url(${this.user.avatar}` } : {}
         }
     },
+
     methods: {
         closeMenu() {
-            document.body.classList.remove('mobile-menu-open');
+            document.body.classList.remove('mobile-menu-open')
         },
         openModal(component) {
-            this.closeMenu();
+            this.closeMenu()
             this.$store.dispatch('openModal', {component: component, data: {closeClass: 'white'}})
         },
         logout() {
-            this.closeMenu();
+            this.closeMenu()
+            this.$store.dispatch('logout')
         }
     }
 }

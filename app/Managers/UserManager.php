@@ -5,6 +5,7 @@ namespace App\Managers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\EmailVerification;
+use App\Notifications\Welcome;
 use App\Jobs\DeleteOldProfilePicture;
 use App\Jobs\ResizeProfilePicture;
 use Notification;
@@ -78,6 +79,9 @@ class UserManager extends BaseManager
 
 		// Create the users notifications entry
 		app(NotificationSettingsManager::class)->byUser($this->user)->create();
+		
+		// Send out user welcome email
+		Notification::send($this->user, new Welcome($this->user));
 		
 		// Send out email for confirming the users email adress
 		Notification::send($this->user, new EmailVerification($this->user));

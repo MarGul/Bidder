@@ -94,7 +94,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <a class="is-clickable" @click="logout">
+                    <a class="is-clickable" @click="$store.dispatch('logout')">
                         <div class="link-section-container">
                             <i class="icon h_lock_open wh20 light-gray mr15"></i>
                             <div class="link-container">
@@ -110,26 +110,18 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    //import Model from '../../includes/Model';
-    //import realTimeEvents from '../../realTimeEvents';
+import { mapGetters } from 'vuex';
 
-    export default {
-        computed: {
-            ...mapGetters({
-                auth: 'authUser'
-            })
-        },
-        methods: {
-            logout() {
-                /*
-                realTimeEvents.stopListenAuth();
-                this.$store.dispatch('clearAuthState');
-				this.$router.push('/');
-				new Model('logout').new().post().catch(error => { location.reload(); });
-                */
-			}
-        }
+export default {
+    
+    name: 'AuthDropdown',
+    
+    computed: {
+        ...mapGetters({
+            auth: 'authUser'
+        })
     }
+    
+}
 </script>
 
