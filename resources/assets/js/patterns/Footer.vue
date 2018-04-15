@@ -38,6 +38,9 @@
 						<li>
 							<i class="icon icon_instagram wh30"></i>
 						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UCkS7EOpGFYOtEvuCaPUyDFg" target="_blank"><i class="icon icon_youtube wh30"></i></a>
+						</li>
 					</ul>
 				</div>
 			</div>

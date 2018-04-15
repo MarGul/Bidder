@@ -15,6 +15,9 @@ Vue.use(VueRouter);
 let SocialSharing = require('vue-social-sharing');
 Vue.use(SocialSharing);
 
+import Meta from 'vue-meta'
+Vue.use(Meta)
+
 /**
  * Global Vue components
  */

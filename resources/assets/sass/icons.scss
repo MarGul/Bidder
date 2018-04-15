@@ -265,6 +265,15 @@
 	}
 }
 
+.icon_youtube {
+	@include mask-icon('../svg/social_youtube.svg');
+	background-color: #8b96a3;
+
+	&:hover {
+		background-color: #FF0000;
+	}
+}
+
 .icon_lock {
 	@include icon('../svg/lock.svg');
 }
