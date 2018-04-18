@@ -94,7 +94,8 @@ export default {
 	metaInfo: {
 		title: 'Om oss',
 		meta: [
-
+			{ description: 'Visionen med GoBid är att skapa en digital marknadsplats där köpare och säljare av tjänster på ett enkelt sätt kan mötas, kommunicera och avtala.' },
+			
 		]
 	}
 
