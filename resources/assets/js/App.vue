@@ -28,11 +28,9 @@
 import appNotifications from './components/Includes/Notifications'
 import appEventNotification from './components/Includes/EventNotification'
 import appModal from './components/Includes/Modal'
-
 import { HeartBeat } from './includes/heartbeat'
 import Model from './includes/Model'
 import RealTimeEvents from './realTimeEvents'
-
 import appHeader from './patterns/Header'
 import appMobileMenu from './patterns/MobileMenu'
 import appFooter from './patterns/Footer'
@@ -41,12 +39,15 @@ export default {
 
     name: 'App',
 
+    metaInfo: {
+        title: 'Mötesplatform för köpare och säljare av tjänster.',
+        titleTemplate: 'GoBid | %s'
+    },
+
     components: {
         appNotifications,
         appEventNotification,
         appModal,
-        
-        
         appHeader,
         appMobileMenu,
         appFooter

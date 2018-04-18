@@ -33,10 +33,10 @@
 					</div>
 					<ul class="f__social-media-link">
 						<li>
-							<i class="icon icon_facebook wh30"></i>
+							<a href="https://www.facebook.com/gobidab/" target="_blank"><i class="icon icon_facebook wh30"></i></a>
 						</li>
 						<li>
-							<i class="icon icon_instagram wh30"></i>
+							<a href="https://www.instagram.com/gobid.se" target="_blank"><i class="icon icon_instagram wh30"></i></a>
 						</li>
 						<li>
 							<a href="https://www.youtube.com/channel/UCkS7EOpGFYOtEvuCaPUyDFg" target="_blank"><i class="icon icon_youtube wh30"></i></a>

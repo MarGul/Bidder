@@ -8,7 +8,6 @@ let routes = [
 	{ path: "/", name: 'home', component: require('./views/Home') },
 	{ path: "/email-verified", name: 'emailVerified', component: require('./views/EmailVerified') },
 	{ path: "/welcome", name: 'welcome', component: require('./views/Welcome'), meta: { requiresAuth: true } },
-	{ path: "/categories", name: 'categories', component: require('./views/Categories') },
 	{ path: "/services", name: 'services', component: require('./views/Services') },
 	{ path: "/services/:id", component: require('./views/ServiceDetails'), 
 		children: [

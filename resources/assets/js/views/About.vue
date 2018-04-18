@@ -87,7 +87,16 @@
 </template>
 
 <script>
-	export default {
-		
+export default {
+
+	name: 'AboutView',
+
+	metaInfo: {
+		title: 'Om oss',
+		meta: [
+
+		]
 	}
+
+}
 </script>
