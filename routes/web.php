@@ -11,8 +11,8 @@ use App\Notifications\NewBidOnMyService;
 | handle all of the routing.
 */
 
-Route::get('/test', function() {
-	return view('test');
+Route::get('/v2/home', function() {
+	return view('v2.home');
 });
 
 /**

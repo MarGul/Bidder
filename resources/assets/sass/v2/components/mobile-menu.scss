@@ -1,0 +1,24 @@
+body.mobile-menu-open .mobile-menu {
+    transform: translateX(0);
+    @apply .max-h-screen;
+}
+
+.mobile-menu {
+    transform: translateX(-16rem);
+    @apply .fixed .pin-t .pin-l .w-64 .h-full .bg-grey-darkest;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform 0.5s;
+
+    &:after {
+        content: "";
+        box-shadow: 0 0 15px rgba(0,0,0,.8);
+        position: absolute;
+        top: 0;
+        right: -15px;
+        width: 15px;
+        background: transparent;
+        height: 100%;
+        display: block;
+    }
+}

@@ -1,0 +1,24 @@
+.btn-primary {
+    @apply .bg-gobid .text-white .font-semibold .py-2 .px-4 .rounded .shadow .no-underline;
+
+    &:hover {
+        @apply .bg-gobid-light;
+    }
+}
+
+.btn-secondary {
+    @apply .bg-transparent .text-gobid .font-semibold .py-2 .px-4 .rounded .border .border-gobid .no-underline;
+
+    &:hover {
+        @apply .bg-gobid .text-white .border-transparent;
+    }
+}
+
+.btn-link {
+    @apply .bg-transparent .text-gobid .font-semibold .py-2 .px-4 .no-underline;
+
+    &:hover {
+        @apply .text-gobid-light;
+    }
+}
+

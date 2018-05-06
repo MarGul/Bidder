@@ -1,5 +1,6 @@
 const mix = require('laravel-mix')
 const path = require('path')
+const tailwindcss = require('tailwindcss')
 
 /*
  |--------------------------------------------------------------------------
@@ -16,21 +17,6 @@ const path = require('path')
 mix.webpackConfig({
     module: {
         rules: [
-            /*
-            {
-                enforce: 'pre',
-                test: /\.s[ac]ss$/,
-                loader: 'import-glob-loader'
-            },
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components|fonts)/,
-                loader: 'eslint-loader',
-                options: {
-                    emitWarning: true
-                }
-            },*/
             {
                 test: /\.svg$/,
                 exclude: /(node_modules|bower_components|fonts)/,
@@ -48,6 +34,11 @@ mix.webpackConfig({
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
+   .sass('resources/assets/sass/v2/app.scss', 'public/css/v2.css')
+   .options({
+       processCssUrls: false,
+       postCss: [ tailwindcss('./tailwind.js') ]
+   })
    .sourceMaps()
    .disableNotifications()
 

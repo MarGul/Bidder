@@ -1,0 +1,13 @@
+body.mobile-menu-open .site-header,
+body.mobile-menu-open .site {
+    transform: translateX(16rem);
+}
+
+.site-header {
+    transition: transform 0.5s;
+}
+
+.site {
+    transition: transform 0.5s;
+    margin-top: 55px;
+}

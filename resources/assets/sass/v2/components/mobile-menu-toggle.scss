@@ -1,0 +1,37 @@
+body.mobile-menu-open {
+
+    .mobile-menu-toggle span {
+        background: transparent;
+
+        &:before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
+    }
+}
+
+.mobile-menu-toggle {
+    @apply .w-10 .h-8 .flex .items-center .relative;
+
+    span,
+    span:before,
+    span:after {
+        @apply .w-6 .block .bg-grey-lightest .absolute;
+        height: 3px;
+        content: "";
+        transition: all .5s ease-in-out;
+    }
+
+    span:before {
+        top: -7px;
+    }
+
+    span:after {
+        bottom: -7px;
+    }
+}
