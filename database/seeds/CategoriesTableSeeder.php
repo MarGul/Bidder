@@ -32,6 +32,11 @@ class CategoriesTableSeeder extends Seeder
                         'slug' => 'fonsterputsning',
                         'description' => '',
                     ],
+                    'Kontorsstädning' => [
+                        'slug' => 'kontorsstadning',
+                        'description' => '',
+                        'active' => true
+                    ],
                     'Hemstädning' => [
                         'slug' => 'hemstadning',
                         'description' => '',
@@ -44,6 +49,7 @@ class CategoriesTableSeeder extends Seeder
                     'Övrig städning' => [
                         'slug' => 'ovrig-stadning',
                         'description' => '',
+                        'active' => true
                     ]
                 ]
             ],
@@ -59,8 +65,7 @@ class CategoriesTableSeeder extends Seeder
                     ],
                     'Gods- & Palltransport' => [
                         'slug' => 'gods-palltransport',
-                        'description' => '',
-                        'active' => true
+                        'description' => ''
                     ],
                     'Kontorsflytt' => [
                         'slug' => 'kontorsflytt',
@@ -87,6 +92,7 @@ class CategoriesTableSeeder extends Seeder
                     'Övrig transport' => [
                         'slug' => 'ovrig-transport',
                         'description' => '',
+                        'active' => true
                     ]
                 ]
             ],
