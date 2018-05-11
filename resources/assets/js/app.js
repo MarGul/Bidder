@@ -21,11 +21,11 @@ import VueAnalytics from 'vue-analytics';
 import trackingCommands from './trackingCommands';
 
 Vue.use(VueAnalytics, {
-    id: 'UA-115412960-1',
+    id: 'UA-118980196-1',
     router,
     commands: trackingCommands,
     debug: {
-        enabled: true
+        enabled: false
     }
 });
 
