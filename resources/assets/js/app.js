@@ -32,9 +32,22 @@ Vue.use(VueAnalytics, {
 /**
  * Create the Vue instance.
  */
+/*
 const app = new Vue({
     el: '#app',
     store,
     router,
     render: h => h(App)
+});*/
+
+
+import App2 from './v2/App.vue'
+/**
+ * Create the Vue instance.
+ */
+const v2 = new Vue({
+    el: '#v2',
+    store,
+    router,
+    render: h => h(App2)
 });

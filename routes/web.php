@@ -11,8 +11,8 @@ use App\Notifications\NewBidOnMyService;
 | handle all of the routing.
 */
 
-Route::get('/v2/home', function() {
-	return view('v2.home');
+Route::get('v2/home-blade', function() {
+    return view('v2.home');
 });
 
 /**
@@ -32,6 +32,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
  */
 Route::get('download-invoice/{hash}', 'InvoiceController@index')->name('download.invoice');
 Route::get('projects/{project}/download-contract', 'ProjectDownloadContractController@index')->name('download.contract');
+
+/* The second version */
+Route::any('v2/{all}', function() {
+    return view('v2');
+})->where(['all' => '.*']);
+
 
 Route::any('{all}', function () {
     return view('index');

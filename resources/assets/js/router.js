@@ -47,6 +47,9 @@ let routes = [
 		],
 		meta: { requiresAuth: true }
 	},
+
+	// Version 2
+	{ path: '/v2/home', name: 'v2.home', component: require('./v2/views/Home') },
 	
 	// 404 is handled by the vue application
 	{ path: "*", component: require('./views/404.vue') }
