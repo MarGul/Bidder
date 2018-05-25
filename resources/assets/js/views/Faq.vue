@@ -41,8 +41,9 @@
                     <span slot="question">Vad kostar det?</span>
                     <p slot="answer">
                         Att lägga ut en tjänst på GoBid är helt kostnadsfritt. Om du som företag vinner budgivningen för att få utföra tjänsten 
-                        tar vi ut en liten procentuell avgift på totalbeloppet. Detta medför att vi inte har några fasta kostnader. Du betalar 
-                        en liten “hittelön” när du tjänar mer pengar.
+                        tar vi 5% av totalbeloppet som en hittelön. Detta medför att vi inte har några fasta kostnader. Du betalar bara när du
+                        tjänar mer pengar. Hittelönen tas också bara ut på första fakturan. På tjänster som utförs exempelvis var 14:e dag så
+                        är det alltså bara på den första gången som vi tar en 5% hittelön.
                     </p>
                 </app-faq-question>
 

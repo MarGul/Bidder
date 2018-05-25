@@ -42,6 +42,11 @@ class CategoriesTableSeeder extends Seeder
                         'description' => '',
                         'active' => true
                     ],
+                    'Byggstädning' => [
+                        'slug' => 'byggstadning',
+                        'description' => '',
+                        'active' => true
+                    ],
                     'Tvättning & Strykning' => [
                         'slug' => 'tvattning-strykning',
                         'description' => '',
