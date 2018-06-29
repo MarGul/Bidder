@@ -1,0 +1,38 @@
+.landing-section {
+    padding: 60px 0;
+
+    &.bg-light-gray {
+        background: $body-bg;
+    }
+
+    &.bg-dark {
+        background: $navbar-bg;
+    }
+
+    &.bg-white {
+        background: #FFF;
+    }
+}
+
+.landing-heading {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    span {
+        font-weight: 500;
+        font-size: 22px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid;
+    }
+
+    &.text-white span {
+        color: #FFF;
+        border-color: $brand-primary;
+    }
+
+    &.text-dark span {
+        color: $text-color;
+        border-color: $brand-primary;
+    }
+}
