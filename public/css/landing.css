@@ -883,11 +883,238 @@
   }
 }
 
+form.loading {
+  position: relative;
+  pointer-events: none;
+  cursor: default;
+}
+
+form.loading:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+form.loading:after {
+  position: absolute;
+  content: "";
+  top: 150px;
+  left: 50%;
+  margin: -1.5em 0 0 -1.5em;
+  width: 3em;
+  height: 3em;
+  border-radius: 500rem;
+  border-style: solid;
+  border-width: 0.2em;
+  border-color: #009999 rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 0 1px transparent;
+          box-shadow: 0 0 0 1px transparent;
+  visibility: visible;
+  z-index: 101;
+  animation: form-spin .6s linear;
+  -webkit-animation: form-spin .6s linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes form-spin {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes form-spin {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.form-section {
+  border-bottom: 1px solid #e6ebf1;
+  padding: 15px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .form-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form-section .form-section-controls {
+    padding-left: 15px;
+  }
+}
+
+.form-section-description {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .form-section-description {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin-bottom: 0;
+    padding-right: 15px;
+  }
+}
+
+.form-section-description .description-header {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #636b6f;
+}
+
+.form-section-description .description-details {
+  font-size: 12px;
+  color: #97A9B5;
+}
+
+@media screen and (min-width: 768px) {
+  .form-section-controls {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+  }
+}
+
+.req {
+  color: #cc0000;
+}
+
+.control-container {
+  margin-bottom: 15px;
+}
+
+.control-container.has-errors .help-block,
+.control-container.has-errors .control-label {
+  color: #cc0000;
+}
+
+.control-container.has-errors .form-control {
+  border-color: #cc0000;
+}
+
+@media screen and (min-width: 768px) {
+  .control-container.half-width {
+    width: 50%;
+  }
+}
+
+.control-label {
+  font-weight: 500;
+  font-size: 11px;
+  color: #97A9B5;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.input-data {
+  color: #222;
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+label.radio-btn {
+  font-weight: normal;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+label.radio-btn input[type=radio] {
+  cursor: pointer;
+}
+
+.form-control {
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  border-radius: 3px;
+  height: 40px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: #009999;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 153, 153, 0.6);
+          box-shadow: 0px 0px 2px 1px rgba(0, 153, 153, 0.6);
+}
+
+.form-group label {
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.form-group small {
+  color: #97A9B5;
+}
+
+.form-control[readonly] {
+  background: #fff;
+}
+
+.calendar .cell:not(.blank):not(.disabled).day:hover,
+.calendar .cell:not(.blank):not(.disabled).month:hover,
+.calendar .cell:not(.blank):not(.disabled).year:hover {
+  border: 1px solid #009999 !important;
+}
+
+.help-block {
+  margin: 1px 0;
+  font-size: 12px;
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {
+  color: #cc0000;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   color: #636b6f;
   line-height: 1.6;
   font-size: 14px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.gray-sub-text {
+  color: #7d8793 !important;
 }
 
 .landing-header {
@@ -940,12 +1167,17 @@ body {
 
 .landing-hero h4 {
   line-height: 26px;
-  width: 70%;
   margin: 40px auto 50px auto;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   font-weight: normal;
   letter-spacing: 0.5px;
+}
+
+@media screen and (min-width: 768px) {
+  .landing-hero h4 {
+    width: 70%;
+  }
 }
 
 .video-container {
@@ -1006,18 +1238,62 @@ body {
   border-color: #009999;
 }
 
-.q-a-container .q-a {
+.landing-section-help {
+  margin: 0 auto 40px auto;
+  padding: 10px 15px;
+  background: #fff5eb;
+  border-left: 4px solid #de751f;
+}
+
+@media screen and (min-width: 768px) {
+  .landing-section-help {
+    width: 75%;
+  }
+}
+
+.landing-section-help .q-a-icon i {
+  background-color: #de751f !important;
+}
+
+.landing-section-help .question,
+.landing-section-help .answer {
+  color: #de751f !important;
+}
+
+.form-container {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .form-container {
+    width: 75%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .form-container {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .form-container {
+    width: 33.333%;
+  }
+}
+
+.q-a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 30px;
 }
 
-.q-a-container .q-a .q-a-icon {
+.q-a .q-a-icon {
   margin-right: 15px;
 }
 
-.q-a-container .q-a .q-a-text {
+.q-a .q-a-text {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -1026,13 +1302,13 @@ body {
           align-items: center;
 }
 
-.q-a-container .q-a .q-a-text .question {
+.q-a .q-a-text .question {
   color: #FFF;
   font-size: 16px;
   font-weight: 500;
 }
 
-.q-a-container .q-a .q-a-text .answer {
+.q-a .q-a-text .answer {
   color: #97A9B5;
 }
 

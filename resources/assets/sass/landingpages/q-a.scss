@@ -1,26 +1,27 @@
 .q-a-container {
 
-    .q-a {
-        display: flex;
-        margin-bottom: 30px;
+    
+}
+.q-a {
+    display: flex;
+    margin-bottom: 30px;
+    
+    .q-a-icon {
+        margin-right: 15px;
+    }
+
+    .q-a-text {
+        flex: 1;
+        align-items: center;
         
-        .q-a-icon {
-            margin-right: 15px;
+        .question {
+            color: #FFF;
+            font-size: 16px;
+            font-weight: 500;
         }
 
-        .q-a-text {
-            flex: 1;
-            align-items: center;
-            
-            .question {
-                color: #FFF;
-                font-size: 16px;
-                font-weight: 500;
-            }
-    
-            .answer {
-                color: $light-icon-color;
-            }
+        .answer {
+            color: $light-icon-color;
         }
     }
 }

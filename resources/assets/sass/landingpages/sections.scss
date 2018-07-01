@@ -36,3 +36,40 @@
         border-color: $brand-primary;
     }
 }
+
+.landing-section-help {
+    margin: 0 auto 40px auto;
+    padding: 10px 15px;
+    background: #fff5eb;
+    border-left: 4px solid #de751f;
+
+
+    @media screen and (min-width: 768px) {
+        width: 75%;
+    }
+
+    .q-a-icon i {
+        background-color: #de751f !important;
+    }
+
+    .question,
+    .answer {
+        color: #de751f !important;
+    }
+}
+
+.form-container {
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+        width: 75%;
+    }
+
+    @media screen and (min-width: 992px) {
+        width: 50%;
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: 33.333%;
+    }
+}

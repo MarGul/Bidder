@@ -21,7 +21,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="GoBid.se logo">
                     </div>
                     <div class="actions-container">
-                        <a href="#" class="btn btn-primary">Skapa en tjänst</a>
+                        <button type="button" class="btn btn-primary" id="createButton">Skapa en tjänst</button>
                     </div>
                 </nav>
             </div>
@@ -126,32 +126,76 @@
 
             <section class="landing-section bg-light-gray">
                 <div class="container">
-                    <div class="landing-heading text-dark">
+                    <div class="landing-heading text-dark" id="registerHeading">
                         <span>Redo att skapa en tjänst?</span>
                     </div>
 
-                    <form method="POST" action="{{ route('auth.register', ['#register']) }}" id="register">
-                        {{ csrf_field() }}
+                    <div class="landing-section-help">
+                        <div class="q-a" style="margin-bottom: 0;">
+                            <div class="q-a-icon"><i class="icon h_help wh20 primary"></i></div>
+                            <div class="q-a-text">
+                                <div class="question">Varför måste jag registrera?</div>
+                                <div class="answer">
+                                    <p>Efter du har hittat ett företag som du vill jobba med så kommer ni att starta ett projekt. Därför behövs en inloggning för
+                                    att kunna hålla reda på dina projekt. Detta gör också att du kan redigera din tjänst och att vi kan skicka notifikationer till dig
+                                    om vad som händer med din tjänst.</p>
+                                    <p>Att registrera dig tar ca 30 sekunder och direkt efter kan du skapa den tjänst som du vill ha hjälp med.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        @if ( $errors->any() )
-                            <ul>
-                                @foreach ( $errors->all() as $error )
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
+                    <div class="form-container">
+                        <form method="POST" action="{{ route('auth.register', ['#register']) }}" id="register">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="company" value="0">
+                            
+                            <div class="control-container {{ $errors->has('username') ? 'has-errors' : '' }}">
+                                <label for="username" class="control-label">Användarnamn</label>
+                                <input type="text" name="username" class="form-control" placeholder="Välj användarnamn">
+                                @if ( $errors->has('username'))
+                                    <span class="help-block">{{ $errors->first('username') }}</span>
+                                @endif
+                            </div>
 
-                        <input type="hidden" name="company" value="0">
-                        <input type="text" name="username" placeholder="Välj användarnamn">
-                        <input type="email" name="email" placeholder="Din emailadress">
-                        <input type="password" name="password" placeholder="Skapa lösenord">
+                            <div class="control-container {{ $errors->has('email') ? 'has-errors' : '' }}">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Din emailadress">
+                                @if ( $errors->has('email'))
+                                    <span class="help-block">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">Registrera</button>
-                    </form>
+                            <div class="control-container {{ $errors->has('password') ? 'has-errors' : '' }}">
+                                <label for="password" class="control-label">Lösenord</label>
+                                <input type="password" name="password" class="form-control" placeholder="Skapa lösenord">
+                                @if ( $errors->has('password'))
+                                    <span class="help-block">{{ $errors->first('password') }}</span>
+                                @endif
+                                <span class="help-block gray-sub-text">Minst en bokstav, ett nummer, och 7 tecken.</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary full-width">Registrera</button>
+                        </form>
+                    </div>
+                    
                 </div>
             </section>
 
         </main>
 
+        <script>
+            var createButton = document.getElementById('createButton');
+            createButton.addEventListener('click', function(event) {
+                var registerForm = document.getElementById('registerHeading');
+                var rect = registerForm.getBoundingClientRect();
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                window.scrollTo({
+                    top: rect.top + scrollTop - 80,
+                    behavior: "smooth"
+                });
+            });
+        </script>
     </body>
 </html>
