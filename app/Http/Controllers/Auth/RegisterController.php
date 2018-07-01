@@ -26,7 +26,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/welcome';
 
     /**
      * Create a new controller instance.
@@ -45,7 +45,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    {        
         return Validator::make($data, [
             'company' => 'required|boolean',
             'username' => 'required|max:50|alpha_num|unique:users,username',
@@ -74,6 +74,10 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        return response()->json(['message' => 'Successfully registered the user.', 'user' => $user], 201);
+        if ( $request->ajax() ) {
+            return response()->json(['message' => 'Successfully registered the user.', 'user' => $user], 201);
+        }
+
+        return redirect($this->redirectPath());
     }
 }

@@ -1,0 +1,39 @@
+.landing-hero {
+    background: linear-gradient(-45deg, $brand-primary, $brand-primary-hover);
+    position: relative;
+    padding: 40px 0;
+    color: #FFF;
+
+    h2 {
+        text-align: center;
+        line-height: 40px;
+    }
+
+    h4 {
+        line-height: 26px;
+        margin: 40px auto 50px auto;
+        text-align: center;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        font-weight: normal;
+        letter-spacing: 0.5px;
+
+        @media screen and (min-width: 768px) {
+            width: 70%;
+        }
+    }
+}
+
+.video-container {
+    text-align: center;
+    position: relative;
+    margin-bottom: -100px;
+
+    img {
+        cursor: pointer;
+        max-width: 100%;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

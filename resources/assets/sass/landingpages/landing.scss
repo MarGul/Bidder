@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500);
+@import "../variables";
+@import "../vendors/bootstrap.min.css";
+@import "../_buttons.scss";
+@import "../mixins.scss";
+@import "../icons.scss";
+@import "../includes/Home/handle-service-steps.scss";
+@import "../_forms.scss";
+
+body {
+    font-family: $font-family-sans-serif;
+	color: $text-color;
+	line-height: $line-height-base;
+	font-size: $font-size-base;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.gray-sub-text {
+	color: $gray-text !important;
+}
+
+
+@import './header.scss';
+@import './hero.scss';
+@import './sections.scss';
+@import './q-a.scss';
