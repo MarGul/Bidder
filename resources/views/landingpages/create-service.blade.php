@@ -31,14 +31,14 @@
 
             <div class="landing-hero" style="padding-top: 100px;">
                 <div class="container">
-                    <h2>Ska du flytta och behöver hjälp?<br>Få företag att buda på att få hjälpa dig.</h2>
+                    <h2>Ska du flytta och behöver hjälp?<br>Få företag att buda på att hjälpa dig.</h2>
                     <h4>
                         <p>Vill du spara tid och energi på att hitta rätt företag att hjälpa dig med flytten? Lägg ut din tjänst på GoBid.se och luta dig tillbaka och låt företagen komma till dig.</p>
                         <p style="margin-top: 20px;">Efter buden har trillat in tar du hjälp av vårt omdömessystem och verifierade företag för att bestämma vem du vill jobba med.</p>
                         <p style="margin-top: 20px;">Snabbt, enkelt och gratis.</p>
                     </h4>
 
-                    <div class="video-container">
+                    <div class="video-container" id="video">
                         <img src="{{ asset('images/screen-video.png') }}" alt="">
                     </div>
                 </div>
@@ -184,6 +184,17 @@
 
         </main>
 
+        <div class="content-modal-overlay" id="modal">
+            <div class="content-modal-container">
+                <div class="content-modal-inner">
+                    <div class="close-modal" id="modalClose"><i class="icon wh20 light-gray h_delete"></i> <span class="margin-left: 5px;">Stäng</span></div>
+                    <div class="modal-content">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/K0Eu6cL0BR8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             var createButton = document.getElementById('createButton');
             createButton.addEventListener('click', function(event) {
@@ -195,6 +206,18 @@
                     top: rect.top + scrollTop - 80,
                     behavior: "smooth"
                 });
+            });
+
+            var video = document.getElementById('video');
+            var modal = document.getElementById('modal');
+            var modalClose = document.getElementById('modalClose');
+
+            video.addEventListener('click', function(event) {
+                modal.style.display = 'block';
+            });
+
+            modalClose.addEventListener('click', function(event) {
+                modal.style.display = 'none';
             });
         </script>
     </body>
